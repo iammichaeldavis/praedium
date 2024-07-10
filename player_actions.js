@@ -5,6 +5,8 @@ buttonSystemMessageDismiss.addEventListener('click', function () { DismissSystem
 buttonForewordDismiss.addEventListener('click', function () { DismissForeword(); });
 buttonForewordEnglish.addEventListener('click', function () { Translate('English'); });
 buttonForewordSpanish.addEventListener('click', function () { Translate('Spanish'); });
+buttonForewordEnglish.addEventListener('touchend', function () { Translate('English'); });
+buttonForewordSpanish.addEventListener('touchend', function () { Translate('Spanish'); });
 buttonGameEventDismiss.addEventListener('click', function () { DismissGameEvent(); });
 buttonTill.addEventListener('click', function () { PlotTill(); });
 buttonPlant.addEventListener('click', function () { PlotPlant(); });
