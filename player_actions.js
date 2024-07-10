@@ -2,37 +2,96 @@
 // *************************************************************************************
 
 buttonSystemMessageDismiss.addEventListener('click', function () { DismissSystemMessage(); });
+buttonSystemMessageDismiss.addEventListener('touchend', function () { DismissSystemMessage(); });
+
 buttonForewordDismiss.addEventListener('click', function () { DismissForeword(); });
+buttonForewordDismiss.addEventListener('touchend', function () { DismissForeword(); });
+
 buttonForewordEnglish.addEventListener('click', function () { Translate('English'); });
-buttonForewordSpanish.addEventListener('click', function () { Translate('Spanish'); });
 buttonForewordEnglish.addEventListener('touchend', function () { Translate('English'); });
+
+buttonForewordSpanish.addEventListener('click', function () { Translate('Spanish'); });
 buttonForewordSpanish.addEventListener('touchend', function () { Translate('Spanish'); });
+
 buttonGameEventDismiss.addEventListener('click', function () { DismissGameEvent(); });
+buttonGameEventDismiss.addEventListener('touchend', function () { DismissGameEvent(); });
+
 buttonTill.addEventListener('click', function () { PlotTill(); });
+buttonTill.addEventListener('touchend', function () { PlotTill(); });
+
 buttonPlant.addEventListener('click', function () { PlotPlant(); });
+buttonPlant.addEventListener('touchend', function () { PlotPlant(); });
+
 buttonWater.addEventListener('click', function () { PlotWater(); });
+buttonWater.addEventListener('touchend', function () { PlotWater(); });
+
 buttonHarvest.addEventListener('click', function () { PlotHarvest(); });
+buttonHarvest.addEventListener('touchend', function () { PlotHarvest(); });
+
 buttonBuyLand.addEventListener('click', function () { BuyLand(); });
+buttonBuyLand.addEventListener('touchend', function () { BuyLand(); });
+
 buttonBuyForest.addEventListener('click', function () { BuyForest(); });
+buttonBuyForest.addEventListener('touchend', function () { BuyForest(); });
+
 buttonBuyMountain.addEventListener('click', function () { BuyMountain(); });
+buttonBuyMountain.addEventListener('touchend', function () { BuyMountain(); });
+
 buttonForest.addEventListener('click', function () { ForestEvents(); });
+buttonForest.addEventListener('touchend', function () { ForestEvents(); });
+
 buttonHire.addEventListener('click', function () { HireHand(); });
+buttonHire.addEventListener('touchend', function () { HireHand(); });
+
 buttonAudit.addEventListener('click', function () { HireAccountant(); });
+buttonAudit.addEventListener('touchend', function () { HireAccountant(); });
+
 buttonPriority.addEventListener('click', function (e) { TogglePriority(e); });
+buttonPriority.addEventListener('touchend', function (e) { TogglePriority(e); });
+
 buttonBarterOlive.addEventListener('click', function () { BarterFruit(2); });
+buttonBarterOlive.addEventListener('touchend', function () { BarterFruit(2); });
+
 buttonBarterDate.addEventListener('click', function () { BarterFruit(3); });
+buttonBarterDate.addEventListener('touchend', function () { BarterFruit(3); });
+
 buttonBarterFig.addEventListener('click', function () { BarterFruit(4); });
+buttonBarterFig.addEventListener('touchend', function () { BarterFruit(4); });
+
 buttonBarterPom.addEventListener('click', function () { BarterFruit(5); });
+buttonBarterPom.addEventListener('touchend', function () { BarterFruit(5); });
+
 buttonBarterGrape.addEventListener('click', function () { BarterFruit(6); });
+buttonBarterGrape.addEventListener('touchend', function () { BarterFruit(6); });
+
 buttonSellGrain.addEventListener('click', function () { SellGrain(); });
+buttonSellGrain.addEventListener('touchend', function () { SellGrain(); });
+
 buttonFound.addEventListener('click', function () { Found(); });
+buttonFound.addEventListener('touchend', function () { Found(); });
+
 buttonBuild.addEventListener('click', function () { Build(); });
+buttonBuild.addEventListener('touchend', function () { Build(); });
+
 buttonWin.addEventListener('click', function () { Win(); });
+buttonWin.addEventListener('touchend', function () { Win(); });
+
 buttonEnglish.addEventListener('click', function () { Translate('English'); });
+buttonEnglish.addEventListener('touchend', function () { Translate('English'); });
+
 buttonSpanish.addEventListener('click', function () { Translate('Spanish'); });
+buttonSpanish.addEventListener('touchend', function () { Translate('Spanish'); });
+
 buttonQ.addEventListener('click', function () { Info(); });
+buttonQ.addEventListener('touchend', function () { Info(); });
+
 buttonI.addEventListener('click', function () { Info(); });
+buttonI.addEventListener('touchend', function () { Info(); });
+
 buttonCC0.addEventListener('click', function () { Legal(); });
+buttonCC0.addEventListener('touchend', function () { Legal(); });
+
+
 
 document.body.onkeyup = function (e) {
     if (e.key == 'G') { god = !god; }
