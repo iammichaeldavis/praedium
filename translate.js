@@ -398,7 +398,7 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'The current language is now set to English.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">“There is no true knowledge without right faith, no virtuous conduct is possible without knowledge, without virtue there is no liberation, and without liberation, no nirvana.”</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeWith = 'Made with CodePen, GIMP & Visual Studio Code.';
+        displayInfoMadeWith = 'Made with CodePen, GIMP, GitHub & VS Code.';
         displayInfoDedication = 'Dedicated to aniwey, Richard Garriott, Marty Hirsch, jfregnault, Denis Loubet, Amir Rajan & Michael Townsend.';
         displayInfoThanks = 'Special thanks to Mohammad Alavi, Dave & Anna Davis, Kenneth Garagnon, Leif Johansen, Brian Moran & Grant Sutherland.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
@@ -597,7 +597,7 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'El idioma actual ahora está configurado en español.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">«No hay conocimiento verdadero sin fe recta, ninguna conducta virtuosa es posible sin conocimiento, sin virtud no hay liberación, y sin liberación, no nirvana.»</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeWith = 'Hecho con CodePen, GIMP y Visual Studio Code.';
+        displayInfoMadeWith = 'Hecho con CodePen, GIMP, GitHub y VS Code.';
         displayInfoDedication = 'Dedicado a aniwey, Richard Garriott, Marty Hirsch, jfregnault, Denis Loubet, Amir Rajan y Michael Townsend.';
         displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Dave y Anna Davis, Kenneth Garagnon, Leif Johansen, Brian Moran y Grant Sutherland.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
