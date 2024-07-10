@@ -1,0 +1,136 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>PRAEDIUM - EDICIÓN DE ORO</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divCenterColumn">
+        <div id="divCalendar"></div>
+
+        <div id="divViewVillage">
+            <div class="rowCentered">
+                <button id="buttonWin"></button>
+            </div>
+
+            <div class="rowCentered">
+                <span id="spanVillageName"></span>
+                <div id="divVillage"></div>
+                <div id="divVillageStatistics"></div>
+            </div>
+
+            <div class="rowCentered">
+                <button id="buttonBuild"></button>
+                <button id="buttonSellGrain"></button>
+            </div>
+        </div>
+
+        <div id="divViewMountain"></div>
+
+        <div id="divViewForest">
+            <div class="rowCentered">
+                <div id="divForest" class="rowCentered"></div>
+                <span id="spanForestReport"></span>
+                <button id="buttonForest"></button>
+            </div>
+        </div>
+
+        <div id="divViewFarm">
+            <div id="divFarm" class="rowCentered"></div>
+
+            <div class="rowCentered">
+                <button id="buttonTill"></button><button id="buttonPlant"></button><button id="buttonWater"></button><button id="buttonHarvest"></button>
+            </div>
+
+            <div class="rowCentered">
+                <button id="buttonPriority"></button>
+            </div>
+
+            <div id="divFarmInfoPanel" class="rowCentered">
+                <div id="divBushelCount"></div>
+                <span id="spanHandsCount"></span>
+                <span id="spanFarmReport"></span>
+            </div>
+
+            <div class="rowCentered">
+                <button id="buttonBuyForest"></button>
+                <button id="buttonBuyMountain"></button>
+                <button id="buttonBuyLand"></button>
+                <button id="buttonFound"></button>
+                <button id="buttonHire"></button>
+                <button id="buttonAudit"></button>
+            </div>
+
+            <div class="rowCentered">
+                <button id="buttonBarterOlive"></button>
+                <button id="buttonBarterDate"></button>
+                <button id="buttonBarterFig"></button>
+                <button id="buttonBarterPom"></button>
+                <button id="buttonBarterGrape"></button>
+            </div>
+        </div>
+
+        <div id="divFooter" class="rowCentered">
+            <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button><button id="buttonQ">?</button><button id="buttonI">i</button><button id="buttonCC0">(CCØ)</button>
+        </div>
+    </div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divOverlayGameEvent" class="overlay">
+        <table class="tableModal">
+            <tr>
+                <td class="tdModal">
+                    <div id="divModalGameEvent" class="modal rowCentered">
+                        <div id="divGameEventCorpus"></div>
+                        <button id="buttonGameEventDismiss"></button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divOverlayForeword" class="overlay">
+        <table class="tableModal">
+            <tr>
+                <td class="tdModal">
+                    <div id="divModalForeword" class="modal rowCentered">
+                        <div id="divForewordCorpus"></div>
+                        <button id="buttonForewordDismiss"></button>
+                        <button id="buttonForewordEnglish">English</button><button id="buttonForewordSpanish">Español</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divOverlaySystemMessage" class="overlay">
+        <table class="tableModal">
+            <tr>
+                <td class="tdModal">
+                    <div id="divModalSystemMessage" class="modal rowCentered">
+                        <div id="divSystemMessageCorpus"></div>
+                        <button id="buttonSystemMessageDismiss"></button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <script src="init.js"></script>
+    <script src="utilities.js"></script>
+    <script src="translate.js"></script>
+    <script src="ui.js"></script>
+    <script src="player_actions.js"></script>
+    <script src="game_turn.js"></script>
+    <script src="start.js"></script>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+</body>
+
+</html>
+
+
+
+<!-- End of Document -->
