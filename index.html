@@ -10,9 +10,9 @@
 
 <body>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <div id="divCenterColumn">
-        <div id="divCalendar"></div>
-
+    <div id="divCalendar"></div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divGameWindow">
         <div id="divViewVillage">
             <div class="rowCentered">
                 <button id="buttonWin"></button>
@@ -44,7 +44,8 @@
             <div id="divFarm" class="rowCentered"></div>
 
             <div class="rowCentered">
-                <button id="buttonTill"></button><button id="buttonPlant"></button><button id="buttonWater"></button><button id="buttonHarvest"></button>
+                <button id="buttonTill"></button><button id="buttonPlant"></button><button
+                    id="buttonWater"></button><button id="buttonHarvest"></button>
             </div>
 
             <div class="rowCentered">
@@ -74,50 +75,33 @@
                 <button id="buttonBarterGrape"></button>
             </div>
         </div>
-
-        <div id="divFooter" class="rowCentered">
-            <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button><button id="buttonQ">?</button><button id="buttonI">i</button><button id="buttonCC0">(CCØ)</button>
-        </div>
+    </div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divFooter" class="rowCentered">
+        <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button><button
+            id="buttonQ">?</button><button id="buttonI">i</button><button id="buttonCC0">(CCØ)</button>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayGameEvent" class="overlay">
-        <table class="tableModal">
-            <tr>
-                <td class="tdModal">
-                    <div id="divModalGameEvent" class="modal rowCentered">
-                        <div id="divGameEventCorpus"></div>
-                        <button id="buttonGameEventDismiss"></button>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div id="divModalGameEvent" class="rowCentered">
+            <div id="divGameEventCorpus"></div>
+            <button id="buttonGameEventDismiss"></button>
+        </div>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayForeword" class="overlay">
-        <table class="tableModal">
-            <tr>
-                <td class="tdModal">
-                    <div id="divModalForeword" class="modal rowCentered">
-                        <div id="divForewordCorpus"></div>
-                        <button id="buttonForewordDismiss"></button>
-                        <button id="buttonForewordEnglish">English</button><button id="buttonForewordSpanish">Español</button>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div id="divModalForeword" class="rowCentered">
+            <div id="divForewordCorpus"></div>
+            <button id="buttonForewordDismiss"></button>
+            <button id="buttonForewordEnglish">English</button><button id="buttonForewordSpanish">Español</button>
+        </div>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlaySystemMessage" class="overlay">
-        <table class="tableModal">
-            <tr>
-                <td class="tdModal">
-                    <div id="divModalSystemMessage" class="modal rowCentered">
-                        <div id="divSystemMessageCorpus"></div>
-                        <button id="buttonSystemMessageDismiss"></button>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div id="divModalSystemMessage" class="rowCentered">
+            <div id="divSystemMessageCorpus"></div>
+            <button id="buttonSystemMessageDismiss"></button>
+        </div>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <script src="init.js"></script>

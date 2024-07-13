@@ -8,32 +8,28 @@
 :root {
     --agua: url('data:image/gif;base64,R0lGODlhEAAQAKEDACMj4VFQ/1T//1lR+iH/C05FVFNDQVBFMi4wAwEAAAAh+QQFFAADACwAAAAAEAAQAAACJowloMtt36IzsoKHw6IASWhFWMgp2eOFTGaClau2Z7yWNJSKmvwUACH5BAUUAAMALAAAAAAQABAAAAInhB1xyS1yolxtWqqubRXltyVaKGqlxwXgGHFodjGslJ4zIN8osAIFACH5BAUUAAMALAAAAAAQABAAAAInhA+hIIK4jJq0vQsp3inyR2lSYFjX9J0o53VhYKbjKm6rPIf4cV8FACH5BAUUAAMALAAAAAAQABAAAAImhBF5y5sBhGhG1YeDpDzzbn1M9hzW1pTiqIIOqU2riV0h1c4IPBcAIfkEBRQAAwAsAAAAABAAEAAAAiaMA6nLcA3VEyIaeXKgEeruXSCjPYnINeaIiRbSainrZOcawnRtFAAh+QQFFAADACwAAAAAEAAQAAACJoSPFsubnxicQAoxnWrt0sd9oCYenLQZ3hiUSPOR1RmsbjjLLFIAACH5BAUUAAMALAAAAAAQABAAAAIlhH+hyA0KoZtv0SaFmLZGqF3MJ45d6ZGGFWJnGV3nB25oGqxSAQAh+QQFFAADACwAAAAAEAAQAAACJoQRmaZxfxScsDWK0cpTCoFtmpV8XHWdj6RGpMPAZie2aQjH5JwVACH5BAUUAAMALAAAAAAQABAAAAImjCWgy22vXmjO0LukxBhyCiHdFGmP+DFaWpFsaWYk2r6yxeGwUQAAIfkEBRQAAwAsAAAAABAAEAAAAieEHXGQ3SKWnE6xNhfOvG5OJWCGQZ11eYE5ak4rfXBaHSLAxvdMSwUAIfkEBRQAAwAsAAAAABAAEAAAAiaED6GBnXyWDEK4a2ZeeMPeTBwYKmTJVJjpierZfvAIP2IEvWhXAAAh+QQFFAADACwAAAAAEAAQAAACJoQRecub2g40rwYhorb06R58keWJTGlKCraFIMmmrysjk0xOUAwUACH5BAUUAAMALAAAAAAQABAAAAInjANpKZKvFpz0IPpktKbhz20XqH0Td5hYqp6Lt47oAbfiaANsrh8FACH5BAUUAAMALAAAAAAQABAAAAImhI8Wy3sOhEgK0gsarqg1uVFeZV1MKHolmq3oCZrBoy4x2544iRQAIfkEBRQAAwAsAAAAABAAEAAAAiiEf6HIDQphCkYIJ52O2qwZKVbXhF62fSQSoutJvSAwYvHTipeMu0cBACH5BAUUAAMALAAAAAAQABAAAAImhBGZx83q4lE0TAuEiFDyLi1XFWieUxnUCZ5j6j5irC7m91a3VwAAOw==');
     --tileResolution: 160px;
-    --farm-margin-top: 64px;
-    --farm-margin-bottom: 32px;
     --farm-width: 160px;
-    --farm-panel-gap: 24px;
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 }
 
 * {
     font-family: 'Courier New', monospace;
-    font-size: 14px;
+    font-size: 2.8vw;
     color: black;
     box-sizing: border-box;
-    margin: 0px;
-    border: 0px;
-    padding: 0px;
+    margin: 0;
+    border: 0;
+    padding: 0;
     image-rendering: pixelated;
 }
 
 body {
-    background: #31313a;
+    background: #afafbf;
 }
 
 .overlay {
     position: fixed;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
@@ -49,75 +45,59 @@ body {
     text-align: center;
 }
 
-.modal {
-    width: 484px;
-    max-width: 484px;
-    margin: 0px auto;
-    padding: 48px;
-}
-
-.tableModal {
-    width: 100%;
-    height: 100%;
-}
-
-.tdModal {
-    vertical-align: middle;
-}
-
 #divModalForeword {
-    padding-top: 64px;
-    padding-bottom: 64px;
-    border: 2px solid crimson;
+    width: 90vw;
+    margin: 5vw auto;
+    border: 3px solid crimson;
+    padding: 14vw 8vw;
     background: antiquewhite;
 }
 
 #divForewordCorpus {
     font-family: 'Garamond', serif;
-    font-size: 18px;
+    font-size: 3.6vw;
     color: #120404;
-    line-height: 26px;
+    line-height: 5.2vw;
     text-align: justify;
 }
 
 #divForewordTitle {
     font-family: 'Garamond', serif;
-    font-size: 42px;
+    font-size: 10vw;
     color: crimson;
     text-align: center;
-    margin: 0px auto 64px auto;
+    margin: 0 auto 13.8vw auto;
     user-select: none;
 }
 
 #divForewordScripture {
     font-family: 'Garamond', serif;
-    font-size: 20px;
+    font-size: 4vw;
     font-style: italic;
     color: crimson;
-    line-height: 26px;
+    line-height: 5.2vw;
     text-align: justify;
-    width: 320px;
-    min-width: 320px;
-    margin: 32px auto;
+    width: 64vw;
+    margin: 6.4vw auto;
 }
 
 #divForewordSource {
     font-family: 'Garamond', serif;
-    font-size: 17px;
+    font-size: 3.4vw;
     font-style: italic;
     color: crimson;
-    margin-top: 7px;
+    margin-top: 1.4vw;
 }
 
 button {
     text-decoration: none;
     border: 1px solid black;
-    padding: 4px 12px;
+    padding: 0.8vw 2.4vw;
     user-select: none;
 }
 
 #buttonTill {
-    margin-left: 10px;
+    margin-left: 2vw;
 }
 
 #buttonForewordEnglish,
@@ -129,18 +109,18 @@ button {
 #buttonSpanish,
 #buttonQ,
 #buttonI {
-    margin-right: 10px;
+    margin-right: 2vw;
 }
 
 #buttonForewordDismiss {
-    font-size: 19px;
+    font-size: 3.8vw;
     display: block;
-    margin: 32px auto;
+    margin: 6.4vw auto;
 }
 
 #buttonForewordEnglish,
 #buttonForewordSpanish {
-    font-size: 12px;
+    font-size: 2.4vw;
 }
 
 #buttonForewordDismiss,
@@ -173,46 +153,49 @@ button {
 }
 
 #divModalSystemMessage {
-    border: 2px solid #3c14dc;
+    width: 80vw;
+    margin: 10vw auto;
+    border: 3px solid #3c14dc;
+    padding: 8vw;
     background: #d7ebfa;
 }
 
 #divSystemMessageCorpus {
     font-family: 'Garamond', serif;
-    font-size: 18px;
+    font-size: 3.6vw;
     color: #040412;
-    line-height: 26px;
+    line-height: 5.2vw;
     text-align: justify;
 }
 
 #dividerSystemMessage {
     color: #3c14dc;
     text-align: center;
-    margin: 16px auto;
+    margin: 3.2vw auto;
     user-select: none;
 }
 
 #divSystemMessageScripture {
     font-family: 'Garamond', serif;
-    font-size: 18px;
+    font-size: 3.6vw;
     color: #040412;
     font-style: italic;
-    line-height: 26px;
+    line-height: 5.2vw;
     text-align: justify;
 }
 
 #divSystemMessageSource {
     font-family: 'Garamond', serif;
-    font-size: 15px;
+    font-size: 3vw;
     font-style: italic;
     color: #040412;
-    margin-top: 6px;
+    margin-top: 1.2vw;
 }
 
 #buttonSystemMessageDismiss {
-    font-size: 19px;
+    font-size: 3.8vw;
     color: #3c14dc;
-    margin-top: 32px;
+    margin-top: 6.4vw;
     border: 1px solid #3c14dc;
     background: #d7ebfa;
 }
@@ -229,21 +212,18 @@ button {
     background: #87b8de;
 }
 
-#divCenterColumn {
-    width: 484px;
-    max-width: 484px;
-    margin: 0px auto;
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
-    border-left: 2px solid black;
+#divGameWindow {
+    padding: 12.8vw 0 0 0; /* 6.4vw --------------------------------------------------------------------- */
     background: #f6f6ff;
 }
 
 #divCalendar {
+    position: fixed;
+    top: 0;
+    width: 100%;
     background: #006800;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    padding: 5px 0px 5px 0px;
+    border-bottom: 2px solid black;
+    padding: 5px 0;
 }
 
 #divCalendar table {
@@ -255,19 +235,18 @@ button {
     font-size: 16px;
     color: #fad15a;
     text-align: center;
-    text-shadow: 1px 0px 0 #004203, 1px -1px 0 #004203, 0px -1px 0 #004203, -1px 0px 0 #009000, -1px 1px 0 #009000, 0px 1px 0 #009000, 1px 1px 0 #004203, -1px -1px 0 #004203;
+    text-shadow: 1px 0 0 #004203, 1px -1px 0 #004203, 0 -1px 0 #004203, -1px 0 0 #009000, -1px 1px 0 #009000, 0 1px 0 #009000, 1px 1px 0 #004203, -1px -1px 0 #004203;
     width: 33%;
 }
 
 #divFooter {
-    margin: 32px 0px 0px 0px;
     border-top: 1px solid black;
-    padding: 16px 0px 16px 0px;
+    padding: 2.3vw 0;
     background: #AFAFBF;
 }
 
 #divFooter button {
-    font-size: 12px;
+    font-size: 2.4vw;
     color: #1a1a1a;
     border: 1px solid #1a1a1a;
     background: #d4d4e4;
@@ -285,30 +264,9 @@ button {
     background: #a4a4c2;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 /* //////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////INSERT CORRECT SHIT HERE //////////////////////////////// */
 /* //////////////////////////////////////////////////////////////////////////////// */
-/* //////////////////////////////////////////////////////////////////////////////// */
-
-
-
-
-
-
-
-
-
-
 
 #divOverlayGameEvent {
     background-color: rgba(0, 16, 0, 0.8);
@@ -316,22 +274,25 @@ button {
 }
 
 #divModalGameEvent {
-    border: 2px solid #24b600;
+    width: 80vw;
+    margin: 10vw auto;
+    border: 3px solid #24b600;
+    padding: 8vw;
     background: #f2fce5;
 }
 
 #divGameEventCorpus {
     font-family: 'Garamond', serif;
-    font-size: 18px;
+    font-size: 3.6vw;
     color: #041204;
-    line-height: 26px;
+    line-height: 5.2vw;
     text-align: center;
 }
 
 #buttonGameEventDismiss {
-    font-size: 19px;
+    font-size: 3.8vw;
     color: #24b600;
-    margin-top: 32px;
+    margin-top: 6.4vw;
     border: 1px solid #24b600;
     background: #f2fce5;
 }
@@ -356,27 +317,22 @@ button {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* //////////////////  ||              || ///////////////////////////////////////// */
+/* /////////////////   \/ no mans land \/ ///////////////////////////////////////// */
 /* //////////////////////////////////////////////////////////////////////////////// */
-/* //////////////////////////////////////////////////////////////////////////////// */
-/* //////////////////////////////////////////////////////////////////////////////// */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .tile {
     width: var(--tileResolution);
@@ -393,36 +349,50 @@ td {
 }
 
 #divFarm {
-    margin: var(--farm-margin-top) auto var(--farm-margin-bottom) auto;
+    margin: 0 auto 6.4vw auto;
     width: var(--farm-width);
     min-width: var(--farm-width);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 #divForest,
 #divMountain {
-    margin: 64px auto 0px auto;
+    margin: 64px auto 0 auto;
     width: 384px;
     min-width: 384px;
 }
 
 #divForest table {
-    margin: 32px auto 0px auto;
+    margin: 32px auto 0 auto;
 }
 
 #buttonForest {
-    margin: 32px auto 0px auto;
+    margin: 32px auto 0 auto;
 }
 
 #divFarm,
 #divForest,
 #divMountain {
-    line-height: 0px;
+    line-height: 0;
     background-image: var(--agua);
 }
 
-#divFarmInfoPanel {
-    padding: var(--farm-panel-gap) 0px var(--farm-panel-gap) 0px;
-}
+
+
+
+
+
 
 .starving {
     color: Red;
@@ -467,6 +437,21 @@ td {
 #divVillageStatistics {
     margin-bottom: 24px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #buttonBuyLand,
 #buttonBuyForest,

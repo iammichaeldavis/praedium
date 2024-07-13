@@ -215,7 +215,7 @@ function Translate(language, bark = true) {
 
     if (language == 'English') {
         displayIUnderstand = 'I UNDERSTAND';
-        displayOK = "OK";
+        displayOK = "I AM READY TO CONTINUE";
         displayInStock = 'In Stock';
         displayFieldhands = 'Fieldhands';
         displayHireHand = 'HIRE FIELDHAND';
@@ -399,7 +399,7 @@ function Translate(language, bark = true) {
         displayLanguageQuote = '<div id="divSystemMessageScripture">“There is no true knowledge without right faith, no virtuous conduct is possible without knowledge, without virtue there is no liberation, and without liberation, no nirvana.”</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
         displayInfoMadeWith = 'Made with CodePen, GIMP, GitHub & VS Code.';
-        displayInfoDedication = 'Dedicated to aniwey, Richard Garriott, Marty Hirsch, jfregnault, Denis Loubet, Amir Rajan & Michael Townsend.';
+        displayInfoDedication = 'Dedicated to aniwey, Richard Garriott, Marty Hirsch, Denis Loubet and Michael Townsend, and in loving memory of Francisco Furlan and Philip J Reed, VSc. I really, really wish you guys were here to play this game.';
         displayInfoThanks = 'Special thanks to Mohammad Alavi, Dave & Anna Davis, Kenneth Garagnon, Leif Johansen, Brian Moran & Grant Sutherland.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
@@ -414,7 +414,7 @@ function Translate(language, bark = true) {
 
     else if (language == 'Spanish') {
         displayIUnderstand = 'ENTIENDO';
-        displayOK = "SÍ";
+        displayOK = "ESTOY LISTO PARA CONTINUAR";
         displayInStock = 'En Stock';
         displayFieldhands = 'Labriegos';
         displayHireHand = 'CONTRATAR LABRIEGO';
@@ -598,7 +598,7 @@ function Translate(language, bark = true) {
         displayLanguageQuote = '<div id="divSystemMessageScripture">«No hay conocimiento verdadero sin fe recta, ninguna conducta virtuosa es posible sin conocimiento, sin virtud no hay liberación, y sin liberación, no nirvana.»</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
         displayInfoMadeWith = 'Hecho con CodePen, GIMP, GitHub y VS Code.';
-        displayInfoDedication = 'Dedicado a aniwey, Richard Garriott, Marty Hirsch, jfregnault, Denis Loubet, Amir Rajan y Michael Townsend.';
+        displayInfoDedication = 'Dedicado a aniwey, Richard Garriott, Marty Hirsch, Denis Loubet, y Michael Townsend, y en memoria amorosa de Francisco Furlan y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí para jugar este juego.';
         displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Dave y Anna Davis, Kenneth Garagnon, Leif Johansen, Brian Moran y Grant Sutherland.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 

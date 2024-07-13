@@ -369,9 +369,11 @@ function UpdateText() {
     buttonGameEventDismiss.innerHTML = displayOK;
 
     // FOREWORD ----------------------------
-    const stringForeword = '<div id="divForewordTitle">PRAEDIUM</div>' + displayForewordA + '<div id="divForewordScripture">' + displayForewordScripture + '<div id="divForewordSource">' + displayForewordSource + '</div></div>' + displayForewordB;
-    divForewordCorpus.innerHTML = stringForeword;
-    buttonForewordDismiss.innerHTML = displayForewordLabel;
+    if (player.seesForeword) {
+        const stringForeword = '<div id="divForewordTitle">PRAEDIUM</div>' + displayForewordA + '<div id="divForewordScripture">' + displayForewordScripture + '<div id="divForewordSource">' + displayForewordSource + '</div></div>' + displayForewordB;
+        divForewordCorpus.innerHTML = stringForeword;
+        buttonForewordDismiss.innerHTML = displayForewordLabel;
+    }
 
     // CALENDAR ----------------------------
     const zodiacChinese = {
@@ -890,8 +892,6 @@ function RedrawFarm() {
     ];
 
     if (farmStage > 0) {
-        document.documentElement.style.setProperty('--farm-margin-top', '80px');
-        document.documentElement.style.setProperty('--farm-margin-bottom', '48px');
         document.documentElement.style.setProperty('--farm-width', '256px');
         document.documentElement.style.setProperty('--tileResolution', '128px');
 
@@ -901,8 +901,6 @@ function RedrawFarm() {
     }
 
     if (farmStage > 1) {
-        document.documentElement.style.setProperty('--farm-margin-top', '104px');
-        document.documentElement.style.setProperty('--farm-margin-bottom', '72px');
         document.documentElement.style.setProperty('--farm-width', '320px');
         document.documentElement.style.setProperty('--tileResolution', '80px');
 
@@ -913,8 +911,6 @@ function RedrawFarm() {
     }
 
     if (farmStage > 2) {
-        document.documentElement.style.setProperty('--farm-margin-top', '80px');
-        document.documentElement.style.setProperty('--farm-margin-bottom', '48px');
         document.documentElement.style.setProperty('--farm-width', '256px');
         document.documentElement.style.setProperty('--tileResolution', '64px');
 
@@ -929,8 +925,6 @@ function RedrawFarm() {
     }
 
     if (farmStage > 3) {
-        document.documentElement.style.setProperty('--farm-margin-top', '80px');
-        document.documentElement.style.setProperty('--farm-margin-bottom', '50px');
         document.documentElement.style.setProperty('--farm-width', '294px');
         document.documentElement.style.setProperty('--tileResolution', '42px');
 
@@ -960,8 +954,6 @@ function RedrawFarm() {
     }
 
     if (farmStage > 4) {
-        document.documentElement.style.setProperty('--farm-margin-top', '64px');
-        document.documentElement.style.setProperty('--farm-margin-bottom', '32px');
         document.documentElement.style.setProperty('--farm-width', '288px');
         document.documentElement.style.setProperty('--tileResolution', '32px');
 
@@ -1157,7 +1149,6 @@ function RedrawFarm() {
     }
 
     if (farmStage > 10) {
-        document.documentElement.style.setProperty('--farm-margin-top', '112px');
         document.documentElement.style.setProperty('--tileResolution', '16px');
 
         arrayFarmGraph[8][1] = PickCropTile(0, 7);
@@ -1387,7 +1378,6 @@ function RedrawFarm() {
     }
 
     if (farmStage > 12) {
-        document.documentElement.style.setProperty('--farm-margin-top', '96px');
         document.documentElement.style.setProperty('--farm-width', '320px');
 
         arrayFarmGraph[0].unshift(tileShrubs1,);
@@ -1845,7 +1835,6 @@ function RedrawFarm() {
     }
 
     if (farmStage > 17) {
-        document.documentElement.style.setProperty('--farm-margin-top', '64px');
         document.documentElement.style.setProperty('--farm-width', '384px');
 
         arrayFarmGraph[0].unshift(tileTrees, tileShrubs4,);

@@ -731,7 +731,6 @@ function Found() {
         player.canFound = false;
         player.canBuild = true;
 
-        document.documentElement.style.setProperty('--farm-panel-gap', '0px');
         spanVillageName.style.display = 'block';
         divVillage.style.display = 'inline-block';
         divVillageStatistics.style.display = 'block';
