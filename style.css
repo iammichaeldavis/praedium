@@ -1,14 +1,9 @@
-@font-face {
-    font-family: 'Runescape11';
-    src: url(data:font/truetype;charset=utf-8;base64,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IFNFVkVORElHSVQgRUlHSFRESUdJVCBOSU5FQ09MT05TRU1JQ09MT05MRVNTLVRIQU4gU0lHTkVRVUFMUyBTSUdOR1JFQVRFUi1USEFOIFNJR05RVUVTVElPTiBNQVJLQ09NTUVSQ0lBTCBBVExBVElOIENBUElUQUwgTEVUVEVSIEFMQVRJTiBDQVBJVEFMIExFVFRFUiBCTEFUSU4gQ0FQSVRBTCBMRVRURVIgQ0xBVElOIENBUElUQUwgTEVUVEVSIERMQVRJTiBDQVBJVEFMIExFVFRFUiBFTEFUSU4gQ0FQSVRBTCBMRVRURVIgRkxBVElOIENBUElUQUwgTEVUVEVSIEdMQVRJTiBDQVBJVEFMIExFVFRFUiBITEFUSU4gQ0FQSVRBTCBMRVRURVIgSUxBVElOIENBUElUQUwgTEVUVEVSIEpMQVRJTiBDQVBJVEFMIExFVFRFUiBLTEFUSU4gQ0FQSVRBTCBMRVRURVIgTExBVElOIENBUElUQUwgTEVUVEVSIE1MQVRJTiBDQVBJVEFMIExFVFRFUiBOTEFUSU4gQ0FQSVRBTCBMRVRURVIgT0xBVElOIENBUElUQUwgTEVUVEVSIFBMQVRJTiBDQVBJVEFMIExFVFRFUiBRTEFUSU4gQ0FQSVRBTCBMRVRURVIgUkxBVElOIENBUElUQUwgTEVUVEVSIFNMQVRJTiBDQVBJVEFMIExFVFRFUiBUTEFUSU4gQ0FQSVRBTCBMRVRURVIgVUxBVElOIENBUElUQUwgTEVUVEVSIFZMQVRJTiBDQVBJVEFMIExFVFRFUiBXTEFUSU4gQ0FQSVRBTCBMRVRURVIgWExBVElOIENBUElUQUwgTEVUVEVSIFlMQVRJTiBDQVBJVEFMIExFVFRFUiBaTEVGVCBTUVVBUkUgQlJBQ0tFVFJFVkVSU0UgU09MSURVU1JJR0hUIFNRVUFSRSBCUkFDS0VUQ0lSQ1VNRkxFWCBBQ0NFTlRMT1cgTElORUdSQVZFIEFDQ0VOVExBVElOIFNNQUxMIExFVFRFUiBBTEFUSU4gU01BTEwgTEVUVEVSIEJMQVRJTiBTTUFMTCBMRVRURVIgQ0xBVElOIFNNQUxMIExFVFRFUiBETEFUSU4gU01BTEwgTEVUVEVSIEVMQVRJTiBTTUFMTCBMRVRURVIgRkxBVElOIFNNQUxMIExFVFRFUiBHTEFUSU4gU01BTEwgTEVUVEVSIEhMQVRJTiBTTUFMTCBMRVRURVIgSUxBVElOIFNNQUxMIExFVFRFUiBKTEFUSU4gU01BTEwgTEVUVEVSIEtMQVRJTiBTTUFMTCBMRVRURVIgTExBVElOIFNNQUxMIExFVFRFUiBNTEFUSU4gU01BTEwgTEVUVEVSIE5MQVRJTiBTTUFMTCBMRVRURVIgT0xBVElOIFNNQUxMIExFVFRFUiBQTEFUSU4gU01BTEwgTEVUVEVSIFFMQVRJTiBTTUFMTCBMRVRURVIgUkxBVElOIFNNQUxMIExFVFRFUiBTTEFUSU4gU01BTEwgTEVUVEVSIFRMQVRJTiBTTUFMTCBMRVRURVIgVUxBVElOIFNNQUxMIExFVFRFUiBWTEFUSU4gU01BTEwgTEVUVEVSIFdMQVRJTiBTTUFMTCBMRVRURVIgWExBVElOIFNNQUxMIExFVFRFUiBZTEFUSU4gU01BTEwgTEVUVEVSIFpMRUZUIENVUkxZIEJSQUNLRVRWRVJUSUNBTCBMSU5FUklHSFQgQ1VSTFkgQlJBQ0tFVFRJTERFTk8tQlJFQUsgU1BBQ0VJTlZFUlRFRCBFWENMQU1BVElPTiBNQVJLQ0VOVCBTSUdOUE9VTkQgU0lHTkNVUlJFTkNZIFNJR05ZRU4gU0lHTkJST0tFTiBCQVJTRUNUSU9OIFNJR05ESUFFUkVTSVNDT1BZUklHSFQgU0lHTkZFTUlOSU5FIE9SRElOQUwgSU5ESUNBVE9STEVGVC1QT0lOVElORyBET1VCTEUgQU5HTEUgUVVPVEFUSU9OIE1BUktOT1QgU0lHTlNPRlQgSFlQSEVOUkVHSVNURVJFRCBTSUdOTUFDUk9OREVHUkVFIFNJR05QTFVTLU1JTlVTIFNJR05TVVBFUlNDUklQVCBUV09TVVBFUlNDUklQVCBUSFJFRUFDVVRFIEFDQ0VOVE1JQ1JPIFNJR05QSUxDUk9XIFNJR05NSURETEUgRE9UQ0VESUxMQVNVUEVSU0NSSVBUIE9ORU1BU0NVTElORSBPUkRJTkFMIElORElDQVRPUlJJR0hULVBPSU5USU5HIERPVUJMRSBBTkdMRSBRVU9UQVRJT04gTUFSS1ZVTEdBUiBGUkFDVElPTiBPTkUgUVVBUlRFUlZVTEdBUiBGUkFDVElPTiBPTkUgSEFMRlZVTEdBUiBGUkFDVElPTiBUSFJFRSBRVUFSVEVSU0lOVkVSVEVEIFFVRVNUSU9OIE1BUktMQVRJTiBDQVBJVEFMIExFVFRFUiBBIFdJVEggR1JBVkVMQVRJTiBDQVBJVEFMIExFVFRFUiBBIFdJVEggQUNVVEVMQVRJTiBDQVBJVEFMIExFVFRFUiBBIFdJVEggQ0lSQ1VNRkxFWExBVElOIENBUElUQUwgTEVUVEVSIEEgV0lUSCBUSUxERUxBVElOIENBUElUQUwgTEVUVEVSIEEgV0lUSCBESUFFUkVTSVNMQVRJTiBDQVBJVEFMIExFVFRFUiBBIFdJVEggUklORyBBQk9WRUxBVElOIENBUElUQUwgTEVUVEVSIEFFTEFUSU4gQ0FQSVRBTCBMRVRURVIgQyBXSVRIIENFRElMTEFMQVRJTiBDQVBJVEFMIExFVFRFUiBFIFdJVEggR1JBVkVMQVRJTiBDQVBJVEFMIExFVFRFUiBFIFdJVEggQUNVVEVMQVRJTiBDQVBJVEFMIExFVFRFUiBFIFdJVEggQ0lSQ1VNRkxFWExBVElOIENBUElUQUwgTEVUVEVSIEUgV0lUSCBESUFFUkVTSVNMQVRJTiBDQVBJVEFMIExFVFRFUiBJIFdJVEggR1JBVkVMQVRJTiBDQVBJVEFMIExFVFRFUiBJIFdJVEggQUNVVEVMQVRJTiBDQVBJVEFMIExFVFRFUiBJIFdJVEggQ0lSQ1VNRkxFWExBVElOIENBUElUQUwgTEVUVEVSIEkgV0lUSCBESUFFUkVTSVNMQVRJTiBDQVBJVEFMIExFVFRFUiBFVEhMQVRJTiBDQVBJVEFMIExFVFRFUiBOIFdJVEggVElMREVMQVRJTiBDQVBJVEFMIExFVFRFUiBPIFdJVEggR1JBVkVMQVRJTiBDQVBJVEFMIExFVFRFUiBPIFdJVEggQUNVVEVMQVRJTiBDQVBJVEFMIExFVFRFUiBPIFdJVEggQ0lSQ1VNRkxFWExBVElOIENBUElUQUwgTEVUVEVSIE8gV0lUSCBUSUxERUxBVElOIENBUElUQUwgTEVUVEVSIE8gV0lUSCBESUFFUkVTSVNNVUxUSVBMSUNBVElPTiBTSUdOTEFUSU4gQ0FQSVRBTCBMRVRURVIgTyBXSVRIIFNUUk9LRUxBVElOIENBUElUQUwgTEVUVEVSIFUgV0lUSCBHUkFWRUxBVElOIENBUElUQUwgTEVUVEVSIFUgV0lUSCBBQ1VURUxBVElOIENBUElUQUwgTEVUVEVSIFUgV0lUSCBDSVJDVU1GTEVYTEFUSU4gQ0FQSVRBTCBMRVRURVIgVSBXSVRIIERJQUVSRVNJU0xBVElOIENBUElUQUwgTEVUVEVSIFkgV0lUSCBBQ1VURUxBVElOIENBUElUQUwgTEVUVEVSIFRIT1JOTEFUSU4gU01BTEwgTEVUVEVSIFNIQVJQIFNMQVRJTiBTTUFMTCBMRVRURVIgQSBXSVRIIEdSQVZFTEFUSU4gU01BTEwgTEVUVEVSIEEgV0lUSCBBQ1VURUxBVElOIFNNQUxMIExFVFRFUiBBIFdJVEggQ0lSQ1VNRkxFWExBVElOIFNNQUxMIExFVFRFUiBBIFdJVEggVElMREVMQVRJTiBTTUFMTCBMRVRURVIgQSBXSVRIIERJQUVSRVNJU0xBVElOIFNNQUxMIExFVFRFUiBBIFdJVEggUklORyBBQk9WRUxBVElOIFNNQUxMIExFVFRFUiBBRUxBVElOIFNNQUxMIExFVFRFUiBDIFdJVEggQ0VESUxMQUxBVElOIFNNQUxMIExFVFRFUiBFIFdJVEggR1JBVkVMQVRJTiBTTUFMTCBMRVRURVIgRSBXSVRIIEFDVVRFTEFUSU4gU01BTEwgTEVUVEVSIEUgV0lUSCBDSVJDVU1GTEVYTEFUSU4gU01BTEwgTEVUVEVSIEUgV0lUSCBESUFFUkVTSVNMQVRJTiBTTUFMTCBMRVRURVIgSSBXSVRIIEdSQVZFTEFUSU4gU01BTEwgTEVUVEVSIEkgV0lUSCBBQ1VURUxBVElOIFNNQUxMIExFVFRFUiBJIFdJVEggQ0lSQ1VNRkxFWExBVElOIFNNQUxMIExFVFRFUiBJIFdJVEggRElBRVJFU0lTTEFUSU4gU01BTEwgTEVUVEVSIEVUSExBVElOIFNNQUxMIExFVFRFUiBOIFdJVEggVElMREVMQVRJTiBTTUFMTCBMRVRURVIgTyBXSVRIIEdSQVZFTEFUSU4gU01BTEwgTEVUVEVSIE8gV0lUSCBBQ1VURUxBVElOIFNNQUxMIExFVFRFUiBPIFdJVEggQ0lS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B4oEjI6KB4iRFYyMigeJBIyNigeJjhWMjYoHhQSOjIgHipAVjIyKBw6RjIwVjYyNjI2MjIiMj4mKiYqJB4qJBg6MjRWOjIgHio8VjYyJB4YEjI6KB4iPFYyOigeIjhWMjooHhQSOjIgHio8VjYyJBw6MkRWNjIkHigSMjIoHio4VjI6KB4mHFSMKDo6MjBWMjIoHio4VjIyKBw6PjBaMjI2MiYqKB5AEjIyKBw6RjJAVjIyKB4oEjI2KB4mNFYyNigeIBIyMigeKjxWMjIoHDpGMjhWMj4oHh40VjI+KBw6RjI4VjIyMjYyMioqKiYoHio8VjIyKB4oEjI2KBw6RkgQgCoyFFYyMigeKjRUhCg6VjI4Vj4yHB4oEjIyKB4qQFYyMigeFBIyQigeGjhWNjIkHio8VjI+KB4iGFYyNigeJjhWMjYoHiQSNjIkHigSMjI6MiIqKB4qPFYyMigcOjIwVkYyMjIyMioyKioyKioqJB46NjIWKjoiIBg6MjBWTj4qIiY6KiIiOigeMBI6MiAeKjxWNjIkHDoyOFY+MhweKBIyMigeKkBWMjIoHhQSMjYoHiZIVjI2KB4UEjIyKB4qQFYyMigcOjIwVk46KiYWOigeKkRWMjIoHhgSQjIYHDpCMjBWTj4qIiY2KiYiOigcOkIyMFZOPioiJjYqJhwcOjI4Vj4yHB4oEjIyKB4qQFYyMigeFBIyNigeJkhWMjYoHiocVjIyKB4kEjYyJB4qQFYyMigcOjIwVk4yIjo6Mg4qPiIcHDo6MjBWTjIMHDpGMjRWNjIkHipEVjJCKioWKkQeJhBWMjYoHDpGMjBWTjIiMjIyMjIqKioqJjIoHjIqKjIqMiogGjhaMjIoHDpCMjBWTjISOigcOk4yMFZOMioyKjYqJjIqFB46RFYyMjIyDipEHDoyMFZOMioyKjIiKjoqFB42MFY2MkIyDiowHDoyNFZGMhQeKBIyOigeIkhWMjooHhQSRjIUHDoyMFZOPioiIjYyMjYyJioqKigeJiAYOjI0VkYyFB4oEjI2KB4mSFYyOigeJhhWMjIoHigSMjIoHigSMjIoHio0VkIyGBw6MjBWTj4qIiY6NjImKioqKjIoHioyKjIqHBo4WjYyJBw6MjRWMjIoHio8VjYyJB4YEjI2KB4mPFYyOigeIjhWMjooHioUVjIyKB4wEjYyJB4qPFYyMigcOkJMEjJCKiYSKkgcOjI0VkoyEB4oEjI2KB4wEjIyRjIOKjAcOjJEVjoyIB4gEjoyIB4kEjYyOjI6MiIqIiokHDpSMjhWRjIUHigSMjIoHigSMjI6MiIyKB4wEjIyKB4wEkYyFBw6MjBWMjI6MjIyMjI2MiYqKiooHjIiKjoqIiooGipEVjYyJB4oEjIyKB42GFYyMigcOkJIEjYyJB4oEjIyKB4YEkIyMjI2MiYqKioYHDoyMFY6MjIyMjIqKioqJj4oHhpIVjJCJiowHiokVjIyKBw6PjBaUjoqJhI2KBw6PkgSNjIkHhwSPjIcHiQSNjIkHDo+LBIyNkomMjoIHDoyOFYyMjYyMjIqMiYqNiomKigeOFoyMigcOjIwVjJCKBw6PjJAVjYyKjIoHio0VjIyKBw6RjI0VjIyKB4qNFYyMigeIBCQKiI8VjI2KBw6RjIwVk4yIjYqJiI2KB4wEjoyIBw6QjI0VjoyIB4oEjI2KB4mPFYyNigcOkYyNFY6MiAeKBIyNjomMjY+MggcOkYyNFSUKjgSMjYoHigSMjIoHDpCMihWMj4qMjI2MjIyKiomMiooGh4qKigeOkhWMjIoHDpGMFoyKigaOBI6MiAeIBI2KiQaOBIyNjoyFio0HiY8VjI2KBw6RjIwVk4yIjYqJhweNFo+MhwcOjoyMFY+MhweKkBWMjIoHDpCMjBWMiYoGjBaMkYyFioqKBoyTFYyMigcOkIyMFZOMh4yMjIqKiYyKioyKiQeNFoyMigcOjoyMFZOMgwcOjIwVj4yMjIqKhweMFo+MjIyKiocHjBaPjIcHDpGMjBWQjoqJhweNFo+MhwcOkYyNFY6MiAeKBIyNigeJjxWMjYoHiASOjIgHDpGMiRWSjIyNiomIjY6MiIqKiYgHDpGMjRWOjIgHigQjComPFYyNigcOkIyMFZCMioyMjIqKioqIBw6RjIwVjI6KB4iOFYyMigeKBIyNigeJjRWMjooHiogVjIyKBw6PjI0VkYyJjIqKiAeKBIyMigcOkYyNFY+MhweKBIyNigeMBI+MhwcOjI8VjYyJB4kEjYyJB4oEjIyNjI2MiYqJiooHDoyNFY+MhweKBIyMjYyJjIoHjASPjIcHDoyMFYyMjIyMjIyMjIyKioqKigeMioqMioqKigaKjxWMjIoHigSMjIoHjYgVjIyKBw6RjBaMiooGjwSOjIgHhwSNiokGjwQjCg6RjIwVjYyMjIqKio6KB4ePFYyPioqKiowHDo6PBIyMigeIBI6MiAeKjxWOjIgHhgSMjIoHipMVjIyKBw6OjBaUjIIHDo6LBIyMjoyMjIqKiIqKB4qTFYyMigeIBI6MiAcOk4yPFYyMjI2KjYyMioqKiYyJigcOjg6OjIwVkYyFB4qSFYyMigcOjIwVjIyOjIqMjIqMjoqKioqKB4qKjYqJjIqKBg6MjBWMjI2KjIyOjIiMioqJjooHiJIVjI2KB4oEjIyKBw6TjIwVjIyMio2MjIyMjYqMjIyKB4qKjImKioqKiYyKigaKkBWMjIoHjIgVjY2JBo6HFYyMigcOjI4VjI2MiYyMjIyKjIyMioyKB4mKjYqJioyKiIyMjAaJjxWNjIkHjhaNjIkHDo6MjBWOjIgHipAVjoyIBw6TjI0VjoyMjIyOioyIioqKioyKB4qMiIwGiQSOiogGkwSMjIoHhgSMjIyOioqKBo4EjI6KBw6QjJMVjIyKB4wWjIyKBw6VjI4VkIyGB4oEjIyKB4qRFYyMigeEBIyPigeHjhWOjIgHipAVjI+KB4iFFYyNigeJjxWMjYoHjIYVjIyKB4qRFYyMigeGBJCMhgcOkYyOFYyPigeHjhWMjIoHio0VjIyKB4gEJAqIjxWMjYoHDoySFYyMigeKBIyMigeKjRWMjIoHjIoVjIyKB4oEjIyKB4qNFYyMigcOjI0VjJCJiowHDo+MjxWMjYoHDpWMjhWQjIYHigSMjIoHipEVjIyKB4QEjI+KB4eOFY6MjI2KiYqNjIyKioqJigeKkBWMj4oHioYVjIyKB4kEjIyKB4qRFYyMigeGBJCMhgcOj4yTFYyNigcOkIySFYyMigeKBCYKio0VjIyKBw6MjBWMjY2JjI2NjImNiomJjYoHDpCMkBWNjIqNigeIjxWMjYoHiokVjIyKB4wEjIyKBw6QjJAVjI2KB4mPFYyNigeKiRWMjIqMioqMB4wEjIyKBw6QjJIVjIyKB4wEjI2JiowHDpGMihWSjIeNj4yHioqJiQcOjJEVjYyJB4oEjIyNioyQioqFjIqHjweMiBWMjYoGjASMjooGDo6MkBWMjIoHDo+MFoyMigeKihUnCg6PjJQVjI2Gio8HDpCMjxWMjooHiI4VjIyKB4oEJgqKjRWMjIoHDoyRFSYKio0VjIyKB42JFSYKio0VjIyKBw6UlASMjYaKjweEBIyMjIyMjIyMjIyMjIyMigeKioqKioqKioqKiooGjooVKAoOlJQEjI2Gio8HhASMjIyMjIyMjIyMjIyKiooHioqNioyKioyJjIqKioqKBooHjokVjYyKjYoHiY0VjIyKBw6UjASMjIyMjIyMjIyMjIyMjIwHjIqKioqKioqKioqKioqKBooHjwSMjYoHiY8VjI2KB4qJFYyMigeKBIyMigeKjRWMjIoHjIQVKAoOkYyNFY2MiQeKBIyOigeIjhWMjIoHjASNjIkHio4VjIyKB4yFFYyMigcOjIwVkIyMjIyMjIyKioqMioqMB4qKiomOjYyGio2IiQaTBIyNigcOjIwVKQqSBIyMigeMBIyNigcOjIwVKQqKkhUgCo4WjIyKBw6MjBWQjIyMjY2MjIqKioqKjIoHioyKioqJjo2MhoqNiIkGipIVJgoOjIwVKQqKkhWNjIkHjhaNjIkHDoyMFZCMjIyMioyOjIyKioqKigeMioqMioqKiY6NjIaKjYgGiQeKkxWMjIoHDpSMjBWRjIyMjIyKioqKiY6NiowHjIyPioiJjYqJiI6Kh46IBogHDoyOFY+MhweKBIyMigeKkBWMjIoHhASNjYqKigeKihUnCpUEjI2KB4UEjIyKB4qQFYyMigcOkYyMFZKNjIyKjIqIiY2KiYmOigeHkxWMjYoHDpGMjBWSjIyMio2KiImNiomJjooHiZMVjI2KBw6RjIwVk4yMjYqJio2MjImIiY2KB4mJjooGDpGMjBWSj4qIiY2KiYmOigeIkxWMjIoHjBaMjIoHDo6UBIyNigeKgxWSjIyMioqEBw6OkwSMjIoHhASSjIQHipMVjI2KBw6PkwSMjIoHhASSjIQHipMVjI2KB4oEjIyKBw6OlASMjIoHgwSSjIQHkwSMjIoHDo8EjIyPjoqJiIyKiomOioeOB46OFYyMigeGBJCMhgcOjIwVk4yMjIqNjIyKioqJjIqJB4yKjIiMkIyEiY2KjoqGBg6MjRWQjIYHigSMjooHiJEVjI2MjIkHiI0VjI2KB4yEFZCMhgcOjI0VkIyGB4oEjI6KB4iRFY2MjI2KiYqNigeGBJCMhgcOjI0VkIyGB4qRFYyMigeEBIyOigeIkRWMjooHiI0VjI6KB4QEkIyGB4qR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AAcAAQAGAAEABwABAAcAAQADAAEABAABAAYAAQAGAAEABgABAAYAAAAKAAEABwABAAcAAQAHAAEABwABAAUAAQAFAAEABwABAAcAAQADAAEABgABAAYAAQAFAAEACAABAAcAAQAHAAEABwABAAcAAQAHAAEABwABAAUAAAAHAAEABwABAAkAAQAHAAEABQAAAAcAAQAEAAEABAAAAAQAAAAHAAEABwABAAQAAQAGAAEABgABAAUAAQAGAAEABgABAAUAAQAGAAEABgABAAMAAQAFAAEABQABAAMAAQAHAAEABgABAAYAAQAGAAEABgABAAUAAQAGAAEABAABAAYAAQAHAAEABwABAAcAAQAGAAEABgABAAMAAAADAAEAAwAAAAgAAQADAAAAAwABAAcAAQAHAAEACAABAAcAAQADAAEACAABAAUAAQAKAAEABgABAAcAAQAHAAEABAABAAoAAQAEAAEABQABAAcAAQAFAAEABQABAAUAAQAGAAEABwABAAMAAQAEAAEABAABAAUAAQAHAAEACQAAAAkAAAAJAAAABgABAAcAAQAHAAEABwABAAcAAQAHAAEABwABAAkAAQAHAAEABgABAAYAAQAGAAEABgABAAMAAAADAAAABAAAAAMAAAAHAAAABwABAAcAAQAHAAEABwABAAcAAQAHAAEABgABAAcAAQAHAAEABwABAAcAAQAHAAEABwABAAUAAAAHAAAABgABAAYAAQAGAAEABgABAAYAAQAGAAEACQABAAUAAQAGAAEABgABAAYAAQAGAAEAAwAAAAMAAAAEAAAAAwAAAAYAAQAGAAEABgABAAYAAQAGAAEABgABAAYAAQAHAAEABgABAAYAAQAGAAEABgABAAYAAQAGAAEABQAAAAYAAQAJAAE=) format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
+/* // UNIVERSAL ///////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 :root {
+    --tilemap: transparent url(bitmaps/tilemap.png) 0 0 no-repeat;
     --agua: url('data:image/gif;base64,R0lGODlhEAAQAKEDACMj4VFQ/1T//1lR+iH/C05FVFNDQVBFMi4wAwEAAAAh+QQFFAADACwAAAAAEAAQAAACJowloMtt36IzsoKHw6IASWhFWMgp2eOFTGaClau2Z7yWNJSKmvwUACH5BAUUAAMALAAAAAAQABAAAAInhB1xyS1yolxtWqqubRXltyVaKGqlxwXgGHFodjGslJ4zIN8osAIFACH5BAUUAAMALAAAAAAQABAAAAInhA+hIIK4jJq0vQsp3inyR2lSYFjX9J0o53VhYKbjKm6rPIf4cV8FACH5BAUUAAMALAAAAAAQABAAAAImhBF5y5sBhGhG1YeDpDzzbn1M9hzW1pTiqIIOqU2riV0h1c4IPBcAIfkEBRQAAwAsAAAAABAAEAAAAiaMA6nLcA3VEyIaeXKgEeruXSCjPYnINeaIiRbSainrZOcawnRtFAAh+QQFFAADACwAAAAAEAAQAAACJoSPFsubnxicQAoxnWrt0sd9oCYenLQZ3hiUSPOR1RmsbjjLLFIAACH5BAUUAAMALAAAAAAQABAAAAIlhH+hyA0KoZtv0SaFmLZGqF3MJ45d6ZGGFWJnGV3nB25oGqxSAQAh+QQFFAADACwAAAAAEAAQAAACJoQRmaZxfxScsDWK0cpTCoFtmpV8XHWdj6RGpMPAZie2aQjH5JwVACH5BAUUAAMALAAAAAAQABAAAAImjCWgy22vXmjO0LukxBhyCiHdFGmP+DFaWpFsaWYk2r6yxeGwUQAAIfkEBRQAAwAsAAAAABAAEAAAAieEHXGQ3SKWnE6xNhfOvG5OJWCGQZ11eYE5ak4rfXBaHSLAxvdMSwUAIfkEBRQAAwAsAAAAABAAEAAAAiaED6GBnXyWDEK4a2ZeeMPeTBwYKmTJVJjpierZfvAIP2IEvWhXAAAh+QQFFAADACwAAAAAEAAQAAACJoQRecub2g40rwYhorb06R58keWJTGlKCraFIMmmrysjk0xOUAwUACH5BAUUAAMALAAAAAAQABAAAAInjANpKZKvFpz0IPpktKbhz20XqH0Td5hYqp6Lt47oAbfiaANsrh8FACH5BAUUAAMALAAAAAAQABAAAAImhI8Wy3sOhEgK0gsarqg1uVFeZV1MKHolmq3oCZrBoy4x2544iRQAIfkEBRQAAwAsAAAAABAAEAAAAiiEf6HIDQphCkYIJ52O2qwZKVbXhF62fSQSoutJvSAwYvHTipeMu0cBACH5BAUUAAMALAAAAAAQABAAAAImhBGZx83q4lE0TAuEiFDyLi1XFWieUxnUCZ5j6j5irC7m91a3VwAAOw==');
-    --tileResolution: 160px;
-    --farm-width: 160px;
 }
 
 * {
@@ -18,14 +13,285 @@
     box-sizing: border-box;
     margin: 0;
     border: 0;
+    border-spacing: 0;
     padding: 0;
     image-rendering: pixelated;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
     background: #afafbf;
 }
+
+/* // BUTTONS /////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+button {
+    text-decoration: none;
+    border: 1px solid #1a1a1a;
+    padding: 0.8vw 2.4vw;
+    background: #f0f0f0;
+    user-select: none;
+    cursor: pointer;
+}
+
+button:hover {
+    border: 1px solid #313131;
+    background: #ffffff;
+}
+
+button:active {
+    border: 1px solid black;
+    background: #cccccc;
+}
+
+.disabled,
+.disabled:hover,
+.disabled:active {
+    border: 1px solid black;
+    background: #dddddd;
+    cursor: default;
+}
+
+
+
+#divGameWindow button {
+    z-index: 100;
+}
+
+#divGameWindow button span {
+    z-index: 50;
+}
+
+
+
+#buttonTill {
+    margin-left: 2vw;
+}
+
+#buttonForewordEnglish,
+#buttonTill,
+#buttonPlant,
+#buttonWater,
+#buttonHarvest,
+#buttonEnglish,
+#buttonSpanish,
+#buttonQ,
+#buttonI {
+    margin-right: 2vw;
+}
+
+#divFarmButtons button,
+#divBarterButtons button {
+    margin: 0 auto;
+}
+
+#divFarmButtons #buttonBuyForest,
+#divFarmButtons #buttonBuyMountain,
+#divFarmButtons #buttonFound,
+#divFarmButtons #buttonHire,
+#divFarmButtons #buttonAudit,
+#divBarterButtons #buttonBarterDate,
+#divBarterButtons #buttonBarterFig,
+#divBarterButtons #buttonBarterPom,
+#divBarterButtons #buttonBarterGrape {
+    margin-top: 2vw;
+}
+
+#divBarterButtons #buttonBarterOlive,
+#divBarterButtons #buttonBarterGrape {
+    margin-bottom: 6.4vw;
+}
+
+#divBarterButtons #buttonBarterOlive.noMargin {
+    margin-bottom: 0;
+}
+
+#buttonForest,
+#buttonMountain {
+    margin: 6.4vw auto 0 auto;
+}
+
+#buttonForewordDismiss {
+    font-size: 3.8vw;
+    display: block;
+    margin: 6.4vw auto;
+}
+
+#buttonForewordEnglish,
+#buttonForewordSpanish {
+    font-size: 2.4vw;
+}
+
+
+
+#buttonForewordDismiss,
+#buttonForewordEnglish,
+#buttonForewordSpanish {
+    color: crimson;
+    border: 1px solid crimson;
+    background: antiquewhite;
+}
+
+#buttonForewordDismiss:hover,
+#buttonForewordEnglish:hover,
+#buttonForewordSpanish:hover {
+    color: #ff0033;
+    border: 1px solid #ff0033;
+    background: bisque;
+}
+
+#buttonForewordDismiss:active,
+#buttonForewordEnglish:active,
+#buttonForewordSpanish:active {
+    color: maroon;
+    border: 1px solid maroon;
+    background: burlywood;
+}
+
+
+
+#buttonSystemMessageDismiss {
+    font-size: 3.8vw;
+    color: #3c14dc;
+    display: block;
+    margin: 6.4vw auto 0 auto;
+    border: 1px solid #3c14dc;
+    background: #d7ebfa;
+}
+
+#buttonSystemMessageDismiss:hover {
+    color: #3300ff;
+    border: 1px solid #3300ff;
+    background: #c4e4ff;
+}
+
+#buttonSystemMessageDismiss:active {
+    color: #000080;
+    border: 1px solid #000080;
+    background: #87b8de;
+}
+
+
+
+#buttonGameEventDismiss {
+    font-size: 3.8vw;
+    color: #24b600;
+    display: block;
+    margin: 6.4vw auto 0 auto;
+    border: 1px solid #24b600;
+    background: #f2fce5;
+}
+
+#buttonGameEventDismiss:hover {
+    color: #27c200;
+    border: 1px solid #27c200;
+    background: #e4ffc4;
+}
+
+#buttonGameEventDismiss:active {
+    color: #008000;
+    border: 1px solid #008000;
+    background: #b8de87;
+}
+
+
+
+#buttonTillDecal {
+    width: 32px;
+    height: 16px;
+    background: var(--tilemap);
+    background-position: -208px -32px;
+    display: block;
+}
+
+#buttonPlantDecal {
+    width: 32px;
+    height: 16px;
+    background: var(--tilemap);
+    background-position: -240px -32px;
+    display: block;
+}
+
+#buttonWaterDecal {
+    width: 32px;
+    height: 16px;
+    background: var(--tilemap);
+    background-position: -272px -32px;
+    display: block;
+}
+
+#buttonHarvestDecal {
+    width: 32px;
+    height: 16px;
+    background: var(--tilemap);
+    background-position: -304px -32px;
+    display: block;
+}
+
+
+
+#buttonPriority {
+    margin-top: 2vw;
+}
+
+#buttonPriorityDecal {
+    width: 16px;
+    height: 16px;
+    background: var(--tilemap);
+    background-position: -80px -208px;
+    display: block;
+    float: left;
+}
+
+#buttonPriorityColon {
+    width: 16px;
+    height: 16px;
+    background: var(--tilemap);
+    background-position: -128px -208px;
+    display: block;
+    float: left;
+}
+
+#buttonPriorityOption {
+    width: 32px;
+    height: 16px;
+    background: var(--tilemap);
+    background-position: -240px -16px;
+    display: block;
+    float: left;
+}
+
+
+
+#divFooter button {
+    font-size: 2.4vw;
+    color: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    background: #d4d4e4;
+}
+
+#divFooter button:hover {
+    color: #313131;
+    border: 1px solid #313131;
+    background: #f6f6ff;
+}
+
+#divFooter button:active {
+    color: black;
+    border: 1px solid black;
+    background: #a4a4c2;
+}
+
+
+
+#buttonWin {
+    border: 3px solid;
+    border-image: linear-gradient(#56f9c4, #56bcf9) 1;
+}
+
+/* // OVERLAYS ////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 .overlay {
     position: fixed;
@@ -34,19 +300,19 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
 }
+
+
 
 #divOverlayForeword {
     background-color: rgba(16, 0, 0, 0.8);
     z-index: 2000;
 }
 
-.rowCentered {
-    width: 100%;
-    text-align: center;
-}
-
 #divModalForeword {
+    text-align: center;
     width: 90vw;
     margin: 5vw auto;
     border: 3px solid crimson;
@@ -90,63 +356,7 @@ body {
     margin-top: 1.4vw;
 }
 
-button {
-    text-decoration: none;
-    border: 1px solid black;
-    padding: 0.8vw 2.4vw;
-    user-select: none;
-}
 
-#buttonTill {
-    margin-left: 2vw;
-}
-
-#buttonForewordEnglish,
-#buttonTill,
-#buttonPlant,
-#buttonWater,
-#buttonHarvest,
-#buttonEnglish,
-#buttonSpanish,
-#buttonQ,
-#buttonI {
-    margin-right: 2vw;
-}
-
-#buttonForewordDismiss {
-    font-size: 3.8vw;
-    display: block;
-    margin: 6.4vw auto;
-}
-
-#buttonForewordEnglish,
-#buttonForewordSpanish {
-    font-size: 2.4vw;
-}
-
-#buttonForewordDismiss,
-#buttonForewordEnglish,
-#buttonForewordSpanish {
-    color: crimson;
-    border: 1px solid crimson;
-    background: antiquewhite;
-}
-
-#buttonForewordDismiss:hover,
-#buttonForewordEnglish:hover,
-#buttonForewordSpanish:hover {
-    color: #ff0033;
-    border: 1px solid #ff0033;
-    background: bisque;
-}
-
-#buttonForewordDismiss:active,
-#buttonForewordEnglish:active,
-#buttonForewordSpanish:active {
-    color: maroon;
-    border: 1px solid maroon;
-    background: burlywood;
-}
 
 #divOverlaySystemMessage {
     background-color: rgba(0, 0, 16, 0.8);
@@ -193,81 +403,7 @@ button {
     margin-top: 1.2vw;
 }
 
-#buttonSystemMessageDismiss {
-    font-size: 3.8vw;
-    color: #3c14dc;
-    margin-top: 6.4vw;
-    border: 1px solid #3c14dc;
-    background: #d7ebfa;
-}
 
-#buttonSystemMessageDismiss:hover {
-    color: #3300ff;
-    border: 1px solid #3300ff;
-    background: #c4e4ff;
-}
-
-#buttonSystemMessageDismiss:active {
-    color: #000080;
-    border: 1px solid #000080;
-    background: #87b8de;
-}
-
-#divGameWindow {
-    padding: 12.8vw 0 0 0; /* 6.4vw --------------------------------------------------------------------- */
-    background: #f6f6ff;
-}
-
-#divCalendar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: #006800;
-    border-bottom: 2px solid black;
-    padding: 5px 0;
-}
-
-#divCalendar table {
-    width: 100%;
-}
-
-#divCalendar td {
-    font-family: 'Runescape11';
-    font-size: 16px;
-    color: #fad15a;
-    text-align: center;
-    text-shadow: 1px 0 0 #004203, 1px -1px 0 #004203, 0 -1px 0 #004203, -1px 0 0 #009000, -1px 1px 0 #009000, 0 1px 0 #009000, 1px 1px 0 #004203, -1px -1px 0 #004203;
-    width: 33%;
-}
-
-#divFooter {
-    border-top: 1px solid black;
-    padding: 2.3vw 0;
-    background: #AFAFBF;
-}
-
-#divFooter button {
-    font-size: 2.4vw;
-    color: #1a1a1a;
-    border: 1px solid #1a1a1a;
-    background: #d4d4e4;
-}
-
-#divFooter button:hover {
-    color: #313131;
-    border: 1px solid #313131;
-    background: #f6f6ff;
-}
-
-#divFooter button:active {
-    color: black;
-    border: 1px solid black;
-    background: #a4a4c2;
-}
-
-/* //////////////////////////////////////////////////////////////////////////////// */
-/* ///////////////////////INSERT CORRECT SHIT HERE //////////////////////////////// */
-/* //////////////////////////////////////////////////////////////////////////////// */
 
 #divOverlayGameEvent {
     background-color: rgba(0, 16, 0, 0.8);
@@ -282,6 +418,18 @@ button {
     background: #f2fce5;
 }
 
+#divGameEventFaçade {
+    width: 60vw;
+    margin: 0 auto 3.2vw auto;
+    user-select: none;
+}
+
+#divGameEventFaçade img {
+    width: 100%;
+    border: 1px solid black;
+    display: block;
+}
+
 #divGameEventCorpus {
     font-family: 'Garamond', serif;
     font-size: 3.6vw;
@@ -290,55 +438,181 @@ button {
     text-align: center;
 }
 
-#buttonGameEventDismiss {
-    font-size: 3.8vw;
-    color: #24b600;
+#divGameEventCorpus #nasirMessage {
+    font-family: 'Alegreya Sans SC', serif;
+    font-size: 3.6vw;
+    color: #041204;
+    line-height: 4.2vw;
+    margin-top: 3.2vw;
+    border: 1px solid black;
+    padding: 2px 8px;
+}
+
+/* // CALENDAR ////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divCalendar {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 48px;
+    border-bottom: 2px solid black;
+    background: #006800;
+}
+
+#divCalendarGap {
+    height: 48px;
+}
+
+.divCalendarCell {
+    text-align: center;
+    position: relative;
+    width: 33.3%;
+    height: 46px;
+}
+
+.divCalendarCellLiner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.divCalendarFlexbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@font-face {
+    font-family: 'RuneScape';
+    src: url('fonts/RuneScape-Plain-11.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#divYear,
+#divWeek {
+    font-family: 'RuneScape', sans-serif;
+    font-size: 16px;
+    color: #fad15a;
+    text-shadow: 1px 0 0 #004203, 1px -1px 0 #004203, 0 -1px 0 #004203, -1px 0 0 #009000, -1px 1px 0 #009000, 0 1px 0 #009000, 1px 1px 0 #004203, -1px -1px 0 #004203;
+    user-select: none;
+}
+
+#divRuneSeason {
+    width: 16px;
+    height: 16px;
+    background: var(--tilemap);
+}
+
+#divStonesSeason {
+    width: 16px;
+    height: 16px;
+    background: var(--tilemap);
+}
+
+#divEmbossZodiacChinese {
+    width: 32px;
+    height: 16px;
+    background: var(--tilemap);
+}
+
+#divHourglass {
+    width: 16px;
+    height: 16px;
+    margin: 0 6px;
+    background: var(--tilemap);
+}
+
+#divEmbossSeason {
+    width: 32px;
+    height: 16px;
+    background: var(--tilemap);
+}
+
+#divStonesWeek {
+    width: 16px;
+    height: 16px;
+    background: var(--tilemap);
+}
+
+#divRuneMonth {
+    width: 16px;
+    height: 16px;
+    background: var(--tilemap);
+}
+
+#divRuneElement {
+    width: 16px;
+    height: 16px;
+    background: var(--tilemap);
+}
+
+/* // GAME WINDOW /////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divGameWindow {
+    text-align: center;
+    padding: 12.8vw 0 6.4vw 0;
+    background: #f6f6ff;
+}
+
+#divViewForest,
+#divViewMountain {
+    padding-bottom: 6.4vw;
+}
+
+.starving {
+    color: Red;
+    font-style: italic;
+}
+
+#divFarmButtons,
+#divBarterButtons {
     margin-top: 6.4vw;
-    border: 1px solid #24b600;
-    background: #f2fce5;
 }
 
-#buttonGameEventDismiss:hover {
-    color: #27c200;
-    border: 1px solid #27c200;
-    background: #e4ffc4;
-}
+/* // CANVASES ////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
-#buttonGameEventDismiss:active {
-    color: #008000;
-    border: 1px solid #008000;
-    background: #b8de87;
+canvas {
+    border: 1px solid black;
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* //////////////////  ||              || ///////////////////////////////////////// */
-/* /////////////////   \/ no mans land \/ ///////////////////////////////////////// */
-/* //////////////////////////////////////////////////////////////////////////////// */
-
-.tile {
-    width: var(--tileResolution);
-    height: var(--tileResolution);
+#canvasFarm {
+    width: 162px;
+    height: 162px;
+    background-color: transparent;
+    background-image: var(--agua);
+    margin: 0 auto 6.4vw auto;
+    display: block;
 }
+
+#canvasMountain,
+#canvasForest {
+    width: 386px;
+    height: 226px;
+    background-color: transparent;
+    background-image: var(--agua);
+    margin: 0 auto 6.4vw auto;
+    display: block;
+}
+
+#canvasVillage {
+    width: 386px;
+    height: 71px; /* add two for border! */
+    background: pink;
+    margin: 0 auto 6.4vw auto;
+    display: block;
+}
+
+/* // TABLES //////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 table {
     margin-left: auto;
@@ -349,10 +623,278 @@ td {
     text-align: right;
 }
 
-#divFarm {
-    margin: 0 auto 6.4vw auto;
-    width: var(--farm-width);
-    min-width: var(--farm-width);
+
+
+#tableFarmInventory,
+#tableFarmStaff,
+#tableFarmReport,
+#tableForestInventory,
+#tableForestStaff,
+#tableForestReport,
+#tableMountainInventory,
+#tableMountainStaff,
+#tableMountainReport {
+    margin-top: 2vw;
+    border: 1px solid black;
+    user-select: none;
+}
+
+#tableFarmInventory,
+#tableForestInventory,
+#tableMountainInventory {
+    margin-top: 6.4vw;
+}
+
+#tableFarmInventory thead td,
+#tableFarmStaff thead td,
+#tableFarmReport thead td,
+#tableForestInventory thead td,
+#tableForestStaff thead td,
+#tableForestReport thead td,
+#tableMountainInventory thead td,
+#tableMountainStaff thead td,
+#tableMountainReport thead td {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    background: #477fa5;
+    border-bottom: 1px solid black;
+    border-right: 1px solid #366e94;
+}
+
+#tableFarmInventory tbody td,
+#tableFarmStaff tbody td,
+#tableForestInventory tbody td,
+#tableForestStaff tbody td,
+#tableMountainInventory tbody td,
+#tableMountainStaff tbody td {
+    vertical-align: bottom;
+}
+
+#tableFarmReport tbody td,
+#tableForestReport tbody td,
+#tableMountainReport tbody td {
+    border-right: 1px solid #d8d8d8;
+}
+
+#tableFarmInventory tr:nth-of-type(even) td,
+#tableFarmStaff tr:nth-of-type(even) td,
+#tableFarmReport tr:nth-of-type(even) td,
+#tableForestInventory tr:nth-of-type(even) td,
+#tableForestStaff tr:nth-of-type(even) td,
+#tableForestReport tr:nth-of-type(even) td,
+#tableMountainInventory tr:nth-of-type(even) td,
+#tableMountainStaff tr:nth-of-type(even) td,
+#tableMountainReport tr:nth-of-type(even) td {
+    background: #e9e9e9;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+#tableFarmInventory td,
+#tableFarmStaff td,
+#tableForestInventory td,
+#tableForestStaff td,
+#tableMountainInventory td,
+#tableMountainStaff td {
+    padding: 2px 8px;
+}
+
+#tableFarmReport td,
+#tableForestReport td,
+#tableMountainReport td {
+    padding: 2px 8px;
+    text-align: center;
+}
+
+#divGameWindow .noPadColumn {
+    padding: 2px 0;
+}
+
+#divGameWindow .rightPadColumn {
+    padding: 2px 8px 2px 0;
+}
+
+
+
+#tableForestInventory thead td,
+#tableForestStaff thead td,
+#tableForestReport thead td {
+    background: #429665;
+    border-right: 1px solid #2b754a;
+}
+
+
+
+#tableMountainInventory thead td,
+#tableMountainStaff thead td,
+#tableMountainReport thead td {
+    background: #be6c62;
+    border-right: 1px solid #9b4b40;
+}
+
+/* // ICONS ///////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+.icon {
+    width: 16px;
+    height: 16px;
+    background: var(--tilemap);
+    margin: 0 auto;
+    display: block;
+}
+
+.inlineicon {
+    display: inline-block;
+}
+
+
+
+.Wheat {
+    background-position: 0 -192px;
+}
+
+.Barley {
+    background-position: -16px -192px;
+}
+
+.Olive {
+    background-position: -32px -192px;
+}
+
+.Date {
+    background-position: -48px -192px;
+}
+
+.Fig {
+    background-position: -64px -192px;
+}
+
+.Pom {
+    background-position: -80px -192px;
+}
+
+.Grape {
+    background-position: -96px -192px;
+}
+
+
+
+.Sawyer {
+    background-position: 0 -208px;
+}
+
+.Miner {
+    background-position: -16px -208px;
+}
+
+.Mason {
+    background-position: -32px -208px;
+}
+
+.Logger {
+    background-position: -48px -208px;
+}
+
+.Guard {
+    background-position: -64px -208px;
+}
+
+.Fieldhand {
+    background-position: -80px -208px;
+}
+
+.Blacksmith {
+    background-position: -96px -208px;
+}
+
+.Accountant {
+    background-position: -112px -208px;
+}
+
+.Vigneron {
+    background-position: -160px -208px;
+}
+
+.Cinderman {
+    background-position: -176px -208px;
+}
+
+
+
+.Shovel {
+    background-position: -112px -192px;
+}
+
+.Axe {
+    background-position: -128px -192px;
+}
+
+.Rake {
+    background-position: -144px -192px;
+}
+
+.Sapling {
+    background-position: -144px -208px;
+}
+
+
+
+.Log {
+    background-position: 0 -224px;
+}
+
+.Board {
+    background-position: -16px -224px;
+}
+
+.Stone {
+    background-position: -32px -224px;
+}
+
+.OreCopper {
+    background-position: -48px -224px;
+}
+
+.IngotCopper {
+    background-position: -64px -224px;
+}
+
+
+
+.Trophy {
+    background-position: 0 -240px;
+}
+
+.Sword {
+    background-position: -16px -240px;
+}
+
+.Shield {
+    background-position: -32px -240px;
+}
+
+.Sell {
+    background-position: -48px -240px;
+}
+
+.Scroll {
+    background-position: -64px -240px;
+}
+
+.Rattata {
+    background-position: -80px -240px;
+}
+
+/* // FOOTER //////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divFooter {
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid black;
+    padding: 2.3vw 0;
+    background: #AFAFBF;
 }
 
 
@@ -366,41 +908,13 @@ td {
 
 
 
+/* //////////////////////////////////////////////////////////// */
+/* ////////////////// _||_              _||_ ////////////////// */
+/* ////////////////// \  / no mans land \  / ////////////////// */
+/* //////////////////  \/                \/  ////////////////// */
+/* //////////////////////////////////////////////////////////// */
 
-#divForest,
-#divMountain {
-    margin: 64px auto 0 auto;
-    width: 384px;
-    min-width: 384px;
-}
-
-#divForest table {
-    margin: 32px auto 0 auto;
-}
-
-#buttonForest {
-    margin: 32px auto 0 auto;
-}
-
-#divFarm,
-#divForest,
-#divMountain {
-    line-height: 0;
-    background-image: var(--agua);
-}
-
-
-
-
-
-
-
-.starving {
-    color: Red;
-    font-style: italic;
-}
-
-#spanVillageName {
+#divVillageName {
     margin-top: 68px;
     font-weight: bold;
     color: #120404;
@@ -443,61 +957,26 @@ td {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-#buttonBuyLand,
-#buttonBuyForest,
-#buttonBuyMountain,
-#buttonHire,
-#buttonAudit,
-#buttonSellGrain,
-#buttonBarterOlive,
-#buttonBarterDate,
-#buttonBarterFig,
-#buttonBarterPom,
-#buttonBarterGrape,
-#buttonFound,
-#buttonBuild,
-#buttonWin {
-    margin-bottom: 10px;
-}
-
-#buttonHire,
-#buttonSellGrain {
-    margin: 0 auto 10px auto;
-}
-
-#buttonPriority {
-    margin-top: 10px;
-}
-
-#buttonWin {
-    margin-top: 82px;
-}
-
-#divBushelCount,
 #divOverlayForeword,
 #divOverlayGameEvent,
 #divOverlaySystemMessage,
+#tableFarmInventory,
+#tableFarmStaff,
+#tableFarmReport,
 #divViewForest,
+#tableForestInventory,
+#tableForestStaff,
+#tableForestReport,
+#divViewMountain,
+#tableMountainReport,
+#divViewVillage,
+#divVillageName,
 #divVillage,
 #divVillageStatistics,
 #buttonTill,
 #buttonPlant,
 #buttonWater,
 #buttonHarvest,
-#spanFarmReport,
-#spanHandsCount,
-#spanVillageName,
 #buttonBuyLand,
 #buttonBuyForest,
 #buttonBuyMountain,

@@ -1,73 +1,159 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html dir="ltr" lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PRAEDIUM - EDICIÓN DE ORO</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <div id="divCalendar"></div>
+    <div id="divCalendar">
+        <div class="divCalendarCell">
+            <div class="divCalendarCellLiner">
+                <div id="divYear"></div>
+                <div class="divCalendarFlexbox">
+                    <div id="divRuneSeason"></div>
+                    <div id="divStonesSeason"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divCalendarCell">
+            <div class="divCalendarCellLiner">
+                <div class="divCalendarFlexbox">
+                    <div id="divEmbossZodiacChinese"></div>
+                    <div id="divHourglass"></div>
+                    <div id="divEmbossSeason"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divCalendarCell">
+            <div class="divCalendarCellLiner">
+                <div id="divWeek"></div>
+                <div class="divCalendarFlexbox">
+                    <div id="divStonesWeek"></div>
+                    <div id="divRuneMonth"></div>
+                    <div id="divRuneElement"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divCalendarGap"></div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divGameWindow">
-        <div id="divViewVillage">
-            <div class="rowCentered">
-                <button id="buttonWin"></button>
-            </div>
 
-            <div class="rowCentered">
-                <span id="spanVillageName"></span>
+        <button id="buttonWin"></button>
+
+        <div id="divViewVillage">
+            <canvas id="canvasVillage" width="384" height="69"></canvas>
+
+            <div>
+                <div id="divVillageName"></div>
                 <div id="divVillage"></div>
                 <div id="divVillageStatistics"></div>
             </div>
 
-            <div class="rowCentered">
+            <div>
                 <button id="buttonBuild"></button>
                 <button id="buttonSellGrain"></button>
             </div>
         </div>
 
-        <div id="divViewMountain"></div>
+        <div id="divViewMountain">
+            <canvas id="canvasMountain" width="384" height="224"></canvas>
+
+            <table id="tableMountainInventory">
+                <thead id="theadMountainInventory"></thead>
+                <tbody id="tbodyMountainInventory"></tbody>
+            </table>
+
+            <table id="tableMountainStaff">
+                <thead id="theadMountainStaff"></thead>
+                <tbody id="tbodyMountainStaff"></tbody>
+            </table>
+
+            <table id="tableMountainReport">
+                <thead id="theadMountainReport"></thead>
+                <tbody id="tbodyMountainReport"></tbody>
+            </table>
+
+            <button id="buttonMountain" style="display:block;">POOP YOUR PANTS</button> <!-- take off this style, duh / but obviously leave the text-->
+        </div>
 
         <div id="divViewForest">
-            <div class="rowCentered">
-                <div id="divForest" class="rowCentered"></div>
-                <span id="spanForestReport"></span>
-                <button id="buttonForest"></button>
-            </div>
+            <canvas id="canvasForest" width="384" height="224"></canvas>
+
+            <table id="tableForestInventory">
+                <thead id="theadForestInventory"></thead>
+                <tbody id="tbodyForestInventory"></tbody>
+            </table>
+
+            <table id="tableForestStaff">
+                <thead id="theadForestStaff"></thead>
+                <tbody id="tbodyForestStaff"></tbody>
+            </table>
+
+            <table id="tableForestReport">
+                <thead id="theadForestReport"></thead>
+                <tbody id="tbodyForestReport"></tbody>
+            </table>
+
+            <button id="buttonForest"></button>
         </div>
 
         <div id="divViewFarm">
-            <div id="divFarm" class="rowCentered"></div>
+            <canvas id="canvasFarm" width="16" height="16"></canvas>
 
-            <div class="rowCentered">
-                <button id="buttonTill"></button><button id="buttonPlant"></button><button
-                    id="buttonWater"></button><button id="buttonHarvest"></button>
+            <div>
+                <button id="buttonTill">
+                    <span id="buttonTillDecal"></span>
+                </button><button id="buttonPlant">
+                    <span id="buttonPlantDecal"></span>
+                </button><button id="buttonWater">
+                    <span id="buttonWaterDecal"></span>
+                </button><button id="buttonHarvest">
+                    <span id="buttonHarvestDecal"></span>
+                </button>
             </div>
 
-            <div class="rowCentered">
-                <button id="buttonPriority"></button>
-            </div>
+            <button id="buttonPriority">
+                <span id="buttonPriorityDecal"></span>
+                <span id="buttonPriorityColon"></span>
+                <span id="buttonPriorityOption"></span>
+            </button>
 
-            <div id="divFarmInfoPanel" class="rowCentered">
-                <div id="divBushelCount"></div>
-                <span id="spanHandsCount"></span>
-                <span id="spanFarmReport"></span>
-            </div>
+            <table id="tableFarmInventory">
+                <thead id="theadFarmInventory"></thead>
+                <tbody id="tbodyFarmInventory"></tbody>
+            </table>
 
-            <div class="rowCentered">
+            <table id="tableFarmStaff">
+                <thead id="theadFarmStaff"></thead>
+                <tbody id="tbodyFarmStaff"></tbody>
+            </table>
+
+            <table id="tableFarmReport">
+                <thead id="theadFarmReport"></thead>
+                <tbody id="tbodyFarmReport"></tbody>
+            </table>
+
+            <div id="divFarmButtons">
+                <button id="buttonBuyLand"></button>
                 <button id="buttonBuyForest"></button>
                 <button id="buttonBuyMountain"></button>
-                <button id="buttonBuyLand"></button>
                 <button id="buttonFound"></button>
                 <button id="buttonHire"></button>
                 <button id="buttonAudit"></button>
             </div>
 
-            <div class="rowCentered">
+            <div id="divBarterButtons">
                 <button id="buttonBarterOlive"></button>
                 <button id="buttonBarterDate"></button>
                 <button id="buttonBarterFig"></button>
@@ -75,42 +161,45 @@
                 <button id="buttonBarterGrape"></button>
             </div>
         </div>
+
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <div id="divFooter" class="rowCentered">
+    <div id="divFooter">
         <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button><button
             id="buttonQ">?</button><button id="buttonI">i</button><button id="buttonCC0">(CCØ)</button>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayGameEvent" class="overlay">
-        <div id="divModalGameEvent" class="rowCentered">
+        <div id="divModalGameEvent">
+            <div id="divGameEventFaçade"></div>
             <div id="divGameEventCorpus"></div>
             <button id="buttonGameEventDismiss"></button>
         </div>
     </div>
-    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+
     <div id="divOverlayForeword" class="overlay">
-        <div id="divModalForeword" class="rowCentered">
+        <div id="divModalForeword">
             <div id="divForewordCorpus"></div>
             <button id="buttonForewordDismiss"></button>
             <button id="buttonForewordEnglish">English</button><button id="buttonForewordSpanish">Español</button>
         </div>
     </div>
-    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+
     <div id="divOverlaySystemMessage" class="overlay">
-        <div id="divModalSystemMessage" class="rowCentered">
+        <div id="divModalSystemMessage">
             <div id="divSystemMessageCorpus"></div>
             <button id="buttonSystemMessageDismiss"></button>
         </div>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <script src="init.js"></script>
-    <script src="utilities.js"></script>
-    <script src="translate.js"></script>
-    <script src="ui.js"></script>
-    <script src="player_actions.js"></script>
-    <script src="game_turn.js"></script>
-    <script src="start.js"></script>
+    <script src="scripts/init.js"></script>
+    <script src="scripts/utilities.js"></script>
+    <script src="scripts/translate.js"></script>
+    <script src="scripts/ui.js"></script>
+    <script src="scripts/player_actions.js"></script>
+    <script src="scripts/game_turn.js"></script>
+    <script src="scripts/start.js"></script>
+    <script src="scripts/mods.js"></script>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
 </body>
 
