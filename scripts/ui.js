@@ -3578,7 +3578,7 @@ function AnimateHourglass(newSpeed) {
         [-16 * 24, 0,],
     ];
 
-    if (newSpeed == oldSpeed) {
+    if (newSpeed == oldSpeed && gameSpeed != 'paused') {
         frameHourglass++;
         if (frameHourglass == frameHourglassMax) {
             frameHourglass = 0;

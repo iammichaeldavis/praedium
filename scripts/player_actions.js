@@ -394,7 +394,7 @@ function BuyLand() {
         player.seesStaff = true;
     }
     else if (farmStage == 3 && bushelCount[0] > priceStage4) {
-        if (story) { GameEvent(displayStoryFarm3); }
+        if (story) { GameEvent(displayStoryFarm3, 'farm_stage_3'); }
         farmStage++;
         bushelCount[0] -= priceStage4;
         spentCount[0] += priceStage4;
@@ -622,8 +622,8 @@ function HireHand() {
         handsAvailable -= 1;
         handsHired += 1;
         if (story) {
-            if (handsHired == 1) { GameEvent(displayStoryHands0); }
-            else if (handsHired == 2) { GameEvent(displayStoryHands1); }
+            if (handsHired == 1) { GameEvent(displayStoryHands0, 'fieldhand_0'); }
+            else if (handsHired == 2) { GameEvent(displayStoryHands1, 'fieldhand_1'); }
             else if (handsHired == 3) { GameEvent(displayStoryHands2); }
             else if (handsHired == 4) { GameEvent(displayStoryHands3); }
             else if (handsHired == 5) { GameEvent(displayStoryHands4); }
