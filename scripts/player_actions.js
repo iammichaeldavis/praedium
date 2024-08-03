@@ -6,11 +6,13 @@ buttonForewordDismiss.addEventListener('click', function () { DismissForeword();
 buttonForewordEnglish.addEventListener('click', function () { Translate('English'); });
 buttonForewordSpanish.addEventListener('click', function () { Translate('Spanish'); });
 buttonGameEventDismiss.addEventListener('click', function () { DismissGameEvent(); });
+buttonOptionsDismiss.addEventListener('click', function () { DismissOptions(); });
 buttonTill.addEventListener('click', function () { PlotTill(); });
 buttonPlant.addEventListener('click', function () { PlotPlant(); });
 buttonWater.addEventListener('click', function () { PlotWater(); });
 buttonHarvest.addEventListener('click', function () { PlotHarvest(); });
 buttonBuyLand.addEventListener('click', function () { BuyLand(); });
+buttonRentWarehouse.addEventListener('click', function () { RentWarehouse(); });
 buttonBuyForest.addEventListener('click', function () { BuyForest(); });
 buttonBuyMountain.addEventListener('click', function () { BuyMountain(); });
 buttonForest.addEventListener('click', function () { ForestEvents(); });
@@ -24,10 +26,13 @@ buttonBarterPom.addEventListener('click', function () { BarterFruit(5); });
 buttonBarterGrape.addEventListener('click', function () { BarterFruit(6); });
 buttonSellGrain.addEventListener('click', function () { SellGrain(); });
 buttonFound.addEventListener('click', function () { Found(); });
+buttonGoToTownship.addEventListener('click', function () { GoToTownship(); });
+buttonGoToPraedium.addEventListener('click', function () { GoToPraedium(); });
 buttonBuild.addEventListener('click', function () { Build(); });
 buttonWin.addEventListener('click', function () { Win(); });
 buttonEnglish.addEventListener('click', function () { Translate('English'); });
 buttonSpanish.addEventListener('click', function () { Translate('Spanish'); });
+buttonOptions.addEventListener('click', function () { SummonOptions(); });
 buttonQ.addEventListener('click', function () { Help(); });
 buttonI.addEventListener('click', function () { Info(); });
 buttonCC0.addEventListener('click', function () { Legal(); });
@@ -44,12 +49,14 @@ document.body.onkeyup = function (e) {
     if (e.code == 'KeyD' && player.canDelegate) { TogglePriority(e); }
     if (e.key == 'e') { Translate('English'); }
     if (e.key == 'r') { Translate('Spanish'); }
+    if (e.key == 'z') { SummonOptions(); }
     if (e.key == '1' && player.canTill) { PlotTill(); }
     if (e.key == '2' && player.canPlant) { PlotPlant(); }
     if (e.key == '3' && player.canWater) { PlotWater(); }
     if (e.key == '4' && player.canHarvest) { PlotHarvest(); }
     if (e.key == '5') {
-        if (player.canBuyForest) { BuyForest(); }
+        if (player.canRentWarehouse) { RentWarehouse(); }
+        else if (player.canBuyForest) { BuyForest(); }
         else if (farmStage == 11 && !player.canLog) { ForestEvents(); }
         else if (farmStage == 11 && !player.canSaw) { ForestEvents(); }
         else if (player.canBuyMountain) { BuyMountain(); }
@@ -286,9 +293,10 @@ function PlotHarvest(robota = false) {
     if (!taskComplete && arrayVineyard.includes(1)) {
         arrayVineyard[arrayVineyard.findIndex((element) => element == 1)] = 0;
 
-        const bounty = FindWholeRandom(grapesMin, grapesMax);
-        bushelCount[6] += bounty;
+        let bounty = FindWholeRandom(grapesMin, grapesMax);
         harvestedCount[6] += bounty;
+        if (bushelCount[6] + bounty > bushelMax[6]) { bounty = bushelMax[6] - bushelCount[6]; }
+        bushelCount[6] += bounty;
         farmedCount[6] += 1;
         taskComplete = true;
     }
@@ -296,9 +304,10 @@ function PlotHarvest(robota = false) {
     if (!taskComplete && arrayPomOrchard.includes(1)) {
         arrayPomOrchard[arrayPomOrchard.findIndex((element) => element == 1)] = 0;
 
-        const bounty = FindWholeRandom(pomegranateMin, pomegranateMax);
-        bushelCount[5] += bounty;
+        let bounty = FindWholeRandom(pomegranateMin, pomegranateMax);
         harvestedCount[5] += bounty;
+        if (bushelCount[5] + bounty > bushelMax[5]) { bounty = bushelMax[5] - bushelCount[5]; }
+        bushelCount[5] += bounty;
         farmedCount[5] += 1;
         taskComplete = true;
     }
@@ -306,9 +315,10 @@ function PlotHarvest(robota = false) {
     if (!taskComplete && arrayOlivar.includes(1)) {
         arrayOlivar[arrayOlivar.findIndex((element) => element == 1)] = 0;
 
-        const bounty = FindWholeRandom(olivesMin, olivesMax);
-        bushelCount[2] += bounty;
+        let bounty = FindWholeRandom(olivesMin, olivesMax);
         harvestedCount[2] += bounty;
+        if (bushelCount[2] + bounty > bushelMax[2]) { bounty = bushelMax[2] - bushelCount[2]; }
+        bushelCount[2] += bounty;
         farmedCount[2] += 1;
         taskComplete = true;
     }
@@ -316,9 +326,10 @@ function PlotHarvest(robota = false) {
     if (!taskComplete && arrayDatePalmGrove.includes(1)) {
         arrayDatePalmGrove[arrayDatePalmGrove.findIndex((element) => element == 1)] = 0;
 
-        const bounty = FindWholeRandom(datesMin, datesMax);
-        bushelCount[3] += bounty;
+        let bounty = FindWholeRandom(datesMin, datesMax);
         harvestedCount[3] += bounty;
+        if (bushelCount[3] + bounty > bushelMax[3]) { bounty = bushelMax[3] - bushelCount[3]; }
+        bushelCount[3] += bounty;
         farmedCount[3] += 1;
         taskComplete = true;
     }
@@ -326,9 +337,10 @@ function PlotHarvest(robota = false) {
     if (!taskComplete && arrayFigOrchard.includes(1)) {
         arrayFigOrchard[arrayFigOrchard.findIndex((element) => element == 1)] = 0;
 
-        const bounty = FindWholeRandom(figsMin, figsMax);
-        bushelCount[4] += bounty;
+        let bounty = FindWholeRandom(figsMin, figsMax);
         harvestedCount[4] += bounty;
+        if (bushelCount[4] + bounty > bushelMax[4]) { bounty = bushelMax[4] - bushelCount[4]; }
+        bushelCount[4] += bounty;
         farmedCount[4] += 1;
         taskComplete = true;
     }
@@ -338,15 +350,17 @@ function PlotHarvest(robota = false) {
         if (plotSearchResult.row != -1) {
 
             arrayFarmPlots[plotSearchResult.row][plotSearchResult.col] = 0;
-            const bounty = FindWholeRandom(yieldMin, yieldMax);
+            let bounty = FindWholeRandom(yieldMin, yieldMax);
             if (plotSearchResult.row > 5) {
-                bushelCount[1] += bounty;
                 harvestedCount[1] += bounty;
+                if (bushelCount[1] + bounty > bushelMax[1]) { bounty = bushelMax[1] - bushelCount[1]; }
+                bushelCount[1] += bounty;
                 farmedCount[1] += 1;
             }
             else {
-                bushelCount[0] += bounty;
                 harvestedCount[0] += bounty;
+                if (bushelCount[0] + bounty > bushelMax[0]) { bounty = bushelMax[0] - bushelCount[0]; }
+                bushelCount[0] += bounty;
                 farmedCount[0] += 1;
             }
             taskComplete = true;
@@ -354,6 +368,10 @@ function PlotHarvest(robota = false) {
     }
 
     if (!robota && taskComplete) {
+        if (farmStage == 0 && warehouseStage == 0 && player.canBuyLand && !player.canRentWarehouse) {
+            player.canRentWarehouse = true;
+            player.seesWarehouse = true;
+        }
         if (farmStage == 0) { player.canBuyLand = true; }
         UpdateDisplay();
     }
@@ -392,6 +410,7 @@ function BuyLand() {
         player.canHire = true;
         player.canAudit = true;
         player.seesStaff = true;
+        player.canRentWarehouse = true;
     }
     else if (farmStage == 3 && bushelCount[0] > priceStage4) {
         if (story) { GameEvent(displayStoryFarm3, 'farm_stage_3'); }
@@ -412,31 +431,31 @@ function BuyLand() {
         handsAvailable += 2;
     }
     else if (farmStage == 5 && bushelCount[0] > priceStage6) {
-        if (story) { GameEvent(displayStoryFarm5); }
+        if (story) { GameEvent(displayStoryFarm5, 'farm_stage_5'); }
         farmStage++;
         bushelCount[0] -= priceStage6;
         spentCount[0] += priceStage6;
     }
     else if (farmStage == 6 && bushelCount[0] > priceStage7) {
-        if (story) { GameEvent(displayStoryFarm6); }
+        if (story) { GameEvent(displayStoryFarm6, 'farm_stage_6'); }
         farmStage++;
         bushelCount[0] -= priceStage7;
         spentCount[0] += priceStage7;
     }
     else if (farmStage == 7 && bushelCount[0] > priceStage8) {
-        if (story) { GameEvent(displayStoryFarm7); }
+        if (story) { GameEvent(displayStoryFarm7, 'farm_stage_7'); }
         farmStage++;
         bushelCount[0] -= priceStage8;
         spentCount[0] += priceStage8;
     }
     else if (farmStage == 8 && bushelCount[0] > priceStage9) {
-        if (story) { GameEvent(displayStoryFarm8); }
+        if (story) { GameEvent(displayStoryFarm8, 'farm_stage_8'); }
         farmStage++;
         bushelCount[0] -= priceStage9;
         spentCount[0] += priceStage9;
     }
     else if (farmStage == 9 && bushelCount[0] > priceStage10) {
-        if (story) { GameEvent(displayStoryFarm9); }
+        if (story) { GameEvent(displayStoryFarm9, 'farm_stage_9'); }
         farmStage++;
         bushelCount[0] -= priceStage10;
         spentCount[0] += priceStage10;
@@ -446,7 +465,7 @@ function BuyLand() {
         player.seesOlives = true;
     }
     else if (farmStage == 10 && bushelCount[0] > priceStage11) {
-        if (story) { GameEvent(displayStoryFarm10); }
+        if (story) { GameEvent(displayStoryFarm10, 'farm_stage_10'); }
         farmStage++;
         bushelCount[0] -= priceStage11;
         spentCount[0] += priceStage11;
@@ -480,7 +499,7 @@ function BuyLand() {
         arrayFarmPlots[2][6] = 0;
     }
     else if (farmStage == 11 && bushelCount[0] > priceStage12[0] && boardsCount >= priceStage12[1]) {
-        if (story) { GameEvent(displayStoryFarm11); }
+        if (story) { GameEvent(displayStoryFarm11, 'farm_stage_11'); }
         farmStage++;
         bushelCount[0] -= priceStage12[0];
         spentCount[0] += priceStage12[0];
@@ -488,9 +507,10 @@ function BuyLand() {
         forestSpentCount[1] += priceStage12[1];
 
         handsAvailable += 2;
+        player.canRentWarehouse = true;
     }
     else if (farmStage == 12 && bushelCount[0] > priceStage13) {
-        if (story) { GameEvent(displayStoryFarm12); }
+        if (story) { GameEvent(displayStoryFarm12, 'farm_stage_12'); }
         farmStage++;
         bushelCount[0] -= priceStage13;
         spentCount[0] += priceStage13;
@@ -499,7 +519,7 @@ function BuyLand() {
         handsAvailable += 8;
     }
     else if (farmStage == 13 && bushelCount[0] > priceStage14[0] && boardsCount >= priceStage14[1]) {
-        if (story) { GameEvent(displayStoryFarm13); }
+        if (story) { GameEvent(displayStoryFarm13, 'farm_stage_13'); }
         farmStage++;
         bushelCount[0] -= priceStage14[0];
         spentCount[0] += priceStage14[0];
@@ -510,7 +530,7 @@ function BuyLand() {
         player.canBuyMountain = true;
     }
     else if (farmStage == 14 && bushelCount[0] > priceStage15[0] && stoneCount >= priceStage15[1]) {
-        if (story) { GameEvent(displayStoryFarm14); }
+        if (story) { GameEvent(displayStoryFarm14, 'farm_stage_14'); }
         farmStage++;
         bushelCount[0] -= priceStage15[0];
         spentCount[0] += priceStage15[0];
@@ -520,7 +540,7 @@ function BuyLand() {
         handsAvailable += 2;
     }
     else if (farmStage == 15 && bushelCount[0] > priceStage16[0] && stoneCount >= priceStage16[1]) {
-        if (story) { GameEvent(displayStoryFarm15); }
+        if (story) { GameEvent(displayStoryFarm15, 'farm_stage_15'); }
         farmStage++;
         bushelCount[0] -= priceStage16[0];
         spentCount[0] += priceStage16[0];
@@ -537,8 +557,8 @@ function BuyLand() {
     }
     else if (farmStage == 16 && bushelCount[0] > priceStage17[0] && boardsCount >= priceStage17[1]) {
         if (story) {
-            Translate(currentLanguage, false); // this repopulates the 'year' binding in the following string
-            GameEvent(displayStoryFarm16);
+            Translate(player.speaks, false); // this repopulates the 'year' binding in the following string
+            GameEvent(displayStoryFarm16, 'farm_stage_16');
         }
         farmStage++;
         bushelCount[0] -= priceStage17[0];
@@ -553,7 +573,7 @@ function BuyLand() {
         arrayFarmPlots[8] = [5, 4, 5, 4, 4, 4, 2, 2, 1, 0, 0, 1, 0, 1,];
     }
     else if (farmStage == 17 && bushelCount[0] > priceStage18[0] && bushelCount[1] > priceStage18[1]) {
-        if (story) { GameEvent(displayStoryFarm17); }
+        if (story) { GameEvent(displayStoryFarm17, 'farm_stage_17'); }
         farmStage++;
         bushelCount[0] -= priceStage18[0];
         bushelCount[1] -= priceStage18[1];
@@ -561,7 +581,8 @@ function BuyLand() {
         spentCount[1] += priceStage18[1];
 
         arrayOlivar.push(0, 0, 0, 0, 0, 0,);
-        vigneronsHired = 5;
+        vigneronsHired = 4;
+        arboristsHired = 8;
         buttonBarterOlive.classList.add('noMargin');
         player.canBuyLand = false;
     }
@@ -570,13 +591,45 @@ function BuyLand() {
 
 
 
+function RentWarehouse() {
+    if (warehouseStage == 0 && bushelCount[0] > priceWarehouse0) {
+        if (story) { GameEvent(displayStoryWarehouse0, 'warehouse_stage_0'); }
+        bushelCount[0] -= priceWarehouse0;
+        spentCount[0] += priceWarehouse0;
+        player.canRentWarehouse = false;
+        warehouseStage++;
+        bushelMax[0] = 300;
+    }
+    else if (warehouseStage == 1 && bushelCount[0] > priceWarehouse1) {
+        if (story) { GameEvent(displayStoryWarehouse1, 'warehouse_stage_1'); }
+        bushelCount[0] -= priceWarehouse1;
+        spentCount[0] += priceWarehouse1;
+        player.canRentWarehouse = false;
+        warehouseStage++;
+        bushelMax[0] = 3000;
+    }
+    else if (warehouseStage == 2 && bushelCount[0] > priceWarehouse2) {
+        if (story) { GameEvent(displayStoryWarehouse2, 'warehouse_stage_2'); }
+        bushelCount[0] -= priceWarehouse2;
+        spentCount[0] += priceWarehouse2;
+        player.canRentWarehouse = false;
+        warehouseStage++;
+        bushelMax[0] = 3000000;
+        bushelMax[2] = 30000;
+    }
+    UpdateDisplay();
+}
+
+
+
 function BuyForest() {
     if (bushelCount[0] > priceForest) {
-        if (story) { GameEvent(displayStoryForest); }
+        if (story) { GameEvent(displayStoryForest, 'buy_forest'); }
         bushelCount[0] -= priceForest;
         spentCount[0] += priceForest;
         player.canBuyForest = false;
         player.seesForest = true;
+        player.seesForestButton = true;
         UpdateDisplay();
     }
 }
@@ -585,7 +638,7 @@ function BuyForest() {
 
 function BuyMountain() {
     if (bushelCount[0] > priceQuarry) {
-        if (story) { GameEvent(displayStoryQuarry); }
+        if (story) { GameEvent(displayStoryQuarry, 'buy_mountain'); }
         bushelCount[0] -= priceQuarry;
         spentCount[0] += priceQuarry;
         player.canBuyMountain = false;
@@ -598,18 +651,19 @@ function BuyMountain() {
 
 function ForestEvents() {
     if (!player.canLog && bushelCount[0] > priceLoggingCamp) {
-        if (story) { GameEvent(displayStoryLoggingCamp); }
+        if (story) { GameEvent(displayStoryLoggingCamp, 'buy_loggingcamp'); }
         bushelCount[0] -= priceLoggingCamp;
         spentCount[0] += priceLoggingCamp;
 
         player.canLog = true;
     }
     else if (!player.canSaw && bushelCount[0] > priceSawmill) {
-        if (story) { GameEvent(displayStorySawmill); }
+        if (story) { GameEvent(displayStorySawmill, 'buy_sawmill'); }
         bushelCount[0] -= priceSawmill;
         spentCount[0] += priceSawmill;
 
         player.canSaw = true;
+        player.seesForestButton = false;
     }
     UpdateDisplay();
 }
@@ -622,42 +676,42 @@ function HireHand() {
         handsAvailable -= 1;
         handsHired += 1;
         if (story) {
-            if (handsHired == 1) { GameEvent(displayStoryHands0, 'fieldhand_0'); }
-            else if (handsHired == 2) { GameEvent(displayStoryHands1, 'fieldhand_1'); }
-            else if (handsHired == 3) { GameEvent(displayStoryHands2); }
-            else if (handsHired == 4) { GameEvent(displayStoryHands3); }
-            else if (handsHired == 5) { GameEvent(displayStoryHands4); }
-            else if (handsHired == 6) { GameEvent(displayStoryHands5); }
-            else if (handsHired == 7) { GameEvent(displayStoryHands6); }
-            else if (handsHired == 8) { GameEvent(displayStoryHands7); }
-            else if (handsHired == 9) { GameEvent(displayStoryHands8); }
-            else if (handsHired == 10) { GameEvent(displayStoryHands9); }
-            else if (handsHired == 11) { GameEvent(displayStoryHands10); }
-            else if (handsHired == 12) { GameEvent(displayStoryHands11); }
-            else if (handsHired == 13) { GameEvent(displayStoryHands12); }
-            else if (handsHired == 14) { GameEvent(displayStoryHands13); }
-            else if (handsHired == 15) { GameEvent(displayStoryHands14); }
-            else if (handsHired == 16) { GameEvent(displayStoryHands15); }
-            else if (handsHired == 17) { GameEvent(displayStoryHands16); }
-            else if (handsHired == 18) { GameEvent(displayStoryHands17); }
-            else if (handsHired == 19) { GameEvent(displayStoryHands18); }
-            else if (handsHired == 20) { GameEvent(displayStoryHands19); }
-            else if (handsHired == 21) { GameEvent(displayStoryHands20); }
-            else if (handsHired == 22) { GameEvent(displayStoryHands21); }
-            else if (handsHired == 23) { GameEvent(displayStoryHands22); }
-            else if (handsHired == 24) { GameEvent(displayStoryHands23); }
-            else if (handsHired == 25) { GameEvent(displayStoryHands24); }
-            else if (handsHired == 26) { GameEvent(displayStoryHands25); }
-            else if (handsHired == 27) { GameEvent(displayStoryHands26); }
-            else if (handsHired == 28) { GameEvent(displayStoryHands27); }
-            else if (handsHired == 29) { GameEvent(displayStoryHands28); }
-            else if (handsHired == 30) { GameEvent(displayStoryHands29); }
-            else if (handsHired == 31) { GameEvent(displayStoryHands30); }
-            else if (handsHired == 32) { GameEvent(displayStoryHands31); }
-            else if (handsHired == 33) { GameEvent(displayStoryHands32); }
-            else if (handsHired == 34) { GameEvent(displayStoryHands33); }
-            else if (handsHired == 35) { GameEvent(displayStoryHands34); }
-            else if (handsHired == 36) { GameEvent(displayStoryHands35); }
+            if (handsHired == 1) { GameEvent(displayStoryHands0, 'hire_fieldhand_0'); }
+            else if (handsHired == 2) { GameEvent(displayStoryHands1, 'hire_fieldhand_1'); }
+            else if (handsHired == 3) { GameEvent(displayStoryHands2, 'hire_fieldhand_2'); }
+            else if (handsHired == 4) { GameEvent(displayStoryHands3, 'hire_fieldhand_3'); }
+            else if (handsHired == 5) { GameEvent(displayStoryHands4, 'hire_fieldhand_4'); }
+            else if (handsHired == 6) { GameEvent(displayStoryHands5, 'hire_fieldhand_5'); }
+            else if (handsHired == 7) { GameEvent(displayStoryHands6, 'hire_fieldhand_6'); }
+            else if (handsHired == 8) { GameEvent(displayStoryHands7, 'hire_fieldhand_7'); }
+            else if (handsHired == 9) { GameEvent(displayStoryHands8, 'hire_fieldhand_8'); }
+            else if (handsHired == 10) { GameEvent(displayStoryHands9, 'hire_fieldhand_9'); }
+            else if (handsHired == 11) { GameEvent(displayStoryHands10, 'hire_fieldhand_10'); }
+            else if (handsHired == 12) { GameEvent(displayStoryHands11, 'hire_fieldhand_11'); }
+            else if (handsHired == 13) { GameEvent(displayStoryHands12, 'hire_fieldhand_12'); }
+            else if (handsHired == 14) { GameEvent(displayStoryHands13, 'hire_fieldhand_13'); }
+            else if (handsHired == 15) { GameEvent(displayStoryHands14, 'hire_fieldhand_14'); }
+            else if (handsHired == 16) { GameEvent(displayStoryHands15, 'hire_fieldhand_15'); }
+            else if (handsHired == 17) { GameEvent(displayStoryHands16, 'hire_fieldhand_16'); }
+            else if (handsHired == 18) { GameEvent(displayStoryHands17, 'hire_fieldhand_17'); }
+            else if (handsHired == 19) { GameEvent(displayStoryHands18, 'hire_fieldhand_18'); }
+            else if (handsHired == 20) { GameEvent(displayStoryHands19, 'hire_fieldhand_19'); }
+            else if (handsHired == 21) { GameEvent(displayStoryHands20, 'hire_fieldhand_20'); }
+            else if (handsHired == 22) { GameEvent(displayStoryHands21, 'hire_fieldhand_21'); }
+            else if (handsHired == 23) { GameEvent(displayStoryHands22, 'hire_fieldhand_22'); }
+            else if (handsHired == 24) { GameEvent(displayStoryHands23, 'hire_fieldhand_23'); }
+            else if (handsHired == 25) { GameEvent(displayStoryHands24, 'hire_fieldhand_24'); }
+            else if (handsHired == 26) { GameEvent(displayStoryHands25, 'hire_fieldhand_25'); }
+            else if (handsHired == 27) { GameEvent(displayStoryHands26, 'hire_fieldhand_26'); }
+            else if (handsHired == 28) { GameEvent(displayStoryHands27, 'hire_fieldhand_27'); }
+            else if (handsHired == 29) { GameEvent(displayStoryHands28, 'hire_fieldhand_28'); }
+            else if (handsHired == 30) { GameEvent(displayStoryHands29, 'hire_fieldhand_29'); }
+            else if (handsHired == 31) { GameEvent(displayStoryHands30, 'hire_fieldhand_30'); }
+            else if (handsHired == 32) { GameEvent(displayStoryHands31, 'hire_fieldhand_31'); }
+            else if (handsHired == 33) { GameEvent(displayStoryHands32, 'hire_fieldhand_32'); }
+            else if (handsHired == 34) { GameEvent(displayStoryHands33, 'hire_fieldhand_33'); }
+            else if (handsHired == 35) { GameEvent(displayStoryHands34, 'hire_fieldhand_34'); }
+            else if (handsHired == 36) { GameEvent(displayStoryHands35, 'hire_fieldhand_35'); }
         }
         if (handsHired == handsMax) {
             player.canHire = false;
@@ -671,7 +725,7 @@ function HireHand() {
 
 function HireAccountant() {
     if (bushelCount[0] > priceAccountant) {
-        if (story) { GameEvent(displayStoryAccountant, 'accountant'); }
+        if (story) { GameEvent(displayStoryAccountant, 'hire_accountant'); }
         bushelCount[0] -= priceAccountant;
         spentCount[0] += priceAccountant;
         player.canAudit = false;
@@ -703,33 +757,32 @@ function BarterFruit(crop) {
 
 function Found() {
     if (bushelCount[0] > priceVillage) {
+        if (story) { GameEvent(displayStoryFound, 'buy_village'); }
         bushelCount[0] -= priceVillage;
         spentCount[0] += priceVillage;
         player.canFound = false;
         player.canBuild = true;
         player.seesVillage = true;
-
-        //put the following three lines into the UI UpdateVisibilites, obviously
-        //seesVillage now displays divViewVillage, this stuff is all contents of that and can be appropriately cleaned up now
-        divVillageName.style.display = 'block';
-        divVillage.style.display = 'inline-block';
-        divVillageStatistics.style.display = 'block';
-        /////////////////////////////////////////////////
-
-        if (story) { GameEvent(displayStoryFound); }
         UpdateDisplay();
     }
 }
 
 
 
-function SellGrain() {
-    if (bushelCount[0] > bushelBulkCount) {
-        bushelCount[0] -= bushelBulkCount;
-        soldCount[0] += bushelBulkCount;
-        asCount += currentBushelPrice;
-        UpdateDisplay();
-    }
+function GoToTownship() {
+    divViewPraedium.style.display = 'none';
+    divViewTownship.style.display = 'block';
+    player.isAt = 'Township';
+    UpdateDisplay();
+}
+
+
+
+function GoToPraedium() {
+    divViewPraedium.style.display = '';
+    divViewTownship.style.display = '';
+    player.isAt = 'Praedium';
+    UpdateDisplay();
 }
 
 
@@ -921,10 +974,51 @@ function Build() {
 
 
 
+function SellGrain() {
+    if (bushelCount[0] > bushelBulkCount) {
+        bushelCount[0] -= bushelBulkCount;
+        soldCount[0] += bushelBulkCount;
+        asCount += currentBushelPrice;
+        UpdateDisplay();
+    }
+}
+
+
+
 function Win() {
     GameEvent(displayWinMessage);
     window.open(winTarget, 'PRAEDIUM_requested_new_tab');
+    console.log('gameTurn count at win: ' + gameTurn);
     saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
+}
+
+
+
+function SummonOptions() {
+    player.seesOptions = true;
+    UpdateDisplay();
+    buttonOptionsDismiss.focus({ focusVisible: false });
+    divOverlayOptions.scrollTo(0, 0);
+}
+
+
+
+function DismissOptions() {
+    player.seesOptions = false;
+    UpdateDisplay();
+}
+
+
+
+function ToggleAnimation() {
+    if (toggleAnimation.checked) {
+        player.likesAnimations = true;
+        document.documentElement.style.setProperty('--agua', 'url(bitmaps/agua_anim.gif)');
+    }
+    else {
+        player.likesAnimations = false;
+        document.documentElement.style.setProperty('--agua', 'url(bitmaps/agua_still.gif)');
+    }
 }
 
 

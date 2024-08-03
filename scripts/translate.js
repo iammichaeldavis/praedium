@@ -11,6 +11,10 @@ const displayBeads = '📿';
 
 let displayIUnderstand = '';
 let displayOK = '';
+let displayOptions = '';
+let displayMusic = '';
+let displaySounds = '';
+let displayAnimations = '';
 let displayInStock = '';
 let displayStaff = '';
 let displayFieldhands = '';
@@ -41,6 +45,7 @@ let displayStone = '';
 let displayOre = '';
 let displayCopper = '';
 let displayVignerons = '';
+let displayArborists = '';
 let displayMasons = '';
 let displayMiners = '';
 let displayCindermen = '';
@@ -73,6 +78,10 @@ let displayLabelBuyLand14 = '';
 let displayLabelBuyLand15 = '';
 let displayLabelBuyLand16 = '';
 let displayLabelBuyLand17 = '';
+
+let displayLabelRentWarehouse0 = '';
+let displayLabelRentWarehouse1 = '';
+let displayLabelRentWarehouse2 = '';
 
 let displayLabelFound = '';
 let displayLabelBuild0 = '';
@@ -119,6 +128,10 @@ let displayStoryFarm15 = '';
 let displayStoryFarm16 = '';
 let displayStoryFarm17 = '';
 let displayStoryOlives = '';
+
+let displayStoryWarehouse0 = '';
+let displayStoryWarehouse1 = '';
+let displayStoryWarehouse2 = '';
 
 let displayStoryHands0 = '';
 let displayStoryHands1 = '';
@@ -179,6 +192,9 @@ let displayStoryVillage17 = '';
 
 let displayNamePlayer = '';
 
+let displayGoToTownship = '';
+let displayGoToPraedium = '';
+
 let displayVillageTitle0 = '';
 let displayVillageTitle1 = '';
 let displayVillageTitle2 = '';
@@ -186,6 +202,15 @@ let displayVillageTitle3 = '';
 let displayVillageTitle4 = '';
 let displayVillageTitle5 = '';
 let displayVillageTitle6 = '';
+
+let displayForewordA = '';
+let displayForewordScripture = '';
+let displayForewordSource = '';
+let displayForewordB = '';
+let displayForewordLabel = '';
+
+let displayNewLanguage = '';
+let displayLanguageQuote = '';
 
 let displayInfoFinal = '';
 let displayInfoMadeWith = '';
@@ -197,27 +222,25 @@ let displayLegalFinal = '';
 let displayBoilerplate = '';
 let displayLegalQuote = '';
 
+let displayOptionsFlavourFinal = '';
+let displayOptionsFlavour = '';
+
 let displayBoxCopy = '';
 
-let displayForewordA = '';
-let displayForewordScripture = '';
-let displayForewordSource = '';
-let displayForewordB = '';
-let displayForewordLabel = '';
-
-let displayNewLanguage = '';
-let displayLanguageQuote = '';
-
-let displayWinMessage = '— Mon ami, dit Valentine, le comte ne vient-il pas de nous dire que l’humaine sagesse était tout entière dans ces deux mots :\n\n— Attendre et espérer !\n\n\n\n\nFIN';
+let displayWinMessage = '— Mon ami, dit Valentine, le comte ne vient-il pas de nous dire que l’humaine sagesse était tout entière dans ces deux mots :<br><br>— Attendre et espérer !<br><br><br><br><br>FIN';
 
 
 
 function Translate(language, bark = true) {
-    currentLanguage = language;
+    player.speaks = language;
 
     if (language == 'English') {
         displayIUnderstand = 'I UNDERSTAND';
         displayOK = "I AM READY TO CONTINUE";
+        displayOptions = 'Options';
+        displayMusic = 'Music?';
+        displaySounds = 'Sounds?';
+        displayAnimations = 'Cosmetic Animations?';
         displayInStock = 'In Stock';
         displayStaff = 'Staff';
         displayFieldhands = 'Fieldhands';
@@ -248,6 +271,7 @@ function Translate(language, bark = true) {
         displayOre = 'Ore';
         displayCopper = 'Copper';
         displayVignerons = 'Vignerons';
+        displayArborists = 'Arborists';
         displayMasons = 'Masons';
         displayMiners = 'Miners';
         displayCindermen = 'Cindermen';
@@ -281,6 +305,10 @@ function Translate(language, bark = true) {
         displayLabelBuyLand16 = 'INVEST IN A BARLEY FIELD';
         displayLabelBuyLand17 = 'PURCHASE A SUCCESSFUL FRUIT PLANTATION';
 
+        displayLabelRentWarehouse0 = 'RENT WAREHOUSE SPACE<br>TO STORE YOUR GRAIN';
+        displayLabelRentWarehouse1 = 'RENT MORE WAREHOUSE SPACE';
+        displayLabelRentWarehouse2 = 'PURCHASE A WAREHOUSE';
+
         displayLabelFound = 'FOUND A VILLAGE';
         displayLabelBuild0 = 'HIRE BLACKSMITH';
         displayLabelBuild1 = 'COMMISSION WORKSHOP';
@@ -301,32 +329,35 @@ function Translate(language, bark = true) {
         displayLabelBuild16 = 'ERECT CITY GATES';
         displayLabelBuild17 = 'ESTABLISH MONUMENT';
 
-        displayStoryFarm0 = 'NOW I CAN PROVIDE<br>FOR MY FAMILY';
+        displayStoryFarm0 = 'NOW I CAN PROVIDE FOR MY FAMILY';
         displayStoryFarmMildew = 'YOU HAVE JUST RECEIVED A MESSAGE FROM THE MAN WHO RUNS THE WAREHOUSE WHERE YOU KEEP YOUR WHEAT:<div id="nasirMessage">Roof damage has let water in; mildew has claimed 90% of all grain in storage; my sincerest apologies<br>—Ea-nāṣir</div>';
-        displayStoryFarm1 = 'WITH TWICE THE LAND<br>I CAN DOUBLE MY PROFITS';
-        displayStoryFarm2 = 'THERE ARE MEN<br>IN NEED OF WORK';
-        displayStoryAccountant = 'I HAVE NO HEAD<br>FOR FIGURES AT ALL';
-        displayStoryFarm3 = 'REINVESTING OUR PROFIT<br>MEANS WE CAN GROW';
+        displayStoryFarm1 = 'WITH TWICE THE LAND I CAN DOUBLE MY PROFITS';
+        displayStoryFarm2 = 'THERE ARE MEN IN NEED OF WORK';
+        displayStoryAccountant = 'I HAVE NO HEAD FOR FIGURES AT ALL';
+        displayStoryFarm3 = 'REINVESTING OUR PROFIT MEANS WE CAN GROW';
         displayStoryFarm4 = '“THE ONLY FENCE AGAINST THE WORLD IS A THOROUGH KNOWLEDGE OF IT”<br>—JOHN LOCKE';
-        displayStoryFarm5 = 'PLENTY OF ROOM FOR<br>SOME TREES';
+        displayStoryFarm5 = 'PLENTY OF ROOM FOR SOME TREES';
         displayStoryFarm6 = '“MAN’S TRUE TAPROOTS ARE NOURISHED IN THE SEQUENCE OF GENERATIONS”<br>—ERIK H. ERIKSON';
         displayStoryFarm7 = 'I’VE SEEN MORE THAN<br>I SHOULD HAVE TO<br>I’VE SEEN THIS<br>ON MY OWN<br>—TAPROOT';
         displayStoryFarm8 = 'IF YOU WANT SOMETHING DONE RIGHT YOU’VE GOT TO DO IT YOURSELF';
         displayStoryFarm9 = '“HE PLANTS HIS TREES TO SERVE A RACE TO COME”<br>—STATIUS';
-        displayStoryFarm10 = 'IF IT WASN’T HIM<br>IT WOULD BE ME';
-        //
-        displayStoryForest = '“HEAVEN IS UNDER OUR FEET AS WELL AS OVER OUR HEADS”\n—HENRY DAVID THOREAU';
-        displayStoryLoggingCamp = 'WELL YOU WORK IN THE WOODS FROM MORNING TO NIGHT\nYOU LAUGH AND SING AND YOU CUSS AND FIGHT\nON SATURDAY NIGHT YOU GO TO EUGENE\nAND ON A SUNDAY MORNING YOUR POCKETS ARE CLEAN\n—LEON PAYNE';
-        displayStorySawmill = '“WOOD IS THE MOST HUMANLY INTIMATE OF ALL MATERIALS. IT IS UNIVERSALLY BEAUTIFUL TO MAN”\n—FRANK LLOYD WRIGHT';
+        displayStoryFarm10 = 'IF IT WASN’T HIM IT WOULD BE ME';
+        displayStoryForest = '“HEAVEN IS UNDER OUR FEET AS WELL AS OVER OUR HEADS”<br>—HENRY DAVID THOREAU';
+        displayStoryLoggingCamp = 'WELL YOU WORK IN THE WOODS<br>FROM MORNING TO NIGHT<br>YOU LAUGH AND SING<br>AND YOU CUSS AND FIGHT<br>ON SATURDAY NIGHT<br>YOU GO TO EUGENE<br>AND ON A SUNDAY MORNING<br>YOUR POCKETS ARE CLEAN<br>—LEON PAYNE';
+        displayStorySawmill = '“WOOD IS THE MOST HUMANLY INTIMATE OF ALL MATERIALS. IT IS UNIVERSALLY BEAUTIFUL TO MAN”<br>—FRANK LLOYD WRIGHT';
         displayStoryFarm11 = 'GOOD FENCES MAKE GOOD NEIGHBOURS';
-        displayStoryFarm12 = 'BRING ME MEN TO MATCH MY MOUNTAINS,\nBRING ME MEN TO MATCH MY PLAINS,\nMEN WITH EMPIRES IN THEIR PURPOSE,\nAND NEW ERAS IN THEIR BRAINS\n—SAM WALTER FOSS';
+        displayStoryFarm12 = 'BRING ME MEN<br>TO MATCH MY MOUNTAINS,<br>BRING ME MEN<br>TO MATCH MY PLAINS,<br>MEN WITH EMPIRES<br>IN THEIR PURPOSE,<br>AND NEW ERAS<br>IN THEIR BRAINS<br>—SAM WALTER FOSS';
         displayStoryFarm13 = 'THIS WILL KEEP OUT THE WOLVES';
-        displayStoryQuarry = '“A PILE OF ROCKS CEASES TO BE A PILE OF ROCKS THE MOMENT A MAN CONTEMPLATES IT WITH THE IDEA OF A CATHEDRAL IN HIS MIND”\n—ANTOINE DE SAINT-EXUPÉRY';
-        displayStoryFarm14 = 'TO NONE IS IT PERMITTED TO MUTTER SACRED VERSES BEFORE THE PUBLIC GAZE AS HE WALKETH IN THE STREET OR MARKETPLACE\n\nA SYNOPSIS AND CODIFICATION OF THE LAWS AND ORDINANCES OF THE KITÁB-I-AQDAS IV.D.1.Y.XXIX';
-        displayStoryFarm15 = '“THE TIME TO DIG A WELL IS BEFORE YOU ARE THIRSTY”\n—ZHU XI\n\n(Per Harvest Yield Minimum +25%)';
+        displayStoryQuarry = '“A PILE OF ROCKS CEASES TO BE A PILE OF ROCKS THE MOMENT A MAN CONTEMPLATES IT WITH THE IDEA OF A CATHEDRAL IN HIS MIND”<br>—ANTOINE DE SAINT-EXUPÉRY';
+        displayStoryFarm14 = 'TO NONE IS IT PERMITTED TO MUTTER SACRED VERSES BEFORE THE PUBLIC GAZE AS HE WALKETH IN THE STREET OR MARKETPLACE<br><br>A SYNOPSIS AND CODIFICATION OF THE LAWS AND ORDINANCES OF THE KITÁB-I-AQDAS IV.D.1.Y.XXIX';
+        displayStoryFarm15 = '“THE TIME TO DIG A WELL IS BEFORE YOU ARE THIRSTY”<br>—ZHU XI<br><br>(Per Harvest Yield Minimum +25%)';
         displayStoryFarm16 = 'HARD TO BELIEVE ALL THIS BEGAN WITH JUST A SINGLE PATCH OF EARTH ' + year + ' YEARS AGO. HONESTLY IT’S DIFFICULT TO EVEN REMEMBER WHAT LIFE WAS LIKE BACK THEN';
         displayStoryFarm17 = 'THE PREVIOUS OWNER GUARANTEES ITS PROFITABILITY. I AM TOLD DATES WILL BE READY AT THE END OF EVERY SUMMER, AND FIGS IN THE LATE SPRING. POMEGRANATES WILL BE READY IN EARLY WINTER, THEN GRAPES SHOULD COME ALONG A FEW WEEKS LATER, BUT THEY ARE FICKLE';
         displayStoryOlives = 'IT HAS BEEN EIGHT LONG YEARS SINCE YOU PLANTED YOUR OLIVE ORCHARD. FINALLY THE TREES ARE MATURE, EVERY BRANCH LADEN WITH RIPE FRUIT. AND THEY SHOULD COME IN AROUND THE SAME TIME EVERY YEAR FROM NOW ON';
+
+        displayStoryWarehouse0 = 'THIS PLACE COMES HIGHLY RECOMMENDED';
+        displayStoryWarehouse1 = '“WHAT IS COMMON TO THE GREATEST NUMBER RECEIVES THE LEAST AMOUNT OF CARE”<br>—ARISTOTLE';
+        displayStoryWarehouse2 = '“WHILST, IN THE MAJORITY OF MEN, THERE IS SUCH A LOVE OF TRIED ARRANGEMENTS, AND SO GREAT A DREAD OF EXPERIMENTS, THAT THEY WILL PROBABLY NOT ACT UPON THIS RIGHT UNTIL LONG AFTER IT IS SAFE TO DO SO”<br>—HERBERT SPENCER';
 
         displayStoryHands0 = 'YOU HAVE BROUGHT ON YOUR FIRST MAN. HIS NAME IS JOHN';
         displayStoryHands1 = 'JOHN HAS A BROTHER LOOKING FOR WORK. YOU COULD USE ANOTHER GOOD MAN';
@@ -343,29 +374,29 @@ function Translate(language, bark = true) {
         displayStoryHands12 = 'EVERYONE KNOWS YOU ARE WHO TO SEE FOR WORK. A GROUP FORMS AT YOUR GATE. YOU PICK THE TALLEST MAN FROM THE CROWD';
         displayStoryHands13 = 'YOU SEE ANOTHER WHO LOOKS STRONG AND TELL HIM TO COME INSIDE';
         displayStoryHands14 = 'A SMALL MAN APPROACHES YOU. HE SAYS HE MAY NOT LOOK LIKE MUCH BUT HE IS TENACIOUS. YOU ADD HIM TO THE ROSTER';
-        displayStoryHands15 = 'SO MANY WORLDS AND LANDS FOR WORKING OUT KARMA.\nSO VERY MANY LESSONS TO BE LEARNED!\n\nGURU GRANTH SAHIB, ANG 7';
+        displayStoryHands15 = 'SO MANY WORLDS AND LANDS FOR WORKING OUT KARMA. SO VERY MANY LESSONS TO BE LEARNED!<br><br>GURU GRANTH SAHIB, ANG 7';
         displayStoryHands16 = 'PLENTY STILL TO CHOOSE FROM. YOU LET ANOTHER STRONG-LOOKING FELLOW THROUGH THE GATE';
         displayStoryHands17 = 'AS YOU SELECT THE NEXT HIRE FROM THE WAITING CROWD, ONE OF YOUR MEN BRINGS NEWS: JOHN TOOK ILL WITH A FEVER LAST NIGHT AND DIDN’T WAKE UP THIS MORNING. A SHAME. TO REPLACE HIM YOU LET IN ONE MORE';
         displayStoryHands18 = 'JOHN’S BROTHER IS SICK WITH GRIEF AND CAN NOT WORK. HE’LL NEED TO BE REPLACED AS WELL UNFORTUNATELY. YOU PICK TWO MORE FROM THE CROWD';
         displayStoryHands19 = 'MORE PEOPLE HERE THAN WE HAVE ROOM FOR, BUT WE DO NEED ONE MORE';
-        displayStoryHands20 = 'SLAVES, ALWAYS OBEY YOUR EARTHLY MASTERS IN EVERY WAY, NOT ONLY WHEN THEY ARE WATCHING YOU, BUT ALL THE TIME, FEARING THE LORD\n\nCOLOSSIANS 3:22';
+        displayStoryHands20 = 'SLAVES, ALWAYS OBEY YOUR EARTHLY MASTERS IN EVERY WAY, NOT ONLY WHEN THEY ARE WATCHING YOU, BUT ALL THE TIME, FEARING THE LORD<br><br>COLOSSIANS 3:22';
         displayStoryHands21 = 'EVERY DAY SOMEONE ASKS: ARE YOU HIRING? WELL, TODAY WE ARE. YOU TAKE ON A NEW MAN INTRODUCED TO YOU BY ONE OF YOUR FARMHANDS';
         displayStoryHands22 = 'SOMETIMES YOU JUST CAN’T HELP BUT LOATHE ALL THESE GODDAM PEOPLE';
         displayStoryHands23 = 'WELL, THERE IS ALWAYS MORE WORK TO BE DONE, AND IT WILL NOT DO ITSELF';
         displayStoryHands24 = 'NEW FELLOW STARTS TODAY. LOOKS PRETTY YOUNG, BUT HE SEEMS EAGER';
         displayStoryHands25 = 'THE NEW BOY LOST A HAND IN AN ACCIDENT JUST HOURS AFTER HIS FIRST DAY BEGAN. A TRAGEDY FOR HIS FAMILY, SURELY. WELL, THE LORD GIVETH AND THE LORD TAKETH AWAY, AS JOB TELLS US. YOU HIRE TWO MORE INSTEAD OF ONLY ONE';
         displayStoryHands26 = 'DEAR LORD, THAT POOR BOY. HARD TO GET THE SIGHT OF ALL THAT BLOOD OUT OF YOUR MIND';
-        displayStoryHands27 = 'UNEASY LIES THE HEAD THAT WEARS A CROWN\n\nTHE SECOND PART OF HENRIE THE FOURTH 3.1.1735';
+        displayStoryHands27 = 'UNEASY LIES THE HEAD THAT WEARS A CROWN<br><br>THE SECOND PART OF HENRIE THE FOURTH 3.1.1735';
         displayStoryHands28 = 'THE MEN WHO HAVE BEEN TENDING WHAT IS NOW YOUR BARLEY FIELD SHOW UP FOR WORK THE NEXT MORNING, HOPEFUL TO JOIN YOUR STAFF AND KEEP THEIR JOBS. THEIR LEADER STEPS FORWARD AND YOU WELCOME HIM TO HIS NEW LIFE, VERY SIMILAR TO HIS LAST ONE';
         displayStoryHands29 = 'THE NEXT MAN SILENTLY COMES THROUGH THE GATE AND BEGINS WORK AS IF NOTHING AT ALL HAD CHANGED. WELL... YOU SUPPOSE, TO HIM, NOT MUCH HAS';
         displayStoryHands30 = 'THIS NEXT FELLOW SEEMS LIKE A LITTLE BIT OF A ROUGH CUSTOMER, BUT, HE ALSO LOOKS LIKE HE’S BEEN WORKING GRAIN HIS WHOLE LIFE. PROBABLY A GOOD MAN TO HAVE ON THE TEAM';
         displayStoryHands31 = 'GOOD LORD, THIS IS TAKING ALL DAY. YES, YES, COME IN, COME IN, GENTLEMEN';
         displayStoryHands32 = 'SOME OF THESE BOYS LOOK LIKE THEY COULD SURE USE A GOOD MEAL';
         displayStoryHands33 = 'SO MANY OF THE MEN IN THIS REGION RELY ON YOU NOW FOR A LIVELIHOOD; THE MEN *AND* THEIR FAMILIES';
-        displayStoryHands34 = 'I’LL STAND BY ALL THIS DRINKING\nIF IT HELPS ME THROUGH THESE DAYS\n—INTERPOL';
+        displayStoryHands34 = 'I’LL STAND BY ALL THIS DRINKING<br>IF IT HELPS ME THROUGH THESE DAYS<br>—INTERPOL';
         displayStoryHands35 = 'CONGRATULATIONS. YOU EMPLOY ALL YOU KNOW';
 
-        displayStoryFound = '“I HAVE SONS, I HAVE WEALTH,”\nWITH SUCH THOUGHTS THE FOOL IS TORMENTED.\nBUT IF ONE’S SELF IS NOT EVEN ONE’S OWN,\nHOW THEN ARE SONS? HOW THEN IS WEALTH?\n\nDHAMMAPADA 5.62';
+        displayStoryFound = '“I HAVE SONS, I HAVE WEALTH,” WITH SUCH THOUGHTS THE FOOL IS TORMENTED. BUT IF ONE’S SELF IS NOT EVEN ONE’S OWN, HOW THEN ARE SONS? HOW THEN IS WEALTH?<br><br>DHAMMAPADA 5.62';
         displayStoryVillage0 = 'HE WILL NEED LUMBER FOR THE FORGE';
         displayStoryVillage1 = 'NOW WE CAN BUILD';
         displayStoryVillage2 = 'WE’VE GOT TO HAVE SOME LAW AND ORDER';
@@ -374,18 +405,21 @@ function Translate(language, bark = true) {
         displayStoryVillage5 = 'THE SPICES OF THE MARKET ARE FRAGRANT INDEED';
         displayStoryVillage6 = 'THE BUILDERS ASSURE THERE IS NO DANGER';
         displayStoryVillage7 = 'CITIZENS FLOW IN FROM THE COUNTRYSIDE NOW, SEEKING OPPORTUNITY';
-        displayStoryVillage8 = '“TEACH A MAN TO FISH AND YOU FEED HIM FOR A LIFETIME”\n—MAIMONIDES\n\n(Per Harvest Yield Maximum +33%)';
-        displayStoryVillage9 = 'LIVE IN A GOOD PLACE\n\nTAO TE CHING 8:5';
+        displayStoryVillage8 = '“TEACH A MAN TO FISH AND YOU FEED HIM FOR A LIFETIME”<br>—MAIMONIDES<br><br>(Per Harvest Yield Maximum +33%)';
+        displayStoryVillage9 = 'LIVE IN A GOOD PLACE<br><br>TAO TE CHING 8:5';
         displayStoryVillage10 = 'HORSES DRIVE PROGRESS';
-        displayStoryVillage11 = 'THE TRUE SERVANTS OF GOD ARE THOSE\nWHO WALK UPON THE EARTH EASILY,\nAND WHEN THE IGNORANT ADDRESS THEM HARSHLY,\nTHEY REPLY WITH WORDS OF PEACE\n\nAL-FURQAN 63';
-        displayStoryVillage12 = '“THEY DESIRE JUST TWO THINGS, BREAD AND CIRCUSES”\n—JUVENAL';
-        displayStoryVillage13 = '“TO CONTRACT NEW DEBTS IS NOT THE WAY TO PAY OLD ONES”\n—GEORGE WASHINGTON';
-        displayStoryVillage14 = 'YOU HAVE THE RIGHT TO LABOUR, BUT YOU HAVE NO RIGHT TO THE FRUITS OF YOUR LABOURS. NEVER BELIEVE YOU ARE THE CAUSE OF THE RESULTS OF YOUR CHOICES. WORK HARD AND BE EVEN-TEMPERED IN SUCCESS AND FAILURE. ... THOSE WHO SEEK TO ENJOY THE FRUITS OF THEIR WORKS ARE MISERABLE.\n\nBHAGAVAD GITA 2.47-49';
+        displayStoryVillage11 = 'THE TRUE SERVANTS OF GOD ARE THOSE WHO WALK UPON THE EARTH EASILY, AND WHEN THE IGNORANT ADDRESS THEM HARSHLY, THEY REPLY WITH WORDS OF PEACE<br><br>AL-FURQAN 63';
+        displayStoryVillage12 = '“THEY DESIRE JUST TWO THINGS, BREAD AND CIRCUSES”<br>—JUVENAL';
+        displayStoryVillage13 = '“TO CONTRACT NEW DEBTS IS NOT THE WAY TO PAY OLD ONES”<br>—GEORGE WASHINGTON';
+        displayStoryVillage14 = 'YOU HAVE THE RIGHT TO LABOUR, BUT YOU HAVE NO RIGHT TO THE FRUITS OF YOUR LABOURS. NEVER BELIEVE YOU ARE THE CAUSE OF THE RESULTS OF YOUR CHOICES. WORK HARD AND BE EVEN-TEMPERED IN SUCCESS AND FAILURE. ... THOSE WHO SEEK TO ENJOY THE FRUITS OF THEIR WORKS ARE MISERABLE.<br><br>BHAGAVAD GITA 2.47-49';
         displayStoryVillage15 = 'CLEANLINESS IS GODLINESS';
-        displayStoryVillage16 = 'THEY HATE HIM WHO REPROVES IN THE GATE,\nAND THEY ABHOR HIM WHO SPEAKS THE TRUTH\n\nAMOS 5:10';
-        displayStoryVillage17 = 'THE BRONZE PLAQUE ON THE PINK MARBLE BASE READS:\n\n≈ THE 8 VIRTUES ≈\n• HONESTY – TELL THE TRUTH\n• HONOR – DO WHAT IS RIGHT\n• VALOR – STAND AGAINST INJUSTICE\n• SACRIFICE – SHARE YOUR BLESSINGS\n• COMPASSION – BE KIND TO THE WEAK\n• JUSTICE – BE FAIR TO ALL\n• SPIRITUALITY – LISTEN TO THE LIGHT\n• HUMILITY – RESIST PRIDE';
+        displayStoryVillage16 = 'THEY HATE HIM WHO REPROVES IN THE GATE, AND THEY ABHOR HIM WHO SPEAKS THE TRUTH<br><br>AMOS 5:10';
+        displayStoryVillage17 = 'THE BRONZE PLAQUE ON THE PINK MARBLE BASE READS:<br><br>≈ THE 8 VIRTUES ≈<br>• HONESTY – TELL THE TRUTH<br>• HONOR – DO WHAT IS RIGHT<br>• VALOR – STAND AGAINST INJUSTICE<br>• SACRIFICE – SHARE YOUR BLESSINGS<br>• COMPASSION – BE KIND TO THE WEAK<br>• JUSTICE – BE FAIR TO ALL<br>• SPIRITUALITY – LISTEN TO THE LIGHT<br>• HUMILITY – RESIST PRIDE';
 
         displayNamePlayer = '“What is your name, citizen?”';
+
+        displayGoToTownship = 'GO TO TOWNSHIP ->';
+        displayGoToPraedium = '<- RETURN TO YOUR PRAEDIUM';
 
         displayVillageTitle0 = 'The Settlement of';
         displayVillageTitle1 = 'The Outpost of';
@@ -405,14 +439,16 @@ function Translate(language, bark = true) {
         displayLanguageQuote = '<div id="divSystemMessageScripture">“There is no true knowledge without right faith, no virtuous conduct is possible without knowledge, without virtue there is no liberation, and without liberation, no nirvana.”</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
         displayInfoMadeWith = 'For Dylan. I love you so much, bud.<br><br>Made with CodePen, GIMP, GitHub & VS Code.';
-        displayInfoDedication = 'Dedicated to aniwey, Richard Garriott, Marty Hirsch, Denis Loubet and Michael Townsend, and in loving memory of Travonteé Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
+        displayInfoDedication = 'Dedicated to aniwey, Lori & Corey Cole, Richard Garriott, Marty Hirsch, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Tom Rothamel, Michael Townsend and Tim Sweeney, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
         displayInfoThanks = 'Special thanks to Mohammad Alavi, Dave & Anna Davis, Kenneth Garagnon, Leif Johansen, Brian Moran, Grant Sutherland & W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
         displayLegalQuote = '<div id="divSystemMessageScripture">“I enjoin you to safeguard your fellow men.”</div><div id="divSystemMessageSource">—Ḥamza ibn ‘Alī ibn ʾAḥmad</div>';
 
-        displayBoxCopy = 'Step into the thonged sandals of a simple Tartessian grain farmer in the year 200 BC. Dost thou have what it takes to pen the constitution of a city-state that will light the way for centuries and personally achieve transcendent enlightenment, milord??\n\nBe literally transported to ancient Roman times by this cutting edge computer simulation that puts YOU in the heart of the pulse-pumping REAL FARMING ACTION!';
+        displayOptionsFlavour = '“Anxiety is the dizziness of freedom.”<div id="divOptionsSource">—Søren Kierkegaard</div>';
+
+        displayBoxCopy = 'Step into the thonged sandals of a simple Tartessian grain farmer in the year 200 BC. Dost thou have what it takes to pen the constitution of a city-state that will light the way for centuries and personally achieve transcendent enlightenment, milord??<br><br>Be literally transported to ancient Roman times by this cutting edge computer simulation that puts YOU in the heart of the pulse-pumping REAL FARMING ACTION!';
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -421,6 +457,10 @@ function Translate(language, bark = true) {
     else if (language == 'Spanish') {
         displayIUnderstand = 'ENTIENDO';
         displayOK = "ESTOY LISTO<br>PARA CONTINUAR";
+        displayOptions = 'Opciones';
+        displayMusic = '¿Música?';
+        displaySounds = '¿Sonidos?';
+        displayAnimations = '¿Animaciones cosméticas?';
         displayInStock = 'En Stock';
         displayStaff = 'Personal';
         displayFieldhands = 'Labriegos';
@@ -451,6 +491,7 @@ function Translate(language, bark = true) {
         displayOre = 'Mineral';
         displayCopper = 'Cobre';
         displayVignerons = 'Viticultores';
+        displayArborists = 'Arboristas';
         displayMasons = 'Masones';
         displayMiners = 'Mineros';
         displayCindermen = 'Metalúrgicos';
@@ -484,6 +525,10 @@ function Translate(language, bark = true) {
         displayLabelBuyLand16 = 'INVERTIR EN UN CAMPO DE CEBADA';
         displayLabelBuyLand17 = 'COMPRAR UN HUERTO DE FRUTAS EXITOSO';
 
+        displayLabelRentWarehouse0 = 'ALQUILAR ESPACIO DE ALMACÉN<br>PARA ALMACENAR SU GRANO';
+        displayLabelRentWarehouse1 = 'ALQUILAR MÁS ESPACIO DE ALMACÉN';
+        displayLabelRentWarehouse2 = 'COMPRAR UN ALMACÉN';
+
         displayLabelFound = 'COMENZAR UN PUEBLO';
         displayLabelBuild0 = 'CONTRATAR HERRERO';
         displayLabelBuild1 = 'CONSTRUIR UN TALLER';
@@ -504,32 +549,35 @@ function Translate(language, bark = true) {
         displayLabelBuild16 = 'LEVANTAR PUERTAS DE LA CIUDAD';
         displayLabelBuild17 = 'ESTABLECER MONUMENTO';
 
-        displayStoryFarm0 = 'AHORA PUEDO PROVEER<br>PARA MI FAMILIA';
+        displayStoryFarm0 = 'AHORA PUEDO PROVEER PARA MI FAMILIA';
         displayStoryFarmMildew = 'ACABAS DE RECIBIR UN MENSAJE DEL HOMBRE QUE DIRIGIE EL ALMACÉN DONDE GUARDAS TU TRIGO:<div id="nasirMessage">Los daños en el techo ha dejado entrar agua; el moho ha reclamado el 90% de todo el grano almacenado; mis más sinceras disculpas<br>—Ea-nāṣir</div>';
-        displayStoryFarm1 = 'CON EL DOBLE DE TERRENO<br>PUEDO DUPLICAR MIS GANANCIAS';
-        displayStoryFarm2 = 'HAY HOMBRES<br>QUE NECESITAN TRABAJO';
-        displayStoryAccountant = 'NO TENGO CABEZA<br>PARA LAS CIFRAS EN ABSOLUTO';
+        displayStoryFarm1 = 'CON EL DOBLE DE TERRENO PUEDO DUPLICAR MIS GANANCIAS';
+        displayStoryFarm2 = 'HAY HOMBRES QUE NECESITAN TRABAJO';
+        displayStoryAccountant = 'NO TENGO CABEZA PARA LAS CIFRAS EN ABSOLUTO';
         displayStoryFarm3 = 'REINVESTIR NUESTROS GANANCIAS SIGNIFICA QUE PODEMOS CRECER';
         displayStoryFarm4 = '«LA ÚNICA VALLA CONTRA EL MUNDO ES UN CONOCIMIENTO PROFUNDO DE ÉL»<br>—JOHN LOCKE';
-        displayStoryFarm5 = 'MUCHO ESPACIO PARA<br>ALGUNOS ÁRBOLES';
+        displayStoryFarm5 = 'MUCHO ESPACIO PARA ALGUNOS ÁRBOLES';
         displayStoryFarm6 = '«LAS VERDADERAS RAÍCES PRINCIPALES DEL HOMBRE SE NUTRE EN LA SECUENCIA DE GENERACIONES»<br>—ERIK H. ERIKSON';
         displayStoryFarm7 = 'HE VISTO MÁS DE<br>LO QUE DEBÍA TENER<br>LO HE VISTO<br>POR MI CUENTA<br>—TAPROOT';
         displayStoryFarm8 = 'SI QUIERES QUE ALGO SE HAGA BIEN TIENES QUE HACERLO TÚ MISMO';
         displayStoryFarm9 = '«EL PLANTA SUS ÁRBOLES PARA SERVIR A UNA RAZA POR VENIR»<br>—ESTACIO';
-        displayStoryFarm10 = 'SI NO FUERA<br>ÉL SERÍA YO';
-        //
-        displayStoryForest = '«CIELO ESTÁ BAJO NUESTROS PIES ADEMÁS SOBRE NUESTRAS CABEZAS»\n—HENRY DAVID THOREAU';
-        displayStoryLoggingCamp = 'BUENO TRABAJAS EN EL BOSQUE DE LA MAÑANA A LA NOCHE\nTÚ RÍES Y CANTAS Y TÚ MALDICES Y PELEAS\nEL SÁBADO POR LA NOCHE VAS A EUGENE\nY UN DOMINGO POR LA MAÑANA TUS BOLSILLOS ESTÁN LIMPIOS\n—LEON PAYNE';
-        displayStorySawmill = '«MADERA ES EL MÁS HUMANAMENTE ÍNTIMO DE TODOS LOS MATERIALES. ES UNIVERSALMENTE HERMOSO PARA HUMANIDAD»\n—FRANK LLOYD WRIGHT';
+        displayStoryFarm10 = 'SI NO FUERA ÉL SERÍA YO';
+        displayStoryForest = '«CIELO ESTÁ BAJO NUESTROS PIES ADEMÁS SOBRE NUESTRAS CABEZAS»<br>—HENRY DAVID THOREAU';
+        displayStoryLoggingCamp = 'BUENO TRABAJAS EN EL BOSQUE<br>DE LA MAÑANA A LA NOCHE<br>TÚ RÍES Y CANTAS<br>Y TÚ MALDICES Y PELEAS<br>EL SÁBADO POR LA NOCHE<br>VAS A EUGENE<br>Y UN DOMINGO POR LA MAÑANA<br>TUS BOLSILLOS ESTÁN LIMPIOS<br>—LEON PAYNE';
+        displayStorySawmill = '«MADERA ES EL MÁS HUMANAMENTE ÍNTIMO DE TODOS LOS MATERIALES. ES UNIVERSALMENTE HERMOSO PARA HUMANIDAD»<br>—FRANK LLOYD WRIGHT';
         displayStoryFarm11 = 'LAS BUENAS CERCA HACEN BUENOS VECINOS';
-        displayStoryFarm12 = 'TRÁEME HOMBRES PARA IGUALAR A MIS MONTAÑAS,\nTRÁEME HOMBRES PARA IGUALAR MIS LLANURAS,\nHOMBRES QUE DESEAN INICIAR IMPERIOS,\nHOMBRES QUE SUEÑAN CON NUEVAS ERA\n—SAM WALTER FOSS';
+        displayStoryFarm12 = 'TRÁEME HOMBRES<br>PARA IGUALAR A MIS MONTAÑAS,<br>TRÁEME HOMBRES<br>PARA IGUALAR MIS LLANURAS,<br>HOMBRES QUE DESEAN<br>INICIAR IMPERIOS,<br>HOMBRES QUE SUEÑAN<br>CON NUEVAS ERA<br>—SAM WALTER FOSS';
         displayStoryFarm13 = 'ESTO MANTENDRÁ FUERA A LOS LOBOS';
-        displayStoryQuarry = '«UN MONTÓN DE ROCAS DEJA DE SER UN MONTÓN DE ROCAS EN EL MOMENTO EN QUE UN HOMBRE LO CONTEMPLA CON LA IDEA DE UNA CATEDRAL EN SU MENTE»\n—ANTOINE DE SAINT-EXUPÉRY';
-        displayStoryFarm14 = 'A NINGUNO ESTÁ PERMITIDO MURTAR VERSOS SAGRADOS FRENTE AL PÚBLICO MIENTRAS CAMINA POR LA CALLE O MERCADO\n\nUNA SINOPSIS Y CODIFICACIÓN DE LAS LEYES Y ORDENANZAS DEL KITÁB-I-AQDAS IV.D.1.Y.XXIX';
-        displayStoryFarm15 = '«EL MOMENTO DE CAVAR UN POZO ES ANTES DE TENER SED»\n—ZHU XI\n\n(Rendimiento Mínimo Por Cosecha +25%)';
+        displayStoryQuarry = '«UN MONTÓN DE ROCAS DEJA DE SER UN MONTÓN DE ROCAS EN EL MOMENTO EN QUE UN HOMBRE LO CONTEMPLA CON LA IDEA DE UNA CATEDRAL EN SU MENTE»<br>—ANTOINE DE SAINT-EXUPÉRY';
+        displayStoryFarm14 = 'A NINGUNO ESTÁ PERMITIDO MURTAR VERSOS SAGRADOS FRENTE AL PÚBLICO MIENTRAS CAMINA POR LA CALLE O MERCADO<br><br>UNA SINOPSIS Y CODIFICACIÓN DE LAS LEYES Y ORDENANZAS DEL KITÁB-I-AQDAS IV.D.1.Y.XXIX';
+        displayStoryFarm15 = '«EL MOMENTO DE CAVAR UN POZO ES ANTES DE TENER SED»<br>—ZHU XI<br><br>(Rendimiento Mínimo Por Cosecha +25%)';
         displayStoryFarm16 = 'DIFÍCIL DE CREER QUE TODO ESTO COMENZÓ CON UN ÚNICO PARCHE DE TIERRA HACE ' + year + ' AÑOS. HONESTAMENTE, ES DIFÍCIL INCLUSO RECORDAR CÓMO ERA LA VIDA EN ESE ENTONCES';
         displayStoryFarm17 = 'EL ANTERIOR DUEÑO GARANTIZA SU RENTABILIDAD. ME DICEN QUE LAS DÁTILES ESTARÁN LISTAS AL FINAL DE CADA VERANO Y LOS HIGOS A FINALES DE LA PRIMAVERA. LAS GRANADAS ESTARÁN LISTAS A PRINCIPIOS DEL INVIERNO, LUEGO LAS UVAS DEBERÍAN LLEGAR UNAS SEMANAS MÁS TARDE, PERO SON INCONSTANTE';
         displayStoryOlives = 'HAN PASADO OCHO LARGOS AÑOS DESDE QUE TÚ HUBIERAS PLANTADO TU OLIVAR. FINALMENTE LOS ÁRBOLES SON MADUROS, CADA RAMA CARGADA DE FRUTOS MADUROS. Y DEBERÍAN LLEGAR A LA MISMA ÉPOCA CADA AÑO A PARTIR DE AHORA';
+
+        displayStoryWarehouse0 = 'ESTE LUGAR ES ALTAMENTE RECOMENDABLE';
+        displayStoryWarehouse1 = '«LO QUE ES COMÚN PARA LA MAYORÍA RECIBE LA MENOR CANTIDAD DE ATENCIÓN»<br>—ARISTÓTELES';
+        displayStoryWarehouse2 = '«EN LA MAYORÍA DE LOS HOMBRES HAY TAL AMOR POR LOS MÉTODOS PROBADOS Y TAL TEMOR A LOS EXPERIMENTOS, QUE PROBABLEMENTE NO ACTUARÁN EN CONSECUENCIA HASTA MUCHO DESPUÉS DE QUE SEA SEGURO HACERLO»<br>—HERBERT SPENCER';
 
         displayStoryHands0 = 'HAS EMPLEADO A TU PRIMER HOMBRE. SU NOMBRE ES JUAN';
         displayStoryHands1 = 'JUAN TIENE UN HERMANO QUE BUSCA TRABAJO. PODRÍAS UTILIZAR OTRO BUEN HOMBRE';
@@ -546,29 +594,29 @@ function Translate(language, bark = true) {
         displayStoryHands12 = 'TODO EL MUNDO SABE QUE ERES A QUIÉN DEBES VER PARA TRABAJAR. SE FORMA UN GRUPO EN TU PUERTA. ELIGES AL HOMBRE MÁS ALTO DE LA MULTITUD';
         displayStoryHands13 = 'VES A OTRO HOMBRE QUE PARECE FUERTE Y DICES QUE ENTRE';
         displayStoryHands14 = 'UN HOMBRE PEQUEÑO SE ACERCA A TI. DICE QUE QUIZÁS NO PARECE MUCHO PERO ES TENAZ. LO AGREGAS A LA LISTA';
-        displayStoryHands15 = 'TANTOS MUNDOS Y TIERRAS PARA ELABORAR KARMA.\n¡TANTAS MUCHAS LECCIONES QUE APRENDER!\n\nGURÚ GRANTH SAHIB, ANG 7';
+        displayStoryHands15 = 'TANTOS MUNDOS Y TIERRAS PARA ELABORAR KARMA. ¡TANTAS MUCHAS LECCIONES QUE APRENDER!<br><br>GURÚ GRANTH SAHIB, ANG 7';
         displayStoryHands16 = 'AUN HAY MUCHO PARA ELEGIR. DEJASTE A OTRO TIPO DE APARIENCIA FUERTE ATRAVESAR LA PUERTA';
         displayStoryHands17 = 'MIENTRAS SELECCIONAS EL PRÓXIMO CONTRATADO ENTRE LA MULTITUD QUE ESPERA, UNO DE TUS HOMBRES TE TRAE LA NOTICIA: JUAN SE ENFERMO CON FIEBRE ANOCHE NOCHE Y NO SE DESPERTÓ ESTA MAÑANA. ES UNA PENA. PARA REEMPLAZARLO DEJAS ENTRAR UNO MÁS';
         displayStoryHands18 = 'EL HERMANO DE JUAN ESTÁ ENFERMO DE DUELO Y NO PUEDE TRABAJAR. DESAFORTUNADAMENTE TAMBIÉN NECESITARÁ SER REEMPLAZO. ELEGES DOS MÁS DE LA MULTITUD';
         displayStoryHands19 = 'HAY MÁS PERSONAS AQUÍ DE LAS QUE TENEMOS OPORTUNIDADES, PERO NECESITAMOS UNO MÁS';
-        displayStoryHands20 = 'ESCLAVOS, OBEDECED SIEMPRE EN TODO SENTIDO A VUESTROS AMOS TERRENALES, NO SÓLO CUANDO OS ESTÁN OBSERVANDO, SINO TODO EL TIEMPO, POR TEMOR A DIOS\n\nCOLOSENSES 3:22';
+        displayStoryHands20 = 'ESCLAVOS, OBEDECED SIEMPRE EN TODO SENTIDO A VUESTROS AMOS TERRENALES, NO SÓLO CUANDO OS ESTÁN OBSERVANDO, SINO TODO EL TIEMPO, POR TEMOR A DIOS<br><br>COLOSENSES 3:22';
         displayStoryHands21 = 'TODOS LOS DÍAS ALGUIEN PREGUNTA: ¿ESTÁS CONTRATANDO? BUENO, HOY SOMOS. USTED EMPLEA A UN HOMBRE NUEVO QUE LE FUE PRESENTADO POR UNO DE SUS GRANJEROS';
         displayStoryHands22 = 'A VECES NO PUEDES EVITAR ODIO A TODAS ESTAS MALDITAS GENTE';
         displayStoryHands23 = 'BIEN, SIEMPRE HAY MÁS TRABAJO POR HACER, Y NO SE HARÁ SOLO';
         displayStoryHands24 = 'NUEVO MUCHACHO EMPIEZA HOY. PARECE BASTANTE JOVEN, PERO PARECE ENTUSIASMADO';
         displayStoryHands25 = 'EL NIÑO NUEVO PERDIÓ UNA MANO EN UN ACCIDENTE POCAS HORAS DESPUÉS DE COMENZAR SU PRIMER DÍA. UNA TRAGEDIA PARA SU FAMILIA, SEGURO. BIEN, EL SEÑOR DA Y EL SEÑOR QUITA, COMO NOS DICE JOB. CONTRATAS A DOS MÁS EN LUGAR DE SOLO UNO';
         displayStoryHands26 = 'DIOS MÍO, ESE POBRE NIÑO. DIFÍCIL SACAR TODA ESA SANGRE DE TU MENTE';
-        displayStoryHands27 = 'INCÓMODA SE ENCUENTRA LA CABEZA QUE LLEVA UNA CORONA\n\nLA SEGUNDA PARTE DE ENRIQUE EL CUARTO 3.1.1735';
+        displayStoryHands27 = 'INCÓMODA SE ENCUENTRA LA CABEZA QUE LLEVA UNA CORONA<br><br>LA SEGUNDA PARTE DE ENRIQUE EL CUARTO 3.1.1735';
         displayStoryHands28 = 'LOS HOMBRES QUE HAN ESTADO CUIDANDO LO QUE AHORA ES TU CAMPO DE CEBADA SE PRESENTAN A TRABAJAR A LA MAÑANA SIGUIENTE, CON LA ESPERANZA DE UNIRSE A TU PERSONAL Y MANTENER SUS EMPLEOS. SU LÍDER DA UN PASO ADELANTE Y TÚ LE DA LA BIENVENIDA EL HOMBRE A LA NUEVA VIDA DE ÉL, MUY SIMILAR A LA ÚLTIMA DE ÉL';
         displayStoryHands29 = 'EL SIGUIENTE HOMBRE ENTRA EN SILENCIO POR LA PUERTA Y COMIENZA A TRABAJAR COMO SI NADA HABIERA CAMBIADO. BUENO... SUPONES, A ÉL, NADA MUCHO HA';
         displayStoryHands30 = 'ESTE SIGUIENTE COMPAÑERO PARECE UN CLIENTE DIFÍCIL, PERO TAMBIÉN PARECE QUE HA ESTADO TRABAJANDO GRANOS TODA SU VIDA. PROBABLEMENTE UN BUEN HOMBRE PARA TENER EN EL EQUIPO';
         displayStoryHands31 = 'BUENO SANTO, ESTO ESTÁ TOMANDO TODO EL DÍA. SI, SI, ENTREN, ENTREN SEÑORES';
         displayStoryHands32 = 'ALGUNOS DE ESTOS NIÑOS PARECE QUE SEGURAMENTE SE BENEFICIARÍAN DE UNA BUENA COMIDA';
         displayStoryHands33 = 'MUCHOS HOMBRES DE ESTA REGIÓN CONFIAN EN USTED AHORA PARA SU MEDIO DE VIDA; LOS HOMBRES *Y* SUS FAMILIAS';
-        displayStoryHands34 = 'TOLERARÉ TODA ESTA BEBIDA\nSI ME AYUDA A PASAR LOS DÍAS\n—INTERPOL';
+        displayStoryHands34 = 'TOLERARÉ TODA ESTA BEBIDA<br>SI ME AYUDA A PASAR LOS DÍAS<br>—INTERPOL';
         displayStoryHands35 = 'FELICIDADES. USTED EMPLEA A TODOS LOS QUE CONOCE';
 
-        displayStoryFound = '«TENGO HIJOS, TENGO RIQUEZA,»\nCON TALES PENSAMIENTOS EL TONTO SE TORMENTA.\nPERO SI NO ERES EL DUEÑO DE TU PROPIO SER,\n¿CÓMO PUEDES DECIR QUE LOS HIJOS TE PERTENECEN? ¿O RIQUEZA?\n\nDHAMMAPADA 5.62';
+        displayStoryFound = '«TENGO HIJOS, TENGO RIQUEZA,» CON TALES PENSAMIENTOS EL TONTO SE TORMENTA. PERO SI NO ERES EL DUEÑO DE TU PROPIO SER, ¿CÓMO PUEDES DECIR QUE LOS HIJOS TE PERTENECEN? ¿O RIQUEZA?<br><br>DHAMMAPADA 5.62';
         displayStoryVillage0 = 'NECESITARÁ MADERA PARA LA FRAGUA';
         displayStoryVillage1 = 'AHORA PODEMOS CONSTRUIR';
         displayStoryVillage2 = 'DEBEMOS TENER ALGO DE LEY Y ORDEN';
@@ -577,18 +625,21 @@ function Translate(language, bark = true) {
         displayStoryVillage5 = 'LAS ESPECIAS DEL MERCADO SON VERDADERAMENTE FRAGANTES';
         displayStoryVillage6 = 'LOS CONSTRUCTORES ASEGURAN QUE NO HAY PELIGRO';
         displayStoryVillage7 = 'LOS CIUDADANOS LLEGAN DEL CAMPO AHORA EN BUSCA DE OPORTUNIDADES';
-        displayStoryVillage8 = '«ENSEÑA A UN HOMBRE A PESCAR Y LO ALIMENTARÁS TODA LA VIDA»\n—MAIMÓNIDES\n\n(Rendimiento Máximo Por Cosecha +33%)';
-        displayStoryVillage9 = 'VIVIR EN UN BUEN LUGAR\n\nDÀO DÉ JĪNG 8:5';
+        displayStoryVillage8 = '«ENSEÑA A UN HOMBRE A PESCAR Y LO ALIMENTARÁS TODA LA VIDA»<br>—MAIMÓNIDES<br><br>(Rendimiento Máximo Por Cosecha +33%)';
+        displayStoryVillage9 = 'VIVIR EN UN BUEN LUGAR<br><br>DÀO DÉ JĪNG 8:5';
         displayStoryVillage10 = 'LOS CABALLOS IMPULSAN EL PROGRESO';
-        displayStoryVillage11 = 'LOS VERDADEROS SIERVOS DE DIOS SON LOS\nQUE VIAJAN POR LA TIERRA CON GRACIA,\nY CUANDO LOS IGNORANTES SE DIRIGEN A LES GROSERAMENTE,\nRESPONDEN CON PALABRAS DE PAZ\n\n’AL-FURQĀN 63';
-        displayStoryVillage12 = '«SÓLO DESEAN DOS COSAS, PAN Y CIRCOS»\n—JUVENAL';
-        displayStoryVillage13 = '«CONTRAER NUEVAS DEUDAS NO ES LA MANERA DE PAGAR LAS VIEJAS»\n—GEORGE WASHINGTON';
-        displayStoryVillage14 = 'TIENES DERECHO A TRABAJAR, PERO NO TIENES DERECHO A LOS FRUTOS DE TU TRABAJO. NUNCA CREAS QUE ERES LA CAUSA DE LOS RESULTADOS DE TUS ELECCIONES. TRABAJAR DURO Y SER EQUILIBRIO EN EL ÉXITO Y EL FRACASO. ... LOS QUE BUSCAN DISFRUTAR LOS FRUTOS DE SUS OBRAS SON MISERABLES.\n\nBHAGAVAD-GĪTĀ 2.47-49';
+        displayStoryVillage11 = 'LOS VERDADEROS SIERVOS DE DIOS SON LOS QUE VIAJAN POR LA TIERRA CON GRACIA, Y CUANDO LOS IGNORANTES SE DIRIGEN A LES GROSERAMENTE, RESPONDEN CON PALABRAS DE PAZ<br><br>’AL-FURQĀN 63';
+        displayStoryVillage12 = '«SÓLO DESEAN DOS COSAS, PAN Y CIRCOS»<br>—JUVENAL';
+        displayStoryVillage13 = '«CONTRAER NUEVAS DEUDAS NO ES LA MANERA DE PAGAR LAS VIEJAS»<br>—GEORGE WASHINGTON';
+        displayStoryVillage14 = 'TIENES DERECHO A TRABAJAR, PERO NO TIENES DERECHO A LOS FRUTOS DE TU TRABAJO. NUNCA CREAS QUE ERES LA CAUSA DE LOS RESULTADOS DE TUS ELECCIONES. TRABAJAR DURO Y SER EQUILIBRIO EN EL ÉXITO Y EL FRACASO. ... LOS QUE BUSCAN DISFRUTAR LOS FRUTOS DE SUS OBRAS SON MISERABLES.<br><br>BHAGAVAD-GĪTĀ 2.47-49';
         displayStoryVillage15 = 'LA LIMPIEZA ES DIVINO';
-        displayStoryVillage16 = 'ODIAN AL QUE SERMONA EN LA PUERTA,\nY ABORRECEN AL QUE HABLA LA VERDAD\n\nAMÓS 5:10';
-        displayStoryVillage17 = 'LA PLACA DE BRONCE SOBRE LA BASE DE MÁRMOL ROSA DICE:\n\n≈ LAS 8 VIRTUDES ≈\n• HONESTIDAD – DECIR LA VERDAD\n• HONOR – HACER LO CORRECTO\n• VALOR – MANTENERSE CONTRA LA INJUSTICIA\n• SACRIFICIO – COMPARTE TUS BENDICIONES\n• COMPASIÓN – SER AMABLE CON LOS DÉBILES\n• JUSTICIA – SER JUSTO CON TODOS\n• ESPIRITUALIDAD – ESCUCHA LA LUZ\n• HUMILDAD – RESISTIR ORGULLO';
+        displayStoryVillage16 = 'ODIAN AL QUE SERMONA EN LA PUERTA, Y ABORRECEN AL QUE HABLA LA VERDAD<br><br>AMÓS 5:10';
+        displayStoryVillage17 = 'LA PLACA DE BRONCE SOBRE LA BASE DE MÁRMOL ROSA DICE:<br><br>≈ LAS 8 VIRTUDES ≈<br>• HONESTIDAD – DECIR LA VERDAD<br>• HONOR – HACER LO CORRECTO<br>• VALOR – MANTENERSE CONTRA LA INJUSTICIA<br>• SACRIFICIO – COMPARTE TUS BENDICIONES<br>• COMPASIÓN – SER AMABLE CON LOS DÉBILES<br>• JUSTICIA – SER JUSTO CON TODOS<br>• ESPIRITUALIDAD – ESCUCHA LA LUZ<br>• HUMILDAD – RESISTIR ORGULLO';
 
         displayNamePlayer = '«¿Cómo te llamas, ciudadano?»';
+
+        displayGoToTownship = 'IR AL MUNICIPIO ->';
+        displayGoToPraedium = '<- REGRESAR A TU PRAEDIUM';
 
         displayVillageTitle0 = 'El Asentamiento de';
         displayVillageTitle1 = 'El Puesto Avanzado de';
@@ -608,22 +659,25 @@ function Translate(language, bark = true) {
         displayLanguageQuote = '<div id="divSystemMessageScripture">«No hay conocimiento verdadero sin fe recta, ninguna conducta virtuosa es posible sin conocimiento, sin virtud no hay liberación, y sin liberación, no nirvana.»</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
         displayInfoMadeWith = 'Para Dylan. Te quiero mucho que mucho, sobrino.<br><br>Hecho con CodePen, GIMP, GitHub y VS Code.';
-        displayInfoDedication = 'Dedicado a aniwey, Richard Garriott, Marty Hirsch, Denis Loubet, y Michael Townsend, y en memoria amorosa de Travonteé Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
+        displayInfoDedication = 'Dedicado a aniwey, Lori y Corey Cole, Richard Garriott, Marty Hirsch, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Tom Rothamel, Michael Townsend y Tim Sweeney, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
         displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Dave y Anna Davis, Kenneth Garagnon, Leif Johansen, Brian Moran, Grant Sutherland y W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';
         displayLegalQuote = '<div id="divSystemMessageScripture">«Os ordeno que protejáis a vuestros semejantes.»</div><div id="divSystemMessageSource">—Ḥamza ibn ‘Alī ibn ʾAḥmad</div>';
 
-        displayBoxCopy = 'Ponte las sandalias de un sencillo agricultor de cereales tartésico en el año 200 a.C. ¿¿Tiene lo necesario para redactar la constitución de una ciudad-Estado que iluminará el camino durante siglos y logrará personalmente una iluminación trascendental, señor??\n\nDéjese transportar literalmente a la antigua época romana mediante esta simulación por computadora de vanguardia que lo coloca a USTED en el corazón de la trepidante ACCIÓN AGRÍCOLA REAL!';
+        displayOptionsFlavour = '«Ansiedad es el vértigo de la libertad.»<div id="divOptionsSource">—Søren Kierkegaard</div>';
+
+        displayBoxCopy = 'Ponte las sandalias de un sencillo agricultor de cereales tartésico en el año 200 a.C. ¿¿Tiene lo necesario para redactar la constitución de una ciudad-Estado que iluminará el camino durante siglos y logrará personalmente una iluminación trascendental, señor??<br><br>Déjese transportar literalmente a la antigua época romana mediante esta simulación por computadora de vanguardia que lo coloca a USTED en el corazón de la trepidante ACCIÓN AGRÍCOLA REAL!';
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const divider = '<div id="dividerSystemMessage">♦♦♦ ♦ ♦♦♦</div>';
+    const divider = '<div class="divider">♦♦♦ ♦ ♦♦♦</div>';
     displayInfoFinal = 'PRAEDIUM (CCØ) MMXXIV.<br><br>' + displayInfoMadeWith + '<br><br>' + displayInfoDedication + '<br><br>' + displayInfoThanks + divider + displayInfoScripture;
     displayLegalFinal = displayBoilerplate + divider + displayLegalQuote;
+    displayOptionsFlavourFinal = divider + displayOptionsFlavour;
     UpdateDisplay();
     if (bark) { SystemMessage(displayNewLanguage + divider + displayLanguageQuote); }
 }

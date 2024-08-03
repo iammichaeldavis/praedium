@@ -1,6 +1,19 @@
 // UTILITIES ***************************************************************************************
 // *************************************************************************************************
 
+function DetermineDevice() {
+    const regexp = /android|iphone|kindle|ipad/i; // regular expression containing known mobile device keywords; this may need to grow 🤔
+    player.isOnMobile = regexp.test(navigator.userAgent);
+
+    if (player.isOnMobile) {
+        alert('I am a mobile device 📱');
+    } else {
+        alert('I am a desktop 🖥️ or laptop 💻');
+    }
+}
+
+
+
 function SystemMessage(messageCorpus) {
     divSystemMessageCorpus.innerHTML = messageCorpus;
     player.seesSystemMessage = true;
@@ -69,7 +82,7 @@ function FindWholeRandom(min, max) {
 
 function GetNewPlayerName() {
     let newName = prompt(displayNamePlayer).trim();
-    namePlayer.push(newName);
+    player.names.push(newName);
 }
 
 

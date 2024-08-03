@@ -3,7 +3,7 @@
 
 :root {
     --tilemap: transparent url(bitmaps/tilemap.png) 0 0 no-repeat;
-    --agua: url('data:image/gif;base64,R0lGODlhEAAQAKEDACMj4VFQ/1T//1lR+iH/C05FVFNDQVBFMi4wAwEAAAAh+QQFFAADACwAAAAAEAAQAAACJowloMtt36IzsoKHw6IASWhFWMgp2eOFTGaClau2Z7yWNJSKmvwUACH5BAUUAAMALAAAAAAQABAAAAInhB1xyS1yolxtWqqubRXltyVaKGqlxwXgGHFodjGslJ4zIN8osAIFACH5BAUUAAMALAAAAAAQABAAAAInhA+hIIK4jJq0vQsp3inyR2lSYFjX9J0o53VhYKbjKm6rPIf4cV8FACH5BAUUAAMALAAAAAAQABAAAAImhBF5y5sBhGhG1YeDpDzzbn1M9hzW1pTiqIIOqU2riV0h1c4IPBcAIfkEBRQAAwAsAAAAABAAEAAAAiaMA6nLcA3VEyIaeXKgEeruXSCjPYnINeaIiRbSainrZOcawnRtFAAh+QQFFAADACwAAAAAEAAQAAACJoSPFsubnxicQAoxnWrt0sd9oCYenLQZ3hiUSPOR1RmsbjjLLFIAACH5BAUUAAMALAAAAAAQABAAAAIlhH+hyA0KoZtv0SaFmLZGqF3MJ45d6ZGGFWJnGV3nB25oGqxSAQAh+QQFFAADACwAAAAAEAAQAAACJoQRmaZxfxScsDWK0cpTCoFtmpV8XHWdj6RGpMPAZie2aQjH5JwVACH5BAUUAAMALAAAAAAQABAAAAImjCWgy22vXmjO0LukxBhyCiHdFGmP+DFaWpFsaWYk2r6yxeGwUQAAIfkEBRQAAwAsAAAAABAAEAAAAieEHXGQ3SKWnE6xNhfOvG5OJWCGQZ11eYE5ak4rfXBaHSLAxvdMSwUAIfkEBRQAAwAsAAAAABAAEAAAAiaED6GBnXyWDEK4a2ZeeMPeTBwYKmTJVJjpierZfvAIP2IEvWhXAAAh+QQFFAADACwAAAAAEAAQAAACJoQRecub2g40rwYhorb06R58keWJTGlKCraFIMmmrysjk0xOUAwUACH5BAUUAAMALAAAAAAQABAAAAInjANpKZKvFpz0IPpktKbhz20XqH0Td5hYqp6Lt47oAbfiaANsrh8FACH5BAUUAAMALAAAAAAQABAAAAImhI8Wy3sOhEgK0gsarqg1uVFeZV1MKHolmq3oCZrBoy4x2544iRQAIfkEBRQAAwAsAAAAABAAEAAAAiiEf6HIDQphCkYIJ52O2qwZKVbXhF62fSQSoutJvSAwYvHTipeMu0cBACH5BAUUAAMALAAAAAAQABAAAAImhBGZx83q4lE0TAuEiFDyLi1XFWieUxnUCZ5j6j5irC7m91a3VwAAOw==');
+    --agua: url(bitmaps/agua_anim.gif);
 }
 
 * {
@@ -75,9 +75,9 @@ button:active {
 #buttonWater,
 #buttonHarvest,
 #buttonEnglish,
-#buttonSpanish,
-#buttonQ,
-#buttonI {
+#buttonOptions,
+#buttonI,
+#buttonQ {
     margin-right: 2vw;
 }
 
@@ -86,6 +86,7 @@ button:active {
     margin: 0 auto;
 }
 
+#divFarmButtons #buttonRentWarehouse,
 #divFarmButtons #buttonBuyForest,
 #divFarmButtons #buttonBuyMountain,
 #divFarmButtons #buttonFound,
@@ -119,7 +120,9 @@ button:active {
 }
 
 #buttonForewordEnglish,
-#buttonForewordSpanish {
+#buttonForewordSpanish,
+#buttonEnglish,
+#buttonSpanish {
     font-size: 2.4vw;
 }
 
@@ -193,6 +196,38 @@ button:active {
     color: #008000;
     border: 1px solid #008000;
     background: #b8de87;
+}
+
+
+
+#buttonOptionsDismiss {
+    font-size: 3.8vw;
+    display: block;
+    margin: 6.4vw auto 0 auto;
+}
+
+#buttonOptionsDismiss,
+#buttonEnglish,
+#buttonSpanish {
+    color: #b6b600;
+    border: 1px solid #b6b600;
+    background: #fcfce5;
+}
+
+#buttonOptionsDismiss:hover,
+#buttonEnglish:hover,
+#buttonSpanish:hover {
+    color: #c2c200;
+    border: 1px solid #c2c200;
+    background: #ffffc4;
+}
+
+#buttonOptionsDismiss:active,
+#buttonEnglish:active,
+#buttonSpanish:active {
+    color: #808000;
+    border: 1px solid #808000;
+    background: #dede87;
 }
 
 
@@ -281,6 +316,13 @@ button:active {
     color: black;
     border: 1px solid black;
     background: #a4a4c2;
+}
+
+
+
+#buttonGoToTownship,
+#buttonGoToPraedium {
+    margin: 0 auto 6.4vw auto;
 }
 
 
@@ -379,7 +421,7 @@ button:active {
     text-align: justify;
 }
 
-#dividerSystemMessage {
+#divSystemMessageCorpus .divider {
     color: #3c14dc;
     text-align: center;
     margin: 3.2vw auto;
@@ -446,6 +488,69 @@ button:active {
     margin-top: 3.2vw;
     border: 1px solid black;
     padding: 2px 8px;
+}
+
+
+
+#divOverlayOptions {
+    background-color: rgba(16, 16, 0, 0.8);
+    z-index: 1000;
+}
+
+#divModalOptions {
+    user-select: none;
+    text-align: center;
+    width: 80vw;
+    margin: 10vw auto;
+    border: 3px solid #b6b600;
+    padding: 8vw;
+    background: #fcfce5;
+}
+
+#divModalOptions label {
+    cursor: pointer;
+    user-select: none;
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #b6b600;
+}
+
+#divModalOptions div {
+    margin-bottom: 3.2vw;
+}
+
+#divModalOptions div:last-of-type {
+    margin-bottom: 6.4vw;
+}
+
+#divOptionsFlavour {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #121204;
+    font-style: italic;
+    line-height: 5.2vw;
+    text-align: justify;
+    user-select: text;
+}
+
+#divOptionsFlavour .divider {
+    color: #b6b600;
+    margin: 3.2vw auto;
+    user-select: none;
+    text-align: center;
+}
+
+#divOptionsSource {
+    font-family: 'Garamond', serif;
+    font-size: 3vw;
+    font-style: italic;
+    color: #121204;
+    margin-top: 1.2vw;
+    user-select: text;
+}
+
+input {
+    cursor: pointer;
 }
 
 /* // CALENDAR ////////////////////////////////////////////////////////////////////////////////// */
@@ -605,7 +710,8 @@ canvas {
 
 #canvasVillage {
     width: 386px;
-    height: 71px; /* add two for border! */
+    height: 71px;
+    /* add two for border! */
     background: pink;
     margin: 0 auto 6.4vw auto;
     display: block;
@@ -621,6 +727,11 @@ table {
 
 td {
     text-align: right;
+}
+
+.warehouseTotal {
+    font-size: 1.8vw;
+    color: #444444;
 }
 
 
@@ -804,6 +915,10 @@ td {
     background-position: -80px -208px;
 }
 
+.Arborist {
+    background-position: -80px -224px;
+}
+
 .Blacksmith {
     background-position: -96px -208px;
 }
@@ -886,33 +1001,8 @@ td {
     background-position: -80px -240px;
 }
 
-/* // FOOTER //////////////////////////////////////////////////////////////////////////////////// */
+/* // VILLAGE /////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
-
-#divFooter {
-    width: 100%;
-    text-align: center;
-    border-top: 1px solid black;
-    padding: 2.3vw 0;
-    background: #AFAFBF;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* //////////////////////////////////////////////////////////// */
-/* ////////////////// _||_              _||_ ////////////////// */
-/* ////////////////// \  / no mans land \  / ////////////////// */
-/* //////////////////  \/                \/  ////////////////// */
-/* //////////////////////////////////////////////////////////// */
 
 #divVillageName {
     margin-top: 68px;
@@ -953,13 +1043,24 @@ td {
     margin-bottom: 24px;
 }
 
+/* // FOOTER //////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
+#divFooter {
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid black;
+    padding: 2.3vw 0;
+    background: #AFAFBF;
+}
 
-
+/* // VISIBILITY //////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 #divOverlayForeword,
 #divOverlayGameEvent,
 #divOverlaySystemMessage,
+#divOverlayOptions,
 #tableFarmInventory,
 #tableFarmStaff,
 #tableFarmReport,
@@ -969,29 +1070,29 @@ td {
 #tableForestReport,
 #divViewMountain,
 #tableMountainReport,
-#divViewVillage,
-#divVillageName,
-#divVillage,
-#divVillageStatistics,
+#divViewTownship,
+#buttonGoToTownship,
 #buttonTill,
 #buttonPlant,
 #buttonWater,
 #buttonHarvest,
+#buttonPriority,
 #buttonBuyLand,
+#buttonRentWarehouse,
 #buttonBuyForest,
 #buttonBuyMountain,
+#buttonHire,
+#buttonAudit,
+#buttonFound,
+#buttonBuild,
 #buttonForest,
+#buttonMountain,
 #buttonBarterOlive,
 #buttonBarterDate,
 #buttonBarterFig,
 #buttonBarterPom,
 #buttonBarterGrape,
-#buttonHire,
-#buttonAudit,
-#buttonPriority,
-#buttonFound,
 #buttonSellGrain,
-#buttonBuild,
 #buttonWin {
     display: none;
 }

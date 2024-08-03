@@ -20,10 +20,24 @@ const arrayPomOrchard = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const arrayVineyard = [0, 0, 0, 0, 0, 0, 0, 0,];
 
 const player = {
+    isOnMobile: null,
+
+    speaks: null,
+
+    likesMusic: true,
+    likesSounds: true,
+    likesAnimations: true,
+
+    isAt: 'Praedium',
+
+    names: ['Mud',],
+
     seesForeword: true,
     seesSystemMessage: false,
     seesGameEvent: false,
+    seesOptions: false,
     seesInventory: false,
+    seesWarehouse: false,
     seesStaff: false,
     seesReport: false,
     seesOlives: false,
@@ -38,6 +52,7 @@ const player = {
     canWater: false,
     canHarvest: false,
     canBuyLand: false,
+    canRentWarehouse: false,
     canBuyForest: false,
     canBuyMountain: false,
     canBarter: false,
@@ -73,6 +88,18 @@ const divGameEventFaçade = document.getElementById('divGameEventFaçade');
 const divGameEventCorpus = document.getElementById('divGameEventCorpus');
 const buttonGameEventDismiss = document.getElementById('buttonGameEventDismiss');
 
+const divOverlayOptions = document.getElementById('divOverlayOptions');
+const toggleMusic = document.getElementById('toggleMusic');
+const labelToggleMusic = document.getElementById('labelToggleMusic');
+const toggleSounds = document.getElementById('toggleSounds');
+const labelToggleSounds = document.getElementById('labelToggleSounds');
+const toggleAnimation = document.getElementById('toggleAnimation');
+const labelToggleAnimation = document.getElementById('labelToggleAnimation');
+const buttonEnglish = document.getElementById('buttonEnglish');
+const buttonSpanish = document.getElementById('buttonSpanish');
+const divOptionsFlavour = document.getElementById('divOptionsFlavour');
+const buttonOptionsDismiss = document.getElementById('buttonOptionsDismiss');
+
 const divYear = document.getElementById('divYear');
 const divRuneSeason = document.getElementById('divRuneSeason');
 const divStonesSeason = document.getElementById('divStonesSeason');
@@ -83,6 +110,9 @@ const divWeek = document.getElementById('divWeek');
 const divStonesWeek = document.getElementById('divStonesWeek');
 const divRuneMonth = document.getElementById('divRuneMonth');
 const divRuneElement = document.getElementById('divRuneElement');
+
+const divViewPraedium = document.getElementById('divViewPraedium');
+const buttonGoToTownship = document.getElementById('buttonGoToTownship');
 
 const canvasFarm = document.getElementById('canvasFarm');
 const canvasFarmContext = canvasFarm.getContext('2d');
@@ -122,7 +152,12 @@ const tableMountainReport = document.getElementById('tableMountainReport');
 const theadMountainReport = document.getElementById('theadMountainReport');
 const tbodyMountainReport = document.getElementById('tbodyMountainReport');
 
+const divViewTownship = document.getElementById('divViewTownship');
+const buttonGoToPraedium = document.getElementById('buttonGoToPraedium');
+
 const divViewVillage = document.getElementById('divViewVillage');
+const canvasVillage = document.getElementById('canvasFarm');
+const canvasVillageContext = canvasVillage.getContext('2d');
 const divVillage = document.getElementById('divVillage');
 const divVillageName = document.getElementById('divVillageName');
 const divVillageStatistics = document.getElementById('divVillageStatistics');
@@ -140,6 +175,7 @@ const buttonPriorityDecal = document.getElementById('buttonPriorityDecal');
 const buttonPriorityOption = document.getElementById('buttonPriorityOption');
 
 const buttonBuyLand = document.getElementById('buttonBuyLand');
+const buttonRentWarehouse = document.getElementById('buttonRentWarehouse');
 const buttonBuyForest = document.getElementById('buttonBuyForest');
 const buttonForest = document.getElementById('buttonForest');
 const buttonBuyMountain = document.getElementById('buttonBuyMountain');
@@ -159,8 +195,7 @@ const buttonSellGrain = document.getElementById('buttonSellGrain');
 
 const buttonWin = document.getElementById('buttonWin');
 
-const buttonEnglish = document.getElementById('buttonEnglish');
-const buttonSpanish = document.getElementById('buttonSpanish');
+const buttonOptions = document.getElementById('buttonOptions');
 const buttonQ = document.getElementById('buttonQ');
 const buttonI = document.getElementById('buttonI');
 const buttonCC0 = document.getElementById('buttonCC0');
@@ -170,23 +205,24 @@ const formatterStandard = new Intl.NumberFormat('en-US');
 let god = true;
 let story = true;
 
-let namePlayer = ['Mud',];
-const nameVillage = 'Terra Australis'; // HBD, Grant! 🎂 (Fun fact: during initial testing this value was ‘Buttsville’)
+const nameVillage = '**TBD**';
 
 let gameTurn = 1;
-const currentYearJewish = 3560; // 200 B.C. according to https://sacred-texts.com/time/cal/jdate.htm ✡️ (lol jdate)
+const currentYearProlepticGregorian = -200; // 200 B.C.
+const currentYearJewish = 3560; // according to https://sacred-texts.com/time/cal/jdate.htm ✡️ (lol jdate)
 const currentYearRoman = 554; // according to https://en.wikipedia.org/wiki/Ab_urbe_condita ✝️
 let year = 1;
 let week = 1;
 
-const bushelCount = [10, 0, 0, 0, 0, 0, 0,]; // 0.wheat 🌾, 1.barley 🌾, 2.olive 🫒, 3.date, 4.fig, 5.pomegranate, 6.grape 🍇
+const bushelCount = [10, 0, 0, 0, 0, 0, 0,]; // 0.wheat 🌾, 1.barley 🌾, 2.olive 🫒, 3.date 🫐, 4.fig 🍅, 5.pomegranate 🍎, 6.grape 🍇
+const bushelMax = [30, 3000000, 300, 30000, 30000, 30000, 30000,];
 const seededCount = [0, 0,];
 const farmedCount = [0, 0, 0, 0, 0, 0, 0,];
 const harvestedCount = [0, 0, 0, 0, 0, 0, 0,];
 const spentCount = [0, 0, 0, 0, 0, 0, 0,];
 const soldCount = [0, 0, 0, 0, 0, 0, 0,];
 const barterMaxBulkCount = 1000;
-const barterExchangeRate = [0, 0, 10, 14, 18, 24, 32,];
+const barterExchangeRate = [1, 0.75, 10, 14, 18, 24, 32,];
 
 let plantCost = 1;
 let yieldMin = 4;
@@ -205,6 +241,7 @@ let grapesMax = 54;
 
 const farmSize = [1, 1,];
 let farmStage = 0;
+let warehouseStage = 0;
 const olivePlantDate = [0, 0,];
 
 let handsAvailable = 2;
@@ -214,6 +251,8 @@ let handsHired = 0;
 let handsEaten = 0;
 let vigneronsHired = 0;
 let vigneronsEaten = 0;
+let arboristsHired = 0;
+let arboristsEaten = 0;
 
 let logsCount = 0;
 let logsMin = 10;
@@ -244,7 +283,7 @@ const mountainProducedCount = [0, 0, 0,];
 const mountainSpentCount = [0, 0, 0,];
 
 const starvingBuffer = 10;
-const starving = [false, false, false, false, false, false, false,]; // hands, loggers, sawyers, masons, miners, smelters, vignerons
+const starving = [false, false, false, false, false, false, false, false,]; // hands, loggers, sawyers, masons, miners, smelters, vignerons, arborists
 
 let villageStage = 0;
 const estDate = [0, 0,];
@@ -261,7 +300,7 @@ const horsesIncAmount = 1;
 let horsesCount = 0;
 
 let beadsSpawn = false;
-const beadsIncAmount = 69; // ☯️ can’t take life *too* seriously, chums ;)
+const beadsIncAmount = 69; // ☯️ can’t take life *too* seriously, chum ;)
 let beadsCount = 0;
 
 let trophiesSpawn = false;
@@ -306,6 +345,10 @@ const priceStage16 = [100, 100,];
 const priceStage17 = [4200, 48000,];
 const priceStage18 = [6400, 3200,];
 
+const priceWarehouse0 = 20;
+const priceWarehouse1 = 50;
+const priceWarehouse2 = 1000;
+
 const priceVillage = 32000;
 const priceBuild0 = 256;
 const priceBuild1 = 420; // 🚬¯\_(ツ)_/¯🍩
@@ -327,9 +370,7 @@ const priceBuild16 = 2400000;
 const priceBuild17 = [4200000, 9000, 77,]; // 4️⃣2️⃣ 🟰 Life, the Universe and Everything
 
 const legalTarget = 'https://creativecommons.org/publicdomain/zero/1.0/';
-const winTarget = 'https://youtu.be/bzsYlG6TqFw'; // point to some page with a hit counter and a suicide note? lol "Welcome to you, 749th visitor. If you're reading this, then..."
-
-let currentLanguage = null;
+const winTarget = 'https://youtu.be/bzsYlG6TqFw';
 
 let saṃsāra = -0;
 

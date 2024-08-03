@@ -51,122 +51,130 @@
 
         <button id="buttonWin"></button>
 
-        <div id="divViewVillage">
-            <canvas id="canvasVillage" width="384" height="69"></canvas>
+        <div id="divViewTownship">
+            <button id="buttonGoToPraedium"></button>
 
-            <div>
-                <div id="divVillageName"></div>
-                <div id="divVillage"></div>
-                <div id="divVillageStatistics"></div>
+            <div id="divViewVillage">
+                <canvas id="canvasVillage" width="384" height="69"></canvas>
+
+                <div id="OLD_VILLAGE_CONTENTS">
+                    <div id="divVillageName"></div>
+                    <div id="divVillage"></div>
+                    <div id="divVillageStatistics"></div>
+                </div>
+
+                <div id="divVillageButtons">
+                    <button id="buttonBuild"></button>
+                    <button id="buttonSellGrain"></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="divViewPraedium">
+            <button id="buttonGoToTownship"></button>
+
+            <div id="divViewMountain">
+                <canvas id="canvasMountain" width="384" height="224"></canvas>
+
+                <table id="tableMountainInventory">
+                    <thead id="theadMountainInventory"></thead>
+                    <tbody id="tbodyMountainInventory"></tbody>
+                </table>
+
+                <table id="tableMountainStaff">
+                    <thead id="theadMountainStaff"></thead>
+                    <tbody id="tbodyMountainStaff"></tbody>
+                </table>
+
+                <table id="tableMountainReport">
+                    <thead id="theadMountainReport"></thead>
+                    <tbody id="tbodyMountainReport"></tbody>
+                </table>
+
+                <button id="buttonMountain"></button>
             </div>
 
-            <div>
-                <button id="buttonBuild"></button>
-                <button id="buttonSellGrain"></button>
+            <div id="divViewForest">
+                <canvas id="canvasForest" width="384" height="224"></canvas>
+
+                <table id="tableForestInventory">
+                    <thead id="theadForestInventory"></thead>
+                    <tbody id="tbodyForestInventory"></tbody>
+                </table>
+
+                <table id="tableForestStaff">
+                    <thead id="theadForestStaff"></thead>
+                    <tbody id="tbodyForestStaff"></tbody>
+                </table>
+
+                <table id="tableForestReport">
+                    <thead id="theadForestReport"></thead>
+                    <tbody id="tbodyForestReport"></tbody>
+                </table>
+
+                <button id="buttonForest"></button>
             </div>
-        </div>
 
-        <div id="divViewMountain">
-            <canvas id="canvasMountain" width="384" height="224"></canvas>
+            <div id="divViewFarm">
+                <canvas id="canvasFarm" width="16" height="16"></canvas>
 
-            <table id="tableMountainInventory">
-                <thead id="theadMountainInventory"></thead>
-                <tbody id="tbodyMountainInventory"></tbody>
-            </table>
+                <div id="divFarmingGameplayControls">
+                    <button id="buttonTill">
+                        <span id="buttonTillDecal"></span>
+                    </button><button id="buttonPlant">
+                        <span id="buttonPlantDecal"></span>
+                    </button><button id="buttonWater">
+                        <span id="buttonWaterDecal"></span>
+                    </button><button id="buttonHarvest">
+                        <span id="buttonHarvestDecal"></span>
+                    </button>
+                </div>
 
-            <table id="tableMountainStaff">
-                <thead id="theadMountainStaff"></thead>
-                <tbody id="tbodyMountainStaff"></tbody>
-            </table>
-
-            <table id="tableMountainReport">
-                <thead id="theadMountainReport"></thead>
-                <tbody id="tbodyMountainReport"></tbody>
-            </table>
-
-            <button id="buttonMountain" style="display:block;">POOP YOUR PANTS</button> <!-- take off this style, duh / but obviously leave the text-->
-        </div>
-
-        <div id="divViewForest">
-            <canvas id="canvasForest" width="384" height="224"></canvas>
-
-            <table id="tableForestInventory">
-                <thead id="theadForestInventory"></thead>
-                <tbody id="tbodyForestInventory"></tbody>
-            </table>
-
-            <table id="tableForestStaff">
-                <thead id="theadForestStaff"></thead>
-                <tbody id="tbodyForestStaff"></tbody>
-            </table>
-
-            <table id="tableForestReport">
-                <thead id="theadForestReport"></thead>
-                <tbody id="tbodyForestReport"></tbody>
-            </table>
-
-            <button id="buttonForest"></button>
-        </div>
-
-        <div id="divViewFarm">
-            <canvas id="canvasFarm" width="16" height="16"></canvas>
-
-            <div>
-                <button id="buttonTill">
-                    <span id="buttonTillDecal"></span>
-                </button><button id="buttonPlant">
-                    <span id="buttonPlantDecal"></span>
-                </button><button id="buttonWater">
-                    <span id="buttonWaterDecal"></span>
-                </button><button id="buttonHarvest">
-                    <span id="buttonHarvestDecal"></span>
+                <button id="buttonPriority">
+                    <span id="buttonPriorityDecal"></span>
+                    <span id="buttonPriorityColon"></span>
+                    <span id="buttonPriorityOption"></span>
                 </button>
-            </div>
 
-            <button id="buttonPriority">
-                <span id="buttonPriorityDecal"></span>
-                <span id="buttonPriorityColon"></span>
-                <span id="buttonPriorityOption"></span>
-            </button>
+                <table id="tableFarmInventory">
+                    <thead id="theadFarmInventory"></thead>
+                    <tbody id="tbodyFarmInventory"></tbody>
+                </table>
 
-            <table id="tableFarmInventory">
-                <thead id="theadFarmInventory"></thead>
-                <tbody id="tbodyFarmInventory"></tbody>
-            </table>
+                <table id="tableFarmStaff">
+                    <thead id="theadFarmStaff"></thead>
+                    <tbody id="tbodyFarmStaff"></tbody>
+                </table>
 
-            <table id="tableFarmStaff">
-                <thead id="theadFarmStaff"></thead>
-                <tbody id="tbodyFarmStaff"></tbody>
-            </table>
+                <table id="tableFarmReport">
+                    <thead id="theadFarmReport"></thead>
+                    <tbody id="tbodyFarmReport"></tbody>
+                </table>
 
-            <table id="tableFarmReport">
-                <thead id="theadFarmReport"></thead>
-                <tbody id="tbodyFarmReport"></tbody>
-            </table>
+                <div id="divFarmButtons">
+                    <button id="buttonBuyLand"></button>
+                    <button id="buttonBuyForest"></button>
+                    <button id="buttonBuyMountain"></button>
+                    <button id="buttonRentWarehouse"></button>
+                    <button id="buttonFound"></button>
+                    <button id="buttonHire"></button>
+                    <button id="buttonAudit"></button>
+                </div>
 
-            <div id="divFarmButtons">
-                <button id="buttonBuyLand"></button>
-                <button id="buttonBuyForest"></button>
-                <button id="buttonBuyMountain"></button>
-                <button id="buttonFound"></button>
-                <button id="buttonHire"></button>
-                <button id="buttonAudit"></button>
-            </div>
-
-            <div id="divBarterButtons">
-                <button id="buttonBarterOlive"></button>
-                <button id="buttonBarterDate"></button>
-                <button id="buttonBarterFig"></button>
-                <button id="buttonBarterPom"></button>
-                <button id="buttonBarterGrape"></button>
+                <div id="divBarterButtons">
+                    <button id="buttonBarterOlive"></button>
+                    <button id="buttonBarterDate"></button>
+                    <button id="buttonBarterFig"></button>
+                    <button id="buttonBarterPom"></button>
+                    <button id="buttonBarterGrape"></button>
+                </div>
             </div>
         </div>
 
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divFooter">
-        <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button><button
-            id="buttonQ">?</button><button id="buttonI">i</button><button id="buttonCC0">(CCØ)</button>
+        <button id="buttonI">i</button><button id="buttonQ">?</button><button id="buttonOptions">Options</button><button id="buttonCC0">(CCØ)</button>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayGameEvent" class="overlay">
@@ -191,6 +199,31 @@
             <button id="buttonSystemMessageDismiss"></button>
         </div>
     </div>
+
+    <div id="divOverlayOptions" class="overlay">
+        <div id="divModalOptions">
+            <div>
+                <label for="toggleMusic" id="labelToggleMusic">Music?</label>
+                <input type="checkbox" id="toggleMusic" name="toggleMusic" disabled />
+            </div>
+
+            <div>
+                <label for="toggleSounds" id="labelToggleSounds">Sounds?</label>
+                <input type="checkbox" id="toggleSounds" name="toggleSounds" disabled />
+            </div>
+
+            <div>
+                <label for="toggleAnimation" id="labelToggleAnimation">Cosmetic Animations?</label>
+                <input type="checkbox" id="toggleAnimation" name="toggleAnimation" checked onclick="ToggleAnimation()" />
+            </div>
+
+            <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button>
+
+            <div id="divOptionsFlavour"></div>
+
+            <button id="buttonOptionsDismiss"></button>
+        </div>
+    </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <script src="scripts/init.js"></script>
     <script src="scripts/utilities.js"></script>
@@ -198,6 +231,7 @@
     <script src="scripts/ui.js"></script>
     <script src="scripts/player_actions.js"></script>
     <script src="scripts/game_turn.js"></script>
+    <script src="scripts/harp.js"></script>
     <script src="scripts/start.js"></script>
     <script src="scripts/mods.js"></script>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->

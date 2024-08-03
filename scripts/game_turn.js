@@ -53,7 +53,7 @@ function GameTurn() {
     }
 
     UpdateDisplay();
-    if (gameSpeed == 'standard') {
+    if (gameSpeed == 'standard' && player.likesAnimations) {
         globalAnimationFrame = 1;
         setTimeout(AnimateCanvases, animationInterval);
     }
@@ -75,10 +75,10 @@ function FruitOlives() {
             olivesGrowthCounter++;
             tileGrowingOlive = [(22 + olivesGrowthCounter) * 16, 96,];
         }
-    
+
         if (year >= (olivePlantDate[1] + 8)) {
             if (year == (olivePlantDate[1] + 8)) {
-                if (story) { GameEvent(displayStoryOlives); }
+                if (story) { GameEvent(displayStoryOlives, 'buy_olives'); }
                 player.canBarter = true;
             }
             for (let i = 0; i < arrayOlivar.length; i++) { arrayOlivar[i] = 1; }
@@ -141,8 +141,19 @@ function FieldhandWork() {
         }
     }
 
+    if (arboristsHired > 0) {
+        if (bushelCount[0] <= arboristsHired + starvingBuffer) { starving[7] = true; }
+        else {
+            starving[7] = false;
+            bushelCount[0] -= arboristsHired;
+            arboristsEaten += arboristsHired;
+        }
+    }
+
+    const finalLaborForceTally = handsHired + vigneronsHired + arboristsHired;
+
     if (priority == 'Reap') {
-        for (let i = 0; i < (handsHired + vigneronsHired); i++) {
+        for (let i = 0; i < (finalLaborForceTally); i++) {
             let taskComplete = false;
             taskComplete = PlotHarvest(true);
             if (!taskComplete) { taskComplete = PlotWater(true); }
@@ -151,7 +162,7 @@ function FieldhandWork() {
         }
     }
     else if (priority == 'Sow') {
-        for (let i = 0; i < (handsHired + vigneronsHired); i++) {
+        for (let i = 0; i < (finalLaborForceTally); i++) {
             let taskComplete = false;
             taskComplete = PlotTill(true);
             if (!taskComplete) { taskComplete = PlotPlant(true); }
