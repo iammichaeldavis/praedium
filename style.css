@@ -18,6 +18,7 @@
     image-rendering: pixelated;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     touch-action: none;
+    user-select: none;
 }
 
 body {
@@ -621,7 +622,7 @@ button:active {
     font-style: italic;
     line-height: 5.2vw;
     text-align: justify;
-    user-select: text;
+    /* user-select: text; */
 }
 
 #divOptionsFlavour .divider {
@@ -637,7 +638,7 @@ button:active {
     font-style: italic;
     color: #121204;
     margin-top: 1.2vw;
-    user-select: text;
+    /* user-select: text; */
 }
 
 input {
