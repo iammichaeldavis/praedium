@@ -2,10 +2,11 @@
 // *************************************************************************************************
 
 buttonSystemMessageDismiss.addEventListener('click', function () { DismissSystemMessage(); });
+buttonForewordEnglish.addEventListener('click', function () { BeginGame('English'); });
+buttonForewordSpanish.addEventListener('click', function () { BeginGame('Spanish'); });
 buttonForewordDismiss.addEventListener('click', function () { DismissForeword(); });
-buttonForewordEnglish.addEventListener('click', function () { Translate('English'); });
-buttonForewordSpanish.addEventListener('click', function () { Translate('Spanish'); });
 buttonGameEventDismiss.addEventListener('click', function () { DismissGameEvent(); });
+buttonModsDismiss.addEventListener('click', function () { DismissModsWindow(); });
 buttonOptionsDismiss.addEventListener('click', function () { DismissOptions(); });
 buttonTill.addEventListener('click', function () { PlotTill(); });
 buttonPlant.addEventListener('click', function () { PlotPlant(); });
@@ -35,6 +36,7 @@ buttonSpanish.addEventListener('click', function () { Translate('Spanish'); });
 buttonOptions.addEventListener('click', function () { SummonOptions(); });
 buttonQ.addEventListener('click', function () { Help(); });
 buttonI.addEventListener('click', function () { Info(); });
+buttonStar.addEventListener('click', function () { SummonModsWindow(); });
 buttonCC0.addEventListener('click', function () { Legal(); });
 
 
@@ -187,6 +189,14 @@ document.body.onkeyup = function (e) {
 
 // PLAYER ACTIONS **********************************************************************************
 // *************************************************************************************************
+
+function BeginGame(language) {
+    Translate(language, false);
+    player.hasBegun = true;
+    UpdateDisplay();
+}
+
+
 
 function DismissSystemMessage() {
     player.seesSystemMessage = false;
@@ -994,6 +1004,53 @@ function Win() {
 
 
 
+function Info() {
+    SystemMessage(displayInfoFinal);
+}
+
+
+
+let hintedElement = null;
+hintedElement = buttonTill;
+//keep track of what WOULD need a hint. so hintLevel is 0, successfully pressing Till for the very
+//first time changes it to 1, so the game just keeps track of what SHOULD be the hintedElement target
+function Help() {
+    if (!player.seesHint) {
+        player.seesHint = true;
+        hintedElement.classList.add('hinted');
+        alert('Hints are not working yet 😬 click [?] again to turn off');
+    }
+    else {
+        player.seesHint = false;
+        hintedElement.classList.remove('hinted');
+    }
+    /*
+    maybe on ANY click or tap of any kind, it turns off the hint? so just have 
+    a global clicker catch, like....... just onClick in a general sense, not the onClick
+    of any specific element
+    like how the wheat sparkle updates on every keypress... there's a general keyPress catch,
+    then a function that sorts it out, there's most likely something similar for click/taps 
+    */
+}
+
+
+
+function SummonModsWindow() {
+    player.seesModsWindow = true;
+    UpdateDisplay();
+    buttonModsDismiss.focus({ focusVisible: false });
+    divOverlayMods.scrollTo(0, 0);
+}
+
+
+
+function DismissModsWindow() {
+    player.seesModsWindow = false;
+    UpdateDisplay();
+}
+
+
+
 function SummonOptions() {
     player.seesOptions = true;
     UpdateDisplay();
@@ -1019,18 +1076,6 @@ function ToggleAnimation() {
         player.likesAnimations = false;
         document.documentElement.style.setProperty('--agua', 'url(bitmaps/agua_still.gif)');
     }
-}
-
-
-
-function Help() {
-    Info();
-}
-
-
-
-function Info() {
-    SystemMessage(displayInfoFinal);
 }
 
 

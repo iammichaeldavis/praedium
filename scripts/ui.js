@@ -347,7 +347,7 @@ function UpdateCalendar() {
 function UpdateText() {
     // FOREWORD ----------------------------
     if (player.seesForeword) {
-        divForewordCorpus.innerHTML = '<div id="divForewordTitle">PRAEDIUM</div>' + displayForewordA + '<div id="divForewordScripture">' + displayForewordScripture + '<div id="divForewordSource">' + displayForewordSource + '</div></div>' + displayForewordB;
+        divForewordCorpus.innerHTML = displayForewordA + '<div id="divForewordScripture">' + displayForewordScripture + '<div id="divForewordSource">' + displayForewordSource + '</div></div>' + displayForewordB;
         buttonForewordDismiss.innerHTML = displayForewordLabel;
     }
 
@@ -614,6 +614,15 @@ function UpdateVisibilities() {
     divOverlaySystemMessage.style.display = player.seesSystemMessage ? 'block' : '';
     divOverlayGameEvent.style.display = player.seesGameEvent ? 'block' : '';
     divOverlayOptions.style.display = player.seesOptions ? 'block' : '';
+    divOverlayMods.style.display = player.seesModsWindow ? 'block' : '';
+
+    if (player.seesForeword && player.hasBegun) {
+        divForewordTitle.style.display = 'none';
+        buttonForewordEnglish.style.display = 'none';
+        buttonForewordSpanish.style.display = 'none';
+        divForewordCorpus.style.display = 'block';
+        buttonForewordDismiss.style.display = 'block';
+    }
 
     if (player.isAt == 'Praedium') {
         tableFarmInventory.style.display = player.seesInventory ? 'table' : '';
@@ -643,12 +652,9 @@ function UpdateVisibilities() {
         buttonBuyForest.style.display = player.canBuyForest ? 'block' : '';
         buttonBuyMountain.style.display = player.canBuyMountain ? 'block' : '';
         buttonFound.style.display = player.canFound ? 'block' : '';
-        buttonBuild.style.display = player.canBuild ? 'block' : '';
 
         buttonHire.style.display = player.canHire ? 'block' : '';
         buttonAudit.style.display = player.canAudit ? 'block' : '';
-
-        buttonSellGrain.style.display = player.canSell ? 'block' : '';
 
         buttonBarterOlive.style.display = player.canBarter ? 'block' : '';
         buttonBarterDate.style.display = (player.canBarter && farmStage > 17) ? 'block' : '';
@@ -700,6 +706,10 @@ function UpdateVisibilities() {
         buttonPriorityOption.style.backgroundPosition = '-304px -32px';
         if (priority == 'Sow') { buttonPriorityOption.style.backgroundPosition = '-208px -32px'; }
         else if (priority == '🤪') { buttonPriorityOption.style.backgroundPosition = '-240px -16px'; }
+    }
+    else {
+        buttonBuild.style.display = player.canBuild ? 'block' : '';
+        buttonSellGrain.style.display = player.canSell ? 'block' : '';
     }
 }
 

@@ -17,6 +17,7 @@
     padding: 0;
     image-rendering: pixelated;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    touch-action: none;
 }
 
 body {
@@ -77,7 +78,8 @@ button:active {
 #buttonEnglish,
 #buttonOptions,
 #buttonI,
-#buttonQ {
+#buttonQ,
+#buttonStar {
     margin-right: 2vw;
 }
 
@@ -116,7 +118,7 @@ button:active {
 #buttonForewordDismiss {
     font-size: 3.8vw;
     display: block;
-    margin: 6.4vw auto;
+    margin: 6.4vw auto 0 auto;
 }
 
 #buttonForewordEnglish,
@@ -196,6 +198,29 @@ button:active {
     color: #008000;
     border: 1px solid #008000;
     background: #b8de87;
+}
+
+
+
+#buttonModsDismiss {
+    font-size: 3.8vw;
+    display: block;
+    margin: 6.4vw auto 0 auto;
+    color: #883e88;
+    border: 1px solid #883e88;
+    background: #faebfa;
+}
+
+#buttonModsDismiss:hover {
+    color: #a34aa3;
+    border: 1px solid #a34aa3;
+    background: #f1ccf1;
+}
+
+#buttonModsDismiss:active {
+    color: #6d2a6d;
+    border: 1px solid #6d2a6d;
+    background: #d8a6d8;
 }
 
 
@@ -332,6 +357,45 @@ button:active {
     border-image: linear-gradient(#56f9c4, #56bcf9) 1;
 }
 
+
+
+.hinted {
+    --hint_border_angle: 0turn;
+    /* For animation */
+    --hint_main_bg: conic-gradient(from var(--hint_border_angle),
+            #213,
+            #112 5%,
+            #112 60%,
+            #213 95%);
+    border: solid 5px transparent;
+    --hint_border_ramp: conic-gradient(from var(--hint_border_angle),
+            transparent 25%,
+            #08f,
+            #f03 99%,
+            transparent);
+    background:
+        /* padding-box clip this background in to the overall element except the border */
+        var(--hint_main_bg) padding-box,
+        /* border-box extends this background to the border space */
+        var(--hint_border_ramp) border-box,
+        /* Duplicate main background to fill in behind the gradient border. You can remove this if you want the border to extend "outside" the box background */
+        var(--hint_main_bg) border-box;
+    background-position: center center;
+    animation: spin_hint 3s linear infinite;
+}
+
+@keyframes spin_hint {
+    to {
+        --hint_border_angle: 1turn;
+    }
+}
+
+@property --hint_border_angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0turn;
+}
+
 /* // OVERLAYS ////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -375,7 +439,7 @@ button:active {
     font-size: 10vw;
     color: crimson;
     text-align: center;
-    margin: 0 auto 13.8vw auto;
+    margin: 0 auto 6.4vw auto;
     user-select: none;
 }
 
@@ -492,6 +556,29 @@ button:active {
 
 
 
+#divOverlayMods {
+    background-color: rgba(16, 0, 16, 0.8);
+    z-index: 3000;
+}
+
+#divModalMods {
+    width: 80vw;
+    margin: 10vw auto;
+    border: 3px solid #883e88;
+    padding: 8vw;
+    background: #faebfa;
+}
+
+#divModsCorpus {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #120412;
+    line-height: 5.2vw;
+    text-align: justify;
+}
+
+
+
 #divOverlayOptions {
     background-color: rgba(16, 16, 0, 0.8);
     z-index: 1000;
@@ -513,6 +600,10 @@ button:active {
     font-family: 'Garamond', serif;
     font-size: 3.6vw;
     color: #b6b600;
+}
+
+#divModalOptions label.temporarily_disabled {
+    color: #999999;
 }
 
 #divModalOptions div {
@@ -731,7 +822,7 @@ td {
 
 .warehouseTotal {
     font-size: 1.8vw;
-    color: #444444;
+    color: #666666;
 }
 
 
@@ -1057,9 +1148,14 @@ td {
 /* // VISIBILITY //////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
+#buttonQ,
+#buttonStar,
 #divOverlayForeword,
+#divForewordCorpus,
+#buttonForewordDismiss,
 #divOverlayGameEvent,
 #divOverlaySystemMessage,
+#divOverlayMods,
 #divOverlayOptions,
 #tableFarmInventory,
 #tableFarmStaff,

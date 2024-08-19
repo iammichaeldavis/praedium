@@ -32,6 +32,8 @@ const player = {
 
     names: ['Mud',],
 
+    seesHint: false,
+    seesModsWindow: false,
     seesForeword: true,
     seesSystemMessage: false,
     seesGameEvent: false,
@@ -67,6 +69,7 @@ const player = {
     canMine: false,
     canSmelt: false,
 
+    hasBegun: false,
     hasMildewed: false,
 };
 
@@ -74,10 +77,11 @@ const tilemap = new Image();
 tilemap.src = 'bitmaps/tilemap.png';
 
 const divOverlayForeword = document.getElementById('divOverlayForeword');
-const divForewordCorpus = document.getElementById('divForewordCorpus');
-const buttonForewordDismiss = document.getElementById('buttonForewordDismiss');
+const divForewordTitle = document.getElementById('divForewordTitle');
 const buttonForewordEnglish = document.getElementById('buttonForewordEnglish');
 const buttonForewordSpanish = document.getElementById('buttonForewordSpanish');
+const divForewordCorpus = document.getElementById('divForewordCorpus');
+const buttonForewordDismiss = document.getElementById('buttonForewordDismiss');
 
 const divOverlaySystemMessage = document.getElementById('divOverlaySystemMessage');
 const divSystemMessageCorpus = document.getElementById('divSystemMessageCorpus');
@@ -87,6 +91,9 @@ const divOverlayGameEvent = document.getElementById('divOverlayGameEvent');
 const divGameEventFaçade = document.getElementById('divGameEventFaçade');
 const divGameEventCorpus = document.getElementById('divGameEventCorpus');
 const buttonGameEventDismiss = document.getElementById('buttonGameEventDismiss');
+
+const divOverlayMods = document.getElementById('divOverlayMods');
+const buttonModsDismiss = document.getElementById('buttonModsDismiss');
 
 const divOverlayOptions = document.getElementById('divOverlayOptions');
 const toggleMusic = document.getElementById('toggleMusic');
@@ -181,7 +188,6 @@ const buttonForest = document.getElementById('buttonForest');
 const buttonBuyMountain = document.getElementById('buttonBuyMountain');
 const buttonMountain = document.getElementById('buttonMountain');
 const buttonFound = document.getElementById('buttonFound');
-const buttonBuild = document.getElementById('buttonBuild');
 
 const buttonHire = document.getElementById('buttonHire');
 const buttonAudit = document.getElementById('buttonAudit');
@@ -191,6 +197,9 @@ const buttonBarterDate = document.getElementById('buttonBarterDate');
 const buttonBarterFig = document.getElementById('buttonBarterFig');
 const buttonBarterPom = document.getElementById('buttonBarterPom');
 const buttonBarterGrape = document.getElementById('buttonBarterGrape');
+
+const buttonBuild = document.getElementById('buttonBuild');
+
 const buttonSellGrain = document.getElementById('buttonSellGrain');
 
 const buttonWin = document.getElementById('buttonWin');
@@ -198,6 +207,7 @@ const buttonWin = document.getElementById('buttonWin');
 const buttonOptions = document.getElementById('buttonOptions');
 const buttonQ = document.getElementById('buttonQ');
 const buttonI = document.getElementById('buttonI');
+const buttonStar = document.getElementById('buttonStar');
 const buttonCC0 = document.getElementById('buttonCC0');
 
 const formatterStandard = new Intl.NumberFormat('en-US');
