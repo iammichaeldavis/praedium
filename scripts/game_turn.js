@@ -3,7 +3,9 @@
 
 function GameTurn() {
     gameTurn++;
+
     week++;
+    if (week == 21) { player.age++; }
     if (week == 53) {
         week = 1;
         year++;
@@ -36,20 +38,40 @@ function GameTurn() {
     }
 
     if (residentsCount < residentsMax) { Migration(); }
-    if (residentsCount > 0) { ChargeRent(); }
+    if (residentsCount > 0) {
+        ChargeRent();
+        if (mineTimer < mineTimerLimit) {
+            mineTimer++;
+            if (mineTimer == mineTimerLimit) {
+                if (story) { GameEvent(displayStoryFoundCopper, null, false); }
+                player.seesMountainButton = true;
+                player.hasFoundCopperEvidence = true;
+            }
+        }
+    }
     if (week % 4 == 0) {
         SetMarketPrice();
         if (beadsSpawn) { MakeBeads(); }
         if (trophiesSpawn) { HostGladiatorGames(); }
     }
-    if (horsesSpawn) { GrowHorses(); }
+    if (horsesSpawn) {
+        GrowHorses();
+        if (cityWalls) {
+            const knightsMax = Math.floor(residentsCount / 2);
+            let knightsCount = horsesCount;
+            if (knightsCount > knightsMax) { knightsCount = knightsMax; }
+            asCount -= knightsCount * 10;
+            asSpent += knightsCount * 10;
+        }
+    }
+    if (horsesCount > 0) { FeedHorses(); }
     if (scrollsSpawn) { ScribeWisdom(); }
     if (ratsSpawn) { BreedRats(); }
 
     if (farmStage == 1 && bushelCount[0] > 88 && !player.hasMildewed) {
         player.hasMildewed = true;
         bushelCount[0] = Math.floor((bushelCount[0] * 0.1));
-        if (story) { GameEvent(displayStoryFarmMildew); }
+        if (story) { GameEvent(displayStoryFarmMildew, null, false); }
     }
 
     UpdateDisplay();
@@ -78,7 +100,7 @@ function FruitOlives() {
 
         if (year >= (olivePlantDate[1] + 8)) {
             if (year == (olivePlantDate[1] + 8)) {
-                if (story) { GameEvent(displayStoryOlives, 'buy_olives'); }
+                if (story) { GameEvent(displayStoryOlives, 'buy_olives', false); }
                 player.canBarter = true;
             }
             for (let i = 0; i < arrayOlivar.length; i++) { arrayOlivar[i] = 1; }
@@ -150,7 +172,16 @@ function FieldhandWork() {
         }
     }
 
-    const finalLaborForceTally = handsHired + vigneronsHired + arboristsHired;
+    if (horticulturalistsHired > 0) {
+        if (bushelCount[0] <= horticulturalistsHired + starvingBuffer) { starving[8] = true; }
+        else {
+            starving[8] = false;
+            bushelCount[0] -= horticulturalistsHired;
+            horticulturalistsEaten += horticulturalistsHired;
+        }
+    }
+
+    const finalLaborForceTally = handsHired + vigneronsHired + arboristsHired + horticulturalistsHired;
 
     if (priority == 'Reap') {
         for (let i = 0; i < (finalLaborForceTally); i++) {
@@ -170,7 +201,7 @@ function FieldhandWork() {
             if (!taskComplete) { PlotHarvest(true); }
         }
     }
-    else { console.log('🍕 cowabunga, dude 🤙'); } // (truly, Turtle Power knows no limit 🥋🐢🗡️)
+    //else { console.log('🍕 cowabunga, dude 🤙'); } // truly, Turtle Power knows no limit 🥋🐢🗡️
 }
 
 
@@ -213,8 +244,6 @@ function QuarryStone() {
     stoneCount += producedAmount;
     mountainProducedCount[0] += producedAmount;
 
-    mineTimer++;
-
     if (bushelCount[0] <= masonsHired + starvingBuffer) { starving[3] = true; }
     else {
         starving[3] = false;
@@ -226,9 +255,9 @@ function QuarryStone() {
 
 
 function MineCopper() {
-    //if (mineTimer > mineDiscoveryTime) {
-    //if (player.canMine) {}
-    //}
+    const producedAmount = minersHired * FindWholeRandom(oreCopperMin, oreCopperMax);
+    oreCopperCount += producedAmount;
+    mountainProducedCount[1] += producedAmount;
 
     if (bushelCount[0] <= minersHired + starvingBuffer) { starving[4] = true; }
     else {
@@ -241,7 +270,12 @@ function MineCopper() {
 
 
 function SmeltCopper() {
-    //smelt that shit bro
+    const producedAmount = smeltersHired * ingotsCopperYieldPerTurn;
+    const processedAmount = producedAmount * ingotsOreCostPerIngot;
+    ingotsCopperCount += producedAmount;
+    mountainProducedCount[2] += producedAmount;
+    oreCopperCount -= processedAmount;
+    mountainSpentCount[1] += processedAmount;
 
     if (bushelCount[0] <= smeltersHired + starvingBuffer) { starving[5] = true; }
     else {
@@ -275,6 +309,7 @@ function ChargeRent() {
 
 function SetMarketPrice() {
     currentBushelPrice = actualBushelPrice + (FindWholeRandom(-2, 2) * 100);
+    currentBarleyAdjustment = 1000 + (FindWholeRandom(-2, 2) * 50);
 }
 
 
@@ -301,6 +336,17 @@ function GrowHorses() {
 
 
 
+function FeedHorses() {
+    if (bushelCount[1] <= horsesCount + starvingBuffer) { horsesStarving = true; }
+    else {
+        horsesStarving = false;
+        bushelCount[1] -= horsesCount;
+        horsesEaten += horsesCount;
+    }
+}
+
+
+
 function ScribeWisdom() {
     if (week == 1 || week == 14 || week == 27 || week == 40) { scrollsCount += scrollsIncAmount; }
 }
@@ -316,6 +362,18 @@ function BreedRats() {
     }
     else { ratsCount = Math.ceil(ratsCount * 1.1); }
     if (ratsCount > ratsHighScore) { ratsHighScore = ratsCount; }
+
+    ratPenaltyFactor = 0;
+    if (ratsCount > 99999) { ratPenaltyFactor = 1; }
+    if (ratsCount > 199999) { ratPenaltyFactor = 2; }
+    if (ratsCount > 299999) { ratPenaltyFactor = 3; }
+    if (ratsCount > 399999) { ratPenaltyFactor = 4; }
+    if (ratsCount > 499999) { ratPenaltyFactor = 5; }
+    if (ratsCount > 599999) { ratPenaltyFactor = 6; }
+    if (ratsCount > 699999) { ratPenaltyFactor = 7; }
+    if (ratsCount > 799999) { ratPenaltyFactor = 8; }
+    if (ratsCount > 899999) { ratPenaltyFactor = 9; }
+    if (ratsCount > 999999) { ratPenaltyFactor = 10; }
 }
 
 

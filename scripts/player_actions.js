@@ -17,15 +17,17 @@ buttonRentWarehouse.addEventListener('click', function () { RentWarehouse(); });
 buttonBuyForest.addEventListener('click', function () { BuyForest(); });
 buttonBuyMountain.addEventListener('click', function () { BuyMountain(); });
 buttonForest.addEventListener('click', function () { ForestEvents(); });
+buttonMountain.addEventListener('click', function () { MountainEvents(); });
 buttonHire.addEventListener('click', function () { HireHand(); });
 buttonAudit.addEventListener('click', function () { HireAccountant(); });
-buttonPriority.addEventListener('click', function (e) { TogglePriority(e); });
+buttonPriority.addEventListener('click', function () { TogglePriority(); });
 buttonBarterOlive.addEventListener('click', function () { BarterFruit(2); });
 buttonBarterDate.addEventListener('click', function () { BarterFruit(3); });
 buttonBarterFig.addEventListener('click', function () { BarterFruit(4); });
 buttonBarterPom.addEventListener('click', function () { BarterFruit(5); });
 buttonBarterGrape.addEventListener('click', function () { BarterFruit(6); });
-buttonSellGrain.addEventListener('click', function () { SellGrain(); });
+buttonSellWheat.addEventListener('click', function () { SellGrain(0); });
+buttonSellBarley.addEventListener('click', function () { SellGrain(1); });
 buttonFound.addEventListener('click', function () { Found(); });
 buttonGoToTownship.addEventListener('click', function () { GoToTownship(); });
 buttonGoToPraedium.addEventListener('click', function () { GoToPraedium(); });
@@ -42,53 +44,145 @@ buttonCC0.addEventListener('click', function () { Legal(); });
 
 
 document.body.onkeyup = function (e) {
-    if (e.key == 'G') {
+    if (e.key == '~') {
         god = !god;
         if (god) { SystemMessage('I Am Soy'); }
         else { SystemMessage('I Ain’t No Soy'); }
     }
-    if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage)) { DismissForeword(); }
-    if (e.code == 'KeyD' && player.canDelegate) { TogglePriority(e); }
-    if (e.key == 'e') { Translate('English'); }
-    if (e.key == 'r') { Translate('Spanish'); }
-    if (e.key == 'z') { SummonOptions(); }
-    if (e.key == '1' && player.canTill) { PlotTill(); }
-    if (e.key == '2' && player.canPlant) { PlotPlant(); }
-    if (e.key == '3' && player.canWater) { PlotWater(); }
-    if (e.key == '4' && player.canHarvest) { PlotHarvest(); }
-    if (e.key == '5') {
-        if (player.canRentWarehouse) { RentWarehouse(); }
-        else if (player.canBuyForest) { BuyForest(); }
-        else if (farmStage == 11 && !player.canLog) { ForestEvents(); }
-        else if (farmStage == 11 && !player.canSaw) { ForestEvents(); }
-        else if (player.canBuyMountain) { BuyMountain(); }
-        else if (player.canBuyLand) { BuyLand(); }
-        else if (player.canFound) { Found(); }
-        else if (player.canBuild) { Build(); }
-    }
-    if (e.key == '6' && player.canHire) {
-        if (!player.seesReport) { HireAccountant(); }
-        else { HireHand(); }
-    }
-    if (e.key == '7') {
-        if (bushelCount[2] > 1) { BarterFruit(2); }
-        else if (bushelCount[3] > 1) { BarterFruit(3); }
-        else if (bushelCount[4] > 1) { BarterFruit(4); }
-        else if (bushelCount[5] > 1) { BarterFruit(5); }
-        else if (bushelCount[6] > 1) { BarterFruit(6); }
-    }
-    if (e.key == '8' && player.canSell) { SellGrain(); }
-    if (e.key == '9') { console.log('9'); }
-    if (e.key == '0') { console.log('0'); }
 
     if (god) {
+        if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && !player.hasBegun)) { BeginGame('English'); }
+        else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && player.hasBegun)) { DismissForeword(); }
+
+        if (e.key == '1' && player.canTill) { PlotTill(); }
+        if (e.key == '2' && player.canPlant) { PlotPlant(); }
+        if (e.key == '3' && player.canWater) { PlotWater(); }
+        if (e.key == '4' && player.canHarvest) { PlotHarvest(); }
+
+        function AdvanceGame() {
+            if (player.canRentWarehouse) { RentWarehouse(); }
+            else if (player.canBuyForest) { BuyForest(); }
+            else if (farmStage == 11 && !player.canLog) { ForestEvents(); }
+            else if (farmStage == 11 && !player.canSaw) { ForestEvents(); }
+            else if (player.canBuyMountain) { BuyMountain(); }
+            else if (player.canBuyLand) { BuyLand(); }
+            else if (player.canFound) { Found(); }
+            else if (player.canBuild) { Build(); }
+        }
+        if (e.key == '5') { AdvanceGame(); }
+
+        if (e.key == '6' && player.canHire) {
+            if (!player.seesReport) { HireAccountant(); }
+            else { HireHand(); }
+        }
         if (e.code == 'KeyW') {
-            if (e.shiftKey) { handsHired += 1; }
-            else if (e.altKey) { handsHired -= 1; }
-            else {
+            if (e.shiftKey) {
                 if (handsHired != 1000) { handsHired = 1000; }
                 else { handsHired = 0; }
             }
+            else if (e.altKey) { handsHired -= 1; }
+            else { handsHired += 1; }
+        }
+        if (e.key == 'd' && player.canDelegate) { TogglePriority(); }
+
+        if (e.key == '7' && player.canBarter) {
+            if (bushelCount[2] > 1) { BarterFruit(2); }
+            else if (bushelCount[3] > 1) { BarterFruit(3); }
+            else if (bushelCount[4] > 1) { BarterFruit(4); }
+            else if (bushelCount[5] > 1) { BarterFruit(5); }
+            else if (bushelCount[6] > 1) { BarterFruit(6); }
+        }
+        if (e.key == '8' && player.canSell) { SellGrain(0); }
+        if (e.key == '9' && player.canSell) { SellGrain(1); }
+
+        if (e.key == '0' && player.seesVillage) {
+            if (player.isAt == 'Praedium') { GoToTownship(); }
+            else { GoToPraedium(); }
+        }
+
+        if (e.key == 'G') { // 🚨🚨🚨 1. USE WITH CAUTION!!! ONLY WORKS AT GAME START AND IN EXACT SEQUENCE
+            if (!player.canPlant) {
+                StartTime();
+                StartTime();
+                PlotTill();
+                PlotPlant();
+                PlotWater();
+            }
+            else if (!player.canBuyLand && story) {
+                PlotHarvest();
+                PlotTill();
+                PlotPlant();
+                PlotWater();
+            }
+            else if (story) {
+                PlotHarvest();
+                StartTime();
+                story = false;
+            }
+            else if (player.canRentWarehouse) {
+                setValues(1000000000);
+                for (let i = 0; i < 25; i++) { AdvanceGame(); }
+                HireAccountant();
+                for (let i = 0; i < 36; i++) { HireHand(); }
+                AdvanceGame();
+                setValues(1000000000);
+                PauseTime();
+                // 🚨🚨🚨 2. manually wait here for bartering to unlock in a few years
+            }
+            else if (villageStage == 0) {
+                for (let i = 0; i < 18; i++) { AdvanceGame(); }
+                setValues(58008);
+            }
+            else {
+                console.log('game state force process finished');
+            }
+        }
+        if (e.key == 'g') { // 🚨🚨🚨 3.
+            //year = 57; // forcing the date breaks the barter buttons appearing
+            //week = 36;
+            bushelCount[0] = 15178;
+            bushelCount[1] = 2870;
+            bushelCount[2] = 0;
+            bushelCount[3] = 0;
+            bushelCount[4] = 0;
+            bushelCount[5] = 0;
+            bushelCount[6] = 0;
+            logsCount = 14012;
+            boardsCount = 72320;
+            stoneCount = 221020;
+            oreCopperCount = 0;
+            ingotsCopperCount = 0;
+            asCount = 0;
+            horsesCount = 0;
+            beadsCount = 0;
+            trophiesCount = 0;
+            scrollsCount = 0;
+            console.log('--------Game State Report--------');
+            console.log('gameTurn: ' + gameTurn);
+            console.log('farmStage: ' + farmStage);
+            console.log('warehouseStage: ' + warehouseStage);
+            console.log('villageStage: ' + villageStage);
+        }
+
+        if (e.key == 'e') { Translate('English'); }
+        if (e.key == 'E') { Translate('English', false); }
+        if (e.key == 'r') { Translate('Spanish'); }
+        if (e.key == 'R') { Translate('Spanish', false); }
+
+        if (e.key == 'z') { SummonOptions(); }
+
+        if (e.code == 'KeyA') {
+            if (e.shiftKey) {
+                if (residentsCount != 1000) { residentsCount = 1000; }
+                else { residentsCount = 0; }
+            }
+            else if (e.altKey) { residentsCount -= 1; }
+            else { residentsCount += 1; }
+        }
+
+        if (e.key == 'd') {
+            if (ratsCount != 100000000) { ratsCount = 100000000; }
+            else { ratsCount = 0; }
         }
 
         if (e.code == 'KeyY') { setValues(1000000000); }
@@ -100,27 +194,28 @@ document.body.onkeyup = function (e) {
         if (e.code == 'KeyJ') { setValues(1000); }
         if (e.code == 'KeyK') { setValues(100); }
         if (e.code == 'KeyL') { setValues(10); }
-        if (e.code == 'KeyM') { setValues(1); }
+        if (e.code == 'KeyN') { setValues(1); }
+        if (e.code == 'KeyM') { setValues(0); }
 
         function setValues(amount) {
             if (e.shiftKey) {
-                bushelCount[0] += amount;
-                bushelCount[1] += amount;
-                bushelCount[2] += amount;
-                bushelCount[3] += amount;
-                bushelCount[4] += amount;
-                bushelCount[5] += amount;
-                bushelCount[6] += amount;
-                logsCount += amount;
-                boardsCount += amount;
-                stoneCount += amount;
-                oreCopperCount += amount;
-                ingotsCopperCount += amount;
-                asCount += amount;
-                horsesCount += amount;
-                beadsCount += amount;
-                trophiesCount += amount;
-                scrollsCount += amount;
+                bushelCount[0] = amount;
+                bushelCount[1] = amount;
+                bushelCount[2] = amount;
+                bushelCount[3] = amount;
+                bushelCount[4] = amount;
+                bushelCount[5] = amount;
+                bushelCount[6] = amount;
+                logsCount = amount;
+                boardsCount = amount;
+                stoneCount = amount;
+                oreCopperCount = amount;
+                ingotsCopperCount = amount;
+                asCount = amount;
+                horsesCount = amount;
+                beadsCount = amount;
+                trophiesCount = amount;
+                scrollsCount = amount;
             }
             else if (e.altKey) {
                 bushelCount[0] -= amount;
@@ -142,44 +237,33 @@ document.body.onkeyup = function (e) {
                 scrollsCount -= amount;
             }
             else {
-                bushelCount[0] = amount;
-                bushelCount[1] = amount;
-                bushelCount[2] = amount;
-                bushelCount[3] = amount;
-                bushelCount[4] = amount;
-                bushelCount[5] = amount;
-                bushelCount[6] = amount;
-                logsCount = amount;
-                boardsCount = amount;
-                stoneCount = amount;
-                oreCopperCount = amount;
-                ingotsCopperCount = amount;
-                asCount = amount;
-                horsesCount = amount;
-                beadsCount = amount;
-                trophiesCount = amount;
-                scrollsCount = amount;
+                bushelCount[0] += amount;
+                bushelCount[1] += amount;
+                bushelCount[2] += amount;
+                bushelCount[3] += amount;
+                bushelCount[4] += amount;
+                bushelCount[5] += amount;
+                bushelCount[6] += amount;
+                logsCount += amount;
+                boardsCount += amount;
+                stoneCount += amount;
+                oreCopperCount += amount;
+                ingotsCopperCount += amount;
+                asCount += amount;
+                horsesCount += amount;
+                beadsCount += amount;
+                trophiesCount += amount;
+                scrollsCount += amount;
             }
         }
 
         if (e.key == 's') { story = false; }
         if (e.key == 'S') { story = true; }
 
-        if (e.key == 'q') {
-            clearTimeout(timeoutHourglass);
-            gameSpeed = 'paused';
-            AnimateHourglass(gameSpeed);
-        }
-
+        if (e.key == 'q') { PauseTime(); }
         if (e.code == 'KeyT') {
-            clearTimeout(timeoutHourglass);
-            if (gameSpeed == 'standard') { gameSpeed = 'fast'; }
-            else if (gameSpeed == 'fast') { gameSpeed = 'high'; }
-            else { gameSpeed = 'standard'; }
-
-            if (e.shiftKey) { gameSpeed = 'ultra'; }
-
-            AnimateHourglass(gameSpeed);
+            if (e.shiftKey) { StartTime(true); }
+            else { StartTime(); }
         }
     }
     UpdateDisplay();
@@ -208,13 +292,14 @@ function DismissSystemMessage() {
 function DismissForeword() {
     player.seesForeword = false;
     player.canTill = true;
-    AnimateHourglass(gameSpeed);
+    StartTime();
     UpdateDisplay();
 }
 
 
 
 function DismissGameEvent() {
+    if (gameSpeed == 'paused') { StartTime(); }
     player.seesGameEvent = false;
     UpdateDisplay();
 }
@@ -304,6 +389,7 @@ function PlotHarvest(robota = false) {
         arrayVineyard[arrayVineyard.findIndex((element) => element == 1)] = 0;
 
         let bounty = FindWholeRandom(grapesMin, grapesMax);
+        if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
         harvestedCount[6] += bounty;
         if (bushelCount[6] + bounty > bushelMax[6]) { bounty = bushelMax[6] - bushelCount[6]; }
         bushelCount[6] += bounty;
@@ -315,6 +401,7 @@ function PlotHarvest(robota = false) {
         arrayPomOrchard[arrayPomOrchard.findIndex((element) => element == 1)] = 0;
 
         let bounty = FindWholeRandom(pomegranateMin, pomegranateMax);
+        if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
         harvestedCount[5] += bounty;
         if (bushelCount[5] + bounty > bushelMax[5]) { bounty = bushelMax[5] - bushelCount[5]; }
         bushelCount[5] += bounty;
@@ -326,6 +413,7 @@ function PlotHarvest(robota = false) {
         arrayOlivar[arrayOlivar.findIndex((element) => element == 1)] = 0;
 
         let bounty = FindWholeRandom(olivesMin, olivesMax);
+        if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
         harvestedCount[2] += bounty;
         if (bushelCount[2] + bounty > bushelMax[2]) { bounty = bushelMax[2] - bushelCount[2]; }
         bushelCount[2] += bounty;
@@ -337,6 +425,7 @@ function PlotHarvest(robota = false) {
         arrayDatePalmGrove[arrayDatePalmGrove.findIndex((element) => element == 1)] = 0;
 
         let bounty = FindWholeRandom(datesMin, datesMax);
+        if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
         harvestedCount[3] += bounty;
         if (bushelCount[3] + bounty > bushelMax[3]) { bounty = bushelMax[3] - bushelCount[3]; }
         bushelCount[3] += bounty;
@@ -348,6 +437,7 @@ function PlotHarvest(robota = false) {
         arrayFigOrchard[arrayFigOrchard.findIndex((element) => element == 1)] = 0;
 
         let bounty = FindWholeRandom(figsMin, figsMax);
+        if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
         harvestedCount[4] += bounty;
         if (bushelCount[4] + bounty > bushelMax[4]) { bounty = bushelMax[4] - bushelCount[4]; }
         bushelCount[4] += bounty;
@@ -361,6 +451,7 @@ function PlotHarvest(robota = false) {
 
             arrayFarmPlots[plotSearchResult.row][plotSearchResult.col] = 0;
             let bounty = FindWholeRandom(yieldMin, yieldMax);
+            if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
             if (plotSearchResult.row > 5) {
                 harvestedCount[1] += bounty;
                 if (bushelCount[1] + bounty > bushelMax[1]) { bounty = bushelMax[1] - bushelCount[1]; }
@@ -593,6 +684,7 @@ function BuyLand() {
         arrayOlivar.push(0, 0, 0, 0, 0, 0,);
         vigneronsHired = 4;
         arboristsHired = 8;
+        horticulturalistsHired = 2;
         buttonBarterOlive.classList.add('noMargin');
         player.canBuyLand = false;
     }
@@ -664,16 +756,45 @@ function ForestEvents() {
         if (story) { GameEvent(displayStoryLoggingCamp, 'buy_loggingcamp'); }
         bushelCount[0] -= priceLoggingCamp;
         spentCount[0] += priceLoggingCamp;
-
         player.canLog = true;
     }
     else if (!player.canSaw && bushelCount[0] > priceSawmill) {
         if (story) { GameEvent(displayStorySawmill, 'buy_sawmill'); }
         bushelCount[0] -= priceSawmill;
         spentCount[0] += priceSawmill;
-
         player.canSaw = true;
         player.seesForestButton = false;
+    }
+    UpdateDisplay();
+}
+
+
+
+function MountainEvents() {
+    if (!player.hasFoundMine && bushelCount[0] > priceMineScout) {
+        if (story) { GameEvent(displayStoryMineScout); }
+        bushelCount[0] -= priceMineScout;
+        spentCount[0] += priceMineScout;
+        player.hasFoundMine = true;
+    }
+    else if (!player.canMine && asCount >= priceMineDig[0] && logsCount >= priceMineDig[1]) {
+        if (story) { GameEvent(displayStoryMineDig); }
+        asCount -= priceMineDig[0];
+        asSpent += priceMineDig[0];
+        logsCount -= priceMineDig[1];
+        forestSpentCount[0] += priceMineDig[1];
+        player.canMine = true;
+    }
+    else if (!player.canSmelt && asCount >= priceFoundry[0] && logsCount >= priceFoundry[1] && stoneCount >= priceFoundry[2]) {
+        if (story) { GameEvent(displayStoryFoundry); }
+        asCount -= priceFoundry[0];
+        asSpent += priceFoundry[0];
+        logsCount -= priceFoundry[1];
+        forestSpentCount[0] += priceFoundry[1];
+        stoneCount -= priceFoundry[2];
+        mountainSpentCount[0] += priceFoundry[2];
+        player.canSmelt = true;
+        player.seesMountainButton = false;
     }
     UpdateDisplay();
 }
@@ -746,9 +867,10 @@ function HireAccountant() {
 
 
 
-function TogglePriority(e) {
-    (priority != 'Sow') ? priority = 'Sow' : priority = 'Reap';
-    if (e.shiftKey && god) { priority = '🤪'; }
+function TogglePriority() {
+    if (priority == 'Reap') { priority = 'Sow'; }
+    else if (priority == 'Sow') { priority = '🤪'; }
+    else { priority = 'Reap'; }
     UpdateDisplay();
 }
 
@@ -760,6 +882,7 @@ function BarterFruit(crop) {
     bushelCount[crop] -= barterAmount;
     soldCount[crop] += barterAmount;
     bushelCount[0] += barterAmount * barterExchangeRate[crop];
+    if (bushelCount[0] > bushelMax[0]) { bushelCount[0] = bushelMax[0]; }
     UpdateDisplay();
 }
 
@@ -798,79 +921,133 @@ function GoToPraedium() {
 
 
 function Build() {
-    if (villageStage == 0 && bushelCount[0] > priceBuild0) {
+    if (villageStage == 0 && bushelCount[0] > priceBuild0[0] && logsCount >= priceBuild0[1] && boardsCount >= priceBuild0[2] && stoneCount >= priceBuild0[3]) {
         if (story) { GameEvent(displayStoryVillage0); }
+        villagemap.src = 'bitmaps/village01.png';
         villageStage += 1;
-        bushelCount[0] -= priceBuild0;
-        spentCount[0] += priceBuild0;
+        bushelCount[0] -= priceBuild0[0];
+        spentCount[0] += priceBuild0[0];
+        logsCount -= priceBuild0[1];
+        forestSpentCount[0] += priceBuild0[1];
+        boardsCount -= priceBuild0[2];
+        forestSpentCount[1] += priceBuild0[2];
+        stoneCount -= priceBuild0[3];
+        mountainSpentCount[0] += priceBuild0[3];
     }
-    else if (villageStage == 1 && bushelCount[0] > priceBuild1) {
+    else if (villageStage == 1 && bushelCount[0] > priceBuild1[0] && boardsCount >= priceBuild1[1] && stoneCount >= priceBuild1[2]) {
         if (story) { GameEvent(displayStoryVillage1); }
+        villagemap.src = 'bitmaps/village02.png';
         villageStage += 1;
-        bushelCount[0] -= priceBuild1;
-        spentCount[0] += priceBuild1;
+        bushelCount[0] -= priceBuild1[0];
+        spentCount[0] += priceBuild1[0];
+        boardsCount -= priceBuild1[1];
+        forestSpentCount[1] += priceBuild1[1];
+        stoneCount -= priceBuild1[2];
+        mountainSpentCount[0] += priceBuild1[2];
     }
-    else if (villageStage == 2 && bushelCount[0] > priceBuild2) {
+    else if (villageStage == 2 && bushelCount[0] > priceBuild2[0] && stoneCount >= priceBuild2[1]) {
         if (story) { GameEvent(displayStoryVillage2); }
+        villagemap.src = 'bitmaps/village03.png';
         villageStage += 1;
-        bushelCount[0] -= priceBuild2;
-        spentCount[0] += priceBuild2;
+        bushelCount[0] -= priceBuild2[0];
+        spentCount[0] += priceBuild2[0];
+        stoneCount -= priceBuild2[1];
+        mountainSpentCount[0] += priceBuild2[1];
 
         estDate[0] = week;
-        estDate[1] = year + currentYearJewish;
+        estDate[1] = year + yearAtStartHebrew;
     }
-    else if (villageStage == 3 && bushelCount[0] > priceBuild3) {
+    else if (villageStage == 3 && bushelCount[0] > priceBuild3[0] && boardsCount >= priceBuild3[1] && stoneCount >= priceBuild3[2]) {
         if (story) { GameEvent(displayStoryVillage3); }
+        villagemap.src = 'bitmaps/village04.png';
         villageStage += 1;
-        bushelCount[0] -= priceBuild3;
-        spentCount[0] += priceBuild3;
+        bushelCount[0] -= priceBuild3[0];
+        spentCount[0] += priceBuild3[0];
+        boardsCount -= priceBuild3[1];
+        forestSpentCount[1] += priceBuild3[1];
+        stoneCount -= priceBuild3[2];
+        mountainSpentCount[0] += priceBuild3[2];
 
         residentsMax += 14;
     }
-    else if (villageStage == 4 && asCount >= priceBuild4) {
+    else if (villageStage == 4 && asCount >= priceBuild4[0] && bushelCount[0] > priceBuild4[1] && boardsCount >= priceBuild4[2] && stoneCount >= priceBuild4[3]) {
         if (story) { GameEvent(displayStoryVillage4); }
+        villagemap.src = 'bitmaps/village05.png';
         villageStage += 1;
-        asCount -= priceBuild4;
+        asCount -= priceBuild4[0];
+        asSpent += priceBuild4[0];
+        bushelCount[0] -= priceBuild4[1];
+        spentCount[0] += priceBuild4[1];
+        boardsCount -= priceBuild4[2];
+        forestSpentCount[1] += priceBuild4[2];
+        stoneCount -= priceBuild4[3];
+        mountainSpentCount[0] += priceBuild4[3];
 
         residentsMax += 14;
         rentPrice += 2;
     }
-    else if (villageStage == 5 && asCount >= priceBuild5[0] && bushelCount[0] > priceBuild5[1]) {
+    else if (villageStage == 5 && asCount >= priceBuild5[0] && bushelCount[0] > priceBuild5[1] && boardsCount >= priceBuild5[2]) {
         if (story) { GameEvent(displayStoryVillage5); }
+        villagemap.src = 'bitmaps/village06.png';
         villageStage += 1;
         asCount -= priceBuild5[0];
+        asSpent += priceBuild5[0];
         bushelCount[0] -= priceBuild5[1];
         spentCount[0] += priceBuild5[1];
+        boardsCount -= priceBuild5[2];
+        forestSpentCount[1] += priceBuild5[2];
 
         rentPrice += 4;
         player.canSell = true;
     }
-    else if (villageStage == 6 && asCount >= priceBuild6) {
+    else if (villageStage == 6 && asCount >= priceBuild6[0] && bushelCount[0] > priceBuild6[1] && boardsCount >= priceBuild6[2] && stoneCount >= priceBuild6[3]) {
         if (story) { GameEvent(displayStoryVillage6); }
+        villagemap.src = 'bitmaps/village07.png';
         villageStage += 1;
-        asCount -= priceBuild6;
+        asCount -= priceBuild6[0];
+        asSpent += priceBuild6[0];
+        bushelCount[0] -= priceBuild6[1];
+        spentCount[0] += priceBuild6[1];
+        boardsCount -= priceBuild6[2];
+        forestSpentCount[1] += priceBuild6[2];
+        stoneCount -= priceBuild6[3];
+        mountainSpentCount[0] += priceBuild6[3];
 
         residentsMax += 14;
         rentPrice += 1;
         actualBushelPrice -= 50;
         SetMarketPrice();
     }
-    else if (villageStage == 7 && asCount >= priceBuild7) {
+    else if (villageStage == 7 && asCount >= priceBuild7[0] && bushelCount[0] > priceBuild7[1] && boardsCount >= priceBuild7[2] && stoneCount >= priceBuild7[3]) {
         if (story) { GameEvent(displayStoryVillage7); }
+        villagemap.src = 'bitmaps/village08.png';
         villageStage += 1;
-        asCount -= priceBuild7;
+        asCount -= priceBuild7[0];
+        asSpent += priceBuild7[0];
+        bushelCount[0] -= priceBuild7[1];
+        spentCount[0] += priceBuild7[1];
+        boardsCount -= priceBuild7[2];
+        forestSpentCount[1] += priceBuild7[2];
+        stoneCount -= priceBuild7[3];
+        mountainSpentCount[0] += priceBuild7[3];
 
         residentsMax += 42;
         rentPrice += 3;
         actualBushelPrice -= 50;
         SetMarketPrice();
     }
-    else if (villageStage == 8 && asCount >= priceBuild8[0] && bushelCount[0] > priceBuild8[1]) {
+    else if (villageStage == 8 && asCount >= priceBuild8[0] && bushelCount[0] > priceBuild8[1] && boardsCount >= priceBuild8[2] && stoneCount >= priceBuild8[3]) {
         if (story) { GameEvent(displayStoryVillage8); }
+        villagemap.src = 'bitmaps/village09.png';
         villageStage += 1;
         asCount -= priceBuild8[0];
+        asSpent += priceBuild8[0];
         bushelCount[0] -= priceBuild8[1];
         spentCount[0] += priceBuild8[1];
+        boardsCount -= priceBuild8[2];
+        forestSpentCount[1] += priceBuild8[2];
+        stoneCount -= priceBuild8[3];
+        mountainSpentCount[0] += priceBuild8[3];
 
         rentPrice += 6;
         actualBushelPrice -= 100;
@@ -882,96 +1059,160 @@ function Build() {
         pomegranateMax += 12;
         grapesMax += 18;
     }
-    else if (villageStage == 9 && asCount >= priceBuild9) {
+    else if (villageStage == 9 && asCount >= priceBuild9[0] && bushelCount[0] > priceBuild9[1] && boardsCount >= priceBuild9[2] && stoneCount >= priceBuild9[3]) {
         if (story) { GameEvent(displayStoryVillage9); }
+        villagemap.src = 'bitmaps/village10.png';
         villageStage += 1;
-        asCount -= priceBuild9;
+        asCount -= priceBuild9[0];
+        asSpent += priceBuild9[0];
+        bushelCount[0] -= priceBuild9[1];
+        spentCount[0] += priceBuild9[1];
+        boardsCount -= priceBuild9[2];
+        forestSpentCount[1] += priceBuild9[2];
+        stoneCount -= priceBuild9[3];
+        mountainSpentCount[0] += priceBuild9[3];
 
         residentsMax += 42;
         rentPrice += 5;
         actualBushelPrice -= 50;
         SetMarketPrice();
     }
-    else if (villageStage == 10 && asCount >= priceBuild10[0] && bushelCount[0] > priceBuild10[1]) {
+    else if (villageStage == 10 && asCount >= priceBuild10[0] && bushelCount[1] > priceBuild10[1] && boardsCount >= priceBuild10[2]) {
         if (story) { GameEvent(displayStoryVillage10); }
+        villagemap.src = 'bitmaps/village11.png';
         villageStage += 1;
         asCount -= priceBuild10[0];
-        bushelCount[0] -= priceBuild10[1];
-        spentCount[0] += priceBuild10[1];
+        asSpent += priceBuild10[0];
+        bushelCount[1] -= priceBuild10[1];
+        spentCount[1] += priceBuild10[1];
+        boardsCount -= priceBuild10[2];
+        forestSpentCount[1] += priceBuild10[2];
 
         horsesSpawn = true;
         rentPrice += 2;
         actualBushelPrice += 100;
         SetMarketPrice();
     }
-    else if (villageStage == 11 && asCount >= priceBuild11[0] && bushelCount[0] > priceBuild11[1] && horsesCount >= priceBuild11[2]) {
+    else if (villageStage == 11 && asCount >= priceBuild11[0] && ingotsCopperCount >= priceBuild11[1] && bushelCount[0] > priceBuild11[2] && bushelCount[1] > priceBuild11[3] && bushelCount[2] >= priceBuild11[4] && bushelCount[3] >= priceBuild11[5] && bushelCount[4] >= priceBuild11[6] && bushelCount[5] >= priceBuild11[7] && bushelCount[6] >= priceBuild11[8] && stoneCount >= priceBuild11[9] && horsesCount >= priceBuild11[10]) {
         if (story) { GameEvent(displayStoryVillage11); }
+        villagemap.src = 'bitmaps/village12.png';
         villageStage += 1;
         asCount -= priceBuild11[0];
-        bushelCount[0] -= priceBuild11[1];
-        spentCount[0] += priceBuild11[1];
-        horsesCount -= priceBuild11[2];
+        asSpent += priceBuild11[0];
+        ingotsCopperCount -= priceBuild11[1];
+        mountainSpentCount[2] += priceBuild11[1];
+        bushelCount[0] -= priceBuild11[2];
+        spentCount[0] += priceBuild11[2];
+        bushelCount[1] -= priceBuild11[3];
+        spentCount[1] += priceBuild11[3];
+        bushelCount[2] -= priceBuild11[4];
+        spentCount[2] += priceBuild11[4];
+        bushelCount[3] -= priceBuild11[5];
+        spentCount[3] += priceBuild11[5];
+        bushelCount[4] -= priceBuild11[6];
+        spentCount[4] += priceBuild11[6];
+        bushelCount[5] -= priceBuild11[7];
+        spentCount[5] += priceBuild11[7];
+        bushelCount[6] -= priceBuild11[8];
+        spentCount[6] += priceBuild11[8];
+        stoneCount -= priceBuild11[9];
+        mountainSpentCount[0] += priceBuild11[9];
+        horsesCount -= priceBuild11[10];
 
         beadsSpawn = true;
         rentPrice += 8;
         actualBushelPrice -= 50;
         SetMarketPrice();
     }
-    else if (villageStage == 12 && asCount >= priceBuild12[0] && horsesCount >= priceBuild12[1]) {
+    else if (villageStage == 12 && asCount >= priceBuild12[0] && bushelCount[1] > priceBuild12[1] && stoneCount >= priceBuild12[2] && horsesCount >= priceBuild12[3]) {
         if (story) { GameEvent(displayStoryVillage12); }
+        villagemap.src = 'bitmaps/village13.png';
         villageStage += 1;
         asCount -= priceBuild12[0];
-        horsesCount -= priceBuild12[1];
+        asSpent += priceBuild12[0];
+        bushelCount[1] -= priceBuild12[1];
+        spentCount[1] += priceBuild12[1];
+        stoneCount -= priceBuild12[2];
+        mountainSpentCount[0] += priceBuild12[2];
+        horsesCount -= priceBuild12[3];
 
         rentPrice += 12;
         actualBushelPrice += 100;
         SetMarketPrice();
         trophiesSpawn = true;
     }
-    else if (villageStage == 13 && asCount >= priceBuild13) {
+    else if (villageStage == 13 && asCount >= priceBuild13[0] && ingotsCopperCount >= priceBuild13[1] && stoneCount >= priceBuild13[2]) {
         if (story) { GameEvent(displayStoryVillage13); }
+        villagemap.src = 'bitmaps/village14.png';
         villageStage += 1;
-        asCount -= priceBuild13;
+        asCount -= priceBuild13[0];
+        asSpent += priceBuild13[0];
+        ingotsCopperCount -= priceBuild13[1];
+        mountainSpentCount[2] += priceBuild13[1];
+        stoneCount -= priceBuild13[2];
+        mountainSpentCount[0] += priceBuild13[2];
 
-        rentPrice += 4;
-        actualBushelPrice -= 200;
+        rentPrice += 10;
+        actualBushelPrice -= 1200;
         SetMarketPrice();
-        displayTreasury = '🏛️';
     }
-    else if (villageStage == 14 && asCount >= priceBuild14[0] && beadsCount >= priceBuild14[1]) {
+    else if (villageStage == 14 && asCount >= priceBuild14[0] && beadsCount >= priceBuild14[1] && stoneCount >= priceBuild14[2]) {
         if (story) { GameEvent(displayStoryVillage14); }
+        villagemap.src = 'bitmaps/village15.png';
         villageStage += 1;
         asCount -= priceBuild14[0];
+        asSpent += priceBuild14[0];
         beadsCount -= priceBuild14[1];
+        stoneCount -= priceBuild14[2];
+        mountainSpentCount[0] += priceBuild14[2];
 
         scrollsSpawn = true;
     }
-    else if (villageStage == 15 && asCount >= priceBuild15) {
+    else if (villageStage == 15 && asCount >= priceBuild15[0] && stoneCount >= priceBuild15[1]) {
         if (story) { GameEvent(displayStoryVillage15); }
         villageStage += 1;
-        asCount -= priceBuild15;
+        asCount -= priceBuild15[0];
+        asSpent += priceBuild15[0];
+        stoneCount -= priceBuild15[1];
+        mountainSpentCount[0] += priceBuild15[1];
 
         rentPrice += 8;
         actualBushelPrice -= 50;
         SetMarketPrice();
         ratsSpawn = true;
     }
-    else if (villageStage == 16 && asCount >= priceBuild16) {
+    else if (villageStage == 16 && asCount >= priceBuild16[0] && bushelCount[1] > priceBuild16[1] && boardsCount >= priceBuild16[2] && stoneCount >= priceBuild16[3]) {
         if (story) { GameEvent(displayStoryVillage16); }
+        villagemap.src = 'bitmaps/village17.png';
         villageStage += 1;
-        asCount -= priceBuild16;
+        asCount -= priceBuild16[0];
+        asSpent += priceBuild16[0];
+        bushelCount[1] -= priceBuild16[1];
+        spentCount[1] += priceBuild16[1];
+        boardsCount -= priceBuild16[2];
+        forestSpentCount[1] += priceBuild16[2];
+        stoneCount -= priceBuild16[3];
+        mountainSpentCount[0] += priceBuild16[3];
 
         rentPrice += 16;
         actualBushelPrice -= 50;
         SetMarketPrice();
         cityWalls = true;
     }
-    else if (villageStage == 17 && asCount >= priceBuild17[0] && beadsCount >= priceBuild17[1] && scrollsCount >= priceBuild17[2]) {
+    else if (villageStage == 17 && asCount >= priceBuild17[0] && beadsCount >= priceBuild17[1] && scrollsCount >= priceBuild17[2] && ingotsCopperCount >= priceBuild17[3] && boardsCount >= priceBuild17[4] && stoneCount >= priceBuild17[5]) {
         if (story) { GameEvent(displayStoryVillage17); }
+        villagemap.src = 'bitmaps/village18.png';
         villageStage += 1;
         asCount -= priceBuild17[0];
+        asSpent += priceBuild17[0];
         beadsCount -= priceBuild17[1];
         scrollsCount -= priceBuild17[2];
+        ingotsCopperCount -= priceBuild17[3];
+        mountainSpentCount[2] += priceBuild17[3];
+        boardsCount -= priceBuild17[4];
+        forestSpentCount[1] += priceBuild17[4];
+        stoneCount -= priceBuild17[5];
+        mountainSpentCount[0] += priceBuild17[5];
 
         rentPrice += 12;
         player.canBuild = false;
@@ -984,11 +1225,19 @@ function Build() {
 
 
 
-function SellGrain() {
-    if (bushelCount[0] > bushelBulkCount) {
-        bushelCount[0] -= bushelBulkCount;
-        soldCount[0] += bushelBulkCount;
-        asCount += currentBushelPrice;
+function SellGrain(grainType) {
+    const adjustedPrice = (currentBushelPrice - currentBarleyAdjustment) * 10;
+
+    if (grainType == 0 && bushelCount[0] > (bushelBulkCount * 10)) {
+        bushelCount[0] -= (bushelBulkCount * 10);
+        soldCount[0] += (bushelBulkCount * 10);
+        asCount += (currentBushelPrice * 10);
+        UpdateDisplay();
+    }
+    else if (grainType == 1 && asCount >= adjustedPrice) {
+        bushelCount[1] += bushelBulkCount * 10;
+        asCount -= adjustedPrice;
+        asSpent += adjustedPrice;
         UpdateDisplay();
     }
 }
@@ -997,9 +1246,34 @@ function SellGrain() {
 
 function Win() {
     GameEvent(displayWinMessage);
-    window.open(winTarget, 'PRAEDIUM_requested_new_tab');
-    console.log('gameTurn count at win: ' + gameTurn);
+
+    //window.open(winTarget, 'PRAEDIUM_requested_new_tab');
+
     saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
+
+    let winReport = {
+        winDateTurn: gameTurn,
+        winDateYear: year,
+        winDateWeek: week,
+        winHeroNames: player.names,
+        winHeroAgo: player.age,
+        winBushelCount: bushelCount,
+        winSeededCount: seededCount,
+        winFarmedCount: farmedCount,
+        winHarvestedCount: harvestedCount,
+        winSpentCount: spentCount,
+        winSoldCount: soldCount,
+        winForestProducedCount: forestProducedCount,
+        winForestSpentCount: forestSpentCount,
+        winMountainProducedCount: mountainProducedCount,
+        winMountainSpentCount: mountainSpentCount,
+        winOlivePlantDate: olivePlantDate,
+        winVillageEstDate: estDate,
+        winAsCount: asCount,
+        winRatsHighScore: ratsHighScore,
+        winSaṃsāra: saṃsāra,
+    };
+    console.log(winReport);
 }
 
 

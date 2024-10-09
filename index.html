@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <title>PRAEDIUM - EDICIÓN DE ORO</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
-    <link rel="stylesheet" href="style.css?v=1002" />
+    <link rel="stylesheet" href="style.css?v=1007" />
 </head>
 
 <body>
@@ -49,47 +49,25 @@
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divGameWindow">
 
-        <button id="buttonWin"></button>
+        <button id="buttonWin">🏵️🏵️🏵️🏵️🏵️🏵️🏵️<br>🏵️🏵️🏵️👑🏵️🏵️🏵️<br>🏵️🏵️🏵️🏵️🏵️🏵️🏵️</button>
 
         <div id="divViewTownship">
             <button id="buttonGoToPraedium"></button>
 
-            <div>
-                Hey there! You have reached the end of the finished portion of this game.
-                From this point forward, everything is basically a very rough sketch of what is to come.
-                Think of a much worse Pax Augusta lol. As a matter of fact, go support that guy!<br>
-                <a href="https://store.steampowered.com/app/1989760/Pax_Augusta/" target="PA_steam_page">store.steampowered.com/app/1989760/Pax_Augusta</a><br>
-                That game rules! I am so excited to eventually get to play it!<br>
-                <br>
-                Anyways... thank you, thank you, thank you:
-                I *can not* thank you enough for playing this silly game and making it this far!
-                I would sincerely love to know what you thought, good or bad.
-                Especially bad! That's the stuff that needs fixing!
-                If you found any typos or bugs or anything, please let me know.
-                Even the tiniest, silliest little misspelling or mistake (especially in Spanish),
-                I would much rather know about it so I can fix it.<br>
-                <br>
-                Again, thank you so so much for playing, your time is valuable and
-                limited and I am very humbled you chose to spend some of it on this
-                goofy nonsense.<br>
-                <br>
-                Peace and love to you and your people 🕊️➕❤️ -MD
-            </div>
-
             <div id="divViewVillage">
-                <canvas id="canvasVillage" width="384" height="69"></canvas>
                 <div id="divVillageName"></div>
+                <div id="divVillageEstDate"></div>
+                <canvas id="canvasVillage" width="384" height="224"></canvas>
 
-                <div id="OLD_VILLAGE_CONTENTS">
-                    <div id="divVillage"></div>
-                    <div id="divVillageStatistics"></div>
-                </div>
+                <div id="divVillageLasTablas"></div>
 
                 <div id="divVillageButtons">
                     <button id="buttonBuild"></button>
-                    <button id="buttonSellGrain"></button>
+                    <button id="buttonSellWheat"></button>
+                    <button id="buttonSellBarley"></button>
                 </div>
             </div>
+
         </div>
 
         <div id="divViewPraedium">
@@ -191,12 +169,14 @@
                     <button id="buttonBarterGrape"></button>
                 </div>
             </div>
+
         </div>
 
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divFooter">
-        <button id="buttonOptions">Options</button><button id="buttonQ">?</button><button id="buttonStar">*</button><button id="buttonI">i</button><button id="buttonCC0">(CCØ)</button>
+        <button id="buttonOptions">Options</button><button id="buttonQ">?</button><button id="buttonStar">*</button><button id="buttonI">i</button><button
+            id="buttonCC0">(CCØ)</button>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayGameEvent" class="overlay">
@@ -209,7 +189,8 @@
 
     <div id="divOverlayForeword" class="overlay">
         <div id="divModalForeword">
-            <div id="divForewordTitle">PRAEDIUM</div>
+            <div id="divForewordTitle">PRÆDIVM</div>
+            <div id="divForewordSubtitle">• a solitaire by Michael David Davis II •</div>
             <button id="buttonForewordEnglish">English</button><button id="buttonForewordSpanish">Español</button>
             <div id="divForewordCorpus"></div>
             <button id="buttonForewordDismiss"></button>
@@ -225,8 +206,11 @@
 
     <div id="divOverlayMods" class="overlay">
         <div id="divModalMods">
-            <div id="divModsCorpus">MODS<br><br><i>USER DISCRETION IS STRONGLY ADVISED!</i><br>Do not copy any code into this window that you do not absolutely trust!</div>
-            <button id="buttonModsDismiss">COMING SOON</button>
+            <div id="divModsCorpus">
+                MODS<br><br><i>USER DISCRETION IS STRONGLY ADVISED!</i><br>
+                Do not copy any code into this window that you do not absolutely trust!
+            </div>
+            <button id="buttonModsDismiss">COMING 'SOON', THEORETICALLY</button>
         </div>
     </div>
 
@@ -236,21 +220,16 @@
                 <label for="toggleMusic" id="labelToggleMusic" class="temporarily_disabled"></label>
                 <input type="checkbox" id="toggleMusic" name="toggleMusic" disabled />
             </div>
-
             <div>
                 <label for="toggleSounds" id="labelToggleSounds" class="temporarily_disabled"></label>
                 <input type="checkbox" id="toggleSounds" name="toggleSounds" disabled />
             </div>
-
             <div>
                 <label for="toggleAnimation" id="labelToggleAnimation"></label>
                 <input type="checkbox" id="toggleAnimation" name="toggleAnimation" checked onclick="ToggleAnimation()" />
             </div>
-
             <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button>
-
             <div id="divOptionsFlavour"></div>
-
             <button id="buttonOptionsDismiss"></button>
         </div>
     </div>
@@ -261,7 +240,7 @@
     <script src="scripts/ui.js"></script>
     <script src="scripts/player_actions.js"></script>
     <script src="scripts/game_turn.js"></script>
-    <script src="scripts/harp.js"></script>
+    <!-- <script src="scripts/harp.js"></script> -->
     <script src="scripts/start.js"></script>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
 </body>

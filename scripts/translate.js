@@ -3,12 +3,6 @@
 
 const currencySymbol = '<s>𝐼</s>';
 
-const displayResidents = '🧑';
-const displayRent = '🗝️';
-let displayTreasury = '💰';
-let displayHorses = '🐎';
-const displayBeads = '📿';
-
 let displayIUnderstand = '';
 let displayOK = '';
 let displayOptions = '';
@@ -22,8 +16,10 @@ let displayHireHand = '';
 let displayCrop = '';
 let displayAcresFarmed = '';
 let displayHarvested = '';
+let displayHarvest = '';
 let displaySpent = '';
 let displayStarving = '';
+let displayStarvingHorse = '';
 let displayRatPlague = '';
 let displayYear = '';
 let displaySeason = '';
@@ -46,6 +42,7 @@ let displayOre = '';
 let displayCopper = '';
 let displayVignerons = '';
 let displayArborists = '';
+let displayHorticulturalists = '';
 let displayMasons = '';
 let displayMiners = '';
 let displayCindermen = '';
@@ -88,6 +85,9 @@ let displayLabelBuild0 = '';
 let displayLabelBuild1 = '';
 let displayLabelBuild2 = '';
 let displayLabelBuild3 = '';
+let displayLabelMineScout = '';
+let displayLabelMineDig = '';
+let displayLabelFoundry = '';
 let displayLabelBuild4 = '';
 let displayLabelBuild5 = '';
 let displayLabelBuild6 = '';
@@ -171,6 +171,11 @@ let displayStoryHands34 = '';
 let displayStoryHands35 = '';
 
 let displayStoryFound = '';
+let displayStoryFoundCopper = '';
+let displayStoryMineScout = '';
+let displayStoryMineDig = '';
+let displayStoryFoundry = '';
+
 let displayStoryVillage0 = '';
 let displayStoryVillage1 = '';
 let displayStoryVillage2 = '';
@@ -203,6 +208,27 @@ let displayVillageTitle4 = '';
 let displayVillageTitle5 = '';
 let displayVillageTitle6 = '';
 
+let displayCitizens = '';
+let displayDemographics = '';
+let displayFiat = '';
+let displayTreasury = '';
+let displayAsSpent = '';
+let displayIncome = '';
+let displayRent = '';
+let displayHusbandry = '';
+let displayWorship = '';
+let displayStudy = '';
+let displayMateriel = '';
+let displayPonies = '';
+let displayCavalry = '';
+let displayPrayers = '';
+let displayChampionships = '';
+let displayScripture = '';
+let displayRats = '';
+let displayStatistics = '';
+let displayOffense = '';
+let displayDefense = '';
+
 let displayForewordA = '';
 let displayForewordScripture = '';
 let displayForewordSource = '';
@@ -227,7 +253,7 @@ let displayOptionsFlavour = '';
 
 let displayBoxCopy = '';
 
-let displayWinMessage = '— Mon ami, dit Valentine, le comte ne vient-il pas de nous dire que l’humaine sagesse était tout entière dans ces deux mots :<br><br>— Attendre et espérer !<br><br><br><br><br>FIN';
+let displayWinMessage = '— Mon ami, dit Valentine,<br>le comte ne vient-il pas de nous<br>dire que l’humaine sagesse était<br>tout entière dans ces deux mots :<br><br>— <span id="Dumas">Attendre et espérer !</span><br><br><br><br><br><span id="fin">FIN DU PRÆDIVM</span><br><br><br><br>';
 
 
 
@@ -248,8 +274,10 @@ function Translate(language, bark = true) {
         displayCrop = 'Crop';
         displayAcresFarmed = 'Acres<br>Farmed';
         displayHarvested = 'Bushels<br>Harvested';
+        displayHarvest = 'Harvest';
         displaySpent = 'Bushels<br>Spent';
         displayStarving = 'YOUR MEN ARE STARVING!!';
+        displayStarvingHorse = 'THESE POOR ANIMALS<br>ARE STARVING!!';
         displayRatPlague = 'RAT PLAGUE!!';
         displayYear = 'Year';
         displaySeason = 'Season';
@@ -272,6 +300,7 @@ function Translate(language, bark = true) {
         displayCopper = 'Copper';
         displayVignerons = 'Vignerons';
         displayArborists = 'Arborists';
+        displayHorticulturalists = 'Horticulturalists';
         displayMasons = 'Masons';
         displayMiners = 'Miners';
         displayCindermen = 'Cindermen';
@@ -314,6 +343,9 @@ function Translate(language, bark = true) {
         displayLabelBuild1 = 'COMMISSION WORKSHOP';
         displayLabelBuild2 = 'ERECT TOWN HALL';
         displayLabelBuild3 = 'BUILD INSULA';
+        displayLabelMineScout = 'SCOUT FOR A PROPER MINE SITE';
+        displayLabelMineDig = 'DIG MINE';
+        displayLabelFoundry = 'BEGIN A COPPER FOUNDRY';
         displayLabelBuild4 = 'ADD SECOND STORY';
         displayLabelBuild5 = 'BUILD MARKETPLACE';
         displayLabelBuild6 = 'ADD THIRD STORY';
@@ -397,6 +429,11 @@ function Translate(language, bark = true) {
         displayStoryHands35 = 'CONGRATULATIONS. YOU EMPLOY ALL YOU KNOW';
 
         displayStoryFound = '“I HAVE SONS, I HAVE WEALTH,” WITH SUCH THOUGHTS THE FOOL IS TORMENTED. BUT IF ONE’S SELF IS NOT EVEN ONE’S OWN, HOW THEN ARE SONS? HOW THEN IS WEALTH?<br><br>DHAMMAPADA 5.62';
+        displayStoryFoundCopper = 'A PAIR OF HIKERS IN YOUR MOUNTAINS HAVE DISCOVERED NUGGETS OF WHAT APPEARS TO BE ORICHALCUM!';
+        displayStoryMineScout = 'YOUR SCOUTS FOUND A RICH VEIN IN YOUR EASTERN FOOTHILLS';
+        displayStoryMineDig = 'MINERALS HAVE THEIR OWN LIFE JUST AS VEGETABLES DO, AND ANIMALS AND BIRDS, AND HUMANS<br><br>PHÁP CHÁNH TRUYỀN, PART 5';
+        displayStoryFoundry = '“THE ‘HOLOCENE’ HAS ENDED. THE GARDEN OF EDEN IS NO MORE. WE HAVE CHANGED THE WORLD SO MUCH THAT SCIENTISTS SAY WE ARE IN A NEW GEOLOGICAL AGE: THE ‘ANTHROPOCENE’. THE AGE OF MAN. WE MUST MOVE BEYOND GUILT OR BLAME, AND GET ON WITH THE PRACTICAL TASKS AT HAND”<br>—SIR DAVID FREDERICK ATTENBOROUGH';
+        
         displayStoryVillage0 = 'HE WILL NEED LUMBER FOR THE FORGE';
         displayStoryVillage1 = 'NOW WE CAN BUILD';
         displayStoryVillage2 = 'WE’VE GOT TO HAVE SOME LAW AND ORDER';
@@ -414,7 +451,7 @@ function Translate(language, bark = true) {
         displayStoryVillage14 = 'YOU HAVE THE RIGHT TO LABOUR, BUT YOU HAVE NO RIGHT TO THE FRUITS OF YOUR LABOURS. NEVER BELIEVE YOU ARE THE CAUSE OF THE RESULTS OF YOUR CHOICES. WORK HARD AND BE EVEN-TEMPERED IN SUCCESS AND FAILURE. ... THOSE WHO SEEK TO ENJOY THE FRUITS OF THEIR WORKS ARE MISERABLE.<br><br>BHAGAVAD GITA 2.47-49';
         displayStoryVillage15 = 'CLEANLINESS IS GODLINESS';
         displayStoryVillage16 = 'THEY HATE HIM WHO REPROVES IN THE GATE, AND THEY ABHOR HIM WHO SPEAKS THE TRUTH<br><br>AMOS 5:10';
-        displayStoryVillage17 = 'THE BRONZE PLAQUE ON THE PINK MARBLE BASE READS:<br><br>≈ THE 8 VIRTUES ≈<br>• HONESTY – TELL THE TRUTH<br>• HONOR – DO WHAT IS RIGHT<br>• VALOR – STAND AGAINST INJUSTICE<br>• SACRIFICE – SHARE YOUR BLESSINGS<br>• COMPASSION – BE KIND TO THE WEAK<br>• JUSTICE – BE FAIR TO ALL<br>• SPIRITUALITY – LISTEN TO THE LIGHT<br>• HUMILITY – RESIST PRIDE';
+        displayStoryVillage17 = 'THE BRONZE PLAQUE ON THE PINK MARBLE BASE READS:<br><br>≈ THE 8 VIRTUES ≈<br><br>♠<br>• HONESTY •<br>TELL THE TRUTH<br>♠<br>• HONOR •<br>DO WHAT IS RIGHT<br>♠<br>• VALOR •<br>STAND AGAINST INJUSTICE<br>♠<br>• SACRIFICE •<br>SHARE YOUR BLESSINGS<br>♠<br>• COMPASSION •<br>BE KIND TO THE WEAK<br>♠<br>• JUSTICE •<br>BE FAIR TO ALL<br>♠<br>• SPIRITUALITY •<br>LISTEN TO THE LIGHT<br>♠<br>• HUMILITY •<br>RESIST PRIDE<br>♣';
 
         displayNamePlayer = '“What is your name, citizen?”';
 
@@ -429,6 +466,27 @@ function Translate(language, bark = true) {
         displayVillageTitle5 = 'The City of';
         displayVillageTitle6 = 'The Capital of';
 
+        displayCitizens = 'Citizens';
+        displayDemographics = 'Demographics';
+        displayFiat = 'Fiat';
+        displayTreasury = 'Treasury';
+        displayAsSpent = 'Spent';
+        displayIncome = 'Income';
+        displayRent = 'Rent';
+        displayHusbandry = 'Husbandry';
+        displayWorship = 'Worship';
+        displayStudy = 'Study';
+        displayMateriel = 'Materiel';
+        displayPonies = 'Ponies';
+        displayCavalry = 'Cavalry';
+        displayPrayers = 'Prayers';
+        displayChampionships = 'Championships';
+        displayScripture = 'Scripture';
+        displayRats = 'Rats';
+        displayStatistics = 'Statistics';
+        displayOffense = 'OFF';
+        displayDefense = 'DEF';
+
         displayForewordA = 'The year is 200 B.C. and thou art a humble Tartessian sharecropper eking out a modest living under the brutal Mediterranean sun in Palestinian Galilee. From dawn to dusk dost thou work the chalky, unforgiving soil with nothing but thine own calloused hands and a sharp stick.';
         displayForewordScripture = '“O Maker of the material world, thou Holy One! How far from the fire? How far from the water? How far from the consecrated bundles of baresma? How far from the faithful?”';
         displayForewordSource = 'Vendidad 8:6';
@@ -438,9 +496,9 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'The current language is now set to English.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">“There is no true knowledge without right faith, no virtuous conduct is possible without knowledge, without virtue there is no liberation, and without liberation, no nirvana.”</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeWith = 'For Dylan. I love you so much, bud.<br><br>Made with CodePen, GIMP, GitHub & VS Code.';
-        displayInfoDedication = 'Dedicated to aniwey, Lori & Corey Cole, Richard Garriott, Marty Hirsch, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Tom Rothamel, Michael Townsend and Tim Sweeney, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Dave & Anna Davis, Kenneth Garagnon, Leif Johansen, Brian Moran, Grant Sutherland & W3Schools.';
+        displayInfoMadeWith = 'For Dylan. I love you so much, bud.<br><br>Made with CodePen, GIMP, GitHub and VS Code.';
+        displayInfoDedication = 'Dedicated to aniwey, Lori & Corey Cole, Jeff & ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Tom Rothamel, Michael Townsend and Tim Sweeney, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Dave & Anna Davis, Kenneth Garagnon, Marty Hirsch, Leif Johansen, David Macaulay, Brian Moran, Grant Sutherland and W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -468,8 +526,10 @@ function Translate(language, bark = true) {
         displayCrop = 'Cultivo';
         displayAcresFarmed = 'Aranzadas<br>Cultivadas';
         displayHarvested = 'Fanegas<br>Cosechadas';
+        displayHarvest = 'Cosecha';
         displaySpent = 'Fanegas<br>Gastadas';
         displayStarving = '¡¡TUS HOMBRES SE<br>MUEREN DE HAMBRE!!';
+        displayStarvingHorse = '¡¡ESTOS POBRES<br>ANIMALES SE ESTÁN<br>MURIENDO DE HAMBRE!!';
         displayRatPlague = '¡¡PESTE RATA!!';
         displayYear = 'Año';
         displaySeason = 'Estación';
@@ -492,6 +552,7 @@ function Translate(language, bark = true) {
         displayCopper = 'Cobre';
         displayVignerons = 'Viticultores';
         displayArborists = 'Arboristas';
+        displayHorticulturalists = 'Horticultores';
         displayMasons = 'Masones';
         displayMiners = 'Mineros';
         displayCindermen = 'Metalúrgicos';
@@ -534,6 +595,9 @@ function Translate(language, bark = true) {
         displayLabelBuild1 = 'CONSTRUIR UN TALLER';
         displayLabelBuild2 = 'CONSTRUIR AYUNTAMIENTO';
         displayLabelBuild3 = 'CONSTRUIR INSULA';
+        displayLabelMineScout = 'BUSCAR UN SITIO MINO ADECUADO';
+        displayLabelMineDig = 'CAVAR MINA';
+        displayLabelFoundry = 'COMENZAR UNA FUNDICIÓN DE COBRE';
         displayLabelBuild4 = 'AÑADIR SEGUNDO PISO';
         displayLabelBuild5 = 'CONSTRUIR MERCADO';
         displayLabelBuild6 = 'AÑADIR TERCER PISO';
@@ -617,6 +681,11 @@ function Translate(language, bark = true) {
         displayStoryHands35 = 'FELICIDADES. USTED EMPLEA A TODOS LOS QUE CONOCE';
 
         displayStoryFound = '«TENGO HIJOS, TENGO RIQUEZA,» CON TALES PENSAMIENTOS EL TONTO SE TORMENTA. PERO SI NO ERES EL DUEÑO DE TU PROPIO SER, ¿CÓMO PUEDES DECIR QUE LOS HIJOS TE PERTENECEN? ¿O RIQUEZA?<br><br>DHAMMAPADA 5.62';
+        displayStoryFoundCopper = '¡UNA PAREJA DE SENDERISTAS EN TU MONTAÑAS HAN DESCUBIERTO PEPITAS DE LO QUE PARECE SER ORICALCO!';
+        displayStoryMineScout = 'TUS EXPLORADORES ENCONTRARON UN VETA RICO EN TUS COLINAS ORIENTAL';
+        displayStoryMineDig = 'LOS MINERALES TIENEN VIDA PROPIA AL IGUAL QUE LOS VEGETALES, Y LOS ANIMALES Y LOS PÁJAROS, Y LOS SERES HUMANOS<br><br>PHÁP CHÁNH TRUYỀN, PARTE 5';
+        displayStoryFoundry = '“EL ‘HOLOCENO’ HA TERMINADO. EL JARDÍN DEL EDÉN YA NO EXISTE. HEMOS CAMBIADO TANTO EL MUNDO QUE LOS CIENTÍFICOS DICEN QUE ESTAMOS EN UNA NUEVA ERA GEOLÓGICA: EL ‘ANTROPOCENO’. LA ERA DE LA HUMANIDAD. DEBEMOS IR MÁS ALLÁ DE LA CULPA Y PONERNOS A LA OBRA PRÁCTICA”<br>—SIR DAVID FREDERICK ATTENBOROUGH';
+
         displayStoryVillage0 = 'NECESITARÁ MADERA PARA LA FRAGUA';
         displayStoryVillage1 = 'AHORA PODEMOS CONSTRUIR';
         displayStoryVillage2 = 'DEBEMOS TENER ALGO DE LEY Y ORDEN';
@@ -634,7 +703,7 @@ function Translate(language, bark = true) {
         displayStoryVillage14 = 'TIENES DERECHO A TRABAJAR, PERO NO TIENES DERECHO A LOS FRUTOS DE TU TRABAJO. NUNCA CREAS QUE ERES LA CAUSA DE LOS RESULTADOS DE TUS ELECCIONES. TRABAJAR DURO Y SER EQUILIBRIO EN EL ÉXITO Y EL FRACASO. ... LOS QUE BUSCAN DISFRUTAR LOS FRUTOS DE SUS OBRAS SON MISERABLES.<br><br>BHAGAVAD-GĪTĀ 2.47-49';
         displayStoryVillage15 = 'LA LIMPIEZA ES DIVINO';
         displayStoryVillage16 = 'ODIAN AL QUE SERMONA EN LA PUERTA, Y ABORRECEN AL QUE HABLA LA VERDAD<br><br>AMÓS 5:10';
-        displayStoryVillage17 = 'LA PLACA DE BRONCE SOBRE LA BASE DE MÁRMOL ROSA DICE:<br><br>≈ LAS 8 VIRTUDES ≈<br>• HONESTIDAD – DECIR LA VERDAD<br>• HONOR – HACER LO CORRECTO<br>• VALOR – MANTENERSE CONTRA LA INJUSTICIA<br>• SACRIFICIO – COMPARTE TUS BENDICIONES<br>• COMPASIÓN – SER AMABLE CON LOS DÉBILES<br>• JUSTICIA – SER JUSTO CON TODOS<br>• ESPIRITUALIDAD – ESCUCHA LA LUZ<br>• HUMILDAD – RESISTIR ORGULLO';
+        displayStoryVillage17 = 'LA PLACA DE BRONCE SOBRE LA BASE DE MÁRMOL ROSA DICE:<br><br>≈ LAS 8 VIRTUDES ≈<br><br>♠<br>• HONESTIDAD •<br>DECIR LA VERDAD<br>♠<br>• HONOR •<br>HACER LO CORRECTO<br>♠<br>• VALOR •<br>MANTENERSE CONTRA LA INJUSTICIA<br>♠<br>• SACRIFICIO •<br>COMPARTE TUS BENDICIONES<br>♠<br>• COMPASIÓN •<br>SER AMABLE CON LOS DÉBILES<br>♠<br>• JUSTICIA •<br>SER JUSTO CON TODOS<br>♠<br>• ESPIRITUALIDAD •<br>ESCUCHA LA LUZ<br>♠<br>• HUMILDAD •<br>RESISTIR ORGULLO<br>♣';
 
         displayNamePlayer = '«¿Cómo te llamas, ciudadano?»';
 
@@ -649,6 +718,27 @@ function Translate(language, bark = true) {
         displayVillageTitle5 = 'La Ciudad de';
         displayVillageTitle6 = 'La Capital de';
 
+        displayCitizens = 'Ciudadanos';
+        displayDemographics = 'Demografía';
+        displayFiat = 'Fiduciario';
+        displayTreasury = 'Tesorería';
+        displayAsSpent = 'Gastado';
+        displayIncome = 'Ingresos';
+        displayRent = 'Alquiler';
+        displayHusbandry = 'Ganadería';
+        displayWorship = 'Adoración';
+        displayStudy = 'Estudio';
+        displayMateriel = 'Material';
+        displayPonies = 'Ponis';
+        displayCavalry = 'Caballería';
+        displayPrayers = 'Oraciones';
+        displayChampionships = 'Campeonatos';
+        displayScripture = 'Escritura';
+        displayRats = 'Ratas';
+        displayStatistics = 'Estadísticas';
+        displayOffense = 'OFE';
+        displayDefense = 'DEF';
+
         displayForewordA = 'Es el año 200 a.C. y eres un humilde aparcero tartésico que se gana la vida modestamente bajo el brutal sol del Mediterráneo en la Galilea palestina. Desde el amanecer hasta el anochecer trabajas la implacable tierra calcárea sin nada más que tus propias manos y un palo afilado.';
         displayForewordScripture = '«¡O Creador del mundo material, O Santo! ¿A qué distancia del fuego? ¿A qué distancia del agua? ¿A qué distancia de los manojos consagrados de baresma? ¿A qué distancia de los fieles?»';
         displayForewordSource = 'Vendidad 8:6';
@@ -659,8 +749,8 @@ function Translate(language, bark = true) {
         displayLanguageQuote = '<div id="divSystemMessageScripture">«No hay conocimiento verdadero sin fe recta, ninguna conducta virtuosa es posible sin conocimiento, sin virtud no hay liberación, y sin liberación, no nirvana.»</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
         displayInfoMadeWith = 'Para Dylan. Te quiero mucho que mucho, sobrino.<br><br>Hecho con CodePen, GIMP, GitHub y VS Code.';
-        displayInfoDedication = 'Dedicado a aniwey, Lori y Corey Cole, Richard Garriott, Marty Hirsch, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Tom Rothamel, Michael Townsend y Tim Sweeney, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Dave y Anna Davis, Kenneth Garagnon, Leif Johansen, Brian Moran, Grant Sutherland y W3Schools.';
+        displayInfoDedication = 'Dedicado a aniwey, Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Tom Rothamel, Michael Townsend y Tim Sweeney, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
+        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Dave y Anna Davis, Kenneth Garagnon, Marty Hirsch, Leif Johansen, David Macaulay, Brian Moran, Grant Sutherland y W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';
@@ -675,7 +765,9 @@ function Translate(language, bark = true) {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     const divider = '<div class="divider">♦♦♦ ♦ ♦♦♦</div>';
-    displayInfoFinal = 'PRAEDIUM (CCØ) MMXXIV.<br><br>' + displayInfoMadeWith + '<br><br>' + displayInfoDedication + '<br><br>' + displayInfoThanks + divider + displayInfoScripture;
+    displayInfoFinal = '<div id="divInfoTitle">PRAEDIUM<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) MMXXIV</span></div>';
+    displayInfoFinal += displayInfoMadeWith + '<br><br>' + displayInfoDedication + '<br><br>' + displayInfoThanks;
+    displayInfoFinal += divider + displayInfoScripture;
     displayLegalFinal = displayBoilerplate + divider + displayLegalQuote;
     displayOptionsFlavourFinal = divider + displayOptionsFlavour;
     UpdateDisplay();

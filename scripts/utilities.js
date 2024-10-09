@@ -14,6 +14,25 @@ function DetermineDevice() {
 
 
 
+function PauseTime() {
+    clearTimeout(timeoutHourglass);
+    gameSpeed = 'paused';
+    AnimateHourglass(gameSpeed);
+}
+
+
+
+function StartTime(punchIt = false) {
+    clearTimeout(timeoutHourglass);
+    if (gameSpeed == 'standard') { gameSpeed = 'fast'; }
+    else if (gameSpeed == 'fast') { gameSpeed = 'high'; }
+    else { gameSpeed = 'standard'; }
+    if (punchIt) { gameSpeed = 'ultra'; }
+    AnimateHourglass(gameSpeed);
+}
+
+
+
 function SystemMessage(messageCorpus) {
     divSystemMessageCorpus.innerHTML = messageCorpus;
     player.seesSystemMessage = true;
@@ -24,7 +43,12 @@ function SystemMessage(messageCorpus) {
 
 
 
-function GameEvent(eventCorpus, eventFaçade = null) {
+function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true) {
+    if (stopThePresses) { PauseTime(); }
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    eventFaçade = null; // !!!!!!!!!!!!! 🚨🚨🚨 blank out ALL event art 🚨🚨🚨 !!!!!!!!!!!!!
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
     if (eventFaçade != null) {
         divGameEventFaçade.innerHTML = '<img src="bitmaps/' + eventFaçade + '.gif" />';
         divGameEventFaçade.style.display = 'block';

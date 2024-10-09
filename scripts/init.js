@@ -1,6 +1,8 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
+const version = '1.0';
+
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -27,10 +29,13 @@ const player = {
     likesMusic: true,
     likesSounds: true,
     likesAnimations: true,
+    //likesStory: true,
 
     isAt: 'Praedium',
 
     names: ['Mud',],
+    age: 11, // longest verified documented human lifespan: Jeanne Calment of France, 122 years and 164 days
+    //isGod: false,
 
     seesHint: false,
     seesModsWindow: false,
@@ -71,13 +76,18 @@ const player = {
 
     hasBegun: false,
     hasMildewed: false,
+    hasFoundCopperEvidence: false,
+    hasFoundMine: false,
 };
 
 const tilemap = new Image();
 tilemap.src = 'bitmaps/tilemap.png';
+let villagemap = new Image();
+villagemap.src = 'bitmaps/village00.png';
 
 const divOverlayForeword = document.getElementById('divOverlayForeword');
 const divForewordTitle = document.getElementById('divForewordTitle');
+const divForewordSubtitle = document.getElementById('divForewordSubtitle');
 const buttonForewordEnglish = document.getElementById('buttonForewordEnglish');
 const buttonForewordSpanish = document.getElementById('buttonForewordSpanish');
 const divForewordCorpus = document.getElementById('divForewordCorpus');
@@ -163,11 +173,11 @@ const divViewTownship = document.getElementById('divViewTownship');
 const buttonGoToPraedium = document.getElementById('buttonGoToPraedium');
 
 const divViewVillage = document.getElementById('divViewVillage');
-const canvasVillage = document.getElementById('canvasFarm');
+const canvasVillage = document.getElementById('canvasVillage');
 const canvasVillageContext = canvasVillage.getContext('2d');
-const divVillage = document.getElementById('divVillage');
 const divVillageName = document.getElementById('divVillageName');
-const divVillageStatistics = document.getElementById('divVillageStatistics');
+const divVillageEstDate = document.getElementById('divVillageEstDate');
+const divVillageLasTablas = document.getElementById('divVillageLasTablas');
 
 const buttonTill = document.getElementById('buttonTill');
 const buttonTillDecal = document.getElementById('buttonTillDecal');
@@ -200,7 +210,8 @@ const buttonBarterGrape = document.getElementById('buttonBarterGrape');
 
 const buttonBuild = document.getElementById('buttonBuild');
 
-const buttonSellGrain = document.getElementById('buttonSellGrain');
+const buttonSellWheat = document.getElementById('buttonSellWheat');
+const buttonSellBarley = document.getElementById('buttonSellBarley');
 
 const buttonWin = document.getElementById('buttonWin');
 
@@ -212,19 +223,20 @@ const buttonCC0 = document.getElementById('buttonCC0');
 
 const formatterStandard = new Intl.NumberFormat('en-US');
 
-let god = true;
-let story = true;
+let god = false; // refactor this to 'player.isGod'
+let story = true; // refactor this to 'player.likesStory'
 
-const nameVillage = '**TBD**';
+const nameVillage = 'Alʿard al-Janubiyah'; // الأرض الجنوبية == Terra Australis. HBD, Grant! 🎂🫂
 
-let gameTurn = 1;
-const currentYearProlepticGregorian = -200; // 200 B.C.
-const currentYearJewish = 3560; // according to https://sacred-texts.com/time/cal/jdate.htm ✡️ (lol jdate)
-const currentYearRoman = 554; // according to https://en.wikipedia.org/wiki/Ab_urbe_condita ✝️
+let gameTurn = 1; // 📅
+const yearAtStartProlepticGregorian = -200; // 200 B.C. ✝️
+const yearAtStartHebrew = 3560; // according to https://sacred-texts.com/time/cal/jdate.htm ✡️
+const yearAtStartRoman = 554; // according to https://en.wikipedia.org/wiki/Ab_urbe_condita 🔥🐂🔥
 let year = 1;
 let week = 1;
 
-const bushelCount = [10, 0, 0, 0, 0, 0, 0,]; // 0.wheat 🌾, 1.barley 🌾, 2.olive 🫒, 3.date 🫐, 4.fig 🍅, 5.pomegranate 🍎, 6.grape 🍇
+// 0. Wheat 🌾, 1. Barley 🌾, 2. Olive 🫒, 3. Date 🫐, 4. Fig 🍅, 5. Pomegranate 🍎, 6. Grape 🍇
+const bushelCount = [10, 0, 0, 0, 0, 0, 0,];
 const bushelMax = [30, 3000000, 300, 30000, 30000, 30000, 30000,];
 const seededCount = [0, 0,];
 const farmedCount = [0, 0, 0, 0, 0, 0, 0,];
@@ -263,17 +275,22 @@ let vigneronsHired = 0;
 let vigneronsEaten = 0;
 let arboristsHired = 0;
 let arboristsEaten = 0;
+let horticulturalistsHired = 0;
+let horticulturalistsEaten = 0;
 
 let logsCount = 0;
 let logsMin = 10;
 let logsMax = 15;
 let loggersHired = 4;
 let loggersEaten = 0;
+
 let boardsCount = 0;
 let boardsPerLog = 4;
 let logsSawnPerWeek = 10;
 let sawyersHired = 4;
 let sawyersEaten = 0;
+
+// 0. Logs 🪵, 1. Boards 📏
 const forestProducedCount = [0, 0,];
 const forestSpentCount = [0, 0,];
 
@@ -282,18 +299,27 @@ let stoneMin = 40;
 let stoneMax = 44;
 let masonsHired = 10;
 let masonsEaten = 0;
-let oreCopperCount = 0;
+
 let mineTimer = 0;
-let minersHired = 5;
+const mineTimerLimit = 21;
+let oreCopperCount = 0;
+let oreCopperMin = 40;
+let oreCopperMax = 44;
+let minersHired = 10;
 let minersEaten = 0;
+
 let ingotsCopperCount = 0;
-let smeltersHired = 5;
+let ingotsOreCostPerIngot = 100;
+let ingotsCopperYieldPerTurn = 1;
+let smeltersHired = 4;
 let smeltersEaten = 0;
+
+// 0. Stone 🪨, 1. Copper Ore ⛏️, 2. Copper Ingots 🧱
 const mountainProducedCount = [0, 0, 0,];
 const mountainSpentCount = [0, 0, 0,];
 
 const starvingBuffer = 10;
-const starving = [false, false, false, false, false, false, false, false,]; // hands, loggers, sawyers, masons, miners, smelters, vignerons, arborists
+const starving = [false, false, false, false, false, false, false, false, false]; // hands, loggers, sawyers, masons, miners, smelters, vignerons, arborists, horticulturalists
 
 let villageStage = 0;
 const estDate = [0, 0,];
@@ -303,14 +329,17 @@ let residentsMax = 0;
 
 let rentPrice = 10;
 let asCount = 0;
+let asSpent = 0;
 
 let horsesSpawn = false;
 let horseClock = 0;
 const horsesIncAmount = 1;
 let horsesCount = 0;
+let horsesEaten = 0;
+let horsesStarving = false;
 
 let beadsSpawn = false;
-const beadsIncAmount = 69; // ☯️ can’t take life *too* seriously, chum ;)
+const beadsIncAmount = 42; // Life, the Universe and Everything 👽🤖📖
 let beadsCount = 0;
 
 let trophiesSpawn = false;
@@ -324,12 +353,14 @@ let ratsSpawn = false;
 let ratsOutbreak = false;
 let ratsCount = 1;
 let ratsHighScore = 1;
+let ratPenaltyFactor = 0;
 
 let cityWalls = false;
 
 const bushelBulkCount = 1000;
 let actualBushelPrice = 5000;
 let currentBushelPrice = actualBushelPrice;
+let currentBarleyAdjustment = 1000;
 
 const priceStage1 = 50;
 const priceStage2 = 100;
@@ -359,32 +390,35 @@ const priceWarehouse0 = 20;
 const priceWarehouse1 = 50;
 const priceWarehouse2 = 1000;
 
-const priceVillage = 32000;
-const priceBuild0 = 256;
-const priceBuild1 = 420; // 🚬¯\_(ツ)_/¯🍩
-const priceBuild2 = 1640;
-const priceBuild3 = 3600;
-const priceBuild4 = 12000;
-const priceBuild5 = [24000, 2000,];
-const priceBuild6 = 24000;
-const priceBuild7 = 64000;
-const priceBuild8 = [48000, 1500,];
-const priceBuild9 = 88000;
-const priceBuild10 = [128000, 3000,];
-const priceBuild11 = [256000, 4000, 4,];
-const priceBuild12 = [2000000, 12,];
-const priceBuild13 = 4000000;
-const priceBuild14 = [64000, 810,];
-const priceBuild15 = 1200000;
-const priceBuild16 = 2400000;
-const priceBuild17 = [4200000, 9000, 77,]; // 4️⃣2️⃣ 🟰 Life, the Universe and Everything
+const priceVillage = 64000;
+const priceBuild0 = [500, 8000, 4000, 20000,]; // blacksmith
+const priceBuild1 = [2000, 8000, 30000,]; // workshop
+const priceBuild2 = [10000, 50000,]; // town hall
+const priceBuild3 = [25000, 5000, 10000,]; // insula floor 1
+const priceMineScout = 420; // 🚬¯\_(ツ)_/¯🍩
+const priceMineDig = [128000, 4000,];
+const priceFoundry = [256000, 6000, 60000];
+const priceBuild4 = [12000, 32000, 6000, 12000,]; // insula floor 2
+const priceBuild5 = [24000, 32000, 20000,]; // market
+const priceBuild6 = [128000, 48000, 12000, 24000,]; // insula floor 3
+const priceBuild7 = [256000, 64000, 25000, 50000,]; // insula 2
+const priceBuild8 = [200000, 80000, 30000, 60000,]; // school
+const priceBuild9 = [256000, 64000, 25000, 50000,]; // insula 3
+const priceBuild10 = [128000, 8000, 12000,]; // stables
+const priceBuild11 = [256000, 100, 7777, 7777, 777, 777, 777, 777, 777, 20000, 4,]; // temple
+const priceBuild12 = [2000000, 4000, 60000, 12,]; // arena
+const priceBuild13 = [4000000, 69, 30000]; // bank
+const priceBuild14 = [64000, 810, 20000]; // monks
+const priceBuild15 = [1200000, 60000]; // sewers
+const priceBuild16 = [2400000, 30000, 60000, 200000]; // gates
+const priceBuild17 = [10000000, 9001, 77, 5000, 100000, 100000]; // monumo
 
 const legalTarget = 'https://creativecommons.org/publicdomain/zero/1.0/';
-const winTarget = 'https://youtu.be/bzsYlG6TqFw';
+const winTarget = 'https://www.youtube.com/watch?v=AQmFlAB15f8'; // 'https://www.youtube.com/watch?v=YnDLlajMxyo'; // 🌼☀️🍂❄️
 
 let saṃsāra = -0;
 
-let gameSpeed = 'standard';
+let gameSpeed = 'paused';
 let oldSpeed = null;
 let timeoutHourglass = null;
 let frameHourglass = 0;
