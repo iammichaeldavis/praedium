@@ -383,8 +383,14 @@ button:active {
 
 #buttonWin {
     border: 3px solid;
-    border-image: linear-gradient(#56f9c4, #56bcf9) 1;
+    border-image: linear-gradient(#60a8fc, #0000a8) 1;
     margin-bottom: 6.4vw;
+}
+
+#buttonWinHeart {
+    color: transparent;
+    background-image: linear-gradient(#ff0000, #330000);
+    background-clip: text;
 }
 
 
@@ -1315,6 +1321,22 @@ td {
 
 .Citizen {
     background-position: -272px -240px;
+}
+
+.Crown1 {
+    background-position: -160px -224px;
+}
+
+.Crown2 {
+    background-position: -208px -224px;
+}
+
+.Crown3 {
+    background-position: -224px -224px;
+}
+
+.Crown4 {
+    background-position: -240px -224px;
 }
 
 

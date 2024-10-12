@@ -73,11 +73,13 @@ const player = {
     canSaw: false,
     canMine: false,
     canSmelt: false,
+    canWin: false,
 
     hasBegun: false,
     hasMildewed: false,
     hasFoundCopperEvidence: false,
     hasFoundMine: false,
+    hasWon: false,
 };
 
 const tilemap = new Image();
@@ -407,14 +409,14 @@ const priceBuild9 = [256000, 64000, 25000, 50000,]; // insula 3
 const priceBuild10 = [128000, 8000, 12000,]; // stables
 const priceBuild11 = [256000, 100, 7777, 7777, 777, 777, 777, 777, 777, 20000, 4,]; // temple
 const priceBuild12 = [2000000, 4000, 60000, 12,]; // arena
-const priceBuild13 = [4000000, 69, 30000]; // bank
+const priceBuild13 = [4000000, 200, 30000]; // bank
 const priceBuild14 = [64000, 810, 20000]; // monks
 const priceBuild15 = [1200000, 60000]; // sewers
 const priceBuild16 = [2400000, 30000, 60000, 200000]; // gates
 const priceBuild17 = [10000000, 9001, 77, 5000, 100000, 100000]; // monumo
 
 const legalTarget = 'https://creativecommons.org/publicdomain/zero/1.0/';
-const winTarget = 'https://www.youtube.com/watch?v=AQmFlAB15f8'; // 'https://www.youtube.com/watch?v=YnDLlajMxyo'; // 🌼☀️🍂❄️
+const winTarget = 'https://youtu.be/dOjFcx3GJHg'; // ♠️♣️♦️♥️ // 'https://youtu.be/AQmFlAB15f8'; // 👨‍🎤💃🎻 // 'https://youtu.be/YnDLlajMxyo'; // 🌼☀️🍂❄️
 
 let saṃsāra = -0;
 

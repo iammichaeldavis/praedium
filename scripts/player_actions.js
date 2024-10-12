@@ -44,6 +44,14 @@ buttonCC0.addEventListener('click', function () { Legal(); });
 
 
 document.body.onkeyup = function (e) {
+    if (e.key == '`') {
+        console.log('--------🚨 Game State Report 🚨--------');
+        console.log('gameTurn: ' + gameTurn);
+        console.log('farmStage: ' + farmStage);
+        console.log('warehouseStage: ' + warehouseStage);
+        console.log('villageStage: ' + villageStage);
+    }
+
     if (e.key == '~') {
         god = !god;
         if (god) { SystemMessage('I Am Soy'); }
@@ -100,7 +108,7 @@ document.body.onkeyup = function (e) {
             else { GoToPraedium(); }
         }
 
-        if (e.key == 'G') { // 🚨🚨🚨 1. USE WITH CAUTION!!! ONLY WORKS AT GAME START AND IN EXACT SEQUENCE
+        if (e.key == 'G') { // 🚨🚨🚨 USE WITH CAUTION!!! ONLY WORKS AT GAME START AND IN EXACT SEQUENCE 🚨🚨🚨
             if (!player.canPlant) {
                 StartTime();
                 StartTime();
@@ -127,41 +135,30 @@ document.body.onkeyup = function (e) {
                 AdvanceGame();
                 setValues(1000000000);
                 PauseTime();
-                // 🚨🚨🚨 2. manually wait here for bartering to unlock in a few years
             }
             else if (villageStage == 0) {
                 for (let i = 0; i < 18; i++) { AdvanceGame(); }
                 setValues(58008);
             }
-            else {
-                console.log('game state force process finished');
-            }
         }
-        if (e.key == 'g') { // 🚨🚨🚨 3.
-            //year = 57; // forcing the date breaks the barter buttons appearing
-            //week = 36;
-            bushelCount[0] = 15178;
-            bushelCount[1] = 2870;
-            bushelCount[2] = 0;
-            bushelCount[3] = 0;
-            bushelCount[4] = 0;
-            bushelCount[5] = 0;
-            bushelCount[6] = 0;
-            logsCount = 14012;
-            boardsCount = 72320;
-            stoneCount = 221020;
-            oreCopperCount = 0;
-            ingotsCopperCount = 0;
-            asCount = 0;
-            horsesCount = 0;
-            beadsCount = 0;
-            trophiesCount = 0;
-            scrollsCount = 0;
-            console.log('--------Game State Report--------');
-            console.log('gameTurn: ' + gameTurn);
-            console.log('farmStage: ' + farmStage);
-            console.log('warehouseStage: ' + warehouseStage);
-            console.log('villageStage: ' + villageStage);
+        if (e.key == 'g') {
+            bushelCount[0] = 1000000;
+            bushelCount[1] = 10000;
+            bushelCount[2] = 1000;
+            bushelCount[3] = 1000;
+            bushelCount[4] = 1000;
+            bushelCount[5] = 1000;
+            bushelCount[6] = 1000;
+            logsCount = 100000;
+            boardsCount = 100000;
+            stoneCount = 100000;
+            oreCopperCount = 10000;
+            ingotsCopperCount = 10000;
+            asCount = 1000000000;
+            horsesCount = 10;
+            beadsCount = 10000;
+            trophiesCount = 100;
+            scrollsCount = 1000;
         }
 
         if (e.key == 'e') { Translate('English'); }
@@ -1217,8 +1214,8 @@ function Build() {
         rentPrice += 12;
         player.canBuild = false;
 
-        buttonWin.style.display = 'inline-block';
-        timeoutWinButton = setTimeout(AnimateWinButton, 111);
+        player.canWin = true;
+        AnimateWinButton();
     }
     UpdateDisplay();
 }
@@ -1245,10 +1242,10 @@ function SellGrain(grainType) {
 
 
 function Win() {
+    player.canWin = false;
+    player.hasWon = true;
     GameEvent(displayWinMessage);
-
     //window.open(winTarget, 'PRAEDIUM_requested_new_tab');
-
     saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
 
     let winReport = {

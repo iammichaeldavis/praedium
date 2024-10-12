@@ -755,7 +755,7 @@ function UpdateText() {
 
     // SYSTEM ------------------------------
     buttonSystemMessageDismiss.innerHTML = displayIUnderstand;
-    buttonGameEventDismiss.innerHTML = displayOK;
+    buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK;
     buttonOptionsDismiss.innerHTML = displayOK;
     labelToggleMusic.innerHTML = displayMusic;
     labelToggleSounds.innerHTML = displaySounds;
@@ -781,6 +781,8 @@ function UpdateVisibilities() {
         divForewordCorpus.style.display = 'block';
         buttonForewordDismiss.style.display = 'block';
     }
+
+    buttonWin.style.display = player.canWin ? 'inline-block' : '';
 
     if (player.isAt == 'Praedium') {
         tableFarmInventory.style.display = player.seesInventory ? 'table' : '';
@@ -3816,45 +3818,18 @@ function RedrawVillage() {
 
 
 
+// disable or enable this based on player.likesAnimations 🚨🚨🚨
 function AnimateWinButton() {
-
-    //disable or enable this based on player.likesAnimations 🚨🚨🚨
-
     frameWinButton++;
-    if (frameWinButton == 12) { frameWinButton = 0; }
-
+    if (frameWinButton == 4) { frameWinButton = 0; }
     const arrayWinFrames = [
-        '🏵️🏵️🏵️💮🏵️🏵️🏵️<br>🏵️🏵️💮👑💮🏵️🏵️<br>🏵️🏵️🏵️💮🏵️🏵️🏵️',
-        '🏵️🏵️💮💮💮🏵️🏵️<br>🏵️💮💮👑💮💮🏵️<br>🏵️🏵️💮💮💮🏵️🏵️',
-        '🏵️💮💮💮💮💮🏵️<br>💮💮💮👑💮💮💮<br>🏵️💮💮💮💮💮🏵️',
-        '💮💮💮💮💮💮💮<br>💮💮💮👑💮💮💮<br>💮💮💮💮💮💮💮',
-        '💮💮💮🪷💮💮💮<br>💮💮🪷👑🪷💮💮<br>💮💮💮🪷💮💮💮',
-        '💮💮🪷🪷🪷💮💮<br>💮🪷🪷👑🪷🪷💮<br>💮💮🪷🪷🪷💮💮',
-        '💮🪷🪷🪷🪷🪷💮<br>🪷🪷🪷👑🪷🪷🪷<br>💮🪷🪷🪷🪷🪷💮',
-        '🪷🪷🪷🪷🪷🪷🪷<br>🪷🪷🪷👑🪷🪷🪷<br>🪷🪷🪷🪷🪷🪷🪷',
-        '🪷🪷🪷🏵️🪷🪷🪷<br>🪷🪷🏵️👑🏵️🪷🪷<br>🪷🪷🪷🏵️🪷🪷🪷',
-        '🪷🪷🏵️🏵️🏵️🪷🪷<br>🪷🏵️🏵️👑🏵️🏵️🪷<br>🪷🪷🏵️🏵️🏵️🪷🪷',
-        '🪷🏵️🏵️🏵️🏵️🏵️🪷<br>🏵️🏵️🏵️👑🏵️🏵️🏵️<br>🪷🏵️🏵️🏵️🏵️🏵️🪷',
-        '🏵️🏵️🏵️🏵️🏵️🏵️🏵️<br>🏵️🏵️🏵️👑🏵️🏵️🏵️<br>🏵️🏵️🏵️🏵️🏵️🏵️🏵️',
+        '<span class="icon Crown1 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown4 inlineIcon"></span><br>(<span id="buttonWinHeart">♥</span>)',
+        '<span class="icon Crown2 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown3 inlineIcon"></span><br>(<span id="buttonWinHeart">♥</span>)',
+        '<span class="icon Crown3 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown2 inlineIcon"></span><br>(<span id="buttonWinHeart">♥</span>)',
+        '<span class="icon Crown4 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown1 inlineIcon"></span><br>(<span id="buttonWinHeart">♥</span>)',
     ];
     buttonWin.innerHTML = arrayWinFrames[frameWinButton];
-
-    const speed1 = 30;
-    const speed2 = 80;
-    const speed3 = 140;
-    const speed4 = 200;
-    if (frameWinButton == 0) { timeoutWinButton = setTimeout(AnimateWinButton, speed1); }
-    else if (frameWinButton == 1) { timeoutWinButton = setTimeout(AnimateWinButton, speed2); }
-    else if (frameWinButton == 2) { timeoutWinButton = setTimeout(AnimateWinButton, speed3); }
-    else if (frameWinButton == 3) { timeoutWinButton = setTimeout(AnimateWinButton, speed4); }
-    else if (frameWinButton == 4) { timeoutWinButton = setTimeout(AnimateWinButton, speed1); }
-    else if (frameWinButton == 5) { timeoutWinButton = setTimeout(AnimateWinButton, speed2); }
-    else if (frameWinButton == 6) { timeoutWinButton = setTimeout(AnimateWinButton, speed3); }
-    else if (frameWinButton == 7) { timeoutWinButton = setTimeout(AnimateWinButton, speed4); }
-    else if (frameWinButton == 8) { timeoutWinButton = setTimeout(AnimateWinButton, speed1); }
-    else if (frameWinButton == 9) { timeoutWinButton = setTimeout(AnimateWinButton, speed2); }
-    else if (frameWinButton == 10) { timeoutWinButton = setTimeout(AnimateWinButton, speed3); }
-    else { timeoutWinButton = setTimeout(AnimateWinButton, speed4); }
+    timeoutWinButton = setTimeout(AnimateWinButton, 69); // ☯️
 }
 
 
@@ -4003,6 +3978,14 @@ function AnimateHourglass(newSpeed) {
 
 
 
+function AnimateCanvases() {
+    RedrawCanvases();
+    globalAnimationFrame++;
+    if (globalAnimationFrame != animationFPS) { setTimeout(AnimateCanvases, animationInterval); }
+}
+
+
+
 //                           ||
 // tile animation is in here \/
 function RedrawCanvases() {
@@ -4124,14 +4107,6 @@ function RedrawCanvases() {
             //township animations go here
         }
     }
-}
-
-
-
-function AnimateCanvases() {
-    RedrawCanvases();
-    globalAnimationFrame++;
-    if (globalAnimationFrame != animationFPS) { setTimeout(AnimateCanvases, animationInterval); }
 }
 
 
