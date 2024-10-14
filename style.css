@@ -898,6 +898,26 @@ canvas {
     display: block;
 }
 
+/*
+@media screen and (min-width: 1000px) {
+    #canvasMountain,
+    #canvasForest,
+    #canvasVillage {
+        width: calc(386px * 2);
+        height: calc(226px * 2);
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    #canvasMountain,
+    #canvasForest,
+    #canvasVillage {
+        width: calc(386px * 3);
+        height: calc(226px * 3);
+    }
+}
+*/
+
 
 
 /* // TABLES //////////////////////////////////////////////////////////////////////////////////// */

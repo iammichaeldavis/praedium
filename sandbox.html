@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <title>Canvas Sandbox</title>
+
+    <style>
+        body {
+            color: white;
+            background-color: black;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        #canvas {
+            display: block;
+            width: 320px;
+            height: 200px;
+            background-color: blueviolet;
+            margin: 0 auto;
+        }
+
+        @media screen and (min-width: 800px) {
+            body {
+                font-size: 32px;
+            }
+
+            #canvas {
+                width: 640px;
+                height: 400px;
+            }
+        }
+
+        @media screen and (min-width: 1120px) {
+            body {
+                font-size: 48px;
+            }
+
+            #canvas {
+                width: 960px;
+                height: 600px;
+            }
+        }
+
+        @media screen and (min-width: 1440px) {
+            body {
+                font-size: 64px;
+            }
+
+            #canvas {
+                width: 1280px;
+                height: 800px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    Canvas Sandbox
+</body>
+
+<script>
+    let tempCanvasImage = new Image();
+    tempCanvasImage.src = 'bitmaps/village00.png';
+
+    const canvas = document.createElement('canvas');
+    const canvas2dContext = canvas.getContext('2d');
+
+    canvas.id = 'canvas';
+    canvas.width = 320;
+    canvas.height = 200;
+
+    document.body.appendChild(canvas);
+
+    document.body.onkeyup = function (e) {
+        if (e.key == '1') {
+            canvas2dContext.drawImage(tempCanvasImage, 0, 0, 320, 200, 0, 0, 320, 200);
+        }
+        if (e.key == '2') {
+            canvas2dContext.drawImage(tempCanvasImage, 0, 0, 160, 200, 0, 0, 320, 200);
+        }
+        if (e.key == '3') {
+            canvas2dContext.drawImage(tempCanvasImage, 0, 0, 160, 100, 0, 0, 320, 200);
+        }
+        if (e.key == '4') {
+            canvas2dContext.drawImage(tempCanvasImage, 0, 0, 320, 100, 0, 0, 320, 200);
+        }
+        if (e.key == '5') {
+            canvas2dContext.drawImage(tempCanvasImage, 0, 0, 320, 200, 0, 0, 160, 100);
+        }
+    }
+</script>
+
+</html>
+
+
+
+<!-- End of Document -->

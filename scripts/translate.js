@@ -498,9 +498,9 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'The current language is now set to English.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">“There is no true knowledge without right faith, no virtuous conduct is possible without knowledge, without virtue there is no liberation, and without liberation, no nirvana.”</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeWith = 'For Dylan. I love you so much, bud.<br><br>Made with CodePen, GIMP, GitHub and VS Code.';
-        displayInfoDedication = 'Dedicated to aniwey, Lori & Corey Cole, Jeff & ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Tom Rothamel, Michael Townsend and Tim Sweeney, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Dave & Anna Davis, Kenneth Garagnon, Sean Glavin, Marty Hirsch, Leif Johansen, David Macaulay, the Méndez family, Brian Moran, Grant Sutherland and W3Schools.';
+        displayInfoMadeWith = 'For Dylan. I love you so much, bud.<br><br>Made with CodePen, the GNU Image Manipulation Program, GitHub and Visual Studio Code.';
+        displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, David “aniwey” L., Denis Loubet, Tom Rothamel, Michael Townsend and Tim Sweeney, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Dave and Anna Davis, Kenneth Garagnon, Sean Glavin, Marty Hirsch, Leif Johansen, David Macaulay, the Méndez family, Brian Moran, Grant Sutherland and W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -753,8 +753,8 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'El idioma actual ahora está configurado en español.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">«No hay conocimiento verdadero sin fe recta, ninguna conducta virtuosa es posible sin conocimiento, sin virtud no hay liberación, y sin liberación, no nirvana.»</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeWith = 'Para Dylan. Te quiero mucho que mucho, sobrino.<br><br>Hecho con CodePen, GIMP, GitHub y VS Code.';
-        displayInfoDedication = 'Dedicado a aniwey, Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Tom Rothamel, Michael Townsend y Tim Sweeney, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
+        displayInfoMadeWith = 'Para Dylan. Te quiero mucho, sobrino.<br><br>Hecho con CodePen, el GNU Image Manipulation Program, GitHub y Visual Studio Code.';
+        displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, David “aniwey” L., Denis Loubet, Tom Rothamel, Michael Townsend y Tim Sweeney, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
         displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Dave y Anna Davis, Kenneth Garagnon, Sean Glavin, Marty Hirsch, Leif Johansen, David Macaulay, la familia Méndez, Brian Moran, Grant Sutherland y W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
@@ -766,7 +766,7 @@ function Translate(language, bark = true) {
         displayBoxCopy = 'Ponte las sandalias de un sencillo agricultor de cereales tartésico en el año 200 a.C. ¿¿Tiene lo necesario para redactar la constitución de una ciudad-Estado que iluminará el camino durante siglos y logrará personalmente una iluminación trascendental, señor??<br><br>Déjese transportar literalmente a la antigua época romana mediante esta simulación por computadora de vanguardia que lo coloca a USTED en el corazón de la trepidante ACCIÓN AGRÍCOLA REAL!';
 
         displayHeir = 'ELEGIR UN HEREDERO';
-        displayEndButton = 'EL FIN';
+        displayEndButton = 'CONCLUIR';
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
