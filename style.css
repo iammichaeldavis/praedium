@@ -695,7 +695,12 @@ button:active {
     font-size: 3.6vw;
     color: #120412;
     line-height: 5.2vw;
-    text-align: justify;
+    text-align: center;
+}
+
+#textareaModCode {
+    width: 100%;
+    display: block;
 }
 
 
@@ -1488,6 +1493,7 @@ td {
 #divOverlayGameEvent,
 #divOverlaySystemMessage,
 #divOverlayMods,
+#buttonStar,
 #divOverlayOptions,
 #tableFarmInventory,
 #tableFarmStaff,
@@ -1532,7 +1538,6 @@ td {
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 #buttonQ,
-#buttonStar,
 #labelToggleMusic,
 #toggleMusic,
 #labelToggleSounds,

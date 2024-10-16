@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.1';
+const version = '1.2';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -105,6 +105,8 @@ const divGameEventCorpus = document.getElementById('divGameEventCorpus');
 const buttonGameEventDismiss = document.getElementById('buttonGameEventDismiss');
 
 const divOverlayMods = document.getElementById('divOverlayMods');
+const textareaModCode = document.getElementById('textareaModCode');
+const buttonSubmitModCode = document.getElementById('buttonSubmitModCode');
 const buttonModsDismiss = document.getElementById('buttonModsDismiss');
 
 const divOverlayOptions = document.getElementById('divOverlayOptions');

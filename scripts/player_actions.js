@@ -6,6 +6,7 @@ buttonForewordEnglish.addEventListener('click', function () { BeginGame('English
 buttonForewordSpanish.addEventListener('click', function () { BeginGame('Spanish'); });
 buttonForewordDismiss.addEventListener('click', function () { DismissForeword(); });
 buttonGameEventDismiss.addEventListener('click', function () { DismissGameEvent(); });
+buttonSubmitModCode.addEventListener('click', function () { SubmitModCode(); });
 buttonModsDismiss.addEventListener('click', function () { DismissModsWindow(); });
 buttonOptionsDismiss.addEventListener('click', function () { DismissOptions(); });
 buttonTill.addEventListener('click', function () { PlotTill(); });
@@ -1308,15 +1309,24 @@ function Help() {
 
 function SummonModsWindow() {
     player.seesModsWindow = true;
+    god = false; // so one can type in the text box without keypresses triggering debug functions
     UpdateDisplay();
-    buttonModsDismiss.focus({ focusVisible: false });
+    textareaModCode.focus({ focusVisible: true });
     divOverlayMods.scrollTo(0, 0);
+}
+
+
+
+function SubmitModCode() {
+    const grabbedModCode = textareaModCode.value;
+    RecordModCode(grabbedModCode);
 }
 
 
 
 function DismissModsWindow() {
     player.seesModsWindow = false;
+    god = true;
     UpdateDisplay();
 }
 

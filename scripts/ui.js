@@ -774,6 +774,7 @@ function UpdateVisibilities() {
     divOverlayGameEvent.style.display = player.seesGameEvent ? 'block' : '';
     divOverlayOptions.style.display = player.seesOptions ? 'block' : '';
     divOverlayMods.style.display = player.seesModsWindow ? 'block' : '';
+    buttonStar.style.display = god ? 'inline-block' : '';
 
     if (player.seesForeword && player.hasBegun) {
         divForewordTitle.style.display = 'none';
@@ -882,8 +883,6 @@ function UpdateVisibilities() {
 
 function RedrawFarm() {
     const pixelScale = window.getComputedStyle(canvasFarm).getPropertyValue('--pixel-scale');
-    // the scale of the farm may need to be set.... all the time. not just at the breakpoints like I have it now
-    //maybe just every stage sets width and height, real and CSS, every time, all the timmmeeeeeeee
 
     function PickCropTile(row, col) {
         let tileChoice = null;
