@@ -4,6 +4,37 @@
 :root {
     --tilemap: transparent url(bitmaps/tilemap.png) 0 0 no-repeat;
     --agua: url(bitmaps/agua_anim.gif);
+    --pixel-scale: 1;
+}
+
+@media screen and (min-width: 1000px) {
+    :root {
+        --pixel-scale: 2;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    :root {
+        --pixel-scale: 3;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    :root {
+        --pixel-scale: 4;
+    }
+}
+
+@media screen and (min-width: 2500px) {
+    :root {
+        --pixel-scale: 5;
+    }
+}
+
+@media screen and (min-width: 3000px) {
+    :root {
+        --pixel-scale: 6;
+    }
 }
 
 * {
@@ -46,7 +77,7 @@ canvas {
 
 button {
     text-decoration: none;
-    border: 1px solid #1a1a1a;
+    border: calc(1px * var(--pixel-scale)) solid #1a1a1a;
     padding: 0.8vw 2.4vw;
     background: #f0f0f0;
     user-select: none;
@@ -54,19 +85,19 @@ button {
 }
 
 button:hover {
-    border: 1px solid #313131;
+    border: calc(1px * var(--pixel-scale)) solid #313131;
     background: #ffffff;
 }
 
 button:active {
-    border: 1px solid black;
+    border: calc(1px * var(--pixel-scale)) solid black;
     background: #cccccc;
 }
 
 .disabled,
 .disabled:hover,
 .disabled:active {
-    border: 1px solid black;
+    border: calc(1px * var(--pixel-scale)) solid black;
     background: #dddddd;
     cursor: default;
 }
@@ -163,7 +194,7 @@ button:active {
 #buttonForewordEnglish,
 #buttonForewordSpanish {
     color: crimson;
-    border: 1px solid crimson;
+    border: calc(1px * var(--pixel-scale)) solid crimson;
     background: antiquewhite;
 }
 
@@ -171,7 +202,7 @@ button:active {
 #buttonForewordEnglish:hover,
 #buttonForewordSpanish:hover {
     color: #ff0033;
-    border: 1px solid #ff0033;
+    border: calc(1px * var(--pixel-scale)) solid #ff0033;
     background: bisque;
 }
 
@@ -179,7 +210,7 @@ button:active {
 #buttonForewordEnglish:active,
 #buttonForewordSpanish:active {
     color: maroon;
-    border: 1px solid maroon;
+    border: calc(1px * var(--pixel-scale)) solid maroon;
     background: burlywood;
 }
 
@@ -190,19 +221,19 @@ button:active {
     color: #3c14dc;
     display: block;
     margin: 6.4vw auto 0 auto;
-    border: 1px solid #3c14dc;
+    border: calc(1px * var(--pixel-scale)) solid #3c14dc;
     background: #d7ebfa;
 }
 
 #buttonSystemMessageDismiss:hover {
     color: #3300ff;
-    border: 1px solid #3300ff;
+    border: calc(1px * var(--pixel-scale)) solid #3300ff;
     background: #c4e4ff;
 }
 
 #buttonSystemMessageDismiss:active {
     color: #000080;
-    border: 1px solid #000080;
+    border: calc(1px * var(--pixel-scale)) solid #000080;
     background: #87b8de;
 }
 
@@ -213,19 +244,19 @@ button:active {
     color: #24b600;
     display: block;
     margin: 6.4vw auto 0 auto;
-    border: 1px solid #24b600;
+    border: calc(1px * var(--pixel-scale)) solid #24b600;
     background: #f2fce5;
 }
 
 #buttonGameEventDismiss:hover {
     color: #27c200;
-    border: 1px solid #27c200;
+    border: calc(1px * var(--pixel-scale)) solid #27c200;
     background: #e4ffc4;
 }
 
 #buttonGameEventDismiss:active {
     color: #008000;
-    border: 1px solid #008000;
+    border: calc(1px * var(--pixel-scale)) solid #008000;
     background: #b8de87;
 }
 
@@ -236,19 +267,19 @@ button:active {
     display: block;
     margin: 6.4vw auto 0 auto;
     color: #883e88;
-    border: 1px solid #883e88;
+    border: calc(1px * var(--pixel-scale)) solid #883e88;
     background: #faebfa;
 }
 
 #buttonModsDismiss:hover {
     color: #a34aa3;
-    border: 1px solid #a34aa3;
+    border: calc(1px * var(--pixel-scale)) solid #a34aa3;
     background: #f1ccf1;
 }
 
 #buttonModsDismiss:active {
     color: #6d2a6d;
-    border: 1px solid #6d2a6d;
+    border: calc(1px * var(--pixel-scale)) solid #6d2a6d;
     background: #d8a6d8;
 }
 
@@ -264,7 +295,7 @@ button:active {
 #buttonEnglish,
 #buttonSpanish {
     color: #b6b600;
-    border: 1px solid #b6b600;
+    border: calc(1px * var(--pixel-scale)) solid #b6b600;
     background: #fcfce5;
 }
 
@@ -272,7 +303,7 @@ button:active {
 #buttonEnglish:hover,
 #buttonSpanish:hover {
     color: #c2c200;
-    border: 1px solid #c2c200;
+    border: calc(1px * var(--pixel-scale)) solid #c2c200;
     background: #ffffc4;
 }
 
@@ -280,41 +311,48 @@ button:active {
 #buttonEnglish:active,
 #buttonSpanish:active {
     color: #808000;
-    border: 1px solid #808000;
+    border: calc(1px * var(--pixel-scale)) solid #808000;
     background: #dede87;
 }
 
 
 
-#buttonTillDecal {
-    width: 32px;
-    height: 16px;
+#buttonTillDecal,
+#buttonPlantDecal,
+#buttonWaterDecal,
+#buttonHarvestDecal,
+#buttonPriorityDecal,
+#buttonPriorityColon,
+#buttonPriorityOption {
     background: var(--tilemap);
-    background-position: -208px -32px;
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+}
+
+#buttonTillDecal {
+    width: calc(32px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
+    background-position: calc(-208px * var(--pixel-scale)) calc(-32px * var(--pixel-scale));
     display: block;
 }
 
 #buttonPlantDecal {
-    width: 32px;
-    height: 16px;
-    background: var(--tilemap);
-    background-position: -240px -32px;
+    width: calc(32px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
+    background-position: calc(-240px * var(--pixel-scale)) calc(-32px * var(--pixel-scale));
     display: block;
 }
 
 #buttonWaterDecal {
-    width: 32px;
-    height: 16px;
-    background: var(--tilemap);
-    background-position: -272px -32px;
+    width: calc(32px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
+    background-position: calc(-272px * var(--pixel-scale)) calc(-32px * var(--pixel-scale));
     display: block;
 }
 
 #buttonHarvestDecal {
-    width: 32px;
-    height: 16px;
-    background: var(--tilemap);
-    background-position: -304px -32px;
+    width: calc(32px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
+    background-position: calc(-304px * var(--pixel-scale)) calc(-32px * var(--pixel-scale));
     display: block;
 }
 
@@ -325,28 +363,25 @@ button:active {
 }
 
 #buttonPriorityDecal {
-    width: 16px;
-    height: 16px;
-    background: var(--tilemap);
-    background-position: -80px -208px;
+    width: calc(16px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
+    background-position: calc(-80px * var(--pixel-scale)) calc(-208px * var(--pixel-scale));
     display: block;
     float: left;
 }
 
 #buttonPriorityColon {
-    width: 16px;
-    height: 16px;
-    background: var(--tilemap);
-    background-position: -128px -208px;
+    width: calc(16px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
+    background-position: calc(-128px * var(--pixel-scale)) calc(-208px * var(--pixel-scale));
     display: block;
     float: left;
 }
 
 #buttonPriorityOption {
-    width: 32px;
-    height: 16px;
-    background: var(--tilemap);
-    background-position: -240px -16px;
+    width: calc(32px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
+    background-position: calc(-240px * var(--pixel-scale)) calc(-16px * var(--pixel-scale));
     display: block;
     float: left;
 }
@@ -356,19 +391,19 @@ button:active {
 #divFooter button {
     font-size: 2.4vw;
     color: #1a1a1a;
-    border: 1px solid #1a1a1a;
+    border: calc(1px * var(--pixel-scale)) solid #1a1a1a;
     background: #d4d4e4;
 }
 
 #divFooter button:hover {
     color: #313131;
-    border: 1px solid #313131;
+    border: calc(1px * var(--pixel-scale)) solid #313131;
     background: #f6f6ff;
 }
 
 #divFooter button:active {
     color: black;
-    border: 1px solid black;
+    border: calc(1px * var(--pixel-scale)) solid black;
     background: #a4a4c2;
 }
 
@@ -382,7 +417,7 @@ button:active {
 
 
 #buttonWin {
-    border: 3px solid;
+    border: calc(3px * var(--pixel-scale)) solid;
     border-image: linear-gradient(#60a8fc, #0000a8) 1;
     margin-bottom: 6.4vw;
 }
@@ -403,7 +438,7 @@ button:active {
             #112 5%,
             #112 60%,
             #213 95%);
-    border: solid 5px transparent;
+    border: solid calc(5px * var(--pixel-scale)) transparent;
     --hint_border_ramp: conic-gradient(from var(--hint_border_angle),
             transparent 25%,
             #08f,
@@ -444,8 +479,8 @@ button:active {
     width: 100%;
     height: 100%;
     overflow: auto;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(calc(2px * var(--pixel-scale)));
+    -webkit-backdrop-filter: blur(calc(2px * var(--pixel-scale)));
 }
 
 
@@ -459,7 +494,7 @@ button:active {
     text-align: center;
     width: 90vw;
     margin: 5vw auto;
-    border: 3px solid crimson;
+    border: calc(3px * var(--pixel-scale)) solid crimson;
     padding: 14vw 8vw;
     background: antiquewhite;
 }
@@ -520,7 +555,7 @@ button:active {
 #divModalSystemMessage {
     width: 80vw;
     margin: 10vw auto;
-    border: 3px solid #3c14dc;
+    border: calc(3px * var(--pixel-scale)) solid #3c14dc;
     padding: 8vw;
     background: #d7ebfa;
 }
@@ -551,9 +586,9 @@ button:active {
 
 #divInfoTitle {
     font-family: 'Garamond', serif;
-    font-weight:  bold;
+    font-weight: bold;
     color: #040412;
-    font-size:4.4vw;
+    font-size: 4.4vw;
     text-align: center;
     line-height: 3vw;
     margin: 2.8vw auto 6.4vw auto;
@@ -561,16 +596,16 @@ button:active {
 
 #spanInfoVersion {
     font-family: 'Garamond', serif;
-    font-weight:  bold;
+    font-weight: bold;
     color: #040412;
-    font-size:2vw;
+    font-size: 2vw;
 }
 
 #spanInfoCC0 {
     font-family: 'Garamond', serif;
-    font-weight:  bold;
+    font-weight: bold;
     color: #040412;
-    font-size:1.6vw;
+    font-size: 1.6vw;
 }
 
 #divSystemMessageSource {
@@ -591,7 +626,7 @@ button:active {
 #divModalGameEvent {
     width: 80vw;
     margin: 10vw auto;
-    border: 3px solid #24b600;
+    border: calc(3px * var(--pixel-scale)) solid #24b600;
     padding: 8vw;
     background: #f2fce5;
 }
@@ -604,7 +639,7 @@ button:active {
 
 #divGameEventFaçade img {
     width: 100%;
-    border: 1px solid black;
+    border: calc(1px * var(--pixel-scale)) solid black;
     display: block;
 }
 
@@ -622,8 +657,8 @@ button:active {
     color: #041204;
     line-height: 4.2vw;
     margin-top: 3.2vw;
-    border: 1px solid black;
-    padding: 2px 8px;
+    border: calc(1px * var(--pixel-scale)) solid black;
+    padding: 1vw 3vw;
 }
 
 #divGameEventCorpus #Dumas {
@@ -650,7 +685,7 @@ button:active {
 #divModalMods {
     width: 80vw;
     margin: 10vw auto;
-    border: 3px solid #883e88;
+    border: calc(3px * var(--pixel-scale)) solid #883e88;
     padding: 8vw;
     background: #faebfa;
 }
@@ -675,7 +710,7 @@ button:active {
     text-align: center;
     width: 80vw;
     margin: 10vw auto;
-    border: 3px solid #b6b600;
+    border: calc(3px * var(--pixel-scale)) solid #b6b600;
     padding: 8vw;
     background: #fcfce5;
 }
@@ -741,20 +776,20 @@ input {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 48px;
-    border-bottom: 2px solid black;
+    height: calc(48px * var(--pixel-scale));
+    border-bottom: calc(2px * var(--pixel-scale)) solid black;
     background: #006800;
 }
 
 #divCalendarGap {
-    height: 48px;
+    height: calc(48px * var(--pixel-scale));
 }
 
 .divCalendarCell {
     text-align: center;
     position: relative;
     width: 33.3%;
-    height: 46px;
+    height: calc(46px * var(--pixel-scale));
 }
 
 .divCalendarCellLiner {
@@ -780,59 +815,67 @@ input {
 #divYear,
 #divWeek {
     font-family: 'RuneScape', sans-serif;
-    font-size: 16px;
+    font-size: calc(16px * var(--pixel-scale));
     color: #fad15a;
-    text-shadow: 1px 0 0 #004203, 1px -1px 0 #004203, 0 -1px 0 #004203, -1px 0 0 #009000, -1px 1px 0 #009000, 0 1px 0 #009000, 1px 1px 0 #004203, -1px -1px 0 #004203;
+    text-shadow: calc(1px * var(--pixel-scale)) 0 0 #004203, calc(1px * var(--pixel-scale)) calc(-1px * var(--pixel-scale)) 0 #004203, 0 calc(-1px * var(--pixel-scale)) 0 #004203, calc(-1px * var(--pixel-scale)) 0 0 #009000, calc(-1px * var(--pixel-scale)) calc(1px * var(--pixel-scale)) 0 #009000, 0 calc(1px * var(--pixel-scale)) 0 #009000, calc(1px * var(--pixel-scale)) calc(1px * var(--pixel-scale)) 0 #004203, calc(-1px * var(--pixel-scale)) calc(-1px * var(--pixel-scale)) 0 #004203;
     user-select: none;
 }
 
 #divRuneSeason {
-    width: 16px;
-    height: 16px;
+    width: calc(16px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
 }
 
 #divStonesSeason {
-    width: 16px;
-    height: 16px;
+    width: calc(16px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
 }
 
 #divEmbossZodiacChinese {
-    width: 32px;
-    height: 16px;
+    width: calc(32px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
 }
 
 #divHourglass {
-    width: 16px;
-    height: 16px;
-    margin: 0 6px;
+    width: calc(16px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
+    margin: 0 calc(6px * var(--pixel-scale));
     background: var(--tilemap);
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
 }
 
 #divEmbossSeason {
-    width: 32px;
-    height: 16px;
+    width: calc(32px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
 }
 
 #divStonesWeek {
-    width: 16px;
-    height: 16px;
+    width: calc(16px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
 }
 
 #divRuneMonth {
-    width: 16px;
-    height: 16px;
+    width: calc(16px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
 }
 
 #divRuneElement {
-    width: 16px;
-    height: 16px;
+    width: calc(16px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
 }
 
 
@@ -842,7 +885,7 @@ input {
 
 #divGameWindow {
     text-align: center;
-    padding: 12.8vw 0 6.4vw 0;
+    padding: 6.4vw 0;
     background: #f6f6ff;
 }
 
@@ -867,56 +910,38 @@ input {
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 canvas {
-    border: 1px solid black;
+    border: calc(1px * var(--pixel-scale)) solid black;
 }
 
 
 
 #canvasFarm {
-    width: 162px;
-    height: 162px;
+    width: calc(162px * var(--pixel-scale));
+    height: calc(162px * var(--pixel-scale));
     background-color: transparent;
     background-image: var(--agua);
+    background-size: calc(16px * var(--pixel-scale));
     margin: 0 auto 6.4vw auto;
     display: block;
 }
 
 #canvasMountain,
 #canvasForest {
-    width: 386px;
-    height: 226px;
+    width: calc(386px * var(--pixel-scale));
+    height: calc(226px * var(--pixel-scale));
     background-color: transparent;
     background-image: var(--agua);
+    background-size: calc(16px * var(--pixel-scale));
     margin: 0 auto 6.4vw auto;
     display: block;
 }
 
 #canvasVillage {
-    width: 386px;
-    height: 226px;
+    width: calc(386px * var(--pixel-scale));
+    height: calc(226px * var(--pixel-scale));
     margin: 0 auto 6.4vw auto;
     display: block;
 }
-
-/*
-@media screen and (min-width: 1000px) {
-    #canvasMountain,
-    #canvasForest,
-    #canvasVillage {
-        width: calc(386px * 2);
-        height: calc(226px * 2);
-    }
-}
-
-@media screen and (min-width: 1500px) {
-    #canvasMountain,
-    #canvasForest,
-    #canvasVillage {
-        width: calc(386px * 3);
-        height: calc(226px * 3);
-    }
-}
-*/
 
 
 
@@ -949,7 +974,7 @@ td {
 #tableMountainStaff,
 #tableMountainReport {
     margin-top: 2vw;
-    border: 1px solid black;
+    border: calc(1px * var(--pixel-scale)) solid black;
     user-select: none;
 }
 
@@ -972,8 +997,8 @@ td {
     font-weight: bold;
     text-align: center;
     background: #477fa5;
-    border-bottom: 1px solid black;
-    border-right: 1px solid #366e94;
+    border-bottom: calc(1px * var(--pixel-scale)) solid black;
+    border-right: calc(1px * var(--pixel-scale)) solid #366e94;
 }
 
 #tableFarmInventory tbody td,
@@ -988,7 +1013,7 @@ td {
 #tableFarmReport tbody td,
 #tableForestReport tbody td,
 #tableMountainReport tbody td {
-    border-right: 1px solid #d8d8d8;
+    border-right: calc(1px * var(--pixel-scale)) solid #d8d8d8;
 }
 
 #tableFarmInventory tr:nth-of-type(even) td,
@@ -1001,8 +1026,8 @@ td {
 #tableMountainStaff tr:nth-of-type(even) td,
 #tableMountainReport tr:nth-of-type(even) td {
     background: #e9e9e9;
-    border-top: 1px solid #d8d8d8;
-    border-bottom: 1px solid #d8d8d8;
+    border-top: calc(1px * var(--pixel-scale)) solid #d8d8d8;
+    border-bottom: calc(1px * var(--pixel-scale)) solid #d8d8d8;
 }
 
 #tableFarmInventory td,
@@ -1011,22 +1036,22 @@ td {
 #tableForestStaff td,
 #tableMountainInventory td,
 #tableMountainStaff td {
-    padding: 2px 8px;
+    padding: 1vw 3vw;
 }
 
 #tableFarmReport td,
 #tableForestReport td,
 #tableMountainReport td {
-    padding: 2px 8px;
+    padding: 1vw 3vw;
     text-align: center;
 }
 
 #divGameWindow .noPadColumn {
-    padding: 2px 0;
+    padding: 1vw 0;
 }
 
 #divGameWindow .rightPadColumn {
-    padding: 2px 8px 2px 0;
+    padding: 1vw 3vw 1vw 0;
 }
 
 
@@ -1035,7 +1060,7 @@ td {
 #tableForestStaff thead td,
 #tableForestReport thead td {
     background: #429665;
-    border-right: 1px solid #2b754a;
+    border-right: calc(1px * var(--pixel-scale)) solid #2b754a;
 }
 
 
@@ -1044,7 +1069,7 @@ td {
 #tableMountainStaff thead td,
 #tableMountainReport thead td {
     background: #be6c62;
-    border-right: 1px solid #9b4b40;
+    border-right: calc(1px * var(--pixel-scale)) solid #9b4b40;
 }
 
 
@@ -1053,7 +1078,7 @@ td {
 #tableVillageIncome,
 #tableVillageMateriel,
 #tableVillageStatistics {
-    border: 1px solid black;
+    border: calc(1px * var(--pixel-scale)) solid black;
     user-select: none;
 }
 
@@ -1069,7 +1094,7 @@ td {
 #tableVillageIncome td,
 #tableVillageMateriel td,
 #tableVillageStatistics td {
-    padding: 2px 8px;
+    padding: 1vw 3vw;
 }
 
 #tableVillageDemographics thead td,
@@ -1080,7 +1105,7 @@ td {
     text-align: center;
     color: white;
     font-weight: bold;
-    border-bottom: 1px solid black;
+    border-bottom: calc(1px * var(--pixel-scale)) solid black;
 }
 
 #tableVillageDemographics thead td {
@@ -1109,7 +1134,7 @@ td {
 #tableVillageMateriel tbody td,
 #tableVillageStatistics tbody td {
     vertical-align: bottom;
-    border-bottom: 1px solid #d8d8d8;
+    border-bottom: calc(1px * var(--pixel-scale)) solid #d8d8d8;
 }
 
 #tableVillageDemographics tr:nth-of-type(even) td,
@@ -1126,11 +1151,13 @@ td {
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 .icon {
-    width: 16px;
-    height: 16px;
-    background: var(--tilemap);
+    width: calc(16px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
     margin: 0 auto;
     display: block;
+    background: var(--tilemap);
+    background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1) calc(var(--j) * var(--pixel-scale) * 16px * -1);
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
 }
 
 .inlineIcon {
@@ -1140,223 +1167,276 @@ td {
 
 
 .Wheat {
-    background-position: 0 -192px;
+    --i: 0;
+    --j: 12;
 }
 
 .Barley {
-    background-position: -16px -192px;
+    --i: 1;
+    --j: 12;
 }
 
 .Olive {
-    background-position: -32px -192px;
+    --i: 2;
+    --j: 12;
 }
 
 .Date {
-    background-position: -48px -192px;
+    --i: 3;
+    --j: 12;
 }
 
 .Fig {
-    background-position: -64px -192px;
+    --i: 4;
+    --j: 12;
 }
 
 .Pom {
-    background-position: -80px -192px;
+    --i: 5;
+    --j: 12;
 }
 
 .Grape {
-    background-position: -96px -192px;
+    --i: 6;
+    --j: 12;
 }
 
 
 
 .Sawyer {
-    background-position: 0 -208px;
+    --i: 0;
+    --j: 13;
 }
 
 .Miner {
-    background-position: -16px -208px;
+    --i: 1;
+    --j: 13;
 }
 
 .Mason {
-    background-position: -32px -208px;
+    --i: 2;
+    --j: 13;
 }
 
 .Logger {
-    background-position: -48px -208px;
+    --i: 3;
+    --j: 13;
 }
 
 .Guard {
-    background-position: -64px -208px;
+    --i: 4;
+    --j: 13;
 }
 
 .Fieldhand {
-    background-position: -80px -208px;
+    --i: 5;
+    --j: 13;
 }
 
 .Arborist {
-    background-position: -80px -224px;
+    --i: 5;
+    --j: 14;
 }
 
 .Horticulturalist {
-    background-position: -128px -224px;
+    --i: 8;
+    --j: 14;
 }
 
 .Blacksmith {
-    background-position: -96px -208px;
+    --i: 6;
+    --j: 13;
 }
 
 .Accountant {
-    background-position: -112px -208px;
+    --i: 7;
+    --j: 13;
 }
 
 .Vigneron {
-    background-position: -160px -208px;
+    --i: 10;
+    --j: 13;
 }
 
 .Cinderman {
-    background-position: -176px -208px;
+    --i: 11;
+    --j: 13;
 }
 
 
 
 .Shovel {
-    background-position: -112px -192px;
+    --i: 7;
+    --j: 12;
 }
 
 .Axe {
-    background-position: -128px -192px;
+    --i: 8;
+    --j: 12;
 }
 
 .Rake {
-    background-position: -144px -192px;
+    --i: 9;
+    --j: 12;
 }
 
 .Sapling {
-    background-position: -144px -208px;
+    --i: 9;
+    --j: 13;
 }
 
 
 
 .Log {
-    background-position: 0 -224px;
+    --i: 0;
+    --j: 14;
 }
 
 .Board {
-    background-position: -16px -224px;
+    --i: 1;
+    --j: 14;
 }
 
 .Stone {
-    background-position: -32px -224px;
+    --i: 2;
+    --j: 14;
 }
 
 .OreCopper {
-    background-position: -48px -224px;
+    --i: 3;
+    --j: 14;
 }
 
 .IngotCopper {
-    background-position: -64px -224px;
+    --i: 4;
+    --j: 14;
 }
 
 
 
 .Trophy {
-    background-position: 0 -240px;
+    --i: 0;
+    --j: 15;
 }
 
 .Sword {
-    background-position: -16px -240px;
+    --i: 1;
+    --j: 15;
 }
 
 .Shield {
-    background-position: -32px -240px;
+    --i: 2;
+    --j: 15;
 }
 
 .Sell {
-    background-position: -48px -240px;
+    --i: 3;
+    --j: 15;
 }
 
 .Scroll {
-    background-position: -64px -240px;
+    --i: 4;
+    --j: 15;
 }
 
 .Rattata {
-    background-position: -80px -240px;
+    --i: 5;
+    --j: 15;
 }
 
 .SellDisable {
-    background-position: -96px -240px;
+    --i: 6;
+    --j: 15;
 }
 
 .WheatDisable {
-    background-position: -96px -224px;
+    --i: 6;
+    --j: 14;
 }
 
 .BarleyDisable {
-    background-position: -112px -224px;
+    --i: 7;
+    --j: 14;
 }
 
 .Mala {
-    background-position: -112px -240px;
+    --i: 7;
+    --j: 15;
 }
 
 .Horsey {
-    background-position: -128px -240px;
+    --i: 8;
+    --j: 15;
 }
 
 .HorseyMounted {
-    background-position: -144px -240px;
+    --i: 9;
+    --j: 15;
 }
 
 .BowAndArrow {
-    background-position: -160px -240px;
+    --i: 10;
+    --j: 15;
 }
 
 .MoneyBag {
-    background-position: -176px -240px;
+    --i: 11;
+    --j: 15;
 }
 
 .MoneyBagSpent {
-    background-position: -176px -224px;
+    --i: 11;
+    --j: 14;
 }
 
 .MoneyTemple {
-    background-position: -192px -240px;
+    --i: 12;
+    --j: 15;
 }
 
 .PenitentMan {
-    background-position: -208px -240px;
+    --i: 13;
+    --j: 15;
 }
 
 .TheWiz {
-    background-position: -224px -240px;
+    --i: 14;
+    --j: 15;
 }
 
 .FarmerJoe {
-    background-position: -240px -240px;
+    --i: 15;
+    --j: 15;
 }
 
 .Key {
-    background-position: -256px -240px;
+    --i: 16;
+    --j: 15;
 }
 
 .Citizen {
-    background-position: -272px -240px;
+    --i: 17;
+    --j: 15;
 }
 
 .Crown1 {
-    background-position: -160px -224px;
+    --i: 10;
+    --j: 14;
 }
 
 .Crown2 {
-    background-position: -208px -224px;
+    --i: 13;
+    --j: 14;
 }
 
 .Crown3 {
-    background-position: -224px -224px;
+    --i: 14;
+    --j: 14;
 }
 
 .Crown4 {
-    background-position: -240px -224px;
+    --i: 15;
+    --j: 14;
 }
 
 
@@ -1392,7 +1472,7 @@ td {
 #divFooter {
     width: 100%;
     text-align: center;
-    border-top: 1px solid black;
+    border-top: calc(1px * var(--pixel-scale)) solid black;
     padding: 2.3vw 0;
     background: #AFAFBF;
 }

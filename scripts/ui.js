@@ -191,6 +191,8 @@ function UpdateCalendar() {
     divYear.innerHTML = displayYear + '&nbsp;' + year;
     divWeek.innerHTML = displayWeek + '&nbsp;' + week;
 
+    const pixelScale = window.getComputedStyle(divRuneSeason).getPropertyValue('--pixel-scale');
+
     const arraySeasonalGods = {
         venus: [-176, -16],
         ceres: [-192, -16],
@@ -201,7 +203,7 @@ function UpdateCalendar() {
     if (week > 39) { chosenRune = arraySeasonalGods.æolus; }
     else if (week > 26) { chosenRune = arraySeasonalGods.bacchus; }
     else if (week > 13) { chosenRune = arraySeasonalGods.ceres; }
-    divRuneSeason.style.backgroundPosition = chosenRune[0] + 'px ' + chosenRune[1] + 'px';
+    divRuneSeason.style.backgroundPosition = chosenRune[0] * pixelScale + 'px ' + chosenRune[1] * pixelScale + 'px';
 
     const arraySeasonStones = {
         alpha: [-272, -16],
@@ -231,7 +233,7 @@ function UpdateCalendar() {
     else if (week % 13 == 9) { chosenStone = arraySeasonStones.iota; }
     else if (week % 13 == 10) { chosenStone = arraySeasonStones.kappa; }
     else if (week % 13 == 11) { chosenStone = arraySeasonStones.lambda; }
-    divStonesSeason.style.backgroundPosition = chosenStone[0] + 'px ' + chosenStone[1] + 'px';
+    divStonesSeason.style.backgroundPosition = chosenStone[0] * pixelScale + 'px ' + chosenStone[1] * pixelScale + 'px';
 
     const arrayZodiacChinese = {
         rat: [0, -48],
@@ -260,7 +262,7 @@ function UpdateCalendar() {
     else if (thisCalculatedYear % 12 == 8) { chosenEmboss = arrayZodiacChinese.dragon; }
     else if (thisCalculatedYear % 12 == 9) { chosenEmboss = arrayZodiacChinese.snake; }
     else if (thisCalculatedYear % 12 == 10) { chosenEmboss = arrayZodiacChinese.horse; }
-    divEmbossZodiacChinese.style.backgroundPosition = chosenEmboss[0] + 'px ' + chosenEmboss[1] + 'px';
+    divEmbossZodiacChinese.style.backgroundPosition = chosenEmboss[0] * pixelScale + 'px ' + chosenEmboss[1] * pixelScale + 'px';
 
     const arraySeasonalEmboss = {
         spring: [-384, -48],
@@ -272,7 +274,7 @@ function UpdateCalendar() {
     if (week > 39) { chosenEmboss = arraySeasonalEmboss.winter; }
     else if (week > 26) { chosenEmboss = arraySeasonalEmboss.autumn; }
     else if (week > 13) { chosenEmboss = arraySeasonalEmboss.summer; }
-    divEmbossSeason.style.backgroundPosition = chosenEmboss[0] + 'px ' + chosenEmboss[1] + 'px';
+    divEmbossSeason.style.backgroundPosition = chosenEmboss[0] * pixelScale + 'px ' + chosenEmboss[1] * pixelScale + 'px';
 
     const weekStones = {
         alpha: [-480, 0],
@@ -284,7 +286,7 @@ function UpdateCalendar() {
     if (week % 4 == 0) { chosenStone = weekStones.delta; }
     else if (week % 4 == 1) { chosenStone = weekStones.alpha; }
     else if (week % 4 == 2) { chosenStone = weekStones.beta; }
-    divStonesWeek.style.backgroundPosition = chosenStone[0] + 'px ' + chosenStone[1] + 'px';
+    divStonesWeek.style.backgroundPosition = chosenStone[0] * pixelScale + 'px ' + chosenStone[1] * pixelScale + 'px';
 
     const arrayClassicalElements = {
         earth: [-400, 0],
@@ -358,8 +360,8 @@ function UpdateCalendar() {
         chosenElement = arrayClassicalElements.air;
         chosenRune = arrayZodiacSidereal.feb;
     }
-    divRuneMonth.style.backgroundPosition = chosenRune[0] + 'px ' + chosenRune[1] + 'px';
-    divRuneElement.style.backgroundPosition = chosenElement[0] + 'px ' + chosenElement[1] + 'px';
+    divRuneMonth.style.backgroundPosition = chosenRune[0] * pixelScale + 'px ' + chosenRune[1] * pixelScale + 'px';
+    divRuneElement.style.backgroundPosition = chosenElement[0] * pixelScale + 'px ' + chosenElement[1] * pixelScale + 'px';
 }
 
 
@@ -822,50 +824,51 @@ function UpdateVisibilities() {
         buttonBarterPom.style.display = (player.canBarter && farmStage > 17) ? 'block' : '';
         buttonBarterGrape.style.display = (player.canBarter && farmStage > 17) ? 'block' : '';
 
+        const pixelScale = window.getComputedStyle(buttonTillDecal).getPropertyValue('--pixel-scale');
         let plotSearchResult = FindPlot(0, 'all');
         if (plotSearchResult.row != -1) {
             buttonTill.classList.remove('disabled');
-            buttonTillDecal.style.backgroundPosition = '-208px -32px';
+            buttonTillDecal.style.backgroundPosition = (-208 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
         else {
             buttonTill.classList.add('disabled');
-            buttonTillDecal.style.backgroundPosition = '-336px -32px';
+            buttonTillDecal.style.backgroundPosition = (-336 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
 
         plotSearchResult = FindPlot(1, 'wheat');
         let plotSearchResultAlt = FindPlot(1, 'barley');
         if ((plotSearchResult.row != -1 && bushelCount[0] >= plantCost) || (plotSearchResultAlt.row != -1 && bushelCount[1] >= plantCost)) {
             buttonPlant.classList.remove('disabled');
-            buttonPlantDecal.style.backgroundPosition = '-240px -32px';
+            buttonPlantDecal.style.backgroundPosition = (-240 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
         else {
             buttonPlant.classList.add('disabled');
-            buttonPlantDecal.style.backgroundPosition = '-368px -32px';
+            buttonPlantDecal.style.backgroundPosition = (-368 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
 
         plotSearchResult = FindPlot(2, 'all');
         if (plotSearchResult.row != -1) {
             buttonWater.classList.remove('disabled');
-            buttonWaterDecal.style.backgroundPosition = '-272px -32px';
+            buttonWaterDecal.style.backgroundPosition = (-272 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
         else {
             buttonWater.classList.add('disabled');
-            buttonWaterDecal.style.backgroundPosition = '-400px -32px';
+            buttonWaterDecal.style.backgroundPosition = (-400 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
 
         plotSearchResult = FindPlot(14, 'all');
         if (plotSearchResult.row != -1 || arrayVineyard.includes(1) || arrayPomOrchard.includes(1) || arrayOlivar.includes(1) || arrayDatePalmGrove.includes(1) || arrayFigOrchard.includes(1)) {
             buttonHarvest.classList.remove('disabled');
-            buttonHarvestDecal.style.backgroundPosition = '-304px -32px';
+            buttonHarvestDecal.style.backgroundPosition = (-304 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
         else {
             buttonHarvest.classList.add('disabled');
-            buttonHarvestDecal.style.backgroundPosition = '-432px -32px';
+            buttonHarvestDecal.style.backgroundPosition = (-432 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
 
-        buttonPriorityOption.style.backgroundPosition = '-304px -32px';
-        if (priority == 'Sow') { buttonPriorityOption.style.backgroundPosition = '-208px -32px'; }
-        else if (priority == '🤪') { buttonPriorityOption.style.backgroundPosition = '-240px -16px'; }
+        buttonPriorityOption.style.backgroundPosition = (-304 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
+        if (priority == 'Sow') { buttonPriorityOption.style.backgroundPosition = (-208 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px'; }
+        else if (priority == '🤪') { buttonPriorityOption.style.backgroundPosition = (-240 * pixelScale) + 'px ' + (-16 * pixelScale) + 'px'; }
     }
 
     else {
@@ -878,6 +881,10 @@ function UpdateVisibilities() {
 
 
 function RedrawFarm() {
+    const pixelScale = window.getComputedStyle(canvasFarm).getPropertyValue('--pixel-scale');
+    // the scale of the farm may need to be set.... all the time. not just at the breakpoints like I have it now
+    //maybe just every stage sets width and height, real and CSS, every time, all the timmmeeeeeeee
+
     function PickCropTile(row, col) {
         let tileChoice = null;
         let arrayCropTiles = [
@@ -941,8 +948,8 @@ function RedrawFarm() {
 
     if (farmStage > 0) {
         canvasFarm.width = 32;
-        canvasFarm.style.width = '258px';
-        canvasFarm.style.height = '130px';
+        canvasFarm.style.width = 258 * pixelScale + 'px';
+        canvasFarm.style.height = 130 * pixelScale + 'px';
 
         arrayFarmGraph[0].push(
             PickCropTile(0, 1),
@@ -951,8 +958,8 @@ function RedrawFarm() {
 
     if (farmStage > 1) {
         canvasFarm.width = 64;
-        canvasFarm.style.width = '322px';
-        canvasFarm.style.height = '82px';
+        canvasFarm.style.width = 322 * pixelScale + 'px';
+        canvasFarm.style.height = 82 * pixelScale + 'px';
 
         arrayFarmGraph[0].push(
             PickCropTile(0, 2),
@@ -962,8 +969,8 @@ function RedrawFarm() {
 
     if (farmStage > 2) {
         canvasFarm.height = 32;
-        canvasFarm.style.width = '258px';
-        canvasFarm.style.height = '130px';
+        canvasFarm.style.width = 258 * pixelScale + 'px';
+        canvasFarm.style.height = 130 * pixelScale + 'px';
 
         arrayFarmGraph.push(
             [
@@ -978,8 +985,8 @@ function RedrawFarm() {
     if (farmStage > 3) {
         canvasFarm.width = 112;
         canvasFarm.height = 48;
-        canvasFarm.style.width = '296px';
-        canvasFarm.style.height = '128px';
+        canvasFarm.style.width = 296 * pixelScale + 'px';
+        canvasFarm.style.height = 128 * pixelScale + 'px';
 
         arrayFarmGraph[0].push(
             PickCropTile(0, 4),
@@ -1009,8 +1016,8 @@ function RedrawFarm() {
     if (farmStage > 4) {
         canvasFarm.width = 144;
         canvasFarm.height = 5 * 16;
-        canvasFarm.style.width = '290px';
-        canvasFarm.style.height = ((5 * 32) + 2) + 'px';
+        canvasFarm.style.width = 290 * pixelScale + 'px';
+        canvasFarm.style.height = ((5 * 32) + 2) * pixelScale + 'px';
 
         arrayFarmGraph.unshift(
             [
@@ -1052,7 +1059,8 @@ function RedrawFarm() {
 
     if (farmStage > 5) {
         canvasFarm.height = 11 * 16;
-        canvasFarm.style.height = ((11 * 32) + 2) + 'px';
+        canvasFarm.style.width = 290 * pixelScale + 'px';
+        canvasFarm.style.height = ((11 * 32) + 2) * pixelScale + 'px';
 
         arrayFarmGraph.unshift(
             [
@@ -1125,17 +1133,23 @@ function RedrawFarm() {
     }
 
     if (farmStage > 6) {
+        canvasFarm.style.width = 290 * pixelScale + 'px';
+        canvasFarm.style.height = ((11 * 32) + 2) * pixelScale + 'px';
         arrayFarmGraph[4][1] = tileLawn;
         arrayFarmGraph[5][4] = tileLawn;
     }
 
     if (farmStage > 7) {
+        canvasFarm.style.width = 290 * pixelScale + 'px';
+        canvasFarm.style.height = ((11 * 32) + 2) * pixelScale + 'px';
         arrayFarmGraph[3][3] = tileLawn;
         arrayFarmGraph[4][6] = tileLawn;
         arrayFarmGraph[5][2] = tileLawn;
     }
 
     if (farmStage > 8) {
+        canvasFarm.style.width = 290 * pixelScale + 'px';
+        canvasFarm.style.height = ((11 * 32) + 2) * pixelScale + 'px';
         arrayFarmGraph[0][0] = tileShrubs4;
         arrayFarmGraph[0][1] = tileLawn;
         arrayFarmGraph[0][2] = tileLawn;
@@ -1189,6 +1203,8 @@ function RedrawFarm() {
     }
 
     if (farmStage > 9) {
+        canvasFarm.style.width = 290 * pixelScale + 'px';
+        canvasFarm.style.height = ((11 * 32) + 2) * pixelScale + 'px';
         arrayFarmGraph[2][2] = PickOliveTile(0);
         arrayFarmGraph[3][2] = PickOliveTile(1);
         arrayFarmGraph[4][2] = PickOliveTile(2);
@@ -1209,8 +1225,8 @@ function RedrawFarm() {
 
     if (farmStage > 10) {
         canvasFarm.width = 18 * 16;
-        canvasFarm.style.width = ((18 * 16) + 2) + 'px';
-        canvasFarm.style.height = ((11 * 16) + 2) + 'px';
+        canvasFarm.style.width = ((18 * 16) + 2) * pixelScale + 'px';
+        canvasFarm.style.height = ((11 * 16) + 2) * pixelScale + 'px';
 
         arrayFarmGraph[8][1] = PickCropTile(0, 7);
         arrayFarmGraph[8][2] = PickCropTile(0, 8);
@@ -1362,6 +1378,8 @@ function RedrawFarm() {
     }
 
     if (farmStage > 11) {
+        canvasFarm.style.width = ((18 * 16) + 2) * pixelScale + 'px';
+        canvasFarm.style.height = ((11 * 16) + 2) * pixelScale + 'px';
         arrayFarmGraph[0][0] = tileFenceNW;
         arrayFarmGraph[0][1] = tileFenceH;
         arrayFarmGraph[0][2] = tileFenceH;
@@ -1441,8 +1459,8 @@ function RedrawFarm() {
     if (farmStage > 12) {
         canvasFarm.width = 20 * 16;
         canvasFarm.height = 18 * 16;
-        canvasFarm.style.width = ((20 * 16) + 2) + 'px';
-        canvasFarm.style.height = ((18 * 16) + 2) + 'px';
+        canvasFarm.style.width = ((20 * 16) + 2) * pixelScale + 'px';
+        canvasFarm.style.height = ((18 * 16) + 2) * pixelScale + 'px';
 
         arrayFarmGraph[0].unshift(tileShrubs1,);
         arrayFarmGraph[0].push(tileTrees,);
@@ -1639,6 +1657,8 @@ function RedrawFarm() {
     }
 
     if (farmStage > 13) {
+        canvasFarm.style.width = ((20 * 16) + 2) * pixelScale + 'px';
+        canvasFarm.style.height = ((18 * 16) + 2) * pixelScale + 'px';
         arrayFarmGraph[0][9] = tilePathV;
         arrayFarmGraph[0][10] = tilePathV;
 
@@ -1737,6 +1757,8 @@ function RedrawFarm() {
     }
 
     if (farmStage > 14) {
+        canvasFarm.style.width = ((20 * 16) + 2) * pixelScale + 'px';
+        canvasFarm.style.height = ((18 * 16) + 2) * pixelScale + 'px';
         arrayFarmGraph[0][8] = tileRoughPathR;
         arrayFarmGraph[0][9] = tileCobblestoneW;
         arrayFarmGraph[0][10] = tileCobblestoneE;
@@ -1761,6 +1783,8 @@ function RedrawFarm() {
     }
 
     if (farmStage > 15) {
+        canvasFarm.style.width = ((20 * 16) + 2) * pixelScale + 'px';
+        canvasFarm.style.height = ((18 * 16) + 2) * pixelScale + 'px';
         arrayFarmGraph[3][4] = tilePathV;
 
         arrayFarmGraph[4][2] = tileWell;
@@ -1785,7 +1809,8 @@ function RedrawFarm() {
 
     if (farmStage > 16) {
         canvasFarm.height = 23 * 16;
-        canvasFarm.style.height = ((23 * 16) + 2) + 'px';
+        canvasFarm.style.width = ((20 * 16) + 2) * pixelScale + 'px';
+        canvasFarm.style.height = ((23 * 16) + 2) * pixelScale + 'px';
 
         arrayFarmGraph.push(
             [
@@ -1904,8 +1929,8 @@ function RedrawFarm() {
     if (farmStage > 17) {
         canvasFarm.width = 24 * 16;
         canvasFarm.height = 44 * 16;
-        canvasFarm.style.width = ((24 * 16) + 2) + 'px';
-        canvasFarm.style.height = ((44 * 16) + 2) + 'px';
+        canvasFarm.style.width = ((24 * 16) + 2) * pixelScale + 'px';
+        canvasFarm.style.height = ((44 * 16) + 2) * pixelScale + 'px';
 
         arrayFarmGraph[0].unshift(tileTrees, tileShrubs4,);
         arrayFarmGraph[0].push(tilePathV, tileRocks,);
@@ -3972,7 +3997,8 @@ function AnimateHourglass(newSpeed) {
         }
     }
     oldSpeed = newSpeed;
-    divHourglass.style.backgroundPosition = arrayHourglassInUse[frameHourglass][0] + 'px ' + arrayHourglassInUse[frameHourglass][1] + 'px';
+    const pixelScale = window.getComputedStyle(divHourglass).getPropertyValue('--pixel-scale');
+    divHourglass.style.backgroundPosition = arrayHourglassInUse[frameHourglass][0] * pixelScale + 'px ' + arrayHourglassInUse[frameHourglass][1] * pixelScale + 'px';
     if (gameSpeed != 'paused') { timeoutHourglass = setTimeout(AnimateHourglass, delayAmountHourglassFrame, newSpeed); }
 }
 
@@ -4104,7 +4130,7 @@ function RedrawCanvases() {
             tileFurnaceSE = arrayFurnaceSEFrames[animationCycleFrame];
         }
         else {
-            //township animations go here
+            //township animations go here (oh, you sweet, naïve boy 😂)
         }
     }
 }
