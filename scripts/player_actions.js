@@ -47,16 +47,16 @@ buttonCC0.addEventListener('click', function () { Legal(); });
 document.body.onkeyup = function (e) {
     if (e.key == '`') {
         console.log('--------🚨 Game State Report 🚨--------');
-        console.log('gameTurn: ' + gameTurn);
-        console.log('farmStage: ' + farmStage);
-        console.log('warehouseStage: ' + warehouseStage);
-        console.log('villageStage: ' + villageStage);
+        console.log('• gameTurn: ' + gameTurn);
+        console.log('• farmStage: ' + farmStage);
+        console.log('• warehouseStage: ' + warehouseStage);
+        console.log('• villageStage: ' + villageStage);
     }
 
     if (e.key == '~') {
         player.isGod = !player.isGod;
-        if (player.isGod) { SystemMessage('<div id="divSoyMessage">I Am Soy</div>All bets are *off*, pal'); }
-        else { SystemMessage('<div id="divSoyMessage">I Ain’t No Soy</div>But don’t you think for one second that any bets are suddenly back *on*, guy'); }
+        if (player.isGod) { SystemMessage('<div id="divSoyMessage">I Am Soy</div>And that means all bets are *off*, partner'); }
+        else { SystemMessage('<div id="divSoyMessage">I Ain’t No Soy</div>But don’t you think for one second any bets are suddenly now back *on*, Buster Brown'); }
     }
 
     if (player.isGod) {
@@ -109,7 +109,7 @@ document.body.onkeyup = function (e) {
             else { GoToPraedium(); }
         }
 
-        if (e.key == 'G') { // 🚨🚨🚨 USE WITH CAUTION!!! ONLY WORKS AT GAME START AND IN EXACT SEQUENCE 🚨🚨🚨
+        if (e.key == 'G') { // 🚨🚨🚨 USE WITH CAUTION!!! ONLY WORKS AT GAME START AND IN *EXACT* SEQUENCE 🚨🚨🚨
             if (!player.canPlant) {
                 StartTime();
                 StartTime();
@@ -1247,6 +1247,7 @@ function Win() {
     player.hasWon = true;
     if (player.likesStory) { GameEvent(displayWinMessage); }
     //window.open(winTarget, 'PRAEDIUM_requested_new_tab');
+
     player.saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
 
     let winReport = {
@@ -1259,6 +1260,7 @@ function Win() {
         winDateWeek: week,
         winDateOlivePlant: olivePlantDate,
         winDateVillageEst: estDate,
+        winDateHolidayTime: [weeksOfHoliday, manweeksLost],
 
         winCountsFarmBushels: bushelCount,
         winCountsFarmSeeded: seededCount,

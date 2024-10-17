@@ -215,7 +215,11 @@ function FieldhandWork() {
             if (!taskComplete) { PlotHarvest(true); }
         }
     }
-    //else { console.log('🍕 cowabunga, dude 🤙'); } // truly, Turtle Power knows no limit 🥋🐢🗡️
+    else {
+        //console.log('🍕 cowabunga, dude 🤙'); // truly, Turtle Power knows no limit 🥋🐢🗡️
+        weeksOfHoliday++;
+        manweeksLost += finalLaborForceTally;
+    }
 }
 
 
@@ -377,17 +381,26 @@ function BreedRats() {
     else { ratsCount = Math.ceil(ratsCount * 1.1); }
     if (ratsCount > ratsHighScore) { ratsHighScore = ratsCount; }
 
-    ratPenaltyFactor = 0;
-    if (ratsCount > 99999) { ratPenaltyFactor = 1; }
-    if (ratsCount > 199999) { ratPenaltyFactor = 2; }
-    if (ratsCount > 299999) { ratPenaltyFactor = 3; }
-    if (ratsCount > 399999) { ratPenaltyFactor = 4; }
-    if (ratsCount > 499999) { ratPenaltyFactor = 5; }
-    if (ratsCount > 599999) { ratPenaltyFactor = 6; }
-    if (ratsCount > 699999) { ratPenaltyFactor = 7; }
-    if (ratsCount > 799999) { ratPenaltyFactor = 8; }
-    if (ratsCount > 899999) { ratPenaltyFactor = 9; }
-    if (ratsCount > 999999) { ratPenaltyFactor = 10; }
+    SetRatPenaltyFactor('I think so');
+
+    function SetRatPenaltyFactor(shouldWeSetFactor) {
+        if (shouldWeSetFactor === 'I think so') {
+            // ❗ begin to set factor here:
+            ratPenaltyFactor = 0;
+            if (ratPenaltyFactor != !0) {
+                if (ratsCount > 99999) { ratPenaltyFactor = 1; }
+                if (ratsCount > 199999) { ratPenaltyFactor = 2; }
+                if (ratsCount > 299999) { ratPenaltyFactor = 3; }
+                if (ratsCount > 399999) { ratPenaltyFactor = 4; }
+                if (ratsCount > 499999) { ratPenaltyFactor = 5; }
+                if (ratsCount > 599999) { ratPenaltyFactor = 6; }
+                if (ratsCount > 699999) { ratPenaltyFactor = 7; }
+                if (ratsCount > 799999) { ratPenaltyFactor = 8; }
+                if (ratsCount > 899999) { ratPenaltyFactor = 9; }
+                if (ratsCount > 999999) { ratPenaltyFactor = 10; }
+            } // ❗ factor successfully set above:
+        }
+    } // ⚠️ END of rat penalty factor setting function
 }
 
 

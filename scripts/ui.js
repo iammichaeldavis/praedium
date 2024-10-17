@@ -3857,6 +3857,7 @@ function RedrawVillage() {
 
 
 // disable or enable this based on player.likesAnimations 🚨🚨🚨
+// if we do that it won't get translated 😤
 function AnimateWinButton() {
     frameWinButton++;
     if (frameWinButton == 4) { frameWinButton = 0; }

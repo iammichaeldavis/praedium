@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.3.02';
+const version = '1.3.03';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -270,6 +270,8 @@ const olivePlantDate = [0, 0,];
 let handsAvailable = 2;
 const handsMax = 36;
 let priority = 'Reap';
+let weeksOfHoliday = 0;
+let manweeksLost = 0;
 let handsHired = 0;
 let handsEaten = 0;
 let vigneronsHired = 0;
