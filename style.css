@@ -1041,13 +1041,13 @@ td {
 #tableForestStaff td,
 #tableMountainInventory td,
 #tableMountainStaff td {
-    padding: 1vw 3vw;
+    padding: 1vw 2vw;
 }
 
 #tableFarmReport td,
 #tableForestReport td,
 #tableMountainReport td {
-    padding: 1vw 3vw;
+    padding: 1vw 2vw;
     text-align: center;
 }
 
@@ -1056,7 +1056,7 @@ td {
 }
 
 #divGameWindow .rightPadColumn {
-    padding: 1vw 3vw 1vw 0;
+    padding: 1vw 2vw 1vw 0;
 }
 
 
@@ -1099,7 +1099,7 @@ td {
 #tableVillageIncome td,
 #tableVillageMateriel td,
 #tableVillageStatistics td {
-    padding: 1vw 3vw;
+    padding: 1vw 2vw;
 }
 
 #tableVillageDemographics thead td,
@@ -1421,6 +1421,16 @@ td {
 
 .Citizen {
     --i: 17;
+    --j: 15;
+}
+
+.TaxCollector {
+    --i: 18;
+    --j: 15;
+}
+
+.LordBritish {
+    --i: 19;
     --j: 15;
 }
 

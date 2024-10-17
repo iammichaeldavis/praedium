@@ -594,9 +594,16 @@ function UpdateText() {
             tableString += '</tr>';
             tableString += '</thead>';
             tableString += '<tbody>';
+            if (player.hasBeenLevied) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayTribute + ' <span class="icon LordBritish inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="noPadColumn">' + '-' + currencySymbol + tributeAmount + '</td>';
+                tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayDay + '</span>' + '</td>';
+                tableString += '</tr>';
+            }
             tableString += '<tr>';
             tableString += '<td>' + displayRent + ' <span class="icon Key inlineIcon"></span>:' + '</td>';
-            tableString += '<td class="noPadColumn">+' + currencySymbol + rentPrice + '/<span class="icon Citizen inlineIcon"></span>' + '</td>';
+            tableString += '<td class="noPadColumn">' + '+' + currencySymbol + rentPrice + '/' + '<span class="icon Citizen inlineIcon"></span>' + '</td>';
             tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayWeek + '</span>' + '</td>';
             tableString += '</tr>';
             if (beadsSpawn) {

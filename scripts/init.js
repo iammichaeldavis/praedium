@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.2';
+const version = '1.3';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -79,6 +79,7 @@ const player = {
     hasMildewed: false,
     hasFoundCopperEvidence: false,
     hasFoundMine: false,
+    hasBeenLevied: false, // change 'Income' table header to 'Profit & Loss'/'Pérdidas y Ganancias'
     hasWon: false,
 };
 
@@ -416,6 +417,10 @@ const priceBuild14 = [64000, 810, 20000]; // monks
 const priceBuild15 = [1200000, 60000]; // sewers
 const priceBuild16 = [2400000, 30000, 60000, 200000]; // gates
 const priceBuild17 = [10000000, 9001, 77, 5000, 100000, 100000]; // monumo
+
+const tributeAmount = 616; // 😈 NRO QSR
+let tributeTimer = 0;
+const tributeTimerLimit = 100;
 
 const legalTarget = 'https://creativecommons.org/publicdomain/zero/1.0/';
 const winTarget = 'https://youtu.be/dOjFcx3GJHg'; // ♠️♣️♦️♥️ // 'https://youtu.be/AQmFlAB15f8'; // 👨‍🎤💃🎻 // 'https://youtu.be/YnDLlajMxyo'; // 🌼☀️🍂❄️

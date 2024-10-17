@@ -62,6 +62,20 @@ function GameTurn() {
             if (knightsCount > knightsMax) { knightsCount = knightsMax; }
             asCount -= knightsCount * 10;
             asSpent += knightsCount * 10;
+
+            if (tributeTimer < tributeTimerLimit) {
+                tributeTimer++;
+                if (tributeTimer == tributeTimerLimit) {
+                    if (story) { GameEvent(displayStoryTribute, null, false); }
+                    player.hasBeenLevied = true;
+                }
+            }
+
+            if (player.hasBeenLevied) {
+                const weeklyLevy = tributeAmount * 7;
+                asCount -= weeklyLevy;
+                asSpent += weeklyLevy;
+            }
         }
     }
     if (horsesCount > 0) { FeedHorses(); }
