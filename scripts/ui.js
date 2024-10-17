@@ -373,6 +373,13 @@ function UpdateText() {
         buttonForewordDismiss.innerHTML = displayForewordLabel;
     }
 
+    if (player.seesModsWindow) {
+        labelModCode.innerHTML = displayModCodeLabel;
+        textareaModCode.placeholder = displayModCodeTextArea;
+        buttonSubmitModCode.innerHTML = displaySubmitModCode;
+        buttonModsDismiss.innerHTML = displayDismissMods;
+    }
+
     if (player.isAt == 'Praedium') {
         buttonGoToTownship.innerHTML = displayGoToTownship;
 
@@ -590,7 +597,7 @@ function UpdateText() {
             tableString += '<table id="tableVillageIncome">';
             tableString += '<thead>';
             tableString += '<tr>';
-            tableString += '<td colspan="3">' + displayIncome + '</td>';
+            tableString += '<td colspan="3">' + (player.hasBeenLevied ? displayPnL : displayIncome) + '</td>';
             tableString += '</tr>';
             tableString += '</thead>';
             tableString += '<tbody>';
@@ -781,7 +788,7 @@ function UpdateVisibilities() {
     divOverlayGameEvent.style.display = player.seesGameEvent ? 'block' : '';
     divOverlayOptions.style.display = player.seesOptions ? 'block' : '';
     divOverlayMods.style.display = player.seesModsWindow ? 'block' : '';
-    buttonStar.style.display = god ? 'inline-block' : '';
+    buttonStar.style.display = player.isGod ? 'inline-block' : '';
 
     if (player.seesForeword && player.hasBegun) {
         divForewordTitle.style.display = 'none';

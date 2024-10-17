@@ -43,7 +43,7 @@ function GameTurn() {
         if (mineTimer < mineTimerLimit) {
             mineTimer++;
             if (mineTimer == mineTimerLimit) {
-                if (story) { GameEvent(displayStoryFoundCopper, null, false); }
+                if (player.likesStory) { GameEvent(displayStoryFoundCopper, null, false); }
                 player.seesMountainButton = true;
                 player.hasFoundCopperEvidence = true;
             }
@@ -66,7 +66,7 @@ function GameTurn() {
             if (tributeTimer < tributeTimerLimit) {
                 tributeTimer++;
                 if (tributeTimer == tributeTimerLimit) {
-                    if (story) { GameEvent(displayStoryTribute, null, false); }
+                    if (player.likesStory) { GameEvent(displayStoryTribute, null, false); }
                     player.hasBeenLevied = true;
                 }
             }
@@ -85,7 +85,7 @@ function GameTurn() {
     if (farmStage == 1 && bushelCount[0] > 88 && !player.hasMildewed) {
         player.hasMildewed = true;
         bushelCount[0] = Math.floor((bushelCount[0] * 0.1));
-        if (story) { GameEvent(displayStoryFarmMildew, null, false); }
+        if (player.likesStory) { GameEvent(displayStoryFarmMildew, null, false); }
     }
 
     UpdateDisplay();
@@ -114,7 +114,7 @@ function FruitOlives() {
 
         if (year >= (olivePlantDate[1] + 8)) {
             if (year == (olivePlantDate[1] + 8)) {
-                if (story) { GameEvent(displayStoryOlives, 'buy_olives', false); }
+                if (player.likesStory) { GameEvent(displayStoryOlives, 'buy_olives', false); }
                 player.canBarter = true;
             }
             for (let i = 0; i < arrayOlivar.length; i++) { arrayOlivar[i] = 1; }

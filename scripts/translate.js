@@ -216,6 +216,7 @@ let displayFiat = '';
 let displayTreasury = '';
 let displayAsSpent = '';
 let displayIncome = '';
+let displayPnL = '';
 let displayRent = '';
 let displayHusbandry = '';
 let displayWorship = '';
@@ -259,6 +260,11 @@ let displayBoxCopy = '';
 let displayHeir = '';
 let displayWinMessage = '— Mon ami, dit Valentine,<br>le comte ne vient-il pas de nous<br>dire que l’humaine sagesse était<br>tout entière dans ces deux mots :<br><br>— <span id="Dumas">Attendre et espérer !</span><br><br><br><br><br><span id="fin">FIN DU PRÆDIVM</span><br><br><br><br>';
 let displayEndButton = '';
+
+let displayModCodeLabel = '';
+let displayModCodeTextArea = '';
+let displaySubmitModCode = '';
+let displayDismissMods = '';
 
 
 
@@ -479,6 +485,7 @@ function Translate(language, bark = true) {
         displayTreasury = 'Treasury';
         displayAsSpent = 'Spent';
         displayIncome = 'Income';
+        displayPnL = 'Profit & Loss';
         displayRent = 'Rent';
         displayHusbandry = 'Husbandry';
         displayWorship = 'Worship';
@@ -518,6 +525,11 @@ function Translate(language, bark = true) {
 
         displayHeir = 'CHOOSE AN HEIR';
         displayEndButton = 'THE END';
+
+        displayModCodeLabel = '<i>USER DISCRETION IS STRONGLY ADVISED!</i><br>Do not copy any code into this window that you do not absolutely understand and/or trust!';
+        displayModCodeTextArea = 'Paste your modCode here';
+        displaySubmitModCode = 'SUBMIT MODCODE';
+        displayDismissMods = 'I AM FINISHED HERE';
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -737,6 +749,7 @@ function Translate(language, bark = true) {
         displayTreasury = 'Tesorería';
         displayAsSpent = 'Gastado';
         displayIncome = 'Ingresos';
+        displayPnL = 'Pérdidas y Ganancias';
         displayRent = 'Alquiler';
         displayHusbandry = 'Ganadería';
         displayWorship = 'Adoración';
@@ -776,6 +789,11 @@ function Translate(language, bark = true) {
 
         displayHeir = 'ELEGIR UN HEREDERO';
         displayEndButton = 'CONCLUIR';
+
+        displayModCodeLabel = '<i>¡LA DISCRECIÓN DEL USUARIO ES FUERTEMENTE ACONSEJADO!</i><br>¡No copie en esta ventana ningún código que no comprenda completamente y/o en el que no confíe!';
+        displayModCodeTextArea = 'Pegue su modCode aquí';
+        displaySubmitModCode = 'ENTREGAR MODCODE';
+        displayDismissMods = 'HE TERMINADO';
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////

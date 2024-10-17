@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.3';
+const version = '1.3.01';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -22,20 +22,20 @@ const arrayPomOrchard = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const arrayVineyard = [0, 0, 0, 0, 0, 0, 0, 0,];
 
 const player = {
+    names: ['Mud',],
+    age: 11, // longest verified documented human lifespan: Jeanne Calment of France, 122 years and 164 days
+    saṃsāra: -0,
+
+    isGod: false,
     isOnMobile: null,
+    isAt: 'Praedium',
 
     speaks: null,
 
     likesMusic: true,
     likesSounds: true,
     likesAnimations: true,
-    //likesStory: true,
-
-    isAt: 'Praedium',
-
-    names: ['Mud',],
-    age: 11, // longest verified documented human lifespan: Jeanne Calment of France, 122 years and 164 days
-    //isGod: false,
+    likesStory: true,
 
     seesHint: false,
     seesModsWindow: false,
@@ -79,7 +79,7 @@ const player = {
     hasMildewed: false,
     hasFoundCopperEvidence: false,
     hasFoundMine: false,
-    hasBeenLevied: false, // change 'Income' table header to 'Profit & Loss'/'Pérdidas y Ganancias'
+    hasBeenLevied: false,
     hasWon: false,
 };
 
@@ -106,6 +106,7 @@ const divGameEventCorpus = document.getElementById('divGameEventCorpus');
 const buttonGameEventDismiss = document.getElementById('buttonGameEventDismiss');
 
 const divOverlayMods = document.getElementById('divOverlayMods');
+const labelModCode = document.getElementById('labelModCode');
 const textareaModCode = document.getElementById('textareaModCode');
 const buttonSubmitModCode = document.getElementById('buttonSubmitModCode');
 const buttonModsDismiss = document.getElementById('buttonModsDismiss');
@@ -228,11 +229,6 @@ const buttonCC0 = document.getElementById('buttonCC0');
 
 const formatterStandard = new Intl.NumberFormat('en-US');
 
-let god = false; // refactor this to 'player.isGod'
-let story = true; // refactor this to 'player.likesStory'
-
-const nameVillage = 'Alʿard al-Janubiyah'; // الأرض الجنوبية == Terra Australis. HBD, Grant! 🎂🫂
-
 let gameTurn = 1; // 📅
 const yearAtStartProlepticGregorian = -200; // 200 B.C. ✝️
 const yearAtStartHebrew = 3560; // according to https://sacred-texts.com/time/cal/jdate.htm ✡️
@@ -324,10 +320,11 @@ const mountainProducedCount = [0, 0, 0,];
 const mountainSpentCount = [0, 0, 0,];
 
 const starvingBuffer = 10;
-const starving = [false, false, false, false, false, false, false, false, false]; // hands, loggers, sawyers, masons, miners, smelters, vignerons, arborists, horticulturalists
+const starving = [false, false, false, false, false, false, false, false, false]; // hands 🧑‍🌾, loggers 🪓, sawyers 🪚, masons 🔨, miners ⛏️, smelters 🔥, vignerons 🍇, arborists 🌲, horticulturalists 🐌
 
-let villageStage = 0;
+const nameVillage = 'Alʿard al-Janubiyah'; // الأرض الجنوبية == Terra Australis. HBD, Grant! 🎂🫂
 const estDate = [0, 0,];
+let villageStage = 0;
 
 let residentsCount = 0;
 let residentsMax = 0;
@@ -424,8 +421,6 @@ const tributeTimerLimit = 100;
 
 const legalTarget = 'https://creativecommons.org/publicdomain/zero/1.0/';
 const winTarget = 'https://youtu.be/dOjFcx3GJHg'; // ♠️♣️♦️♥️ // 'https://youtu.be/AQmFlAB15f8'; // 👨‍🎤💃🎻 // 'https://youtu.be/YnDLlajMxyo'; // 🌼☀️🍂❄️
-
-let saṃsāra = -0;
 
 let gameSpeed = 'paused';
 let oldSpeed = null;

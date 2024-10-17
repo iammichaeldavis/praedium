@@ -575,6 +575,14 @@ button:active {
     user-select: none;
 }
 
+#divSoyMessage {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 6.9vw;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 4vw;
+}
+
 #divSystemMessageScripture {
     font-family: 'Garamond', serif;
     font-size: 3.6vw;
