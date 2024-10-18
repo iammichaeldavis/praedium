@@ -604,7 +604,7 @@ function UpdateText() {
             if (player.hasBeenLevied) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayTribute + ' <span class="icon LordBritish inlineIcon"></span>:' + '</td>';
-                tableString += '<td class="noPadColumn">' + '-' + currencySymbol + tributeAmount + '</td>';
+                tableString += '<td class="noPadColumn">' + '-' + currencySymbol + tributeAmount + '/' + '<span class="icon CityWalls inlineIcon"></span>' + '</td>';
                 tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayDay + '</span>' + '</td>';
                 tableString += '</tr>';
             }
@@ -613,6 +613,13 @@ function UpdateText() {
             tableString += '<td class="noPadColumn">' + '+' + currencySymbol + rentPrice + '/' + '<span class="icon Citizen inlineIcon"></span>' + '</td>';
             tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayWeek + '</span>' + '</td>';
             tableString += '</tr>';
+            if (trophiesSpawn) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayTourism + ' <span class="icon Jester inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="noPadColumn">' + '+' + currencySymbol + tourismValue + '/' + '<span class="icon Trophy inlineIcon"></span>' + '</td>';
+                tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayFortnight + '</span>' + '</td>';
+                tableString += '</tr>';
+            }
             if (beadsSpawn) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayWorship + ' <span class="icon PenitentMan inlineIcon"></span>:' + '</td>';
@@ -668,7 +675,7 @@ function UpdateText() {
                     tableString += '<tr>';
                     tableString += '<td>' + displayChampionships + ' <span class="icon Trophy inlineIcon"></span>:' + '</td>';
                     tableString += '<td class="noPadColumn">' + formatterStandard.format(trophiesCount) + '</td>';
-                    tableString += '<td></td>';
+                    tableString += '<td>(10%' + '<span class="warehouseTotal"> ' + displayChance + '/' + displayMonth + '</span>)' + '</td>';
                     tableString += '</tr>';
                 }
                 if (beadsSpawn) {

@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.3.04';
+const version = '1.3.05';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -348,6 +348,8 @@ let beadsCount = 0;
 
 let trophiesSpawn = false;
 let trophiesCount = 0;
+let tourismValue = 10;
+let tourismLifetimeProfit = 0;
 
 let scrollsSpawn = false;
 const scrollsIncAmount = 1;

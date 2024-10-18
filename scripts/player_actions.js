@@ -55,8 +55,8 @@ document.body.onkeyup = function (e) {
 
     if (e.key == '~') {
         player.isGod = !player.isGod;
-        if (player.isGod) { SystemMessage('<div id="divSoyMessage">I Am Soy</div>And that means all bets are *off*, partner'); }
-        else { SystemMessage('<div id="divSoyMessage">I Ain’t No Soy</div>But don’t you think for one second any bets are suddenly now back *on*, Buster Brown'); }
+        if (player.isGod) { SystemMessage('<div id="divSoyMessage">☛ I Am Soy ☚</div>And that means all bets are *off*, partner'); }
+        else { SystemMessage('<div id="divSoyMessage">☞ I Ain’t No Soy ☜</div>But don’t you think for one second any bets are suddenly now back *on*, Buster Brown'); }
     }
 
     if (player.isGod) {
@@ -1151,6 +1151,7 @@ function Build() {
         mountainSpentCount[0] += priceBuild13[2];
 
         rentPrice += 10;
+        tourismValue += 2;
         actualBushelPrice -= 1200;
         SetMarketPrice();
     }
@@ -1175,6 +1176,7 @@ function Build() {
         mountainSpentCount[0] += priceBuild15[1];
 
         rentPrice += 8;
+        tourismValue += 2;
         actualBushelPrice -= 50;
         SetMarketPrice();
         ratsSpawn = true;
@@ -1193,6 +1195,7 @@ function Build() {
         mountainSpentCount[0] += priceBuild16[3];
 
         rentPrice += 16;
+        tourismValue += 8;
         actualBushelPrice -= 50;
         SetMarketPrice();
         cityWalls = true;
@@ -1213,6 +1216,7 @@ function Build() {
         mountainSpentCount[0] += priceBuild17[5];
 
         rentPrice += 12;
+        tourismValue += 24;
         player.canBuild = false;
 
         player.canWin = true;
@@ -1272,7 +1276,7 @@ function Win() {
         winCountsForestSpent: forestSpentCount,
         winCountsMountainProduced: mountainProducedCount,
         winCountsMountainSpent: mountainSpentCount,
-        winCountsVillageAs: [asCount, asSpent],
+        winCountsVillageAs: [asCount, asSpent, tourismLifetimeProfit],
         winCountsVillageMateriel: [horsesCount, trophiesCount, beadsCount, scrollsCount],
         winCountsVillageRats: [ratsCount, ratsHighScore],
     };

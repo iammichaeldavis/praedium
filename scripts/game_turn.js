@@ -54,6 +54,11 @@ function GameTurn() {
         if (beadsSpawn) { MakeBeads(); }
         if (trophiesSpawn) { HostGladiatorGames(); }
     }
+    if (week % 2 == 0) {
+        const tourismTotalIncome = tourismValue * trophiesCount;
+        asCount += tourismTotalIncome;
+        tourismLifetimeProfit += tourismTotalIncome;
+    }
     if (horsesSpawn) {
         GrowHorses();
         if (cityWalls) {
