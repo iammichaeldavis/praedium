@@ -182,7 +182,10 @@ button:active {
 }
 
 #buttonForewordEnglish,
-#buttonForewordSpanish,
+#buttonForewordSpanish {
+    font-size: 3.6vw;
+}
+
 #buttonEnglish,
 #buttonSpanish {
     font-size: 2.4vw;
@@ -509,7 +512,8 @@ button:active {
 
 #divForewordTitle {
     font-family: 'Garamond', serif;
-    font-size: 10vw;
+    font-size: 14vw;
+    line-height: 8vw;
     color: crimson;
     text-align: center;
     margin: 0 auto;
@@ -518,11 +522,11 @@ button:active {
 
 #divForewordSubtitle {
     font-family: 'Garamond', serif;
-    font-size: 2.4vw;
+    font-size: 2.8vw;
     font-style: italic;
     color: crimson;
     text-align: center;
-    margin: 0 auto 6vw auto;
+    margin: 2.2vw auto 4.2vw auto;
     user-select: none;
 }
 

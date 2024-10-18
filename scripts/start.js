@@ -7,7 +7,7 @@ window.onresize = UpdateDisplay;
 
 
 // ╔════════════════════╗
-// ║ PRAEDIUM v1.3.03   ║
+// ║ PRAEDIUM v1.3.04   ║
 // ╟────────────────────╢
 // ║                    ║
 // ║                    ║

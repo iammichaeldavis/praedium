@@ -511,9 +511,9 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'The current language is now set to English.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">“There is no true knowledge without right faith, no virtuous conduct is possible without knowledge, without virtue there is no liberation, and without liberation, no nirvana.”</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeWith = 'For Dylan. I love you so much, bud.<br><br>Made with CodePen, the GNU Image Manipulation Program, GitHub and Visual Studio Code.';
-        displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, David “aniwey” L., Denis Loubet, Tom Rothamel, Michael Townsend and Tim Sweeney, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Dave and Anna Davis, Kenneth Garagnon, Sean Glavin, Marty Hirsch, Leif Johansen, David Macaulay, the Méndez family, Brian Moran, Grant Sutherland and W3Schools.';
+        displayInfoMadeWith = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.<br><br>Made with CodePen, the GNU Image Manipulation Program, GitHub and Visual Studio Code.';
+        displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, David “aniwey” L., Tom Rothamel, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Dave and Anna Davis, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor and W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -775,9 +775,9 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'El idioma actual ahora está configurado en español.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">«No hay conocimiento verdadero sin fe recta, ninguna conducta virtuosa es posible sin conocimiento, sin virtud no hay liberación, y sin liberación, no nirvana.»</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeWith = 'Para Dylan. Te quiero mucho, sobrino.<br><br>Hecho con CodePen, el GNU Image Manipulation Program, GitHub y Visual Studio Code.';
-        displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, David “aniwey” L., Denis Loubet, Tom Rothamel, Michael Townsend y Tim Sweeney, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Dave y Anna Davis, Kenneth Garagnon, Sean Glavin, Marty Hirsch, Leif Johansen, David Macaulay, la familia Méndez, Brian Moran, Grant Sutherland y W3Schools.';
+        displayInfoMadeWith = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.<br><br>Hecho con CodePen, el GNU Image Manipulation Program, GitHub y Visual Studio Code.';
+        displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, David “aniwey” L., Tom Rothamel, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
+        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Dave y Anna Davis, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor y W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';
