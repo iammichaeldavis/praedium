@@ -1130,7 +1130,7 @@ td {
 }
 
 #tableVillageFiat thead td {
-    background: #839436;
+    background: #9fa332;
 }
 
 #tableVillageIncome thead td {
@@ -1160,6 +1160,13 @@ td {
 #tableVillageMateriel tr:nth-of-type(even) td,
 #tableVillageStatistics tr:nth-of-type(even) td {
     background: #e9e9e9;
+}
+
+#divVillageLasTablas #tableVillageFiat tr .tdFiatStatementSubheader {
+    text-align: center;
+    font-style: italic;
+    background: #a9ab84;
+    color: white;
 }
 
 
@@ -1453,6 +1460,41 @@ td {
 
 .CityWalls {
     --i: 21;
+    --j: 15;
+}
+
+.Child {
+    --i: 22;
+    --j: 15;
+}
+
+.Pilgrim {
+    --i: 23;
+    --j: 15;
+}
+
+.Chest {
+    --i: 24;
+    --j: 15;
+}
+
+.Decree {
+    --i: 25;
+    --j: 15;
+}
+
+.Sphinx {
+    --i: 26;
+    --j: 15;
+}
+
+.Relic {
+    --i: 27;
+    --j: 15;
+}
+
+.EspírituSanto {
+    --i: 28;
     --j: 15;
 }
 

@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.3.05';
+const version = '1.4';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -331,13 +331,18 @@ let villageStage = 0;
 let residentsCount = 0;
 let residentsMax = 0;
 
-let rentPrice = 10;
 let asCount = 0;
 let asSpent = 0;
 
+let rentPrice = 10;
+let rentLifetimeCollected = 0;
+
+let taxesValue = 69; // ☯️
+let taxesLifetimeCollected = 0;
+
 let horsesSpawn = false;
 let horseClock = 0;
-const horsesIncAmount = 1;
+let horsesIncAmount = 1;
 let horsesCount = 0;
 let horsesEaten = 0;
 let horsesStarving = false;
@@ -362,11 +367,20 @@ let ratsHighScore = 1;
 let ratPenaltyFactor = 0;
 
 let cityWalls = false;
+let militaryLifetimeCost = 0;
+
+let pilgrimsCount = 0;
+let pilgrimsMax = 0;
+let pilgrimPrayerValue = 1;
+let pilgrimLifetimeIncome = 0;
+let relicSpawnCount = 1;
+let relicCount = 0;
 
 const bushelBulkCount = 1000;
 let actualBushelPrice = 5000;
 let currentBushelPrice = actualBushelPrice;
 let currentBarleyAdjustment = 1000;
+let marketLifetimeRevenue = 0;
 
 const priceStage1 = 50;
 const priceStage2 = 100;
@@ -420,6 +434,7 @@ const priceBuild16 = [2400000, 30000, 60000, 200000]; // gates
 const priceBuild17 = [10000000, 9001, 77, 5000, 100000, 100000]; // monumo
 
 const tributeAmount = 616; // 😈 NRO QSR
+let tributeLifetimePaid = 0;
 let tributeTimer = 0;
 const tributeTimerLimit = 100;
 

@@ -54,7 +54,7 @@ function GameTurn() {
         if (beadsSpawn) { MakeBeads(); }
         if (trophiesSpawn) { HostGladiatorGames(); }
     }
-    if (week % 2 == 0) {
+    if (week % 2 == 0 && trophiesSpawn) {
         const tourismTotalIncome = tourismValue * trophiesCount;
         asCount += tourismTotalIncome;
         tourismLifetimeProfit += tourismTotalIncome;
@@ -65,8 +65,10 @@ function GameTurn() {
             const knightsMax = Math.floor(residentsCount / 2);
             let knightsCount = horsesCount;
             if (knightsCount > knightsMax) { knightsCount = knightsMax; }
-            asCount -= knightsCount * 10;
-            asSpent += knightsCount * 10;
+            const militarySalary = knightsCount * 10;
+            asCount -= militarySalary;
+            asSpent += militarySalary;
+            militaryLifetimeCost += militarySalary;
 
             if (tributeTimer < tributeTimerLimit) {
                 tributeTimer++;
@@ -80,6 +82,7 @@ function GameTurn() {
                 const weeklyLevy = tributeAmount * 7;
                 asCount -= weeklyLevy;
                 asSpent += weeklyLevy;
+                tributeLifetimePaid += weeklyLevy;
             }
         }
     }
@@ -91,6 +94,21 @@ function GameTurn() {
         player.hasMildewed = true;
         bushelCount[0] = Math.floor((bushelCount[0] * 0.1));
         if (player.likesStory) { GameEvent(displayStoryFarmMildew, null, false); }
+    }
+
+    if (villageStage > 13 && (week == 52 || week == 26)) {
+        const calculatedTaxValue = residentsCount * taxesValue;
+        asCount += calculatedTaxValue;
+        taxesLifetimeCollected += calculatedTaxValue;
+    }
+
+    if (villageStage > 17) {
+        pilgrimsMax = Math.floor(residentsCount / 2);
+        pilgrimsCount = FindWholeRandom(0, pilgrimsMax);
+        const thisWeeksTake = pilgrimsCount * pilgrimPrayerValue;
+        beadsCount += thisWeeksTake;
+        pilgrimLifetimeIncome += thisWeeksTake;
+        if (week == 1 && year % 10 == 0) { relicCount++; }
     }
 
     UpdateDisplay();
@@ -325,7 +343,9 @@ function Migration() {
 
 
 function ChargeRent() {
-    asCount += rentPrice * residentsCount;
+    const tabulatedRentalSum = rentPrice * residentsCount;
+    asCount += tabulatedRentalSum;
+    rentLifetimeCollected += tabulatedRentalSum;
 }
 
 
@@ -410,4 +430,4 @@ function BreedRats() {
 
 
 
-// End of Document  
+// End of Document

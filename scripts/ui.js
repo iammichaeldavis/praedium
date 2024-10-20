@@ -569,6 +569,12 @@ function UpdateText() {
             tableString += '<td>' + displayCitizens + ' <span class="icon Citizen inlineIcon"></span>:' + '</td>';
             tableString += '<td class="rightPadColumn">' + residentsCount + '<span class="warehouseTotal">/' + residentsMax + '</span>' + '</td>';
             tableString += '</tr>';
+            if (villageStage > 17) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayPilgrims + ' <span class="icon Pilgrim inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + pilgrimsCount + '<span class="warehouseTotal">/' + pilgrimsMax + '</span>' + '</td>';
+                tableString += '</tr>';
+            }
             tableString += '</tbody>';
             tableString += '</table>';
 
@@ -589,6 +595,58 @@ function UpdateText() {
                 tableString += '<tr>';
                 tableString += '<td>' + displayAsSpent + ' <span class="icon MoneyBagSpent inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(asSpent) + '</td>';
+                tableString += '</tr>';
+            }
+            if (1 == 1) {
+                tableString += '<tr>';
+                tableString += '<td colspan="2" class="rightPadColumn">' + '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td colspan="2" class="tdFiatStatementSubheader">' + displayLifetimeRevenues + '</td>';
+                tableString += '</tr>';
+            }
+            if (1 == 1) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayRealEstate + ' <span class="icon Key inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(rentLifetimeCollected) + '</td>';
+                tableString += '</tr>';
+            }
+            if (player.canSell) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayMarket + ' <span class="icon Wheat inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(marketLifetimeRevenue) + '</td>';
+                tableString += '</tr>';
+            }
+            if (villageStage > 12) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayTourism + ' <span class="icon Jester inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(tourismLifetimeProfit) + '</td>';
+                tableString += '</tr>';
+            }
+            if (villageStage > 13) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayTaxes + ' <span class="icon Chest inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(taxesLifetimeCollected) + '</td>';
+                tableString += '</tr>';
+            }
+            if (villageStage > 16) {
+                tableString += '<tr>';
+                tableString += '<td colspan="2" class="rightPadColumn">' + '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td colspan="2" class="tdFiatStatementSubheader">' + displayLifetimeCosts + '</td>';
+                tableString += '</tr>';
+            }
+            if (villageStage > 16) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayMilitary + ' <span class="icon TaxCollector inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(militaryLifetimeCost) + '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasBeenLevied) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayTribute + ' <span class="icon LordBritish inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(tributeLifetimePaid) + '</td>';
                 tableString += '</tr>';
             }
             tableString += '</tbody>';
@@ -634,11 +692,32 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displaySeason + '</span>' + '</td>';
                 tableString += '</tr>';
             }
+            if (villageStage > 13) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayTaxes + ' <span class="icon Chest inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="noPadColumn">' + '+' + currencySymbol + taxesValue + '/' + '<span class="icon Key inlineIcon"></span>' + '</td>';
+                tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displaySemester + '</span>' + '</td>';
+                tableString += '</tr>';
+            }
             if (horsesSpawn) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayHusbandry + ' <span class="icon FarmerJoe inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="noPadColumn">' + '+' + horsesIncAmount + '<span class="icon Horsey inlineIcon"></span>' + '</td>';
                 tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayYear + '</span>' + '</td>';
+                tableString += '</tr>';
+            }
+            if (villageStage > 17) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayConjunction + ' <span class="icon Sphinx inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="noPadColumn">' + '+' + relicSpawnCount + '<span class="icon Relic inlineIcon"></span>' + '</td>';
+                tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayDecade + '</span>' + '</td>';
+                tableString += '</tr>';
+            }
+            if (player.isGod) {
+                tableString += '<tr>';
+                tableString += '<td>' + 'רוּחַ קָדְשׁוֹ' + ' <span class="icon EspírituSanto inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="noPadColumn">' + '+' + relicSpawnCount + '<span class="icon Child inlineIcon"></span>' + '</td>';
+                tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayCentury + '</span>' + '</td>';
                 tableString += '</tr>';
             }
             tableString += '</tbody>';
@@ -682,13 +761,31 @@ function UpdateText() {
                     tableString += '<tr>';
                     tableString += '<td>' + displayPrayers + ' <span class="icon Mala inlineIcon"></span>:' + '</td>';
                     tableString += '<td class="noPadColumn">' + formatterStandard.format(beadsCount) + '</td>';
-                    tableString += '<td></td>';
+                    tableString += '<td>';
+                    if (villageStage > 17) {
+                        tableString += '(+' + pilgrimPrayerValue + '/' + '<span class="icon Pilgrim inlineIcon"></span>' + ')';
+                    }
+                    tableString += '</td>';
                     tableString += '</tr>';
                 }
                 if (scrollsSpawn) {
                     tableString += '<tr>';
                     tableString += '<td>' + displayScripture + ' <span class="icon Scroll inlineIcon"></span>:' + '</td>';
                     tableString += '<td class="noPadColumn">' + formatterStandard.format(scrollsCount) + '</td>';
+                    tableString += '<td></td>';
+                    tableString += '</tr>';
+                }
+                if (villageStage > 17) {
+                    tableString += '<tr>';
+                    tableString += '<td>' + displayRelic + ' <span class="icon Relic inlineIcon"></span>:' + '</td>';
+                    tableString += '<td class="noPadColumn">' + formatterStandard.format(relicCount) + '</td>';
+                    tableString += '<td></td>';
+                    tableString += '</tr>';
+                }
+                if (player.isGod) {
+                    tableString += '<tr>';
+                    tableString += '<td>' + 'χριστοί' + ' <span class="icon Child inlineIcon"></span>:' + '</td>';
+                    tableString += '<td class="noPadColumn">' + formatterStandard.format(0) + '</td>';
                     tableString += '<td></td>';
                     tableString += '</tr>';
                 }
@@ -3875,7 +3972,7 @@ function AnimateWinButton() {
         '<span class="icon Crown4 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown1 inlineIcon"></span><br>(<span id="buttonWinHeart">♥</span>)',
     ];
     buttonWin.innerHTML = arrayWinFrames[frameWinButton];
-    timeoutWinButton = setTimeout(AnimateWinButton, 69); // ☯️
+    timeoutWinButton = setTimeout(AnimateWinButton, 82); // 🤰
 }
 
 

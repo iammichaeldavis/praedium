@@ -1151,7 +1151,7 @@ function Build() {
         mountainSpentCount[0] += priceBuild13[2];
 
         rentPrice += 10;
-        tourismValue += 2;
+        tourismValue += 16;
         actualBushelPrice -= 1200;
         SetMarketPrice();
     }
@@ -1165,6 +1165,9 @@ function Build() {
         stoneCount -= priceBuild14[2];
         mountainSpentCount[0] += priceBuild14[2];
 
+        rentPrice += 1;
+        tourismValue += 8;
+        taxesValue += 2;
         scrollsSpawn = true;
     }
     else if (villageStage == 15 && asCount >= priceBuild15[0] && stoneCount >= priceBuild15[1]) {
@@ -1176,7 +1179,8 @@ function Build() {
         mountainSpentCount[0] += priceBuild15[1];
 
         rentPrice += 8;
-        tourismValue += 2;
+        tourismValue += 4;
+        taxesValue += 28;
         actualBushelPrice -= 50;
         SetMarketPrice();
         ratsSpawn = true;
@@ -1195,7 +1199,8 @@ function Build() {
         mountainSpentCount[0] += priceBuild16[3];
 
         rentPrice += 16;
-        tourismValue += 8;
+        tourismValue += 22;
+        taxesValue += 32;
         actualBushelPrice -= 50;
         SetMarketPrice();
         cityWalls = true;
@@ -1216,7 +1221,8 @@ function Build() {
         mountainSpentCount[0] += priceBuild17[5];
 
         rentPrice += 12;
-        tourismValue += 24;
+        tourismValue += 48;
+        taxesValue += 16;
         player.canBuild = false;
 
         player.canWin = true;
@@ -1234,6 +1240,7 @@ function SellGrain(grainType) {
         bushelCount[0] -= (bushelBulkCount * 10);
         soldCount[0] += (bushelBulkCount * 10);
         asCount += (currentBushelPrice * 10);
+        marketLifetimeRevenue += (currentBushelPrice * 10);
         UpdateDisplay();
     }
     else if (grainType == 1 && asCount >= adjustedPrice) {
@@ -1259,12 +1266,10 @@ function Win() {
         winHeroAgo: player.age,
         winHeroSaṃsāra: player.saṃsāra,
 
-        winDateTurn: gameTurn,
-        winDateYear: year,
-        winDateWeek: week,
-        winDateOlivePlant: olivePlantDate,
-        winDateVillageEst: estDate,
-        winDateHolidayTime: [weeksOfHoliday, manweeksLost],
+        winTimeCalendar: [gameTurn, year, week,],
+        winTimeOlivePlant: olivePlantDate,
+        winTimeVillageEst: estDate,
+        winTimeHolidayTime: [weeksOfHoliday, manweeksLost,],
 
         winCountsFarmBushels: bushelCount,
         winCountsFarmSeeded: seededCount,
@@ -1276,9 +1281,8 @@ function Win() {
         winCountsForestSpent: forestSpentCount,
         winCountsMountainProduced: mountainProducedCount,
         winCountsMountainSpent: mountainSpentCount,
-        winCountsVillageAs: [asCount, asSpent, tourismLifetimeProfit],
-        winCountsVillageMateriel: [horsesCount, trophiesCount, beadsCount, scrollsCount],
-        winCountsVillageRats: [ratsCount, ratsHighScore],
+        winCountsVillageFiat: [asCount, asSpent, rentLifetimeCollected, marketLifetimeRevenue, tourismLifetimeProfit, taxesLifetimeCollected, militaryLifetimeCost, tributeLifetimePaid,],
+        winCountsVillageMateriel: [horsesCount, trophiesCount, [beadsCount, pilgrimLifetimeIncome,], scrollsCount, relicCount, [ratsCount, ratsHighScore,],],
     };
     console.log(winReport);
 
