@@ -2,6 +2,8 @@
 // *************************************************************************************************
 
 function GameTurn() {
+    if (player.likesRecords) { snapshotLastTurn = snapshotThisTurn; }
+
     gameTurn++;
 
     week++;
@@ -105,16 +107,23 @@ function GameTurn() {
     if (villageStage > 17) {
         pilgrimsMax = Math.floor(residentsCount / 2);
         pilgrimsCount = FindWholeRandom(0, pilgrimsMax);
+        pilgrimsLifetimeCount += pilgrimsCount;
         const thisWeeksTake = pilgrimsCount * pilgrimPrayerValue;
         beadsCount += thisWeeksTake;
         pilgrimLifetimeIncome += thisWeeksTake;
         if (week == 1 && year % 10 == 0) { relicCount++; }
     }
 
+    WorkshopProduction();
+
     UpdateDisplay();
     if (gameSpeed == 'standard' && player.likesAnimations) {
         globalAnimationFrame = 1;
         setTimeout(AnimateCanvases, animationInterval);
+    }
+    if (player.likesRecords) {
+        snapshotThisTurn = CollateGameStateReport();
+        //reportOutputToWriteToDiskForDataAnalysis = snapshotThisTurn - snapshotLastTurn;
     }
 }
 
@@ -183,45 +192,54 @@ function FruitGrapes() {
 
 
 
+function WorkshopProduction() {
+    Render(0);
+    Render(1);
+    Render(2);
+    Render(3);
+    Render(4);
+    Render(5);
+    Render(6);
+    Render(7);
+
+    function Render(ingredient) {
+        while (residenceIngredientInStockCount[ingredient] >= residenceIngredientsIn[ingredient]) {
+            residenceIngredientInStockCount[ingredient] -= residenceIngredientsIn[ingredient];
+            residenceInStockCount[ingredient] += residenceProductOut[ingredient];
+            residenceProducedCount[ingredient] += residenceProductOut[ingredient];
+        }
+    }
+}
+
+
+
+function PayWorkerGroup(howManyToPay, whoToPay) {
+    let hasBeenPayed = false;
+    const costInBread = howManyToPay * loavesPaymentAmount;
+    if (residenceInStockCount[0] >= costInBread) {
+        residenceInStockCount[0] -= costInBread;
+        residenceSpentCount[0] += costInBread;
+        hasBeenPayed = true;
+    }
+    if (!hasBeenPayed && bushelCount[0] >= howManyToPay + starvingBuffer) {
+        bushelCount[0] -= howManyToPay;
+        paidOutWheat[whoToPay] += howManyToPay;
+        hasBeenPayed = true;
+    }
+    if (!hasBeenPayed) { starving[whoToPay] = true; }
+    else { starving[whoToPay] = false; }
+}
+
+
+
 function FieldhandWork() {
-    if (bushelCount[0] <= handsHired + starvingBuffer) { starving[0] = true; }
-    else {
-        starving[0] = false;
-        bushelCount[0] -= handsHired;
-        handsEaten += handsHired;
-    }
-
-    if (vigneronsHired > 0) {
-        if (bushelCount[0] <= vigneronsHired + starvingBuffer) { starving[6] = true; }
-        else {
-            starving[6] = false;
-            bushelCount[0] -= vigneronsHired;
-            vigneronsEaten += vigneronsHired;
-        }
-    }
-
-    if (arboristsHired > 0) {
-        if (bushelCount[0] <= arboristsHired + starvingBuffer) { starving[7] = true; }
-        else {
-            starving[7] = false;
-            bushelCount[0] -= arboristsHired;
-            arboristsEaten += arboristsHired;
-        }
-    }
-
-    if (horticulturalistsHired > 0) {
-        if (bushelCount[0] <= horticulturalistsHired + starvingBuffer) { starving[8] = true; }
-        else {
-            starving[8] = false;
-            bushelCount[0] -= horticulturalistsHired;
-            horticulturalistsEaten += horticulturalistsHired;
-        }
-    }
-
-    const finalLaborForceTally = handsHired + vigneronsHired + arboristsHired + horticulturalistsHired;
-
+    PayWorkerGroup(handsHired, 0);
+    if (vigneronsHired > 0) { PayWorkerGroup(vigneronsHired, 6); }
+    if (arboristsHired > 0) { PayWorkerGroup(arboristsHired, 7); }
+    if (horticulturalistsHired > 0) { PayWorkerGroup(horticulturalistsHired, 8); }
+    const laborForceTally = handsHired + vigneronsHired + arboristsHired + horticulturalistsHired;
     if (priority == 'Reap') {
-        for (let i = 0; i < (finalLaborForceTally); i++) {
+        for (let i = 0; i < (laborForceTally); i++) {
             let taskComplete = false;
             taskComplete = PlotHarvest(true);
             if (!taskComplete) { taskComplete = PlotWater(true); }
@@ -230,7 +248,7 @@ function FieldhandWork() {
         }
     }
     else if (priority == 'Sow') {
-        for (let i = 0; i < (finalLaborForceTally); i++) {
+        for (let i = 0; i < (laborForceTally); i++) {
             let taskComplete = false;
             taskComplete = PlotTill(true);
             if (!taskComplete) { taskComplete = PlotPlant(true); }
@@ -241,7 +259,7 @@ function FieldhandWork() {
     else {
         //console.log('🍕 cowabunga, dude 🤙'); // truly, Turtle Power knows no limit 🥋🐢🗡️
         weeksOfHoliday++;
-        manweeksLost += finalLaborForceTally;
+        manweeksLost += laborForceTally;
     }
 }
 
@@ -251,13 +269,7 @@ function FellTrees() {
     const loggedAmount = FindWholeRandom(logsMin, logsMax) * loggersHired;
     logsCount += loggedAmount;
     forestProducedCount[0] += loggedAmount;
-
-    if (bushelCount[0] <= loggersHired + starvingBuffer) { starving[1] = true; }
-    else {
-        starving[1] = false;
-        bushelCount[0] -= loggersHired;
-        loggersEaten += loggersHired;
-    }
+    PayWorkerGroup(loggersHired, 1);
 }
 
 
@@ -269,13 +281,7 @@ function SawLogs() {
     forestSpentCount[0] += processedAmount;
     boardsCount += producedAmount;
     forestProducedCount[1] += producedAmount;
-
-    if (bushelCount[0] <= sawyersHired + starvingBuffer) { starving[2] = true; }
-    else {
-        starving[2] = false;
-        bushelCount[0] -= sawyersHired;
-        sawyersEaten += sawyersHired;
-    }
+    PayWorkerGroup(sawyersHired, 2);
 }
 
 
@@ -284,13 +290,7 @@ function QuarryStone() {
     const producedAmount = masonsHired * FindWholeRandom(stoneMin, stoneMax);
     stoneCount += producedAmount;
     mountainProducedCount[0] += producedAmount;
-
-    if (bushelCount[0] <= masonsHired + starvingBuffer) { starving[3] = true; }
-    else {
-        starving[3] = false;
-        bushelCount[0] -= masonsHired;
-        masonsEaten += masonsHired;
-    }
+    PayWorkerGroup(masonsHired, 3);
 }
 
 
@@ -299,13 +299,7 @@ function MineCopper() {
     const producedAmount = minersHired * FindWholeRandom(oreCopperMin, oreCopperMax);
     oreCopperCount += producedAmount;
     mountainProducedCount[1] += producedAmount;
-
-    if (bushelCount[0] <= minersHired + starvingBuffer) { starving[4] = true; }
-    else {
-        starving[4] = false;
-        bushelCount[0] -= minersHired;
-        minersEaten += minersHired;
-    }
+    PayWorkerGroup(minersHired, 4);
 }
 
 
@@ -317,13 +311,7 @@ function SmeltCopper() {
     mountainProducedCount[2] += producedAmount;
     oreCopperCount -= processedAmount;
     mountainSpentCount[1] += processedAmount;
-
-    if (bushelCount[0] <= smeltersHired + starvingBuffer) { starving[5] = true; }
-    else {
-        starving[5] = false;
-        bushelCount[0] -= smeltersHired;
-        smeltersEaten += smeltersHired;
-    }
+    PayWorkerGroup(smeltersHired, 5);
 }
 
 

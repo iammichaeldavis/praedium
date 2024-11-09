@@ -1,6 +1,46 @@
 // UTILITIES ***************************************************************************************
 // *************************************************************************************************
 
+function CollateGameStateReport(loud = false) {
+    const integerCounts = {
+        farmBushels: bushelCount,
+        farmSeeded: seededCount,
+        farmFarmed: farmedCount,
+        farmHarvested: harvestedCount,
+        farmSpent: spentCount,
+        farmSold: soldCount,
+        farmHolidays: [weeksOfHoliday, manweeksLost,],
+        forestProduced: forestProducedCount,
+        forestSpent: forestSpentCount,
+        mountainProduced: mountainProducedCount,
+        mountainSpent: mountainSpentCount,
+        staffWheatPaid: paidOutWheat,
+        villageFiat: [asCount, asSpent, rentLifetimeCollected, marketLifetimeRevenue, tourismLifetimeProfit, taxesLifetimeCollected, militaryLifetimeCost, tributeLifetimePaid, currentBushelPrice,],
+        villageDemographics: [residentsCount, [pilgrimsCount, pilgrimsLifetimeCount,],],
+        villageMateriel: [[horsesCount, horsesEaten,], trophiesCount, [beadsCount, pilgrimLifetimeIncome,], scrollsCount, relicCount, [ratsCount, ratsHighScore,],],
+        residenceResourceInStockCount: residenceIngredientInStockCount,
+        residenceResourceConsumedCount: residenceIngredientConsumedCount,
+        residenceOutputInStockCount: residenceInStockCount,
+        residenceOutputProducedCount: residenceProducedCount,
+        residenceOutputSpentCount: residenceSpentCount,
+    }
+    const gameStateSnapshot = {
+        hero: [player.names, player.age, player.saṃsāra, player.isAt, player.hasWon,],
+        preferences: [player.speaks, player.likesMusic, player.likesSounds, player.likesAnimations, player.likesStory, player.isGod, player.isOnMobile,],
+        calendar: [gameTurn, year, week, olivePlantDate, estDate,],
+        stages: [farmStage, warehouseStage, residenceStage, villageStage,],
+        counts: integerCounts,
+    };
+    if (loud) {
+        console.log('--------🚨 Game State Report Start 🚨--------');
+        console.log(gameStateSnapshot);
+        console.log('--------🚨 Game State Report End 🚨--------');
+    }
+    return gameStateSnapshot;
+}
+
+
+
 function DetermineDevice() {
     const regexp = /android|iphone|kindle|ipad/i; // regular expression containing known mobile device keywords; this may need to grow 🤔
     player.isOnMobile = regexp.test(navigator.userAgent);
@@ -122,6 +162,18 @@ function RomanceNumber(originalNumber) {
         }
     }
     return result;
+}
+
+
+
+function ZeroArray(targetArray) {
+    for (i = 0; i < targetArray.length; i++) { targetArray[i] = 0; }
+}
+
+
+
+function FillArray(targetArray, fillValue) {
+    for (i = 0; i < targetArray.length; i++) { targetArray[i] = fillValue; }
 }
 
 

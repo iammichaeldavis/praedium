@@ -1,6 +1,9 @@
 // TRANSLATION *************************************************************************************
 // *************************************************************************************************
 
+const displayGameTitle = 'PRAEDIUM';
+let displayGameEdition = '';
+
 const currencySymbol = '<s>𝐼</s>';
 
 let displayIUnderstand = '';
@@ -51,6 +54,7 @@ let displayHorticulturalists = '';
 let displayMasons = '';
 let displayMiners = '';
 let displayCindermen = '';
+let displayMetallurgists = '';
 let displayGood = '';
 let displayScoreProduced = '';
 let displayScoreSpent = '';
@@ -84,6 +88,22 @@ let displayLabelBuyLand17 = '';
 let displayLabelRentWarehouse0 = '';
 let displayLabelRentWarehouse1 = '';
 let displayLabelRentWarehouse2 = '';
+
+let displayLabelWasteTime = '';
+let displayLabelResidence00 = '';
+let displayLabelResidence01 = '';
+let displayLabelResidence02 = '';
+let displayLabelResidence03 = '';
+let displayLabelResidence04 = '';
+let displayLabelResidence05 = '';
+let displayLabelResidence06 = '';
+let displayLabelResidence07 = '';
+let displayLabelResidence08 = '';
+let displayLabelResidence09 = '';
+let displayLabelResidence10 = '';
+let displayLabelResidence11 = '';
+let displayLabelResidence12 = '';
+let displayLabelResidence13 = '';
 
 let displayLabelFound = '';
 let displayLabelBuild0 = '';
@@ -182,6 +202,22 @@ let displayStoryMineDig = '';
 let displayStoryFoundry = '';
 let displayStoryTribute = '';
 
+let displayStoryResidenceFirstVisit = '';
+let displayStoryResidence00 = '';
+let displayStoryResidence01 = '';
+let displayStoryResidence02 = '';
+let displayStoryResidence03 = '';
+let displayStoryResidence04 = '';
+let displayStoryResidence05 = '';
+let displayStoryResidence06 = '';
+let displayStoryResidence07 = '';
+let displayStoryResidence08 = '';
+let displayStoryResidence09 = '';
+let displayStoryResidence10 = '';
+let displayStoryResidence11 = '';
+let displayStoryResidence12 = '';
+let displayStoryResidence13 = '';
+
 let displayStoryVillage0 = '';
 let displayStoryVillage1 = '';
 let displayStoryVillage2 = '';
@@ -203,8 +239,12 @@ let displayStoryVillage17 = '';
 
 let displayNamePlayer = '';
 
+let displayGoToPraediumFromRes = '';
+let displayGoToResidence = '';
 let displayGoToTownship = '';
 let displayGoToPraedium = '';
+let displayGoToPort = '';
+let displayGoToTownshipFromPort = '';
 
 let displayVillageTitle0 = '';
 let displayVillageTitle1 = '';
@@ -249,6 +289,28 @@ let displayStatistics = '';
 let displayOffense = '';
 let displayDefense = '';
 
+let displayLoaves = '';
+let displayOil = '';
+let displayBeer = '';
+let displayWine = '';
+let displaySyrup = '';
+let displayJuice = '';
+let displayDriedFigs = '';
+let displayTrinkets = '';
+let displayAmountProduced = '';
+let displayAmountSpent = '';
+
+let displayConsumes = '';
+let displayUsed = '';
+let displayBakery = '';
+let displayOliveMill = '';
+let displayBrewery = '';
+let displayWinery = '';
+let displayKitchen = '';
+let displayPress = '';
+let displayGreenhouse = '';
+let displayAtelier = '';
+
 let displayForewordA = '';
 let displayForewordScripture = '';
 let displayForewordSource = '';
@@ -288,6 +350,8 @@ function Translate(language, bark = true) {
     player.speaks = language;
 
     if (language == 'English') {
+        displayGameEdition = 'GOLD EDITION';
+
         displayIUnderstand = 'I UNDERSTAND';
         displayOK = "I AM READY TO CONTINUE";
         displayOptions = 'Options';
@@ -336,6 +400,7 @@ function Translate(language, bark = true) {
         displayMasons = 'Masons';
         displayMiners = 'Miners';
         displayCindermen = 'Cindermen';
+        displayMetallurgists = 'Braziers';
         displayGood = 'Good';
         displayScoreProduced = 'Score<br>Produced';
         displayScoreSpent = 'Score<br>Spent';
@@ -369,6 +434,22 @@ function Translate(language, bark = true) {
         displayLabelRentWarehouse0 = 'RENT WAREHOUSE SPACE<br>TO STORE YOUR GRAIN';
         displayLabelRentWarehouse1 = 'RENT MORE WAREHOUSE SPACE';
         displayLabelRentWarehouse2 = 'PURCHASE A WAREHOUSE';
+
+        displayLabelWasteTime = 'RELAX AND DO NOTHING';
+        displayLabelResidence00 = 'BUILD SHANTY ON YOUR OWN LAND';
+        displayLabelResidence01 = 'IMPROVE YOUR SHANTY';
+        displayLabelResidence02 = 'IMPROVE YOUR CABIN';
+        displayLabelResidence03 = 'BUILD BAKERY';
+        displayLabelResidence04 = 'BUILD OLIVE MILL';
+        displayLabelResidence05 = 'IMPROVE THE MAIN HOUSE';
+        displayLabelResidence06 = 'BUILD BREWERY';
+        displayLabelResidence07 = 'BUILD WINERY';
+        displayLabelResidence08 = 'BUILD KITCHEN';
+        displayLabelResidence09 = 'BUILD PRESS';
+        displayLabelResidence10 = 'BUILD GREENHOUSE';
+        displayLabelResidence11 = 'IMPROVE THE ESTATE';
+        displayLabelResidence12 = 'BUILD ATELIER';
+        displayLabelResidence13 = 'REALLY ZHUZH THIS PLACE UP SOME, SON';
 
         displayLabelFound = 'FOUND A VILLAGE';
         displayLabelBuild0 = 'HIRE BLACKSMITH';
@@ -467,6 +548,22 @@ function Translate(language, bark = true) {
         displayStoryFoundry = '“THE ‘HOLOCENE’ HAS ENDED. THE GARDEN OF EDEN IS NO MORE. WE HAVE CHANGED THE WORLD SO MUCH THAT SCIENTISTS SAY WE ARE IN A NEW GEOLOGICAL AGE: THE ‘ANTHROPOCENE’. THE AGE OF MAN. WE MUST MOVE BEYOND GUILT OR BLAME, AND GET ON WITH THE PRACTICAL TASKS AT HAND”<br>—SIR DAVID FREDERICK ATTENBOROUGH';
         displayStoryTribute = 'THE LOCAL WARLORD KING HAS CAUGHT WIND OF YOUR SUCCESS AT LAST. QUOTH HIS EMISSARY: “OF COURSE, TARIFFS MUST BE LEVIED”';
 
+        displayStoryResidenceFirstVisit = 'THERE’S NO PLACE LIKE HOME: YOUR CAMPSITE, ANONYMOUS AMONG THE HUNDREDS OF OTHERS JUST LIKE IT ALL NESTLED HERE, IN THIS NARROW, ARID VALLEY, WHERE YOU RENT THIS PATCH OF DIRT FOR AN EXORBITANT RATE';
+        displayStoryResidence00 = 'LIVING ON MY OWN LAND WILL CERTAINLY MAKE IT EASY TO GET TO WORK IN THE MORNING';
+        displayStoryResidence01 = 'FINALLY SOME SPACE TO STRETCH OUT MY LEGS';
+        displayStoryResidence02 = 'MORE THAN ENOUGH ACREAGE IN THIS PRAIRIE FOR A MODEST HOMESTEAD, I RECKON';
+        displayStoryResidence03 = 'GIVE US THIS DAY OUR DAILY BREAD<br>~STEVIE BREADSMAN<br><br>(Laborers Will Accept ' + loavesPaymentAmount + '<span class="icon Loaves inlineIcon"></span>/Week)';
+        displayStoryResidence04 = '';
+        displayStoryResidence05 = '';
+        displayStoryResidence06 = '';
+        displayStoryResidence07 = '';
+        displayStoryResidence08 = '';
+        displayStoryResidence09 = '';
+        displayStoryResidence10 = '';
+        displayStoryResidence11 = '';
+        displayStoryResidence12 = '';
+        displayStoryResidence13 = '';
+
         displayStoryVillage0 = 'HE WILL NEED LUMBER FOR THE FORGE';
         displayStoryVillage1 = 'NOW WE CAN BUILD';
         displayStoryVillage2 = 'WE’VE GOT TO HAVE SOME LAW AND ORDER';
@@ -488,8 +585,12 @@ function Translate(language, bark = true) {
 
         displayNamePlayer = '“What is your name, citizen?”';
 
-        displayGoToTownship = 'GO TO TOWNSHIP ->';
-        displayGoToPraedium = '<- RETURN TO YOUR PRAEDIUM';
+        displayGoToPraediumFromRes = 'GO BACK TO YOUR LANDS →';
+        displayGoToResidence = '← GO TO YOUR RESIDENCE';
+        displayGoToTownship = 'GO TO TOWNSHIP →';
+        displayGoToPraedium = '← RETURN TO YOUR PRAEDIUM';
+        displayGoToPort = 'TRAVEL TO THE PORT →';
+        displayGoToTownshipFromPort = '← RETURN TO YOUR PROVINCE';
 
         displayVillageTitle0 = 'The Settlement of';
         displayVillageTitle1 = 'The Outpost of';
@@ -534,6 +635,28 @@ function Translate(language, bark = true) {
         displayOffense = 'OFF';
         displayDefense = 'DEF';
 
+        displayLoaves = 'Loaves';
+        displayOil = 'Oil';
+        displayBeer = 'Beer';
+        displayWine = 'Wine';
+        displaySyrup = 'Syrup';
+        displayJuice = 'Juice';
+        displayDriedFigs = 'Sun-Dried Figs';
+        displayTrinkets = 'Trinkets';
+        displayAmountProduced = 'Units<br>Produced';
+        displayAmountSpent = 'Units<br>Spent';
+
+        displayConsumes = 'Consumes';
+        displayUsed = 'Used';
+        displayBakery = 'Bakery';
+        displayOliveMill = 'Olive Mill';
+        displayBrewery = 'Brewery';
+        displayWinery = 'Winery';
+        displayKitchen = 'Kitchen';
+        displayPress = 'Press';
+        displayGreenhouse = 'Greenhouse';
+        displayAtelier = 'Atelier';
+
         displayForewordA = 'The year is 200 B.C. and thou art a humble Tartessian sharecropper eking out a modest living under the brutal Mediterranean sun in Palestinian Galilee. From dawn to dusk dost thou work the chalky, unforgiving soil with nothing but thine own calloused hands and a sharp stick.';
         displayForewordScripture = '“O Maker of the material world, thou Holy One! How far from the fire? How far from the water? How far from the consecrated bundles of baresma? How far from the faithful?”';
         displayForewordSource = 'Vendidad 8:6';
@@ -568,6 +691,8 @@ function Translate(language, bark = true) {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     else if (language == 'Spanish') {
+        displayGameEdition = 'EDICIÓN DE ORO';
+
         displayIUnderstand = 'ENTIENDO';
         displayOK = "ESTOY LISTO<br>PARA CONTINUAR";
         displayOptions = 'Opciones';
@@ -615,7 +740,8 @@ function Translate(language, bark = true) {
         displayHorticulturalists = 'Horticultores';
         displayMasons = 'Masones';
         displayMiners = 'Mineros';
-        displayCindermen = 'Metalúrgicos';
+        displayCindermen = 'Forjadores';
+        displayMetallurgists = 'Broncistas'; // Metalúrgicos
         displayGood = 'Bien';
         displayScoreProduced = 'Veintenas<br>Producidas';
         displayScoreSpent = 'Veintenas<br>Gastadas';
@@ -649,6 +775,22 @@ function Translate(language, bark = true) {
         displayLabelRentWarehouse0 = 'ALQUILAR ESPACIO DE ALMACÉN<br>PARA ALMACENAR SU GRANO';
         displayLabelRentWarehouse1 = 'ALQUILAR MÁS ESPACIO DE ALMACÉN';
         displayLabelRentWarehouse2 = 'COMPRAR UN ALMACÉN';
+
+        displayLabelWasteTime = 'RELAJARSE Y NO HACER NADA';
+        displayLabelResidence00 = 'CONSTRUIR UNA CHOZA EN TU PROPIO TERRENO';
+        displayLabelResidence01 = 'MEJORAR TU CHOZA';
+        displayLabelResidence02 = 'MEJORAR TU CABAÑA';
+        displayLabelResidence03 = 'CONSTRUIR UNA PANADERÍA';
+        displayLabelResidence04 = 'CONSTRUIR UN ALMAZARA';
+        displayLabelResidence05 = 'MEJORAR LA CASA PRINCIPAL';
+        displayLabelResidence06 = 'CONSTRUIR CERVECERÍA';
+        displayLabelResidence07 = 'CONSTRUIR LAGAR';
+        displayLabelResidence08 = 'CONSTRUIR COCINA';
+        displayLabelResidence09 = 'CONSTRUIR EXPRIMIDOR';
+        displayLabelResidence10 = 'CONSTRUIR INVERNADERO';
+        displayLabelResidence11 = 'MEJORAR LA FINCA';
+        displayLabelResidence12 = 'CONSTRUIR ATELIER';
+        displayLabelResidence13 = 'REALMENTE ZHUZH ESTE LUGAR MEJORÓ, HIJO';
 
         displayLabelFound = 'COMENZAR UN PUEBLO';
         displayLabelBuild0 = 'CONTRATAR HERRERO';
@@ -747,6 +889,22 @@ function Translate(language, bark = true) {
         displayStoryFoundry = '«EL ‘HOLOCENO’ HA TERMINADO. EL JARDÍN DEL EDÉN YA NO EXISTE. HEMOS CAMBIADO TANTO EL MUNDO QUE LOS CIENTÍFICOS DICEN QUE ESTAMOS EN UNA NUEVA ERA GEOLÓGICA: EL ‘ANTROPOCENO’. LA ERA DE LA HUMANIDAD. DEBEMOS IR MÁS ALLÁ DE LA CULPA Y PONERNOS A LA OBRA PRÁCTICA»<br>—SIR DAVID FREDERICK ATTENBOROUGH';
         displayStoryTribute = 'EL JEFE MILITAR REY LOCAL FINALMENTE HA OÍDO HABLAR DE TI. SU EMISARIO TE DICE: «POR SUPUESTO, SE DEBEN IMPONER ARANCELES»';
 
+        displayStoryResidenceFirstVisit = 'NO HAY LUGAR COMO EL HOGAR: TU CAMPAMENTO, ANÓNIMO ENTRE LOS CIENTOS DE OTROS EXACTAMENTE COMO ÉL QUE SE ENCUENTRAN AQUÍ, EN ESTE VALLE ANGOSTO Y ÁRIDO, DONDE ALQUILAS ESTE TROZO DE TIERRA POR UN PRECIO EXORBITANTE';
+        displayStoryResidence00 = 'VIVIR EN MI PROPIA TIERRA SEGURO ME HARÁ MÁS FÁCIL LLEGAR AL TRABAJO POR LA MAÑANA';
+        displayStoryResidence01 = 'POR FIN UN POCO DE ESPACIO PARA ESTIRAR MIS PIERNAS';
+        displayStoryResidence02 = 'SUPERFICIE MÁS QUE SUFICIENTE EN ESTE PRADERA PARA UNA FINCA MODESTA, CREO QUE';
+        displayStoryResidence03 = '';
+        displayStoryResidence04 = '';
+        displayStoryResidence05 = '';
+        displayStoryResidence06 = '';
+        displayStoryResidence07 = '';
+        displayStoryResidence08 = '';
+        displayStoryResidence09 = '';
+        displayStoryResidence10 = '';
+        displayStoryResidence11 = '';
+        displayStoryResidence12 = '';
+        displayStoryResidence13 = '';
+
         displayStoryVillage0 = 'NECESITARÁ MADERA PARA LA FRAGUA';
         displayStoryVillage1 = 'AHORA PODEMOS CONSTRUIR';
         displayStoryVillage2 = 'DEBEMOS TENER ALGO DE LEY Y ORDEN';
@@ -768,8 +926,12 @@ function Translate(language, bark = true) {
 
         displayNamePlayer = '«¿Cómo te llamas, ciudadano?»';
 
-        displayGoToTownship = 'IR AL MUNICIPIO ->';
-        displayGoToPraedium = '<- REGRESAR A TU PRAEDIUM';
+        displayGoToPraediumFromRes = 'VOLVER A TUS TIERRAS →';
+        displayGoToResidence = '← IR A TU RESIDENCIA';
+        displayGoToTownship = 'IR AL MUNICIPIO →';
+        displayGoToPraedium = '← REGRESAR A TU PRAEDIUM';
+        displayGoToPort = 'VIAJAR AL PUERTO →';
+        displayGoToTownshipFromPort = '← REGRESAR A TU PROVINCIA';
 
         displayVillageTitle0 = 'El Asentamiento de';
         displayVillageTitle1 = 'El Puesto Avanzado de';
@@ -814,6 +976,28 @@ function Translate(language, bark = true) {
         displayOffense = 'OFE';
         displayDefense = 'DEF';
 
+        displayLoaves = 'Hogazas';
+        displayOil = 'Aceite';
+        displayBeer = 'Cerveza';
+        displayWine = 'Vino';
+        displaySyrup = 'Jarabe';
+        displayJuice = 'Jugo';
+        displayDriedFigs = 'Higos Secos al Sol';
+        displayTrinkets = 'Baratijas';
+        displayAmountProduced = 'Unidades<br>Producidas';
+        displayAmountSpent = 'Unidades<br>Gastadas';
+
+        displayConsumes = 'Consume';
+        displayUsed = 'Utilizado';
+        displayBakery = 'Panadería';
+        displayOliveMill = 'Almazara';
+        displayBrewery = 'Cervecería';
+        displayWinery = 'Lagar';
+        displayKitchen = 'Cocina';
+        displayPress = 'Exprimidor';
+        displayGreenhouse = 'Invernadero';
+        displayAtelier = 'Atelier';
+
         displayForewordA = 'Es el año 200 a.C. y eres un humilde aparcero tartésico que se gana la vida modestamente bajo el brutal sol del Mediterráneo en la Galilea palestina. Desde el amanecer hasta el anochecer trabajas la implacable tierra calcárea sin nada más que tus propias manos y un palo afilado.';
         displayForewordScripture = '«¡O Creador del mundo material, O Santo! ¿A qué distancia del fuego? ¿A qué distancia del agua? ¿A qué distancia de los manojos consagrados de baresma? ¿A qué distancia de los fieles?»';
         displayForewordSource = 'Vendidad 8:6';
@@ -848,11 +1032,12 @@ function Translate(language, bark = true) {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     const divider = '<div class="divider">♦♦♦ ♦ ♦♦♦</div>';
-    displayInfoFinal = '<div id="divInfoTitle">PRAEDIUM<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) MMXXIV</span></div>';
+    displayInfoFinal = '<div id="divInfoTitle">' + displayGameTitle + '<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) MMXXIV</span></div>';
     displayInfoFinal += displayInfoMadeWith + '<br><br>' + displayInfoDedication + '<br><br>' + displayInfoThanks;
     displayInfoFinal += divider + displayInfoScripture;
     displayLegalFinal = displayBoilerplate + divider + displayLegalQuote;
     displayOptionsFlavourFinal = divider + displayOptionsFlavour;
+    document.title = displayGameTitle + ' - ' + displayGameEdition;
     UpdateDisplay();
     if (bark) { SystemMessage(displayNewLanguage + divider + displayLanguageQuote); }
 }

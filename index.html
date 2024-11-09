@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html dir="ltr" lang="en">
 
 <head>
@@ -16,7 +15,7 @@
     <link rel="apple-touch-icon" sizes="16x16" href="bitmaps/favicon/favicon16x.ico" />
     <link rel="manifest" href="bitmaps/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
-    <link rel="stylesheet" href="style.css?v=1023" />
+    <link rel="stylesheet" href="style.css?v=1025" />
 </head>
 
 <body>
@@ -31,7 +30,6 @@
                 </div>
             </div>
         </div>
-
         <div class="divCalendarCell">
             <div class="divCalendarCellLiner">
                 <div class="divCalendarFlexbox">
@@ -41,7 +39,6 @@
                 </div>
             </div>
         </div>
-
         <div class="divCalendarCell">
             <div class="divCalendarCellLiner">
                 <div id="divWeek"></div>
@@ -53,80 +50,116 @@
             </div>
         </div>
     </div>
-
     <div id="divCalendarGap"></div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divGameWindow">
-
         <button id="buttonWin">👑</button>
 
-        <div id="divViewTownship">
-            <button id="buttonGoToPraedium"></button>
-
-            <div id="divViewVillage">
-                <div id="divVillageName"></div>
-                <div id="divVillageEstDate"></div>
-                <canvas id="canvasVillage" width="384" height="224"></canvas>
-
-                <div id="divVillageLasTablas"></div>
-
-                <div id="divVillageButtons">
-                    <button id="buttonBuild"></button>
-                    <button id="buttonSellWheat"></button>
-                    <button id="buttonSellBarley"></button>
-                </div>
+        <div id="divViewResidence">
+            <button id="buttonGoToPraediumFromRes"></button>
+            <canvas id="canvasResidence" width="384" height="224"></canvas>
+            <div id="divResidenceActionArea">
+                <button id="buttonWasteTime"></button>
+                <button id="buttonImproveResidence"></button>
+                <table id="tableResidenceInventory"></table>
+                <table id="tableResidenceReport"></table>
+                <table id="tableWorkshopsContainer">
+                    <tr>
+                        <td style="width: 50%;">
+                            <div id="divWorkshopBakery">
+                                <img src="bitmaps/res_bakery.png" width="130" height="86" />
+                                <table id="tableWorkshopBakery" class="residenceWorkshopTable"></table>
+                            </div>
+                        </td>
+                        <td style="width: 50%;">
+                            <div id="divWorkshopOliveMill">
+                                <img src="bitmaps/res_olivemill.png" width="130" height="86" />
+                                <table id="tableWorkshopOliveMill" class="residenceWorkshopTable"></table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divWorkshopBrewery">
+                                <img src="bitmaps/res_brewery.png" width="130" height="86" />
+                                <table id="tableWorkshopBrewery" class="residenceWorkshopTable"></table>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="divWorkshopWinery">
+                                <img src="bitmaps/res_winery.png" width="130" height="86" />
+                                <table id="tableWorkshopWinery" class="residenceWorkshopTable"></table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divWorkshopKitchen">
+                                <img src="bitmaps/res_kitchen.png" width="130" height="86" />
+                                <table id="tableWorkshopKitchen" class="residenceWorkshopTable"></table>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="divWorkshopPress">
+                                <img src="bitmaps/res_press.png" width="130" height="86" />
+                                <table id="tableWorkshopPress" class="residenceWorkshopTable"></table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="divWorkshopGreenhouse">
+                                <img src="bitmaps/res_greenhouse.png" width="130" height="86" />
+                                <table id="tableWorkshopGreenhouse" class="residenceWorkshopTable"></table>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="divWorkshopAtelier">
+                                <img src="bitmaps/res_atelier.png" width="130" height="86" />
+                                <table id="tableWorkshopAtelier" class="residenceWorkshopTable"></table>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
-
         </div>
 
         <div id="divViewPraedium">
-            <button id="buttonGoToTownship"></button>
-
+            <button id="buttonGoToResidence"></button><button id="buttonGoToTownship"></button>
             <div id="divViewMountain">
                 <canvas id="canvasMountain" width="384" height="224"></canvas>
-
                 <table id="tableMountainInventory">
                     <thead id="theadMountainInventory"></thead>
                     <tbody id="tbodyMountainInventory"></tbody>
                 </table>
-
                 <table id="tableMountainStaff">
                     <thead id="theadMountainStaff"></thead>
                     <tbody id="tbodyMountainStaff"></tbody>
                 </table>
-
                 <table id="tableMountainReport">
                     <thead id="theadMountainReport"></thead>
                     <tbody id="tbodyMountainReport"></tbody>
                 </table>
-
                 <button id="buttonMountain"></button>
             </div>
-
             <div id="divViewForest">
                 <canvas id="canvasForest" width="384" height="224"></canvas>
-
                 <table id="tableForestInventory">
                     <thead id="theadForestInventory"></thead>
                     <tbody id="tbodyForestInventory"></tbody>
                 </table>
-
                 <table id="tableForestStaff">
                     <thead id="theadForestStaff"></thead>
                     <tbody id="tbodyForestStaff"></tbody>
                 </table>
-
                 <table id="tableForestReport">
                     <thead id="theadForestReport"></thead>
                     <tbody id="tbodyForestReport"></tbody>
                 </table>
-
                 <button id="buttonForest"></button>
             </div>
-
             <div id="divViewFarm">
                 <canvas id="canvasFarm" width="16" height="16"></canvas>
-
                 <div id="divFarmingGameplayControls">
                     <button id="buttonTill">
                         <span id="buttonTillDecal"></span>
@@ -138,28 +171,23 @@
                         <span id="buttonHarvestDecal"></span>
                     </button>
                 </div>
-
                 <button id="buttonPriority">
                     <span id="buttonPriorityDecal"></span>
                     <span id="buttonPriorityColon"></span>
                     <span id="buttonPriorityOption"></span>
                 </button>
-
                 <table id="tableFarmInventory">
                     <thead id="theadFarmInventory"></thead>
                     <tbody id="tbodyFarmInventory"></tbody>
                 </table>
-
                 <table id="tableFarmStaff">
                     <thead id="theadFarmStaff"></thead>
                     <tbody id="tbodyFarmStaff"></tbody>
                 </table>
-
                 <table id="tableFarmReport">
                     <thead id="theadFarmReport"></thead>
                     <tbody id="tbodyFarmReport"></tbody>
                 </table>
-
                 <div id="divFarmButtons">
                     <button id="buttonBuyLand"></button>
                     <button id="buttonBuyForest"></button>
@@ -169,7 +197,6 @@
                     <button id="buttonHire"></button>
                     <button id="buttonAudit"></button>
                 </div>
-
                 <div id="divBarterButtons">
                     <button id="buttonBarterOlive"></button>
                     <button id="buttonBarterDate"></button>
@@ -178,9 +205,35 @@
                     <button id="buttonBarterGrape"></button>
                 </div>
             </div>
-
         </div>
 
+        <div id="divViewTownship">
+            <button id="buttonGoToPraedium"></button><button id="buttonGoToPort"></button>
+            <div id="divVillageName"></div>
+            <div id="divVillageEstDate"></div>
+            <canvas id="canvasVillage" width="384" height="224"></canvas>
+            <div id="divVillageLasTablas"></div>
+            <div id="divVillageButtons">
+                <button id="buttonBuild"></button>
+                <button id="buttonSellWheat"></button>
+                <button id="buttonSellBarley"></button>
+            </div>
+        </div>
+
+        <div id="divViewPort">
+            <button id="buttonGoToTownshipFromPort"></button>
+            <div id="divPortName">The ʿAkkō Harbour</div>
+            <div id="divPortSubtitle">Mercantile Gateway to Cyprus & the Levant</div>
+            <canvas id="canvasPort" width="384" height="224"></canvas>
+            <div id="divPortActionArea">
+                <img src="bitmaps/trade_goods.png" width="132" height="88" style="border:2px solid black; display: block; margin: 6.4vw auto 3.2vw auto;" />
+                <button id="buttonEstablishTradeRoute">ESTABLISH NEW TRADE ROUTE<br>(-<s>𝐼</s>1,000,000)</button>
+                <img src="bitmaps/trade_tin.png" width="132" height="88" style="border:2px solid black; display: block; margin: 6.4vw auto 3.2vw auto;" />
+                <button id="buttonImportTin">
+                    ARRANGE FOR THE IMPORT OF TIN<br>(-100<span class="icon IngotCopper inlineIcon"></span><span class="warehouseTotal">/Voyage</span>)
+                </button>
+            </div>
+        </div>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divFooter">
@@ -195,7 +248,6 @@
             <button id="buttonGameEventDismiss"></button>
         </div>
     </div>
-
     <div id="divOverlayForeword" class="overlay">
         <div id="divModalForeword">
             <div id="divForewordTitle">PRÆDIVM</div>
@@ -205,14 +257,12 @@
             <button id="buttonForewordDismiss"></button>
         </div>
     </div>
-
     <div id="divOverlaySystemMessage" class="overlay">
         <div id="divModalSystemMessage">
             <div id="divSystemMessageCorpus"></div>
             <button id="buttonSystemMessageDismiss"></button>
         </div>
     </div>
-
     <div id="divOverlayMods" class="overlay">
         <div id="divModalMods">
             <div id="divModsCorpus">
@@ -223,7 +273,6 @@
             <button id="buttonModsDismiss"></button>
         </div>
     </div>
-
     <div id="divOverlayOptions" class="overlay">
         <div id="divModalOptions">
             <div>

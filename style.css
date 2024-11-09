@@ -412,9 +412,18 @@ button:active {
 
 
 
+#buttonGoToPraediumFromRes,
+#buttonGoToResidence,
 #buttonGoToTownship,
-#buttonGoToPraedium {
+#buttonGoToPraedium,
+#buttonGoToPort,
+#buttonGoToTownshipFromPort {
     margin: 0 auto 6.4vw auto;
+}
+
+#buttonGoToTownship,
+#buttonGoToPort {
+    margin-left: 2vw;
 }
 
 
@@ -468,6 +477,18 @@ button:active {
     syntax: "<angle>";
     inherits: true;
     initial-value: 0turn;
+}
+
+
+
+#divViewResidence #divResidenceActionArea #buttonWasteTime {
+    display: block;
+    margin: 0 auto;
+}
+
+#buttonImproveResidence {
+    display: block;
+    margin: 2vw auto 0 auto;
 }
 
 
@@ -953,7 +974,9 @@ canvas {
     display: block;
 }
 
-#canvasVillage {
+#canvasVillage,
+#canvasResidence,
+#canvasPort {
     width: calc(386px * var(--pixel-scale));
     height: calc(226px * var(--pixel-scale));
     margin: 0 auto 6.4vw auto;
@@ -1171,6 +1194,104 @@ td {
 
 
 
+#tableResidenceInventory {
+    margin-top: 6.4vw;
+}
+
+#tableResidenceReport {
+    margin-top: 2vw;
+}
+
+#tableResidenceInventory,
+#tableResidenceReport {
+    border: calc(1px * var(--pixel-scale)) solid black;
+    user-select: none;
+}
+
+#tableResidenceInventory tr:nth-of-type(even) td,
+#tableResidenceReport tr:nth-of-type(even) td {
+    background: #e9e9e9;
+}
+
+#tableResidenceInventory td,
+#tableResidenceReport td {
+    padding: 1vw 2vw;
+    vertical-align: bottom;
+    border-bottom: calc(1px * var(--pixel-scale)) solid #d8d8d8;
+}
+
+#tableResidenceReport td {
+    text-align: center;
+    border-right: calc(1px * var(--pixel-scale)) solid #d8d8d8;
+}
+
+#tableResidenceInventory thead td,
+#theadResidenceReport tr td {
+    background: #c28947;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-bottom: calc(1px * var(--pixel-scale)) solid black;
+}
+
+#theadResidenceReport tr td {
+    border-right: calc(1px * var(--pixel-scale)) solid #9e6b30;
+}
+
+
+
+#tableWorkshopsContainer {
+    width: 95vw;
+}
+
+.residenceWorkshopTable {
+    border: calc(1px * var(--pixel-scale)) solid black;
+    user-select: none;
+}
+
+.residenceWorkshopTable td {
+    vertical-align: bottom;
+    text-align: center;
+    padding: 1vw 2vw;
+    border-bottom: calc(1px * var(--pixel-scale)) solid #d8d8d8;
+}
+
+.residenceWorkshopTable tr:nth-of-type(even) td {
+    background: #e9e9e9;
+}
+
+.residenceWorkshopTable thead tr td {
+    font-weight: bold;
+    color: white;
+    background-color: cadetblue;
+    border-bottom: calc(1px * var(--pixel-scale)) solid black;
+}
+
+.workshopHarvestGrainDecal,
+.workshopHarvestFruitDecal,
+.workshopHarvestMetalDecal {
+    background: var(--tilemap);
+    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    width: calc(16px * var(--pixel-scale));
+    height: calc(16px * var(--pixel-scale));
+    margin-right: calc(2px * var(--pixel-scale));
+    display: inline-block;
+}
+
+.workshopHarvestGrainDecal {
+    background-position: calc(-304px * var(--pixel-scale)) calc(-32px * var(--pixel-scale));
+}
+
+.workshopHarvestFruitDecal {
+    background-position: calc(-320px * var(--pixel-scale)) calc(-32px * var(--pixel-scale));
+}
+
+.workshopHarvestMetalDecal {
+    background-position: calc(-480px * var(--pixel-scale)) calc(-240px * var(--pixel-scale));
+}
+
+
+
 /* // ICONS ///////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -1333,6 +1454,61 @@ td {
 
 .IngotCopper {
     --i: 4;
+    --j: 14;
+}
+
+.IngotTin {
+    --i: 25;
+    --j: 14;
+}
+
+.IngotBronze {
+    --i: 26;
+    --j: 14;
+}
+
+.TheLocnar {
+    --i: 27;
+    --j: 14;
+}
+
+.Loaves {
+    --i: 31;
+    --j: 7;
+}
+
+.Amphora {
+    --i: 31;
+    --j: 8;
+}
+
+.Keg {
+    --i: 31;
+    --j: 9;
+}
+
+.Honeypot {
+    --i: 31;
+    --j: 10;
+}
+
+.Basket {
+    --i: 31;
+    --j: 11;
+}
+
+.Jug {
+    --i: 31;
+    --j: 12;
+}
+
+.Cask {
+    --i: 31;
+    --j: 13;
+}
+
+.Trinket {
+    --i: 31;
     --j: 14;
 }
 
@@ -1500,6 +1676,13 @@ td {
 
 
 
+.ShippingCrate {
+    --i: 30;
+    --j: 15;
+}
+
+
+
 .Crown1 {
     --i: 10;
     --j: 14;
@@ -1529,7 +1712,7 @@ td {
     font-size: 3.2vw;
     font-weight: bold;
     color: #120404;
-    margin-top: 0;
+    margin: 0;
 }
 
 #divVillageEstDate {
@@ -1539,9 +1722,53 @@ td {
     text-align: center;
     display: inline-block;
     width: 100%;
+    margin: 0;
 }
 
 #divVillageLasTablas {
+    margin-bottom: 6.4vw;
+}
+
+
+
+/* // RESIDENCE ///////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divResidenceActionArea {
+    margin-bottom: 6.4vw;
+}
+
+#tableWorkshopsContainer img {
+    width: calc(130px * var(--pixel-scale));
+    height: calc(86px * var(--pixel-scale));
+    border: calc(1px * var(--pixel-scale)) solid black;
+    display: block;
+    margin: 6.4vw auto 2vw auto;
+}
+
+
+
+/* // PORT ////////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divPortName {
+    font-size: 3.2vw;
+    font-weight: bold;
+    color: #120404;
+    margin: 0;
+}
+
+#divPortSubtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 1.8vw;
+    color: #120404;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+}
+
+#divPortActionArea {
     margin-bottom: 6.4vw;
 }
 
@@ -1580,8 +1807,23 @@ td {
 #tableForestReport,
 #divViewMountain,
 #tableMountainReport,
+#divViewResidence,
+#buttonImproveResidence,
+#tableResidenceInventory,
+#tableResidenceReport,
+#divWorkshopBakery,
+#divWorkshopOliveMill,
+#divWorkshopBrewery,
+#divWorkshopWinery,
+#divWorkshopKitchen,
+#divWorkshopPress,
+#divWorkshopGreenhouse,
+#divWorkshopAtelier,
+#buttonGoToResidence,
 #divViewTownship,
 #buttonGoToTownship,
+#buttonGoToPort,
+#divViewPort,
 #buttonTill,
 #buttonPlant,
 #buttonWater,

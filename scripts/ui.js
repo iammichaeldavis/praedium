@@ -41,6 +41,7 @@ const tilePineTree = [64, 160,];
 const tilePlinth = [5 * 16, 160,];
 const tileRocks = [6 * 16, 160,];
 const tileShrine = [176, 8 * 16,];
+const tileGraves = [176 + 32, 8 * 16,];
 
 const tileBigTreeNW = [8 * 16, 9 * 16,];
 const tileBigTreeNE = [9 * 16, 9 * 16,];
@@ -48,6 +49,14 @@ const tileBigTreeNW2 = [8 * 16, 8 * 16,];
 const tileBigTreeNE2 = [9 * 16, 8 * 16,];
 const tileBigTreeSW = [8 * 16, 160,];
 const tileBigTreeSE = [9 * 16, 160,];
+
+const tileHut = [0, 7 * 16,];
+const tileTinyWell = [0, 6 * 16,];
+const tileCabin = [16, 7 * 16,];
+const tileHouseBoardsTop = [48, 6 * 16,];
+const tileHouseBoardsLeft = [32, 7 * 16,];
+const tileHouseBoardsMiddle = [48, 7 * 16,];
+const tileHouseBoardsRight = [64, 7 * 16,];
 
 const tilePathCross = [0, 176,];
 const tilePathH2N = [16, 176,];
@@ -81,6 +90,7 @@ const tileCobblestoneEdgeW = [14 * 16, 12 * 16,];
 const tileCobblestoneEdgeE = [15 * 16, 12 * 16,];
 
 const tileBridgeNew = [12 * 16, 12 * 16,];
+const tileBridgeNewH = [14 * 16, 8 * 16,];
 const tileBridgePrim = [12 * 16, 13 * 16,];
 const tileBridgePrimH = [12 * 16, 14 * 16,];
 
@@ -381,6 +391,7 @@ function UpdateText() {
     }
 
     if (player.isAt == 'Praedium') {
+        buttonGoToResidence.innerHTML = displayGoToResidence;
         buttonGoToTownship.innerHTML = displayGoToTownship;
 
         // FARM --------------------------------
@@ -417,15 +428,40 @@ function UpdateText() {
 
         if (player.seesReport) {
             theadFarmReport.innerHTML = '<tr><td><br>' + displayCrop + '</td><td>' + displayAcresFarmed + '</td><td>' + displayHarvested + '</td><td>' + displaySpent + '</td></tr>';
-            const totalEaten = handsEaten + loggersEaten + sawyersEaten + masonsEaten + minersEaten + smeltersEaten + vigneronsEaten + arboristsEaten + horticulturalistsEaten;
-            tableString = '<tr><td><span class="icon Wheat"></span></td><td>' + formatterStandard.format(farmedCount[0]) + '</td><td>' + formatterStandard.format(harvestedCount[0]) + '</td><td>' + formatterStandard.format(spentCount[0] + soldCount[0] + seededCount[0] + totalEaten) + '</td></tr>';
-            if (farmStage > 16) { tableString += '<tr><td><span class="icon Barley"></span></td><td>' + formatterStandard.format(farmedCount[1]) + '</td><td>' + formatterStandard.format(harvestedCount[1]) + '</td><td>' + formatterStandard.format(spentCount[1] + soldCount[1] + seededCount[1] + horsesEaten) + '</td></tr>'; }
-            if (player.seesOlives) { tableString += '<tr><td><span class="icon Olive"></span></td><td>' + formatterStandard.format(farmedCount[2]) + '</td><td>' + formatterStandard.format(harvestedCount[2]) + '</td><td>' + formatterStandard.format(spentCount[2] + soldCount[2]) + '</td></tr>'; }
+            const totalEaten = paidOutWheat[0] + paidOutWheat[1] + paidOutWheat[2] + paidOutWheat[3] + paidOutWheat[4] + paidOutWheat[5] + paidOutWheat[6] + paidOutWheat[7] + paidOutWheat[8] + paidOutWheat[9];
+            tableString = '<tr><td><span class="icon Wheat"></span></td>';
+            tableString += '<td>' + formatterStandard.format(farmedCount[0]) + '</td>';
+            tableString += '<td>' + formatterStandard.format(harvestedCount[0]) + '</td>';
+            tableString += '<td>' + formatterStandard.format(spentCount[0] + soldCount[0] + seededCount[0] + totalEaten + residenceIngredientConsumedCount[0]) + '</td></tr>';
+            if (farmStage > 16) {
+                tableString += '<tr><td><span class="icon Barley"></span></td>';
+                tableString += '<td>' + formatterStandard.format(farmedCount[1]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(harvestedCount[1]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(spentCount[1] + soldCount[1] + seededCount[1] + horsesEaten + residenceIngredientConsumedCount[2]) + '</td></tr>';
+            }
+            if (player.seesOlives) {
+                tableString += '<tr><td><span class="icon Olive"></span></td>';
+                tableString += '<td>' + formatterStandard.format(farmedCount[2]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(harvestedCount[2]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(spentCount[2] + soldCount[2] + residenceIngredientConsumedCount[1]) + '</td></tr>';
+            }
             if (farmStage > 17) {
-                tableString += '<tr><td><span class="icon Date"></span></td><td>' + formatterStandard.format(farmedCount[3]) + '</td><td>' + formatterStandard.format(harvestedCount[3]) + '</td><td>' + formatterStandard.format(spentCount[3] + soldCount[3]) + '</td></tr>';
-                tableString += '<tr><td><span class="icon Fig"></span></td><td>' + formatterStandard.format(farmedCount[4]) + '</td><td>' + formatterStandard.format(harvestedCount[4]) + '</td><td>' + formatterStandard.format(spentCount[4] + soldCount[4]) + '</td></tr>';
-                tableString += '<tr><td><span class="icon Pom"></span></td><td>' + formatterStandard.format(farmedCount[5]) + '</td><td>' + formatterStandard.format(harvestedCount[5]) + '</td><td>' + formatterStandard.format(spentCount[5] + soldCount[5]) + '</td></tr>';
-                tableString += '<tr><td><span class="icon Grape"></span></td><td>' + formatterStandard.format(farmedCount[6]) + '</td><td>' + formatterStandard.format(harvestedCount[6]) + '</td><td>' + formatterStandard.format(spentCount[6] + soldCount[6]) + '</td></tr>';
+                tableString += '<tr><td><span class="icon Date"></span></td>';
+                tableString += '<td>' + formatterStandard.format(farmedCount[3]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(harvestedCount[3]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(spentCount[3] + soldCount[3] + residenceIngredientConsumedCount[4]) + '</td></tr>';
+                tableString += '<tr><td><span class="icon Fig"></span></td>';
+                tableString += '<td>' + formatterStandard.format(farmedCount[4]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(harvestedCount[4]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(spentCount[4] + soldCount[4] + residenceIngredientConsumedCount[6]) + '</td></tr>';
+                tableString += '<tr><td><span class="icon Pom"></span></td>';
+                tableString += '<td>' + formatterStandard.format(farmedCount[5]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(harvestedCount[5]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(spentCount[5] + soldCount[5] + residenceIngredientConsumedCount[5]) + '</td></tr>';
+                tableString += '<tr><td><span class="icon Grape"></span></td>';
+                tableString += '<td>' + formatterStandard.format(farmedCount[6]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(harvestedCount[6]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(spentCount[6] + soldCount[6] + residenceIngredientConsumedCount[3]) + '</td></tr>';
             }
             tbodyFarmReport.innerHTML = tableString;
         }
@@ -464,18 +500,59 @@ function UpdateText() {
             tableString = '<tr><td>' + displayStone + '&nbsp;<span class="icon Stone inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(stoneCount) + '</td><td></td></tr>';
             if (player.canMine) { tableString += '<tr><td>' + displayOre + '&nbsp;<span class="icon OreCopper inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(oreCopperCount) + '</td><td></td></tr>'; }
             if (player.canSmelt) { tableString += '<tr><td>' + displayCopper + '&nbsp;<span class="icon IngotCopper inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(ingotsCopperCount) + '</td><td>(-' + (smeltersHired * ingotsCopperYieldPerTurn * ingotsOreCostPerIngot) + '<span class="icon OreCopper inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)</td></tr>'; }
+            if (1 == 1) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += 'Tin' + '&nbsp;<span class="icon IngotTin inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="noPadColumn">';
+                tableString += formatterStandard.format(ingotsTinCount);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += '';
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (1 == 1) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += 'Bronze' + '&nbsp;<span class="icon IngotBronze inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="noPadColumn">';
+                tableString += formatterStandard.format(ingotsBronzeCount);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += '(-' + bronzeCopperNeed + '<span class="icon IngotCopper inlineIcon"></span> -' + bronzeTinNeed + '<span class="icon IngotTin inlineIcon"></span><span class="warehouseTotal">/' + displayMonth + '</span>)';
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             tbodyMountainInventory.innerHTML = tableString;
 
             theadMountainStaff.innerHTML = '<tr><td colspan="3">' + displayStaff + '</td></tr>';
             let masonCost = '(-' + formatterStandard.format(masonsHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
             let minerCost = '(-' + formatterStandard.format(minersHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
             let smelterCost = '(-' + formatterStandard.format(smeltersHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
+            let metallurgistCost = '(-' + formatterStandard.format(metallurgistsHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
             if (starving[3]) { masonCost = '<span class="starving">' + displayStarving + '</span>'; }
             if (starving[4]) { minerCost = '<span class="starving">' + displayStarving + '</span>'; }
             if (starving[5]) { smelterCost = '<span class="starving">' + displayStarving + '</span>'; }
+            if (starving[9]) { metallurgistCost = '<span class="starving">' + displayStarving + '</span>'; }
             tableString = '<tr><td>' + displayMasons + '&nbsp;<span class="icon Mason inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(masonsHired) + '</td><td>' + masonCost + '</td></tr>';
             if (player.canMine) { tableString += '<tr><td>' + displayMiners + '&nbsp;<span class="icon Miner inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(minersHired) + '</td><td>' + minerCost + '</td></tr>'; }
             if (player.canSmelt) { tableString += '<tr><td>' + displayCindermen + '&nbsp;<span class="icon Cinderman inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(smeltersHired) + '</td><td>' + smelterCost + '</td></tr>'; }
+            if (1 == 1) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayMetallurgists + '&nbsp;<span class="icon Blacksmith inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="noPadColumn">';
+                tableString += formatterStandard.format(metallurgistsHired);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += metallurgistCost;
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             tbodyMountainStaff.innerHTML = tableString;
 
             if (player.seesReport) {
@@ -483,6 +560,32 @@ function UpdateText() {
                 tableString = '<tr><td><span class="icon Stone"></span></td><td>' + formatterStandard.format(mountainProducedCount[0]) + '</td><td>' + formatterStandard.format(mountainSpentCount[0]) + '</td></tr>';
                 if (player.canMine) { tableString += '<tr><td><span class="icon OreCopper"></span></td><td>' + formatterStandard.format(mountainProducedCount[1]) + '</td><td>' + formatterStandard.format(mountainSpentCount[1]) + '</td></tr>'; }
                 if (player.canSmelt) { tableString += '<tr><td><span class="icon IngotCopper"></span></td><td>' + formatterStandard.format(mountainProducedCount[2]) + '</td><td>' + formatterStandard.format(mountainSpentCount[2]) + '</td></tr>'; }
+                if (1 == 1) {
+                    tableString += '<tr>';
+                    tableString += '<td>';
+                    tableString += '<span class="icon IngotTin"></span>';
+                    tableString += '</td>';
+                    tableString += '<td>';
+                    tableString += formatterStandard.format(mountainProducedCount[3]);
+                    tableString += '</td>';
+                    tableString += '<td>';
+                    tableString += formatterStandard.format(mountainSpentCount[3]);
+                    tableString += '</td>';
+                    tableString += '</tr>';
+                }
+                if (1 == 1) {
+                    tableString += '<tr>';
+                    tableString += '<td>';
+                    tableString += '<span class="icon IngotBronze"></span>';
+                    tableString += '</td>';
+                    tableString += '<td>';
+                    tableString += formatterStandard.format(mountainProducedCount[4]);
+                    tableString += '</td>';
+                    tableString += '<td>';
+                    tableString += formatterStandard.format(mountainSpentCount[4]);
+                    tableString += '</td>';
+                    tableString += '</tr>';
+                }
                 tbodyMountainReport.innerHTML = tableString;
             }
 
@@ -551,8 +654,9 @@ function UpdateText() {
         }
     }
 
-    else { // player.isAt == 'Township'
+    else if (player.isAt == 'Township') {
         buttonGoToPraedium.innerHTML = displayGoToPraedium;
+        buttonGoToPort.innerHTML = displayGoToPort;
 
         // VILLAGE -----------------------------
         let tableString = null;
@@ -873,6 +977,438 @@ function UpdateText() {
         buttonSellBarley.innerHTML = currencySymbol + formatterStandard.format(adjustedPrice) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterStandard.format((bushelBulkCount * 10)) + '<span class="icon ' + tempGrainIcon + ' inlineIcon"></span>';
     }
 
+    else if (player.isAt == 'Port') {
+        buttonGoToTownshipFromPort.innerHTML = displayGoToTownshipFromPort;
+    }
+
+    else if (player.isAt == 'Residence') {
+        buttonGoToPraediumFromRes.innerHTML = displayGoToPraediumFromRes;
+        buttonWasteTime.innerHTML = displayLabelWasteTime;
+
+        if (residenceStage == 0) { buttonImproveResidence.innerHTML = displayLabelResidence00 + '<br>' + '(' + priceResidence00 + '<span class="icon Wheat inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 1) { buttonImproveResidence.innerHTML = displayLabelResidence01 + '<br>' + '(' + priceResidence01[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence01[1] + '<span class="icon Log inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 2) { buttonImproveResidence.innerHTML = displayLabelResidence02 + '<br>' + '(' + priceResidence02[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence02[1] + '<span class="icon Board inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 3) { buttonImproveResidence.innerHTML = displayLabelResidence03 + '<br>' + '(' + priceResidence03[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence03[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence03[2] + '<span class="icon Board inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 4) { buttonImproveResidence.innerHTML = displayLabelResidence04 + '<br>' + '(' + priceResidence04[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence04[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence04[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence04[3] + '<span class="icon Olive inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 5) { buttonImproveResidence.innerHTML = displayLabelResidence05 + '<br>' + '(' + priceResidence05[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence05[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence05[2] + '<span class="icon Board inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 6) { buttonImproveResidence.innerHTML = displayLabelResidence06 + '<br>' + '(' + priceResidence06[0] + '<span class="icon Barley inlineIcon"></span>' + ' + ' + priceResidence06[1] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence06[2] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence06[3] + '<span class="icon Board inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 7) { buttonImproveResidence.innerHTML = displayLabelResidence07 + '<br>' + '(' + priceResidence07[0] + '<span class="icon Grape inlineIcon"></span>' + ' + ' + priceResidence07[1] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence07[2] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence07[3] + '<span class="icon Board inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 8) { buttonImproveResidence.innerHTML = displayLabelResidence08 + '<br>' + '(' + priceResidence08[0] + '<span class="icon Date inlineIcon"></span>' + ' + ' + priceResidence08[1] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence08[2] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence08[3] + '<span class="icon Board inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 9) { buttonImproveResidence.innerHTML = displayLabelResidence09 + '<br>' + '(' + priceResidence09[0] + '<span class="icon Pom inlineIcon"></span>' + ' + ' + priceResidence09[1] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence09[2] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence09[3] + '<span class="icon Board inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 10) { buttonImproveResidence.innerHTML = displayLabelResidence10 + '<br>' + '(' + priceResidence10[0] + '<span class="icon Fig inlineIcon"></span>' + ' + ' + priceResidence10[1] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence10[2] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence10[3] + '<span class="icon Board inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 11) { buttonImproveResidence.innerHTML = displayLabelResidence11 + '<br>' + '(' + priceResidence11[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence11[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence11[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence11[3] + '<span class="icon IngotCopper inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 12) { buttonImproveResidence.innerHTML = displayLabelResidence12 + '<br>' + '(' + priceResidence12[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence12[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence12[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence12[3] + '<span class="icon IngotBronze inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 13) { buttonImproveResidence.innerHTML = displayLabelResidence13 + '<br>' + '(' + formatterStandard.format(priceResidence13[0]) + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence13[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence13[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence13[3] + '<span class="icon IngotBronze inlineIcon"></span>' + ')'; }
+
+        if (residenceStage > 2) {
+            let tableString = '<thead id="theadResidenceInventory"><tr><td colspan="2">' + displayInStock + '</td></tr></thead>';
+            tableString += '<tbody id="tbodyResidenceInventory">';
+            tableString += '<tr>'
+            tableString += '<td>';
+            tableString += displayLoaves;
+            tableString += '&nbsp;<span class="icon Loaves inlineIcon"></span>:';
+            tableString += '</td>';
+            tableString += '<td class="rightPadColumn">';
+            tableString += formatterStandard.format(residenceInStockCount[0]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            if (player.hasOliveMill) {
+                tableString += '<tr>'
+                tableString += '<td>';
+                tableString += displayOil;
+                tableString += '&nbsp;<span class="icon Amphora inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceInStockCount[1]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasBrewery) {
+                tableString += '<tr>'
+                tableString += '<td>';
+                tableString += displayBeer;
+                tableString += '&nbsp;<span class="icon Keg inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceInStockCount[2]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasWinery) {
+                tableString += '<tr>'
+                tableString += '<td>';
+                tableString += displayWine;
+                tableString += '&nbsp;<span class="icon Cask inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceInStockCount[3]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasKitchen) {
+                tableString += '<tr>'
+                tableString += '<td>';
+                tableString += displaySyrup;
+                tableString += '&nbsp;<span class="icon Honeypot inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceInStockCount[4]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasPress) {
+                tableString += '<tr>'
+                tableString += '<td>';
+                tableString += displayJuice;
+                tableString += '&nbsp;<span class="icon Jug inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceInStockCount[5]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasGreenhouse) {
+                tableString += '<tr>'
+                tableString += '<td>';
+                tableString += displayDriedFigs;
+                tableString += '&nbsp;<span class="icon Basket inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceInStockCount[6]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasAtelier) {
+                tableString += '<tr>'
+                tableString += '<td>';
+                tableString += displayTrinkets;
+                tableString += '&nbsp;<span class="icon Trinket inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceInStockCount[7]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            tableString += '</tbody>';
+            tableResidenceInventory.innerHTML = tableString;
+
+            tableString = '<thead id="theadResidenceReport"><tr><td>' + displayGood + '</td><td>' + displayAmountProduced + '</td><td>' + displayAmountSpent + '</td></tr></thead>';
+            tableString += '<tbody id="tbodyResidenceInventory">';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon Loaves"></span>';
+            tableString += '</td>';
+            tableString += '<td>';
+            tableString += formatterStandard.format(residenceProducedCount[0]);
+            tableString += '</td>';
+            tableString += '<td>';
+            tableString += formatterStandard.format(residenceSpentCount[0]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            if (player.hasOliveMill) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Amphora"></span>';
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceProducedCount[1]);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceSpentCount[1]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasBrewery) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Keg"></span>';
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceProducedCount[2]);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceSpentCount[2]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasWinery) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Cask"></span>';
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceProducedCount[3]);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceSpentCount[3]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasKitchen) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Honeypot"></span>';
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceProducedCount[4]);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceSpentCount[4]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasPress) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Jug"></span>';
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceProducedCount[5]);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceSpentCount[5]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasGreenhouse) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Basket"></span>';
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceProducedCount[6]);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceSpentCount[6]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasAtelier) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Trinket"></span>';
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceProducedCount[7]);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceSpentCount[7]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            tableString += '</tbody>';
+            tableResidenceReport.innerHTML = tableString;
+
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayBakery;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[0] * 100) + '% <span class="workshopHarvestGrainDecal"></span><span class="icon Wheat inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += residenceIngredientsIn[0] + '<span class="icon Wheat inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[0] + '<span class="icon Loaves inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon Wheat inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[0]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableWorkshopBakery.innerHTML = tableString;
+
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayOliveMill;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[1] * 100) + '% <span class="workshopHarvestFruitDecal"></span><span class="icon Olive inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += residenceIngredientsIn[1] + '<span class="icon Olive inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[1] + '<span class="icon Amphora inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon Olive inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[1]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableWorkshopOliveMill.innerHTML = tableString;
+
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayBrewery;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[2] * 100) + '% <span class="workshopHarvestGrainDecal"></span><span class="icon Barley inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += residenceIngredientsIn[2] + '<span class="icon Barley inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[2] + '<span class="icon Keg inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon Barley inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[2]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableWorkshopBrewery.innerHTML = tableString;
+
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayWinery;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[3] * 100) + '% <span class="workshopHarvestFruitDecal"></span><span class="icon Grape inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += residenceIngredientsIn[3] + '<span class="icon Grape inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[3] + '<span class="icon Cask inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon Grape inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[3]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableWorkshopWinery.innerHTML = tableString;
+
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayKitchen;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[4] * 100) + '% <span class="workshopHarvestFruitDecal"></span><span class="icon Date inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += residenceIngredientsIn[4] + '<span class="icon Date inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[4] + '<span class="icon Honeypot inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon Date inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[4]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableWorkshopKitchen.innerHTML = tableString;
+
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayPress;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[5] * 100) + '% <span class="workshopHarvestFruitDecal"></span><span class="icon Pom inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += residenceIngredientsIn[5] + '<span class="icon Pom inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[5] + '<span class="icon Jug inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon Pom inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[5]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableWorkshopPress.innerHTML = tableString;
+
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayGreenhouse;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[6] * 100) + '% <span class="workshopHarvestFruitDecal"></span><span class="icon Fig inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += residenceIngredientsIn[6] + '<span class="icon Fig inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[6] + '<span class="icon Basket inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon Fig inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[6]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableWorkshopGreenhouse.innerHTML = tableString;
+
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayAtelier;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[7] * 100) + '% <span class="workshopHarvestMetalDecal"></span><span class="icon IngotBronze inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += residenceIngredientsIn[7] + '<span class="icon IngotBronze inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[7] + '<span class="icon Trinket inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon IngotBronze inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[7]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableWorkshopAtelier.innerHTML = tableString;
+        }
+    }
+
     // SYSTEM ------------------------------
     buttonSystemMessageDismiss.innerHTML = displayIUnderstand;
     buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK;
@@ -920,7 +1456,8 @@ function UpdateVisibilities() {
         tableMountainReport.style.display = player.seesReport ? 'table' : '';
         buttonMountain.style.display = player.seesMountainButton ? 'block' : '';
 
-        buttonGoToTownship.style.display = player.seesVillage ? 'block' : '';
+        buttonGoToResidence.style.display = player.canGoHome ? 'inline-block' : '';
+        buttonGoToTownship.style.display = player.seesVillage ? 'inline-block' : '';
 
         buttonTill.style.display = player.canTill ? 'inline-block' : '';
         buttonPlant.style.display = player.canPlant ? 'inline-block' : '';
@@ -990,10 +1527,29 @@ function UpdateVisibilities() {
         else if (priority == '🤪') { buttonPriorityOption.style.backgroundPosition = (-240 * pixelScale) + 'px ' + (-16 * pixelScale) + 'px'; }
     }
 
-    else {
+    else if (player.isAt == 'Township') {
+        buttonGoToPort.style.display = player.canSell ? 'inline-block' : '';
         buttonBuild.style.display = player.canBuild ? 'block' : '';
         buttonSellWheat.style.display = player.canSell ? 'block' : '';
         buttonSellBarley.style.display = player.canSell ? 'block' : '';
+    }
+
+    else if (player.isAt == 'Port') {
+        // schmeep schmarp
+    }
+
+    else if (player.isAt == 'Residence') {
+        buttonImproveResidence.style.display = player.hasMansion ? '' : 'block';
+        tableResidenceInventory.style.display = player.hasBakery ? 'table' : '';
+        tableResidenceReport.style.display = player.hasBakery ? 'table' : '';
+        divWorkshopBakery.style.display = player.hasBakery ? 'block' : '';
+        divWorkshopOliveMill.style.display = player.hasOliveMill ? 'block' : '';
+        divWorkshopBrewery.style.display = player.hasBrewery ? 'block' : '';
+        divWorkshopWinery.style.display = player.hasWinery ? 'block' : '';
+        divWorkshopKitchen.style.display = player.hasKitchen ? 'block' : '';
+        divWorkshopPress.style.display = player.hasPress ? 'block' : '';
+        divWorkshopGreenhouse.style.display = player.hasGreenhouse ? 'block' : '';
+        divWorkshopAtelier.style.display = player.hasAtelier ? 'block' : '';
     }
 }
 
@@ -1492,6 +2048,22 @@ function RedrawFarm() {
             tileLawn,
             tileLawn,
         );
+    }
+
+    if (residenceStage > 0) {
+        arrayFarmGraph[2][13] = tileTinyWell;
+        arrayFarmGraph[2][14] = tileHut;
+    }
+
+    if (residenceStage > 1) {
+        arrayFarmGraph[2][14] = tileCabin;
+    }
+
+    if (residenceStage > 2) {
+        arrayFarmGraph[1][14] = tileHouseBoardsTop;
+        arrayFarmGraph[2][13] = tileHouseBoardsLeft;
+        arrayFarmGraph[2][14] = tileHouseBoardsMiddle;
+        arrayFarmGraph[2][15] = tileHouseBoardsRight;
     }
 
     if (farmStage > 11) {
@@ -2857,7 +3429,7 @@ function RedrawForest() {
             tileBigTreeNW,
             tileBigTreeNE,
             tileTrees,
-            tileRocks,
+            tileGraves,
             tileForest,
         ],
         [
@@ -3908,6 +4480,27 @@ function RedrawMountain() {
         arrayMountainGraph[11][19] = tileEarthSE;
     }
 
+    if (player.hasMansion) {
+        arrayMountainGraph[7][12] = tilePathV2E;
+        arrayMountainGraph[7][13] = tilePathH;
+        arrayMountainGraph[7][14] = tilePathH;
+        arrayMountainGraph[7][15] = tilePathH;
+        arrayMountainGraph[7][16] = tilePathH;
+        arrayMountainGraph[7][17] = tilePathH;
+        arrayMountainGraph[7][18] = tilePathH;
+        arrayMountainGraph[7][19] = tilePathH;
+        arrayMountainGraph[7][20] = tileBridgeNewH;
+    }
+
+    if (player.hasMansion && farmStage > 14) {
+        arrayMountainGraph[7][12] = tileCobblestoneE;
+        arrayMountainGraph[7][13] = tileRoughPathLroad;
+    }
+
+    if (player.hasMansion && player.canSmelt) {
+        arrayMountainGraph[7][16] = tilePathCross;
+    }
+
     TileRenderer(arrayMountainGraph, canvasMountainContext);
 }
 
@@ -3955,14 +4548,26 @@ function RedrawVillage() {
     if (villageStage > 17) { tempString = displayVillageTitle6; }
     divVillageName.innerHTML = tempString + ' ' + nameVillage;
 
-    canvasVillageContext.drawImage(villagemap, 0, 0, 384, 224, 0, 0, 384, 224);
+    canvasVillageContext.drawImage(villageImage, 0, 0, 384, 224, 0, 0, 384, 224);
 }
 
 
 
-// disable or enable this based on player.likesAnimations 🚨🚨🚨
-// if we do that it won't get translated 😤
+function RedrawResidence() {
+    canvasResidenceContext.drawImage(residenceImage, 0, 0, 384, 224, 0, 0, 384, 224);
+}
+
+
+
+function RedrawPort() {
+    canvasPortContext.drawImage(portImage, 0, 0, 384, 224, 0, 0, 384, 224);
+}
+
+
+
 function AnimateWinButton() {
+    // disable or enable this based on player.likesAnimations 🚨🚨🚨
+    // !! if we do that it won't get translated 😤
     frameWinButton++;
     if (frameWinButton == 4) { frameWinButton = 0; }
     const arrayWinFrames = [
@@ -4130,16 +4735,20 @@ function AnimateCanvases() {
 
 
 
-//                           ||
-// tile animation is in here \/
 function RedrawCanvases() {
     if (player.isAt == 'Praedium') {
         RedrawFarm();
         if (player.seesForest) { RedrawForest(); }
         if (player.seesMountain) { RedrawMountain(); }
     }
-    else {
+    else if (player.isAt == 'Township') {
         RedrawVillage();
+    }
+    else if (player.isAt == 'Residence') {
+        RedrawResidence();
+    }
+    else if (player.isAt == 'Port') {
+        RedrawPort();
     }
 
     if (player.likesAnimations) {
@@ -4247,9 +4856,15 @@ function RedrawCanvases() {
             ];
             tileFurnaceSE = arrayFurnaceSEFrames[animationCycleFrame];
         }
-        else {
-            //township animations go here (oh, you sweet, naïve boy 😂)
-        }
+        //else if (player.isAt == 'Township') {
+        //    //township animations go here (oh, you sweet, naïve boy 😂)
+        //}
+        //else if (player.isAt == 'Residence') {
+        //    // meep meep
+        //}
+        //else if (player.isAt == 'Port') {
+        //    // morp morp
+        //}
     }
 }
 
