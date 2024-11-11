@@ -36,6 +36,7 @@ buttonSellWheat.addEventListener('click', function () { SellGrain(0); });
 buttonSellBarley.addEventListener('click', function () { SellGrain(1); });
 
 buttonFound.addEventListener('click', function () { Found(); });
+buttonNewFarm.addEventListener('click', function () { BuyNewFarm(); });
 
 buttonImproveResidence.addEventListener('click', function () { ImproveResidence(); });
 
@@ -397,8 +398,10 @@ function PlotPlant(robota = false) {
     let foundRow = '';
     let foundCol = '';
 
+    // change this to behave like harvesting... just search for everything, IF you find it, figure out what row its on to find out its cost, IF you have the cost, do so
+
     if (bushelCount[0] >= plantCost) {
-        let plotSearchResult = FindPlot(1, 'wheat');
+        let plotSearchResult = FindPlot(1, 'wheat');//just search for all, and HERE if its wheat (row is correct), let it continue, if you find something but it aint wheat, its berlerm so do bermlerm things
         if (plotSearchResult.row != -1) {
             taskComplete = true;
             foundRow = plotSearchResult.row;
@@ -546,7 +549,7 @@ function PlotHarvest(robota = false) {
             arrayFarmPlots[plotSearchResult.row][plotSearchResult.col] = 0;
             let bounty = FindWholeRandom(yieldMin, yieldMax);
             if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
-            if (plotSearchResult.row > 5) {
+            if (plotSearchResult.row > 5 && plotSearchResult.row < 9) {
                 harvestedCount[1] += bounty;
                 if (player.hasBrewery) {
                     const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[2]);
@@ -954,6 +957,7 @@ function HireHand() {
         if (handsHired == handsMax) {
             player.canHire = false;
             player.canFound = true;
+            player.canBuyNewFarm = true;
         }
         UpdateDisplay();
     }
@@ -1003,6 +1007,22 @@ function Found() {
         player.canFound = false;
         player.canBuild = true;
         player.seesVillage = true;
+        UpdateDisplay();
+    }
+}
+
+
+
+function BuyNewFarm() {
+    if (asCount >= priceNewFarm) {
+        if (player.likesStory) { GameEvent(displayStoryNewFarm); }
+        asCount -= priceNewFarm;
+        asSpent += priceNewFarm;
+        player.canBuyNewFarm = false;
+        player.hasNewFarm = true;
+        farmSize[1] = 15;
+        handsHired += 30;
+        handsMax += 30;
         UpdateDisplay();
     }
 }

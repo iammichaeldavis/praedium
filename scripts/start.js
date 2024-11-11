@@ -14,7 +14,7 @@ window.onresize = UpdateDisplay;
 // ║                    ║
 // ║                    ║
 // ║   by Michael Davis ║
-// ║         11/07/2024 ║
+// ║         11/11/2024 ║
 // ╚════════════════════╝
 
 

@@ -13,6 +13,12 @@ const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
+    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
+    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
+    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
+    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
+    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
 ];
 
 const arrayOlivar = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
@@ -69,6 +75,7 @@ const player = {
     canAudit: false,
     canDelegate: false,
     canFound: false,
+    canBuyNewFarm: false,
     canBuild: false,
     canSell: false,
     canLog: false,
@@ -80,6 +87,7 @@ const player = {
     hasBegun: false,
     hasMildewed: false,
     hasSeenResidence: false,
+    hasNewFarm: false,
     hasBakery: false,
     hasOliveMill: false,
     hasBrewery: false,
@@ -105,6 +113,8 @@ const villageImage = new Image();
 villageImage.src = 'bitmaps/village00.png';
 const portImage = new Image();
 portImage.src = 'bitmaps/docks.png';
+const mansionImage = new Image();
+mansionImage.src = 'bitmaps/mansion.png';
 
 const divOverlayForeword = document.getElementById('divOverlayForeword');
 const divForewordTitle = document.getElementById('divForewordTitle');
@@ -234,6 +244,7 @@ const buttonForest = document.getElementById('buttonForest');
 const buttonBuyMountain = document.getElementById('buttonBuyMountain');
 const buttonMountain = document.getElementById('buttonMountain');
 const buttonFound = document.getElementById('buttonFound');
+const buttonNewFarm = document.getElementById('buttonNewFarm');
 const buttonHire = document.getElementById('buttonHire');
 const buttonAudit = document.getElementById('buttonAudit');
 const buttonBarterOlive = document.getElementById('buttonBarterOlive');
@@ -310,7 +321,7 @@ let warehouseStage = 0;
 const olivePlantDate = [0, 0,];
 
 let handsAvailable = 2;
-const handsMax = 36;
+let handsMax = 36;
 let priority = 'Reap';
 let weeksOfHoliday = 0;
 let manweeksLost = 0;
@@ -463,6 +474,7 @@ const priceStage15 = [8000, 80000,];
 const priceStage16 = [100, 100,];
 const priceStage17 = [4200, 48000,];
 const priceStage18 = [6400, 3200,];
+const priceNewFarm = 3000000;
 
 const priceWarehouse0 = 20;
 const priceWarehouse1 = 50;

@@ -26,12 +26,12 @@ const tileTrees = [16, 9 * 16,];
 const tileForest = [32, 9 * 16,];
 const tileStump = [48, 9 * 16,];
 const tileDeadTree = [64, 9 * 16,];
-//const tileLawnMuddy = [80, 8 * 16,];
-//const tileLawnLog = [96, 8 * 16,];
-//const tileLawnRocky1 = [112, 8 * 16,];
-//const tileLawnScrub1 = [80, 9 * 16,];
-//const tileLawnScrub2 = [96, 9 * 16,];
-//const tileLawnRocky2 = [112, 9 * 16,];
+const tileLawnMuddy = [80, 8 * 16,];
+const tileLawnLog = [96, 8 * 16,];
+const tileLawnRocky1 = [112, 8 * 16,];
+const tileLawnScrub1 = [80, 9 * 16,];
+const tileLawnScrub2 = [96, 9 * 16,];
+const tileLawnRocky2 = [112, 9 * 16,];
 
 const tileShrubs1 = [0, 160,];
 const tileShrubs2 = [16, 160,];
@@ -57,12 +57,50 @@ const tileHouseBoardsTop = [48, 6 * 16,];
 const tileHouseBoardsLeft = [32, 7 * 16,];
 const tileHouseBoardsMiddle = [48, 7 * 16,];
 const tileHouseBoardsRight = [64, 7 * 16,];
+const tileBakeryNW = [80, 6 * 16,];
+const tileBakeryNE = [96, 6 * 16,];
+const tileBakerySW = [80, 7 * 16,];
+const tileBakerySE = [96, 7 * 16,];
+const tileOliveMillNW = [112, 6 * 16,];
+const tileOliveMillNE = [128, 6 * 16,];
+const tileOliveMillSW = [112, 7 * 16,];
+const tileOliveMillSE = [128, 7 * 16,];
+const tileHousePlasterTop = [48 + (8 * 16), 6 * 16,];
+const tileHousePlasterLeft = [32 + (8 * 16), 7 * 16,];
+const tileHousePlasterMiddle = [48 + (8 * 16), 7 * 16,];
+const tileHousePlasterRight = [64 + (8 * 16), 7 * 16,];
+const tileBrewery = [16, 6 * 16,];
+const tileWinery = [32, 6 * 16,];
+const tileKitchen = [64, 6 * 16,];
+const tilePress = [192, 6 * 16,];
+const tileGreenhouseN = [144, 6 * 16,];
+const tileGreenhouseS = [144, 7 * 16,];
+const tileHouseStoneNW = [48 + (11 * 16), 6 * 16,];
+const tileHouseStoneN = [48 + (12 * 16), 6 * 16,];
+const tileHouseStoneNE = [48 + (13 * 16), 6 * 16,];
+const tileHouseStoneSW = [48 + (11 * 16), 7 * 16,];
+const tileHouseStoneS = [48 + (12 * 16), 7 * 16,];
+const tileHouseStoneSE = [48 + (13 * 16), 7 * 16,];
+const tileOliveMillwRoad = [48 + (12 * 16), 8 * 16,];
+const tileAtelierNW = [48 + (14 * 16), 6 * 16,];
+const tileAtelierNE = [48 + (15 * 16), 6 * 16,];
+const tileAtelierSW = [48 + (14 * 16), 7 * 16,];
+const tileAtelierSE = [48 + (15 * 16), 7 * 16,];
+const tileAtelierRoad1 = [48 + (22 * 16), 7 * 16,];
+const tileAtelierRoad2 = [48 + (16 * 16), 6 * 16,];
+const tileAtelierRoad3 = [48 + (17 * 16), 6 * 16,];
+const tileAtelierRoad4 = [48 + (18 * 16), 6 * 16,];
+const tileAtelierRoad5 = [48 + (22 * 16), 8 * 16,];
+const tileAtelierRoad6 = [48 + (16 * 16), 7 * 16,];
+const tileAtelierRoad7 = [48 + (17 * 16), 7 * 16,];
+const tileAtelierRoad8 = [48 + (18 * 16), 7 * 16,];
 
 const tilePathCross = [0, 176,];
 const tilePathH2N = [16, 176,];
 const tilePathH2S = [32, 176,];
 const tilePathH = [48, 176,];
 const tilePathHPeterE = [112, 160,];
+const tilePathHPeterEclay = [176 + (6 * 16), 144 - 16,];
 const tilePathN2E = [64, 176,];
 const tilePathN2W = [80, 176,];
 const tilePathN2WMountain = [96, 176,];
@@ -73,6 +111,7 @@ const tilePathV2W = [160, 176,];
 const tilePathV = [176, 176,];
 const tilePathVPeterN = [176, 160,];
 const tilePathVPeterS = [176, 144,];
+const tilePathVPeterSclay = [176 + (5 * 16), 144 - 16,];
 
 const tileRoughPathR = [12 * 16, 176,];
 const tileRoughPathL = [13 * 16, 176,];
@@ -184,7 +223,19 @@ const tileGrapeTrellisEdgeE = [27 * 16, 80,];
 const tileGrapeTrellisPostSW = [28 * 16, 80,];
 const tileGrapeTrellisPostSE = [29 * 16, 80,];
 
+const tileStoneFenceNW = [48 + (25 * 16), 7 * 16,];
+const tileStoneFenceNE = [48 + (26 * 16), 7 * 16,];
+const tileStoneFenceEndN = [48 + (27 * 16), 7 * 16,];
+const tileStoneFenceEndW = [48 + (25 * 16), 8 * 16,];
+const tileStoneFenceSE = [48 + (26 * 16), 8 * 16,];
+const tileStoneFenceV = [48 + (27 * 16), 8 * 16,];
+const tileStoneFenceH = [48 + (25 * 16), 9 * 16,];
+const tileStoneFenceEndE = [48 + (26 * 16), 9 * 16,];
+const tileStoneFenceEndS = [48 + (27 * 16), 9 * 16,];
+
 let tileGrowingOlive = [22 * 16, 96,];
+
+const tileAutograph = [64 + (9 * 16), 7 * 16,];
 
 
 
@@ -631,6 +682,9 @@ function UpdateText() {
         buttonBuyForest.innerHTML = displayLabelForest + '<br>(' + priceForest + '<span class="icon Wheat inlineIcon"></span>)';
         buttonBuyMountain.innerHTML = displayLabelQuarry + '<br>(' + priceQuarry + '<span class="icon Wheat inlineIcon"></span>)';
         buttonFound.innerHTML = displayLabelFound + '<br>(' + formatterStandard.format(priceVillage) + '<span class="icon Wheat inlineIcon"></span>)';
+
+        // NEW FARM BUTTON ---------------------
+        buttonNewFarm.innerHTML = displayLabelNewFarm + '<br>(' + currencySymbol + formatterStandard.format(priceNewFarm) + ')';
 
         // BARTER BUTTONS ----------------------
         if (player.canBarter) {
@@ -1470,6 +1524,7 @@ function UpdateVisibilities() {
         buttonBuyForest.style.display = player.canBuyForest ? 'block' : '';
         buttonBuyMountain.style.display = player.canBuyMountain ? 'block' : '';
         buttonFound.style.display = player.canFound ? 'block' : '';
+        buttonNewFarm.style.display = player.canBuyNewFarm ? 'block' : '';
 
         buttonHire.style.display = player.canHire ? 'block' : '';
         buttonAudit.style.display = player.canAudit ? 'block' : '';
@@ -1584,7 +1639,7 @@ function RedrawFarm() {
                 [16 * 17, 64,],
                 [16 * 18, 64,],
             ];
-            if (row > 5) {
+            if (row > 5 && row < 9) {
                 arrayCropTiles = [
                     [16 * 19, 64,],
                     [16 * 20, 64,],
@@ -2064,6 +2119,57 @@ function RedrawFarm() {
         arrayFarmGraph[2][13] = tileHouseBoardsLeft;
         arrayFarmGraph[2][14] = tileHouseBoardsMiddle;
         arrayFarmGraph[2][15] = tileHouseBoardsRight;
+    }
+
+    if (residenceStage > 3) {
+        arrayFarmGraph[2][14] = tileBakeryNW;
+        arrayFarmGraph[2][15] = tileBakeryNE;
+        arrayFarmGraph[3][14] = tileBakerySW;
+        arrayFarmGraph[3][15] = tileBakerySE;
+    }
+
+    if (residenceStage > 4) {
+        arrayFarmGraph[2][13] = tileOliveMillNW;
+        arrayFarmGraph[2][14] = tileOliveMillNE;
+        arrayFarmGraph[3][13] = tileOliveMillSW;
+        arrayFarmGraph[3][14] = tileOliveMillSE;
+    }
+
+    if (residenceStage > 5) {
+        arrayFarmGraph[1][14] = tileHousePlasterTop;
+        arrayFarmGraph[2][13] = tileHousePlasterLeft;
+        arrayFarmGraph[2][14] = tileHousePlasterMiddle;
+        arrayFarmGraph[2][15] = tileHousePlasterRight;
+    }
+
+    if (residenceStage > 10) {
+        arrayFarmGraph[4][14] = tileGreenhouseN;
+        arrayFarmGraph[5][14] = tileGreenhouseS;
+    }
+
+    if (residenceStage > 11) {
+        arrayFarmGraph[1][13] = tileHouseStoneNW;
+        arrayFarmGraph[1][14] = tileHouseStoneN;
+        arrayFarmGraph[1][15] = tileHouseStoneNE;
+        arrayFarmGraph[2][13] = tileHouseStoneSW;
+        arrayFarmGraph[2][14] = tileHouseStoneS;
+        arrayFarmGraph[2][15] = tileHouseStoneSE;
+        arrayFarmGraph[3][14] = tileOliveMillwRoad;
+    }
+
+    if (residenceStage > 12) {
+        arrayFarmGraph[1][15] = tileAtelierNW;
+        arrayFarmGraph[1][16] = tileAtelierNE;
+        arrayFarmGraph[2][15] = tileAtelierSW;
+        arrayFarmGraph[2][16] = tileAtelierSE;
+        arrayFarmGraph[3][13] = tileAtelierRoad1;
+        arrayFarmGraph[3][14] = tileAtelierRoad2;
+        arrayFarmGraph[3][15] = tileAtelierRoad3;
+        arrayFarmGraph[3][16] = tileAtelierRoad4;
+        arrayFarmGraph[4][13] = tileAtelierRoad5;
+        arrayFarmGraph[4][14] = tileAtelierRoad6;
+        arrayFarmGraph[4][15] = tileAtelierRoad7;
+        arrayFarmGraph[4][16] = tileAtelierRoad8;
     }
 
     if (farmStage > 11) {
@@ -2615,6 +2721,24 @@ function RedrawFarm() {
         );
     }
 
+    if (residenceStage > 6) {
+        arrayFarmGraph[4][12] = tilePathV;
+        arrayFarmGraph[4][13] = tileBrewery;
+        arrayFarmGraph[5][12] = tilePathH2N;
+    }
+
+    if (residenceStage > 7) {
+        arrayFarmGraph[3][12] = tileWinery;
+    }
+
+    if (residenceStage > 8) {
+        arrayFarmGraph[4][11] = tileKitchen;
+    }
+
+    if (residenceStage > 9) {
+        arrayFarmGraph[6][11] = tilePress;
+    }
+
     if (farmStage > 17) {
         canvasFarm.width = 24 * 16;
         canvasFarm.height = 44 * 16;
@@ -3054,8 +3178,8 @@ function RedrawFarm() {
                 tilePathH,
                 tilePathH,
                 tileFenceV,
-                tileShrubs2,
                 tileLawn,
+                tileLawnScrub1,
                 tileLawn,
             ],
             [
@@ -3107,7 +3231,7 @@ function RedrawFarm() {
                 tilePathH,
                 tileFenceV,
                 tileLawn,
-                tileLawn,
+                tileShrubs2,
                 tileLawn,
             ],
             [
@@ -3200,18 +3324,18 @@ function RedrawFarm() {
                 tilePathH,
                 tileLawn,
                 tileLawn,
+                tilePathH2S,
+                tilePathH,
+                tileLawn,
+                tilePathH,
                 tileLawn,
                 tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
+                tilePathH,
+                tilePathH,
+                tilePathH,
+                tilePathH,
+                tilePathH,
+                tilePathS2W,
                 tileLawn,
             ],
             [
@@ -3231,19 +3355,421 @@ function RedrawFarm() {
                 tileLawn,
                 tileLawn,
                 tileLawn,
+                tileShrubs1,
                 tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
-                tileLawn,
+                tileShrubs3,
+                tileShrubs4,
+                tileForest,
+                tileTrees,
+                tilePathV,
                 tileLawn,
             ],
         );
     }
 
+    if (player.hasNewFarm) {
+        canvasFarm.height = 59 * 16;
+        canvasFarm.style.height = ((59 * 16) + 2) * pixelScale + 'px';
+
+        arrayFarmGraph.push(
+            [
+                tileLawn,
+                tileLawn,
+                tileStoneFenceNW,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceEndE,
+                tileLawn,
+                tilePathV,
+                tileLawn,
+                tileLawn,
+                tileStoneFenceEndW,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceNE,
+                tilePathV,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileStoneFenceV,
+                tilePathS2E,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathCross,
+                tilePathCross,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathH2S,
+                tilePathS2W,
+                tileStoneFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileStoneFenceV,
+                tilePathV,
+                PickCropTile(9, 0),
+                PickCropTile(9, 1),
+                PickCropTile(9, 2),
+                PickCropTile(9, 3),
+                PickCropTile(9, 4),
+                PickCropTile(9, 5),
+                PickCropTile(9, 6),
+                tilePathV,
+                tilePathV,
+                PickCropTile(9, 7),
+                PickCropTile(9, 8),
+                PickCropTile(9, 9),
+                PickCropTile(9, 10),
+                PickCropTile(9, 11),
+                PickCropTile(9, 12),
+                PickCropTile(9, 13),
+                tilePathV,
+                tileStoneFenceV,
+                tilePathV,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileStoneFenceV,
+                tilePathV,
+                PickCropTile(10, 0),
+                PickCropTile(10, 1),
+                PickCropTile(10, 2),
+                PickCropTile(10, 3),
+                PickCropTile(10, 4),
+                PickCropTile(10, 5),
+                PickCropTile(10, 6),
+                tilePathV,
+                tilePathV,
+                PickCropTile(10, 7),
+                PickCropTile(10, 8),
+                PickCropTile(10, 9),
+                PickCropTile(10, 10),
+                PickCropTile(10, 11),
+                PickCropTile(10, 12),
+                PickCropTile(10, 13),
+                tilePathV,
+                tileStoneFenceV,
+                tilePathV,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileSignpostW,
+                tileStoneFenceEndS,
+                tilePathV,
+                PickCropTile(11, 0),
+                PickCropTile(11, 1),
+                PickCropTile(11, 2),
+                PickCropTile(11, 3),
+                PickCropTile(11, 4),
+                PickCropTile(11, 5),
+                PickCropTile(11, 6),
+                tilePathV,
+                tilePathV,
+                PickCropTile(11, 7),
+                PickCropTile(11, 8),
+                PickCropTile(11, 9),
+                PickCropTile(11, 10),
+                PickCropTile(11, 11),
+                PickCropTile(11, 12),
+                PickCropTile(11, 13),
+                tilePathV,
+                tileStoneFenceEndS,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tilePathH,
+                tilePathH,
+                tilePathH,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathH,
+                tilePathH2N,
+                tilePathH,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileHitchingPostV,
+                tilePathV,
+                tileWell,
+                tilePathCross,
+                tileWell,
+                tilePathCross,
+                tileWell,
+                tilePathCross,
+                tileWell,
+                tilePathCross,
+                tilePathCross,
+                tileWell,
+                tilePathCross,
+                tileWell,
+                tilePathCross,
+                tileWell,
+                tilePathCross,
+                tileWell,
+                tilePathV,
+                tileHitchingPostV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tilePathH,
+                tilePathH,
+                tilePathH,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathCross,
+                tilePathH,
+                tilePathH,
+                tilePathH,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileStoneFenceEndN,
+                tilePathV,
+                PickCropTile(12, 0),
+                PickCropTile(12, 1),
+                PickCropTile(12, 2),
+                PickCropTile(12, 3),
+                PickCropTile(12, 4),
+                PickCropTile(12, 5),
+                PickCropTile(12, 6),
+                tilePathV,
+                tilePathV,
+                PickCropTile(12, 7),
+                PickCropTile(12, 8),
+                PickCropTile(12, 9),
+                PickCropTile(12, 10),
+                PickCropTile(12, 11),
+                PickCropTile(12, 12),
+                PickCropTile(12, 13),
+                tilePathV,
+                tileStoneFenceEndN,
+                tileSignpostE,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileStoneFenceV,
+                tilePathV,
+                PickCropTile(13, 0),
+                PickCropTile(13, 1),
+                PickCropTile(13, 2),
+                PickCropTile(13, 3),
+                PickCropTile(13, 4),
+                PickCropTile(13, 5),
+                PickCropTile(13, 6),
+                tilePathV,
+                tilePathV,
+                PickCropTile(13, 7),
+                PickCropTile(13, 8),
+                PickCropTile(13, 9),
+                PickCropTile(13, 10),
+                PickCropTile(13, 11),
+                PickCropTile(13, 12),
+                PickCropTile(13, 13),
+                tilePathV,
+                tileStoneFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileStoneFenceV,
+                tilePathV,
+                PickCropTile(14, 0),
+                PickCropTile(14, 1),
+                PickCropTile(14, 2),
+                PickCropTile(14, 3),
+                PickCropTile(14, 4),
+                PickCropTile(14, 5),
+                PickCropTile(14, 6),
+                tilePathV,
+                tilePathV,
+                PickCropTile(14, 7),
+                PickCropTile(14, 8),
+                PickCropTile(14, 9),
+                PickCropTile(14, 10),
+                PickCropTile(14, 11),
+                PickCropTile(14, 12),
+                PickCropTile(14, 13),
+                tilePathV,
+                tileStoneFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileStoneFenceV,
+                tilePathN2E,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathCross,
+                tilePathCross,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathH2N,
+                tilePathN2W,
+                tileStoneFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileStoneFenceEndW,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceEndE,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawnScrub2,
+                tileStoneFenceEndW,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceH,
+                tileStoneFenceSE,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawnLog,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileHitchingPostH,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawnRocky1,
+            ],
+            [
+                tileLawnMuddy,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawnRocky2,
+                tileAutograph,
+            ],
+        );
+    }
+
     TileRenderer(arrayFarmGraph, canvasFarmContext);
+
+    if (player.hasMansion) {
+        canvasFarmContext.drawImage(mansionImage, 0, 0, 256, 128, 79, 52, 256, 128);
+    }
 }
 
 
@@ -4453,7 +4979,7 @@ function RedrawMountain() {
 
         arrayMountainGraph[8][14] = tileEarthNW;
         arrayMountainGraph[8][15] = tileEarthN;
-        arrayMountainGraph[8][16] = tileEarthN;
+        arrayMountainGraph[8][16] = tilePathVPeterSclay;
         arrayMountainGraph[8][17] = tileBrazierDousedNW;
         arrayMountainGraph[8][18] = tileBrazierDousedNE;
 
@@ -4465,7 +4991,7 @@ function RedrawMountain() {
         arrayMountainGraph[9][19] = tileEarthNE;
 
         arrayMountainGraph[10][13] = tileRoughPathLroad;
-        arrayMountainGraph[10][14] = tileEarthW;
+        arrayMountainGraph[10][14] = tilePathHPeterEclay;
         arrayMountainGraph[10][15] = tileFurnaceSW;
         arrayMountainGraph[10][16] = tileFurnaceSE;
         arrayMountainGraph[10][17] = tileEarth;

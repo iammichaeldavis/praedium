@@ -84,6 +84,7 @@ let displayLabelBuyLand14 = '';
 let displayLabelBuyLand15 = '';
 let displayLabelBuyLand16 = '';
 let displayLabelBuyLand17 = '';
+let displayLabelNewFarm = '';
 
 let displayLabelRentWarehouse0 = '';
 let displayLabelRentWarehouse1 = '';
@@ -153,6 +154,7 @@ let displayStoryFarm15 = '';
 let displayStoryFarm16 = '';
 let displayStoryFarm17 = '';
 let displayStoryOlives = '';
+let displayStoryNewFarm = '';
 
 let displayStoryWarehouse0 = '';
 let displayStoryWarehouse1 = '';
@@ -430,6 +432,7 @@ function Translate(language, bark = true) {
         displayLabelBuyLand15 = 'DIG A SECOND WELL';
         displayLabelBuyLand16 = 'INVEST IN A BARLEY FIELD';
         displayLabelBuyLand17 = 'PURCHASE A SUCCESSFUL FRUIT PLANTATION';
+        displayLabelNewFarm = 'PURCHASE A COMPETING WHEAT CONCERN';
 
         displayLabelRentWarehouse0 = 'RENT WAREHOUSE SPACE<br>TO STORE YOUR GRAIN';
         displayLabelRentWarehouse1 = 'RENT MORE WAREHOUSE SPACE';
@@ -499,6 +502,7 @@ function Translate(language, bark = true) {
         displayStoryFarm16 = 'HARD TO BELIEVE ALL THIS BEGAN WITH JUST A SINGLE PATCH OF EARTH ' + year + ' YEARS AGO. HONESTLY IT’S DIFFICULT TO EVEN REMEMBER WHAT LIFE WAS LIKE BACK THEN';
         displayStoryFarm17 = 'THE PREVIOUS OWNER GUARANTEES ITS PROFITABILITY. I AM TOLD DATES WILL BE READY AT THE END OF EVERY SUMMER, AND FIGS IN THE LATE SPRING. POMEGRANATES WILL BE READY IN EARLY WINTER, THEN GRAPES SHOULD COME ALONG A FEW WEEKS LATER, BUT THEY ARE FICKLE';
         displayStoryOlives = 'IT HAS BEEN EIGHT LONG YEARS SINCE YOU PLANTED YOUR OLIVE ORCHARD. FINALLY THE TREES ARE MATURE, EVERY BRANCH LADEN WITH RIPE FRUIT. AND THEY SHOULD COME IN AROUND THE SAME TIME EVERY YEAR FROM NOW ON';
+        displayStoryNewFarm = 'new farm english';
 
         displayStoryWarehouse0 = 'THIS PLACE COMES HIGHLY RECOMMENDED';
         displayStoryWarehouse1 = '“WHAT IS COMMON TO THE GREATEST NUMBER RECEIVES THE LEAST AMOUNT OF CARE”<br>—ARISTOTLE';
@@ -552,17 +556,18 @@ function Translate(language, bark = true) {
         displayStoryResidence00 = 'LIVING ON MY OWN LAND WILL CERTAINLY MAKE IT EASY TO GET TO WORK IN THE MORNING';
         displayStoryResidence01 = 'FINALLY SOME SPACE TO STRETCH OUT MY LEGS';
         displayStoryResidence02 = 'MORE THAN ENOUGH ACREAGE IN THIS PRAIRIE FOR A MODEST HOMESTEAD, I RECKON';
-        displayStoryResidence03 = 'GIVE US THIS DAY OUR DAILY BREAD<br>~STEVIE BREADSMAN<br><br>(Laborers Will Accept ' + loavesPaymentAmount + '<span class="icon Loaves inlineIcon"></span>/Week)';
-        displayStoryResidence04 = '';
-        displayStoryResidence05 = '';
-        displayStoryResidence06 = '';
-        displayStoryResidence07 = '';
-        displayStoryResidence08 = '';
-        displayStoryResidence09 = '';
-        displayStoryResidence10 = '';
-        displayStoryResidence11 = '';
-        displayStoryResidence12 = '';
-        displayStoryResidence13 = '';
+        displayStoryResidence03 = 'KEEP FALSEHOOD AND DECEITFUL WORDS FAR FROM ME. GIVE ME NEITHER POVERTY NOR RICHES; FEED ME ONLY THE BREAD THAT IS MY PORTION<br><br>PROVERBS 30:8<br><br>(Laborers Will Accept ' + loavesPaymentAmount + '<span class="icon Loaves inlineIcon"></span>/Week)';
+        //
+        displayStoryResidence04 = 'THOSE FRUITY PRIESTS CAN’T GET ENOUGH OF THIS STUFF';
+        displayStoryResidence05 = 'LUCKY I’M SANE<br>AFTER ALL I’VE BEEN THROUGH<br>I CAN’T COMPLAIN,<br>BUT SOMETIMES I STILL DO<br>LIFE’S BEEN GOOD TO ME SO FAR<br>—JOE WALSH';
+        displayStoryResidence06 = '“THE PEOPLE OF THE GREAT PALACE, HAVING PUT ON SCARVES LIKE THE QUAIL-BIRDS PUTTING THEIR TAILS TOGETHER LIKE WAGTAILS’, AND CONGREGATED TOGETHER LIKE THE YARD-SPARROWS, MAY PERHAPS TODAY BE TRULY STEEPED IN LIQUOR,”<br><br>THE KOJIKI, VOLUME III, SECTION CLX.—EMPEROR YŪ-RIYAKU (PART XI.—THE LEAF IN THE CUP)';
+        displayStoryResidence07 = 'NOAH, A MAN OF THE SOIL, WAS THE FIRST TO PLANT A VINEYARD. WHEN HE DRANK SOME OF ITS WINE, HE BECAME DRUNK AND FELL ASLEEP UNCOVERED INSIDE HIS TENT. HAM, THE FATHER OF CANAAN, SAW HIS FATHER NAKED, THEN WENT OUTSIDE AND TOLD HIS TWO BROTHERS<br><br>GENESIS 9:20-22'; // just be glad this wasn't Genesis 19:30-38 😮
+        displayStoryResidence08 = '“DATE SYRUP IS A NATURAL SWEETENER THAT HAS WONDERFUL RICHNESS AND TREACLY DEPTH; I DRIZZLE IT OVER SEMOLINA PORRIDGE”<br>—YOTAM OTTOLENGHI';
+        displayStoryResidence09 = 'pom joos';
+        displayStoryResidence10 = 'sundried fig';
+        displayStoryResidence11 = 'stone house';
+        displayStoryResidence12 = 'trinkets';
+        displayStoryResidence13 = 'the white villa';
 
         displayStoryVillage0 = 'HE WILL NEED LUMBER FOR THE FORGE';
         displayStoryVillage1 = 'NOW WE CAN BUILD';
@@ -771,6 +776,7 @@ function Translate(language, bark = true) {
         displayLabelBuyLand15 = 'EXCAVAR UN SEGUNDO POZO';
         displayLabelBuyLand16 = 'INVERTIR EN UN CAMPO DE CEBADA';
         displayLabelBuyLand17 = 'COMPRAR UN HUERTO DE FRUTAS EXITOSO';
+        displayLabelNewFarm = 'COMPRAR UNA EMPRESA DE TRIGO QUE COMPITE';
 
         displayLabelRentWarehouse0 = 'ALQUILAR ESPACIO DE ALMACÉN<br>PARA ALMACENAR SU GRANO';
         displayLabelRentWarehouse1 = 'ALQUILAR MÁS ESPACIO DE ALMACÉN';
@@ -840,6 +846,7 @@ function Translate(language, bark = true) {
         displayStoryFarm16 = 'DIFÍCIL DE CREER QUE TODO ESTO COMENZÓ CON UN ÚNICO PARCHE DE TIERRA HACE ' + year + ' AÑOS. HONESTAMENTE, ES DIFÍCIL INCLUSO RECORDAR CÓMO ERA LA VIDA EN ESE ENTONCES';
         displayStoryFarm17 = 'EL ANTERIOR DUEÑO GARANTIZA SU RENTABILIDAD. ME DICEN QUE LAS DÁTILES ESTARÁN LISTAS AL FINAL DE CADA VERANO Y LOS HIGOS A FINALES DE LA PRIMAVERA. LAS GRANADAS ESTARÁN LISTAS A PRINCIPIOS DEL INVIERNO, LUEGO LAS UVAS DEBERÍAN LLEGAR UNAS SEMANAS MÁS TARDE, PERO SON INCONSTANTE';
         displayStoryOlives = 'HAN PASADO OCHO LARGOS AÑOS DESDE QUE TÚ HUBIERAS PLANTADO TU OLIVAR. FINALMENTE LOS ÁRBOLES SON MADUROS, CADA RAMA CARGADA DE FRUTOS MADUROS. Y DEBERÍAN LLEGAR A LA MISMA ÉPOCA CADA AÑO A PARTIR DE AHORA';
+        displayStoryNewFarm = 'nueva farm spanish';
 
         displayStoryWarehouse0 = 'ESTE LUGAR ES ALTAMENTE RECOMENDABLE';
         displayStoryWarehouse1 = '«LO QUE ES COMÚN PARA LA MAYORÍA RECIBE LA MENOR CANTIDAD DE ATENCIÓN»<br>—ARISTÓTELES';
@@ -893,7 +900,7 @@ function Translate(language, bark = true) {
         displayStoryResidence00 = 'VIVIR EN MI PROPIA TIERRA SEGURO ME HARÁ MÁS FÁCIL LLEGAR AL TRABAJO POR LA MAÑANA';
         displayStoryResidence01 = 'POR FIN UN POCO DE ESPACIO PARA ESTIRAR MIS PIERNAS';
         displayStoryResidence02 = 'SUPERFICIE MÁS QUE SUFICIENTE EN ESTE PRADERA PARA UNA FINCA MODESTA, CREO QUE';
-        displayStoryResidence03 = '';
+        displayStoryResidence03 = 'ALEJA DE MÍ LA FALSEDAD Y LAS PALABRAS ENGAÑOSAS. NO ME DES POBREZA NI RIQUEZAS; ALIMÉNTAME SOLO EL PAN QUE ES MI PORCIÓN<br><br>PROVERBIOS 30:8<br><br>(Trabajadores Aceptarán ' + loavesPaymentAmount + '<span class="icon Loaves inlineIcon"></span>/Semana)';;
         displayStoryResidence04 = '';
         displayStoryResidence05 = '';
         displayStoryResidence06 = '';
