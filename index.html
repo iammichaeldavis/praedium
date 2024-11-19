@@ -223,16 +223,16 @@
 
         <div id="divViewPort">
             <button id="buttonGoToTownshipFromPort"></button>
-            <div id="divPortName">The ʿAkkō Harbour</div>
-            <div id="divPortSubtitle">Mercantile Gateway to Cyprus & the Levant</div>
+            <div id="divPortName"></div>
+            <div id="divPortSubtitle"></div>
             <canvas id="canvasPort" width="384" height="224"></canvas>
             <div id="divPortActionArea">
-                <img src="bitmaps/trade_goods.png" width="132" height="88" style="border:2px solid black; display: block; margin: 6.4vw auto 3.2vw auto;" />
-                <button id="buttonEstablishTradeRoute">ESTABLISH NEW TRADE ROUTE<br>(-<s>𝐼</s>1,000,000)</button>
-                <img src="bitmaps/trade_tin.png" width="132" height="88" style="border:2px solid black; display: block; margin: 6.4vw auto 3.2vw auto;" />
-                <button id="buttonImportTin">
-                    ARRANGE FOR THE IMPORT OF TIN<br>(-100<span class="icon IngotCopper inlineIcon"></span><span class="warehouseTotal">/Voyage</span>)
-                </button>
+                <img id="imgTradeGoods" src="bitmaps/trade_goods.png" width="130" height="86" />
+                <table id="tableExports"></table>
+                <button id="buttonEstablishTradeRoute"></button>
+                <img id="imgTradeTin" src="bitmaps/trade_tin.png" width="130" height="86" />
+                <table id="tableImports"></table>
+                <button id="buttonImportTin"></button>
             </div>
         </div>
     </div>

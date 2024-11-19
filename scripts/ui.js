@@ -551,10 +551,10 @@ function UpdateText() {
             tableString = '<tr><td>' + displayStone + '&nbsp;<span class="icon Stone inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(stoneCount) + '</td><td></td></tr>';
             if (player.canMine) { tableString += '<tr><td>' + displayOre + '&nbsp;<span class="icon OreCopper inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(oreCopperCount) + '</td><td></td></tr>'; }
             if (player.canSmelt) { tableString += '<tr><td>' + displayCopper + '&nbsp;<span class="icon IngotCopper inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(ingotsCopperCount) + '</td><td>(-' + (smeltersHired * ingotsCopperYieldPerTurn * ingotsOreCostPerIngot) + '<span class="icon OreCopper inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)</td></tr>'; }
-            if (1 == 1) {
+            if (player.canImportTin) {
                 tableString += '<tr>';
                 tableString += '<td>';
-                tableString += 'Tin' + '&nbsp;<span class="icon IngotTin inlineIcon"></span>:';
+                tableString += displayTin + '&nbsp;<span class="icon IngotTin inlineIcon"></span>:';
                 tableString += '</td>';
                 tableString += '<td class="noPadColumn">';
                 tableString += formatterStandard.format(ingotsTinCount);
@@ -564,10 +564,10 @@ function UpdateText() {
                 tableString += '</td>';
                 tableString += '</tr>';
             }
-            if (1 == 1) {
+            if (player.hasHiredBronzeworkers) {
                 tableString += '<tr>';
                 tableString += '<td>';
-                tableString += 'Bronze' + '&nbsp;<span class="icon IngotBronze inlineIcon"></span>:';
+                tableString += displayBronze + '&nbsp;<span class="icon IngotBronze inlineIcon"></span>:';
                 tableString += '</td>';
                 tableString += '<td class="noPadColumn">';
                 tableString += formatterStandard.format(ingotsBronzeCount);
@@ -589,9 +589,13 @@ function UpdateText() {
             if (starving[5]) { smelterCost = '<span class="starving">' + displayStarving + '</span>'; }
             if (starving[9]) { metallurgistCost = '<span class="starving">' + displayStarving + '</span>'; }
             tableString = '<tr><td>' + displayMasons + '&nbsp;<span class="icon Mason inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(masonsHired) + '</td><td>' + masonCost + '</td></tr>';
-            if (player.canMine) { tableString += '<tr><td>' + displayMiners + '&nbsp;<span class="icon Miner inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(minersHired) + '</td><td>' + minerCost + '</td></tr>'; }
-            if (player.canSmelt) { tableString += '<tr><td>' + displayCindermen + '&nbsp;<span class="icon Cinderman inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(smeltersHired) + '</td><td>' + smelterCost + '</td></tr>'; }
-            if (1 == 1) {
+            if (player.canMine) {
+                tableString += '<tr><td>' + displayMiners + '&nbsp;<span class="icon Miner inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(minersHired) + '</td><td>' + minerCost + '</td></tr>';
+            }
+            if (player.canSmelt) {
+                tableString += '<tr><td>' + displayCindermen + '&nbsp;<span class="icon Cinderman inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(smeltersHired) + '</td><td>' + smelterCost + '</td></tr>';
+            }
+            if (player.hasHiredBronzeworkers) {
                 tableString += '<tr>';
                 tableString += '<td>';
                 tableString += displayMetallurgists + '&nbsp;<span class="icon Blacksmith inlineIcon"></span>:';
@@ -609,9 +613,13 @@ function UpdateText() {
             if (player.seesReport) {
                 theadMountainReport.innerHTML = '<tr><td><br>' + displayGood + '</td><td>' + displayHomersProduced + '</td><td>' + displayHomersSpent + '</td></tr>';
                 tableString = '<tr><td><span class="icon Stone"></span></td><td>' + formatterStandard.format(mountainProducedCount[0]) + '</td><td>' + formatterStandard.format(mountainSpentCount[0]) + '</td></tr>';
-                if (player.canMine) { tableString += '<tr><td><span class="icon OreCopper"></span></td><td>' + formatterStandard.format(mountainProducedCount[1]) + '</td><td>' + formatterStandard.format(mountainSpentCount[1]) + '</td></tr>'; }
-                if (player.canSmelt) { tableString += '<tr><td><span class="icon IngotCopper"></span></td><td>' + formatterStandard.format(mountainProducedCount[2]) + '</td><td>' + formatterStandard.format(mountainSpentCount[2]) + '</td></tr>'; }
-                if (1 == 1) {
+                if (player.canMine) {
+                    tableString += '<tr><td><span class="icon OreCopper"></span></td><td>' + formatterStandard.format(mountainProducedCount[1]) + '</td><td>' + formatterStandard.format(mountainSpentCount[1]) + '</td></tr>';
+                }
+                if (player.canSmelt) {
+                    tableString += '<tr><td><span class="icon IngotCopper"></span></td><td>' + formatterStandard.format(mountainProducedCount[2]) + '</td><td>' + formatterStandard.format(mountainSpentCount[2]) + '</td></tr>';
+                }
+                if (player.canImportTin) {
                     tableString += '<tr>';
                     tableString += '<td>';
                     tableString += '<span class="icon IngotTin"></span>';
@@ -620,11 +628,11 @@ function UpdateText() {
                     tableString += formatterStandard.format(mountainProducedCount[3]);
                     tableString += '</td>';
                     tableString += '<td>';
-                    tableString += formatterStandard.format(mountainSpentCount[3]);
+                    tableString += formatterStandard.format(mountainSpentCount[3] + residenceIngredientConsumedCount[7]);
                     tableString += '</td>';
                     tableString += '</tr>';
                 }
-                if (1 == 1) {
+                if (player.hasHiredBronzeworkers) {
                     tableString += '<tr>';
                     tableString += '<td>';
                     tableString += '<span class="icon IngotBronze"></span>';
@@ -643,6 +651,7 @@ function UpdateText() {
             if (player.hasFoundCopperEvidence && !player.hasFoundMine) { buttonMountain.innerHTML = displayLabelMineScout + '<br>(' + priceMineScout + '<span class="icon Wheat inlineIcon"></span>)'; }
             else if (player.hasFoundMine && !player.canMine) { buttonMountain.innerHTML = displayLabelMineDig + '<br>(' + currencySymbol + formatterStandard.format(priceMineDig[0]) + ' + ' + priceMineDig[1] + '<span class="icon Log inlineIcon"></span>)'; }
             else if (player.canMine && !player.canSmelt) { buttonMountain.innerHTML = displayLabelFoundry + '<br>(' + currencySymbol + formatterStandard.format(priceFoundry[0]) + ' + ' + priceFoundry[1] + '<span class="icon Log inlineIcon"></span> + ' + formatterStandard.format(priceFoundry[2]) + '<span class="icon Stone inlineIcon"></span>)'; }
+            else if (player.canSmelt && player.canHireBronzeworkers) { buttonMountain.innerHTML = displayLabelBronzeworkers + ' ' + '<span class="icon Blacksmith inlineIcon"></span>'; }
         }
 
         // BUY LAND BUTTON ---------------------
@@ -775,6 +784,13 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(marketLifetimeRevenue) + '</td>';
                 tableString += '</tr>';
             }
+            if (player.canExport) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayWholesale + ' <span class="icon ShippingCrate inlineIcon"></span>:' + '</td>';
+                const allShippingProfits = shipmentProfits[0] + shipmentProfits[1] + shipmentProfits[2] + shipmentProfits[3] + shipmentProfits[4] + shipmentProfits[5] + shipmentProfits[6];
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(allShippingProfits) + '</td>';
+                tableString += '</tr>';
+            }
             if (villageStage > 12) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayTourism + ' <span class="icon Jester inlineIcon"></span>:' + '</td>';
@@ -787,12 +803,19 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(taxesLifetimeCollected) + '</td>';
                 tableString += '</tr>';
             }
-            if (villageStage > 16) {
+            if (villageStage > 16 || player.canImport) {
                 tableString += '<tr>';
                 tableString += '<td colspan="2" class="rightPadColumn">' + '</td>';
                 tableString += '</tr>';
                 tableString += '<tr>';
                 tableString += '<td colspan="2" class="tdFiatStatementSubheader">' + displayLifetimeCosts + '</td>';
+                tableString += '</tr>';
+            }
+            if (player.canImport) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayCommodities + ' <span class="icon ShippingCrate inlineIcon"></span>:' + '</td>';
+                const allShippingCosts = shipmentCosts[0];
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(allShippingCosts) + '</td>';
                 tableString += '</tr>';
             }
             if (villageStage > 16) {
@@ -999,13 +1022,13 @@ function UpdateText() {
             else if (villageStage == 8) { buttonBuild.innerHTML = displayLabelBuild8 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild8[0]) + ' + ' + formatterStandard.format(priceBuild8[1]) + '<span class="icon Wheat inlineIcon"></span> + ' + formatterStandard.format(priceBuild8[2]) + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild8[3]) + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (villageStage == 9) { buttonBuild.innerHTML = displayLabelBuild9 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild9[0]) + ' + ' + formatterStandard.format(priceBuild9[1]) + '<span class="icon Wheat inlineIcon"></span> + ' + formatterStandard.format(priceBuild9[2]) + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild9[3]) + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (villageStage == 10) { buttonBuild.innerHTML = displayLabelBuild10 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild10[0]) + ' + ' + priceBuild10[1] + '<span class="icon Barley inlineIcon"></span> + ' + formatterStandard.format(priceBuild10[2]) + '<span class="icon Board inlineIcon"></span>)'; }
-            else if (villageStage == 11) { buttonBuild.innerHTML = displayLabelBuild11 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild11[0]) + ' + ' + priceBuild11[2] + '<span class="icon Wheat inlineIcon"></span> + ' + priceBuild11[3] + '<span class="icon Barley inlineIcon"></span> + ' + priceBuild11[4] + '<span class="icon Olive inlineIcon"></span><br>+ ' + priceBuild11[5] + '<span class="icon Date inlineIcon"></span> + ' + priceBuild11[6] + '<span class="icon Fig inlineIcon"></span> + ' + priceBuild11[7] + '<span class="icon Pom inlineIcon"></span> + ' + priceBuild11[8] + '<span class="icon Grape inlineIcon"></span><br>+ ' + formatterStandard.format(priceBuild11[9]) + '<span class="icon Stone inlineIcon"></span> + ' + priceBuild11[1] + '<span class="icon IngotCopper inlineIcon"></span> + ' + priceBuild11[10] + '<span class="icon Horsey inlineIcon"></span>)'; }
+            else if (villageStage == 11) { buttonBuild.innerHTML = displayLabelBuild11 + '<br>(' + priceBuild11[2] + '<span class="icon Wheat inlineIcon"></span> + ' + priceBuild11[3] + '<span class="icon Barley inlineIcon"></span> + ' + priceBuild11[4] + '<span class="icon Olive inlineIcon"></span> + ' + priceBuild11[5] + '<span class="icon Date inlineIcon"></span> + ' + priceBuild11[6] + '<span class="icon Fig inlineIcon"></span> + ' + priceBuild11[7] + '<span class="icon Pom inlineIcon"></span> + ' + priceBuild11[8] + '<span class="icon Grape inlineIcon"></span><br> + ' + currencySymbol + formatterStandard.format(priceBuild11[0]) + ' + ' + formatterStandard.format(priceBuild11[9]) + '<span class="icon Stone inlineIcon"></span> + ' + priceBuild11[1] + '<span class="icon IngotCopper inlineIcon"></span> + ' + priceBuild11[10] + '<span class="icon Horsey inlineIcon"></span>' + ')'; }
             else if (villageStage == 12) { buttonBuild.innerHTML = displayLabelBuild12 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild12[0]) + ' + ' + priceBuild12[1] + '<span class="icon Barley inlineIcon"></span> + ' + formatterStandard.format(priceBuild12[2]) + '<span class="icon Stone inlineIcon"></span> + ' + priceBuild12[3] + '<span class="icon Horsey inlineIcon"></span>)'; }
             else if (villageStage == 13) { buttonBuild.innerHTML = displayLabelBuild13 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild13[0]) + ' + ' + priceBuild13[1] + '<span class="icon IngotCopper inlineIcon"></span> + ' + formatterStandard.format(priceBuild13[2]) + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (villageStage == 14) { buttonBuild.innerHTML = displayLabelBuild14 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild14[0]) + ' + ' + priceBuild14[1] + '<span class="icon Mala inlineIcon"></span> + ' + formatterStandard.format(priceBuild14[2]) + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (villageStage == 15) { buttonBuild.innerHTML = displayLabelBuild15 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild15[0]) + ' + ' + formatterStandard.format(priceBuild15[1]) + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (villageStage == 16) { buttonBuild.innerHTML = displayLabelBuild16 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild16[0]) + ' + ' + formatterStandard.format(priceBuild16[1]) + '<span class="icon Barley inlineIcon"></span> + ' + formatterStandard.format(priceBuild16[2]) + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild16[3]) + '<span class="icon Stone inlineIcon"></span>)'; }
-            else if (villageStage == 17) { buttonBuild.innerHTML = displayLabelBuild17 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild17[0]) + ' + ' + priceBuild17[1] + '<span class="icon Mala inlineIcon"></span> + ' + priceBuild17[2] + '<span class="icon Scroll inlineIcon"></span> + ' + priceBuild17[3] + '<span class="icon IngotCopper inlineIcon"></span><br>+ ' + formatterStandard.format(priceBuild17[4]) + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild17[5]) + '<span class="icon Stone inlineIcon"></span>)'; }
+            else if (villageStage == 17) { buttonBuild.innerHTML = displayLabelBuild17 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild17[0]) + ' + ' + priceBuild17[1] + '<span class="icon Mala inlineIcon"></span> + ' + priceBuild17[2] + '<span class="icon Scroll inlineIcon"></span> + ' + priceBuild17[3] + '<span class="icon IngotBronze inlineIcon"></span><br>+ ' + formatterStandard.format(priceBuild17[4]) + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild17[5]) + '<span class="icon Stone inlineIcon"></span>)'; }
         }
 
         // SELL BUTTONS ------------------------
@@ -1033,6 +1056,670 @@ function UpdateText() {
 
     else if (player.isAt == 'Port') {
         buttonGoToTownshipFromPort.innerHTML = displayGoToTownshipFromPort;
+
+        divPortName.innerHTML = displayPortName;
+        divPortSubtitle.innerHTML = displayPortSubtitle;
+
+        if (!player.canExport) { buttonEstablishTradeRoute.innerHTML = displayLabelTradeRoute + '<br>(' + currencySymbol + formatterStandard.format(pricePort0) + ' + ' + '<span class="icon Amphora inlineIcon"></span>' + ')'; }
+        else if (player.canExport && !player.canExportBeer) { buttonEstablishTradeRoute.innerHTML = displayLabelTradeRoute + '<br>(' + currencySymbol + formatterStandard.format(pricePort1) + ' + ' + '<span class="icon Keg inlineIcon"></span>' + ')'; }
+        else if (player.canExport && !player.canExportWine) { buttonEstablishTradeRoute.innerHTML = displayLabelTradeRoute + '<br>(' + currencySymbol + formatterStandard.format(pricePort2) + ' + ' + '<span class="icon Cask inlineIcon"></span>' + ')'; }
+        else if (player.canExport && !player.canExportSyrup) { buttonEstablishTradeRoute.innerHTML = displayLabelTradeRoute + '<br>(' + currencySymbol + formatterStandard.format(pricePort3) + ' + ' + '<span class="icon Honeypot inlineIcon"></span>' + ')'; }
+        else if (player.canExport && !player.canExportJuice) { buttonEstablishTradeRoute.innerHTML = displayLabelTradeRoute + '<br>(' + currencySymbol + formatterStandard.format(pricePort4) + ' + ' + '<span class="icon Jug inlineIcon"></span>' + ')'; }
+        else if (player.canExport && !player.canExportFigs) { buttonEstablishTradeRoute.innerHTML = displayLabelTradeRoute + '<br>(' + currencySymbol + formatterStandard.format(pricePort5) + ' + ' + '<span class="icon Basket inlineIcon"></span>' + ')'; }
+        else if (player.canExport && !player.canExportTrinkets) { buttonEstablishTradeRoute.innerHTML = displayLabelTradeRoute + '<br>(' + currencySymbol + formatterStandard.format(pricePort6) + ' + ' + '<span class="icon Trinket inlineIcon"></span>' + ')'; }
+
+        buttonImportTin.innerHTML = displayLabelImportTin + '<br>(<span class="icon Decree inlineIcon"></span>' + ' + ' + '<span class="icon MoneyTemple inlineIcon"></span>' + ' + ' + currencySymbol + formatterStandard.format(importCost[0]) + '<span class="warehouseTotal">/' + displayVoyage + '</span>)';
+
+        if (player.canExport) {
+            let tableString = null;
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayActiveRoutes;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td style="padding: 3.2vw;">';
+            const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / bushelBulkCount);
+            let currentDollarValueOfUnit = null;
+            let bounty = null;
+            let colourIncrement = null;
+            let greenValue = null;
+            let greenString = null;
+            let redValue = null;
+            let redString = null;
+            let calculatedValue = null;
+            let shownCountdown = null;
+            if (player.canExportOil) {
+                tableString += '<div class="divTradeRouteWrapper" id="divTradeRouteWrapperOil">';
+                tableString += '<table id="tableTradeRouteOil">';
+                tableString += '<thead>';
+                tableString += '<tr>';
+                tableString += '<td colspan="2">';
+                tableString += displayOil;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</thead>';
+                tableString += '<tbody>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayContract;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                currentDollarValueOfUnit = valueFactor[0] * (wheatValuePerUnit[0] * currentDollarPriceOfOneWheat);
+                bounty = currentDollarValueOfUnit * residenceInStockCount[1];
+                tableString += formatterStandard.format(residenceInStockCount[1]) + '<span class="icon Amphora inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterStandard.format(bounty);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDestination;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += displayAthens;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDuration;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += shipmentDuration[0] + ' ' + displayMonths;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayShipped;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceSpentCount[1]) + '<span class="icon Amphora inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayProfit;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += currencySymbol + formatterStandard.format(shipmentProfits[0]);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</tbody>';
+                tableString += '</table>';
+                tableString += '<div class="divDeliveryColumnWrapper">';
+                tableString += '<img src="bitmaps/route_athens.png" width="66" height="66" />';
+                colourIncrement = Math.floor(99 / shipmentTimersDefault[0]);
+                greenValue = 99 - (colourIncrement * shipmentTimersCurrent[0]);
+                greenString = '' + greenValue;
+                if (greenValue < 10) { greenString = '0' + greenString; }
+                redValue = colourIncrement * shipmentTimersCurrent[0];
+                redString = '' + redValue;
+                if (redValue < 10) { redString = '0' + redString; }
+                calculatedValue = '' + redString + greenString + '00';
+                tableString += '<div class="divDeliveryTimerBox" style="background-color: #' + calculatedValue + ';">';
+                tableString += displayNextDelivery;
+                tableString += '<div class="divDeliveryTimerBoxLiner">';
+                shownCountdown = '' + shipmentTimersCurrent[0];
+                if (shipmentTimersCurrent[0] < 10) { shownCountdown = 0 + shownCountdown; }
+                tableString += shownCountdown + ' ' + displayWeek + '(s)';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+            }
+            if (player.canExportBeer) {
+                tableString += '<div class="divTradeRouteWrapper" id="divTradeRouteWrapperBeer">';
+                tableString += '<table id="tableTradeRouteBeer">';
+                tableString += '<thead>';
+                tableString += '<tr>';
+                tableString += '<td colspan="2">';
+                tableString += displayBeer;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</thead>';
+                tableString += '<tbody>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayContract;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                currentDollarValueOfUnit = valueFactor[1] * (wheatValuePerUnit[1] * currentDollarPriceOfOneWheat);
+                bounty = currentDollarValueOfUnit * residenceInStockCount[2];
+                tableString += formatterStandard.format(residenceInStockCount[2]) + '<span class="icon Keg inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterStandard.format(bounty);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDestination;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += displayDamascus;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDuration;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += shipmentDuration[1] + ' ' + displayMonth;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayShipped;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceSpentCount[2]) + '<span class="icon Keg inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayProfit;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += currencySymbol + formatterStandard.format(shipmentProfits[1]);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</tbody>';
+                tableString += '</table>';
+                tableString += '<div class="divDeliveryColumnWrapper">';
+                tableString += '<img src="bitmaps/route_damascus.png" width="66" height="66" />';
+                colourIncrement = Math.floor(99 / shipmentTimersDefault[1]);
+                greenValue = 99 - (colourIncrement * shipmentTimersCurrent[1]);
+                greenString = '' + greenValue;
+                if (greenValue < 10) { greenString = '0' + greenString; }
+                redValue = colourIncrement * shipmentTimersCurrent[1];
+                redString = '' + redValue;
+                if (redValue < 10) { redString = '0' + redString; }
+                calculatedValue = '' + redString + greenString + '00';
+                tableString += '<div class="divDeliveryTimerBox" style="background-color: #' + calculatedValue + ';">';
+                tableString += displayNextDelivery;
+                tableString += '<div class="divDeliveryTimerBoxLiner">';
+                shownCountdown = '' + shipmentTimersCurrent[1];
+                if (shipmentTimersCurrent[1] < 10) { shownCountdown = 0 + shownCountdown; }
+                tableString += shownCountdown + ' ' + displayWeek + '(s)';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+            }
+            if (player.canExportWine) {
+                tableString += '<div class="divTradeRouteWrapper" id="divTradeRouteWrapperWine">';
+                tableString += '<table id="tableTradeRouteWine">';
+                tableString += '<thead>';
+                tableString += '<tr>';
+                tableString += '<td colspan="2">';
+                tableString += displayWine;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</thead>';
+                tableString += '<tbody>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayContract;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                currentDollarValueOfUnit = valueFactor[2] * (wheatValuePerUnit[2] * currentDollarPriceOfOneWheat);
+                bounty = currentDollarValueOfUnit * residenceInStockCount[3];
+                tableString += formatterStandard.format(residenceInStockCount[3]) + '<span class="icon Cask inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterStandard.format(bounty);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDestination;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += displayRhodes;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDuration;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += shipmentDuration[2] + ' ' + displayMonths;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayShipped;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceSpentCount[3]) + '<span class="icon Cask inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayProfit;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += currencySymbol + formatterStandard.format(shipmentProfits[2]);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</tbody>';
+                tableString += '</table>';
+                tableString += '<div class="divDeliveryColumnWrapper">';
+                tableString += '<img src="bitmaps/route_rhodes.png" width="66" height="66" />';
+                colourIncrement = Math.floor(99 / shipmentTimersDefault[2]);
+                greenValue = 99 - (colourIncrement * shipmentTimersCurrent[2]);
+                greenString = '' + greenValue;
+                if (greenValue < 10) { greenString = '0' + greenString; }
+                redValue = colourIncrement * shipmentTimersCurrent[2];
+                redString = '' + redValue;
+                if (redValue < 10) { redString = '0' + redString; }
+                calculatedValue = '' + redString + greenString + '00';
+                tableString += '<div class="divDeliveryTimerBox" style="background-color: #' + calculatedValue + ';">';
+                tableString += displayNextDelivery;
+                tableString += '<div class="divDeliveryTimerBoxLiner">';
+                shownCountdown = '' + shipmentTimersCurrent[2];
+                if (shipmentTimersCurrent[2] < 10) { shownCountdown = 0 + shownCountdown; }
+                tableString += shownCountdown + ' ' + displayWeek + '(s)';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+            }
+            if (player.canExportSyrup) {
+                tableString += '<div class="divTradeRouteWrapper" id="divTradeRouteWrapperSyrup">';
+                tableString += '<table id="tableTradeRouteSyrup">';
+                tableString += '<thead>';
+                tableString += '<tr>';
+                tableString += '<td colspan="2">';
+                tableString += displaySyrup;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</thead>';
+                tableString += '<tbody>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayContract;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                currentDollarValueOfUnit = valueFactor[3] * (wheatValuePerUnit[3] * currentDollarPriceOfOneWheat);
+                bounty = currentDollarValueOfUnit * residenceInStockCount[4];
+                tableString += formatterStandard.format(residenceInStockCount[4]) + '<span class="icon Honeypot inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterStandard.format(bounty);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDestination;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += displayAlexandria;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDuration;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += shipmentDuration[3] + ' ' + displayMonths;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayShipped;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceSpentCount[4]) + '<span class="icon Honeypot inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayProfit;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += currencySymbol + formatterStandard.format(shipmentProfits[3]);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</tbody>';
+                tableString += '</table>';
+                tableString += '<div class="divDeliveryColumnWrapper">';
+                tableString += '<img src="bitmaps/route_alexandria.png" width="66" height="66" />';
+                colourIncrement = Math.floor(99 / shipmentTimersDefault[3]);
+                greenValue = 99 - (colourIncrement * shipmentTimersCurrent[3]);
+                greenString = '' + greenValue;
+                if (greenValue < 10) { greenString = '0' + greenString; }
+                redValue = colourIncrement * shipmentTimersCurrent[3];
+                redString = '' + redValue;
+                if (redValue < 10) { redString = '0' + redString; }
+                calculatedValue = '' + redString + greenString + '00';
+                tableString += '<div class="divDeliveryTimerBox" style="background-color: #' + calculatedValue + ';">';
+                tableString += displayNextDelivery;
+                tableString += '<div class="divDeliveryTimerBoxLiner">';
+                shownCountdown = '' + shipmentTimersCurrent[3];
+                if (shipmentTimersCurrent[3] < 10) { shownCountdown = 0 + shownCountdown; }
+                tableString += shownCountdown + ' ' + displayWeek + '(s)';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+            }
+            if (player.canExportJuice) {
+                tableString += '<div class="divTradeRouteWrapper" id="divTradeRouteWrapperJuice">';
+                tableString += '<table id="tableTradeRouteJuice">';
+                tableString += '<thead>';
+                tableString += '<tr>';
+                tableString += '<td colspan="2">';
+                tableString += displayJuice;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</thead>';
+                tableString += '<tbody>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayContract;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                currentDollarValueOfUnit = valueFactor[4] * (wheatValuePerUnit[4] * currentDollarPriceOfOneWheat);
+                bounty = currentDollarValueOfUnit * residenceInStockCount[5];
+                tableString += formatterStandard.format(residenceInStockCount[5]) + '<span class="icon Jug inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterStandard.format(bounty);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDestination;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += displayJerusalem;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDuration;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += shipmentDuration[4] + ' ' + displayWeeks;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayShipped;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceSpentCount[5]) + '<span class="icon Jug inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayProfit;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += currencySymbol + formatterStandard.format(shipmentProfits[4]);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</tbody>';
+                tableString += '</table>';
+                tableString += '<div class="divDeliveryColumnWrapper">';
+                tableString += '<img src="bitmaps/route_jerusalem.png" width="66" height="66" />';
+                colourIncrement = Math.floor(99 / shipmentTimersDefault[4]);
+                greenValue = 99 - (colourIncrement * shipmentTimersCurrent[4]);
+                greenString = '' + greenValue;
+                if (greenValue < 10) { greenString = '0' + greenString; }
+                redValue = colourIncrement * shipmentTimersCurrent[4];
+                redString = '' + redValue;
+                if (redValue < 10) { redString = '0' + redString; }
+                calculatedValue = '' + redString + greenString + '00';
+                tableString += '<div class="divDeliveryTimerBox" style="background-color: #' + calculatedValue + ';">';
+                tableString += displayNextDelivery;
+                tableString += '<div class="divDeliveryTimerBoxLiner">';
+                shownCountdown = '' + shipmentTimersCurrent[4];
+                if (shipmentTimersCurrent[4] < 10) { shownCountdown = 0 + shownCountdown; }
+                tableString += shownCountdown + ' ' + displayWeek + '(s)';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+            }
+            if (player.canExportFigs) {
+                tableString += '<div class="divTradeRouteWrapper" id="divTradeRouteWrapperFigs">';
+                tableString += '<table id="tableTradeRouteFigs">';
+                tableString += '<thead>';
+                tableString += '<tr>';
+                tableString += '<td colspan="2">';
+                tableString += displayDriedFigs;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</thead>';
+                tableString += '<tbody>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayContract;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                currentDollarValueOfUnit = valueFactor[5] * (wheatValuePerUnit[5] * currentDollarPriceOfOneWheat);
+                bounty = currentDollarValueOfUnit * residenceInStockCount[6];
+                tableString += formatterStandard.format(residenceInStockCount[6]) + '<span class="icon Basket inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterStandard.format(bounty);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDestination;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += displayMemphis;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDuration;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += shipmentDuration[5] + ' ' + displayMonths;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayShipped;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceSpentCount[6]) + '<span class="icon Basket inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayProfit;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += currencySymbol + formatterStandard.format(shipmentProfits[5]);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</tbody>';
+                tableString += '</table>';
+                tableString += '<div class="divDeliveryColumnWrapper">';
+                tableString += '<img src="bitmaps/route_memphis.png" width="66" height="66" />';
+                colourIncrement = Math.floor(99 / shipmentTimersDefault[5]);
+                greenValue = 99 - (colourIncrement * shipmentTimersCurrent[5]);
+                greenString = '' + greenValue;
+                if (greenValue < 10) { greenString = '0' + greenString; }
+                redValue = colourIncrement * shipmentTimersCurrent[5];
+                redString = '' + redValue;
+                if (redValue < 10) { redString = '0' + redString; }
+                calculatedValue = '' + redString + greenString + '00';
+                tableString += '<div class="divDeliveryTimerBox" style="background-color: #' + calculatedValue + ';">';
+                tableString += displayNextDelivery;
+                tableString += '<div class="divDeliveryTimerBoxLiner">';
+                shownCountdown = '' + shipmentTimersCurrent[5];
+                if (shipmentTimersCurrent[5] < 10) { shownCountdown = 0 + shownCountdown; }
+                tableString += shownCountdown + ' ' + displayWeek + '(s)';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+            }
+            if (player.canExportTrinkets) {
+                tableString += '<div class="divTradeRouteWrapper" id="divTradeRouteWrapperTrinkets">';
+                tableString += '<table id="tableTradeRouteTrinkets">';
+                tableString += '<thead>';
+                tableString += '<tr>';
+                tableString += '<td colspan="2">';
+                tableString += displayTrinkets;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</thead>';
+                tableString += '<tbody>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayContract;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                bounty = residenceInStockCount[7] * trinketValue;
+                tableString += formatterStandard.format(residenceInStockCount[7]) + '<span class="icon Trinket inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterStandard.format(bounty);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDestination;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += displayRome;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDuration;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += shipmentDuration[6] + ' ' + displayYear;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayShipped;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceSpentCount[7]) + '<span class="icon Trinket inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayProfit;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += currencySymbol + formatterStandard.format(shipmentProfits[6]);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</tbody>';
+                tableString += '</table>';
+                tableString += '<div class="divDeliveryColumnWrapper">';
+                tableString += '<img src="bitmaps/route_rome.png" width="66" height="66" />';
+                colourIncrement = Math.floor(99 / shipmentTimersDefault[6]);
+                greenValue = 99 - (colourIncrement * shipmentTimersCurrent[6]);
+                greenString = '' + greenValue;
+                if (greenValue < 10) { greenString = '0' + greenString; }
+                redValue = colourIncrement * shipmentTimersCurrent[6];
+                redString = '' + redValue;
+                if (redValue < 10) { redString = '0' + redString; }
+                calculatedValue = '' + redString + greenString + '00';
+                tableString += '<div class="divDeliveryTimerBox" style="background-color: #' + calculatedValue + ';">';
+                tableString += displayNextDelivery;
+                tableString += '<div class="divDeliveryTimerBoxLiner">';
+                shownCountdown = '' + shipmentTimersCurrent[6];
+                if (shipmentTimersCurrent[6] < 10) { shownCountdown = 0 + shownCountdown; }
+                tableString += shownCountdown + ' ' + displayWeek + '(s)';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+            }
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableExports.innerHTML = tableString;
+        }
+
+        if (player.canImport) {
+            let tableString = null;
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayActiveLanes;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td style="padding: 3.2vw;">';
+            if (player.canImportTin) {
+                tableString += '<div class="divTradeRouteWrapper" id="divTradeRouteWrapperTin">';
+                tableString += '<table id="tableTradeRouteTin">';
+                tableString += '<thead>';
+                tableString += '<tr>';
+                tableString += '<td colspan="2">';
+                tableString += displayTin;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</thead>';
+                tableString += '<tbody>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayContract;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += currencySymbol + formatterStandard.format(importCost[0]) + ' <span class="icon Sell inlineIcon"></span> ' + formatterStandard.format(importAmount[0]) + '<span class="icon IngotTin inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displaySource;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += displayTartessos;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayDuration;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += shipmentDuration[7] + ' ' + displayMonths;
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayImported;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(mountainProducedCount[3]) + '<span class="icon IngotTin inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayCost;
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += currencySymbol + formatterStandard.format(shipmentCosts[0]);
+                tableString += '</td>';
+                tableString += '</tr>';
+                tableString += '</tbody>';
+                tableString += '</table>';
+                tableString += '<div class="divDeliveryColumnWrapper">';
+                tableString += '<img src="bitmaps/route_tartessos.png" width="66" height="66" />';
+                let colourIncrement = Math.floor(99 / shipmentTimersDefault[7]);
+                let greenValue = 99 - (colourIncrement * shipmentTimersCurrent[7]);
+                let greenString = '' + greenValue;
+                if (greenValue < 10) { greenString = '0' + greenString; }
+                let redValue = colourIncrement * shipmentTimersCurrent[7];
+                let redString = '' + redValue;
+                if (redValue < 10) { redString = '0' + redString; }
+                let calculatedValue = '' + redString + greenString + '00';
+                tableString += '<div class="divDeliveryTimerBox" style="background-color: #' + calculatedValue + ';">';
+                tableString += displayNextDelivery;
+                tableString += '<div class="divDeliveryTimerBoxLiner">';
+                let shownCountdown = '' + shipmentTimersCurrent[7];
+                if (shipmentTimersCurrent[7] < 10) { shownCountdown = 0 + shownCountdown; }
+                tableString += shownCountdown + ' ' + displayWeek + '(s)';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+                tableString += '</div>';
+            }
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableImports.innerHTML = tableString;
+        }
     }
 
     else if (player.isAt == 'Residence') {
@@ -1044,14 +1731,14 @@ function UpdateText() {
         else if (residenceStage == 2) { buttonImproveResidence.innerHTML = displayLabelResidence02 + '<br>' + '(' + priceResidence02[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence02[1] + '<span class="icon Board inlineIcon"></span>' + ')'; }
         else if (residenceStage == 3) { buttonImproveResidence.innerHTML = displayLabelResidence03 + '<br>' + '(' + priceResidence03[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence03[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence03[2] + '<span class="icon Board inlineIcon"></span>' + ')'; }
         else if (residenceStage == 4) { buttonImproveResidence.innerHTML = displayLabelResidence04 + '<br>' + '(' + priceResidence04[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence04[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence04[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence04[3] + '<span class="icon Olive inlineIcon"></span>' + ')'; }
-        else if (residenceStage == 5) { buttonImproveResidence.innerHTML = displayLabelResidence05 + '<br>' + '(' + priceResidence05[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence05[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence05[2] + '<span class="icon Board inlineIcon"></span>' + ')'; }
-        else if (residenceStage == 6) { buttonImproveResidence.innerHTML = displayLabelResidence06 + '<br>' + '(' + priceResidence06[0] + '<span class="icon Barley inlineIcon"></span>' + ' + ' + priceResidence06[1] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence06[2] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence06[3] + '<span class="icon Board inlineIcon"></span>' + ')'; }
-        else if (residenceStage == 7) { buttonImproveResidence.innerHTML = displayLabelResidence07 + '<br>' + '(' + priceResidence07[0] + '<span class="icon Grape inlineIcon"></span>' + ' + ' + priceResidence07[1] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence07[2] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence07[3] + '<span class="icon Board inlineIcon"></span>' + ')'; }
-        else if (residenceStage == 8) { buttonImproveResidence.innerHTML = displayLabelResidence08 + '<br>' + '(' + priceResidence08[0] + '<span class="icon Date inlineIcon"></span>' + ' + ' + priceResidence08[1] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence08[2] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence08[3] + '<span class="icon Board inlineIcon"></span>' + ')'; }
-        else if (residenceStage == 9) { buttonImproveResidence.innerHTML = displayLabelResidence09 + '<br>' + '(' + priceResidence09[0] + '<span class="icon Pom inlineIcon"></span>' + ' + ' + priceResidence09[1] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence09[2] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence09[3] + '<span class="icon Board inlineIcon"></span>' + ')'; }
-        else if (residenceStage == 10) { buttonImproveResidence.innerHTML = displayLabelResidence10 + '<br>' + '(' + priceResidence10[0] + '<span class="icon Fig inlineIcon"></span>' + ' + ' + priceResidence10[1] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence10[2] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence10[3] + '<span class="icon Board inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 5) { buttonImproveResidence.innerHTML = displayLabelResidence05 + '<br>' + '(' + priceResidence05[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence05[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence05[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence05[3] + '<span class="icon IngotCopper inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 6) { buttonImproveResidence.innerHTML = displayLabelResidence06 + '<br>' + '(' + priceResidence06[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence06[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence06[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence06[3] + '<span class="icon Barley inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 7) { buttonImproveResidence.innerHTML = displayLabelResidence07 + '<br>' + '(' + priceResidence07[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence07[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence07[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence07[3] + '<span class="icon Grape inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 8) { buttonImproveResidence.innerHTML = displayLabelResidence08 + '<br>' + '(' + priceResidence08[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence08[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence08[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence08[3] + '<span class="icon Date inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 9) { buttonImproveResidence.innerHTML = displayLabelResidence09 + '<br>' + '(' + priceResidence09[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence09[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence09[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence09[3] + '<span class="icon Pom inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 10) { buttonImproveResidence.innerHTML = displayLabelResidence10 + '<br>' + '(' + priceResidence10[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence10[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence10[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence10[3] + '<span class="icon Fig inlineIcon"></span>' + ')'; }
         else if (residenceStage == 11) { buttonImproveResidence.innerHTML = displayLabelResidence11 + '<br>' + '(' + priceResidence11[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence11[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence11[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence11[3] + '<span class="icon IngotCopper inlineIcon"></span>' + ')'; }
-        else if (residenceStage == 12) { buttonImproveResidence.innerHTML = displayLabelResidence12 + '<br>' + '(' + priceResidence12[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence12[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence12[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence12[3] + '<span class="icon IngotBronze inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 12) { buttonImproveResidence.innerHTML = displayLabelResidence12 + '<br>' + '(' + priceResidence12[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence12[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence12[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence12[3] + '<span class="icon IngotTin inlineIcon"></span>' + ')'; }
         else if (residenceStage == 13) { buttonImproveResidence.innerHTML = displayLabelResidence13 + '<br>' + '(' + formatterStandard.format(priceResidence13[0]) + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence13[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence13[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence13[3] + '<span class="icon IngotBronze inlineIcon"></span>' + ')'; }
 
         if (residenceStage > 2) {
@@ -1445,17 +2132,17 @@ function UpdateText() {
             tableString += '<tbody>';
             tableString += '<tr>';
             tableString += '<td>';
-            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[7] * 100) + '% <span class="workshopHarvestMetalDecal"></span><span class="icon IngotBronze inlineIcon"></span>';
+            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[7] * 100) + '% <span class="workshopHarvestMetalDecal"></span><span class="icon IngotTin inlineIcon"></span>';
             tableString += '</td>';
             tableString += '</tr>';
             tableString += '<tr>';
             tableString += '<td>';
-            tableString += residenceIngredientsIn[7] + '<span class="icon IngotBronze inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[7] + '<span class="icon Trinket inlineIcon"></span>';
+            tableString += residenceIngredientsIn[7] + '<span class="icon IngotTin inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[7] + '<span class="icon Trinket inlineIcon"></span>';
             tableString += '</td>';
             tableString += '</tr>';
             tableString += '<tr>';
             tableString += '<td>';
-            tableString += '<span class="icon IngotBronze inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[7]);
+            tableString += '<span class="icon IngotTin inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[7]);
             tableString += '</td>';
             tableString += '</tr>';
             tableString += '</tbody>';
@@ -1590,7 +2277,12 @@ function UpdateVisibilities() {
     }
 
     else if (player.isAt == 'Port') {
-        // schmeep schmarp
+        imgTradeGoods.style.display = player.canExport ? 'none' : '';
+        tableExports.style.display = player.canExport ? 'table' : '';
+        buttonEstablishTradeRoute.style.display = player.seesExportButton ? '' : 'none';
+        imgTradeTin.style.display = player.canImport ? 'none' : '';
+        tableImports.style.display = player.canImport ? 'table' : '';
+        buttonImportTin.style.display = player.seesImportButton ? '' : 'none';
     }
 
     else if (player.isAt == 'Residence') {
@@ -3367,6 +4059,139 @@ function RedrawFarm() {
         );
     }
 
+    if (player.hasMansion) {
+        arrayFarmGraph[0][6] = tilePathV;
+
+        arrayFarmGraph[1][2] = tilePathV;
+        arrayFarmGraph[1][6] = tilePathV;
+        arrayFarmGraph[1][18] = tilePathH;
+        arrayFarmGraph[1][19] = tilePathH;
+        arrayFarmGraph[1][20] = tilePathH;
+
+        arrayFarmGraph[2][1] = tilePathS2E;
+        arrayFarmGraph[2][2] = tilePathH2N;
+        arrayFarmGraph[2][3] = tilePathH;
+        arrayFarmGraph[2][4] = tilePathH;
+        arrayFarmGraph[2][5] = tilePathH;
+        arrayFarmGraph[2][6] = tilePathH2N;
+        arrayFarmGraph[2][7] = tilePathH;
+        arrayFarmGraph[2][8] = tilePathH;
+        arrayFarmGraph[2][9] = tilePathH;
+        arrayFarmGraph[2][10] = tileRoughPathRroad;
+        arrayFarmGraph[2][18] = tileLawn;
+        arrayFarmGraph[2][19] = tileLawn;
+        arrayFarmGraph[2][20] = tileLawn;
+        arrayFarmGraph[2][23] = tileLawn;
+
+        arrayFarmGraph[3][1] = tilePathV;
+
+        arrayFarmGraph[4][1] = tilePathV;
+        arrayFarmGraph[4][4] = tilePathS2E;
+        arrayFarmGraph[4][5] = tilePathH;
+        arrayFarmGraph[4][6] = tilePathH2S;
+        arrayFarmGraph[4][7] = tilePathH;
+        arrayFarmGraph[4][8] = tilePathH2S;
+        arrayFarmGraph[4][9] = tilePathH;
+        arrayFarmGraph[4][10] = tileRoughPathRroad;
+
+        arrayFarmGraph[5][1] = tilePathV;
+        arrayFarmGraph[5][4] = tilePathV;
+        arrayFarmGraph[5][8] = tilePathV;
+
+        arrayFarmGraph[7][1] = tilePathV;
+        arrayFarmGraph[7][8] = tilePathV;
+
+        arrayFarmGraph[11][1] = tilePathV;
+
+        arrayFarmGraph[12][22] = tilePathV;
+        arrayFarmGraph[12][23] = tileLawn;
+
+        arrayFarmGraph[13][4] = tilePathS2E;
+        arrayFarmGraph[13][5] = tilePathH;
+        arrayFarmGraph[13][6] = tilePathH;
+        arrayFarmGraph[13][7] = tilePathH;
+        arrayFarmGraph[13][15] = tilePathH;
+        arrayFarmGraph[13][19] = tilePathS2W;
+        arrayFarmGraph[13][22] = tilePathV;
+        arrayFarmGraph[13][23] = tileLawn;
+
+        arrayFarmGraph[14][1] = tilePathV;
+        arrayFarmGraph[14][4] = tilePathN2E;
+        arrayFarmGraph[14][8] = tilePathH;
+        arrayFarmGraph[14][14] = tilePathH;
+        arrayFarmGraph[14][17] = tilePathH;
+        arrayFarmGraph[14][19] = tilePathN2W;
+        arrayFarmGraph[14][22] = tilePathV;
+        arrayFarmGraph[14][23] = tileLawn;
+
+        arrayFarmGraph[15][11] = tilePathV;
+        arrayFarmGraph[15][21] = tileLawn;
+
+        arrayFarmGraph[16][11] = tilePathV;
+
+        arrayFarmGraph[17][11] = tilePathV;
+        arrayFarmGraph[17][12] = tilePathV;
+
+        arrayFarmGraph[18][7] = tilePathV;
+        arrayFarmGraph[18][11] = tilePathV;
+        arrayFarmGraph[18][12] = tilePathV;
+        arrayFarmGraph[18][16] = tilePathV;
+
+        arrayFarmGraph[19][2] = tilePathH;
+        arrayFarmGraph[19][3] = tilePathH;
+        arrayFarmGraph[19][4] = tilePathH;
+        arrayFarmGraph[19][5] = tilePathH;
+        arrayFarmGraph[19][6] = tilePathH;
+        arrayFarmGraph[19][7] = tilePathH2N;
+        arrayFarmGraph[19][8] = tilePathH;
+        arrayFarmGraph[19][9] = tilePathH;
+        arrayFarmGraph[19][10] = tilePathH;
+        arrayFarmGraph[19][11] = tilePathH2N;
+        arrayFarmGraph[19][12] = tilePathH2N;
+        arrayFarmGraph[19][13] = tilePathH;
+        arrayFarmGraph[19][14] = tilePathH;
+        arrayFarmGraph[19][15] = tilePathH;
+        arrayFarmGraph[19][16] = tilePathH2N;
+        arrayFarmGraph[19][17] = tilePathH;
+        arrayFarmGraph[19][18] = tilePathH;
+        arrayFarmGraph[19][19] = tilePathH2S;
+        arrayFarmGraph[19][20] = tilePathH;
+
+        arrayFarmGraph[20][19] = tilePathV;
+
+        arrayFarmGraph[21][1] = tilePathV;
+        arrayFarmGraph[21][19] = tilePathV2W;
+
+        arrayFarmGraph[22][1] = tilePathV;
+        arrayFarmGraph[22][18] = tileLawn;
+
+        arrayFarmGraph[23][1] = tilePathV;
+
+        arrayFarmGraph[24][1] = tilePathV;
+
+        arrayFarmGraph[25][1] = tilePathV;
+
+        arrayFarmGraph[26][1] = tilePathV;
+
+        arrayFarmGraph[29][1] = tilePathV;
+
+        arrayFarmGraph[30][17] = tilePathV;
+
+        arrayFarmGraph[37][1] = tilePathV;
+
+        arrayFarmGraph[42][4] = tilePathH;
+        arrayFarmGraph[42][7] = tilePathH;
+        arrayFarmGraph[42][9] = tilePathH;
+        arrayFarmGraph[42][10] = tilePathH;
+        arrayFarmGraph[42][12] = tilePathH2S;
+        arrayFarmGraph[42][13] = tilePathH;
+        arrayFarmGraph[42][15] = tilePathH;
+        arrayFarmGraph[42][16] = tilePathH;
+
+        arrayFarmGraph[43][11] = tilePathV;
+        arrayFarmGraph[43][12] = tilePathV;
+    }
+
     if (player.hasNewFarm) {
         canvasFarm.height = 59 * 16;
         canvasFarm.style.height = ((59 * 16) + 2) * pixelScale + 'px';
@@ -3532,7 +4357,7 @@ function RedrawFarm() {
                 tileLawn,
                 tileLawn,
                 tileHitchingPostV,
-                tilePathV,
+                tilePathV2E,
                 tileWell,
                 tilePathCross,
                 tileWell,
@@ -3549,7 +4374,7 @@ function RedrawFarm() {
                 tileWell,
                 tilePathCross,
                 tileWell,
-                tilePathV,
+                tilePathV2W,
                 tileHitchingPostV,
                 tileLawn,
                 tileLawn,
@@ -3763,6 +4588,14 @@ function RedrawFarm() {
                 tileAutograph,
             ],
         );
+
+        if (player.hasMansion) {
+            arrayFarmGraph[44][12] = tilePathV;
+
+            arrayFarmGraph[45][22] = tilePathV;
+
+            arrayFarmGraph[48][22] = tilePathV;
+        }
     }
 
     TileRenderer(arrayFarmGraph, canvasFarmContext);
@@ -4444,6 +5277,35 @@ function RedrawForest() {
         arrayForestGraph[10][10] = tileRoughPathRroad;
     }
 
+    if (player.hasMansion) {
+        arrayForestGraph[5][2] = tileShrubs1;
+        arrayForestGraph[5][17] = tilePathV2E;
+        arrayForestGraph[5][18] = tilePathH;
+        arrayForestGraph[5][19] = tilePathH;
+        arrayForestGraph[5][20] = tilePathH;
+        arrayForestGraph[5][21] = tilePathH;
+        arrayForestGraph[5][22] = tilePathH;
+        arrayForestGraph[5][23] = tilePathH;
+
+        arrayForestGraph[6][2] = tileLawn;
+
+        arrayForestGraph[7][2] = tileShrubs4;
+
+        arrayForestGraph[8][2] = tileShrubs2;
+
+        arrayForestGraph[10][4] = tilePathV2E;
+
+        arrayForestGraph[11][4] = tilePathV;
+        arrayForestGraph[11][5] = tileLawn;
+        arrayForestGraph[11][6] = tilePathV;
+
+        arrayForestGraph[12][4] = tilePathN2W;
+        arrayForestGraph[12][6] = tilePathV;
+
+        arrayForestGraph[13][6] = tilePathV;
+        arrayForestGraph[13][20] = tileLawn;
+    }
+
     TileRenderer(arrayForestGraph, canvasForestContext);
 }
 
@@ -5016,6 +5878,11 @@ function RedrawMountain() {
         arrayMountainGraph[7][18] = tilePathH;
         arrayMountainGraph[7][19] = tilePathH;
         arrayMountainGraph[7][20] = tileBridgeNewH;
+        arrayMountainGraph[7][21] = tilePathS2W;
+
+        arrayMountainGraph[8][21] = tilePathN2E;
+        arrayMountainGraph[8][22] = tilePathH;
+        arrayMountainGraph[8][23] = tilePathH;
     }
 
     if (player.hasMansion && farmStage > 14) {
@@ -5096,11 +5963,13 @@ function AnimateWinButton() {
     // !! if we do that it won't get translated 😤
     frameWinButton++;
     if (frameWinButton == 4) { frameWinButton = 0; }
+    const greenifyOpen = '<span style="font-weight: bold; color: green;">';
+    const greenifyClose = '</span>';
     const arrayWinFrames = [
-        '<span class="icon Crown1 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown4 inlineIcon"></span><br>(<span id="buttonWinHeart">♥</span>)',
-        '<span class="icon Crown2 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown3 inlineIcon"></span><br>(<span id="buttonWinHeart">♥</span>)',
-        '<span class="icon Crown3 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown2 inlineIcon"></span><br>(<span id="buttonWinHeart">♥</span>)',
-        '<span class="icon Crown4 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown1 inlineIcon"></span><br>(<span id="buttonWinHeart">♥</span>)',
+        '<span class="icon Crown1 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown4 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonWinHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
+        '<span class="icon Crown2 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown3 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonWinHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
+        '<span class="icon Crown3 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown2 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonWinHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
+        '<span class="icon Crown4 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown1 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonWinHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
     ];
     buttonWin.innerHTML = arrayWinFrames[frameWinButton];
     timeoutWinButton = setTimeout(AnimateWinButton, 82); // 🤰

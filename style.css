@@ -711,6 +711,15 @@ button:active {
     font-weight: bold;
 }
 
+#divGameEventCorpus #writ {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: crimson;
+    line-height: 4.3vw;
+}
+
+
+
 #divOverlayMods {
     background-color: rgba(16, 0, 16, 0.8);
     z-index: 3000;
@@ -1293,6 +1302,48 @@ td {
 
 
 
+#tableExports,
+#tableImports {
+    border: calc(1px * var(--pixel-scale)) solid black;
+    margin-bottom: 3.2vw;
+}
+
+#tableImports {
+    margin-top: 6.4vw;
+}
+
+#tableExports table,
+#tableImports table {
+    border: calc(1px * var(--pixel-scale)) solid black;
+}
+
+#tableExports td,
+#tableImports td {
+    padding: 1vw 2vw;
+    vertical-align: bottom;
+}
+
+#tableExports table tr:nth-of-type(even) td,
+#tableImports table tr:nth-of-type(even) td {
+    background: #e9e9e9;
+}
+
+#tableExports table tr td,
+#tableImports table tr td {
+    border-bottom: calc(1px * var(--pixel-scale)) solid #d8d8d8;
+}
+
+#divPortActionArea #tableExports thead td,
+#divPortActionArea #tableImports thead td {
+    background-color: purple;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: calc(1px * var(--pixel-scale)) solid black;
+}
+
+
+
 /* // ICONS ///////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -1773,6 +1824,64 @@ td {
     margin-bottom: 6.4vw;
 }
 
+#divGameWindow #divPortActionArea img {
+    border: calc(1px * var(--pixel-scale)) solid black;
+    display: block;
+}
+
+#imgTradeGoods,
+#imgTradeTin {
+    width: calc(130px * var(--pixel-scale));
+    height: calc(86px * var(--pixel-scale));
+    margin: 6.4vw auto 3.2vw auto;
+}
+
+.divTradeRouteWrapper,
+.divImportsWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin-top: 6.4vw;
+}
+
+#divTradeRouteWrapperOil,
+#divTradeRouteWrapperTin {
+    margin-top: 0;
+}
+
+.divDeliveryColumnWrapper {
+    margin-left: 2vw;
+    text-align: center;
+}
+
+#divPortActionArea .divTradeRouteWrapper img,
+#divPortActionArea .divImportsWrapper img {
+    width: calc(66px * var(--pixel-scale));
+    height: calc(66px * var(--pixel-scale));
+    margin: 0 auto 2vw auto;
+}
+
+.divDeliveryTimerBox {
+    border: calc(1px * var(--pixel-scale)) solid black;
+    padding: 1vw 2vw 2vw 2vw;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.8vw;
+}
+
+.divDeliveryTimerBoxLiner {
+    border: calc(1px * var(--pixel-scale)) solid black;
+    padding: 1vw 2vw;
+    text-align: center;
+    background-color: aliceblue;
+    font-weight: normal;
+    margin-top: 1vw;
+    font-size: 2.8vw;
+}
+
 
 
 /* // FOOTER //////////////////////////////////////////////////////////////////////////////////// */
@@ -1825,6 +1934,8 @@ td {
 #buttonGoToTownship,
 #buttonGoToPort,
 #divViewPort,
+#tableExports,
+#tableImports,
 #buttonTill,
 #buttonPlant,
 #buttonWater,

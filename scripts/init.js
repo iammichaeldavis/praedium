@@ -60,6 +60,8 @@ const player = {
     seesMountain: false,
     seesMountainButton: false,
     seesVillage: false,
+    seesExportButton: true,
+    seesImportButton: true,
 
     canTill: false,
     canPlant: false,
@@ -82,12 +84,24 @@ const player = {
     canSaw: false,
     canMine: false,
     canSmelt: false,
+    canExport: false,
+    canExportOil: false,
+    canExportBeer: false,
+    canExportWine: false,
+    canExportSyrup: false,
+    canExportJuice: false,
+    canExportFigs: false,
+    canExportTrinkets: false,
+    canImport: false,
+    canImportTin: false,
+    canHireBronzeworkers: false,
     canWin: false,
 
     hasBegun: false,
     hasMildewed: false,
     hasSeenResidence: false,
     hasNewFarm: false,
+    hasBank: false,
     hasBakery: false,
     hasOliveMill: false,
     hasBrewery: false,
@@ -99,8 +113,10 @@ const player = {
     hasMansion: false,
     hasSeenVillage: false,
     hasSeenPort: false,
+    hasMerchantGuildWrit: false,
     hasFoundCopperEvidence: false,
     hasFoundMine: false,
+    hasHiredBronzeworkers: false,
     hasBeenLevied: false,
     hasWon: false,
 };
@@ -271,6 +287,12 @@ const divPortName = document.getElementById('divPortName');
 const divPortSubtitle = document.getElementById('divPortSubtitle');
 const canvasPort = document.getElementById('canvasPort');
 const canvasPortContext = canvasPort.getContext('2d');
+const imgTradeGoods = document.getElementById('imgTradeGoods');
+const tableExports = document.getElementById('tableExports');
+const buttonEstablishTradeRoute = document.getElementById('buttonEstablishTradeRoute');
+const imgTradeTin = document.getElementById('imgTradeTin');
+const tableImports = document.getElementById('tableImports');
+const buttonImportTin = document.getElementById('buttonImportTin');
 
 const buttonOptions = document.getElementById('buttonOptions');
 const buttonQ = document.getElementById('buttonQ');
@@ -298,7 +320,7 @@ const harvestedCount = [0, 0, 0, 0, 0, 0, 0,];
 const spentCount = [0, 0, 0, 0, 0, 0, 0,];
 const soldCount = [0, 0, 0, 0, 0, 0, 0,];
 const barterMaxBulkCount = 1000;
-const barterExchangeRate = [1, 0.75, 10, 14, 18, 24, 32,];
+const barterExchangeRate = [1, 1, 10, 14, 18, 24, 32,];
 
 let plantCost = 1;
 let yieldMin = 4;
@@ -363,9 +385,11 @@ let smeltersHired = 4;
 
 let ingotsTinCount = 0;
 let ingotsBronzeCount = 0;
-let bronzeTinNeed = 12;
-let bronzeCopperNeed = 88;
+let bronzeTinNeed = 2;
+let bronzeCopperNeed = 8;
 let metallurgistsHired = 0;
+let bronzeworkCountdownTimerMax = 4;
+let bronzeworkCountdownTimer = bronzeworkCountdownTimerMax;
 
 // 0. Stone 🪨, 1. Copper Ore ⛏️, 2. Copper Ingots 🧱, 3. Tin Ingots 🧱, 4. Bronze Ingots 🧱
 const mountainProducedCount = [0, 0, 0, 0, 0,];
@@ -380,8 +404,8 @@ let residenceStage = 0;
 let loavesPaymentAmount = 14;
 
 // 0. Loaves 🥖, 1. Oil 🪔, 2. Beer 🍺, 3. Wine 🍷, 4. Syrup 🍯, 5. Juice 🧃, 6. Fruit Leather (Sun-Dried Fig) 🫐, 7. Trinkets 💎
-const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2,];
-const residenceIngredientsIn = [1, 8, 4, 250, 6, 3, 5, 1,];
+const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5,];
+const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1,];
 const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5,];
 const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0,];
 const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0,];
@@ -448,6 +472,24 @@ let currentBushelPrice = actualBushelPrice;
 let currentBarleyAdjustment = 1000;
 let marketLifetimeRevenue = 0;
 
+// 0. Oil 🪔, 1. Beer 🍺, 2. Wine 🍷, 3. Syrup 🍯, 4. Juice 🧃, 5. Fruit Leather (Sun-Dried Fig) 🫐, 6. Trinkets 💎
+const wheatValuePerUnit = [null, null, null, null, null, null,];
+wheatValuePerUnit[0] = barterExchangeRate[2] * (residenceIngredientsIn[1] / residenceProductOut[1]);//oil
+wheatValuePerUnit[1] = barterExchangeRate[1] * (residenceIngredientsIn[2] / residenceProductOut[2]);//beer
+wheatValuePerUnit[2] = barterExchangeRate[6] * (residenceIngredientsIn[3] / residenceProductOut[3]);//wine
+wheatValuePerUnit[3] = barterExchangeRate[3] * (residenceIngredientsIn[4] / residenceProductOut[4]);//syrup
+wheatValuePerUnit[4] = barterExchangeRate[5] * (residenceIngredientsIn[5] / residenceProductOut[5]);//juice
+wheatValuePerUnit[5] = barterExchangeRate[4] * (residenceIngredientsIn[6] / residenceProductOut[6]);//figs
+const shipmentTimersCurrent = [24, 4, 16, 8, 2, 12, 48, 12,];
+const shipmentTimersDefault = [24, 4, 16, 8, 2, 12, 48, 12,];
+const shipmentDuration = [6, 1, 4, 2, 2, 3, 1, 3,];
+const shipmentProfits = [0, 0, 0, 0, 0, 0, 0,];
+const valueFactor = [12, 42, 24, 16, 9, 6, 10,];
+const shipmentCosts = [0,];
+const importCost = [8000,];
+const importAmount = [40,];
+let trinketValue = ((importCost[0] / importAmount[0]) / residenceProductOut[7]) * valueFactor[6];
+
 let snapshotLastTurn = null;
 let snapshotThisTurn = null;
 
@@ -474,32 +516,32 @@ const priceStage15 = [8000, 80000,];
 const priceStage16 = [100, 100,];
 const priceStage17 = [4200, 48000,];
 const priceStage18 = [6400, 3200,];
-const priceNewFarm = 3000000;
+const priceNewFarm = 1000000;
 
 const priceWarehouse0 = 20;
 const priceWarehouse1 = 50;
 const priceWarehouse2 = 1000;
 
-const priceResidence00 = 21;
-const priceResidence01 = [42, 21,];
-const priceResidence02 = [84, 42,];
+const priceResidence00 = 21; // Straw Shanty ⛺
+const priceResidence01 = [42, 21,]; // Log Cabin 🏕️
+const priceResidence02 = [84, 42,]; // Board House 🛖
 const priceResidence03 = [168, 84, 42,]; // Bakery 🥖
-const priceResidence04 = [336, 168, 84, 42,]; // Olive Mill 🪔
-const priceResidence05 = [672, 336, 168,];
-const priceResidence06 = [1344, 672, 336, 168,]; // Brewery 🍺
-const priceResidence07 = [1344, 672, 336, 168,]; // Winery 🍷
-const priceResidence08 = [1344, 672, 336, 168,]; // Kitchen 🍯
-const priceResidence09 = [1344, 672, 336, 168,]; // Press 🧃
-const priceResidence10 = [1344, 672, 336, 168,]; // Greenhouse 🫐
-const priceResidence11 = [2688, 1344, 672, 336,];
-const priceResidence12 = [5376, 2688, 1344, 672,]; // Atelier 💎
-const priceResidence13 = [10752, 5376, 2688, 1344,]; // Mansion 🏡
+const priceResidence04 = [168, 84, 42, 21,]; // Olive Mill 🪔
+const priceResidence05 = [168, 84, 42, 21,]; // Plaster House 🎪
+const priceResidence06 = [168, 84, 42, 21,]; // Brewery 🍺
+const priceResidence07 = [168, 84, 42, 21,]; // Winery 🍷
+const priceResidence08 = [168, 84, 42, 21,]; // Kitchen 🍯
+const priceResidence09 = [168, 84, 42, 21,]; // Press 🧃
+const priceResidence10 = [168, 84, 42, 21,]; // Greenhouse 🫐
+const priceResidence11 = [336, 168, 84, 42,]; // Stone House 🏠
+const priceResidence12 = [336, 168, 84, 42,]; // Atelier 💎
+const priceResidence13 = [672, 336, 168, 84,]; // Mansion 🏡
 
 const priceVillage = 64000;
 const priceBuild0 = [500, 8000, 4000, 20000,]; // Blacksmith
 const priceBuild1 = [2000, 8000, 30000,]; // Workshop
 const priceBuild2 = [10000, 50000,]; // Town Hall (Forum)
-const priceBuild3 = [25000, 5000, 10000,]; // Insula (ground floor only)
+const priceBuild3 = [25000, 5000, 10000,]; // Insula (ground floor)
 const priceMineScout = 420; // 🚬¯\_(ツ)_/¯🍩
 const priceMineDig = [128000, 4000,];
 const priceFoundry = [256000, 6000, 60000];
@@ -510,13 +552,22 @@ const priceBuild7 = [256000, 64000, 25000, 50000,]; // 2nd Insula
 const priceBuild8 = [200000, 80000, 30000, 60000,]; // School
 const priceBuild9 = [256000, 64000, 25000, 50000,]; // 3rd Insula
 const priceBuild10 = [128000, 8000, 12000,]; // Stables
-const priceBuild11 = [256000, 100, 7777, 7777, 777, 777, 777, 777, 777, 20000, 4,]; // Temple
+const priceBuild11 = [256000, 100, 7, 7, 7, 7, 7, 7, 7, 20000, 4,]; // Temple
 const priceBuild12 = [2000000, 4000, 60000, 12,]; // Arena
 const priceBuild13 = [4000000, 200, 30000]; // Bank
 const priceBuild14 = [64000, 810, 20000]; // Monks
 const priceBuild15 = [1200000, 60000]; // Sewers
 const priceBuild16 = [2400000, 30000, 60000, 200000]; // Gates
-const priceBuild17 = [10000000, 9001, 77, 5000, 100000, 100000]; // Monument
+const priceBuild17 = [10000000, 9001, 77, 2500, 100000, 100000]; // Monument
+
+const pricePort0 = 8000;
+const pricePort1 = 16000;
+const pricePort2 = 32000;
+const pricePort3 = 64000;
+const pricePort4 = 128000;
+const pricePort5 = 256000;
+const pricePort6 = 512000;
+const pricePort7 = 7777777777777; // import cost?
 
 const tributeAmount = 616; // 😈 NRO QSR
 let tributeLifetimePaid = 0;

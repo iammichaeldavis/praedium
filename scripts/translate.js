@@ -27,11 +27,14 @@ let displayRatPlague = '';
 let displayCentury = '';
 let displayDecade = '';
 let displayYear = '';
+let displayYears = '';
 let displaySemester = '';
 let displaySeason = '';
 let displayMonth = '';
+let displayMonths = '';
 let displayFortnight = '';
 let displayWeek = '';
+let displayWeeks = '';
 let displayDay = '';
 let displayLabelAvailable = '';
 let displayWheat = '';
@@ -48,6 +51,8 @@ let displaySawyers = '';
 let displayStone = '';
 let displayOre = '';
 let displayCopper = '';
+let displayTin = '';
+let displayBronze = '';
 let displayVignerons = '';
 let displayArborists = '';
 let displayHorticulturalists = '';
@@ -114,6 +119,7 @@ let displayLabelBuild3 = '';
 let displayLabelMineScout = '';
 let displayLabelMineDig = '';
 let displayLabelFoundry = '';
+let displayLabelBronzeworkers = '';
 let displayLabelBuild4 = '';
 let displayLabelBuild5 = '';
 let displayLabelBuild6 = '';
@@ -128,6 +134,9 @@ let displayLabelBuild14 = '';
 let displayLabelBuild15 = '';
 let displayLabelBuild16 = '';
 let displayLabelBuild17 = '';
+
+let displayLabelTradeRoute = '';
+let displayLabelImportTin = '';
 
 let displayStoryFarm0 = '';
 let displayStoryFarmMildew = '';
@@ -202,6 +211,7 @@ let displayStoryFoundCopper = '';
 let displayStoryMineScout = '';
 let displayStoryMineDig = '';
 let displayStoryFoundry = '';
+let displayStoryBronzeworkers = '';
 let displayStoryTribute = '';
 
 let displayStoryResidenceFirstVisit = '';
@@ -220,6 +230,7 @@ let displayStoryResidence11 = '';
 let displayStoryResidence12 = '';
 let displayStoryResidence13 = '';
 
+let displayStoryVillageFirstVisit = '';
 let displayStoryVillage0 = '';
 let displayStoryVillage1 = '';
 let displayStoryVillage2 = '';
@@ -238,6 +249,16 @@ let displayStoryVillage14 = '';
 let displayStoryVillage15 = '';
 let displayStoryVillage16 = '';
 let displayStoryVillage17 = '';
+
+let displayStoryPortFirstVisit = '';
+let displayStoryPort00 = '';
+let displayStoryPort01 = '';
+let displayStoryPort02 = '';
+let displayStoryPort03 = '';
+let displayStoryPort04 = '';
+let displayStoryPort05 = '';
+let displayStoryPort06 = '';
+let displayStoryPort07 = '';
 
 let displayNamePlayer = '';
 
@@ -269,6 +290,8 @@ let displayPnL = '';
 let displayRent = '';
 let displayRealEstate = '';
 let displayMarket = '';
+let displayWholesale = '';
+let displayCommodities = '';
 let displayHusbandry = '';
 let displayConjunction = '';
 let displayTourism = '';
@@ -312,6 +335,29 @@ let displayKitchen = '';
 let displayPress = '';
 let displayGreenhouse = '';
 let displayAtelier = '';
+
+let displayPortName = '';
+let displayPortSubtitle = '';
+let displayActiveRoutes = '';
+let displayActiveLanes = '';
+let displayContract = '';
+let displayDestination = '';
+let displaySource = '';
+let displayAthens = '';
+let displayDamascus = '';
+let displayRhodes = '';
+let displayAlexandria = '';
+let displayJerusalem = '';
+let displayMemphis = '';
+let displayRome = '';
+let displayTartessos = '';
+let displayDuration = '';
+let displayVoyage = '';
+let displayShipped = '';
+let displayImported = '';
+let displayProfit = '';
+let displayCost = '';
+let displayNextDelivery = '';
 
 let displayForewordA = '';
 let displayForewordScripture = '';
@@ -375,11 +421,14 @@ function Translate(language, bark = true) {
         displayCentury = 'Century';
         displayDecade = 'Decade';
         displayYear = 'Year';
+        displayYears = 'Years';
         displaySemester = 'Semester';
         displaySeason = 'Season';
         displayMonth = 'Month';
+        displayMonths = 'Months';
         displayFortnight = 'Fortnight';
         displayWeek = 'Week';
+        displayWeeks = 'Weeks';
         displayDay = 'Day';
         displayLabelAvailable = 'Available';
         displayWheat = 'Wheat';
@@ -396,6 +445,8 @@ function Translate(language, bark = true) {
         displayStone = 'Stone';
         displayOre = 'Ore';
         displayCopper = 'Copper';
+        displayTin = 'Tin';
+        displayBronze = 'Bronze';
         displayVignerons = 'Vignerons';
         displayArborists = 'Arborists';
         displayHorticulturalists = 'Horticulturalists';
@@ -462,6 +513,7 @@ function Translate(language, bark = true) {
         displayLabelMineScout = 'SCOUT FOR A PROPER MINE SITE';
         displayLabelMineDig = 'DIG MINE';
         displayLabelFoundry = 'BEGIN A COPPER FOUNDRY';
+        displayLabelBronzeworkers = 'BRING ON BRONZEWORKERS';
         displayLabelBuild4 = 'ADD SECOND STORY';
         displayLabelBuild5 = 'BUILD MARKETPLACE';
         displayLabelBuild6 = 'ADD THIRD STORY';
@@ -476,6 +528,9 @@ function Translate(language, bark = true) {
         displayLabelBuild15 = 'DIG SEWERS';
         displayLabelBuild16 = 'ERECT CITY GATES';
         displayLabelBuild17 = 'ESTABLISH MONUMENT';
+
+        displayLabelTradeRoute = 'ESTABLISH NEW TRADE ROUTE';
+        displayLabelImportTin = 'ARRANGE FOR THE IMPORT OF TIN';
 
         displayStoryFarm0 = 'NOW I CAN PROVIDE FOR MY FAMILY';
         displayStoryFarmMildew = 'YOU HAVE JUST RECEIVED A MESSAGE FROM THE MAN WHO RUNS THE WAREHOUSE WHERE YOU KEEP YOUR WHEAT:<div id="nasirMessage">Roof damage has let water in; mildew has claimed 90% of all grain in storage; my sincerest apologies<br>—Ea-nāṣir</div>';
@@ -501,8 +556,8 @@ function Translate(language, bark = true) {
         displayStoryFarm15 = '“THE TIME TO DIG A WELL IS BEFORE YOU ARE THIRSTY”<br>—ZHU XI<br><br>(Per Harvest Yield Minimum +25%)';
         displayStoryFarm16 = 'HARD TO BELIEVE ALL THIS BEGAN WITH JUST A SINGLE PATCH OF EARTH ' + year + ' YEARS AGO. HONESTLY IT’S DIFFICULT TO EVEN REMEMBER WHAT LIFE WAS LIKE BACK THEN';
         displayStoryFarm17 = 'THE PREVIOUS OWNER GUARANTEES ITS PROFITABILITY. I AM TOLD DATES WILL BE READY AT THE END OF EVERY SUMMER, AND FIGS IN THE LATE SPRING. POMEGRANATES WILL BE READY IN EARLY WINTER, THEN GRAPES SHOULD COME ALONG A FEW WEEKS LATER, BUT THEY ARE FICKLE';
-        displayStoryOlives = 'IT HAS BEEN EIGHT LONG YEARS SINCE YOU PLANTED YOUR OLIVE ORCHARD. FINALLY THE TREES ARE MATURE, EVERY BRANCH LADEN WITH RIPE FRUIT. AND THEY SHOULD COME IN AROUND THE SAME TIME EVERY YEAR FROM NOW ON';
-        displayStoryNewFarm = 'new farm english';
+        displayStoryOlives = 'IT HAS BEEN EIGHT LONG YEARS SINCE YOU PLANTED YOUR OLIVE ORCHARD. FINALLY THE TREES ARE MATURE, EVERY BRANCH LADEN WITH RIPE FRUIT, AND THE HARVEST SHOULD BE AROUND THIS SAME TIME EVERY YEAR FROM NOW ON';
+        displayStoryNewFarm = '“THE NATURAL STATE OF MEN BEFORE THEY ENTERED INTO SOCIETY WAS SIMPLY A WAR OF ALL AGAINST ALL”<BR>—THOMAS HOBBES';
 
         displayStoryWarehouse0 = 'THIS PLACE COMES HIGHLY RECOMMENDED';
         displayStoryWarehouse1 = '“WHAT IS COMMON TO THE GREATEST NUMBER RECEIVES THE LEAST AMOUNT OF CARE”<br>—ARISTOTLE';
@@ -547,9 +602,10 @@ function Translate(language, bark = true) {
 
         displayStoryFound = '“I HAVE SONS, I HAVE WEALTH,” WITH SUCH THOUGHTS THE FOOL IS TORMENTED. BUT IF ONE’S SELF IS NOT EVEN ONE’S OWN, HOW THEN ARE SONS? HOW THEN IS WEALTH?<br><br>DHAMMAPADA 5.62';
         displayStoryFoundCopper = 'A PAIR OF HIKERS IN YOUR MOUNTAINS HAVE DISCOVERED NUGGETS OF WHAT APPEARS TO BE ORICHALCUM!';
-        displayStoryMineScout = 'YOUR SCOUTS FOUND A RICH VEIN IN YOUR EASTERN FOOTHILLS';
+        displayStoryMineScout = 'YOUR SCOUTS FOUND A RICH VEIN IN YOUR NORTHERN FOOTHILLS';
         displayStoryMineDig = 'MINERALS HAVE THEIR OWN LIFE JUST AS VEGETABLES DO, AND ANIMALS AND BIRDS, AND HUMANS<br><br>PHÁP CHÁNH TRUYỀN, PART 5';
         displayStoryFoundry = '“THE ‘HOLOCENE’ HAS ENDED. THE GARDEN OF EDEN IS NO MORE. WE HAVE CHANGED THE WORLD SO MUCH THAT SCIENTISTS SAY WE ARE IN A NEW GEOLOGICAL AGE: THE ‘ANTHROPOCENE’. THE AGE OF MAN. WE MUST MOVE BEYOND GUILT OR BLAME, AND GET ON WITH THE PRACTICAL TASKS AT HAND”<br>—SIR DAVID FREDERICK ATTENBOROUGH';
+        displayStoryBronzeworkers = 'WITH WEAPONS AND ARMORS OF GLEAMING BRONZE WE CAN FINALLY SHOW THOSE SNOOTY PHRYGIANS EXACTLY WHAT IS WHAT';
         displayStoryTribute = 'THE LOCAL WARLORD KING HAS CAUGHT WIND OF YOUR SUCCESS AT LAST. QUOTH HIS EMISSARY: “OF COURSE, TARIFFS MUST BE LEVIED”';
 
         displayStoryResidenceFirstVisit = 'THERE’S NO PLACE LIKE HOME: YOUR CAMPSITE, ANONYMOUS AMONG THE HUNDREDS OF OTHERS JUST LIKE IT ALL NESTLED HERE, IN THIS NARROW, ARID VALLEY, WHERE YOU RENT THIS PATCH OF DIRT FOR AN EXORBITANT RATE';
@@ -557,18 +613,18 @@ function Translate(language, bark = true) {
         displayStoryResidence01 = 'FINALLY SOME SPACE TO STRETCH OUT MY LEGS';
         displayStoryResidence02 = 'MORE THAN ENOUGH ACREAGE IN THIS PRAIRIE FOR A MODEST HOMESTEAD, I RECKON';
         displayStoryResidence03 = 'KEEP FALSEHOOD AND DECEITFUL WORDS FAR FROM ME. GIVE ME NEITHER POVERTY NOR RICHES; FEED ME ONLY THE BREAD THAT IS MY PORTION<br><br>PROVERBS 30:8<br><br>(Laborers Will Accept ' + loavesPaymentAmount + '<span class="icon Loaves inlineIcon"></span>/Week)';
-        //
         displayStoryResidence04 = 'THOSE FRUITY PRIESTS CAN’T GET ENOUGH OF THIS STUFF';
-        displayStoryResidence05 = 'LUCKY I’M SANE<br>AFTER ALL I’VE BEEN THROUGH<br>I CAN’T COMPLAIN,<br>BUT SOMETIMES I STILL DO<br>LIFE’S BEEN GOOD TO ME SO FAR<br>—JOE WALSH';
+        displayStoryResidence05 = 'WHAT’S THE POINT IN EARNING IT IF YOU AIN’T GONNA ENJOY SOME OF IT';
         displayStoryResidence06 = '“THE PEOPLE OF THE GREAT PALACE, HAVING PUT ON SCARVES LIKE THE QUAIL-BIRDS PUTTING THEIR TAILS TOGETHER LIKE WAGTAILS’, AND CONGREGATED TOGETHER LIKE THE YARD-SPARROWS, MAY PERHAPS TODAY BE TRULY STEEPED IN LIQUOR,”<br><br>THE KOJIKI, VOLUME III, SECTION CLX.—EMPEROR YŪ-RIYAKU (PART XI.—THE LEAF IN THE CUP)';
         displayStoryResidence07 = 'NOAH, A MAN OF THE SOIL, WAS THE FIRST TO PLANT A VINEYARD. WHEN HE DRANK SOME OF ITS WINE, HE BECAME DRUNK AND FELL ASLEEP UNCOVERED INSIDE HIS TENT. HAM, THE FATHER OF CANAAN, SAW HIS FATHER NAKED, THEN WENT OUTSIDE AND TOLD HIS TWO BROTHERS<br><br>GENESIS 9:20-22'; // just be glad this wasn't Genesis 19:30-38 😮
         displayStoryResidence08 = '“DATE SYRUP IS A NATURAL SWEETENER THAT HAS WONDERFUL RICHNESS AND TREACLY DEPTH; I DRIZZLE IT OVER SEMOLINA PORRIDGE”<br>—YOTAM OTTOLENGHI';
-        displayStoryResidence09 = 'pom joos';
-        displayStoryResidence10 = 'sundried fig';
-        displayStoryResidence11 = 'stone house';
-        displayStoryResidence12 = 'trinkets';
-        displayStoryResidence13 = 'the white villa';
+        displayStoryResidence09 = 'I WOULD LEAD YOU BY THE HAND TO THE HOUSE WHERE I WAS RAISED BY MY MOTHER. SHE TAUGHT ME EVERYTHING I KNOW. I WOULD GIVE YOU SPICED WINE TO DRINK, THE JUICE OF MY POMEGRANATES<br><br>SONG OF SONGS 8:2';
+        displayStoryResidence10 = '“NOTHING GREAT IS CREATED SUDDENLY, ANY MORE THAN A BUNCH OF GRAPES OR A FIG. IF YOU TELL ME THAT YOU DESIRE A FIG, I ANSWER YOU THAT THERE MUST BE TIME. LET IT FIRST BLOSSOM, THEN BEAR FRUIT, THEN RIPEN”<br>—EPICTETUS';
+        displayStoryResidence11 = 'LUCKY I’M SANE<br>AFTER ALL I’VE BEEN THROUGH<br>I CAN’T COMPLAIN,<br>BUT SOMETIMES I STILL DO<br>LIFE’S BEEN GOOD TO ME SO FAR<br>—JOE WALSH';
+        displayStoryResidence12 = '“IF HORSES COULD HOLD A PENCIL THEY WOULD DRAW THEIR GODS AS HORSES”<br>—XENOPHANES';
+        displayStoryResidence13 = '“IF YOU WANT TO TOTALLY DESTROY A MAN, GIVE HIM EVERYTHING HE EVER WISHED FOR”<br>—BOULET';
 
+        displayStoryVillageFirstVisit = 'FROM NOW ON, WE’RE GONNA BE DOING THINGS *MY* WAY AROUND HERE';
         displayStoryVillage0 = 'HE WILL NEED LUMBER FOR THE FORGE';
         displayStoryVillage1 = 'NOW WE CAN BUILD';
         displayStoryVillage2 = 'WE’VE GOT TO HAVE SOME LAW AND ORDER';
@@ -582,11 +638,21 @@ function Translate(language, bark = true) {
         displayStoryVillage10 = 'HORSES DRIVE PROGRESS';
         displayStoryVillage11 = 'THE TRUE SERVANTS OF GOD ARE THOSE WHO WALK UPON THE EARTH EASILY, AND WHEN THE IGNORANT ADDRESS THEM HARSHLY, THEY REPLY WITH WORDS OF PEACE<br><br>AL-FURQAN 63';
         displayStoryVillage12 = '“THEY DESIRE JUST TWO THINGS, BREAD AND CIRCUSES”<br>—JUVENAL';
-        displayStoryVillage13 = '“TO CONTRACT NEW DEBTS IS NOT THE WAY TO PAY OLD ONES”<br>—GEORGE WASHINGTON';
+        displayStoryVillage13 = '“TO CONTRACT NEW DEBTS IS NOT THE WAY TO PAY OLD ONES”<br>—GEORGE WASHINGTON<br><br>(Import License Financing Now Available)';
         displayStoryVillage14 = 'YOU HAVE THE RIGHT TO LABOUR, BUT YOU HAVE NO RIGHT TO THE FRUITS OF YOUR LABOURS. NEVER BELIEVE YOU ARE THE CAUSE OF THE RESULTS OF YOUR CHOICES. WORK HARD AND BE EVEN-TEMPERED IN SUCCESS AND FAILURE. ... THOSE WHO SEEK TO ENJOY THE FRUITS OF THEIR WORKS ARE MISERABLE.<br><br>BHAGAVAD GITA 2.47-49';
         displayStoryVillage15 = 'CLEANLINESS IS GODLINESS';
         displayStoryVillage16 = 'THEY HATE HIM WHO REPROVES IN THE GATE, AND THEY ABHOR HIM WHO SPEAKS THE TRUTH<br><br>AMOS 5:10';
         displayStoryVillage17 = 'THE BRONZE PLAQUE ON THE PINK MARBLE BASE READS:<br><br>≈ THE 8 VIRTUES ≈<br><br>♠<br>• HONESTY •<br>TELL THE TRUTH<br>♠<br>• HONOR •<br>DO WHAT IS RIGHT<br>♠<br>• VALOR •<br>STAND AGAINST INJUSTICE<br>♠<br>• SACRIFICE •<br>SHARE YOUR BLESSINGS<br>♠<br>• COMPASSION •<br>BE KIND TO THE WEAK<br>♠<br>• JUSTICE •<br>BE FAIR TO ALL<br>♠<br>• SPIRITUALITY •<br>LISTEN TO THE LIGHT<br>♠<br>• HUMILITY •<br>RESIST PRIDE<br>♣';
+
+        displayStoryPortFirstVisit = 'YOU FIRST ARRIVED ON THESE FOREIGN SHORES THROUGH THESE VERY DOCKS; JUST A CHILD THEN, A STRANGER IN A STRANGE LAND. OF COURSE, YOUR CIRCUMSTANCES HAVE IMPROVED SIGNIFICANTLY SINCE THOSE DAYS. TODAY YOU HAVE BEEN GREETED HERE AS A POTENTIAL CLIENT OF GREAT IMPORTANCE, AND USHERED DIRECTLY INTO THE FOREMAN’S WELL-APPOINTED OFFICE. HIS ASSISTANT OFFERS YOU AN ORNATELY FILIGREED PEWTER TRAY FULL OF CANDIED DATES';
+        displayStoryPort00 = 'THE ATHENIANS HAVE A PRESSING NEED FOR SACRED OIL, AND ARE WILLING TO PAY HANDSOMELY';
+        displayStoryPort01 = '“THIS... IS GRAIN; WHICH ANY FOOL CAN EAT, BUT FOR WHICH THE LORD INTENDED A MORE DIVINE MEANS OF CONSUMPTION. LET US GIVE PRAISE TO OUR MAKER, AND GLORY TO HIS BOUNTY, BY LEARNING ABOUT: BEER”<br>—FRIAR TUCK<br><br>ROBIN HOOD: PRINCE OF THIEVES (WARNER BROS. 1991)';
+        displayStoryPort02 = '“SO WHEN THE DEVIL SAYS TO YOU, ‘DO NOT DRINK,’ ANSWER HIM, ‘I WILL DRINK, AND RIGHT FREELY, JUST BECAUSE YOU TELL ME NOT TO.’ ONE MUST ALWAYS DO WHAT SATAN FORBIDS”<br>—MARTIN LUTHER';
+        displayStoryPort03 = 'BOY, I HAVE YET TO MEET THE EGYPTIAN THAT DID NOT LOVE SWEETS';
+        displayStoryPort04 = 'FRESH JUICE DOES NOT KEEP LONG; FORTUNATELY THE ECONOMIC CHANCELLOR HAS INTRODUCED US TO A MERCHANT IN JERUSALEM WE CAN TRUST WHO IS HUNGRY FOR WHATEVER WE CAN SUPPLY';
+        displayStoryPort05 = 'THOU HAST FOUND THYSELF IN GOOD ENOUGH STANDING WITH THESE SLIPPERY MERCHANTS AT LAST; THE GUILD HAST FINALLY GRANTED THEE A <span class="icon Decree inlineIcon"></span> <span id="writ">WRIT OF PERMISSION</span> TO IMPORT TIN!';
+        displayStoryPort06 = 'HOUSEWIVES DO SO LOVE THEIR DOODADS AND GEWGAWS';
+        displayStoryPort07 = 'WITH THIS TIN, ARTISANS CAN CHURN OUT THOSE LUDICROUS, GAUDY BAUBLES THAT COMMAND SUCH A HIGH PRICE IN ROME';
 
         displayNamePlayer = '“What is your name, citizen?”';
 
@@ -618,6 +684,8 @@ function Translate(language, bark = true) {
         displayRent = 'Rent';
         displayRealEstate = 'Real Estate';
         displayMarket = 'Retail';
+        displayWholesale = 'Wholesale';
+        displayCommodities = 'Commodities';
         displayHusbandry = 'Husbandry';
         displayConjunction = 'Conjunction';
         displayTourism = 'Tourism';
@@ -662,6 +730,29 @@ function Translate(language, bark = true) {
         displayGreenhouse = 'Greenhouse';
         displayAtelier = 'Atelier';
 
+        displayPortName = 'The ʿAkkō Harbour';
+        displayPortSubtitle = 'Mercantile Gateway to Cyprus & the Levant';
+        displayActiveRoutes = 'Currently Active Export Trade Routes';
+        displayActiveLanes = 'Currently Active Import Shipping Lanes';
+        displayContract = 'Contract:';
+        displayDestination = 'Destination:';
+        displaySource = 'Source:';
+        displayAthens = 'Athens';
+        displayDamascus = 'Damascus';
+        displayRhodes = 'Rhodes';
+        displayAlexandria = 'Alexandria';
+        displayJerusalem = 'Jerusalem';
+        displayMemphis = 'Memphis';
+        displayRome = 'Rome';
+        displayTartessos = 'Tartessos';
+        displayDuration = 'Interval:';
+        displayVoyage = 'Voyage';
+        displayShipped = 'Shipped:';
+        displayImported = 'Imported:';
+        displayProfit = 'Profit:';
+        displayCost = 'Cost:';
+        displayNextDelivery = 'Next Delivery In:';
+
         displayForewordA = 'The year is 200 B.C. and thou art a humble Tartessian sharecropper eking out a modest living under the brutal Mediterranean sun in Palestinian Galilee. From dawn to dusk dost thou work the chalky, unforgiving soil with nothing but thine own calloused hands and a sharp stick.';
         displayForewordScripture = '“O Maker of the material world, thou Holy One! How far from the fire? How far from the water? How far from the consecrated bundles of baresma? How far from the faithful?”';
         displayForewordSource = 'Vendidad 8:6';
@@ -673,7 +764,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.<br><br>Made with CodePen, the GNU Image Manipulation Program, GitHub, Inkscape and Visual Studio Code.';
         displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, David “aniwey” L., Tom Rothamel, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Dave and Anna Davis, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor and W3Schools.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Dave and Anna Davis, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben and W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -719,11 +810,14 @@ function Translate(language, bark = true) {
         displayCentury = 'Siglo';
         displayDecade = 'Década';
         displayYear = 'Año';
+        displayYears = 'Años';
         displaySemester = 'Semestre';
         displaySeason = 'Estación';
         displayMonth = 'Mes';
+        displayMonths = 'Meses';
         displayFortnight = 'Quincena';
         displayWeek = 'Semana';
+        displayWeeks = 'Semanas';
         displayDay = 'Día';
         displayLabelAvailable = 'Disponible';
         displayWheat = 'Trigo';
@@ -740,6 +834,8 @@ function Translate(language, bark = true) {
         displayStone = 'Piedra';
         displayOre = 'Mineral';
         displayCopper = 'Cobre';
+        displayTin = 'Estaño';
+        displayBronze = 'Bronce';
         displayVignerons = 'Viticultores';
         displayArborists = 'Arboristas';
         displayHorticulturalists = 'Horticultores';
@@ -806,6 +902,7 @@ function Translate(language, bark = true) {
         displayLabelMineScout = 'BUSCAR UN SITIO MINO ADECUADO';
         displayLabelMineDig = 'CAVAR MINA';
         displayLabelFoundry = 'COMENZAR UNA FUNDICIÓN DE COBRE';
+        displayLabelBronzeworkers = 'TRAER A LOS TRABAJADORES DEL BRONCE';
         displayLabelBuild4 = 'AÑADIR SEGUNDO PISO';
         displayLabelBuild5 = 'CONSTRUIR MERCADO';
         displayLabelBuild6 = 'AÑADIR TERCER PISO';
@@ -820,6 +917,9 @@ function Translate(language, bark = true) {
         displayLabelBuild15 = 'EXCAVAR ALCANTARILLAS';
         displayLabelBuild16 = 'LEVANTAR PUERTAS DE LA CIUDAD';
         displayLabelBuild17 = 'ESTABLECER MONUMENTO';
+
+        displayLabelTradeRoute = 'ESTABLECER NUEVA RUTA COMERCIAL';
+        displayLabelImportTin = 'DISPONER LA IMPORTACIÓN DE ESTAÑO';
 
         displayStoryFarm0 = 'AHORA PUEDO PROVEER PARA MI FAMILIA';
         displayStoryFarmMildew = 'ACABAS DE RECIBIR UN MENSAJE DEL HOMBRE QUE DIRIGIE EL ALMACÉN DONDE GUARDAS TU TRIGO:<div id="nasirMessage">Los daños en el techo ha dejado entrar agua; el moho ha reclamado el 90% de todo el grano almacenado; mis más sinceras disculpas<br>—Ea-nāṣir</div>';
@@ -845,8 +945,8 @@ function Translate(language, bark = true) {
         displayStoryFarm15 = '«EL MOMENTO DE CAVAR UN POZO ES ANTES DE TENER SED»<br>—ZHU XI<br><br>(Rendimiento Mínimo Por Cosecha +25%)';
         displayStoryFarm16 = 'DIFÍCIL DE CREER QUE TODO ESTO COMENZÓ CON UN ÚNICO PARCHE DE TIERRA HACE ' + year + ' AÑOS. HONESTAMENTE, ES DIFÍCIL INCLUSO RECORDAR CÓMO ERA LA VIDA EN ESE ENTONCES';
         displayStoryFarm17 = 'EL ANTERIOR DUEÑO GARANTIZA SU RENTABILIDAD. ME DICEN QUE LAS DÁTILES ESTARÁN LISTAS AL FINAL DE CADA VERANO Y LOS HIGOS A FINALES DE LA PRIMAVERA. LAS GRANADAS ESTARÁN LISTAS A PRINCIPIOS DEL INVIERNO, LUEGO LAS UVAS DEBERÍAN LLEGAR UNAS SEMANAS MÁS TARDE, PERO SON INCONSTANTE';
-        displayStoryOlives = 'HAN PASADO OCHO LARGOS AÑOS DESDE QUE TÚ HUBIERAS PLANTADO TU OLIVAR. FINALMENTE LOS ÁRBOLES SON MADUROS, CADA RAMA CARGADA DE FRUTOS MADUROS. Y DEBERÍAN LLEGAR A LA MISMA ÉPOCA CADA AÑO A PARTIR DE AHORA';
-        displayStoryNewFarm = 'nueva farm spanish';
+        displayStoryOlives = 'HAN PASADO OCHO LARGOS AÑOS DESDE QUE TÚ HUBIERAS PLANTADO TU OLIVAR. FINALMENTE LOS ÁRBOLES SON MADUROS, CADA RAMA CARGADA DE FRUTOS MADUROS, Y DEBERÍAN LLEGAR A LA MISMA ÉPOCA CADA AÑO A PARTIR DE AHORA';
+        displayStoryNewFarm = '«EL ESTADO NATURAL DE LOS HOMBRES ANTES DE ENTRAR EN LA SOCIEDAD ERA SIMPLEMENTE UNA GUERRA DE TODOS CONTRA TODOS»<BR>—THOMAS HOBBES';
 
         displayStoryWarehouse0 = 'ESTE LUGAR ES ALTAMENTE RECOMENDABLE';
         displayStoryWarehouse1 = '«LO QUE ES COMÚN PARA LA MAYORÍA RECIBE LA MENOR CANTIDAD DE ATENCIÓN»<br>—ARISTÓTELES';
@@ -891,9 +991,10 @@ function Translate(language, bark = true) {
 
         displayStoryFound = '«TENGO HIJOS, TENGO RIQUEZA,» CON TALES PENSAMIENTOS EL TONTO SE TORMENTA. PERO SI NO ERES EL DUEÑO DE TU PROPIO SER, ¿CÓMO PUEDES DECIR QUE LOS HIJOS TE PERTENECEN? ¿O RIQUEZA?<br><br>DHAMMAPADA 5.62';
         displayStoryFoundCopper = '¡UNA PAREJA DE SENDERISTAS EN TU MONTAÑAS HAN DESCUBIERTO PEPITAS DE LO QUE PARECE SER ORICALCO!';
-        displayStoryMineScout = 'TUS EXPLORADORES ENCONTRARON UN VETA RICO EN TUS COLINAS ORIENTAL';
+        displayStoryMineScout = 'TUS EXPLORADORES ENCONTRARON UN VETA RICO EN TUS COLINAS DEL NORTE';
         displayStoryMineDig = 'LOS MINERALES TIENEN VIDA PROPIA AL IGUAL QUE LOS VEGETALES, Y LOS ANIMALES Y LOS PÁJAROS, Y LOS SERES HUMANOS<br><br>PHÁP CHÁNH TRUYỀN, PARTE 5';
         displayStoryFoundry = '«EL ‘HOLOCENO’ HA TERMINADO. EL JARDÍN DEL EDÉN YA NO EXISTE. HEMOS CAMBIADO TANTO EL MUNDO QUE LOS CIENTÍFICOS DICEN QUE ESTAMOS EN UNA NUEVA ERA GEOLÓGICA: EL ‘ANTROPOCENO’. LA ERA DE LA HUMANIDAD. DEBEMOS IR MÁS ALLÁ DE LA CULPA Y PONERNOS A LA OBRA PRÁCTICA»<br>—SIR DAVID FREDERICK ATTENBOROUGH';
+        displayStoryBronzeworkers = 'CON ARMAS Y ARMADURAS DE BRONCE BRILLANTE PODEMOS POR FIN MOSTRARLES A ESOS FRIGIOS PRESUMIDO EXACTAMENTE QUÉ ES QUÉ';
         displayStoryTribute = 'EL JEFE MILITAR REY LOCAL FINALMENTE HA OÍDO HABLAR DE TI. SU EMISARIO TE DICE: «POR SUPUESTO, SE DEBEN IMPONER ARANCELES»';
 
         displayStoryResidenceFirstVisit = 'NO HAY LUGAR COMO EL HOGAR: TU CAMPAMENTO, ANÓNIMO ENTRE LOS CIENTOS DE OTROS EXACTAMENTE COMO ÉL QUE SE ENCUENTRAN AQUÍ, EN ESTE VALLE ANGOSTO Y ÁRIDO, DONDE ALQUILAS ESTE TROZO DE TIERRA POR UN PRECIO EXORBITANTE';
@@ -901,17 +1002,18 @@ function Translate(language, bark = true) {
         displayStoryResidence01 = 'POR FIN UN POCO DE ESPACIO PARA ESTIRAR MIS PIERNAS';
         displayStoryResidence02 = 'SUPERFICIE MÁS QUE SUFICIENTE EN ESTE PRADERA PARA UNA FINCA MODESTA, CREO QUE';
         displayStoryResidence03 = 'ALEJA DE MÍ LA FALSEDAD Y LAS PALABRAS ENGAÑOSAS. NO ME DES POBREZA NI RIQUEZAS; ALIMÉNTAME SOLO EL PAN QUE ES MI PORCIÓN<br><br>PROVERBIOS 30:8<br><br>(Trabajadores Aceptarán ' + loavesPaymentAmount + '<span class="icon Loaves inlineIcon"></span>/Semana)';;
-        displayStoryResidence04 = '';
-        displayStoryResidence05 = '';
-        displayStoryResidence06 = '';
-        displayStoryResidence07 = '';
-        displayStoryResidence08 = '';
-        displayStoryResidence09 = '';
-        displayStoryResidence10 = '';
-        displayStoryResidence11 = '';
-        displayStoryResidence12 = '';
-        displayStoryResidence13 = '';
+        displayStoryResidence04 = 'ESOS SACERDOTES FRUTALOS NO PUEDEN TENER SUFICIENTE DE ESTAS COSAS';
+        displayStoryResidence05 = '¿DE QUÉ SIRVE GANARTELO SI NO VAS A DISFRUTARLO?';
+        displayStoryResidence06 = '«LA GENTE DEL GRAN PALACIO, PONIÉNDOSE BUFANDAS COMO CODORNICES JUNTANDO SUS COLAS COMO LAVANDERAS, Y REUNIDA COMO LOS GORRIONEROS DE JARDÍN, TAL VEZ HOY ESTÉN VERDADERAMENTE REMOJOSOS EN LICOR,»<br><br>EL KOJIKI, VOLUMEN III, SECCIÓN CLX.—EMPERADOR YŪ-RIYAKU (PARTE XI.—LA HOJA EN LA COPA)';
+        displayStoryResidence07 = 'NOÉ, UN HOMBRE DE LA TIERRA, FUE EL PRIMERO EN PLANTAR UNA VIÑA. Y BEBIÓ DEL VINO, Y SE EMBRIAGÓ, Y SE DURMIÓ DESCUBIERTO DENTRO DE SU TIENDA. CAM, EL PADRE DE CANAÁN, VIO A SU PADRE DESNUDO, LUEGO SALIO Y SE LO CONTO A SUS DOS HERMANOS<br><br>GÉNESIS 9:20-22'; // alégrate de que esto no haya sido Génesis 19:30-38 😮
+        displayStoryResidence08 = '«EL JARABE DE DÁTILES ES UN EDULCORANTE NATURAL QUE TIENE UNA RIQUEZA MARAVILLOSA Y UNA PROFUNDIDAD MELAZA; LO ROCIO SOBRE GACHAS DE SÉMOLA»<br>—YOTAM OTTOLENGHI';
+        displayStoryResidence09 = 'TE LLEVARÍA DE LA MANO A LA CASA DONDE ME CRIÓ MI MADRE. ELLA ME ENSEÑÓ TODO LO QUE SÉ. TE DARÍA A BEBER VINO CON ESPECIAS, EL JUGO DE MIS GRANADAS<br><br>CANTAR DE LOS CANTARES 8:2';
+        displayStoryResidence10 = '«NADA GRANDE SE CREA DE REPENTE, COMO TAMPOCO LO HACE UN RACIMO DE UVAS O UN HIGO. SI ME DICES QUE DESEAS UN HIGO, TE RESPONDO QUE DEBE HABER TIEMPO. DEJA QUE PRIMERO FLOREZCA, LUEGO DÉ FRUTO, LUEGO MADURE»<br>—EPICTETUS';
+        displayStoryResidence11 = 'ES UNA SUERTE ESTOY SANO DE MENTE DESPUÉS DE TODO LO QUE HE PASADO<br>NO ME PUEDO QUEJAR, PERO A VECES TODAVÍA LO HAGO<br>LA VIDA HA SIDO BUENA CONMIGO HASTA AHORA<br>—JOE WALSH';
+        displayStoryResidence12 = '«SI LOS CABALLOS PUDIERAN SOSTENER UN LÁPIZ DIBUJARÍAN A SUS DIOSES COMO CABALLOS»<br>—XENOPHANES';
+        displayStoryResidence13 = '«SI QUIERES DESTRUIR TOTALMENTE A UN HOMBRE, DALE TODO LO QUE SIEMPRE HA DESEADO»<br>—BOULET';
 
+        displayStoryVillageFirstVisit = 'A PARTIR DE AHORA, VAMOS A HACER LAS COSAS A *MI* MANERA';
         displayStoryVillage0 = 'NECESITARÁ MADERA PARA LA FRAGUA';
         displayStoryVillage1 = 'AHORA PODEMOS CONSTRUIR';
         displayStoryVillage2 = 'DEBEMOS TENER ALGO DE LEY Y ORDEN';
@@ -925,11 +1027,21 @@ function Translate(language, bark = true) {
         displayStoryVillage10 = 'LOS CABALLOS IMPULSAN EL PROGRESO';
         displayStoryVillage11 = 'LOS VERDADEROS SIERVOS DE DIOS SON LOS QUE VIAJAN POR LA TIERRA CON GRACIA, Y CUANDO LOS IGNORANTES SE DIRIGEN A LES GROSERAMENTE, RESPONDEN CON PALABRAS DE PAZ<br><br>’AL-FURQĀN 63';
         displayStoryVillage12 = '«SÓLO DESEAN DOS COSAS, PAN Y CIRCOS»<br>—JUVENAL';
-        displayStoryVillage13 = '«CONTRAER NUEVAS DEUDAS NO ES LA MANERA DE PAGAR LAS VIEJAS»<br>—GEORGE WASHINGTON';
+        displayStoryVillage13 = '«CONTRAER NUEVAS DEUDAS NO ES LA MANERA DE PAGAR LAS VIEJAS»<br>—GEORGE WASHINGTON<br><br>(Financiamiento para Licencias de Importación Ya Disponible)';
         displayStoryVillage14 = 'TIENES DERECHO A TRABAJAR, PERO NO TIENES DERECHO A LOS FRUTOS DE TU TRABAJO. NUNCA CREAS QUE ERES LA CAUSA DE LOS RESULTADOS DE TUS ELECCIONES. TRABAJAR DURO Y SER EQUILIBRIO EN EL ÉXITO Y EL FRACASO. ... LOS QUE BUSCAN DISFRUTAR LOS FRUTOS DE SUS OBRAS SON MISERABLES.<br><br>BHAGAVAD-GĪTĀ 2.47-49';
         displayStoryVillage15 = 'LA LIMPIEZA ES DIVINO';
         displayStoryVillage16 = 'ODIAN AL QUE SERMONA EN LA PUERTA, Y ABORRECEN AL QUE HABLA LA VERDAD<br><br>AMÓS 5:10';
         displayStoryVillage17 = 'LA PLACA DE BRONCE SOBRE LA BASE DE MÁRMOL ROSA DICE:<br><br>≈ LAS 8 VIRTUDES ≈<br><br>♠<br>• HONESTIDAD •<br>DECIR LA VERDAD<br>♠<br>• HONOR •<br>HACER LO CORRECTO<br>♠<br>• VALOR •<br>MANTENERSE CONTRA LA INJUSTICIA<br>♠<br>• SACRIFICIO •<br>COMPARTE TUS BENDICIONES<br>♠<br>• COMPASIÓN •<br>SER AMABLE CON LOS DÉBILES<br>♠<br>• JUSTICIA •<br>SER JUSTO CON TODOS<br>♠<br>• ESPIRITUALIDAD •<br>ESCUCHA LA LUZ<br>♠<br>• HUMILDAD •<br>RESISTIR ORGULLO<br>♣';
+
+        displayStoryPortFirstVisit = 'USTED LLEGÓ A ESTE PAÍS POR ESTOS MISMOS MUELLES; ENTONCES SOLO ERA UN NIÑO, UN EXTRAÑO EN UNA TIERRA EXTRAÑA. POR SUPUESTO, SUS CIRCUNSTANCIAS HAN MEJORADO SIGNIFICATIVAMENTE DESDE AQUELLOS DÍAS. HOY LO HAN RECIBIDO AQUÍ COMO UN CLIENTE POTENCIAL DE GRAN IMPORTANCIA Y LO HAN CONDUCIDO DIRECTAMENTE A LA BIEN EQUIPADA OFICINA DEL CAPATAZ. SU ASISTENTE LE OFRECE UNA BANDEJA DE PELTRE CON FILIGRANAS ADORNADAS LLENA DE DÁTILES CONFITADOS';
+        displayStoryPort00 = 'LOS ATENIENSES TIENEN UNA NECESIDAD URGENTE DE ACEITE SAGRADO Y ESTÁN DISPUESTOS A PAGAR GENIALMENTE';
+        displayStoryPort01 = '«ESTE... ES GRANO; QUE CUALQUIER TONTO PUEDE COMER, PERO PARA EL CUAL EL SEÑOR PREVIO UN MEDIO DE CONSUMO MÁS DIVINO. ALABEMOS A NUESTRO CREADOR, Y GLORIA A SU BENDICIÓN, APRENDIENDO SOBRE: LA CERVEZA»<br>—FRAILE TUCK<br><br>ROBIN HOOD: EL PRÍNCIPE DE LOS LADRONES (WARNER BROS. 1991)';
+        displayStoryPort02 = '«CUANDO EL DIABLO LES DIGA, “NO BEBAN,” RESPONDAN, “BEBERÉ, TODO LO QUE QUIERA, SOLO PORQUE ME DIJISTE QUE NO LO HICIERA.” HAY QUE HACER SIEMPRE LO QUE SATANÁS PROHÍBE»<br>—MARTÍN LUTERO';
+        displayStoryPort03 = 'MUCHACHO, TODAVÍA NO HE CONOCIDO A UN EGIPCIO AL QUE NO LE ENCANTEN LOS DULCES';
+        displayStoryPort04 = 'EL JUGO FRESCO NO DURA MUCHO TIEMPO; AFORTUNADAMENTE EL CANCILLER ECONÓMICO NOS HA PRESENTADO A UN COMERCIANTE EN JERUSALÉN EN QUIEN PODEMOS CONFIAR Y QUE ESTÁ HAMBRIENTO DE LO QUE PODAMOS SUMINISTRARLE';
+        displayStoryPort05 = '¡POR FIN TE HAS ENCONTRADO EN BUENA POSICIÓN CON ESTOS ESCALOFRÍOS COMERCIANTES; EL GREMIO FINALMENTE TE HA CONCEDIDO UNA <span class="icon Decree inlineIcon"></span> <span id="writ">ORDEN DE PERMISO</span> PARA IMPORTAR ESTAÑO!';
+        displayStoryPort06 = 'A LAS AMAS DE CASA LES ENCANTAN SUS ADORNOS Y CHUCHERÍAS';
+        displayStoryPort07 = 'CON ESTA ESTAÑO, LOS ARTESANOS PUEDEN FABRICAR EN MASA ESA ÑAQUE RIDÍCULA Y LLAMATIVA QUE TIENEN UN PRECIO TAN ALTO EN ROMA';
 
         displayNamePlayer = '«¿Cómo te llamas, ciudadano?»';
 
@@ -961,6 +1073,8 @@ function Translate(language, bark = true) {
         displayRent = 'Alquiler';
         displayRealEstate = 'Inmueble';
         displayMarket = 'Minorista';
+        displayWholesale = 'Al Por Mayor';
+        displayCommodities = 'Materias Primas';
         displayHusbandry = 'Ganadería';
         displayConjunction = 'Conjunción';
         displayTourism = 'Turismo';
@@ -1005,6 +1119,29 @@ function Translate(language, bark = true) {
         displayGreenhouse = 'Invernadero';
         displayAtelier = 'Atelier';
 
+        displayPortName = 'El Puerto de ʿAkkō';
+        displayPortSubtitle = 'Puerta de Entrada Comercial a Chipre y el Levante';
+        displayActiveRoutes = 'Rutas Comerciales de Exportación Activas Actualmente';
+        displayActiveLanes = 'Vías de Envío de Importación Activas Actualmente';
+        displayContract = 'Contrato:';
+        displayDestination = 'Destino:';
+        displaySource = 'Fuente:';
+        displayAthens = 'Atenas';
+        displayDamascus = 'Damasco';
+        displayRhodes = 'Rodas';
+        displayAlexandria = 'Alejandría';
+        displayJerusalem = 'Jerusalén';
+        displayMemphis = 'Menfis';
+        displayRome = 'Roma';
+        displayTartessos = 'Tartesos';
+        displayDuration = 'Intervalo:';
+        displayVoyage = 'Viaje';
+        displayShipped = 'Enviado:';
+        displayImported = 'Importado:';
+        displayProfit = 'Lucro:';
+        displayCost = 'Costó:';
+        displayNextDelivery = 'Próxima Entrega En:';
+
         displayForewordA = 'Es el año 200 a.C. y eres un humilde aparcero tartésico que se gana la vida modestamente bajo el brutal sol del Mediterráneo en la Galilea palestina. Desde el amanecer hasta el anochecer trabajas la implacable tierra calcárea sin nada más que tus propias manos y un palo afilado.';
         displayForewordScripture = '«¡O Creador del mundo material, O Santo! ¿A qué distancia del fuego? ¿A qué distancia del agua? ¿A qué distancia de los manojos consagrados de baresma? ¿A qué distancia de los fieles?»';
         displayForewordSource = 'Vendidad 8:6';
@@ -1016,7 +1153,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.<br><br>Hecho con CodePen, el GNU Image Manipulation Program, GitHub, Inkscape y Visual Studio Code.';
         displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, David “aniwey” L., Tom Rothamel, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Dave y Anna Davis, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor y W3Schools.';
+        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Dave y Anna Davis, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben y W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';

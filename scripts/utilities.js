@@ -111,8 +111,6 @@ function FindPlot(typeSought, crop) {
     let col = -1;
     let rowCount = farmSize[1];
 
-    if (crop == 'wheat' && rowCount > 6) { rowCount = 6; }
-
     if (crop == 'barley') {
         if (rowCount > 6) {
             cell[0] += 6;
@@ -124,6 +122,15 @@ function FindPlot(typeSought, crop) {
     for (let i = 0; i < rowCount; i++) {
         cell[0] += 1;
         cell[1] = -1;
+        if (crop == 'wheat' && cell[0] == 6) {
+            if (rowCount > 9) {
+                cell[0] = 9;
+                rowCount -= 3;
+            }
+            else {
+                return { row, col };
+            }
+        }
         for (let i = 0; i < farmSize[0]; i++) {
             cell[1] += 1;
             if (arrayFarmPlots[cell[0]][cell[1]] == typeSought) {

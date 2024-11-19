@@ -51,16 +51,19 @@ function GameTurn() {
             }
         }
     }
+
     if (week % 4 == 0) {
         SetMarketPrice();
         if (beadsSpawn) { MakeBeads(); }
         if (trophiesSpawn) { HostGladiatorGames(); }
     }
+
     if (week % 2 == 0 && trophiesSpawn) {
         const tourismTotalIncome = tourismValue * trophiesCount;
         asCount += tourismTotalIncome;
         tourismLifetimeProfit += tourismTotalIncome;
     }
+
     if (horsesSpawn) {
         GrowHorses();
         if (cityWalls) {
@@ -88,8 +91,11 @@ function GameTurn() {
             }
         }
     }
+
     if (horsesCount > 0) { FeedHorses(); }
+
     if (scrollsSpawn) { ScribeWisdom(); }
+
     if (ratsSpawn) { BreedRats(); }
 
     if (farmStage == 1 && bushelCount[0] > 88 && !player.hasMildewed) {
@@ -114,13 +120,19 @@ function GameTurn() {
         if (week == 1 && year % 10 == 0) { relicCount++; }
     }
 
-    WorkshopProduction();
+    if (player.canExport) { Shipping(); }
+
+    if (player.hasBakery) { WorkshopProduction(); }
+
+    if (player.hasHiredBronzeworkers) { ForgeBronze(); }
 
     UpdateDisplay();
+
     if (gameSpeed == 'standard' && player.likesAnimations) {
         globalAnimationFrame = 1;
         setTimeout(AnimateCanvases, animationInterval);
     }
+
     if (player.likesRecords) {
         snapshotThisTurn = CollateGameStateReport();
         //reportOutputToWriteToDiskForDataAnalysis = snapshotThisTurn - snapshotLastTurn;
@@ -207,6 +219,141 @@ function WorkshopProduction() {
             residenceIngredientInStockCount[ingredient] -= residenceIngredientsIn[ingredient];
             residenceInStockCount[ingredient] += residenceProductOut[ingredient];
             residenceProducedCount[ingredient] += residenceProductOut[ingredient];
+        }
+    }
+}
+
+
+
+function ForgeBronze() {
+    bronzeworkCountdownTimer--;
+    if (bronzeworkCountdownTimer == 0) {
+        bronzeworkCountdownTimer = bronzeworkCountdownTimerMax;
+        if (ingotsCopperCount >= bronzeCopperNeed && ingotsTinCount >= bronzeTinNeed) {
+            ingotsCopperCount -= bronzeCopperNeed;
+            mountainSpentCount[2] += bronzeCopperNeed;
+            ingotsTinCount -= bronzeTinNeed;
+            mountainSpentCount[3] += bronzeTinNeed;
+            const bounty = bronzeCopperNeed + bronzeTinNeed;
+            ingotsBronzeCount += bounty;
+            mountainProducedCount[4] += bounty;
+        }
+    }
+    PayWorkerGroup(metallurgistsHired, 9);
+}
+
+
+
+function Shipping() {
+    const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / bushelBulkCount);
+
+    shipmentTimersCurrent[0]--;
+    shipmentTimersCurrent[1]--;
+    shipmentTimersCurrent[2]--;
+    shipmentTimersCurrent[3]--;
+    shipmentTimersCurrent[4]--;
+    shipmentTimersCurrent[5]--;
+    shipmentTimersCurrent[6]--;
+    shipmentTimersCurrent[7]--;
+
+    if (shipmentTimersCurrent[0] == 0) {
+        shipmentTimersCurrent[0] = shipmentTimersDefault[0];
+        if (player.canExportOil) {
+            const currentDollarValueOfUnit = (wheatValuePerUnit[0] * currentDollarPriceOfOneWheat) * valueFactor[0];
+            const bounty = currentDollarValueOfUnit * residenceInStockCount[1];
+            residenceSpentCount[1] += residenceInStockCount[1];
+            residenceInStockCount[1] = 0;
+            asCount += bounty;
+            shipmentProfits[0] += bounty;
+        }
+    }
+
+    if (shipmentTimersCurrent[1] == 0) {
+        shipmentTimersCurrent[1] = shipmentTimersDefault[1];
+        if (player.canExportBeer) {
+            const currentDollarValueOfUnit = (wheatValuePerUnit[1] * currentDollarPriceOfOneWheat) * valueFactor[1];
+            const bounty = currentDollarValueOfUnit * residenceInStockCount[2];
+            residenceSpentCount[2] += residenceInStockCount[2];
+            residenceInStockCount[2] = 0;
+            asCount += bounty;
+            shipmentProfits[1] += bounty;
+        }
+    }
+
+    if (shipmentTimersCurrent[2] == 0) {
+        shipmentTimersCurrent[2] = shipmentTimersDefault[2];
+        if (player.canExportWine) {
+            const currentDollarValueOfUnit = (wheatValuePerUnit[2] * currentDollarPriceOfOneWheat) * valueFactor[2];
+            const bounty = currentDollarValueOfUnit * residenceInStockCount[3];
+            residenceSpentCount[3] += residenceInStockCount[3];
+            residenceInStockCount[3] = 0;
+            asCount += bounty;
+            shipmentProfits[2] += bounty;
+        }
+    }
+
+    if (shipmentTimersCurrent[3] == 0) {
+        shipmentTimersCurrent[3] = shipmentTimersDefault[3];
+        if (player.canExportSyrup) {
+            const currentDollarValueOfUnit = (wheatValuePerUnit[3] * currentDollarPriceOfOneWheat) * valueFactor[3];
+            const bounty = currentDollarValueOfUnit * residenceInStockCount[4];
+            residenceSpentCount[4] += residenceInStockCount[4];
+            residenceInStockCount[4] = 0;
+            asCount += bounty;
+            shipmentProfits[3] += bounty;
+        }
+    }
+
+    if (shipmentTimersCurrent[4] == 0) {
+        shipmentTimersCurrent[4] = shipmentTimersDefault[4];
+        if (player.canExportJuice) {
+            const currentDollarValueOfUnit = (wheatValuePerUnit[4] * currentDollarPriceOfOneWheat) * valueFactor[4];
+            const bounty = currentDollarValueOfUnit * residenceInStockCount[5];
+            residenceSpentCount[5] += residenceInStockCount[5];
+            residenceInStockCount[5] = 0;
+            asCount += bounty;
+            shipmentProfits[4] += bounty;
+        }
+    }
+
+    if (shipmentTimersCurrent[5] == 0) {
+        shipmentTimersCurrent[5] = shipmentTimersDefault[5];
+        if (player.canExportFigs) {
+            const currentDollarValueOfUnit = (wheatValuePerUnit[5] * currentDollarPriceOfOneWheat) * valueFactor[5];
+            const bounty = currentDollarValueOfUnit * residenceInStockCount[6];
+            residenceSpentCount[6] += residenceInStockCount[6];
+            residenceInStockCount[6] = 0;
+            asCount += bounty;
+            shipmentProfits[5] += bounty;
+        }
+    }
+
+    if (shipmentTimersCurrent[6] == 0) {
+        shipmentTimersCurrent[6] = shipmentTimersDefault[6];
+        if (player.canExportTrinkets) {
+            const bounty = residenceInStockCount[7] * trinketValue;
+            residenceSpentCount[7] += residenceInStockCount[7];
+            residenceInStockCount[7] = 0;
+            asCount += bounty;
+            shipmentProfits[6] += bounty;
+        }
+    }
+
+    if (shipmentTimersCurrent[7] == 0) {
+        shipmentTimersCurrent[7] = shipmentTimersDefault[7];
+        if (player.canImportTin && asCount >= importCost[0]) {
+            asCount -= importCost[0];
+            asSpent += importCost[0];
+            shipmentCosts[0] += importCost[0];
+            let bounty = importAmount[0];
+            mountainProducedCount[3] += bounty;
+            if (player.hasAtelier) {
+                const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[7]);
+                residenceIngredientInStockCount[7] += workshopShare;
+                residenceIngredientConsumedCount[7] += workshopShare;
+                bounty = bounty - workshopShare;
+            }
+            ingotsTinCount += bounty;
         }
     }
 }
