@@ -435,7 +435,7 @@ let loavesPaymentAmount = 14;
 
 // 0. Loaves 🥖, 1. Oil 🪔, 2. Beer 🍺, 3. Wine 🍷, 4. Syrup 🍯, 5. Juice 🧃, 6. Fruit Leather (Sun-Dried Fig) 🫐, 7. Trinkets 💍, 8. Gems 💎
 const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.8];
-const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1, 1,];
+const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1, 100,];
 const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5, 1,];
 const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
