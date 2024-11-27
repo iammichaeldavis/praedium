@@ -47,6 +47,7 @@ buttonGoToPraedium.addEventListener('click', function () { GoToPraedium(); });
 buttonGoToPort.addEventListener('click', function () { GoToPort(); });
 buttonGoToTownshipFromPort.addEventListener('click', function () { GoToTownship(); });
 
+buttonVisitOracle.addEventListener('click', function () { ConsultOracle(); });
 buttonBuild.addEventListener('click', function () { Build(); });
 
 buttonEstablishTradeRoute.addEventListener('click', function () { EstablishTradeRoute(); });
@@ -87,6 +88,7 @@ document.body.onkeyup = function (e) {
             ZeroArray(forestProducedCount);
             ZeroArray(forestSpentCount);
             stoneCount = 0;
+            crystalsCount = 0;
             oreCopperCount = 0;
             ingotsCopperCount = 0;
             ingotsTinCount = 0;
@@ -110,12 +112,18 @@ document.body.onkeyup = function (e) {
             tourismLifetimeProfit = 0;
             scrollsCount = 0;
             militaryLifetimeCost = 0;
+            medicalLifetimeCost = 0;
             pilgrimsCount = 0;
             pilgrimsLifetimeCount = 0;
             pilgrimLifetimeIncome = 0;
             relicCount = 0;
+            ghostsCount = 0;
             marketLifetimeRevenue = 0;
             tributeLifetimePaid = 0;
+            ZeroArray(shipmentProfits);
+            ZeroArray(shipmentCosts);
+            interestLifetimeCollected = 0;
+            ratsCount = 2;
         }
 
         if (e.key == '`') { CollateGameStateReport(true); }
@@ -130,6 +138,7 @@ document.body.onkeyup = function (e) {
 
         function AdvanceGame() {
             // add mine improvements here
+            // add port upgrades here
             if (player.canRentWarehouse) { RentWarehouse(); }
             else if (player.canBuyForest) { BuyForest(); }
             else if (farmStage == 11 && !player.canLog) { ForestEvents(); }
@@ -172,25 +181,28 @@ document.body.onkeyup = function (e) {
         if (e.key == 'b' && player.canSell && player.isAt == 'Township') { GoToPort(); }
 
         if (e.key == 'G') { // 🚨🚨🚨 USE WITH CAUTION!!! ONLY WORKS AT GAME START AND IN *EXACT* SEQUENCE 🚨🚨🚨
-            if (!player.canPlant) {
+            if (debugCounter == 0) {
                 StartTime();
                 StartTime();
                 PlotTill();
                 PlotPlant();
                 PlotWater();
+                debugCounter++;
             }
-            else if (!player.canBuyLand && player.likesStory) {
+            else if (debugCounter == 1) {
                 PlotHarvest();
                 PlotTill();
                 PlotPlant();
                 PlotWater();
+                debugCounter++;
             }
-            else if (player.likesStory) {
+            else if (debugCounter == 2) {
                 PlotHarvest();
                 StartTime();
                 player.likesStory = false;
+                debugCounter++;
             }
-            else if (player.canRentWarehouse) {
+            else if (debugCounter == 3) {
                 setValues(1000000000);
                 for (let i = 0; i < 25; i++) { AdvanceGame(); }
                 HireAccountant();
@@ -198,10 +210,17 @@ document.body.onkeyup = function (e) {
                 AdvanceGame();
                 setValues(1000000000);
                 PauseTime();
+                debugCounter++;
             }
-            else if (villageStage == 0) {
-                for (let i = 0; i < (18 + 14); i++) { AdvanceGame(); }
-                setValues(58008);
+            else if (debugCounter == 4) {
+                for (let i = 0; i < (35); i++) { AdvanceGame(); }
+                setValues(5800858008);
+                debugCounter++;
+            }
+            else if (debugCounter == 5) {
+                for (let i = 0; i < (14); i++) { AdvanceGame(); }
+                setValues(5800858008);
+                debugCounter++;
             }
         }
         if (e.key == 'g') {
@@ -215,12 +234,14 @@ document.body.onkeyup = function (e) {
             logsCount = 100000;
             boardsCount = 100000;
             stoneCount = 100000;
+            crystalsCount = 10000;
+            residenceInStockCount[8] = 10000;
             oreCopperCount = 10000;
             ingotsCopperCount = 10000;
             ingotsTinCount = 10000;
             ingotsBronzeCount = 10000;
             asCount = 1000000000;
-            horsesCount = 10;
+            horsesCount = 100;
             beadsCount = 10000;
             trophiesCount = 100;
             scrollsCount = 1000;
@@ -271,6 +292,8 @@ document.body.onkeyup = function (e) {
                 logsCount = amount;
                 boardsCount = amount;
                 stoneCount = amount;
+                crystalsCount = amount;
+                residenceInStockCount[8] = amount;
                 oreCopperCount = amount;
                 ingotsCopperCount = amount;
                 ingotsTinCount = amount;
@@ -280,6 +303,16 @@ document.body.onkeyup = function (e) {
                 beadsCount = amount;
                 trophiesCount = amount;
                 scrollsCount = amount;
+                ghostsCount = amount;
+                relicCount = amount;
+                residenceInStockCount[0] = amount;
+                residenceInStockCount[1] = amount;
+                residenceInStockCount[2] = amount;
+                residenceInStockCount[3] = amount;
+                residenceInStockCount[4] = amount;
+                residenceInStockCount[5] = amount;
+                residenceInStockCount[6] = amount;
+                residenceInStockCount[7] = amount;
             }
             else if (e.altKey) {
                 bushelCount[0] -= amount;
@@ -292,6 +325,8 @@ document.body.onkeyup = function (e) {
                 logsCount -= amount;
                 boardsCount -= amount;
                 stoneCount -= amount;
+                crystalsCount -= amount;
+                residenceInStockCount[8] -= amount;
                 oreCopperCount -= amount;
                 ingotsCopperCount -= amount;
                 ingotsTinCount -= amount;
@@ -301,6 +336,16 @@ document.body.onkeyup = function (e) {
                 beadsCount -= amount;
                 trophiesCount -= amount;
                 scrollsCount -= amount;
+                ghostsCount -= amount;
+                relicCount -= amount;
+                residenceInStockCount[0] -= amount;
+                residenceInStockCount[1] -= amount;
+                residenceInStockCount[2] -= amount;
+                residenceInStockCount[3] -= amount;
+                residenceInStockCount[4] -= amount;
+                residenceInStockCount[5] -= amount;
+                residenceInStockCount[6] -= amount;
+                residenceInStockCount[7] -= amount;
             }
             else {
                 bushelCount[0] += amount;
@@ -313,6 +358,8 @@ document.body.onkeyup = function (e) {
                 logsCount += amount;
                 boardsCount += amount;
                 stoneCount += amount;
+                crystalsCount += amount;
+                residenceInStockCount[8] += amount;
                 oreCopperCount += amount;
                 ingotsCopperCount += amount;
                 ingotsTinCount += amount;
@@ -322,6 +369,16 @@ document.body.onkeyup = function (e) {
                 beadsCount += amount;
                 trophiesCount += amount;
                 scrollsCount += amount;
+                ghostsCount += amount;
+                relicCount += amount;
+                residenceInStockCount[0] += amount;
+                residenceInStockCount[1] += amount;
+                residenceInStockCount[2] += amount;
+                residenceInStockCount[3] += amount;
+                residenceInStockCount[4] += amount;
+                residenceInStockCount[5] += amount;
+                residenceInStockCount[6] += amount;
+                residenceInStockCount[7] += amount;
             }
         }
 
@@ -913,7 +970,13 @@ function MountainEvents() {
         if (player.likesStory) { GameEvent(displayStoryBronzeworkers); }
         metallurgistsHired += 4;
         player.seesMountainButton = false;
+        player.canHireBronzeworkers = false;
         player.hasHiredBronzeworkers = true;
+    }
+    else if (player.hasFoundCrystalEvidence && !player.hasHiredGemcutters) {
+        if (player.likesStory) { GameEvent(displayStoryCrystal); }
+        player.seesMountainButton = false;
+        player.hasHiredGemcutters = true;
     }
     UpdateDisplay();
 }
@@ -1262,8 +1325,69 @@ function GoToPort() {
 
 
 
+function ConsultOracle() {
+    GameEvent(displayRandomWisdomsDisplay[revealedWisdom]);
+    revealedWisdom++;
+    if (revealedWisdom == displayRandomWisdomsDisplay.length) {
+        if (!player.hasAllWisdom) {
+            player.hasAllWisdom = true;
+            Achievement();
+        }
+        revealedWisdom = 0;
+    }
+}
+
+
+
 function Build() {
-    if (villageStage == 0 && bushelCount[0] > priceBuild0[0] && logsCount >= priceBuild0[1] && boardsCount >= priceBuild0[2] && stoneCount >= priceBuild0[3]) {
+    if (villageStage == -5 && bushelCount[0] > priceBuildNEG5) {
+        if (player.likesStory) { GameEvent(displayStoryVillageNEG5); }
+        villageImage.src = 'bitmaps/villageNEG04.png';
+        villageStage++;
+        bushelCount[0] -= priceBuildNEG5;
+        spentCount[0] += priceBuildNEG5;
+    }
+    else if (villageStage == -4 && bushelCount[0] > priceBuildNEG4[0] && residenceInStockCount[1] >= priceBuildNEG4[1] && bushelCount[5] >= priceBuildNEG4[2] && boardsCount >= priceBuildNEG4[3] && stoneCount >= priceBuildNEG4[4]) {
+        if (player.likesStory) { GameEvent(displayStoryVillageNEG4); }
+        villageImage.src = 'bitmaps/villageNEG03.png';
+        villageStage++;
+        bushelCount[0] -= priceBuildNEG4[0];
+        spentCount[0] += priceBuildNEG4[0];
+        residenceInStockCount[1] -= priceBuildNEG4[1];
+        residenceSpentCount[1] += priceBuildNEG4[1];
+        bushelCount[5] -= priceBuildNEG4[2];
+        spentCount[5] += priceBuildNEG4[2];
+        boardsCount -= priceBuildNEG4[3];
+        forestSpentCount[1] += priceBuildNEG4[3];
+        stoneCount -= priceBuildNEG4[4];
+        mountainSpentCount[0] += priceBuildNEG4[4];
+        estDate[0] = week;
+        estDate[1] = year + yearAtStartHebrew;
+    }
+    else if (villageStage == -3 && bushelCount[0] > priceBuildNEG3) {
+        if (player.likesStory) { GameEvent(displayStoryVillageNEG3); }
+        villageImage.src = 'bitmaps/villageNEG02.png';
+        villageStage++;
+        bushelCount[0] -= priceBuildNEG3;
+        spentCount[0] += priceBuildNEG3;
+    }
+    else if (villageStage == -2 && bushelCount[0] > priceBuildNEG2) {
+        if (player.likesStory) { GameEvent(displayStoryVillageNEG2); }
+        villageImage.src = 'bitmaps/villageNEG01.png';
+        villageStage++;
+        bushelCount[0] -= priceBuildNEG2;
+        spentCount[0] += priceBuildNEG2;
+    }
+    else if (villageStage == -1 && bushelCount[0] > priceBuildNEG1[0] && stoneCount >= priceBuildNEG1[1]) {
+        if (player.likesStory) { GameEvent(displayStoryVillageNEG1); }
+        villageImage.src = 'bitmaps/village00.png';
+        villageStage++;
+        bushelCount[0] -= priceBuildNEG1[0];
+        spentCount[0] += priceBuildNEG1[0];
+        stoneCount -= priceBuildNEG1[1];
+        mountainSpentCount[0] += priceBuildNEG1[1];
+    }
+    else if (villageStage == 0 && bushelCount[0] > priceBuild0[0] && logsCount >= priceBuild0[1] && boardsCount >= priceBuild0[2] && stoneCount >= priceBuild0[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage0); }
         villageImage.src = 'bitmaps/village01.png';
         villageStage += 1;
@@ -1295,9 +1419,6 @@ function Build() {
         spentCount[0] += priceBuild2[0];
         stoneCount -= priceBuild2[1];
         mountainSpentCount[0] += priceBuild2[1];
-
-        estDate[0] = week;
-        estDate[1] = year + yearAtStartHebrew;
     }
     else if (villageStage == 3 && bushelCount[0] > priceBuild3[0] && boardsCount >= priceBuild3[1] && stoneCount >= priceBuild3[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage3); }
@@ -1513,10 +1634,12 @@ function Build() {
         rentPrice += 1;
         tourismValue += 8;
         taxesValue += 2;
+        interestRate += 0.0001;
         scrollsSpawn = true;
     }
     else if (villageStage == 15 && asCount >= priceBuild15[0] && stoneCount >= priceBuild15[1]) {
         if (player.likesStory) { GameEvent(displayStoryVillage15); }
+        villageImage.src = 'bitmaps/village16.png';
         villageStage += 1;
         asCount -= priceBuild15[0];
         asSpent += priceBuild15[0];
@@ -1528,12 +1651,13 @@ function Build() {
         taxesValue += 28;
         actualBushelPrice -= 50;
         SetMarketPrice();
+        interestRate += 0.0012;
         ratsSpawn = true;
     }
     else if (villageStage == 16 && asCount >= priceBuild16[0] && bushelCount[1] > priceBuild16[1] && boardsCount >= priceBuild16[2] && stoneCount >= priceBuild16[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage16); }
         villageImage.src = 'bitmaps/village17.png';
-        villageStage += 1;
+        villageStage++;
         asCount -= priceBuild16[0];
         asSpent += priceBuild16[0];
         bushelCount[1] -= priceBuild16[1];
@@ -1548,28 +1672,252 @@ function Build() {
         taxesValue += 32;
         actualBushelPrice -= 50;
         SetMarketPrice();
+        interestRate += 0.0023;
         cityWalls = true;
     }
-    else if (villageStage == 17 && asCount >= priceBuild17[0] && beadsCount >= priceBuild17[1] && scrollsCount >= priceBuild17[2] && ingotsBronzeCount >= priceBuild17[3] && boardsCount >= priceBuild17[4] && stoneCount >= priceBuild17[5]) {
+    else if (villageStage == 17 && asCount >= priceBuild17[0] && stoneCount >= priceBuild17[1] && ingotsBronzeCount >= priceBuild17[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage17); }
         villageImage.src = 'bitmaps/village18.png';
-        villageStage += 1;
+        villageStage++;
         asCount -= priceBuild17[0];
         asSpent += priceBuild17[0];
-        beadsCount -= priceBuild17[1];
-        scrollsCount -= priceBuild17[2];
-        ingotsBronzeCount -= priceBuild17[3];
-        mountainSpentCount[4] += priceBuild17[3];
-        boardsCount -= priceBuild17[4];
-        forestSpentCount[1] += priceBuild17[4];
-        stoneCount -= priceBuild17[5];
-        mountainSpentCount[0] += priceBuild17[5];
+        stoneCount -= priceBuild17[1];
+        mountainSpentCount[0] += priceBuild17[1];
+        ingotsBronzeCount -= priceBuild17[2];
+        mountainSpentCount[4] += priceBuild17[2];
+
+        rentPrice += 20;
+        tourismValue += 8;
+        taxesValue += 28;
+        actualBushelPrice += 200;
+        SetMarketPrice();
+        interestRate += 0.0019;
+        player.hasArmy = true;
+    }
+    else if (villageStage == 18 && asCount >= priceBuild18[0] && boardsCount >= priceBuild18[1] && stoneCount >= priceBuild18[2]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage18); }
+        villageImage.src = 'bitmaps/village19.png';
+        villageStage++;
+        asCount -= priceBuild18[0];
+        asSpent += priceBuild18[0];
+        boardsCount -= priceBuild18[1];
+        forestSpentCount[1] += priceBuild18[1];
+        stoneCount -= priceBuild18[2];
+        mountainSpentCount[0] += priceBuild18[2];
+
+        rentPrice += 2;
+        tourismValue += 1;
+        taxesValue += 6;
+        residentsMax += 168;
+        actualBushelPrice -= 50;
+        SetMarketPrice();
+        interestRate += 0.0033;
+    }
+    else if (villageStage == 19 && asCount >= priceBuild19[0] && stoneCount >= priceBuild19[1] && oreCopperCount >= priceBuild19[2]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage19); }
+        villageImage.src = 'bitmaps/village20.png';
+        villageStage++;
+        asCount -= priceBuild19[0];
+        asSpent += priceBuild19[0];
+        stoneCount -= priceBuild19[1];
+        mountainSpentCount[0] += priceBuild19[1];
+        oreCopperCount -= priceBuild19[2];
+        mountainSpentCount[1] += priceBuild19[2];
+
+        tourismValue += 2;
+        taxesValue += 12;
+        SetMarketPrice();
+        interestRate += 0.0004;
+        player.hasGraveyard = true;
+    }
+    else if (villageStage == 20 && asCount >= priceBuild20[0] && bushelCount[0] > priceBuild20[1] && boardsCount >= priceBuild20[2] && stoneCount >= priceBuild20[3]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage20); }
+        villageImage.src = 'bitmaps/village21.png';
+        villageStage++;
+        asCount -= priceBuild20[0];
+        asSpent += priceBuild20[0];
+        bushelCount[0] -= priceBuild20[1];
+        spentCount[0] += priceBuild20[1];
+        boardsCount -= priceBuild20[2];
+        forestSpentCount[1] += priceBuild20[2];
+        stoneCount -= priceBuild20[3];
+        mountainSpentCount[0] += priceBuild20[3];
+
+        rentPrice += 4;
+        tourismValue += 4;
+        taxesValue += 6;
+        actualBushelPrice += 50;
+        SetMarketPrice();
+        interestRate += 0.004;
+        residenceProductOut[0] = 32;
+        residenceIngredientsIn[1] = 7;
+        residenceIngredientsIn[2] = 3;
+        residenceIngredientsIn[3] = 40;
+        residenceIngredientsIn[4] = 5;
+        residenceIngredientsIn[5] = 2;
+        residenceIngredientsIn[6] = 4;
+        residenceProductOut[7] = 6;
+    }
+    else if (villageStage == 21 && asCount >= priceBuild21[0] && stoneCount >= priceBuild21[1] && ingotsCopperCount >= priceBuild21[2]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage21); }
+        villageImage.src = 'bitmaps/village22.png';
+        villageStage++;
+        asCount -= priceBuild21[0];
+        asSpent += priceBuild21[0];
+        stoneCount -= priceBuild21[1];
+        mountainSpentCount[0] += priceBuild21[1];
+        ingotsCopperCount -= priceBuild21[2];
+        mountainSpentCount[2] += priceBuild21[2];
+
+        rentPrice += 8;
+        tourismValue += 1;
+        taxesValue += 33;
+        actualBushelPrice += 50;
+        SetMarketPrice();
+        interestRate += 0.009;
+        player.hasHospital = true;
+    }
+    else if (villageStage == 22 && asCount >= priceBuild22[0] && stoneCount >= priceBuild22[1] && ingotsCopperCount >= priceBuild22[2] && ingotsTinCount >= priceBuild22[3] && ingotsBronzeCount >= priceBuild22[4]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage22); }
+        villageImage.src = 'bitmaps/village23.png';
+        villageStage++;
+        asCount -= priceBuild22[0];
+        asSpent += priceBuild22[0];
+        stoneCount -= priceBuild22[1];
+        mountainSpentCount[0] += priceBuild22[1];
+        ingotsCopperCount -= priceBuild22[2];
+        mountainSpentCount[2] += priceBuild22[2];
+        ingotsTinCount -= priceBuild22[3];
+        mountainSpentCount[3] += priceBuild22[3];
+        ingotsBronzeCount -= priceBuild22[4];
+        mountainSpentCount[4] += priceBuild22[4];
+
+        rentPrice += 1;
+        tourismValue += 3;
+        taxesValue += 50;
+        actualBushelPrice += 100;
+        SetMarketPrice();
+        interestRate += 0.01;
+        player.hasCourthouse = true;
+    }
+    else if (villageStage == 23 && asCount >= priceBuild23[0] && stoneCount >= priceBuild23[1] && ingotsCopperCount >= priceBuild23[2]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage23); }
+        villageImage.src = 'bitmaps/village24.png';
+        villageStage++;
+        asCount -= priceBuild23[0];
+        asSpent += priceBuild23[0];
+        stoneCount -= priceBuild23[1];
+        mountainSpentCount[0] += priceBuild23[1];
+        oreCopperCount -= priceBuild23[2];
+        mountainSpentCount[1] += priceBuild23[2];
+
+        rentPrice += 3;
+        tourismValue += 111;
+        taxesValue -= 4;
+        actualBushelPrice -= 50;
+        SetMarketPrice();
+        interestRate += 0.005;
+        horsesIncAmount++;
+        player.hasRacetrack = true;
+    }
+    else if (villageStage == 24 && asCount >= priceBuild24[0] && stoneCount >= priceBuild24[1]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage24); }
+        villageImage.src = 'bitmaps/village25.png';
+        villageStage++;
+        asCount -= priceBuild24[0];
+        asSpent += priceBuild24[0];
+        stoneCount -= priceBuild24[1];
+        mountainSpentCount[0] += priceBuild24[1];
+
+        rentPrice += 4;
+        tourismValue += 99;
+        taxesValue -= 6;
+        actualBushelPrice -= 50;
+        SetMarketPrice();
+        interestRate += 0.004;
+        trophyChance = 20;
+    }
+    else if (villageStage == 25 && asCount >= priceBuild25[0] && stoneCount >= priceBuild25[1]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage25); }
+        villageImage.src = 'bitmaps/village26.png';
+        villageStage++;
+        asCount -= priceBuild25[0];
+        asSpent += priceBuild25[0];
+        stoneCount -= priceBuild25[1];
+        mountainSpentCount[0] += priceBuild25[1];
+
+        rentPrice += 6;
+        tourismValue += 222;
+        taxesValue -= 1;
+        actualBushelPrice -= 50;
+        SetMarketPrice();
+        interestRate += 0.001;
+    }
+    else if (villageStage == 26 && asCount >= priceBuild26) {
+        if (player.likesStory) { GameEvent(displayStoryVillage26); }
+        villageImage.src = 'bitmaps/village27.png';
+        villageStage++;
+        asCount -= priceBuild26;
+        asSpent += priceBuild26;
+
+        taxesValue += 100;
+        actualBushelPrice -= 250;
+        SetMarketPrice();
+        interestRate -= 0.025;
+        residentsMax += 333;
+    }
+    else if (villageStage == 27 && asCount >= priceBuild27[0] && stoneCount >= priceBuild27[1] && crystalsCount >= priceBuild27[2]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage27); }
+        villageImage.src = 'bitmaps/village28.png';
+        villageStage++;
+        asCount -= priceBuild27[0];
+        asSpent += priceBuild27[0];
+        stoneCount -= priceBuild27[1];
+        mountainSpentCount[0] += priceBuild27[1];
+        crystalsCount -= priceBuild27[2];
+        mountainSpentCount[5] += priceBuild27[2];
+
+        player.hasOracle = true;
+        residentsMax += 111;
+    }
+    else if (villageStage == 28 && asCount >= priceBuild28[0] && stoneCount >= priceBuild28[1] && ingotsBronzeCount >= priceBuild28[2] && residenceInStockCount[8] >= priceBuild28[3]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage28); }
+        villageImage.src = 'bitmaps/village29.png';
+        villageStage = 100;
+        asCount -= priceBuild28[0];
+        asSpent += priceBuild28[0];
+        stoneCount -= priceBuild28[1];
+        mountainSpentCount[0] += priceBuild28[1];
+        ingotsBronzeCount -= priceBuild28[2];
+        mountainSpentCount[4] += priceBuild28[2];
+        residenceInStockCount[8] -= priceBuild28[3];
+        residenceSpentCount[8] += priceBuild28[3];
+
+        residentsMax += 39;
+    }
+    else if (villageStage == 100 && asCount >= priceBuild100[0] && beadsCount >= priceBuild100[1] && scrollsCount >= priceBuild100[2] && ingotsBronzeCount >= priceBuild100[3] && boardsCount >= priceBuild100[4] && stoneCount >= priceBuild100[5]) {
+        if (player.likesStory) { GameEvent(displayStoryVillage100); }
+        villageImage.src = 'bitmaps/village100.png';
+        villageStage += 1;
+        asCount -= priceBuild100[0];
+        asSpent += priceBuild100[0];
+        beadsCount -= priceBuild100[1];
+        scrollsCount -= priceBuild100[2];
+        ingotsBronzeCount -= priceBuild100[3];
+        mountainSpentCount[4] += priceBuild100[3];
+        boardsCount -= priceBuild100[4];
+        forestSpentCount[1] += priceBuild100[4];
+        stoneCount -= priceBuild100[5];
+        mountainSpentCount[0] += priceBuild100[5];
 
         rentPrice += 12;
         tourismValue += 48;
         taxesValue += 16;
+        actualBushelPrice += 200;
+        SetMarketPrice();
+        interestRate += 0.0077;
         player.canBuild = false;
-
+        player.hasMonument = true;
         player.canWin = true;
         AnimateWinButton();
     }
@@ -1751,10 +2099,26 @@ function ToggleAnimation() {
     if (toggleAnimation.checked) {
         player.likesAnimations = true;
         document.documentElement.style.setProperty('--agua', 'url(bitmaps/agua_anim.gif)');
+        //imgWorkshopBakery.src = 'bitmaps/res_bakery.gif';
+        //imgWorkshopOliveMill.src = 'bitmaps/res_olivemill.gif';
+        //imgWorkshopBrewery.src = 'bitmaps/res_brewery.gif';
+        //imgWorkshopWinery.src = 'bitmaps/res_winery.gif';
+        //imgWorkshopKitchen.src = 'bitmaps/res_kitchen.gif';
+        //imgWorkshopPress.src = 'bitmaps/res_press.gif';
+        //imgWorkshopGreenhouse.src = 'bitmaps/res_greenhouse.gif';
+        //imgWorkshopAtelier.src = 'bitmaps/res_atelier.gif';
     }
     else {
         player.likesAnimations = false;
         document.documentElement.style.setProperty('--agua', 'url(bitmaps/agua_still.gif)');
+        imgWorkshopBakery.src = 'bitmaps/res_bakery.png';
+        imgWorkshopOliveMill.src = 'bitmaps/res_olivemill.png';
+        imgWorkshopBrewery.src = 'bitmaps/res_brewery.png';
+        imgWorkshopWinery.src = 'bitmaps/res_winery.png';
+        imgWorkshopKitchen.src = 'bitmaps/res_kitchen.png';
+        imgWorkshopPress.src = 'bitmaps/res_press.png';
+        imgWorkshopGreenhouse.src = 'bitmaps/res_greenhouse.png';
+        imgWorkshopAtelier.src = 'bitmaps/res_atelier.png';
     }
 }
 

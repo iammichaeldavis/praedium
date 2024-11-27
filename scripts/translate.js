@@ -49,6 +49,7 @@ let displayBoards = '';
 let displayLumberjacks = '';
 let displaySawyers = '';
 let displayStone = '';
+let displayCrystal = '';
 let displayOre = '';
 let displayCopper = '';
 let displayTin = '';
@@ -60,6 +61,7 @@ let displayMasons = '';
 let displayMiners = '';
 let displayCindermen = '';
 let displayMetallurgists = '';
+let displayGemcutters = '';
 let displayGood = '';
 let displayScoreProduced = '';
 let displayScoreSpent = '';
@@ -112,6 +114,11 @@ let displayLabelResidence12 = '';
 let displayLabelResidence13 = '';
 
 let displayLabelFound = '';
+let displayLabelBuildNEG5 = '';
+let displayLabelBuildNEG4 = '';
+let displayLabelBuildNEG3 = '';
+let displayLabelBuildNEG2 = '';
+let displayLabelBuildNEG1 = '';
 let displayLabelBuild0 = '';
 let displayLabelBuild1 = '';
 let displayLabelBuild2 = '';
@@ -120,6 +127,7 @@ let displayLabelMineScout = '';
 let displayLabelMineDig = '';
 let displayLabelFoundry = '';
 let displayLabelBronzeworkers = '';
+let displayLabelDigCrystal = '';
 let displayLabelBuild4 = '';
 let displayLabelBuild5 = '';
 let displayLabelBuild6 = '';
@@ -134,6 +142,19 @@ let displayLabelBuild14 = '';
 let displayLabelBuild15 = '';
 let displayLabelBuild16 = '';
 let displayLabelBuild17 = '';
+let displayLabelBuild18 = '';
+let displayLabelBuild19 = '';
+let displayLabelBuild20 = '';
+let displayLabelBuild21 = '';
+let displayLabelBuild22 = '';
+let displayLabelBuild23 = '';
+let displayLabelBuild24 = '';
+let displayLabelBuild25 = '';
+let displayLabelBuild26 = '';
+let displayLabelBuild27 = '';
+let displayLabelOracle = '';
+let displayLabelBuild28 = '';
+let displayLabelBuild100 = '';
 
 let displayLabelTradeRoute = '';
 let displayLabelImportTin = '';
@@ -212,6 +233,8 @@ let displayStoryMineScout = '';
 let displayStoryMineDig = '';
 let displayStoryFoundry = '';
 let displayStoryBronzeworkers = '';
+let displayStoryFoundCrystal = '';
+let displayStoryCrystal = '';
 let displayStoryTribute = '';
 
 let displayStoryResidenceFirstVisit = '';
@@ -231,6 +254,11 @@ let displayStoryResidence12 = '';
 let displayStoryResidence13 = '';
 
 let displayStoryVillageFirstVisit = '';
+let displayStoryVillageNEG5 = '';
+let displayStoryVillageNEG4 = '';
+let displayStoryVillageNEG3 = '';
+let displayStoryVillageNEG2 = '';
+let displayStoryVillageNEG1 = '';
 let displayStoryVillage0 = '';
 let displayStoryVillage1 = '';
 let displayStoryVillage2 = '';
@@ -249,6 +277,18 @@ let displayStoryVillage14 = '';
 let displayStoryVillage15 = '';
 let displayStoryVillage16 = '';
 let displayStoryVillage17 = '';
+let displayStoryVillage18 = '';
+let displayStoryVillage19 = '';
+let displayStoryVillage20 = '';
+let displayStoryVillage21 = '';
+let displayStoryVillage22 = '';
+let displayStoryVillage23 = '';
+let displayStoryVillage24 = '';
+let displayStoryVillage25 = '';
+let displayStoryVillage26 = '';
+let displayStoryVillage27 = '';
+let displayStoryVillage28 = '';
+let displayStoryVillage100 = '';
 
 let displayStoryPortFirstVisit = '';
 let displayStoryPort00 = '';
@@ -269,6 +309,7 @@ let displayGoToPraedium = '';
 let displayGoToPort = '';
 let displayGoToTownshipFromPort = '';
 
+let displayVillageTitleNEG1 = '';
 let displayVillageTitle0 = '';
 let displayVillageTitle1 = '';
 let displayVillageTitle2 = '';
@@ -276,6 +317,7 @@ let displayVillageTitle3 = '';
 let displayVillageTitle4 = '';
 let displayVillageTitle5 = '';
 let displayVillageTitle6 = '';
+let displayVillageTitle7 = '';
 
 let displayCitizens = '';
 let displayPilgrims = '';
@@ -298,8 +340,11 @@ let displayTourism = '';
 let displayWorship = '';
 let displayTribute = '';
 let displayMilitary = '';
+let displayMedical = '';
 let displayStudy = '';
 let displayTaxes = '';
+let displayInterest = '';
+let displayInterestRate = '';
 let displayMateriel = '';
 let displayPonies = '';
 let displayCavalry = '';
@@ -308,6 +353,8 @@ let displayChampionships = '';
 let displayChance = '';
 let displayScripture = '';
 let displayRelic = '';
+let displayGhosts = '';
+let displayPatients = '';
 let displayMessiahs = '';
 let displayRats = '';
 let displayStatistics = '';
@@ -322,6 +369,7 @@ let displaySyrup = '';
 let displayJuice = '';
 let displayDriedFigs = '';
 let displayTrinkets = '';
+let displayGems = '';
 let displayAmountProduced = '';
 let displayAmountSpent = '';
 
@@ -392,6 +440,42 @@ let displayModCodeTextArea = '';
 let displaySubmitModCode = '';
 let displayDismissMods = '';
 
+let displayCheevo = '';
+
+
+
+let displayRandomWisdomsInglés = [
+    '“Have patience. All things are difficult before they become easy.”<br>—Saʿdī Shīrāzī',
+    '“Only a fool trips on what is behind him.”<br>—Marcus Aurelius',
+    '“Every real story is a never-ending story.”<br>—Michael Ende',
+    '“There’re two types of fools: people who take religion literally, and people who think religion has no value.”<br>—Jimmy Carr',
+    'SIGNS<br>POINT<br>TO YES',
+    'There’s only two things for certain:<br>That we born alone, die alone<br>And birds keep chirpin’<br>—Xzibit',
+    '“There are no passengers on Spaceship Earth: only crew.”<br>—Marshall McLuhan',
+    '“If it’s your job to eat a frog, do it first thing in the morning. And if it’s your job to eat two frogs, eat the bigger one first.”<br>—Mark Twain',
+    '“Wherever you go, there you are.”<br>—Peter Weller<br><br>The Adventures of Buckaroo Banzai Across the 8th Dimension (Sherwood Productions, 1984)',
+    '“Commander, it is possible to commit no mistakes, and still lose. That is not a weakness; that is life.”<br>—Captain Jean-Luc Picard<br><br>Star Trek: The Next Generation (Paramount Television, 1989), Season 2, Episode 21: “Peak Performance”',
+    'Eat your vegetables',
+    '“For with wisdom did someone once reveal the maxim, now famous, that evil at one time or another seems good, to him whose mind a god leads to ruin.”<br>—Sophocles',
+    '“I hope that when the world comes to an end, I can breathe a sigh of relief, because there will be so much to look forward to.”<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)'
+];
+let displayRandomWisdomsEspañol = [
+    '«Ten paciencia. Todas las cosas son difíciles antes de volverse fáciles.»<br>—Saʿdī Shīrāzī',
+    '«Sólo un tonto tropieza con lo que tiene detrás.»<br>—Marco Aurelio',
+    '«Toda historia real es una historia sin fin.»<br>—Michael Ende',
+    '«Hay dos tipos de tontos: la gente que toma la religión literalmente, y la gente que piensa que la religión no tiene ningún valor.»<br>—Jimmy Carr',
+    'SEÑALES<br>APUNTAN<br>A SÍ',
+    'Sólo hay dos cosas seguras:<br>Que nacemos solos, morimos solos<br>Y los pájaros siguen cantando<br>—Xzibit',
+    '«No hay pasajeros en La Nave Espacial Tierra: sólo tripulación.»<br>—Marshall McLuhan',
+    '«Si tu trabajo consiste en comerte una rana, hazlo a primera hora de la mañana. Y si tu trabajo consiste en comerte dos ranas, cómete la más grande primero.»<br>—Mark Twain',
+    '«Donde quiera que vayas, ahí estás.»<br>—Peter Weller<br><br>Las Aventuras de Buckaroo Banzai (Sherwood Productions, 1984)',
+    '«Comandante, es posible no cometer errores y aun así perder. Eso no es debilidad; eso es vida.»<br>Capitán Jean-Luc Picard<br><br>Viaje a Las Estrellas: La Nueva Generación (Paramount Television, 1989), Temporada 2, Episodio 21: “Máximo Rendimiento”',
+    'Come tus verduras',
+    '«Porque alguien reveló una vez con sabiduría la máxima, ahora famosa, de que el mal en un momento u otro parece bueno a aquel cuya mente es llevada a la ruina por un dios.»<br>—Sófocles',
+    '«Espero que cuando el mundo llegue a su fin, pueda respirar aliviado, porque habrá mucho que mucho que esperar.»<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)',
+];
+let displayRandomWisdomsDisplay = null;
+
 
 
 function Translate(language, bark = true) {
@@ -443,6 +527,7 @@ function Translate(language, bark = true) {
         displayLumberjacks = 'Lumberjacks';
         displaySawyers = 'Sawyers';
         displayStone = 'Stone';
+        displayCrystal = 'Crystal';
         displayOre = 'Ore';
         displayCopper = 'Copper';
         displayTin = 'Tin';
@@ -454,6 +539,7 @@ function Translate(language, bark = true) {
         displayMiners = 'Miners';
         displayCindermen = 'Cindermen';
         displayMetallurgists = 'Braziers';
+        displayGemcutters = 'Gemcutters';
         displayGood = 'Good';
         displayScoreProduced = 'Score<br>Produced';
         displayScoreSpent = 'Score<br>Spent';
@@ -506,6 +592,11 @@ function Translate(language, bark = true) {
         displayLabelResidence13 = 'REALLY ZHUZH THIS PLACE UP SOME, SON';
 
         displayLabelFound = 'FOUND A VILLAGE';
+        displayLabelBuildNEG5 = 'CONDUCT GEOLOGICAL SURVEY';
+        displayLabelBuildNEG4 = 'HOST GROUNDBREAKING CEREMONY';
+        displayLabelBuildNEG3 = 'HAVE PLANS DRAWN UP';
+        displayLabelBuildNEG2 = 'TRENCH PERIMETER';
+        displayLabelBuildNEG1 = 'CONSTRUCT AQUEDUCT';
         displayLabelBuild0 = 'HIRE BLACKSMITH';
         displayLabelBuild1 = 'COMMISSION WORKSHOP';
         displayLabelBuild2 = 'ERECT TOWN HALL';
@@ -514,6 +605,7 @@ function Translate(language, bark = true) {
         displayLabelMineDig = 'DIG MINE';
         displayLabelFoundry = 'BEGIN A COPPER FOUNDRY';
         displayLabelBronzeworkers = 'BRING ON BRONZEWORKERS';
+        displayLabelDigCrystal = 'DIG FOR AMETHYST';
         displayLabelBuild4 = 'ADD SECOND STORY';
         displayLabelBuild5 = 'BUILD MARKETPLACE';
         displayLabelBuild6 = 'ADD THIRD STORY';
@@ -527,7 +619,20 @@ function Translate(language, bark = true) {
         displayLabelBuild14 = 'CREATE HERMETIC ORDER';
         displayLabelBuild15 = 'DIG SEWERS';
         displayLabelBuild16 = 'ERECT CITY GATES';
-        displayLabelBuild17 = 'ESTABLISH MONUMENT';
+        displayLabelBuild17 = 'RAISE A STANDING ARMY';
+        displayLabelBuild18 = 'BUILD MORE APARTMENT COMPLEXES';
+        displayLabelBuild19 = 'CONSECRATE GRAVEYARD';
+        displayLabelBuild20 = 'FOUND UNIVERSITY';
+        displayLabelBuild21 = 'BUILD HOSPITAL';
+        displayLabelBuild22 = 'ERECT COURTHOUSE';
+        displayLabelBuild23 = 'INSTALL HIPPODROME';
+        displayLabelBuild24 = 'UPGRADE PROVINCIAL ARENA<br>TO COSMOPOLITAN AMPHITHEATER';
+        displayLabelBuild25 = 'ERECT THEATER';
+        displayLabelBuild26 = 'ZONE FOR PRIVATE DEVELOPMENT';
+        displayLabelBuild27 = 'INAUGURATE ORACLE';
+        displayLabelOracle = 'VISIT ORACLE';
+        displayLabelBuild28 = 'COMMISSION ASTRONOMERS’ GUILD';
+        displayLabelBuild100 = 'ESTABLISH MONUMENT';
 
         displayLabelTradeRoute = 'ESTABLISH NEW TRADE ROUTE';
         displayLabelImportTin = 'ARRANGE FOR THE IMPORT OF TIN';
@@ -606,6 +711,8 @@ function Translate(language, bark = true) {
         displayStoryMineDig = 'MINERALS HAVE THEIR OWN LIFE JUST AS VEGETABLES DO, AND ANIMALS AND BIRDS, AND HUMANS<br><br>PHÁP CHÁNH TRUYỀN, PART 5';
         displayStoryFoundry = '“THE ‘HOLOCENE’ HAS ENDED. THE GARDEN OF EDEN IS NO MORE. WE HAVE CHANGED THE WORLD SO MUCH THAT SCIENTISTS SAY WE ARE IN A NEW GEOLOGICAL AGE: THE ‘ANTHROPOCENE’. THE AGE OF MAN. WE MUST MOVE BEYOND GUILT OR BLAME, AND GET ON WITH THE PRACTICAL TASKS AT HAND”<br>—SIR DAVID FREDERICK ATTENBOROUGH';
         displayStoryBronzeworkers = 'WITH WEAPONS AND ARMORS OF GLEAMING BRONZE WE CAN FINALLY SHOW THOSE SNOOTY PHRYGIANS EXACTLY WHAT IS WHAT';
+        displayStoryFoundCrystal = 'MASONS AT THE QUARRY HAVE DISCOVERED GEODES OF AMETHYST!!';
+        displayStoryCrystal = 'LAPIDARISTS IN OUR ATELIER WILL TRANSFORM THESE INTO SOMETHING TRULY WONDERFUL';
         displayStoryTribute = 'THE LOCAL WARLORD KING HAS CAUGHT WIND OF YOUR SUCCESS AT LAST. QUOTH HIS EMISSARY: “OF COURSE, TARIFFS MUST BE LEVIED”';
 
         displayStoryResidenceFirstVisit = 'THERE’S NO PLACE LIKE HOME: YOUR CAMPSITE, ANONYMOUS AMONG THE HUNDREDS OF OTHERS JUST LIKE IT ALL NESTLED HERE, IN THIS NARROW, ARID VALLEY, WHERE YOU RENT THIS PATCH OF DIRT FOR AN EXORBITANT RATE';
@@ -625,6 +732,11 @@ function Translate(language, bark = true) {
         displayStoryResidence13 = '“IF YOU WANT TO TOTALLY DESTROY A MAN, GIVE HIM EVERYTHING HE EVER WISHED FOR”<br>—BOULET';
 
         displayStoryVillageFirstVisit = 'FROM NOW ON, WE’RE GONNA BE DOING THINGS *MY* WAY AROUND HERE';
+        displayStoryVillageNEG5 = 'AN INVESTIGATION OF THIS LAND HAS FOUND NO STAGNANT POOLS OR SWAMPS. A FLAT BUT SLOPING PLAIN TO ENSURE GOOD DRAINAGE, HIGH ENOUGH TO AVOID FUTURE FLOODS. UPON THOROUGH INSPECTION, LIVERS FROM THE LOCAL WILDLIFE APPEAR TO BE HEALTHY';
+        displayStoryVillageNEG4 = 'THE CLERIC HAS DECLARED THAT THE GODS HAVE BEEN PLEASED (THEY HAD BETTER BE, WE’RE PAYING THIS GUY AN ARM AN A LEG)';
+        displayStoryVillageNEG3 = 'FINALLY, LONG WEEKS OF MEASURING, DESIGNING, DRAWING AND REVISING HAVE ALL LED TO THIS: WE SHALL HAVE PUBLIC WATER FOUNTAINS, BATHS AND TOILETS, AND EVENTUALLY A LAVISH ENTERTAINMENT COMPLEX. A COPY OF THESE PLANS HAS BEEN CARVED INTO A MARBLE PLINTH TO STAND IN THE TOWN SQUARE FOR ALL TO SEE';
+        displayStoryVillageNEG2 = 'MEANWHILE AENEAS MARKED OUT THE CITY LIMITS WITH A PLOUGH AND ALLOCATED HOUSES: HE DECLARED THAT THIS WAS ILIUM AND THIS PLACE TROY<br><br>THE AENEID OF VIRGIL, BOOK V, L.755-757';
+        displayStoryVillageNEG1 = '“NO MAN EVER STEPS IN THE SAME RIVER TWICE, FOR IT’S NOT THE SAME RIVER AND HE’S NOT THE SAME MAN”<br>—HERACLITUS';
         displayStoryVillage0 = 'HE WILL NEED LUMBER FOR THE FORGE';
         displayStoryVillage1 = 'NOW WE CAN BUILD';
         displayStoryVillage2 = 'WE’VE GOT TO HAVE SOME LAW AND ORDER';
@@ -642,11 +754,23 @@ function Translate(language, bark = true) {
         displayStoryVillage14 = 'YOU HAVE THE RIGHT TO LABOUR, BUT YOU HAVE NO RIGHT TO THE FRUITS OF YOUR LABOURS. NEVER BELIEVE YOU ARE THE CAUSE OF THE RESULTS OF YOUR CHOICES. WORK HARD AND BE EVEN-TEMPERED IN SUCCESS AND FAILURE. ... THOSE WHO SEEK TO ENJOY THE FRUITS OF THEIR WORKS ARE MISERABLE.<br><br>BHAGAVAD GITA 2.47-49';
         displayStoryVillage15 = 'CLEANLINESS IS GODLINESS';
         displayStoryVillage16 = 'THEY HATE HIM WHO REPROVES IN THE GATE, AND THEY ABHOR HIM WHO SPEAKS THE TRUTH<br><br>AMOS 5:10';
-        displayStoryVillage17 = 'THE BRONZE PLAQUE ON THE PINK MARBLE BASE READS:<br><br>≈ THE 8 VIRTUES ≈<br><br>♠<br>• HONESTY •<br>TELL THE TRUTH<br>♠<br>• HONOR •<br>DO WHAT IS RIGHT<br>♠<br>• VALOR •<br>STAND AGAINST INJUSTICE<br>♠<br>• SACRIFICE •<br>SHARE YOUR BLESSINGS<br>♠<br>• COMPASSION •<br>BE KIND TO THE WEAK<br>♠<br>• JUSTICE •<br>BE FAIR TO ALL<br>♠<br>• SPIRITUALITY •<br>LISTEN TO THE LIGHT<br>♠<br>• HUMILITY •<br>RESIST PRIDE<br>♣';
+        displayStoryVillage17 = '<div id="MrSecretary">Q: Could I follow up, Mr. Secretary, on what you just said, please? In regard to Iraqi weapons of mass destruction, is there any evidence to indicate that Iraq has attempted to, or is willing to, supply terrorists with weapons of mass destruction? Because there are reports that there is *no* evidence of a direct link between Baghdad and these terrorist organizations.<br><br>Rumsfeld: Reports that say that something *hasn’t* happened are always interesting to me, because, as we know, there are ‘known knowns’: there are things we know we know. We also know there are ‘known unknowns’, that is to say we know there are some things we do not know. But there are also ‘unknown unknowns’: the ones we don’t know we don’t know. And if one looks throughout the history of our country and other free countries, it is the latter category that tend to be the difficult ones. And so people who have the omniscience that they can say with high certainty that something has not happened or is not being tried, have capabilities that are... heh, they can do things I can’t do.<br><br>Q: Excuse me, but is *this* an unknown unknown? Because you said ‘several unknowns’, and I’m just wondering if this is an unknown unknown.<br><br>Rumsfeld: I’m not going to say which it is.<br><br><i>DoD News Broadcast, Pentagon Briefing Room, February 12, 2002 11:30 AM<br>Presenter: United States Secretary of Defense Donald H. Rumsfeld<br>(Also participating: Gen. Richard B. Myers, Chairman of the Joint Chiefs of Staff)</i></div>';
+        displayStoryVillage18 = '“MY LIFE HAS BEEN SPENT IN URBAN AND SUBURBAN SPRAWL WHERE THE NATURAL WORLD IS LARGELY OBSCURED BY THE ASPHALT, STEEL, AND CONCRETE THAT WEIGH DOWN THE AMERICAN LANDSCAPE. NATURE SEEMS MOSTLY ABSENT FROM THIS WORLD ... IN FACT, NATURE IS THERE, BUT IT HAS BEEN SO THOROUGHLY CONTROLLED AND MASTERED THAT, IN A SENSE, IT CEASES TO EXIST. MEMBERS OF THE METROPOLIS TAKE THE DOMINATION OF NATURE FOR GRANTED. INDEED, THE CONQUEST OF NATURE IS SO CENTRAL TO AMERICAN CULTURE TODAY THAT WE HARDLY GIVE THE IDEA A SECOND THOUGHT”<br>—THEODORE STEINBERG';
+        displayStoryVillage19 = '“BUT IT’S THE MOST BEAUTIFUL THING THERE IS, DYING. IT’S NOT AT ALL HOW THEY PAINT IT, LIKE SOMETHING CONFUSING AND TERRIFYING. IT SEEMS TO ME THEY PAINT IT THAT WAY BECAUSE ‘RESTING IN PEACE’ SOUNDS TOO TEMPTING”<br>—MATEO GARCÍA ELIZONDO';
+        displayStoryVillage20 = '“PLATO SAID GOD GEOMETRIZES CONTINUALLY”<br>—PLUTARCH<br><br>“GOD ARITHMETIZES”<br>—CARL FRIEDRICH GAUSS<br><br>“GOD DOES NOT PLAY DICE”<br>—ALBERT EINSTEIN<br><br>(Workshop Competencies Improved)';
+        displayStoryVillage21 = 'THE LORD WAS BY THEN NEARLY FINISHED OFF BECAUSE OF THE PAIN IN HIS TEETH. THEREFORE IT WAS WITH GREAT EFFORT THAT HE SPOKE AGAIN:<br>“I BEG OF YOU, TAKE PITY ON ME. WHAT MEDICINES WOULD YOU MAKE? WITH WHAT MEDICINES WOULD YOU CURE?” ASKED THE LORD.<br>“WE WOULD MERELY REMOVE WORMS FROM TEETH, CURE EYE AILMENTS, AND SET BONES, THOU LORD,” THEY REPLIED<br><br>POPOL VUH, THE DEFEAT OF SEVEN MACAW';
+        displayStoryVillage22 = '5. IF A JUDGE TRY A CASE, REACH A DECISION, AND PRESENT HIS JUDGMENT IN WRITING; IF LATER ERROR SHALL APPEAR IN HIS DECISION, AND IT BE THROUGH HIS OWN FAULT, THEN HE SHALL PAY TWELVE TIMES THE FINE SET BY HIM IN THE CASE, AND HE SHALL BE PUBLICLY REMOVED FROM THE BENCH, AND NEVER AGAIN SHALL HE SIT THERE TO RENDER JUDGEMENT<br><br>THE CODE OF HAMMURABI';
+        displayStoryVillage23 = '<div id="shootingScript"><div class="action">EXT. CORNER OF ALLEN & 5<sup>TH</sup> ST. – DAY</div>WYATT<div class="dialogue">You know I was thinkin’, what this town could really use is a racetrack.</div>BEHAN<div class="dialogue">Really? That’s not a bad idea. Send a signal we’re growin’ up.</div>DOC<div class="dialogue">Way ahead of yourselves, aren’t you, boys? This is just another mining camp.</div>BEHAN<div class="dialogue">Have you seen how everyone dresses? Awful tony for a mining camp. No sir, the die is cast: we are growin’; be as big as San Francisco in a few years, and just as sophisticated.</div><div class="action">As if on cue, a bullet WHIZZES past Behan’s head. Everyone ducks. More GUNFIRE as a man holding a bloody hand to his throat reels out the door of the nearby Crystal Palace, his gun firing wildly like a sputtering engine before he pitches face first onto the sidewalk, dead.<br><br>Immediately two more men appear: a staggering DRUNK with a bullet hole in his shoulder; and TURKEY CREEK JACK JOHNSON, a leathery plainsman with his gun at the ready. A crowd forms as the drunk raises his pistol, bellowing.</div>DRUNK<div class="dialogue">You son of a bitch!</div>DOC<div class="dialogue">(turns to Behan)<br>Very cosmopolitan.</div></div>TOMBSTONE (HOLLYWOOD PICTURES, 1993)';
+        displayStoryVillage24 = '“NO ONE IN THIS WORLD, SO FAR AS I KNOW—AND I HAVE SEARCHED THE RECORDS FOR YEARS, AND EMPLOYED AGENTS TO HELP ME—HAS EVER LOST MONEY BY UNDERESTIMATING THE INTELLIGENCE OF THE GREAT MASSES OF PLAIN PEOPLE”<br>—H.L. MENCKEN';
+        displayStoryVillage25 = 'A CIRCUS FOR SPORT, A COLOSSEUM FOR THE BLOODLUST, AND NOW A WORLD-CLASS THEATER FOR THE LATEST DRAMAS. TRULY THIS SHOULD PUT US ON THE MAP';
+        displayStoryVillage26 = '“BUILDING SUSTAINABLE CITIES — AND A SUSTAINABLE FUTURE — WILL NEED OPEN DIALOGUE AMONG ALL BRANCHES OF NATIONAL, REGIONAL AND LOCAL GOVERNMENT. AND IT WILL NEED THE ENGAGEMENT OF ALL STAKEHOLDERS — INCLUDING THE PRIVATE SECTOR AND CIVIL SOCIETY, AND ESPECIALLY THE POOR AND MARGINALIZED”<br>—BAN KI-MOON';
+        displayStoryVillage27 = 'SALVATION IS NOT BROUGHT ABOUT BY FORMULAS OF WORSHIP, OR BY EXORCISM, OR BY CALLING ON ORACLES<br><br>OFUDESAKI 3:45';
+        displayStoryVillage28 = 'THEY TELL ME GOD WRITES PATTERNS IN THE FIRMAMENT. WELL I MEAN TO FIND OUT';
+        displayStoryVillage100 = 'THE BRONZE PLAQUE ON THE PINK MARBLE BASE READS:<br><br>≈ THE 8 VIRTUES ≈<br><br>♠<br>• HONESTY •<br>TELL THE TRUTH<br>♠<br>• HONOR •<br>DO WHAT IS RIGHT<br>♠<br>• VALOR •<br>STAND AGAINST INJUSTICE<br>♠<br>• SACRIFICE •<br>SHARE YOUR BLESSINGS<br>♠<br>• COMPASSION •<br>BE KIND TO THE WEAK<br>♠<br>• JUSTICE •<br>BE FAIR TO ALL<br>♠<br>• SPIRITUALITY •<br>LISTEN TO THE LIGHT<br>♠<br>• HUMILITY •<br>RESIST PRIDE<br>♣';
 
         displayStoryPortFirstVisit = 'YOU FIRST ARRIVED ON THESE FOREIGN SHORES THROUGH THESE VERY DOCKS; JUST A CHILD THEN, A STRANGER IN A STRANGE LAND. OF COURSE, YOUR CIRCUMSTANCES HAVE IMPROVED SIGNIFICANTLY SINCE THOSE DAYS. TODAY YOU HAVE BEEN GREETED HERE AS A POTENTIAL CLIENT OF GREAT IMPORTANCE, AND USHERED DIRECTLY INTO THE FOREMAN’S WELL-APPOINTED OFFICE. HIS ASSISTANT OFFERS YOU AN ORNATELY FILIGREED PEWTER TRAY FULL OF CANDIED DATES';
         displayStoryPort00 = 'THE ATHENIANS HAVE A PRESSING NEED FOR SACRED OIL, AND ARE WILLING TO PAY HANDSOMELY';
-        displayStoryPort01 = '“THIS... IS GRAIN; WHICH ANY FOOL CAN EAT, BUT FOR WHICH THE LORD INTENDED A MORE DIVINE MEANS OF CONSUMPTION. LET US GIVE PRAISE TO OUR MAKER, AND GLORY TO HIS BOUNTY, BY LEARNING ABOUT: BEER”<br>—FRIAR TUCK<br><br>ROBIN HOOD: PRINCE OF THIEVES (WARNER BROS. 1991)';
+        displayStoryPort01 = '“THIS... IS GRAIN; WHICH ANY FOOL CAN EAT, BUT FOR WHICH THE LORD INTENDED A MORE DIVINE MEANS OF CONSUMPTION. LET US GIVE PRAISE TO OUR MAKER, AND GLORY TO HIS BOUNTY, BY LEARNING ABOUT: BEER”<br>—FRIAR TUCK<br><br>ROBIN HOOD: PRINCE OF THIEVES (WARNER BROS., 1991)';
         displayStoryPort02 = '“SO WHEN THE DEVIL SAYS TO YOU, ‘DO NOT DRINK,’ ANSWER HIM, ‘I WILL DRINK, AND RIGHT FREELY, JUST BECAUSE YOU TELL ME NOT TO.’ ONE MUST ALWAYS DO WHAT SATAN FORBIDS”<br>—MARTIN LUTHER';
         displayStoryPort03 = 'BOY, I HAVE YET TO MEET THE EGYPTIAN THAT DID NOT LOVE SWEETS';
         displayStoryPort04 = 'FRESH JUICE DOES NOT KEEP LONG; FORTUNATELY THE ECONOMIC CHANCELLOR HAS INTRODUCED US TO A MERCHANT IN JERUSALEM WE CAN TRUST WHO IS HUNGRY FOR WHATEVER WE CAN SUPPLY';
@@ -663,13 +787,15 @@ function Translate(language, bark = true) {
         displayGoToPort = 'TRAVEL TO THE PORT →';
         displayGoToTownshipFromPort = '← RETURN TO YOUR PROVINCE';
 
+        displayVillageTitleNEG1 = 'The Pasture of';
         displayVillageTitle0 = 'The Settlement of';
         displayVillageTitle1 = 'The Outpost of';
         displayVillageTitle2 = 'The Hamlet of';
         displayVillageTitle3 = 'The Village of';
         displayVillageTitle4 = 'The Town of';
         displayVillageTitle5 = 'The City of';
-        displayVillageTitle6 = 'The Capital of';
+        displayVillageTitle6 = 'The Metropolis of';
+        displayVillageTitle7 = 'The Capital of';
 
         displayCitizens = 'Citizens';
         displayPilgrims = 'Pilgrims';
@@ -692,8 +818,11 @@ function Translate(language, bark = true) {
         displayWorship = 'Worship';
         displayTribute = 'Tribute';
         displayMilitary = 'Military';
+        displayMedical = 'Medical';
         displayStudy = 'Study';
         displayTaxes = 'Taxes';
+        displayInterest = 'Interest';
+        displayInterestRate = 'Interest Rate';
         displayMateriel = 'Materiel';
         displayPonies = 'Ponies';
         displayCavalry = 'Cavalry';
@@ -702,6 +831,8 @@ function Translate(language, bark = true) {
         displayChance = 'chance';
         displayScripture = 'Scripture';
         displayRelic = 'Artifacts';
+        displayGhosts = 'Ghosts';
+        displayPatients = 'Patients';
         displayMessiahs = 'Messiahs';
         displayRats = 'Rats';
         displayStatistics = 'Statistics';
@@ -716,6 +847,7 @@ function Translate(language, bark = true) {
         displayJuice = 'Juice';
         displayDriedFigs = 'Sun-Dried Figs';
         displayTrinkets = 'Trinkets';
+        displayGems = 'Gems';
         displayAmountProduced = 'Units<br>Produced';
         displayAmountSpent = 'Units<br>Spent';
 
@@ -763,8 +895,8 @@ function Translate(language, bark = true) {
         displayLanguageQuote = '<div id="divSystemMessageScripture">“There is no true knowledge without right faith, no virtuous conduct is possible without knowledge, without virtue there is no liberation, and without liberation, no nirvana.”</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
         displayInfoMadeWith = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.<br><br>Made with CodePen, the GNU Image Manipulation Program, GitHub, Inkscape and Visual Studio Code.';
-        displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, David “aniwey” L., Tom Rothamel, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Dave and Anna Davis, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben and W3Schools.';
+        displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben and W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -781,6 +913,10 @@ function Translate(language, bark = true) {
         displayModCodeTextArea = 'Paste your modCode here';
         displaySubmitModCode = 'SUBMIT MODCODE';
         displayDismissMods = 'I AM FINISHED HERE';
+
+        displayCheevo = 'Gleaned All Wisdom';
+
+        displayRandomWisdomsDisplay = displayRandomWisdomsInglés;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -832,6 +968,7 @@ function Translate(language, bark = true) {
         displayLumberjacks = 'Leñadores';
         displaySawyers = 'Aserradores';
         displayStone = 'Piedra';
+        displayCrystal = 'Cristal';
         displayOre = 'Mineral';
         displayCopper = 'Cobre';
         displayTin = 'Estaño';
@@ -843,6 +980,7 @@ function Translate(language, bark = true) {
         displayMiners = 'Mineros';
         displayCindermen = 'Forjadores';
         displayMetallurgists = 'Broncistas'; // Metalúrgicos
+        displayGemcutters = 'Tallador de Gemas';
         displayGood = 'Bien';
         displayScoreProduced = 'Veintenas<br>Producidas';
         displayScoreSpent = 'Veintenas<br>Gastadas';
@@ -895,6 +1033,11 @@ function Translate(language, bark = true) {
         displayLabelResidence13 = 'REALMENTE ZHUZH ESTE LUGAR MEJORÓ, HIJO';
 
         displayLabelFound = 'COMENZAR UN PUEBLO';
+        displayLabelBuildNEG5 = 'REALIZAR ESTUDIO GEOLÓGICO';
+        displayLabelBuildNEG4 = 'ORGANIZAR UNA CEREMONIA DE INICIO DE OBRAS';
+        displayLabelBuildNEG3 = 'DIBUJAR PLANOS DE CONSTRUCCIÓN';
+        displayLabelBuildNEG2 = 'CAVAR LA ZANJA PERIMETRAL';
+        displayLabelBuildNEG1 = 'CONSTRUIR ACUEDUCTO';
         displayLabelBuild0 = 'CONTRATAR HERRERO';
         displayLabelBuild1 = 'CONSTRUIR UN TALLER';
         displayLabelBuild2 = 'CONSTRUIR AYUNTAMIENTO';
@@ -903,6 +1046,7 @@ function Translate(language, bark = true) {
         displayLabelMineDig = 'CAVAR MINA';
         displayLabelFoundry = 'COMENZAR UNA FUNDICIÓN DE COBRE';
         displayLabelBronzeworkers = 'TRAER A LOS TRABAJADORES DEL BRONCE';
+        displayLabelDigCrystal = 'EXCAVAR EN BUSCA DE AMATISTA';
         displayLabelBuild4 = 'AÑADIR SEGUNDO PISO';
         displayLabelBuild5 = 'CONSTRUIR MERCADO';
         displayLabelBuild6 = 'AÑADIR TERCER PISO';
@@ -916,7 +1060,20 @@ function Translate(language, bark = true) {
         displayLabelBuild14 = 'CREAR ORDEN HERMÉTICO';
         displayLabelBuild15 = 'EXCAVAR ALCANTARILLAS';
         displayLabelBuild16 = 'LEVANTAR PUERTAS DE LA CIUDAD';
-        displayLabelBuild17 = 'ESTABLECER MONUMENTO';
+        displayLabelBuild17 = 'FORMAR UN EJÉRCITO PERMANENTE';
+        displayLabelBuild18 = 'CONSTRUIR MÁS COMPLEJOS DE APARTAMENTOS';
+        displayLabelBuild19 = 'CONSAGRAR CEMENTERIO';
+        displayLabelBuild20 = 'FUNDAR UNIVERSIDAD';
+        displayLabelBuild21 = 'CONSTRUIR HOSPITAL';
+        displayLabelBuild22 = 'ERIGIR PALACIO DE JUSTICIA';
+        displayLabelBuild23 = 'INSTALAR HIPÓDROMO';
+        displayLabelBuild24 = 'ACTUALIZAR EL ARENA PROVINCIAL<br>A ANFITEATRO COSMOPOLITANO';
+        displayLabelBuild25 = 'ERIGIR TEATRO';
+        displayLabelBuild26 = 'ZONIFICAR PARA EL DESARROLLO PRIVADO';
+        displayLabelBuild27 = 'INAUGURAR ORÁCULO';
+        displayLabelOracle = 'VISITAR ORÁCULO';
+        displayLabelBuild28 = 'ENCARGAR UN GREMIO DE ASTRÓNOMOS';
+        displayLabelBuild100 = 'ESTABLECER MONUMENTO';
 
         displayLabelTradeRoute = 'ESTABLECER NUEVA RUTA COMERCIAL';
         displayLabelImportTin = 'DISPONER LA IMPORTACIÓN DE ESTAÑO';
@@ -995,6 +1152,8 @@ function Translate(language, bark = true) {
         displayStoryMineDig = 'LOS MINERALES TIENEN VIDA PROPIA AL IGUAL QUE LOS VEGETALES, Y LOS ANIMALES Y LOS PÁJAROS, Y LOS SERES HUMANOS<br><br>PHÁP CHÁNH TRUYỀN, PARTE 5';
         displayStoryFoundry = '«EL ‘HOLOCENO’ HA TERMINADO. EL JARDÍN DEL EDÉN YA NO EXISTE. HEMOS CAMBIADO TANTO EL MUNDO QUE LOS CIENTÍFICOS DICEN QUE ESTAMOS EN UNA NUEVA ERA GEOLÓGICA: EL ‘ANTROPOCENO’. LA ERA DE LA HUMANIDAD. DEBEMOS IR MÁS ALLÁ DE LA CULPA Y PONERNOS A LA OBRA PRÁCTICA»<br>—SIR DAVID FREDERICK ATTENBOROUGH';
         displayStoryBronzeworkers = 'CON ARMAS Y ARMADURAS DE BRONCE BRILLANTE PODEMOS POR FIN MOSTRARLES A ESOS FRIGIOS PRESUMIDO EXACTAMENTE QUÉ ES QUÉ';
+        displayStoryFoundCrystal = '¡¡LOS ALBAÑILES DE LA CANTERA HAN DESCUBRIDO GEODAS DE AMATISTA!!';
+        displayStoryCrystal = 'LOS LAPIDARISTAS DE NUESTRO TALLER TRANSFORMARÁN ESTOS EN ALGO VERDADERAMENTE MARAVILLOSO';
         displayStoryTribute = 'EL JEFE MILITAR REY LOCAL FINALMENTE HA OÍDO HABLAR DE TI. SU EMISARIO TE DICE: «POR SUPUESTO, SE DEBEN IMPONER ARANCELES»';
 
         displayStoryResidenceFirstVisit = 'NO HAY LUGAR COMO EL HOGAR: TU CAMPAMENTO, ANÓNIMO ENTRE LOS CIENTOS DE OTROS EXACTAMENTE COMO ÉL QUE SE ENCUENTRAN AQUÍ, EN ESTE VALLE ANGOSTO Y ÁRIDO, DONDE ALQUILAS ESTE TROZO DE TIERRA POR UN PRECIO EXORBITANTE';
@@ -1014,6 +1173,11 @@ function Translate(language, bark = true) {
         displayStoryResidence13 = '«SI QUIERES DESTRUIR TOTALMENTE A UN HOMBRE, DALE TODO LO QUE SIEMPRE HA DESEADO»<br>—BOULET';
 
         displayStoryVillageFirstVisit = 'A PARTIR DE AHORA, VAMOS A HACER LAS COSAS A *MI* MANERA';
+        displayStoryVillageNEG5 = 'UNA INVESTIGACIÓN DE ESTE TERRENO NO HA ENCONTRADO PISCINAS ESTANCADAS NI PANTANOS. UNA LLANURA PLANA PERO CON PENDIENTE PARA ASEGURAR UN BUEN DRENAJE, LO SUFICIENTEMENTE ALTA PARA EVITAR FUTURAS INUNDACIONES. TRAS UNA INSPECCIÓN EXHAUSTIVA, LOS HÍGADOS DE LA FAUNA LOCAL PARECEN ESTAR SALUDABLES';
+        displayStoryVillageNEG4 = 'EL CLÉRIGO HA DECLARADO QUE LOS DIOSES ESTÁN COMPLACIDOS (SERÁ MEJOR QUE ASÍ SEA, LE ESTAMOS PAGANDO A ESTE TIPO UN BRAZO Y UNA PIERNA)';
+        displayStoryVillageNEG3 = 'FINALMENTE, LARGAS SEMANAS DE MEDICIÓN, DISEÑO, DIBUJO Y REVISIÓN HAN LLEVADO A ESTO: TENDREMOS FUENTES DE AGUA Y BAÑOS PÚBLICAS, Y EVENTUALMENTE UN LUJOSO COMPLEJO DE ENTRETENIMIENTO. UNA COPIA DE ESTOS PLANOS SE HA TALLADO EN UN PEDESTAL DE MÁRMOL PARA COLOCARLO EN LA PLAZA DE LA CIUDAD PARA QUE TODOS LO VEAN';
+        displayStoryVillageNEG2 = 'MIENTRAS TANTO ENEAS MARCÓ LOS LÍMITES DE LA CIUDAD CON UN ARADO Y ASIGNÓ CASAS: DECLARÓ QUE ESTO ERA ILIÓN Y ESTE LUGAR TROYA<br><br>LA ENEIDA DE VIRGILIO, LIBRO V, L.755-757';
+        displayStoryVillageNEG1 = '«NADIE SE BAÑA DOS VECES EN EL MISMO RÍO, PORQUE NO ES EL MISMO RÍO NI ÉL ES EL MISMO HOMBRE»<br>—HERÁCLITO';
         displayStoryVillage0 = 'NECESITARÁ MADERA PARA LA FRAGUA';
         displayStoryVillage1 = 'AHORA PODEMOS CONSTRUIR';
         displayStoryVillage2 = 'DEBEMOS TENER ALGO DE LEY Y ORDEN';
@@ -1031,11 +1195,23 @@ function Translate(language, bark = true) {
         displayStoryVillage14 = 'TIENES DERECHO A TRABAJAR, PERO NO TIENES DERECHO A LOS FRUTOS DE TU TRABAJO. NUNCA CREAS QUE ERES LA CAUSA DE LOS RESULTADOS DE TUS ELECCIONES. TRABAJAR DURO Y SER EQUILIBRIO EN EL ÉXITO Y EL FRACASO. ... LOS QUE BUSCAN DISFRUTAR LOS FRUTOS DE SUS OBRAS SON MISERABLES.<br><br>BHAGAVAD-GĪTĀ 2.47-49';
         displayStoryVillage15 = 'LA LIMPIEZA ES DIVINO';
         displayStoryVillage16 = 'ODIAN AL QUE SERMONA EN LA PUERTA, Y ABORRECEN AL QUE HABLA LA VERDAD<br><br>AMÓS 5:10';
-        displayStoryVillage17 = 'LA PLACA DE BRONCE SOBRE LA BASE DE MÁRMOL ROSA DICE:<br><br>≈ LAS 8 VIRTUDES ≈<br><br>♠<br>• HONESTIDAD •<br>DECIR LA VERDAD<br>♠<br>• HONOR •<br>HACER LO CORRECTO<br>♠<br>• VALOR •<br>MANTENERSE CONTRA LA INJUSTICIA<br>♠<br>• SACRIFICIO •<br>COMPARTE TUS BENDICIONES<br>♠<br>• COMPASIÓN •<br>SER AMABLE CON LOS DÉBILES<br>♠<br>• JUSTICIA •<br>SER JUSTO CON TODOS<br>♠<br>• ESPIRITUALIDAD •<br>ESCUCHA LA LUZ<br>♠<br>• HUMILDAD •<br>RESISTIR ORGULLO<br>♣';
+        displayStoryVillage17 = '<div id="MrSecretary">P: ¿Podría continuar, Señor Secretario, con lo que acaba de decir, por favor? Con respecto a las armas de destrucción masiva iraquíes, ¿hay alguna evidencia que indique que Irak ha intentado o está dispuesto a suministrar armas de destrucción masiva a terroristas? Porque hay informes de que *no* hay evidencia de un vínculo directo entre Bagdad y estas organizaciones terroristas.<br><br>Rumsfeld: Los informes que dicen que algo *no* ha sucedido siempre me resultan interesantes porque, como sabemos, hay cosas que ‘se saben’: hay cosas que sabemos que sabemos. También sabemos que hay ‘incógnitas conocidas’, es decir, sabemos que hay algunas cosas que no sabemos. Pero, también hay muchas ‘incógnitas desconocidas’: aquellas que no sabemos que no conocemos. Y si uno mira a lo largo de la historia de nuestro país y de otros países libres, son los de esta última categoría los que tienden a ser los difíciles. Y entonces las personas que tienen la omnisciencia de poder decir con gran certeza que algo no ha sucedido o no se está intentando, tienen capacidades que son... jeje, ellos pueden hacer cosas que yo no puedo hacer.<br><br>P: Disculpe, pero ¿es *esto* un desconocido desconocido? Porque usted dijo ‘varios desconocidos’ y me pregunto si esto es un desconocido desconocido.<br><br>Rumsfeld: No voy a decir cuál es.<br><br><i>DoD Transmisión de Noticias, Sala de Reuniones del Pentágono, Febrero 12, 2002 11:30 AM<br>Presentador: Secretario de Defensa de los Estados Unidos Donald H. Rumsfeld<br>(También participan: Gral. Richard B. Myers, Presidente del Estado Mayor Conjunto)</i></div>';
+        displayStoryVillage18 = '«MI VIDA HA TRANSCURRIDO EN ZONAS URBANA Y SUBURBANAS DONDE EL MUNDO NATURAL ESTÁ EN GRAN MEDIO OBSCURRIDO POR EL ASFALTO, EL ACERO Y EL HORMIGÓN QUE PESAN EL PAISAJE AMERICANO. LA NATURALEZA PARECE ESTAR MAYORMENTE AUSENTE EN ESTE MUNDO ... DE HECHO, LA NATURALEZA ESTÁ ALLÍ, PERO HA SIDO TAN CONTROLADA Y DOMINADA QUE, EN CIERTO SENTIDO, DEJA DE EXISTIR. LOS MIEMBROS DE LA METRÓPOLIS DEN POR SENTADO EL DOMINIO DE LA NATURALEZA. DE HECHO, LA CONQUISTA DE LA NATURALEZA ES TAN CENTRAL PARA LA CULTURA AMERICANA HOY EN DÍA QUE DIFICILMENTE PENSAMOS EN LA IDEA»<br>—THEODORE STEINBERG';
+        displayStoryVillage19 = '«PERO ES DE LO MÁS BONITO QUE HAY, MORIRSE. NO ES PARA NADA COMO LO PINTAN, COMO ALGO CONFUSO Y ATERRADOR. A MI SE ME HACE QUE A UNO SE LO PINTAN ASI PORQUE ‘DESCANSAR EN PAZ’ SUENA DEMASIADO TENTADOR»<br>—MATEO GARCÍA ELIZONDO';
+        displayStoryVillage20 = '«PLATÓN DIJO QUE DIOS GEOMETRIZA CONTINUAMENTE»<br>—PLUTARCO<br><br>«DIOS ARITMETIZA»<br>—CARL FRIEDRICH GAUSS<br><br>«DIOS NO JUEGA A LOS DADOS»<br>—ALBERT EINSTEIN<br><br>(Competencias del Taller Mejoraron)';
+        displayStoryVillage21 = 'EL SEÑOR YA ESTABA CASI ACABADO POR EL DOLOR EN SUS DIENTES. POR TANTO, FUE CON GRAN ESFUERZO QUE HABLÓ OTRA VEZ:<br>«TE LO SUPLICO, TEN PIEDAD DE MÍ. ¿QUÉ MEDICAMENTOS HABRÍAS PREPARADO? ¿CON QUÉ MEDICAMENTOS CURARÍAS?» PREGUNTÓ EL SEÑOR.<br>«NOSOTROS SIMPLEMENTE ELIMINARÍAMOS GUSANOS DE LOS DIENTES, CURARÍAMOS DOLENCIAS OCULARES, Y PONER HUESOS, TÚ SEÑOR,» RESPONDIERON<br><br>POPOL VUH, LA DERROTA DE SIETE GUACAMAYO';
+        displayStoryVillage22 = '5. SI UN JUEZ JUZGA UN CASO, LLEGA A UNA DECISIÓN Y PRESENTA SU SENTENCIA POR ESCRITO; SI LUEGO APARECE ERROR EN SU DECISIÓN, Y ES POR SU PROPIA CULPA, ENTONCES PAGARÁ DOCE VECES LA MULTA QUE HAYA FIJADO EN EL CASO, Y SERÁ REMOVIDO PÚBLICAMENTE DEL TRIBUNAL, Y NUNCA MÁS SE SENTARÁ ALLÍ PARA DICTAR SENTENCIA<br><br>EL CÓDIGO DE HAMMURABI';
+        displayStoryVillage23 = '<div id="shootingScript"><div class="action">EXT. ESQUINA DE ALLEN Y CALLE 5 – DÍA</div>WYATT<div class="dialogue">Sabes, estaba pensando que lo que realmente le vendría bien a esta ciudad es una pista de carreras.</div>BEHAN<div class="dialogue">¿En serio? No es una mala idea. Envía un mensaje de que estamos creciendo.</div>DOC<div class="dialogue">Se están adelantando mucho, ¿no, muchachos? Este es solo otro campamento minero.</div>BEHAN<div class="dialogue">¿Has visto cómo se visten todos? Bastante elegante para un campamento minero. No señor, la suerte está echada: estamos creciendo; tan grandes como San Francisco en unos años, e igual de sofisticados.</div><div class="action">Como si fuera una señal, una bala pasa ZUMBANDO cerca de la cabeza de Behan. Todos se agachan. MÁS DISPAROS mientras un hombre con una mano ensangrentada en la garganta sale tambaleándose por la puerta del cercano Crystal Palace, su arma disparando salvajemente como un motor en llamas antes de caer de cara a la acera, muerto.<br><br>Inmediatamente aparecen dos hombres más: un BORRACHO tambaleante con un agujero de bala en el hombro; y TURKEY CREEK JACK JOHNSON, un curtido hombre de las llanuras con su arma lista. Se forma una multitud mientras el borracho levanta su pistola y grita.</div>BORRACHO<div class="dialogue">¡Hijo de puta!</div>DOC<div class="dialogue">(se vuelve hacia Behan)<br>Muy cosmopolita.</div></div>TOMBSTONE (HOLLYWOOD PICTURES, 1993)';
+        displayStoryVillage24 = '«NADIE EN ESTE MUNDO, HASTA DONDE YO SÉ (Y HE BUSCADO EN LOS REGISTROS DURANTE AÑOS Y HE CONTRATADO AGENTES PARA QUE ME AYUDARAN) HA PERDIDO DINERO POR SUBESTIMAR LA INTELIGENCIA DE LAS GRANDES MASAS DE GENTE SENCILLA»<br>—H.L. MENCKEN';
+        displayStoryVillage25 = 'UN CIRCO PARA EL DEPORTE, UN COLISEO PARA LA SED DE SANGRE, Y AHORA UN TEATRO DE CLASE MUNDIAL PARA LOS ÚLTIMOS DRAMAS. SEGURAMENTE ESTO DEBERÍA PONERNOS EN EL MAPA';
+        displayStoryVillage26 = '«PARA CONSTRUIR CIUDADES SOSTENIBLES — Y UN FUTURO SOSTENIBLE — SE NECESITARÁ UN DIÁLOGO ABIERTO ENTRE TODAS LAS PODERES DEL GOBIERNO NACIONAL, REGIONAL Y LOCAL. Y SE REQUERIRÁ LA PARTICIPACIÓN DE TODOS LOS INTERESADOS — INCLUIDOS EL SECTOR PRIVADO Y LA SOCIEDAD CIVIL, Y ESPECIALMENTE LOS POBRES Y MARGINADOS»<br>—BAN KI-MOON';
+        displayStoryVillage27 = 'SALVACIÓN NO SE OBTIENE CON FÓRMULAS DE ADORACIÓN, NI CON EXORCISMOS, NI CON INVOCACIONES A ORÁCULOS<br><br>OFUDESAKI 3:45';
+        displayStoryVillage28 = 'ME DICEN QUE DIOS ESCRIBE PATRONES EN EL FIRMAMENTO. BUENO, QUIERO DESCUBRIRLO';
+        displayStoryVillage100 = 'LA PLACA DE BRONCE SOBRE LA BASE DE MÁRMOL ROSA DICE:<br><br>≈ LAS 8 VIRTUDES ≈<br><br>♠<br>• HONESTIDAD •<br>DECIR LA VERDAD<br>♠<br>• HONOR •<br>HACER LO CORRECTO<br>♠<br>• VALOR •<br>MANTENERSE CONTRA LA INJUSTICIA<br>♠<br>• SACRIFICIO •<br>COMPARTE TUS BENDICIONES<br>♠<br>• COMPASIÓN •<br>SER AMABLE CON LOS DÉBILES<br>♠<br>• JUSTICIA •<br>SER JUSTO CON TODOS<br>♠<br>• ESPIRITUALIDAD •<br>ESCUCHA LA LUZ<br>♠<br>• HUMILDAD •<br>RESISTIR ORGULLO<br>♣';
 
         displayStoryPortFirstVisit = 'USTED LLEGÓ A ESTE PAÍS POR ESTOS MISMOS MUELLES; ENTONCES SOLO ERA UN NIÑO, UN EXTRAÑO EN UNA TIERRA EXTRAÑA. POR SUPUESTO, SUS CIRCUNSTANCIAS HAN MEJORADO SIGNIFICATIVAMENTE DESDE AQUELLOS DÍAS. HOY LO HAN RECIBIDO AQUÍ COMO UN CLIENTE POTENCIAL DE GRAN IMPORTANCIA Y LO HAN CONDUCIDO DIRECTAMENTE A LA BIEN EQUIPADA OFICINA DEL CAPATAZ. SU ASISTENTE LE OFRECE UNA BANDEJA DE PELTRE CON FILIGRANAS ADORNADAS LLENA DE DÁTILES CONFITADOS';
         displayStoryPort00 = 'LOS ATENIENSES TIENEN UNA NECESIDAD URGENTE DE ACEITE SAGRADO Y ESTÁN DISPUESTOS A PAGAR GENIALMENTE';
-        displayStoryPort01 = '«ESTE... ES GRANO; QUE CUALQUIER TONTO PUEDE COMER, PERO PARA EL CUAL EL SEÑOR PREVIO UN MEDIO DE CONSUMO MÁS DIVINO. ALABEMOS A NUESTRO CREADOR, Y GLORIA A SU BENDICIÓN, APRENDIENDO SOBRE: LA CERVEZA»<br>—FRAILE TUCK<br><br>ROBIN HOOD: EL PRÍNCIPE DE LOS LADRONES (WARNER BROS. 1991)';
+        displayStoryPort01 = '«ESTE... ES GRANO; QUE CUALQUIER TONTO PUEDE COMER, PERO PARA EL CUAL EL SEÑOR PREVIO UN MEDIO DE CONSUMO MÁS DIVINO. ALABEMOS A NUESTRO CREADOR, Y GLORIA A SU BENDICIÓN, APRENDIENDO SOBRE: LA CERVEZA»<br>—FRAILE TUCK<br><br>ROBIN HOOD: EL PRÍNCIPE DE LOS LADRONES (WARNER BROS., 1991)';
         displayStoryPort02 = '«CUANDO EL DIABLO LES DIGA, “NO BEBAN,” RESPONDAN, “BEBERÉ, TODO LO QUE QUIERA, SOLO PORQUE ME DIJISTE QUE NO LO HICIERA.” HAY QUE HACER SIEMPRE LO QUE SATANÁS PROHÍBE»<br>—MARTÍN LUTERO';
         displayStoryPort03 = 'MUCHACHO, TODAVÍA NO HE CONOCIDO A UN EGIPCIO AL QUE NO LE ENCANTEN LOS DULCES';
         displayStoryPort04 = 'EL JUGO FRESCO NO DURA MUCHO TIEMPO; AFORTUNADAMENTE EL CANCILLER ECONÓMICO NOS HA PRESENTADO A UN COMERCIANTE EN JERUSALÉN EN QUIEN PODEMOS CONFIAR Y QUE ESTÁ HAMBRIENTO DE LO QUE PODAMOS SUMINISTRARLE';
@@ -1052,13 +1228,15 @@ function Translate(language, bark = true) {
         displayGoToPort = 'VIAJAR AL PUERTO →';
         displayGoToTownshipFromPort = '← REGRESAR A TU PROVINCIA';
 
+        displayVillageTitleNEG1 = 'El Apacentadero de';
         displayVillageTitle0 = 'El Asentamiento de';
         displayVillageTitle1 = 'El Puesto Avanzado de';
         displayVillageTitle2 = 'El Caserío de';
         displayVillageTitle3 = 'La Aldea de';
         displayVillageTitle4 = 'El Pueblo de';
         displayVillageTitle5 = 'La Ciudad de';
-        displayVillageTitle6 = 'La Capital de';
+        displayVillageTitle6 = 'La Metrópoli de';
+        displayVillageTitle7 = 'La Capital de';
 
         displayCitizens = 'Ciudadanos';
         displayPilgrims = 'Peregrinos';
@@ -1081,8 +1259,11 @@ function Translate(language, bark = true) {
         displayWorship = 'Adoración';
         displayTribute = 'Homenaje';
         displayMilitary = 'Militar';
+        displayMedical = 'Médica';
         displayStudy = 'Estudio';
         displayTaxes = 'Impuestos';
+        displayInterest = 'Interés';
+        displayInterestRate = 'Tasa de Interés';
         displayMateriel = 'Material';
         displayPonies = 'Ponis';
         displayCavalry = 'Caballería';
@@ -1091,6 +1272,8 @@ function Translate(language, bark = true) {
         displayChance = 'oportunidad';
         displayScripture = 'Escritura';
         displayRelic = 'Artefactos';
+        displayGhosts = 'Fantasmas';
+        displayPatients = 'Pacientes';
         displayMessiahs = 'Mesías';
         displayRats = 'Ratas';
         displayStatistics = 'Estadísticas';
@@ -1105,6 +1288,7 @@ function Translate(language, bark = true) {
         displayJuice = 'Jugo';
         displayDriedFigs = 'Higos Secos al Sol';
         displayTrinkets = 'Baratijas';
+        displayGems = 'Piedras Preciosas';
         displayAmountProduced = 'Unidades<br>Producidas';
         displayAmountSpent = 'Unidades<br>Gastadas';
 
@@ -1152,8 +1336,8 @@ function Translate(language, bark = true) {
         displayLanguageQuote = '<div id="divSystemMessageScripture">«No hay conocimiento verdadero sin fe recta, ninguna conducta virtuosa es posible sin conocimiento, sin virtud no hay liberación, y sin liberación, no nirvana.»</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
         displayInfoMadeWith = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.<br><br>Hecho con CodePen, el GNU Image Manipulation Program, GitHub, Inkscape y Visual Studio Code.';
-        displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, David “aniwey” L., Tom Rothamel, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Dave y Anna Davis, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben y W3Schools.';
+        displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
+        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben y W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';
@@ -1170,6 +1354,10 @@ function Translate(language, bark = true) {
         displayModCodeTextArea = 'Pegue su modCode aquí';
         displaySubmitModCode = 'ENTREGAR MODCODE';
         displayDismissMods = 'HE TERMINADO';
+
+        displayCheevo = 'Tienes Toda Sabiduría';
+
+        displayRandomWisdomsDisplay = displayRandomWisdomsEspañol;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////

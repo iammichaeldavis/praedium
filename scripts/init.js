@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.5';
+const version = '1.6';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -111,13 +111,23 @@ const player = {
     hasGreenhouse: false,
     hasAtelier: false,
     hasMansion: false,
+    hasArmy: false,
+    hasGraveyard: false,
+    hasHospital: false,
+    hasCourthouse: false,
+    hasRacetrack: false,
+    hasOracle: false,
+    hasMonument: false,
     hasSeenVillage: false,
     hasSeenPort: false,
     hasMerchantGuildWrit: false,
     hasFoundCopperEvidence: false,
     hasFoundMine: false,
     hasHiredBronzeworkers: false,
+    hasFoundCrystalEvidence: false,
+    hasHiredGemcutters: false,
     hasBeenLevied: false,
+    hasAllWisdom: false,
     hasWon: false,
 };
 
@@ -126,11 +136,13 @@ tilemap.src = 'bitmaps/tilemap.png';
 const residenceImage = new Image();
 residenceImage.src = 'bitmaps/res00.png';
 const villageImage = new Image();
-villageImage.src = 'bitmaps/village00.png';
+villageImage.src = 'bitmaps/villageNEG05.png';
 const portImage = new Image();
 portImage.src = 'bitmaps/docks.png';
 const mansionImage = new Image();
 mansionImage.src = 'bitmaps/mansion.png';
+
+const divOverlayLoading = document.getElementById('divOverlayLoading');
 
 const divOverlayForeword = document.getElementById('divOverlayForeword');
 const divForewordTitle = document.getElementById('divForewordTitle');
@@ -188,20 +200,28 @@ const tableResidenceInventory = document.getElementById('tableResidenceInventory
 const tableResidenceReport = document.getElementById('tableResidenceReport');
 
 const divWorkshopBakery = document.getElementById('divWorkshopBakery');
+const imgWorkshopBakery = document.getElementById('imgWorkshopBakery');
 const tableWorkshopBakery = document.getElementById('tableWorkshopBakery');
 const divWorkshopOliveMill = document.getElementById('divWorkshopOliveMill');
+const imgWorkshopOliveMill = document.getElementById('imgWorkshopOliveMill');
 const tableWorkshopOliveMill = document.getElementById('tableWorkshopOliveMill');
 const divWorkshopBrewery = document.getElementById('divWorkshopBrewery');
+const imgWorkshopBrewery = document.getElementById('imgWorkshopBrewery');
 const tableWorkshopBrewery = document.getElementById('tableWorkshopBrewery');
 const divWorkshopWinery = document.getElementById('divWorkshopWinery');
+const imgWorkshopWinery = document.getElementById('imgWorkshopWinery');
 const tableWorkshopWinery = document.getElementById('tableWorkshopWinery');
 const divWorkshopKitchen = document.getElementById('divWorkshopKitchen');
+const imgWorkshopKitchen = document.getElementById('imgWorkshopKitchen');
 const tableWorkshopKitchen = document.getElementById('tableWorkshopKitchen');
 const divWorkshopPress = document.getElementById('divWorkshopPress');
+const imgWorkshopPress = document.getElementById('imgWorkshopPress');
 const tableWorkshopPress = document.getElementById('tableWorkshopPress');
 const divWorkshopGreenhouse = document.getElementById('divWorkshopGreenhouse');
+const imgWorkshopGreenhouse = document.getElementById('imgWorkshopGreenhouse');
 const tableWorkshopGreenhouse = document.getElementById('tableWorkshopGreenhouse');
 const divWorkshopAtelier = document.getElementById('divWorkshopAtelier');
+const imgWorkshopAtelier = document.getElementById('imgWorkshopAtelier');
 const tableWorkshopAtelier = document.getElementById('tableWorkshopAtelier');
 
 const divViewPraedium = document.getElementById('divViewPraedium');
@@ -278,6 +298,7 @@ const canvasVillage = document.getElementById('canvasVillage');
 const canvasVillageContext = canvasVillage.getContext('2d');
 const divVillageLasTablas = document.getElementById('divVillageLasTablas');
 const buttonBuild = document.getElementById('buttonBuild');
+const buttonVisitOracle = document.getElementById('buttonVisitOracle');
 const buttonSellWheat = document.getElementById('buttonSellWheat');
 const buttonSellBarley = document.getElementById('buttonSellBarley');
 
@@ -301,6 +322,9 @@ const buttonI = document.getElementById('buttonI');
 const buttonCC0 = document.getElementById('buttonCC0');
 
 const buttonWin = document.getElementById('buttonWin');
+const imgNirvana = document.getElementById('imgNirvana');
+
+const spanCheevoText = document.getElementById('spanCheevoText');
 
 const formatterStandard = new Intl.NumberFormat('en-US');
 
@@ -378,6 +402,12 @@ let oreCopperMin = 40;
 let oreCopperMax = 44;
 let minersHired = 10;
 
+let crystalTimer = 0;
+const crystalTimerLimit = 8;
+let crystalsCount = 0;
+let crystalHarvest = 100;
+let gemcuttersHired = 5;
+
 let ingotsCopperCount = 0;
 let ingotsOreCostPerIngot = 100;
 let ingotsCopperYieldPerTurn = 1;
@@ -391,31 +421,31 @@ let metallurgistsHired = 0;
 let bronzeworkCountdownTimerMax = 4;
 let bronzeworkCountdownTimer = bronzeworkCountdownTimerMax;
 
-// 0. Stone 🪨, 1. Copper Ore ⛏️, 2. Copper Ingots 🧱, 3. Tin Ingots 🧱, 4. Bronze Ingots 🧱
-const mountainProducedCount = [0, 0, 0, 0, 0,];
-const mountainSpentCount = [0, 0, 0, 0, 0,];
+// 0. Stone 🪨, 1. Copper Ore ⛏️, 2. Copper Ingots 🧱, 3. Tin Ingots 🧱, 4. Bronze Ingots 🧱, 5. Crystal 💎
+const mountainProducedCount = [0, 0, 0, 0, 0, 0,];
+const mountainSpentCount = [0, 0, 0, 0, 0, 0,];
 
-// 0. Hands 🧑‍🌾, 1. Loggers 🪓, 2. Sawyers 🪚, 3. Masons 🔨, 4. Miners ⛏️, 5. Smelters 🔥, 6. Vignerons 🍇, 7. Arborists 🌲, 8. Horticulturalists 🐌, 9. Metallurgists 💍
-const paidOutWheat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const starving = [false, false, false, false, false, false, false, false, false, false,];
+// 0. Hands 🧑‍🌾, 1. Loggers 🪓, 2. Sawyers 🪚, 3. Masons 🔨, 4. Miners ⛏️, 5. Smelters 🔥, 6. Vignerons 🍇, 7. Arborists 🌲, 8. Horticulturalists 🐌, 9. Metallurgists 💍, 10. Gemcutters 💎
+const paidOutWheat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const starving = [false, false, false, false, false, false, false, false, false, false, false,];
 const starvingBuffer = 10;
 
 let residenceStage = 0;
 let loavesPaymentAmount = 14;
 
-// 0. Loaves 🥖, 1. Oil 🪔, 2. Beer 🍺, 3. Wine 🍷, 4. Syrup 🍯, 5. Juice 🧃, 6. Fruit Leather (Sun-Dried Fig) 🫐, 7. Trinkets 💎
-const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5,];
-const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1,];
-const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5,];
-const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceInStockCount = [0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceProducedCount = [0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceSpentCount = [0, 0, 0, 0, 0, 0, 0, 0,];
+// 0. Loaves 🥖, 1. Oil 🪔, 2. Beer 🍺, 3. Wine 🍷, 4. Syrup 🍯, 5. Juice 🧃, 6. Fruit Leather (Sun-Dried Fig) 🫐, 7. Trinkets 💍, 8. Gems 💎
+const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.8];
+const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1, 1,];
+const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5, 1,];
+const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const residenceInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const residenceProducedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const residenceSpentCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
 
 const nameVillage = 'Alʿard al-Janubiyah'; // الأرض الجنوبية == Terra Australis. HBD, Grant! 🎂🫂
 const estDate = [0, 0,];
-let villageStage = 0;
+let villageStage = -5;
 
 let residentsCount = 0;
 let residentsMax = 0;
@@ -428,6 +458,9 @@ let rentLifetimeCollected = 0;
 
 let taxesValue = 69; // ☯️
 let taxesLifetimeCollected = 0;
+
+let interestRate = 0.0056; // Nov. 2024 U.S. Nat'l Ave.
+let interestLifetimeCollected = 0;
 
 let horsesSpawn = false;
 let horseClock = 0;
@@ -442,6 +475,7 @@ let beadsCount = 0;
 
 let trophiesSpawn = false;
 let trophiesCount = 0;
+let trophyChance = 10;
 let tourismValue = 10;
 let tourismLifetimeProfit = 0;
 
@@ -457,6 +491,12 @@ let ratPenaltyFactor = 0;
 
 let cityWalls = false;
 let militaryLifetimeCost = 0;
+
+let ghostsCount = 0;
+
+let patientsCount = 0;
+let patientCost = 100;
+let medicalLifetimeCost = 0;
 
 let pilgrimsCount = 0;
 let pilgrimsMax = 0;
@@ -489,9 +529,6 @@ const shipmentCosts = [0,];
 const importCost = [8000,];
 const importAmount = [40,];
 let trinketValue = ((importCost[0] / importAmount[0]) / residenceProductOut[7]) * valueFactor[6];
-
-let snapshotLastTurn = null;
-let snapshotThisTurn = null;
 
 const priceStage1 = 50;
 const priceStage2 = 100;
@@ -538,8 +575,13 @@ const priceResidence12 = [336, 168, 84, 42,]; // Atelier 💎
 const priceResidence13 = [672, 336, 168, 84,]; // Mansion 🏡
 
 const priceVillage = 64000;
-const priceBuild0 = [500, 8000, 4000, 20000,]; // Blacksmith
-const priceBuild1 = [2000, 8000, 30000,]; // Workshop
+const priceBuildNEG5 = 500; // Survey
+const priceBuildNEG4 = [1000, 3, 25, 200, 100,]; // Groundbreaking
+const priceBuildNEG3 = 200; // Plans
+const priceBuildNEG2 = 100; // Trench
+const priceBuildNEG1 = [10000, 50000,]; // Aqueduct
+const priceBuild0 = [500, 8000, 4000, 500,]; // Blacksmith
+const priceBuild1 = [2000, 8000, 100,]; // Workshop
 const priceBuild2 = [10000, 50000,]; // Town Hall (Forum)
 const priceBuild3 = [25000, 5000, 10000,]; // Insula (ground floor)
 const priceMineScout = 420; // 🚬¯\_(ツ)_/¯🍩
@@ -554,11 +596,23 @@ const priceBuild9 = [256000, 64000, 25000, 50000,]; // 3rd Insula
 const priceBuild10 = [128000, 8000, 12000,]; // Stables
 const priceBuild11 = [256000, 100, 7, 7, 7, 7, 7, 7, 7, 20000, 4,]; // Temple
 const priceBuild12 = [2000000, 4000, 60000, 12,]; // Arena
-const priceBuild13 = [4000000, 200, 30000]; // Bank
-const priceBuild14 = [64000, 810, 20000]; // Monks
-const priceBuild15 = [1200000, 60000]; // Sewers
-const priceBuild16 = [2400000, 30000, 60000, 200000]; // Gates
-const priceBuild17 = [10000000, 9001, 77, 2500, 100000, 100000]; // Monument
+const priceBuild13 = [4000000, 200, 30000,]; // Bank
+const priceBuild14 = [64000, 810, 20000,]; // Monks
+const priceBuild15 = [1200000, 60000,]; // Sewers
+const priceBuild16 = [2400000, 30000, 60000, 200000,]; // Gates
+const priceBuild17 = [1000000, 100000, 200,]; // Standing Army
+const priceBuild18 = [1024000, 100000, 200000,]; // 4x Insulas
+const priceBuild19 = [250000, 20000, 100000,]; // Graveyard
+const priceBuild20 = [400000, 160000, 60000, 120000,]; // University
+const priceBuild21 = [200000, 60000, 300,]; // Hospital
+const priceBuild22 = [500000, 40000, 100, 100, 100,]; // Courthouse
+const priceBuild23 = [250000, 10000, 20000,]; // Hippodrome
+const priceBuild24 = [1250000, 20000,]; // Colosseum
+const priceBuild25 = [1000000, 16000,]; // Theater
+const priceBuild26 = 100000; // Private Development
+const priceBuild27 = [10000, 5000, 100,]; // Oracle
+const priceBuild28 = [10000, 2000, 333, 333,]; // Astronomers Guild
+const priceBuild100 = [10000000, 9001, 77, 1000, 100000, 100000,]; // Monument
 
 const pricePort0 = 8000;
 const pricePort1 = 16000;
@@ -567,15 +621,22 @@ const pricePort3 = 64000;
 const pricePort4 = 128000;
 const pricePort5 = 256000;
 const pricePort6 = 512000;
-const pricePort7 = 7777777777777; // import cost?
 
 const tributeAmount = 616; // 😈 NRO QSR
 let tributeLifetimePaid = 0;
 let tributeTimer = 0;
 const tributeTimerLimit = 100;
 
+let revealedWisdom = 0;
+const achievementSoundRare = new Audio('waveforms/XboxOneRareAchievement.mp3');
+
 const legalTarget = 'https://creativecommons.org/publicdomain/zero/1.0/';
 const winTarget = 'https://youtu.be/dOjFcx3GJHg'; // ♠️♣️♦️♥️ // 'https://youtu.be/AQmFlAB15f8'; // 👨‍🎤💃🎻 // 'https://youtu.be/YnDLlajMxyo'; // 🌼☀️🍂❄️
+
+let snapshotLastTurn = null;
+let snapshotThisTurn = null;
+
+let debugCounter = 0;
 
 let gameSpeed = 'paused';
 let oldSpeed = null;

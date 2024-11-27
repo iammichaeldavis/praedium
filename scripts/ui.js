@@ -549,6 +549,18 @@ function UpdateText() {
         if (player.seesMountain) {
             theadMountainInventory.innerHTML = '<tr><td colspan="3">' + displayInStock + '</td></tr>';
             tableString = '<tr><td>' + displayStone + '&nbsp;<span class="icon Stone inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(stoneCount) + '</td><td></td></tr>';
+            if (player.hasHiredGemcutters) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayCrystal + '&nbsp;<span class="icon Crystal inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="noPadColumn">';
+                tableString += formatterStandard.format(crystalsCount);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             if (player.canMine) { tableString += '<tr><td>' + displayOre + '&nbsp;<span class="icon OreCopper inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(oreCopperCount) + '</td><td></td></tr>'; }
             if (player.canSmelt) { tableString += '<tr><td>' + displayCopper + '&nbsp;<span class="icon IngotCopper inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(ingotsCopperCount) + '</td><td>(-' + (smeltersHired * ingotsCopperYieldPerTurn * ingotsOreCostPerIngot) + '<span class="icon OreCopper inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)</td></tr>'; }
             if (player.canImportTin) {
@@ -581,14 +593,29 @@ function UpdateText() {
 
             theadMountainStaff.innerHTML = '<tr><td colspan="3">' + displayStaff + '</td></tr>';
             let masonCost = '(-' + formatterStandard.format(masonsHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
+            let gemcutterCost = '(-' + formatterStandard.format(gemcuttersHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
             let minerCost = '(-' + formatterStandard.format(minersHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
             let smelterCost = '(-' + formatterStandard.format(smeltersHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
             let metallurgistCost = '(-' + formatterStandard.format(metallurgistsHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
             if (starving[3]) { masonCost = '<span class="starving">' + displayStarving + '</span>'; }
+            if (starving[10]) { gemcutterCost = '<span class="starving">' + displayStarving + '</span>'; }
             if (starving[4]) { minerCost = '<span class="starving">' + displayStarving + '</span>'; }
             if (starving[5]) { smelterCost = '<span class="starving">' + displayStarving + '</span>'; }
             if (starving[9]) { metallurgistCost = '<span class="starving">' + displayStarving + '</span>'; }
             tableString = '<tr><td>' + displayMasons + '&nbsp;<span class="icon Mason inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(masonsHired) + '</td><td>' + masonCost + '</td></tr>';
+            if (player.hasHiredGemcutters) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayGemcutters + '&nbsp;<span class="icon Gemcutter inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="noPadColumn">';
+                tableString += formatterStandard.format(gemcuttersHired);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += gemcutterCost;
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             if (player.canMine) {
                 tableString += '<tr><td>' + displayMiners + '&nbsp;<span class="icon Miner inlineIcon"></span>:</td><td class="noPadColumn">' + formatterStandard.format(minersHired) + '</td><td>' + minerCost + '</td></tr>';
             }
@@ -613,6 +640,19 @@ function UpdateText() {
             if (player.seesReport) {
                 theadMountainReport.innerHTML = '<tr><td><br>' + displayGood + '</td><td>' + displayHomersProduced + '</td><td>' + displayHomersSpent + '</td></tr>';
                 tableString = '<tr><td><span class="icon Stone"></span></td><td>' + formatterStandard.format(mountainProducedCount[0]) + '</td><td>' + formatterStandard.format(mountainSpentCount[0]) + '</td></tr>';
+                if (player.hasHiredGemcutters) {
+                    tableString += '<tr>';
+                    tableString += '<td>';
+                    tableString += '<span class="icon Crystal"></span>';
+                    tableString += '</td>';
+                    tableString += '<td>';
+                    tableString += formatterStandard.format(mountainProducedCount[5]);
+                    tableString += '</td>';
+                    tableString += '<td>';
+                    tableString += formatterStandard.format(mountainSpentCount[5]);
+                    tableString += '</td>';
+                    tableString += '</tr>';
+                }
                 if (player.canMine) {
                     tableString += '<tr><td><span class="icon OreCopper"></span></td><td>' + formatterStandard.format(mountainProducedCount[1]) + '</td><td>' + formatterStandard.format(mountainSpentCount[1]) + '</td></tr>';
                 }
@@ -652,6 +692,7 @@ function UpdateText() {
             else if (player.hasFoundMine && !player.canMine) { buttonMountain.innerHTML = displayLabelMineDig + '<br>(' + currencySymbol + formatterStandard.format(priceMineDig[0]) + ' + ' + priceMineDig[1] + '<span class="icon Log inlineIcon"></span>)'; }
             else if (player.canMine && !player.canSmelt) { buttonMountain.innerHTML = displayLabelFoundry + '<br>(' + currencySymbol + formatterStandard.format(priceFoundry[0]) + ' + ' + priceFoundry[1] + '<span class="icon Log inlineIcon"></span> + ' + formatterStandard.format(priceFoundry[2]) + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (player.canSmelt && player.canHireBronzeworkers) { buttonMountain.innerHTML = displayLabelBronzeworkers + ' ' + '<span class="icon Blacksmith inlineIcon"></span>'; }
+            else if (player.hasFoundCrystalEvidence) { buttonMountain.innerHTML = displayLabelDigCrystal + ' ' + '<span class="icon Shovel inlineIcon"></span>'; }
         }
 
         // BUY LAND BUTTON ---------------------
@@ -736,7 +777,7 @@ function UpdateText() {
             tableString += '<td>' + displayCitizens + ' <span class="icon Citizen inlineIcon"></span>:' + '</td>';
             tableString += '<td class="rightPadColumn">' + residentsCount + '<span class="warehouseTotal">/' + residentsMax + '</span>' + '</td>';
             tableString += '</tr>';
-            if (villageStage > 17) {
+            if (player.hasMonument) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayPilgrims + ' <span class="icon Pilgrim inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="rightPadColumn">' + pilgrimsCount + '<span class="warehouseTotal">/' + pilgrimsMax + '</span>' + '</td>';
@@ -762,6 +803,22 @@ function UpdateText() {
                 tableString += '<tr>';
                 tableString += '<td>' + displayAsSpent + ' <span class="icon MoneyBagSpent inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(asSpent) + '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasBank) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayInterestRate + ' <span class="icon Accountant inlineIcon"></span>:' + '</td>';
+                let revealedRate = interestRate * 100;
+                revealedRate = Math.round(revealedRate * 100) / 100;
+                tableString += '<td class="rightPadColumn">' + revealedRate + '% APR</td>';
+                tableString += '</tr>';
+            }
+            if (player.canSell) {
+                tableString += '<tr>';
+                tableString += '<td>' + 'Market Value' + ' <span class="icon Scales inlineIcon"></span>:' + '</td>';
+                const calculatedValue = (currentBushelPrice * 100) / bushelBulkCount;
+                const valueToString = '' + calculatedValue;
+                tableString += '<td class="rightPadColumn">' + '1<span class="icon Wheat inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + valueToString[0] + '.' + valueToString[1] + valueToString[2] + '</td>';
                 tableString += '</tr>';
             }
             if (1 == 1) {
@@ -793,7 +850,7 @@ function UpdateText() {
             }
             if (villageStage > 12) {
                 tableString += '<tr>';
-                tableString += '<td>' + displayTourism + ' <span class="icon Jester inlineIcon"></span>:' + '</td>';
+                tableString += '<td>' + displayTourism + ' <span class="icon Chuckles inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(tourismLifetimeProfit) + '</td>';
                 tableString += '</tr>';
             }
@@ -803,7 +860,13 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(taxesLifetimeCollected) + '</td>';
                 tableString += '</tr>';
             }
-            if (villageStage > 16 || player.canImport) {
+            if (player.hasBank) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayInterest + ' <span class="icon Accountant inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(interestLifetimeCollected) + '</td>';
+                tableString += '</tr>';
+            }
+            if (player.canImport || player.hasArmy || player.hasBeenLevied) {
                 tableString += '<tr>';
                 tableString += '<td colspan="2" class="rightPadColumn">' + '</td>';
                 tableString += '</tr>';
@@ -818,10 +881,16 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(allShippingCosts) + '</td>';
                 tableString += '</tr>';
             }
-            if (villageStage > 16) {
+            if (player.hasArmy) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayMilitary + ' <span class="icon TaxCollector inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(militaryLifetimeCost) + '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasHospital) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayMedical + ' <span class="icon Patient inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(medicalLifetimeCost) + '</td>';
                 tableString += '</tr>';
             }
             if (player.hasBeenLevied) {
@@ -854,7 +923,7 @@ function UpdateText() {
             tableString += '</tr>';
             if (trophiesSpawn) {
                 tableString += '<tr>';
-                tableString += '<td>' + displayTourism + ' <span class="icon Jester inlineIcon"></span>:' + '</td>';
+                tableString += '<td>' + displayTourism + ' <span class="icon Chuckles inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="noPadColumn">' + '+' + currencySymbol + tourismValue + '/' + '<span class="icon Trophy inlineIcon"></span>' + '</td>';
                 tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayFortnight + '</span>' + '</td>';
                 tableString += '</tr>';
@@ -887,7 +956,7 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayYear + '</span>' + '</td>';
                 tableString += '</tr>';
             }
-            if (villageStage > 17) {
+            if (player.hasMonument) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayConjunction + ' <span class="icon Sphinx inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="noPadColumn">' + '+' + relicSpawnCount + '<span class="icon Relic inlineIcon"></span>' + '</td>';
@@ -924,7 +993,7 @@ function UpdateText() {
                 const knightsMax = Math.floor(residentsCount / 2);
                 let knightsCount = horsesCount;
                 if (knightsCount > knightsMax) { knightsCount = knightsMax; }
-                if (cityWalls) {
+                if (player.hasArmy) {
                     tableString += '<tr>';
                     tableString += '<td>' + displayCavalry + ' <span class="icon BowAndArrow inlineIcon"></span>:' + '</td>';
                     tableString += '<td class="noPadColumn">' + formatterStandard.format(knightsCount) + '<span class="warehouseTotal">/' + knightsMax + '</span>' + '</td>';
@@ -935,7 +1004,7 @@ function UpdateText() {
                     tableString += '<tr>';
                     tableString += '<td>' + displayChampionships + ' <span class="icon Trophy inlineIcon"></span>:' + '</td>';
                     tableString += '<td class="noPadColumn">' + formatterStandard.format(trophiesCount) + '</td>';
-                    tableString += '<td>(10%' + '<span class="warehouseTotal"> ' + displayChance + '/' + displayMonth + '</span>)' + '</td>';
+                    tableString += '<td>(' + trophyChance + '%' + '<span class="warehouseTotal"> ' + displayChance + '/' + displayMonth + '</span>)' + '</td>';
                     tableString += '</tr>';
                 }
                 if (beadsSpawn) {
@@ -943,7 +1012,7 @@ function UpdateText() {
                     tableString += '<td>' + displayPrayers + ' <span class="icon Mala inlineIcon"></span>:' + '</td>';
                     tableString += '<td class="noPadColumn">' + formatterStandard.format(beadsCount) + '</td>';
                     tableString += '<td>';
-                    if (villageStage > 17) {
+                    if (player.hasMonument) {
                         tableString += '(+' + pilgrimPrayerValue + '/' + '<span class="icon Pilgrim inlineIcon"></span>' + ')';
                     }
                     tableString += '</td>';
@@ -956,7 +1025,7 @@ function UpdateText() {
                     tableString += '<td></td>';
                     tableString += '</tr>';
                 }
-                if (villageStage > 17) {
+                if (player.hasMonument) {
                     tableString += '<tr>';
                     tableString += '<td>' + displayRelic + ' <span class="icon Relic inlineIcon"></span>:' + '</td>';
                     tableString += '<td class="noPadColumn">' + formatterStandard.format(relicCount) + '</td>';
@@ -966,7 +1035,23 @@ function UpdateText() {
                 if (player.isGod) {
                     tableString += '<tr>';
                     tableString += '<td>' + 'χριστοί' + ' <span class="icon Child inlineIcon"></span>:' + '</td>';
-                    tableString += '<td class="noPadColumn">' + formatterStandard.format(0) + '</td>';
+                    tableString += '<td class="noPadColumn">' + 0 + '</td>';
+                    tableString += '<td></td>';
+                    tableString += '</tr>';
+                }
+                if (player.hasHospital) {
+                    tableString += '<tr>';
+                    tableString += '<td>' + displayPatients + ' <span class="icon Patient inlineIcon"></span>:' + '</td>';
+                    tableString += '<td class="noPadColumn">' + formatterStandard.format(patientsCount) + '</td>';
+                    let cellContent = '';
+                    if (patientsCount != 0) { cellContent = '(-' + currencySymbol + formatterStandard.format(patientsCount * patientCost) + ')'; }
+                    tableString += '<td>' + cellContent + '</td>';
+                    tableString += '</tr>';
+                }
+                if (player.hasGraveyard) {
+                    tableString += '<tr>';
+                    tableString += '<td>' + displayGhosts + ' <span class="icon Ghost inlineIcon"></span>:' + '</td>';
+                    tableString += '<td class="noPadColumn">' + formatterStandard.format(ghostsCount) + '</td>';
                     tableString += '<td></td>';
                     tableString += '</tr>';
                 }
@@ -993,10 +1078,12 @@ function UpdateText() {
                     tableString += '</tr>';
                     tableString += '</thead>';
                     tableString += '<tbody>';
-                    tableString += '<tr>';
-                    tableString += '<td>' + displayOffense + ' <span class="icon Sword inlineIcon"></span>:' + '</td>';
-                    tableString += '<td class="rightPadColumn">' + formatterStandard.format(calculatedOffenseScore) + '</td>';
-                    tableString += '</tr>';
+                    if (player.hasArmy) {
+                        tableString += '<tr>';
+                        tableString += '<td>' + displayOffense + ' <span class="icon Sword inlineIcon"></span>:' + '</td>';
+                        tableString += '<td class="rightPadColumn">' + formatterStandard.format(calculatedOffenseScore) + '</td>';
+                        tableString += '</tr>';
+                    }
                     tableString += '<tr>';
                     tableString += '<td>' + displayDefense + ' <span class="icon Shield inlineIcon"></span>:' + '</td>';
                     tableString += '<td class="rightPadColumn">' + formatterStandard.format(calculatedDefenseScore) + '</td>';
@@ -1011,8 +1098,13 @@ function UpdateText() {
 
         // BUILD BUTTON ------------------------
         if (player.canBuild) {
-            if (villageStage == 0) { buttonBuild.innerHTML = displayLabelBuild0 + '<br>(' + priceBuild0[0] + '<span class="icon Wheat inlineIcon"></span> + ' + priceBuild0[1] + '<span class="icon Log inlineIcon"></span> + ' + priceBuild0[2] + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild0[3]) + '<span class="icon Stone inlineIcon"></span>)'; }
-            else if (villageStage == 1) { buttonBuild.innerHTML = displayLabelBuild1 + '<br>(' + priceBuild1[0] + '<span class="icon Wheat inlineIcon"></span> + ' + priceBuild1[1] + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild1[2]) + '<span class="icon Stone inlineIcon"></span>)'; }
+            if (villageStage == -5) { buttonBuild.innerHTML = displayLabelBuildNEG5 + ' <span class="icon HerosDioptra inlineIcon"></span>' + '<br>(' + priceBuildNEG5 + '<span class="icon Wheat inlineIcon"></span>)'; }
+            else if (villageStage == -4) { buttonBuild.innerHTML = displayLabelBuildNEG4 + '<br>(' + priceBuildNEG4[0] + '<span class="icon Wheat inlineIcon"></span> + ' + priceBuildNEG4[1] + '<span class="icon Amphora inlineIcon"></span> + ' + priceBuildNEG4[2] + '<span class="icon Pom inlineIcon"></span> + ' + priceBuildNEG4[3] + '<span class="icon Board inlineIcon"></span> + ' + priceBuildNEG4[4] + '<span class="icon Stone inlineIcon"></span>)'; }
+            else if (villageStage == -3) { buttonBuild.innerHTML = displayLabelBuildNEG3 + '<br>(' + priceBuildNEG3 + '<span class="icon Wheat inlineIcon"></span>)'; }
+            else if (villageStage == -2) { buttonBuild.innerHTML = displayLabelBuildNEG2 + '<br>(' + priceBuildNEG2 + '<span class="icon Wheat inlineIcon"></span>)'; }
+            else if (villageStage == -1) { buttonBuild.innerHTML = displayLabelBuildNEG1 + '<br>(' + formatterStandard.format(priceBuildNEG1[0]) + '<span class="icon Wheat inlineIcon"></span> + ' + formatterStandard.format(priceBuildNEG1[1]) + '<span class="icon Stone inlineIcon"></span>' + ')'; }
+            else if (villageStage == 0) { buttonBuild.innerHTML = displayLabelBuild0 + '<br>(' + priceBuild0[0] + '<span class="icon Wheat inlineIcon"></span> + ' + priceBuild0[1] + '<span class="icon Log inlineIcon"></span> + ' + priceBuild0[2] + '<span class="icon Board inlineIcon"></span> + ' + priceBuild0[3] + '<span class="icon Stone inlineIcon"></span>)'; }
+            else if (villageStage == 1) { buttonBuild.innerHTML = displayLabelBuild1 + '<br>(' + priceBuild1[0] + '<span class="icon Wheat inlineIcon"></span> + ' + priceBuild1[1] + '<span class="icon Board inlineIcon"></span> + ' + priceBuild1[2] + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (villageStage == 2) { buttonBuild.innerHTML = displayLabelBuild2 + '<br>(' + formatterStandard.format(priceBuild2[0]) + '<span class="icon Wheat inlineIcon"></span> + ' + formatterStandard.format(priceBuild2[1]) + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (villageStage == 3) { buttonBuild.innerHTML = displayLabelBuild3 + '<br>(' + formatterStandard.format(priceBuild3[0]) + '<span class="icon Wheat inlineIcon"></span> + ' + priceBuild3[1] + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild3[2]) + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (villageStage == 4) { buttonBuild.innerHTML = displayLabelBuild4 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild4[0]) + ' + ' + formatterStandard.format(priceBuild4[1]) + '<span class="icon Wheat inlineIcon"></span> + ' + priceBuild4[2] + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild4[3]) + '<span class="icon Stone inlineIcon"></span>)'; }
@@ -1028,8 +1120,23 @@ function UpdateText() {
             else if (villageStage == 14) { buttonBuild.innerHTML = displayLabelBuild14 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild14[0]) + ' + ' + priceBuild14[1] + '<span class="icon Mala inlineIcon"></span> + ' + formatterStandard.format(priceBuild14[2]) + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (villageStage == 15) { buttonBuild.innerHTML = displayLabelBuild15 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild15[0]) + ' + ' + formatterStandard.format(priceBuild15[1]) + '<span class="icon Stone inlineIcon"></span>)'; }
             else if (villageStage == 16) { buttonBuild.innerHTML = displayLabelBuild16 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild16[0]) + ' + ' + formatterStandard.format(priceBuild16[1]) + '<span class="icon Barley inlineIcon"></span> + ' + formatterStandard.format(priceBuild16[2]) + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild16[3]) + '<span class="icon Stone inlineIcon"></span>)'; }
-            else if (villageStage == 17) { buttonBuild.innerHTML = displayLabelBuild17 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild17[0]) + ' + ' + priceBuild17[1] + '<span class="icon Mala inlineIcon"></span> + ' + priceBuild17[2] + '<span class="icon Scroll inlineIcon"></span> + ' + priceBuild17[3] + '<span class="icon IngotBronze inlineIcon"></span><br>+ ' + formatterStandard.format(priceBuild17[4]) + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild17[5]) + '<span class="icon Stone inlineIcon"></span>)'; }
+            else if (villageStage == 17) { buttonBuild.innerHTML = displayLabelBuild17 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild17[0]) + ' + ' + formatterStandard.format(priceBuild17[1]) + '<span class="icon Stone inlineIcon"></span> + ' + priceBuild17[2] + '<span class="icon IngotBronze inlineIcon"></span>)'; }
+            else if (villageStage == 18) { buttonBuild.innerHTML = displayLabelBuild18 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild18[0]) + ' + ' + formatterStandard.format(priceBuild18[1]) + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild18[2]) + '<span class="icon Stone inlineIcon"></span>)'; }
+            else if (villageStage == 19) { buttonBuild.innerHTML = displayLabelBuild19 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild19[0]) + ' + ' + formatterStandard.format(priceBuild19[1]) + '<span class="icon Stone inlineIcon"></span> + ' + formatterStandard.format(priceBuild19[2]) + '<span class="icon OreCopper inlineIcon"></span>)'; }
+            else if (villageStage == 20) { buttonBuild.innerHTML = displayLabelBuild20 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild20[0]) + ' + ' + formatterStandard.format(priceBuild20[1]) + '<span class="icon Wheat inlineIcon"></span> + ' + formatterStandard.format(priceBuild20[2]) + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild20[3]) + '<span class="icon Stone inlineIcon"></span>)'; }
+            else if (villageStage == 21) { buttonBuild.innerHTML = displayLabelBuild21 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild21[0]) + ' + ' + formatterStandard.format(priceBuild21[1]) + '<span class="icon Stone inlineIcon"></span> + ' + formatterStandard.format(priceBuild21[2]) + '<span class="icon IngotCopper inlineIcon"></span>)'; }
+            else if (villageStage == 22) { buttonBuild.innerHTML = displayLabelBuild22 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild22[0]) + ' + ' + formatterStandard.format(priceBuild22[1]) + '<span class="icon Stone inlineIcon"></span> + ' + formatterStandard.format(priceBuild22[2]) + '<span class="icon IngotCopper inlineIcon"></span> + ' + formatterStandard.format(priceBuild22[3]) + '<span class="icon IngotTin inlineIcon"></span> + ' + formatterStandard.format(priceBuild22[4]) + '<span class="icon IngotBronze inlineIcon"></span>)'; }
+            else if (villageStage == 23) { buttonBuild.innerHTML = displayLabelBuild23 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild23[0]) + ' + ' + formatterStandard.format(priceBuild23[1]) + '<span class="icon Stone inlineIcon"></span> + ' + formatterStandard.format(priceBuild23[2]) + '<span class="icon OreCopper inlineIcon"></span>)'; }
+            else if (villageStage == 24) { buttonBuild.innerHTML = displayLabelBuild24 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild24[0]) + ' + ' + formatterStandard.format(priceBuild24[1]) + '<span class="icon Stone inlineIcon"></span>)'; }
+            else if (villageStage == 25) { buttonBuild.innerHTML = displayLabelBuild25 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild25[0]) + ' + ' + formatterStandard.format(priceBuild25[1]) + '<span class="icon Stone inlineIcon"></span>)'; }
+            else if (villageStage == 26) { buttonBuild.innerHTML = displayLabelBuild26 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild26) + ')'; }
+            else if (villageStage == 27) { buttonBuild.innerHTML = displayLabelBuild27 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild27[0]) + ' + ' + priceBuild27[1] + '<span class="icon Stone inlineIcon"></span> + ' + priceBuild27[2] + '<span class="icon Crystal inlineIcon"></span>)'; }
+            else if (villageStage == 28) { buttonBuild.innerHTML = displayLabelBuild28 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild28[0]) + ' + ' + priceBuild28[1] + '<span class="icon Stone inlineIcon"></span> + ' + priceBuild28[2] + '<span class="icon IngotBronze inlineIcon"></span> + ' + priceBuild28[3] + '<span class="icon Gems inlineIcon"></span>)'; }
+            else if (villageStage == 100) { buttonBuild.innerHTML = displayLabelBuild100 + '<br>(' + currencySymbol + formatterStandard.format(priceBuild100[0]) + ' + ' + priceBuild100[1] + '<span class="icon Mala inlineIcon"></span> + ' + priceBuild100[2] + '<span class="icon Scroll inlineIcon"></span><br>+ ' + priceBuild100[3] + '<span class="icon IngotBronze inlineIcon"></span> + ' + formatterStandard.format(priceBuild100[4]) + '<span class="icon Board inlineIcon"></span> + ' + formatterStandard.format(priceBuild100[5]) + '<span class="icon Stone inlineIcon"></span>)'; }
         }
+
+        // ORACLE BUTTON -----------------------
+        buttonVisitOracle.innerHTML = displayLabelOracle + ' <span class="icon Oracle inlineIcon"></span>';
 
         // SELL BUTTONS ------------------------
         let tempGrainIcon = 'WheatDisable';
@@ -1830,6 +1937,17 @@ function UpdateText() {
                 tableString += '</td>';
                 tableString += '</tr>';
             }
+            if (player.hasHiredGemcutters) {
+                tableString += '<tr>'
+                tableString += '<td>';
+                tableString += displayGems;
+                tableString += '&nbsp;<span class="icon Gems inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceInStockCount[8]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             tableString += '</tbody>';
             tableResidenceInventory.innerHTML = tableString;
 
@@ -1934,6 +2052,19 @@ function UpdateText() {
                 tableString += '</td>';
                 tableString += '<td>';
                 tableString += formatterStandard.format(residenceSpentCount[7]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasHiredGemcutters) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Gems"></span>';
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceProducedCount[8]);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceSpentCount[8]);
                 tableString += '</td>';
                 tableString += '</tr>';
             }
@@ -2135,16 +2266,37 @@ function UpdateText() {
             tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[7] * 100) + '% <span class="workshopHarvestMetalDecal"></span><span class="icon IngotTin inlineIcon"></span>';
             tableString += '</td>';
             tableString += '</tr>';
+            if (player.hasHiredGemcutters) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[8] * 100) + '% <span class="workshopHarvestDigDecal"></span><span class="icon Crystal inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             tableString += '<tr>';
             tableString += '<td>';
             tableString += residenceIngredientsIn[7] + '<span class="icon IngotTin inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[7] + '<span class="icon Trinket inlineIcon"></span>';
             tableString += '</td>';
             tableString += '</tr>';
+            if (player.hasHiredGemcutters) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += residenceIngredientsIn[8] + '<span class="icon Crystal inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[8] + '<span class="icon Gems inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             tableString += '<tr>';
             tableString += '<td>';
             tableString += '<span class="icon IngotTin inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[7]);
             tableString += '</td>';
             tableString += '</tr>';
+            if (player.hasHiredGemcutters) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Crystal inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[8]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             tableString += '</tbody>';
             tableWorkshopAtelier.innerHTML = tableString;
         }
@@ -2159,6 +2311,7 @@ function UpdateText() {
     labelToggleAnimation.innerHTML = displayAnimations;
     divOptionsFlavour.innerHTML = displayOptionsFlavourFinal;
     buttonOptions.innerHTML = displayOptions;
+    spanCheevoText.innerHTML = displayCheevo;
 }
 
 
@@ -2170,6 +2323,8 @@ function UpdateVisibilities() {
     divOverlayOptions.style.display = player.seesOptions ? 'block' : '';
     divOverlayMods.style.display = player.seesModsWindow ? 'block' : '';
     buttonStar.style.display = player.isGod ? 'inline-block' : '';
+
+    imgNirvana.style.display = player.hasWon ? 'block' : '';
 
     if (player.seesForeword && player.hasBegun) {
         divForewordTitle.style.display = 'none';
@@ -2272,6 +2427,7 @@ function UpdateVisibilities() {
     else if (player.isAt == 'Township') {
         buttonGoToPort.style.display = player.canSell ? 'inline-block' : '';
         buttonBuild.style.display = player.canBuild ? 'block' : '';
+        buttonVisitOracle.style.display = player.hasOracle ? 'block' : '';
         buttonSellWheat.style.display = player.canSell ? 'block' : '';
         buttonSellBarley.style.display = player.canSell ? 'block' : '';
     }
@@ -4177,7 +4333,15 @@ function RedrawFarm() {
 
         arrayFarmGraph[30][17] = tilePathV;
 
+        arrayFarmGraph[36][15] = tilePathV2E;
+        arrayFarmGraph[36][16] = tilePathH;
+
         arrayFarmGraph[37][1] = tilePathV;
+        arrayFarmGraph[37][15] = tilePathV2W;
+        arrayFarmGraph[37][17] = tilePathV;
+
+        arrayFarmGraph[38][15] = tilePathV2E;
+        arrayFarmGraph[38][16] = tilePathH;
 
         arrayFarmGraph[42][4] = tilePathH;
         arrayFarmGraph[42][7] = tilePathH;
@@ -5812,7 +5976,7 @@ function RedrawMountain() {
         arrayMountainGraph[12][2] = tileLawn;
     }
 
-    if (villageStage > 17) {
+    if (player.hasMonument) {
         arrayMountainGraph[12][2] = tileShrine;
     }
 
@@ -5928,17 +6092,19 @@ function TileRenderer(sourceArray, destinationContext) {
 
 
 function RedrawVillage() {
-    let tempString = '';
-    if (villageStage > 2) { tempString = 'Est. ' + RomanceNumber(estDate[1]); }
+    let tempString = '&nbsp;';
+    if (estDate[1] != 0) { tempString = 'Est. ' + RomanceNumber(estDate[1]); }
     divVillageEstDate.innerHTML = tempString;
 
-    tempString = displayVillageTitle0;
+    tempString = displayVillageTitleNEG1;
+    if (villageStage > -4) { tempString = displayVillageTitle0; }
     if (villageStage > 2) { tempString = displayVillageTitle1; }
     if (villageStage > 5) { tempString = displayVillageTitle2; }
     if (villageStage > 8) { tempString = displayVillageTitle3; }
     if (villageStage > 11) { tempString = displayVillageTitle4; }
     if (villageStage > 14) { tempString = displayVillageTitle5; }
     if (villageStage > 17) { tempString = displayVillageTitle6; }
+    if (villageStage > 100) { tempString = displayVillageTitle7; }
     divVillageName.innerHTML = tempString + ' ' + nameVillage;
 
     canvasVillageContext.drawImage(villageImage, 0, 0, 384, 224, 0, 0, 384, 224);

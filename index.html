@@ -19,6 +19,7 @@
 </head>
 
 <body>
+    <div id="divOverlayLoading"><span>L</span>OADING...</div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divCalendar">
         <div class="divCalendarCell">
@@ -53,6 +54,8 @@
     <div id="divCalendarGap"></div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divGameWindow">
+        <img id="imgNirvana" src="bitmaps/nirvana.png" />
+
         <button id="buttonWin">👑</button>
 
         <div id="divViewResidence">
@@ -67,13 +70,13 @@
                     <tr>
                         <td style="width: 50%;">
                             <div id="divWorkshopBakery">
-                                <img src="bitmaps/res_bakery.png" width="130" height="86" />
+                                <img id="imgWorkshopBakery" src="bitmaps/res_bakery.png" width="130" height="86" />
                                 <table id="tableWorkshopBakery" class="residenceWorkshopTable"></table>
                             </div>
                         </td>
                         <td style="width: 50%;">
                             <div id="divWorkshopOliveMill">
-                                <img src="bitmaps/res_olivemill.png" width="130" height="86" />
+                                <img id="imgWorkshopOliveMill" src="bitmaps/res_olivemill.png" width="130" height="86" />
                                 <table id="tableWorkshopOliveMill" class="residenceWorkshopTable"></table>
                             </div>
                         </td>
@@ -81,13 +84,13 @@
                     <tr>
                         <td>
                             <div id="divWorkshopBrewery">
-                                <img src="bitmaps/res_brewery.png" width="130" height="86" />
+                                <img id="imgWorkshopBrewery" src="bitmaps/res_brewery.png" width="130" height="86" />
                                 <table id="tableWorkshopBrewery" class="residenceWorkshopTable"></table>
                             </div>
                         </td>
                         <td>
                             <div id="divWorkshopWinery">
-                                <img src="bitmaps/res_winery.png" width="130" height="86" />
+                                <img id="imgWorkshopWinery" src="bitmaps/res_winery.png" width="130" height="86" />
                                 <table id="tableWorkshopWinery" class="residenceWorkshopTable"></table>
                             </div>
                         </td>
@@ -95,27 +98,27 @@
                     <tr>
                         <td>
                             <div id="divWorkshopKitchen">
-                                <img src="bitmaps/res_kitchen.png" width="130" height="86" />
+                                <img id="imgWorkshopKitchen" src="bitmaps/res_kitchen.png" width="130" height="86" />
                                 <table id="tableWorkshopKitchen" class="residenceWorkshopTable"></table>
                             </div>
                         </td>
                         <td>
                             <div id="divWorkshopPress">
-                                <img src="bitmaps/res_press.png" width="130" height="86" />
+                                <img id="imgWorkshopPress" src="bitmaps/res_press.png" width="130" height="86" />
                                 <table id="tableWorkshopPress" class="residenceWorkshopTable"></table>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td id="tdGreenhouse">
                             <div id="divWorkshopGreenhouse">
-                                <img src="bitmaps/res_greenhouse.png" width="130" height="86" />
+                                <img id="imgWorkshopGreenhouse" src="bitmaps/res_greenhouse.png" width="130" height="86" />
                                 <table id="tableWorkshopGreenhouse" class="residenceWorkshopTable"></table>
                             </div>
                         </td>
                         <td>
                             <div id="divWorkshopAtelier">
-                                <img src="bitmaps/res_atelier.png" width="130" height="86" />
+                                <img id="imgWorkshopAtelier" src="bitmaps/res_atelier.png" width="130" height="86" />
                                 <table id="tableWorkshopAtelier" class="residenceWorkshopTable"></table>
                             </div>
                         </td>
@@ -215,6 +218,7 @@
             <canvas id="canvasVillage" width="384" height="224"></canvas>
             <div id="divVillageLasTablas"></div>
             <div id="divVillageButtons">
+                <button id="buttonVisitOracle"></button>
                 <button id="buttonBuild"></button>
                 <button id="buttonSellWheat"></button>
                 <button id="buttonSellBarley"></button>
@@ -251,7 +255,7 @@
     </div>
     <div id="divOverlayForeword" class="overlay">
         <div id="divModalForeword">
-            <div id="divForewordTitle">PRÆDIVM</div>
+            <div id="divForewordTitle"><img src="curves/PRÆDIVM.svg" /></div>
             <div id="divForewordSubtitle">☙ a solitaire by Michael David Davis II ❧</div>
             <button id="buttonForewordEnglish">English</button><button id="buttonForewordSpanish">Español</button>
             <div id="divForewordCorpus"></div>
@@ -291,6 +295,41 @@
             <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button>
             <div id="divOptionsFlavour"></div>
             <button id="buttonOptionsDismiss"></button>
+        </div>
+    </div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divCheevo">
+        <div class="achievement">
+        <div class="animation">
+            <div class="circle">
+                <div class="img trophy_animate trophy_img">
+                    <img class="trophy_1" src="curves/trophy_full.svg" />
+                    <img class="trophy_2" src="curves/trophy_no_handles.svg" />
+                </div>
+                <div class="img xbox_img">
+                    <img src="curves/xbox.svg?dl=0" />
+                </div>
+                <div class="brilliant-wrap">
+                    <div class="brilliant">
+                    </div>
+                </div>
+            </div>
+            <div class="banner-outer">
+                <div class="banner">
+                    <div class="achieve_disp">
+                        <span class="unlocked">GLEEMED INSIDE A CUBE</span>
+                        <div class="score_disp">
+                            <div class="gamerscore">
+                                <img width="20px" src="curves/G.svg?dl=0" />
+                                <span class="acheive_score">420</span>
+                            </div>
+                            <span class="hyphen_sep">-</span>
+                            <span id="spanCheevoText" class="achiev_name"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->

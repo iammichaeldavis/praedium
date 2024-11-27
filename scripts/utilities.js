@@ -1,6 +1,22 @@
 // UTILITIES ***************************************************************************************
 // *************************************************************************************************
 
+function Achievement() {
+    achievementSoundRare.play();
+    document.querySelector('.achievement').classList.add('rare');
+    document.querySelector('.circle').classList.add('circle_animate');
+    document.querySelector('.banner').classList.add('banner-animate');
+    document.querySelector('.achieve_disp').classList.add('achieve_disp_animate');
+    setTimeout(() => {
+        document.querySelector('.circle').classList.remove('circle_animate');
+        document.querySelector('.banner').classList.remove('banner-animate');
+        document.querySelector('.achieve_disp').classList.remove('achieve_disp_animate');
+        document.querySelector('.achievement').classList.remove('rare');
+    }, 12000);
+}
+
+
+
 function CollateGameStateReport(loud = false) {
     const integerCounts = {
         farmBushels: bushelCount,
@@ -15,7 +31,7 @@ function CollateGameStateReport(loud = false) {
         mountainProduced: mountainProducedCount,
         mountainSpent: mountainSpentCount,
         staffWheatPaid: paidOutWheat,
-        villageFiat: [asCount, asSpent, rentLifetimeCollected, marketLifetimeRevenue, tourismLifetimeProfit, taxesLifetimeCollected, militaryLifetimeCost, tributeLifetimePaid, currentBushelPrice,],
+        villageFiat: [asCount, asSpent, rentLifetimeCollected, marketLifetimeRevenue, tourismLifetimeProfit, taxesLifetimeCollected, interestLifetimeCollected, militaryLifetimeCost, tributeLifetimePaid, currentBushelPrice,],
         villageDemographics: [residentsCount, [pilgrimsCount, pilgrimsLifetimeCount,],],
         villageMateriel: [[horsesCount, horsesEaten,], trophiesCount, [beadsCount, pilgrimLifetimeIncome,], scrollsCount, relicCount, [ratsCount, ratsHighScore,],],
         residenceResourceInStockCount: residenceIngredientInStockCount,

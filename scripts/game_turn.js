@@ -56,6 +56,7 @@ function GameTurn() {
         SetMarketPrice();
         if (beadsSpawn) { MakeBeads(); }
         if (trophiesSpawn) { HostGladiatorGames(); }
+        if (player.hasBank) { AccrueInterest(); }
     }
 
     if (week % 2 == 0 && trophiesSpawn) {
@@ -64,39 +65,38 @@ function GameTurn() {
         tourismLifetimeProfit += tourismTotalIncome;
     }
 
-    if (horsesSpawn) {
-        GrowHorses();
-        if (cityWalls) {
-            const knightsMax = Math.floor(residentsCount / 2);
-            let knightsCount = horsesCount;
-            if (knightsCount > knightsMax) { knightsCount = knightsMax; }
-            const militarySalary = knightsCount * 10;
-            asCount -= militarySalary;
-            asSpent += militarySalary;
-            militaryLifetimeCost += militarySalary;
-
-            if (tributeTimer < tributeTimerLimit) {
-                tributeTimer++;
-                if (tributeTimer == tributeTimerLimit) {
-                    if (player.likesStory) { GameEvent(displayStoryTribute, null, false); }
-                    player.hasBeenLevied = true;
-                }
-            }
-
-            if (player.hasBeenLevied) {
-                const weeklyLevy = tributeAmount * 7;
-                asCount -= weeklyLevy;
-                asSpent += weeklyLevy;
-                tributeLifetimePaid += weeklyLevy;
-            }
-        }
-    }
-
+    if (horsesSpawn) { GrowHorses(); }
     if (horsesCount > 0) { FeedHorses(); }
 
     if (scrollsSpawn) { ScribeWisdom(); }
 
     if (ratsSpawn) { BreedRats(); }
+
+    if (cityWalls) {
+        if (tributeTimer < tributeTimerLimit) {
+            tributeTimer++;
+            if (tributeTimer == tributeTimerLimit) {
+                if (player.likesStory) { GameEvent(displayStoryTribute, null, false); }
+                player.hasBeenLevied = true;
+            }
+        }
+        if (player.hasBeenLevied) {
+            const weeklyLevy = tributeAmount * 7;
+            asCount -= weeklyLevy;
+            asSpent += weeklyLevy;
+            tributeLifetimePaid += weeklyLevy;
+        }
+    }
+
+    if (player.hasArmy) {
+        const knightsMax = Math.floor(residentsCount / 2);
+        let knightsCount = horsesCount;
+        if (knightsCount > knightsMax) { knightsCount = knightsMax; }
+        const militarySalary = knightsCount * 10;
+        asCount -= militarySalary;
+        asSpent += militarySalary;
+        militaryLifetimeCost += militarySalary;
+    }
 
     if (farmStage == 1 && bushelCount[0] > 88 && !player.hasMildewed) {
         player.hasMildewed = true;
@@ -110,7 +110,7 @@ function GameTurn() {
         taxesLifetimeCollected += calculatedTaxValue;
     }
 
-    if (villageStage > 17) {
+    if (player.hasMonument) {
         pilgrimsMax = Math.floor(residentsCount / 2);
         pilgrimsCount = FindWholeRandom(0, pilgrimsMax);
         pilgrimsLifetimeCount += pilgrimsCount;
@@ -122,9 +122,23 @@ function GameTurn() {
 
     if (player.canExport) { Shipping(); }
 
-    if (player.hasBakery) { WorkshopProduction(); }
+    if (player.hasHiredBronzeworkers) {
+        ForgeBronze();
+        if (crystalTimer < crystalTimerLimit && player.hasAtelier) {
+            crystalTimer++;
+            if (crystalTimer == crystalTimerLimit) {
+                if (player.likesStory) { GameEvent(displayStoryFoundCrystal, null, false); }
+                player.seesMountainButton = true;
+                player.hasFoundCrystalEvidence = true;
+            }
+        }
+    }
 
-    if (player.hasHiredBronzeworkers) { ForgeBronze(); }
+    if (player.hasHiredGemcutters) { CutCrystals(); }
+
+    if (player.hasHospital) { TreatPatients(); }
+
+    if (player.hasBakery) { WorkshopProduction(); }
 
     UpdateDisplay();
 
@@ -213,6 +227,7 @@ function WorkshopProduction() {
     Render(5);
     Render(6);
     Render(7);
+    Render(8);
 
     function Render(ingredient) {
         while (residenceIngredientInStockCount[ingredient] >= residenceIngredientsIn[ingredient]) {
@@ -240,6 +255,38 @@ function ForgeBronze() {
         }
     }
     PayWorkerGroup(metallurgistsHired, 9);
+}
+
+
+
+function CutCrystals() {
+    let bounty = crystalHarvest;
+    mountainProducedCount[5] += bounty;
+    const workshopShare = Math.floor(crystalHarvest * residenceIngredientWorkshopPortion[8]);
+    residenceIngredientInStockCount[8] += workshopShare;
+    residenceIngredientConsumedCount[8] += workshopShare;
+    bounty = bounty - workshopShare;
+    crystalsCount += bounty;
+    mountainSpentCount[5] += bounty;
+    PayWorkerGroup(gemcuttersHired, 10);
+}
+
+
+
+function TreatPatients() {
+    patientsCount = FindWholeRandom(0, 10);
+    const thisTurnCost = patientsCount * patientCost;
+    asCount -= thisTurnCost;
+    asSpent += thisTurnCost;
+    medicalLifetimeCost += thisTurnCost;
+}
+
+
+
+function AccrueInterest() {
+    const interestAmount = Math.floor(asCount * (interestRate / 12));
+    asCount += interestAmount;
+    interestLifetimeCollected += interestAmount;
 }
 
 
@@ -499,7 +546,9 @@ function MakeBeads() {
 
 
 function HostGladiatorGames() {
-    if (FindWholeRandom(1, 10) == 1) { trophiesCount += 1; }
+    let chanceMax = 10;
+    if (trophyChance == 20) { chanceMax = 5; }
+    if (FindWholeRandom(1, chanceMax) == 1) { trophiesCount += 1; }
 }
 
 
