@@ -334,6 +334,8 @@ let displayRealEstate = '';
 let displayMarket = '';
 let displayWholesale = '';
 let displayCommodities = '';
+let displayComDev = '';
+let displayFreight = '';
 let displayHusbandry = '';
 let displayConjunction = '';
 let displayTourism = '';
@@ -455,6 +457,7 @@ let displayRandomWisdomsInglés = [
     '“If it’s your job to eat a frog, do it first thing in the morning. And if it’s your job to eat two frogs, eat the bigger one first.”<br>—Mark Twain',
     '“Wherever you go, there you are.”<br>—Peter Weller<br><br>The Adventures of Buckaroo Banzai Across the 8th Dimension (Sherwood Productions, 1984)',
     '“Commander, it is possible to commit no mistakes, and still lose. That is not a weakness; that is life.”<br>—Captain Jean-Luc Picard<br><br>Star Trek: The Next Generation (Paramount Television, 1989), Season 2, Episode 21: “Peak Performance”',
+    '“Due to compound interest and inflation, if a rich person has $1,000,000 today, tomorrow they’ll have $1,050,000. Due to the exact same economic forces, if a poor person has $1 today, tomorrow they have $0.95.”<br>—Vicar Neumann',
     'Eat your vegetables',
     '“For with wisdom did someone once reveal the maxim, now famous, that evil at one time or another seems good, to him whose mind a god leads to ruin.”<br>—Sophocles',
     '“I hope that when the world comes to an end, I can breathe a sigh of relief, because there will be so much to look forward to.”<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)'
@@ -470,6 +473,7 @@ let displayRandomWisdomsEspañol = [
     '«Si tu trabajo consiste en comerte una rana, hazlo a primera hora de la mañana. Y si tu trabajo consiste en comerte dos ranas, cómete la más grande primero.»<br>—Mark Twain',
     '«Donde quiera que vayas, ahí estás.»<br>—Peter Weller<br><br>Las Aventuras de Buckaroo Banzai (Sherwood Productions, 1984)',
     '«Comandante, es posible no cometer errores y aun así perder. Eso no es debilidad; eso es vida.»<br>Capitán Jean-Luc Picard<br><br>Viaje a Las Estrellas: La Nueva Generación (Paramount Television, 1989), Temporada 2, Episodio 21: “Máximo Rendimiento”',
+    '«Debido al interés compuesto y a la inflación, si una persona rica tiene hoy 1.000.000 de dólares, mañana tendrá 1.050.000. Debido a las mismas fuerzas económicas, si una persona pobre tiene hoy 1 dólar, mañana tendrá 0,95 dólares.»<br>—Vicar Neumann',
     'Come tus verduras',
     '«Porque alguien reveló una vez con sabiduría la máxima, ahora famosa, de que el mal en un momento u otro parece bueno a aquel cuya mente es llevada a la ruina por un dios.»<br>—Sófocles',
     '«Espero que cuando el mundo llegue a su fin, pueda respirar aliviado, porque habrá mucho que mucho que esperar.»<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)',
@@ -812,6 +816,8 @@ function Translate(language, bark = true) {
         displayMarket = 'Retail';
         displayWholesale = 'Wholesale';
         displayCommodities = 'Commodities';
+        displayComDev = 'Commercial Development';
+        displayFreight = 'Freight';
         displayHusbandry = 'Husbandry';
         displayConjunction = 'Conjunction';
         displayTourism = 'Tourism';
@@ -896,7 +902,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.<br><br>Made with CodePen, the GNU Image Manipulation Program, GitHub, Inkscape and Visual Studio Code.';
         displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben and W3Schools.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Todd Spigener, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben and W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -1253,6 +1259,8 @@ function Translate(language, bark = true) {
         displayMarket = 'Minorista';
         displayWholesale = 'Al Por Mayor';
         displayCommodities = 'Materias Primas';
+        displayComDev = 'Desarrollo Comercial';
+        displayFreight = 'Carga';
         displayHusbandry = 'Ganadería';
         displayConjunction = 'Conjunción';
         displayTourism = 'Turismo';
@@ -1337,7 +1345,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.<br><br>Hecho con CodePen, el GNU Image Manipulation Program, GitHub, Inkscape y Visual Studio Code.';
         displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben y W3Schools.';
+        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Todd Spigener, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben y W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';

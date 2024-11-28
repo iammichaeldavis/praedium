@@ -171,8 +171,15 @@ button:active {
     margin: 0 auto;
 }
 
-#divVillageButtons #buttonSellBarley {
-    margin: 2vw auto 6.4vw auto;
+#divVillageButtons #buttonBuyBarley,
+#divVillageButtons #buttonBuyLogs,
+#divVillageButtons #buttonBuyBoards,
+#divVillageButtons #buttonBuyStone {
+    margin: 2vw auto 0 auto;
+}
+
+#divVillageButtons #buttonBuyStone {
+    margin-bottom: 6.4vw;
 }
 
 #buttonForest,
@@ -1724,6 +1731,21 @@ td {
     --j: 14;
 }
 
+.LogsDisable {
+    --i: 27;
+    --j: 7;
+}
+
+.BoardsDisable {
+    --i: 26;
+    --j: 8;
+}
+
+.StoneDisable {
+    --i: 27;
+    --j: 8;
+}
+
 .Mala {
     --i: 7;
     --j: 15;
@@ -2098,7 +2120,10 @@ td {
 #buttonBarterPom,
 #buttonBarterGrape,
 #buttonSellWheat,
-#buttonSellBarley,
+#buttonBuyBarley,
+#buttonBuyLogs,
+#buttonBuyBoards,
+#buttonBuyStone,
 #buttonVisitOracle,
 #buttonWin {
     display: none;
@@ -2378,7 +2403,10 @@ td {
 }
 
 @keyframes brilliant-wrap {
-    0%,
+    0% {
+        opacity: 0;
+    }
+
     20% {
         opacity: 0;
     }

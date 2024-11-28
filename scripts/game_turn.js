@@ -292,7 +292,7 @@ function AccrueInterest() {
 
 
 function Shipping() {
-    const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / bushelBulkCount);
+    const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / commodityBulkCount);
 
     shipmentTimersCurrent[0]--;
     shipmentTimersCurrent[1]--;
@@ -533,8 +533,8 @@ function ChargeRent() {
 
 
 function SetMarketPrice() {
-    currentBushelPrice = actualBushelPrice + (FindWholeRandom(-2, 2) * 100);
-    currentBarleyAdjustment = 1000 + (FindWholeRandom(-2, 2) * 50);
+    currentBushelPrice = actualBushelPrice + (FindWholeRandom(-2, 2) * 1000);
+    currentBarleyAdjustment = actualBarleyAdjustment + (FindWholeRandom(-2, 2) * 500);
 }
 
 

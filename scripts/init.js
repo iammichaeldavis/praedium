@@ -300,7 +300,10 @@ const divVillageLasTablas = document.getElementById('divVillageLasTablas');
 const buttonBuild = document.getElementById('buttonBuild');
 const buttonVisitOracle = document.getElementById('buttonVisitOracle');
 const buttonSellWheat = document.getElementById('buttonSellWheat');
-const buttonSellBarley = document.getElementById('buttonSellBarley');
+const buttonBuyBarley = document.getElementById('buttonBuyBarley');
+const buttonBuyLogs = document.getElementById('buttonBuyLogs');
+const buttonBuyBoards = document.getElementById('buttonBuyBoards');
+const buttonBuyStone = document.getElementById('buttonBuyStone');
 
 const divViewPort = document.getElementById('divViewPort');
 const buttonGoToTownshipFromPort = document.getElementById('buttonGoToTownshipFromPort');
@@ -452,6 +455,8 @@ let residentsMax = 0;
 
 let asCount = 0;
 let asSpent = 0;
+let commercialLifetimeSpend = 0;
+let commoditiesLifetimeSpend = 0;
 
 let rentPrice = 10;
 let rentLifetimeCollected = 0;
@@ -506,11 +511,16 @@ let pilgrimLifetimeIncome = 0;
 let relicSpawnCount = 1;
 let relicCount = 0;
 
-const bushelBulkCount = 1000;
-let actualBushelPrice = 5000;
+const commodityBulkCount = 10000;
+let actualBushelPrice = 50000;
 let currentBushelPrice = actualBushelPrice;
-let currentBarleyAdjustment = 1000;
+let actualBarleyAdjustment = 10000;
+let currentBarleyAdjustment = actualBarleyAdjustment;
 let marketLifetimeRevenue = 0;
+
+let valueInWheat1Log = 2;
+let valueInWheat1Board = 4;
+let valueInWheat1Stone = 8;
 
 // 0. Oil 🪔, 1. Beer 🍺, 2. Wine 🍷, 3. Syrup 🍯, 4. Juice 🧃, 5. Fruit Leather (Sun-Dried Fig) 🫐, 6. Trinkets 💎
 const wheatValuePerUnit = [null, null, null, null, null, null,];

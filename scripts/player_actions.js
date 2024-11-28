@@ -33,7 +33,10 @@ buttonBarterFig.addEventListener('click', function () { BarterFruit(4); });
 buttonBarterPom.addEventListener('click', function () { BarterFruit(5); });
 buttonBarterGrape.addEventListener('click', function () { BarterFruit(6); });
 buttonSellWheat.addEventListener('click', function () { SellGrain(0); });
-buttonSellBarley.addEventListener('click', function () { SellGrain(1); });
+buttonBuyBarley.addEventListener('click', function () { SellGrain(1); });
+buttonBuyLogs.addEventListener('click', function () { PurchaseCommodities(0); });
+buttonBuyBoards.addEventListener('click', function () { PurchaseCommodities(1); });
+buttonBuyStone.addEventListener('click', function () { PurchaseCommodities(2); });
 
 buttonFound.addEventListener('click', function () { Found(); });
 buttonNewFarm.addEventListener('click', function () { BuyNewFarm(); });
@@ -103,6 +106,8 @@ document.body.onkeyup = function (e) {
             residentsCount = 0;
             asCount = 0;
             asSpent = 0;
+            commercialLifetimeSpend = 0;
+            commoditiesLifetimeSpend = 0;
             rentLifetimeCollected = 0;
             taxesLifetimeCollected = 0;
             horsesCount = 0;
@@ -113,6 +118,7 @@ document.body.onkeyup = function (e) {
             scrollsCount = 0;
             militaryLifetimeCost = 0;
             medicalLifetimeCost = 0;
+            patientsCount = 0;
             pilgrimsCount = 0;
             pilgrimsLifetimeCount = 0;
             pilgrimLifetimeIncome = 0;
@@ -225,7 +231,7 @@ document.body.onkeyup = function (e) {
         }
         if (e.key == 'g') {
             bushelCount[0] = 1000000;
-            bushelCount[1] = 10000;
+            bushelCount[1] = 1000000;
             bushelCount[2] = 1000;
             bushelCount[3] = 1000;
             bushelCount[4] = 1000;
@@ -1439,6 +1445,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild4[0];
         asSpent += priceBuild4[0];
+        commercialLifetimeSpend += priceBuild4[0];
         bushelCount[0] -= priceBuild4[1];
         spentCount[0] += priceBuild4[1];
         boardsCount -= priceBuild4[2];
@@ -1455,6 +1462,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild5[0];
         asSpent += priceBuild5[0];
+        commercialLifetimeSpend += priceBuild5[0];
         bushelCount[0] -= priceBuild5[1];
         spentCount[0] += priceBuild5[1];
         boardsCount -= priceBuild5[2];
@@ -1469,6 +1477,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild6[0];
         asSpent += priceBuild6[0];
+        commercialLifetimeSpend += priceBuild6[0];
         bushelCount[0] -= priceBuild6[1];
         spentCount[0] += priceBuild6[1];
         boardsCount -= priceBuild6[2];
@@ -1478,7 +1487,7 @@ function Build() {
 
         residentsMax += 14;
         rentPrice += 1;
-        actualBushelPrice -= 50;
+        actualBushelPrice -= 500;
         SetMarketPrice();
     }
     else if (villageStage == 7 && asCount >= priceBuild7[0] && bushelCount[0] > priceBuild7[1] && boardsCount >= priceBuild7[2] && stoneCount >= priceBuild7[3]) {
@@ -1487,6 +1496,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild7[0];
         asSpent += priceBuild7[0];
+        commercialLifetimeSpend += priceBuild7[0];
         bushelCount[0] -= priceBuild7[1];
         spentCount[0] += priceBuild7[1];
         boardsCount -= priceBuild7[2];
@@ -1496,7 +1506,7 @@ function Build() {
 
         residentsMax += 42;
         rentPrice += 3;
-        actualBushelPrice -= 50;
+        actualBushelPrice -= 500;
         SetMarketPrice();
     }
     else if (villageStage == 8 && asCount >= priceBuild8[0] && bushelCount[0] > priceBuild8[1] && boardsCount >= priceBuild8[2] && stoneCount >= priceBuild8[3]) {
@@ -1505,6 +1515,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild8[0];
         asSpent += priceBuild8[0];
+        commercialLifetimeSpend += priceBuild8[0];
         bushelCount[0] -= priceBuild8[1];
         spentCount[0] += priceBuild8[1];
         boardsCount -= priceBuild8[2];
@@ -1513,7 +1524,7 @@ function Build() {
         mountainSpentCount[0] += priceBuild8[3];
 
         rentPrice += 6;
-        actualBushelPrice -= 100;
+        actualBushelPrice -= 1000;
         SetMarketPrice();
         yieldMax += 4;
         olivesMax += 6;
@@ -1528,6 +1539,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild9[0];
         asSpent += priceBuild9[0];
+        commercialLifetimeSpend += priceBuild9[0];
         bushelCount[0] -= priceBuild9[1];
         spentCount[0] += priceBuild9[1];
         boardsCount -= priceBuild9[2];
@@ -1537,7 +1549,7 @@ function Build() {
 
         residentsMax += 42;
         rentPrice += 5;
-        actualBushelPrice -= 50;
+        actualBushelPrice -= 500;
         SetMarketPrice();
     }
     else if (villageStage == 10 && asCount >= priceBuild10[0] && bushelCount[1] > priceBuild10[1] && boardsCount >= priceBuild10[2]) {
@@ -1546,6 +1558,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild10[0];
         asSpent += priceBuild10[0];
+        commercialLifetimeSpend += priceBuild10[0];
         bushelCount[1] -= priceBuild10[1];
         spentCount[1] += priceBuild10[1];
         boardsCount -= priceBuild10[2];
@@ -1553,7 +1566,7 @@ function Build() {
 
         horsesSpawn = true;
         rentPrice += 2;
-        actualBushelPrice += 100;
+        actualBushelPrice += 1000;
         SetMarketPrice();
     }
     else if (villageStage == 11 && asCount >= priceBuild11[0] && ingotsCopperCount >= priceBuild11[1] && bushelCount[0] > priceBuild11[2] && bushelCount[1] > priceBuild11[3] && bushelCount[2] >= priceBuild11[4] && bushelCount[3] >= priceBuild11[5] && bushelCount[4] >= priceBuild11[6] && bushelCount[5] >= priceBuild11[7] && bushelCount[6] >= priceBuild11[8] && stoneCount >= priceBuild11[9] && horsesCount >= priceBuild11[10]) {
@@ -1562,6 +1575,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild11[0];
         asSpent += priceBuild11[0];
+        commercialLifetimeSpend += priceBuild11[0];
         ingotsCopperCount -= priceBuild11[1];
         mountainSpentCount[2] += priceBuild11[1];
         bushelCount[0] -= priceBuild11[2];
@@ -1584,7 +1598,7 @@ function Build() {
 
         beadsSpawn = true;
         rentPrice += 8;
-        actualBushelPrice -= 50;
+        actualBushelPrice -= 500;
         SetMarketPrice();
     }
     else if (villageStage == 12 && asCount >= priceBuild12[0] && bushelCount[1] > priceBuild12[1] && stoneCount >= priceBuild12[2] && horsesCount >= priceBuild12[3]) {
@@ -1593,6 +1607,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild12[0];
         asSpent += priceBuild12[0];
+        commercialLifetimeSpend += priceBuild12[0];
         bushelCount[1] -= priceBuild12[1];
         spentCount[1] += priceBuild12[1];
         stoneCount -= priceBuild12[2];
@@ -1600,7 +1615,7 @@ function Build() {
         horsesCount -= priceBuild12[3];
 
         rentPrice += 12;
-        actualBushelPrice += 100;
+        actualBushelPrice += 1000;
         SetMarketPrice();
         trophiesSpawn = true;
     }
@@ -1610,6 +1625,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild13[0];
         asSpent += priceBuild13[0];
+        commercialLifetimeSpend += priceBuild13[0];
         ingotsCopperCount -= priceBuild13[1];
         mountainSpentCount[2] += priceBuild13[1];
         stoneCount -= priceBuild13[2];
@@ -1617,7 +1633,7 @@ function Build() {
 
         rentPrice += 10;
         tourismValue += 16;
-        actualBushelPrice -= 1200;
+        actualBushelPrice -= 12000;
         player.hasBank = true;
         SetMarketPrice();
     }
@@ -1627,6 +1643,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild14[0];
         asSpent += priceBuild14[0];
+        commercialLifetimeSpend += priceBuild14[0];
         beadsCount -= priceBuild14[1];
         stoneCount -= priceBuild14[2];
         mountainSpentCount[0] += priceBuild14[2];
@@ -1643,13 +1660,14 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild15[0];
         asSpent += priceBuild15[0];
+        commercialLifetimeSpend += priceBuild15[0];
         stoneCount -= priceBuild15[1];
         mountainSpentCount[0] += priceBuild15[1];
 
         rentPrice += 8;
         tourismValue += 4;
         taxesValue += 28;
-        actualBushelPrice -= 50;
+        actualBushelPrice -= 500;
         SetMarketPrice();
         interestRate += 0.0012;
         ratsSpawn = true;
@@ -1660,6 +1678,7 @@ function Build() {
         villageStage++;
         asCount -= priceBuild16[0];
         asSpent += priceBuild16[0];
+        commercialLifetimeSpend += priceBuild16[0];
         bushelCount[1] -= priceBuild16[1];
         spentCount[1] += priceBuild16[1];
         boardsCount -= priceBuild16[2];
@@ -1670,7 +1689,7 @@ function Build() {
         rentPrice += 16;
         tourismValue += 22;
         taxesValue += 32;
-        actualBushelPrice -= 50;
+        actualBushelPrice -= 500;
         SetMarketPrice();
         interestRate += 0.0023;
         cityWalls = true;
@@ -1681,6 +1700,7 @@ function Build() {
         villageStage++;
         asCount -= priceBuild17[0];
         asSpent += priceBuild17[0];
+        commercialLifetimeSpend += priceBuild17[0];
         stoneCount -= priceBuild17[1];
         mountainSpentCount[0] += priceBuild17[1];
         ingotsBronzeCount -= priceBuild17[2];
@@ -1689,7 +1709,7 @@ function Build() {
         rentPrice += 20;
         tourismValue += 8;
         taxesValue += 28;
-        actualBushelPrice += 200;
+        actualBushelPrice += 2000;
         SetMarketPrice();
         interestRate += 0.0019;
         player.hasArmy = true;
@@ -1700,6 +1720,7 @@ function Build() {
         villageStage++;
         asCount -= priceBuild18[0];
         asSpent += priceBuild18[0];
+        commercialLifetimeSpend += priceBuild18[0];
         boardsCount -= priceBuild18[1];
         forestSpentCount[1] += priceBuild18[1];
         stoneCount -= priceBuild18[2];
@@ -1709,7 +1730,7 @@ function Build() {
         tourismValue += 1;
         taxesValue += 6;
         residentsMax += 168;
-        actualBushelPrice -= 50;
+        actualBushelPrice -= 500;
         SetMarketPrice();
         interestRate += 0.0033;
     }
@@ -1719,6 +1740,7 @@ function Build() {
         villageStage++;
         asCount -= priceBuild19[0];
         asSpent += priceBuild19[0];
+        commercialLifetimeSpend += priceBuild19[0];
         stoneCount -= priceBuild19[1];
         mountainSpentCount[0] += priceBuild19[1];
         oreCopperCount -= priceBuild19[2];
@@ -1736,6 +1758,7 @@ function Build() {
         villageStage++;
         asCount -= priceBuild20[0];
         asSpent += priceBuild20[0];
+        commercialLifetimeSpend += priceBuild20[0];
         bushelCount[0] -= priceBuild20[1];
         spentCount[0] += priceBuild20[1];
         boardsCount -= priceBuild20[2];
@@ -1746,7 +1769,7 @@ function Build() {
         rentPrice += 4;
         tourismValue += 4;
         taxesValue += 6;
-        actualBushelPrice += 50;
+        actualBushelPrice += 500;
         SetMarketPrice();
         interestRate += 0.004;
         residenceProductOut[0] = 32;
@@ -1764,6 +1787,7 @@ function Build() {
         villageStage++;
         asCount -= priceBuild21[0];
         asSpent += priceBuild21[0];
+        commercialLifetimeSpend += priceBuild21[0];
         stoneCount -= priceBuild21[1];
         mountainSpentCount[0] += priceBuild21[1];
         ingotsCopperCount -= priceBuild21[2];
@@ -1772,7 +1796,7 @@ function Build() {
         rentPrice += 8;
         tourismValue += 1;
         taxesValue += 33;
-        actualBushelPrice += 50;
+        actualBushelPrice += 500;
         SetMarketPrice();
         interestRate += 0.009;
         player.hasHospital = true;
@@ -1783,6 +1807,7 @@ function Build() {
         villageStage++;
         asCount -= priceBuild22[0];
         asSpent += priceBuild22[0];
+        commercialLifetimeSpend += priceBuild22[0];
         stoneCount -= priceBuild22[1];
         mountainSpentCount[0] += priceBuild22[1];
         ingotsCopperCount -= priceBuild22[2];
@@ -1795,7 +1820,7 @@ function Build() {
         rentPrice += 1;
         tourismValue += 3;
         taxesValue += 50;
-        actualBushelPrice += 100;
+        actualBushelPrice += 1000;
         SetMarketPrice();
         interestRate += 0.01;
         player.hasCourthouse = true;
@@ -1806,6 +1831,7 @@ function Build() {
         villageStage++;
         asCount -= priceBuild23[0];
         asSpent += priceBuild23[0];
+        commercialLifetimeSpend += priceBuild23[0];
         stoneCount -= priceBuild23[1];
         mountainSpentCount[0] += priceBuild23[1];
         oreCopperCount -= priceBuild23[2];
@@ -1814,7 +1840,7 @@ function Build() {
         rentPrice += 3;
         tourismValue += 111;
         taxesValue -= 4;
-        actualBushelPrice -= 50;
+        actualBushelPrice -= 500;
         SetMarketPrice();
         interestRate += 0.005;
         horsesIncAmount++;
@@ -1826,13 +1852,14 @@ function Build() {
         villageStage++;
         asCount -= priceBuild24[0];
         asSpent += priceBuild24[0];
+        commercialLifetimeSpend += priceBuild24[0];
         stoneCount -= priceBuild24[1];
         mountainSpentCount[0] += priceBuild24[1];
 
         rentPrice += 4;
         tourismValue += 99;
         taxesValue -= 6;
-        actualBushelPrice -= 50;
+        actualBushelPrice -= 500;
         SetMarketPrice();
         interestRate += 0.004;
         trophyChance = 20;
@@ -1843,13 +1870,14 @@ function Build() {
         villageStage++;
         asCount -= priceBuild25[0];
         asSpent += priceBuild25[0];
+        commercialLifetimeSpend += priceBuild25[0];
         stoneCount -= priceBuild25[1];
         mountainSpentCount[0] += priceBuild25[1];
 
         rentPrice += 6;
         tourismValue += 222;
         taxesValue -= 1;
-        actualBushelPrice -= 50;
+        actualBushelPrice -= 500;
         SetMarketPrice();
         interestRate += 0.001;
     }
@@ -1859,9 +1887,10 @@ function Build() {
         villageStage++;
         asCount -= priceBuild26;
         asSpent += priceBuild26;
+        commercialLifetimeSpend += priceBuild26;
 
         taxesValue += 100;
-        actualBushelPrice -= 250;
+        actualBushelPrice -= 2500;
         SetMarketPrice();
         interestRate -= 0.025;
         residentsMax += 333;
@@ -1872,6 +1901,7 @@ function Build() {
         villageStage++;
         asCount -= priceBuild27[0];
         asSpent += priceBuild27[0];
+        commercialLifetimeSpend += priceBuild27[0];
         stoneCount -= priceBuild27[1];
         mountainSpentCount[0] += priceBuild27[1];
         crystalsCount -= priceBuild27[2];
@@ -1886,6 +1916,7 @@ function Build() {
         villageStage = 100;
         asCount -= priceBuild28[0];
         asSpent += priceBuild28[0];
+        commercialLifetimeSpend += priceBuild28[0];
         stoneCount -= priceBuild28[1];
         mountainSpentCount[0] += priceBuild28[1];
         ingotsBronzeCount -= priceBuild28[2];
@@ -1901,6 +1932,7 @@ function Build() {
         villageStage += 1;
         asCount -= priceBuild100[0];
         asSpent += priceBuild100[0];
+        commercialLifetimeSpend += priceBuild100[0];
         beadsCount -= priceBuild100[1];
         scrollsCount -= priceBuild100[2];
         ingotsBronzeCount -= priceBuild100[3];
@@ -1913,7 +1945,7 @@ function Build() {
         rentPrice += 12;
         tourismValue += 48;
         taxesValue += 16;
-        actualBushelPrice += 200;
+        actualBushelPrice += 2000;
         SetMarketPrice();
         interestRate += 0.0077;
         player.canBuild = false;
@@ -1992,22 +2024,55 @@ function EstablishShippingLanes() {
 
 
 function SellGrain(grainType) {
-    const adjustedPrice = (currentBushelPrice - currentBarleyAdjustment) * 10;
+    const adjustedPrice = (currentBushelPrice - currentBarleyAdjustment);
 
-    if (grainType == 0 && bushelCount[0] > (bushelBulkCount * 10)) {
-        bushelCount[0] -= (bushelBulkCount * 10);
-        soldCount[0] += (bushelBulkCount * 10);
-        asCount += (currentBushelPrice * 10);
-        marketLifetimeRevenue += (currentBushelPrice * 10);
+    if (grainType == 0 && bushelCount[0] > commodityBulkCount) {
+        bushelCount[0] -= commodityBulkCount;
+        soldCount[0] += commodityBulkCount;
+        asCount += currentBushelPrice;
+        marketLifetimeRevenue += currentBushelPrice;
         UpdateDisplay();
     }
     else if (grainType == 1 && asCount >= adjustedPrice) {
-        bushelCount[1] += bushelBulkCount * 10;
+        bushelCount[1] += commodityBulkCount;
         asCount -= adjustedPrice;
         asSpent += adjustedPrice;
+        commoditiesLifetimeSpend += adjustedPrice;
         UpdateDisplay();
     }
 }
+
+
+
+function PurchaseCommodities(type) {
+    const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / commodityBulkCount);
+    const currentLogBulkCost = commodityBulkCount * valueInWheat1Log * currentDollarPriceOfOneWheat;
+    const currentBoardBulkCost = commodityBulkCount * valueInWheat1Board * currentDollarPriceOfOneWheat;
+    const currentStoneBulkCost = commodityBulkCount * valueInWheat1Stone * currentDollarPriceOfOneWheat;
+
+    if (type == 0 && asCount >= currentLogBulkCost) {
+        asCount -= currentLogBulkCost;
+        asSpent += currentLogBulkCost;
+        commoditiesLifetimeSpend += currentLogBulkCost;
+        logsCount += commodityBulkCount;
+        UpdateDisplay();
+    }
+    else if (type == 1 && asCount >= currentBoardBulkCost) {
+        asCount -= currentBoardBulkCost;
+        asSpent += currentBoardBulkCost;
+        commoditiesLifetimeSpend += currentBoardBulkCost;
+        boardsCount += commodityBulkCount;
+        UpdateDisplay();
+    }
+    else if (type == 2 && asCount >= currentStoneBulkCost) {
+        asCount -= currentStoneBulkCost;
+        asSpent += currentStoneBulkCost;
+        commoditiesLifetimeSpend += currentStoneBulkCost;
+        stoneCount += commodityBulkCount;
+        UpdateDisplay();
+    }
+}
+
 
 
 

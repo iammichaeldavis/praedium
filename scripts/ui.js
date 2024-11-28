@@ -816,7 +816,7 @@ function UpdateText() {
             if (player.canSell) {
                 tableString += '<tr>';
                 tableString += '<td>' + 'Market Value' + ' <span class="icon Scales inlineIcon"></span>:' + '</td>';
-                const calculatedValue = (currentBushelPrice * 100) / bushelBulkCount;
+                const calculatedValue = (currentBushelPrice * 100) / commodityBulkCount;
                 const valueToString = '' + calculatedValue;
                 tableString += '<td class="rightPadColumn">' + '1<span class="icon Wheat inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + valueToString[0] + '.' + valueToString[1] + valueToString[2] + '</td>';
                 tableString += '</tr>';
@@ -866,17 +866,27 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(interestLifetimeCollected) + '</td>';
                 tableString += '</tr>';
             }
-            if (player.canImport || player.hasArmy || player.hasBeenLevied) {
+            if (asSpent > 0) {
                 tableString += '<tr>';
                 tableString += '<td colspan="2" class="rightPadColumn">' + '</td>';
                 tableString += '</tr>';
                 tableString += '<tr>';
                 tableString += '<td colspan="2" class="tdFiatStatementSubheader">' + displayLifetimeCosts + '</td>';
                 tableString += '</tr>';
+                tableString += '<tr>';
+                tableString += '<td>' + displayComDev + ' <span class="icon CityWalls inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(commercialLifetimeSpend) + '</td>';
+                tableString += '</tr>';
+            }
+            if (player.canSell) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayCommodities + ' <span class="icon Barley inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(commoditiesLifetimeSpend) + '</td>';
+                tableString += '</tr>';
             }
             if (player.canImport) {
                 tableString += '<tr>';
-                tableString += '<td>' + displayCommodities + ' <span class="icon ShippingCrate inlineIcon"></span>:' + '</td>';
+                tableString += '<td>' + displayFreight + ' <span class="icon ShippingCrate inlineIcon"></span>:' + '</td>';
                 const allShippingCosts = shipmentCosts[0];
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterStandard.format(allShippingCosts) + '</td>';
                 tableString += '</tr>';
@@ -1138,27 +1148,64 @@ function UpdateText() {
         // ORACLE BUTTON -----------------------
         buttonVisitOracle.innerHTML = displayLabelOracle + ' <span class="icon Oracle inlineIcon"></span>';
 
-        // SELL BUTTONS ------------------------
-        let tempGrainIcon = 'WheatDisable';
-        let tempSellIcon = 'SellDisable';
-        buttonSellWheat.classList.add('disabled');
-        if (bushelCount[0] > (bushelBulkCount * 10)) {
-            tempGrainIcon = 'Wheat'
-            tempSellIcon = 'Sell';
-            buttonSellWheat.classList.remove('disabled');
-        }
-        buttonSellWheat.innerHTML = formatterStandard.format((bushelBulkCount * 10)) + '<span class="icon ' + tempGrainIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterStandard.format((currentBushelPrice * 10));
+        // MARKET BUTTONS ----------------------
+        if (player.canSell) {
+            let tempCommodityIcon = 'WheatDisable';
+            let tempSellIcon = 'SellDisable';
+            buttonSellWheat.classList.add('disabled');
+            if (bushelCount[0] > commodityBulkCount) {
+                tempCommodityIcon = 'Wheat'
+                tempSellIcon = 'Sell';
+                buttonSellWheat.classList.remove('disabled');
+            }
+            buttonSellWheat.innerHTML = formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterStandard.format(currentBushelPrice);
 
-        tempGrainIcon = 'BarleyDisable'
-        tempSellIcon = 'SellDisable';
-        buttonSellBarley.classList.add('disabled');
-        const adjustedPrice = (currentBushelPrice - currentBarleyAdjustment) * 10;
-        if (asCount >= adjustedPrice) {
-            tempGrainIcon = 'Barley'
-            tempSellIcon = 'Sell';
-            buttonSellBarley.classList.remove('disabled');
+            tempCommodityIcon = 'BarleyDisable'
+            tempSellIcon = 'SellDisable';
+            buttonBuyBarley.classList.add('disabled');
+            let adjustedPrice = (currentBushelPrice - currentBarleyAdjustment);
+            if (asCount >= adjustedPrice) {
+                tempCommodityIcon = 'Barley'
+                tempSellIcon = 'Sell';
+                buttonBuyBarley.classList.remove('disabled');
+            }
+            buttonBuyBarley.innerHTML = currencySymbol + formatterStandard.format(adjustedPrice) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
+
+            const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / commodityBulkCount);
+            const currentLogBulkCost = commodityBulkCount * valueInWheat1Log * currentDollarPriceOfOneWheat;
+            const currentBoardBulkCost = commodityBulkCount * valueInWheat1Board * currentDollarPriceOfOneWheat;
+            const currentStoneBulkCost = commodityBulkCount * valueInWheat1Stone * currentDollarPriceOfOneWheat;
+
+            tempCommodityIcon = 'LogsDisable'
+            tempSellIcon = 'SellDisable';
+            buttonBuyLogs.classList.add('disabled');
+            if (asCount >= currentLogBulkCost) {
+                tempCommodityIcon = 'Log'
+                tempSellIcon = 'Sell';
+                buttonBuyLogs.classList.remove('disabled');
+            }
+            buttonBuyLogs.innerHTML = currencySymbol + formatterStandard.format(currentLogBulkCost) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
+
+            tempCommodityIcon = 'BoardsDisable'
+            tempSellIcon = 'SellDisable';
+            buttonBuyBoards.classList.add('disabled');
+            if (asCount >= currentBoardBulkCost) {
+                tempCommodityIcon = 'Board'
+                tempSellIcon = 'Sell';
+                buttonBuyBoards.classList.remove('disabled');
+            }
+            buttonBuyBoards.innerHTML = currencySymbol + formatterStandard.format(currentBoardBulkCost) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
+
+            tempCommodityIcon = 'StoneDisable'
+            tempSellIcon = 'SellDisable';
+            buttonBuyStone.classList.add('disabled');
+            if (asCount >= currentStoneBulkCost) {
+                tempCommodityIcon = 'Stone'
+                tempSellIcon = 'Sell';
+                buttonBuyStone.classList.remove('disabled');
+            }
+            buttonBuyStone.innerHTML = currencySymbol + formatterStandard.format(currentStoneBulkCost) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
         }
-        buttonSellBarley.innerHTML = currencySymbol + formatterStandard.format(adjustedPrice) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterStandard.format((bushelBulkCount * 10)) + '<span class="icon ' + tempGrainIcon + ' inlineIcon"></span>';
     }
 
     else if (player.isAt == 'Port') {
@@ -1189,7 +1236,7 @@ function UpdateText() {
             tableString += '<tbody>';
             tableString += '<tr>';
             tableString += '<td style="padding: 3.2vw;">';
-            const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / bushelBulkCount);
+            const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / commodityBulkCount);
             let currentDollarValueOfUnit = null;
             let bounty = null;
             let colourIncrement = null;
@@ -2429,7 +2476,10 @@ function UpdateVisibilities() {
         buttonBuild.style.display = player.canBuild ? 'block' : '';
         buttonVisitOracle.style.display = player.hasOracle ? 'block' : '';
         buttonSellWheat.style.display = player.canSell ? 'block' : '';
-        buttonSellBarley.style.display = player.canSell ? 'block' : '';
+        buttonBuyBarley.style.display = player.canSell ? 'block' : '';
+        buttonBuyLogs.style.display = player.canSell ? 'block' : '';
+        buttonBuyBoards.style.display = player.canSell ? 'block' : '';
+        buttonBuyStone.style.display = player.canSell ? 'block' : '';
     }
 
     else if (player.isAt == 'Port') {
@@ -2466,34 +2516,34 @@ function RedrawFarm() {
         let arrayCropTiles = [
             [0, 64,],
             [16, 64,],
-            [16 * 2, 64,],
-            [16 * 3, 64,],
-            [16 * 4, 64,],
-            [16 * 5, 64,],
-            [16 * 6, 64,],
-            [16 * 7, 64,],
-            [16 * 8, 64,],
-            [16 * 9, 64,],
-            [16 * 10, 64,],
-            [16 * 11, 64,],
-            [16 * 12, 64,],
-            [16 * 13, 64,],
+            [32, 64,],
+            [48, 64,],
+            [64, 64,],
+            [80, 64,],
+            [96, 64,],
+            [112, 64,],
+            [128, 64,],
+            [144, 64,],
+            [160, 64,],
+            [176, 64,],
+            [192, 64,],
+            [208, 64,],
         ];
         if (arrayFarmPlots[row][col] == 14) {
             arrayCropTiles = [
-                [16 * 14, 64,],
-                [16 * 15, 64,],
-                [16 * 16, 64,],
-                [16 * 17, 64,],
-                [16 * 18, 64,],
+                [224, 64,],
+                [240, 64,],
+                [256, 64,],
+                [272, 64,],
+                [288, 64,],
             ];
             if (row > 5 && row < 9) {
                 arrayCropTiles = [
-                    [16 * 19, 64,],
-                    [16 * 20, 64,],
-                    [16 * 21, 64,],
-                    [16 * 22, 64,],
-                    [16 * 23, 64,],
+                    [304, 64,],
+                    [320, 64,],
+                    [336, 64,],
+                    [352, 64,],
+                    [368, 64,],
                 ];
             }
             tileChoice = arrayCropTiles[FindWholeRandom(0, 4)];
@@ -2502,18 +2552,18 @@ function RedrawFarm() {
         return tileChoice;
     }
 
-    function PickOliveTile(tree) { return (arrayOlivar[tree] == 0) ? tileGrowingOlive : [31 * 16, 96,]; }
+    function PickOliveTile(tree) { return (arrayOlivar[tree] == 0) ? tileGrowingOlive : [496, 96,]; }
 
-    function PickDatePalmTile(palm) { return (arrayDatePalmGrove[palm] == 0) ? [24 * 16, 80,] : [25 * 16, 80,]; }
+    function PickDatePalmTile(palm) { return (arrayDatePalmGrove[palm] == 0) ? [384, 80,] : [400, 80,]; }
 
-    function PickFigTile(fig) { return (arrayFigOrchard[fig] == 0) ? [30 * 16, 64,] : [31 * 16, 64,]; }
+    function PickFigTile(fig) { return (arrayFigOrchard[fig] == 0) ? [480, 64,] : [496, 64,]; }
 
-    function PickPomTile(pom) { return (arrayPomOrchard[pom] == 0) ? [24 * 16, 64,] : [25 * 16, 64,]; }
+    function PickPomTile(pom) { return (arrayPomOrchard[pom] == 0) ? [384, 64,] : [400, 64,]; }
 
     function PickGrapeTile(grape, post) {
-        let tileChoice = [26 * 16, 64,];
-        if (post) { tileChoice = [28 * 16, 64,]; }
-        return (arrayVineyard[grape] == 0) ? tileChoice : [27 * 16, 64,];
+        let tileChoice = [416, 64,];
+        if (post) { tileChoice = [448, 64,]; }
+        return (arrayVineyard[grape] == 0) ? tileChoice : [432, 64,];
     }
 
     const arrayFarmGraph = [
