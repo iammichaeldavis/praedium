@@ -456,12 +456,18 @@ let displayRandomWisdomsInglés = [
     '“There are no passengers on Spaceship Earth: only crew.”<br>—Marshall McLuhan',
     '“If it’s your job to eat a frog, do it first thing in the morning. And if it’s your job to eat two frogs, eat the bigger one first.”<br>—Mark Twain',
     '“Wherever you go, there you are.”<br>—Peter Weller<br><br>The Adventures of Buckaroo Banzai Across the 8th Dimension (Sherwood Productions, 1984)',
+    '“The society that separates its scholars from its warriors will have its thinking done by cowards and its fighting by fools.”<br>—Thucydides',
     '“Commander, it is possible to commit no mistakes, and still lose. That is not a weakness; that is life.”<br>—Captain Jean-Luc Picard<br><br>Star Trek: The Next Generation (Paramount Television, 1989), Season 2, Episode 21: “Peak Performance”',
     '“Due to compound interest and inflation, if a rich person has $1,000,000 today, tomorrow they’ll have $1,050,000. Due to the exact same economic forces, if a poor person has $1 today, tomorrow they have $0.95.”<br>—Vicar Neumann',
+    '“Let me get my cigarette, Frank... I smoke, and I drink, lotta you don’t drink, don’t smoke; some people here tonight, they don’t eat butter, no salt. No sugar, no lard. No biscuits, no gravy with onions in it. ’Cause they wanna live, they give up that good stuff. Neck bone, pig tail. You gonna feel like a damn fool, lyin’ at the hospital, dyin’ from nothin’.”<br>—Redd Foxx',
     'Eat your vegetables',
     '“For with wisdom did someone once reveal the maxim, now famous, that evil at one time or another seems good, to him whose mind a god leads to ruin.”<br>—Sophocles',
     '“There is an old saying: the first sip from the cup of natural sciences will make you an atheist, but at the bottom of the glass God is waiting for you.”<br>—Carl Friedrich von Weizsäcker, paraphrasing Francis Bacon',
-    '“I hope that when the world comes to an end, I can breathe a sigh of relief, because there will be so much to look forward to.”<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)'
+    '<div id="MrSecretary">Arsenio Hall: Okay, your middle name is “Macho”, but uh, I’m wondering if you ever cry. You ever... Has the Macho Man ever cried?<br><br>Macho Man Randy Savage: Oh, yeah.<br><br>Hall: Really?<br><br>Savage: Uh huh. It’s okay for macho men to show every emotion available, right there, you know, because I’ve cried a thousand times and I’m gonna cry some more. But—I’ve soared with the eagles, and I’ve slithered with the snakes and I’ve been everywhere in between, and I’m gonna tell you something right now, there’s one guarantee in life: in that there are no guarantees, yeah, and—understand this: nobody likes a quitter. Nobody said life was easy. So if you get knocked down, take the standing eight count, get back up and fight again! And you’re a Macho Maniac, dig it.</div><br>The Arsenio Hall Show (Paramount Television, 1992)',
+    '“Do you wish God to hear your prayer immediately, brother?” asks Abba Zenon. “When you lift your hands up to heaven, pray first of all, with all of your heart, for your enemies and God will grant you speedily whatever else you request.”<br><br>The Evergetinos',
+    '“I hope that when the world comes to an end, I can breathe a sigh of relief, because there will be so much to look forward to.”<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)',
+    '“Let me remember that the unintended meaning that people project onto what I do is neither my fault or something I can take credit for.”<br>—ze frank',
+    '“Hang in there, friend. It can only get stranger.”<br>—William Gibson',
 ];
 let displayRandomWisdomsEspañol = [
     '«Ten paciencia. Todas las cosas son difíciles antes de volverse fáciles.»<br>—Saʿdī Shīrāzī',
@@ -473,12 +479,18 @@ let displayRandomWisdomsEspañol = [
     '«No hay pasajeros en La Nave Espacial Tierra: sólo tripulación.»<br>—Marshall McLuhan',
     '«Si tu trabajo consiste en comerte una rana, hazlo a primera hora de la mañana. Y si tu trabajo consiste en comerte dos ranas, cómete la más grande primero.»<br>—Mark Twain',
     '«Donde quiera que vayas, ahí estás.»<br>—Peter Weller<br><br>Las Aventuras de Buckaroo Banzai (Sherwood Productions, 1984)',
+    '«La sociedad que separa a sus eruditos de sus guerreros tendrá su pensamiento hecho por cobardes y su lucha por tontos.»<br>—Thucydides',
     '«Comandante, es posible no cometer errores y aun así perder. Eso no es debilidad; eso es vida.»<br>Capitán Jean-Luc Picard<br><br>Viaje a Las Estrellas: La Nueva Generación (Paramount Television, 1989), Temporada 2, Episodio 21: “Máximo Rendimiento”',
     '«Debido al interés compuesto y a la inflación, si una persona rica tiene hoy 1.000.000 de dólares, mañana tendrá 1.050.000. Debido a las mismas fuerzas económicas, si una persona pobre tiene hoy 1 dólar, mañana tendrá 0,95 dólares.»<br>—Vicar Neumann',
+    '«Déjame coger mi cigarrillo, Frank... Yo fumo, y yo bebo, muchos no beben, ni fuman; algunas personas aquí esta noche, ellos no comen mantequilla, no sal. No azúcar, no manteca. No galletas, no salsa con cebolla. Porque quieren vivir, renuncian a todas esas cosas buenas. Hueso de cuello, rabo de buey. Te sentirás como un maldito idiota, tirado en el hospital, muriendo de nada.»<br>—Redd Foxx',
     'Come tus verduras',
     '«Porque alguien reveló una vez con sabiduría la máxima, ahora famosa, de que el mal en un momento u otro parece bueno a aquel cuya mente es llevada a la ruina por un dios.»<br>—Sófocles',
     '«Hay un viejo dicho: el primer sorbo de la copa de las ciencias naturales te hará un ateo, pero en el fondo del vaso te espera Dios.»<br>—Carl Friedrich von Weizsäcker, parafraseando a Francis Bacon',
+    '<div id="MrSecretary">Arsenio Hall: Vale, tu segundo nombre es “Macho”, pero me pregunto si alguna vez lloras. ¿Alguna vez...? ¿El Macho Man ha llorado alguna vez?<br><br>Macho Man Randy Savage: Oh, sí.<br><br>Hall: ¿En realidad?<br><br>Savage: Sí, claro. Está bien que los hombres machos muestren todas las emociones posibles, ahí mismo, ya sabes, porque he llorado mil veces y voy a llorar aún más. Pero—he volado con las águilas, me he deslizado con las serpientes y he estado en todas partes entremedio, y te voy a decir algo ahora mismo, hay una garantía en la vida: que no hay garantías, sí, y—entiendan esto: a nadie le gustan los que se rinden. Nadie dijo que la vida fuera fácil. Así que si te derriban, toma la cuenta ocho de pie, levántate y ¡vuelve a pelear! Y eres un Macho Maniac, ¡entiéndelo!</div><br>The Arsenio Hall Show (Paramount Television, 1992)',
+    '«¿Deseas que Dios escuche tu oración inmediatamente, hermano?», pregunta Abba Zenon. «Cuando levantes tus manos al cielo, ora ante todo, con todo de tu corazón, por tus enemigos y Dios te concederá rápidamente todo lo demás que pidas.»<br><br>El Evergetinos',
     '«Espero que cuando el mundo llegue a su fin, pueda respirar aliviado, porque habrá mucho que mucho que esperar.»<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)',
+    '«Déjame recordar a yo mismo que el significado no intencionado que la gente proyecta sobre lo que hago no es mi culpa ni algo por lo que pueda atribuirme el mérito.»<br>—ze frank',
+    '«Ánimo, amigo. Esto solo puede volverse más extraño.»<br>—William Gibson',
 ];
 let displayRandomWisdomsDisplay = null;
 
@@ -904,7 +916,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.<br><br>Made with CodePen, the GNU Image Manipulation Program, GitHub, Inkscape and Visual Studio Code.';
         displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Todd Spigener, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben and W3Schools.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Todd Spigener, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben, Rebecca Wickersham and W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -1347,7 +1359,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.<br><br>Hecho con CodePen, el GNU Image Manipulation Program, GitHub, Inkscape y Visual Studio Code.';
         displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Todd Spigener, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben y W3Schools.';
+        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Todd Spigener, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben, Rebecca Wickersham y W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';
