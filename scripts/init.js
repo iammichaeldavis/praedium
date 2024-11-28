@@ -32,7 +32,7 @@ const player = {
     age: 11, // longest verified documented human lifespan: Jeanne Calment of France, 122 years and 164 days
     saṃsāra: -0,
 
-    isGod: true,
+    isGod: false,
     isOnMobile: null,
     isAt: 'Praedium',
 
@@ -610,18 +610,18 @@ const priceBuild13 = [4000000, 200, 30000,]; // Bank
 const priceBuild14 = [64000, 810, 20000,]; // Monks
 const priceBuild15 = [1200000, 60000,]; // Sewers
 const priceBuild16 = [2400000, 30000, 60000, 200000,]; // Gates
-const priceBuild17 = [1000000, 100000, 200,]; // Standing Army
+const priceBuild17 = [3600000, 100000, 200,]; // Standing Army
 const priceBuild18 = [1024000, 100000, 200000,]; // 4x Insulas
-const priceBuild19 = [250000, 20000, 100000,]; // Graveyard
+const priceBuild19 = [250000, 20000, 10000,]; // Graveyard
 const priceBuild20 = [400000, 160000, 60000, 120000,]; // University
-const priceBuild21 = [200000, 60000, 300,]; // Hospital
-const priceBuild22 = [500000, 40000, 100, 100, 100,]; // Courthouse
-const priceBuild23 = [250000, 10000, 20000,]; // Hippodrome
-const priceBuild24 = [1250000, 20000,]; // Colosseum
-const priceBuild25 = [1000000, 16000,]; // Theater
+const priceBuild21 = [1200000, 60000, 100,]; // Hospital
+const priceBuild22 = [1500000, 40000, 100, 100, 100,]; // Courthouse
+const priceBuild23 = [1250000, 10000, 10000,]; // Hippodrome
+const priceBuild24 = [1500000, 20000, 10000,]; // Colosseum
+const priceBuild25 = [750000, 16000,]; // Theater
 const priceBuild26 = 100000; // Private Development
-const priceBuild27 = [10000, 5000, 100,]; // Oracle
-const priceBuild28 = [10000, 2000, 333, 333,]; // Astronomers Guild
+const priceBuild27 = [100000, 5000, 5000,]; // Oracle
+const priceBuild28 = [1000000, 2000, 333, 333,]; // Astronomers Guild
 const priceBuild100 = [10000000, 9001, 77, 1000, 100000, 100000,]; // Monument
 
 const pricePort0 = 8000;

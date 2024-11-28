@@ -957,6 +957,7 @@ function MountainEvents() {
         if (player.likesStory) { GameEvent(displayStoryMineDig); }
         asCount -= priceMineDig[0];
         asSpent += priceMineDig[0];
+        commercialLifetimeSpend += priceMineDig[0];
         logsCount -= priceMineDig[1];
         forestSpentCount[0] += priceMineDig[1];
         player.canMine = true;
@@ -965,6 +966,7 @@ function MountainEvents() {
         if (player.likesStory) { GameEvent(displayStoryFoundry); }
         asCount -= priceFoundry[0];
         asSpent += priceFoundry[0];
+        commercialLifetimeSpend += priceFoundry[0];
         logsCount -= priceFoundry[1];
         forestSpentCount[0] += priceFoundry[1];
         stoneCount -= priceFoundry[2];
@@ -1095,6 +1097,7 @@ function BuyNewFarm() {
         if (player.likesStory) { GameEvent(displayStoryNewFarm); }
         asCount -= priceNewFarm;
         asSpent += priceNewFarm;
+        commercialLifetimeSpend += priceNewFarm;
         player.canBuyNewFarm = false;
         player.hasNewFarm = true;
         farmSize[1] = 15;
@@ -1825,7 +1828,7 @@ function Build() {
         interestRate += 0.01;
         player.hasCourthouse = true;
     }
-    else if (villageStage == 23 && asCount >= priceBuild23[0] && stoneCount >= priceBuild23[1] && ingotsCopperCount >= priceBuild23[2]) {
+    else if (villageStage == 23 && asCount >= priceBuild23[0] && stoneCount >= priceBuild23[1] && oreCopperCount >= priceBuild23[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage23); }
         villageImage.src = 'bitmaps/village24.png';
         villageStage++;
@@ -1846,7 +1849,7 @@ function Build() {
         horsesIncAmount++;
         player.hasRacetrack = true;
     }
-    else if (villageStage == 24 && asCount >= priceBuild24[0] && stoneCount >= priceBuild24[1]) {
+    else if (villageStage == 24 && asCount >= priceBuild24[0] && stoneCount >= priceBuild24[1] && oreCopperCount >= priceBuild24[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage24); }
         villageImage.src = 'bitmaps/village25.png';
         villageStage++;
@@ -1855,6 +1858,8 @@ function Build() {
         commercialLifetimeSpend += priceBuild24[0];
         stoneCount -= priceBuild24[1];
         mountainSpentCount[0] += priceBuild24[1];
+        oreCopperCount -= priceBuild24[2];
+        mountainSpentCount[1] += priceBuild24[2];
 
         rentPrice += 4;
         tourismValue += 99;
@@ -1963,6 +1968,7 @@ function EstablishTradeRoute() {
         if (player.likesStory) { GameEvent(displayStoryPort00); }
         asCount -= pricePort0;
         asSpent += pricePort0;
+        commercialLifetimeSpend += pricePort0;
         player.canExport = true;
         player.canExportOil = true;
     }
@@ -1970,30 +1976,35 @@ function EstablishTradeRoute() {
         if (player.likesStory) { GameEvent(displayStoryPort01); }
         asCount -= pricePort1;
         asSpent += pricePort1;
+        commercialLifetimeSpend += pricePort1;
         player.canExportBeer = true;
     }
     else if (player.canExport && asCount >= pricePort2 && player.hasWinery && !player.canExportWine) {
         if (player.likesStory) { GameEvent(displayStoryPort02); }
         asCount -= pricePort2;
         asSpent += pricePort2;
+        commercialLifetimeSpend += pricePort2;
         player.canExportWine = true;
     }
     else if (player.canExport && asCount >= pricePort3 && player.hasKitchen && !player.canExportSyrup) {
         if (player.likesStory) { GameEvent(displayStoryPort03); }
         asCount -= pricePort3;
         asSpent += pricePort3;
+        commercialLifetimeSpend += pricePort3;
         player.canExportSyrup = true;
     }
     else if (player.canExport && asCount >= pricePort4 && player.hasPress && !player.canExportJuice) {
         if (player.likesStory) { GameEvent(displayStoryPort04); }
         asCount -= pricePort4;
         asSpent += pricePort4;
+        commercialLifetimeSpend += pricePort4;
         player.canExportJuice = true;
     }
     else if (player.canExport && asCount >= pricePort5 && player.hasGreenhouse && !player.canExportFigs) {
         if (player.likesStory) { GameEvent(displayStoryPort05); }
         asCount -= pricePort5;
         asSpent += pricePort5;
+        commercialLifetimeSpend += pricePort5;
         player.canExportFigs = true;
         player.hasMerchantGuildWrit = true;
     }
@@ -2001,6 +2012,7 @@ function EstablishTradeRoute() {
         if (player.likesStory) { GameEvent(displayStoryPort06); }
         asCount -= pricePort6;
         asSpent += pricePort6;
+        commercialLifetimeSpend += pricePort6;
         player.canExportTrinkets = true;
         player.seesExportButton = false;
     }

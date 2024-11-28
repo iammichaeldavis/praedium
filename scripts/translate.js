@@ -460,6 +460,7 @@ let displayRandomWisdomsInglés = [
     '“Due to compound interest and inflation, if a rich person has $1,000,000 today, tomorrow they’ll have $1,050,000. Due to the exact same economic forces, if a poor person has $1 today, tomorrow they have $0.95.”<br>—Vicar Neumann',
     'Eat your vegetables',
     '“For with wisdom did someone once reveal the maxim, now famous, that evil at one time or another seems good, to him whose mind a god leads to ruin.”<br>—Sophocles',
+    '“There is an old saying: the first sip from the cup of natural sciences will make you an atheist, but at the bottom of the glass God is waiting for you.”<br>—Carl Friedrich von Weizsäcker, paraphrasing Francis Bacon',
     '“I hope that when the world comes to an end, I can breathe a sigh of relief, because there will be so much to look forward to.”<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)'
 ];
 let displayRandomWisdomsEspañol = [
@@ -476,6 +477,7 @@ let displayRandomWisdomsEspañol = [
     '«Debido al interés compuesto y a la inflación, si una persona rica tiene hoy 1.000.000 de dólares, mañana tendrá 1.050.000. Debido a las mismas fuerzas económicas, si una persona pobre tiene hoy 1 dólar, mañana tendrá 0,95 dólares.»<br>—Vicar Neumann',
     'Come tus verduras',
     '«Porque alguien reveló una vez con sabiduría la máxima, ahora famosa, de que el mal en un momento u otro parece bueno a aquel cuya mente es llevada a la ruina por un dios.»<br>—Sófocles',
+    '«Hay un viejo dicho: el primer sorbo de la copa de las ciencias naturales te hará un ateo, pero en el fondo del vaso te espera Dios.»<br>—Carl Friedrich von Weizsäcker, parafraseando a Francis Bacon',
     '«Espero que cuando el mundo llegue a su fin, pueda respirar aliviado, porque habrá mucho que mucho que esperar.»<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)',
 ];
 let displayRandomWisdomsDisplay = null;
@@ -745,7 +747,7 @@ function Translate(language, bark = true) {
         displayStoryVillage1 = 'NOW WE CAN BUILD';
         displayStoryVillage2 = 'WE’VE GOT TO HAVE SOME LAW AND ORDER';
         displayStoryVillage3 = 'PEOPLE NEED HOMES';
-        displayStoryVillage4 = 'MORE APARTMENTS MEAN MORE TENANTS, MORE TENANTS MEAN MORE RENT';
+        displayStoryVillage4 = 'MO’ APARTMENTS MEANS MO’ TENANTS, MO’ TENANTS MEANS MO’ RENT';
         displayStoryVillage5 = 'THE SPICES OF THE MARKET ARE FRAGRANT INDEED';
         displayStoryVillage6 = 'THE BUILDERS ASSURE THERE IS NO DANGER';
         displayStoryVillage7 = 'CITIZENS FLOW IN FROM THE COUNTRYSIDE NOW, SEEKING OPPORTUNITY';
@@ -902,7 +904,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.<br><br>Made with CodePen, the GNU Image Manipulation Program, GitHub, Inkscape and Visual Studio Code.';
         displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Todd Spigener, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben and W3Schools.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Jim Shepperd, Todd Spigener, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben and W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -1345,7 +1347,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.<br><br>Hecho con CodePen, el GNU Image Manipulation Program, GitHub, Inkscape y Visual Studio Code.';
         displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Todd T. Brannon, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Todd Spigener, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben y W3Schools.';
+        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Jim Shepperd, Todd Spigener, Grant Sutherland, Benjamin A. Taylor, Jan van der Crabben y W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';
