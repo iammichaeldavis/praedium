@@ -308,7 +308,7 @@ function Shipping() {
         if (player.canExportOil) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[0] * currentDollarPriceOfOneWheat) * valueFactor[0];
             const bounty = currentDollarValueOfUnit * residenceInStockCount[1];
-            residenceSpentCount[1] += residenceInStockCount[1];
+            residenceShippedCount[1] += residenceInStockCount[1];
             residenceInStockCount[1] = 0;
             asCount += bounty;
             shipmentProfits[0] += bounty;
@@ -320,7 +320,7 @@ function Shipping() {
         if (player.canExportBeer) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[1] * currentDollarPriceOfOneWheat) * valueFactor[1];
             const bounty = currentDollarValueOfUnit * residenceInStockCount[2];
-            residenceSpentCount[2] += residenceInStockCount[2];
+            residenceShippedCount[2] += residenceInStockCount[2];
             residenceInStockCount[2] = 0;
             asCount += bounty;
             shipmentProfits[1] += bounty;
@@ -332,7 +332,7 @@ function Shipping() {
         if (player.canExportWine) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[2] * currentDollarPriceOfOneWheat) * valueFactor[2];
             const bounty = currentDollarValueOfUnit * residenceInStockCount[3];
-            residenceSpentCount[3] += residenceInStockCount[3];
+            residenceShippedCount[3] += residenceInStockCount[3];
             residenceInStockCount[3] = 0;
             asCount += bounty;
             shipmentProfits[2] += bounty;
@@ -344,7 +344,7 @@ function Shipping() {
         if (player.canExportSyrup) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[3] * currentDollarPriceOfOneWheat) * valueFactor[3];
             const bounty = currentDollarValueOfUnit * residenceInStockCount[4];
-            residenceSpentCount[4] += residenceInStockCount[4];
+            residenceShippedCount[4] += residenceInStockCount[4];
             residenceInStockCount[4] = 0;
             asCount += bounty;
             shipmentProfits[3] += bounty;
@@ -356,7 +356,7 @@ function Shipping() {
         if (player.canExportJuice) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[4] * currentDollarPriceOfOneWheat) * valueFactor[4];
             const bounty = currentDollarValueOfUnit * residenceInStockCount[5];
-            residenceSpentCount[5] += residenceInStockCount[5];
+            residenceShippedCount[5] += residenceInStockCount[5];
             residenceInStockCount[5] = 0;
             asCount += bounty;
             shipmentProfits[4] += bounty;
@@ -368,7 +368,7 @@ function Shipping() {
         if (player.canExportFigs) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[5] * currentDollarPriceOfOneWheat) * valueFactor[5];
             const bounty = currentDollarValueOfUnit * residenceInStockCount[6];
-            residenceSpentCount[6] += residenceInStockCount[6];
+            residenceShippedCount[6] += residenceInStockCount[6];
             residenceInStockCount[6] = 0;
             asCount += bounty;
             shipmentProfits[5] += bounty;
@@ -379,7 +379,7 @@ function Shipping() {
         shipmentTimersCurrent[6] = shipmentTimersDefault[6];
         if (player.canExportTrinkets) {
             const bounty = residenceInStockCount[7] * trinketValue;
-            residenceSpentCount[7] += residenceInStockCount[7];
+            residenceShippedCount[7] += residenceInStockCount[7];
             residenceInStockCount[7] = 0;
             asCount += bounty;
             shipmentProfits[6] += bounty;
@@ -393,7 +393,7 @@ function Shipping() {
             asSpent += importCost[0];
             shipmentCosts[0] += importCost[0];
             let bounty = importAmount[0];
-            mountainProducedCount[3] += bounty;
+            mountainPurchasedCount[3] += bounty;
             if (player.hasAtelier) {
                 const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[7]);
                 residenceIngredientInStockCount[7] += workshopShare;

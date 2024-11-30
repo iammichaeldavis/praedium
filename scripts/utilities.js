@@ -19,40 +19,65 @@ function Achievement() {
 
 function CollateGameStateReport(loud = false) {
     const integerCounts = {
-        farmBushels: bushelCount,
+        farmInventory: bushelCount,
         farmSeeded: seededCount,
         farmFarmed: farmedCount,
         farmHarvested: harvestedCount,
         farmSpent: spentCount,
+        farmPurchased: purchasedCount,
         farmSold: soldCount,
         farmHolidays: [weeksOfHoliday, manweeksLost,],
+
+        forestInventory: [logsCount, boardsCount,],
         forestProduced: forestProducedCount,
         forestSpent: forestSpentCount,
+        forestPurchased: forestPurchasedCount,
+        forestSold: forestSoldCount,
+
+        mountainInventory: [stoneCount, oreCopperCount, ingotsCopperCount, ingotsTinCount, ingotsBronzeCount, crystalsCount,],
         mountainProduced: mountainProducedCount,
         mountainSpent: mountainSpentCount,
+        mountainPurchased: mountainPurchasedCount,
+        mountainSold: mountainSoldCount,
+
         staffWheatPaid: paidOutWheat,
-        villageFiat: [asCount, asSpent, rentLifetimeCollected, marketLifetimeRevenue, tourismLifetimeProfit, taxesLifetimeCollected, interestLifetimeCollected, militaryLifetimeCost, tributeLifetimePaid, currentBushelPrice,],
+        staffStarving: starving,
+        staffPriority: priority,
+        staffHired: handsHired,
+
+        residenceResourceInventory: residenceIngredientInStockCount,
+        residenceResourceSpent: residenceIngredientConsumedCount,
+        residenceOutputInventory: residenceInStockCount,
+        residenceOutputProduced: residenceProducedCount,
+        residenceOutputSpent: residenceSpentCount,
+        residenceOutputShipped: residenceShippedCount,
+
         villageDemographics: [residentsCount, [pilgrimsCount, pilgrimsLifetimeCount,],],
-        villageMateriel: [[horsesCount, horsesEaten,], trophiesCount, [beadsCount, pilgrimLifetimeIncome,], scrollsCount, relicCount, [ratsCount, ratsHighScore,],],
-        residenceResourceInStockCount: residenceIngredientInStockCount,
-        residenceResourceConsumedCount: residenceIngredientConsumedCount,
-        residenceOutputInStockCount: residenceInStockCount,
-        residenceOutputProducedCount: residenceProducedCount,
-        residenceOutputSpentCount: residenceSpentCount,
-    }
-    const gameStateSnapshot = {
-        hero: [player.names, player.age, player.saṃsāra, player.isAt, player.hasWon,],
-        preferences: [player.speaks, player.likesMusic, player.likesSounds, player.likesAnimations, player.likesStory, player.isGod, player.isOnMobile,],
+        villageFiat: [asCount, asSpent, commercialLifetimeSpend, commoditiesLifetimeSpend, rentLifetimeCollected, taxesLifetimeCollected, interestLifetimeCollected, tourismLifetimeProfit, militaryLifetimeCost, medicalLifetimeCost, currentBushelPrice, currentBarleyAdjustment, marketLifetimeRevenue, shipmentProfits, shipmentCosts, tributeLifetimePaid,],
+        villageMateriel: [[horsesCount, horsesEaten,], [beadsCount, pilgrimLifetimeIncome,], trophiesCount, scrollsCount, [ratsCount, ratsHighScore,], ghostsCount, patientsCount, relicCount,],
+    };
+    const farmlandArrays = {
+        grain: arrayFarmPlots,
+        olives: arrayOlivar,
+        dates: arrayDatePalmGrove,
+        figs: arrayFigOrchard,
+        poms: arrayPomOrchard,
+        grapes: arrayVineyard,
+    };
+    const report = {
+        hero: player,
         calendar: [gameTurn, year, week, olivePlantDate, estDate,],
         stages: [farmStage, warehouseStage, residenceStage, villageStage,],
         counts: integerCounts,
+        farmland: farmlandArrays,
+        v: version,
     };
     if (loud) {
-        console.log('--------🚨 Game State Report Start 🚨--------');
-        console.log(gameStateSnapshot);
-        console.log('--------🚨 Game State Report End 🚨--------');
-    }
-    return gameStateSnapshot;
+        console.log('--------🚨 Report Start 🚨--------');
+        console.log(report);
+        console.log('--------🚨 Report End 🚨--------');
+    };
+    return report;
 }
 
 

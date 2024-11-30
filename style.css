@@ -39,7 +39,7 @@
 
 * {
     font-family: 'Courier New', monospace;
-    font-size: 2.8vw;
+    font-size: 2.4vw;
     color: black;
     box-sizing: border-box;
     margin: 0;
@@ -58,9 +58,6 @@ body {
     background: #afafbf;
 }
 
-/* attempting to deal with BS iPhone double-tap zoom, but that I fear is a lost cause
-   short of rolling everything up into a native app for the app store, which.. f apple man jfc
-   this makes me just want to fn give up 😠 */
 table,
 tr,
 td,
@@ -167,18 +164,24 @@ button:active {
     margin: 0 auto 6.4vw auto;
 }
 
-#divVillageButtons #buttonSellWheat {
+#divVillageButtons #buttonBuyWheat {
     margin: 0 auto;
 }
 
+#divVillageButtons #buttonSellWheat,
 #divVillageButtons #buttonBuyBarley,
+#divVillageButtons #buttonSellBarley,
 #divVillageButtons #buttonBuyLogs,
+#divVillageButtons #buttonSellLogs,
 #divVillageButtons #buttonBuyBoards,
-#divVillageButtons #buttonBuyStone {
+#divVillageButtons #buttonSellBoards,
+#divVillageButtons #buttonBuyStone,
+#divVillageButtons #buttonSellStone {
     margin: 2vw auto 0 auto;
 }
 
-#divVillageButtons #buttonBuyStone {
+#divVillageButtons #buttonBuyStone,
+#divVillageButtons #buttonSellStone {
     margin-bottom: 6.4vw;
 }
 
@@ -794,6 +797,13 @@ button:active {
 #divGameEventCorpus #signs {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 3.2vw;
+}
+
+#divGameEventCorpus #there {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    font-style: italic;
+    color: #041204;
 }
 
 
@@ -2119,11 +2129,16 @@ td {
 #buttonBarterFig,
 #buttonBarterPom,
 #buttonBarterGrape,
+#buttonBuyWheat,
 #buttonSellWheat,
 #buttonBuyBarley,
+#buttonSellBarley,
 #buttonBuyLogs,
+#buttonSellLogs,
 #buttonBuyBoards,
+#buttonSellBoards,
 #buttonBuyStone,
+#buttonSellStone,
 #buttonVisitOracle,
 #buttonWin {
     display: none;

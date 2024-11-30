@@ -18,9 +18,17 @@ let displayFieldhands = '';
 let displayHireHand = '';
 let displayCrop = '';
 let displayAcresFarmed = '';
+let displayBushels = '';
 let displayHarvested = '';
 let displayHarvest = '';
 let displaySpent = '';
+let displayPurchased = '';
+let displaySold = '';
+let displayGood = '';
+let displayProduced = '';
+let displayScore = '';
+let displayHomers = '';
+let displayUnits = '';
 let displayStarving = '';
 let displayStarvingHorse = '';
 let displayRatPlague = '';
@@ -62,11 +70,6 @@ let displayMiners = '';
 let displayCindermen = '';
 let displayMetallurgists = '';
 let displayGemcutters = '';
-let displayGood = '';
-let displayScoreProduced = '';
-let displayScoreSpent = '';
-let displayHomersProduced = '';
-let displayHomersSpent = '';
 
 let displayLabelBuyLand0 = '';
 let displayLabelBuyLand1 = '';
@@ -347,6 +350,8 @@ let displayStudy = '';
 let displayTaxes = '';
 let displayInterest = '';
 let displayInterestRate = '';
+let displayFairRate = '';
+
 let displayMateriel = '';
 let displayPonies = '';
 let displayCavalry = '';
@@ -372,8 +377,6 @@ let displayJuice = '';
 let displayDriedFigs = '';
 let displayTrinkets = '';
 let displayGems = '';
-let displayAmountProduced = '';
-let displayAmountSpent = '';
 
 let displayConsumes = '';
 let displayUsed = '';
@@ -448,14 +451,19 @@ let displayCheevo = '';
 
 let displayRandomWisdomsInglés = [
     '“Have patience. All things are difficult before they become easy.”<br>—Saʿdī Shīrāzī',
+    'You can’t make a silk purse out of a sow’s ear.<br><br>Alexander Barclay’s Eclogues',
+    'A poor workman blames his tools.<br><br>John Ray’s A Compleat Collection of English Proverbs',
+    '“When you are going through hell, keep going.”<br>—Winston Churchill<br><br>“...I mean, why would you stop <span id="there">there</span>?”<br>—Steve Harvey',
     '“Only a fool trips on what is behind him.”<br>—Marcus Aurelius',
     '“Every real story is a never-ending story.”<br>—Michael Ende',
     '“There’re two types of fools: people who take religion literally, and people who think religion has no value.”<br>—Jimmy Carr',
+    '“The naked man fears no pickpocket.”<br>—Sun Tzu',
     '<span id="signs">SIGNS<br>POINT<br>TO YES</span>',
     'There’s only two things for certain:<br>That we born alone, die alone<br>And birds keep chirpin’<br>—Xzibit',
     '“There are no passengers on Spaceship Earth: only crew.”<br>—Marshall McLuhan',
     '“If it’s your job to eat a frog, do it first thing in the morning. And if it’s your job to eat two frogs, eat the bigger one first.”<br>—Mark Twain',
-    '“Wherever you go, there you are.”<br>—Peter Weller<br><br>The Adventures of Buckaroo Banzai Across the 8th Dimension (Sherwood Productions, 1984)',
+    'Shh-shh, softly<br>As if I played piano in the dark<br>Found a way to channel my anger, now to embark<br>The world’s a stage and everybody gots to play they part<br>God works in mysterious ways, so when he starts<br>The job of speakin’ through us, we be so sincere with this here<br>No drugs or alcohol so I can get the signal clear as day<br>Put my Glock away, I got a stronger weapon<br>That never runs out of ammunition<br>So I’m ready for war, okay<br>—André Benjamin',
+    '“Remember: no matter where you go, there you are.”<br>—Peter Weller, quoting Confucius<br><br>The Adventures of Buckaroo Banzai Across the 8th Dimension (Sherwood Productions, 1984)',
     '“The society that separates its scholars from its warriors will have its thinking done by cowards and its fighting by fools.”<br>—Thucydides',
     '“Commander, it is possible to commit no mistakes, and still lose. That is not a weakness; that is life.”<br>—Captain Jean-Luc Picard<br><br>Star Trek: The Next Generation (Paramount Television, 1989), Season 2, Episode 21: “Peak Performance”',
     '“Due to compound interest and inflation, if a rich person has $1,000,000 today, tomorrow they’ll have $1,050,000. Due to the exact same economic forces, if a poor person has $1 today, tomorrow they have $0.95.”<br>—Vicar Neumann',
@@ -472,18 +480,23 @@ let displayRandomWisdomsInglés = [
 ];
 let displayRandomWisdomsEspañol = [
     '«Ten paciencia. Todas las cosas son difíciles antes de volverse fáciles.»<br>—Saʿdī Shīrāzī',
+    'No se puede hacer un bolso de seda con una oreja de cerdo.<br><br>Eclogues de Alexander Barclay',
+    'Un pobre trabajador culpa a sus herramientas.<br><br>Una Colección Completa de Proverbios Ingleses de John Ray',
+    '«Cuando estés pasando por el infierno, sigue adelante.»<br>—Winston Churchill<br><br>«...Quiero decir, ¿por qué tu quería parar <span id="there">ahí?</span>»<br>—Steve Harvey',
     '«Sólo un tonto tropieza con lo que tiene detrás.»<br>—Marco Aurelio',
     '«Toda historia real es una historia sin fin.»<br>—Michael Ende',
     '«Hay dos tipos de tontos: la gente que toma la religión literalmente, y la gente que piensa que la religión no tiene ningún valor.»<br>—Jimmy Carr',
+    '«El hombre desnudo no teme a ningún carterista.»<br>—Sun Tzu',
     '<span id="signs">SEÑALES<br>APUNTAN<br>A SÍ</span>',
     'Sólo hay dos cosas seguras:<br>Que nacemos solos, morimos solos<br>Y los pájaros siguen cantando<br>—Xzibit',
     '«No hay pasajeros en La Nave Espacial Tierra: sólo tripulación.»<br>—Marshall McLuhan',
     '«Si tu trabajo consiste en comerte una rana, hazlo a primera hora de la mañana. Y si tu trabajo consiste en comerte dos ranas, cómete la más grande primero.»<br>—Mark Twain',
-    '«Donde quiera que vayas, ahí estás.»<br>—Peter Weller<br><br>Las Aventuras de Buckaroo Banzai (Sherwood Productions, 1984)',
+    'Shh-shh, suavemente<br>Como si tocara el piano en la oscuridad<br>Encontré una manera de canalizar mi ira, ahora a embarcarse<br>El mundo es un escenario y cada uno tiene que desempeñar su papel<br>Dios trabaja de maneras misteriosas, así que cuando comienza<br>La tarea de hablar a través de nosotros, somos muy sinceros con esto aquí<br>Sin drogas ni alcohol para poder recibir la señal con claridad<br>Guarda mi Glock, tengo un arma más fuerte<br>Que nunca se queda sin munición<br>Así que estoy listo para la guerra, ¿de acuerdo?<br>—André Benjamin',
+    '«Recuerda: no importa dónde vayas, ahí estás.»<br>—Peter Weller, citando a Confucio<br><br>Las Aventuras de Buckaroo Banzai (Sherwood Productions, 1984)',
     '«La sociedad que separa a sus eruditos de sus guerreros tendrá su pensamiento hecho por cobardes y su lucha por tontos.»<br>—Thucydides',
     '«Comandante, es posible no cometer errores y aun así perder. Eso no es debilidad; eso es vida.»<br>Capitán Jean-Luc Picard<br><br>Viaje a Las Estrellas: La Nueva Generación (Paramount Television, 1989), Temporada 2, Episodio 21: “Máximo Rendimiento”',
     '«Debido al interés compuesto y a la inflación, si una persona rica tiene hoy 1.000.000 de dólares, mañana tendrá 1.050.000. Debido a las mismas fuerzas económicas, si una persona pobre tiene hoy 1 dólar, mañana tendrá 0,95 dólares.»<br>—Vicar Neumann',
-    '«Déjame coger mi cigarrillo, Frank... Yo fumo, y yo bebo, muchos no beben, ni fuman; algunas personas aquí esta noche, ellos no comen mantequilla, no sal. No azúcar, no manteca. No galletas, no salsa con cebolla. Porque quieren vivir, renuncian a todas esas cosas buenas. Hueso de cuello, rabo de buey. Te sentirás como un maldito idiota, tirado en el hospital, muriendo de nada.»<br>—Redd Foxx',
+    '«Déjame coger mi cigarrillo, Frank... Yo fumo, y yo bebo, muchos no beben, ni fuman; algunas personas aquí esta noche, ellos no comen mantequilla, ningún sal. Ningún azúcar, ningún manteca. Ningún galletas, ningún salsa con cebolla. Porque quieren vivir, renuncian a todas esas cosas buenas. Hueso de cuello, rabo de buey. Te sentirás como un maldito idiota, tirado en el hospital, muriendo de nada.»<br>—Redd Foxx',
     'Come tus verduras',
     '«Porque alguien reveló una vez con sabiduría la máxima, ahora famosa, de que el mal en un momento u otro parece bueno a aquel cuya mente es llevada a la ruina por un dios.»<br>—Sófocles',
     '«Hay un viejo dicho: el primer sorbo de la copa de las ciencias naturales te hará un ateo, pero en el fondo del vaso te espera Dios.»<br>—Carl Friedrich von Weizsäcker, parafraseando a Francis Bacon',
@@ -516,9 +529,17 @@ function Translate(language, bark = true) {
         displayHireHand = 'HIRE FIELDHAND';
         displayCrop = 'Crop';
         displayAcresFarmed = 'Acres<br>Farmed';
-        displayHarvested = 'Bushels<br>Harvested';
+        displayBushels = 'Bushels';
+        displayHarvested = 'Harvested';
         displayHarvest = 'Harvest';
-        displaySpent = 'Bushels<br>Spent';
+        displaySpent = 'Spent';
+        displayPurchased = 'Purchased';
+        displaySold = 'Sold';
+        displayGood = 'Good';
+        displayProduced = 'Produced';
+        displayScore = 'Score';
+        displayHomers = 'Homers';
+        displayUnits = 'Units';
         displayStarving = 'YOUR MEN ARE STARVING!!';
         displayStarvingHorse = 'THESE POOR ANIMALS<br>ARE STARVING!!';
         displayRatPlague = 'RAT PLAGUE!!';
@@ -560,11 +581,6 @@ function Translate(language, bark = true) {
         displayCindermen = 'Cindermen';
         displayMetallurgists = 'Braziers';
         displayGemcutters = 'Gemcutters';
-        displayGood = 'Good';
-        displayScoreProduced = 'Score<br>Produced';
-        displayScoreSpent = 'Score<br>Spent';
-        displayHomersProduced = 'Homers<br>Produced';
-        displayHomersSpent = 'Homers<br>Spent';
 
         displayLabelBuyLand0 = 'LEASE ANOTHER ACRE';
         displayLabelBuyLand1 = 'LEASE A LARGER PLOT';
@@ -832,7 +848,7 @@ function Translate(language, bark = true) {
         displayMarket = 'Retail';
         displayWholesale = 'Wholesale';
         displayCommodities = 'Commodities';
-        displayComDev = 'Commercial Development';
+        displayComDev = 'Development';
         displayFreight = 'Freight';
         displayHusbandry = 'Husbandry';
         displayConjunction = 'Conjunction';
@@ -845,6 +861,7 @@ function Translate(language, bark = true) {
         displayTaxes = 'Taxes';
         displayInterest = 'Interest';
         displayInterestRate = 'Interest Rate';
+        displayFairRate = 'Fair Market Value';
         displayMateriel = 'Materiel';
         displayPonies = 'Ponies';
         displayCavalry = 'Cavalry';
@@ -870,8 +887,6 @@ function Translate(language, bark = true) {
         displayDriedFigs = 'Sun-Dried Figs';
         displayTrinkets = 'Trinkets';
         displayGems = 'Gems';
-        displayAmountProduced = 'Units<br>Produced';
-        displayAmountSpent = 'Units<br>Spent';
 
         displayConsumes = 'Consumes';
         displayUsed = 'Used';
@@ -901,7 +916,7 @@ function Translate(language, bark = true) {
         displayTartessos = 'Tartessos';
         displayDuration = 'Interval:';
         displayVoyage = 'Voyage';
-        displayShipped = 'Shipped:';
+        displayShipped = 'Shipped';
         displayImported = 'Imported:';
         displayProfit = 'Profit:';
         displayCost = 'Cost:';
@@ -957,11 +972,19 @@ function Translate(language, bark = true) {
         displayStaff = 'Personal';
         displayFieldhands = 'Labriegos';
         displayHireHand = 'CONTRATAR LABRIEGO';
-        displayCrop = 'Cultivo';
+        displayCrop = 'Bien'; //'Cultivo';
         displayAcresFarmed = 'Aranzadas<br>Cultivadas';
-        displayHarvested = 'Fanegas<br>Cosechadas';
+        displayBushels = 'Fanegas';
+        displayHarvested = 'Cosechadas';
         displayHarvest = 'Cosecha';
-        displaySpent = 'Fanegas<br>Gastadas';
+        displaySpent = 'Gastadas';
+        displayPurchased = 'Comprados';
+        displaySold = 'Vendidos';
+        displayGood = 'Bien';
+        displayProduced = 'Producidas';
+        displayScore = 'Veintenas';
+        displayHomers = 'Homeres';
+        displayUnits = 'Unidades';
         displayStarving = '¡¡TUS HOMBRES SE<br>MUEREN DE HAMBRE!!';
         displayStarvingHorse = '¡¡ESTOS POBRES<br>ANIMALES SE<br>ESTÁN MURIENDO<br>DE HAMBRE!!';
         displayRatPlague = '¡¡PESTE RATA!!';
@@ -1003,11 +1026,6 @@ function Translate(language, bark = true) {
         displayCindermen = 'Forjadores';
         displayMetallurgists = 'Broncistas'; // Metalúrgicos
         displayGemcutters = 'Tallador de Gemas';
-        displayGood = 'Bien';
-        displayScoreProduced = 'Veintenas<br>Producidas';
-        displayScoreSpent = 'Veintenas<br>Gastadas';
-        displayHomersProduced = 'Homeres<br>Producidos';
-        displayHomersSpent = 'Homeres<br>Gastados';
 
         displayLabelBuyLand0 = 'ARRENDAR OTRO ARANZADA';
         displayLabelBuyLand1 = 'ARRENDAR UNA PARCELA MÁS GRANDE';
@@ -1275,7 +1293,7 @@ function Translate(language, bark = true) {
         displayMarket = 'Minorista';
         displayWholesale = 'Al Por Mayor';
         displayCommodities = 'Materias Primas';
-        displayComDev = 'Desarrollo Comercial';
+        displayComDev = 'Desarrollo';
         displayFreight = 'Carga';
         displayHusbandry = 'Ganadería';
         displayConjunction = 'Conjunción';
@@ -1288,6 +1306,7 @@ function Translate(language, bark = true) {
         displayTaxes = 'Impuestos';
         displayInterest = 'Interés';
         displayInterestRate = 'Tasa de Interés';
+        displayFairRate = 'Valor Justo de Mercado';
         displayMateriel = 'Material';
         displayPonies = 'Ponis';
         displayCavalry = 'Caballería';
@@ -1313,8 +1332,6 @@ function Translate(language, bark = true) {
         displayDriedFigs = 'Higos Secos al Sol';
         displayTrinkets = 'Baratijas';
         displayGems = 'Piedras Preciosas';
-        displayAmountProduced = 'Unidades<br>Producidas';
-        displayAmountSpent = 'Unidades<br>Gastadas';
 
         displayConsumes = 'Consume';
         displayUsed = 'Utilizado';
@@ -1344,7 +1361,7 @@ function Translate(language, bark = true) {
         displayTartessos = 'Tartesos';
         displayDuration = 'Intervalo:';
         displayVoyage = 'Viaje';
-        displayShipped = 'Enviado:';
+        displayShipped = 'Enviado';
         displayImported = 'Importado:';
         displayProfit = 'Lucro:';
         displayCost = 'Costó:';

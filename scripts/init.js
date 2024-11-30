@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.6.2';
+const version = '1.7.0';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -14,11 +14,11 @@ const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
     [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
+    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0,],
+    [0, 0, 0, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,],
+    [11, 12, 13, 13, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4,],
+    [12, 13, 14, 14, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5,],
+    [13, 14, 14, 14, 14, 14, 13, 12, 11, 10, 9, 8, 7, 6,],
 ];
 
 const arrayOlivar = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
@@ -299,11 +299,16 @@ const canvasVillageContext = canvasVillage.getContext('2d');
 const divVillageLasTablas = document.getElementById('divVillageLasTablas');
 const buttonBuild = document.getElementById('buttonBuild');
 const buttonVisitOracle = document.getElementById('buttonVisitOracle');
+const buttonBuyWheat = document.getElementById('buttonBuyWheat');
 const buttonSellWheat = document.getElementById('buttonSellWheat');
 const buttonBuyBarley = document.getElementById('buttonBuyBarley');
+const buttonSellBarley = document.getElementById('buttonSellBarley');
 const buttonBuyLogs = document.getElementById('buttonBuyLogs');
+const buttonSellLogs = document.getElementById('buttonSellLogs');
 const buttonBuyBoards = document.getElementById('buttonBuyBoards');
+const buttonSellBoards = document.getElementById('buttonSellBoards');
 const buttonBuyStone = document.getElementById('buttonBuyStone');
+const buttonSellStone = document.getElementById('buttonSellStone');
 
 const divViewPort = document.getElementById('divViewPort');
 const buttonGoToTownshipFromPort = document.getElementById('buttonGoToTownshipFromPort');
@@ -345,6 +350,7 @@ const seededCount = [0, 0,];
 const farmedCount = [0, 0, 0, 0, 0, 0, 0,];
 const harvestedCount = [0, 0, 0, 0, 0, 0, 0,];
 const spentCount = [0, 0, 0, 0, 0, 0, 0,];
+const purchasedCount = [0, 0, 0, 0, 0, 0, 0,];
 const soldCount = [0, 0, 0, 0, 0, 0, 0,];
 const barterMaxBulkCount = 1000;
 const barterExchangeRate = [1, 1, 10, 14, 18, 24, 32,];
@@ -392,6 +398,8 @@ let sawyersHired = 4;
 // 0. Logs 🪵, 1. Boards 📏
 const forestProducedCount = [0, 0,];
 const forestSpentCount = [0, 0,];
+const forestPurchasedCount = [0, 0,];
+const forestSoldCount = [0, 0,];
 
 let stoneCount = 0;
 let stoneMin = 40;
@@ -427,6 +435,8 @@ let bronzeworkCountdownTimer = bronzeworkCountdownTimerMax;
 // 0. Stone 🪨, 1. Copper Ore ⛏️, 2. Copper Ingots 🧱, 3. Tin Ingots 🧱, 4. Bronze Ingots 🧱, 5. Crystal 💎
 const mountainProducedCount = [0, 0, 0, 0, 0, 0,];
 const mountainSpentCount = [0, 0, 0, 0, 0, 0,];
+const mountainPurchasedCount = [0, 0, 0, 0, 0, 0,];
+const mountainSoldCount = [0, 0, 0, 0, 0, 0,];
 
 // 0. Hands 🧑‍🌾, 1. Loggers 🪓, 2. Sawyers 🪚, 3. Masons 🔨, 4. Miners ⛏️, 5. Smelters 🔥, 6. Vignerons 🍇, 7. Arborists 🌲, 8. Horticulturalists 🐌, 9. Metallurgists 💍, 10. Gemcutters 💎
 const paidOutWheat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
@@ -445,6 +455,7 @@ const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const residenceInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const residenceProducedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const residenceSpentCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const residenceShippedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
 
 const nameVillage = 'Alʿard al-Janubiyah'; // الأرض الجنوبية == Terra Australis. HBD, Grant! 🎂🫂
 const estDate = [0, 0,];
@@ -582,7 +593,7 @@ const priceResidence09 = [168, 84, 42, 21,]; // Press 🧃
 const priceResidence10 = [168, 84, 42, 21,]; // Greenhouse 🫐
 const priceResidence11 = [336, 168, 84, 42,]; // Stone House 🏠
 const priceResidence12 = [336, 168, 84, 42,]; // Atelier 💎
-const priceResidence13 = [672, 336, 168, 84,]; // Mansion 🏡
+const priceResidence13 = [1000000, 8000, 4000, 500, 2000, 100,]; // Mansion 🏡
 
 const priceVillage = 64000;
 const priceBuildNEG5 = 500; // Survey
@@ -594,7 +605,7 @@ const priceBuild0 = [500, 8000, 4000, 500,]; // Blacksmith
 const priceBuild1 = [2000, 8000, 100,]; // Workshop
 const priceBuild2 = [10000, 50000,]; // Town Hall (Forum)
 const priceBuild3 = [25000, 5000, 10000,]; // Insula (ground floor)
-const priceMineScout = 420; // 🚬¯\_(ツ)_/¯🍩
+const priceMineScout = 100;
 const priceMineDig = [128000, 4000,];
 const priceFoundry = [256000, 6000, 60000];
 const priceBuild4 = [12000, 32000, 6000, 12000,]; // Insula (2nd floor)
@@ -611,7 +622,7 @@ const priceBuild14 = [64000, 810, 20000,]; // Monks
 const priceBuild15 = [1200000, 60000,]; // Sewers
 const priceBuild16 = [2400000, 30000, 60000, 200000,]; // Gates
 const priceBuild17 = [3600000, 100000, 200,]; // Standing Army
-const priceBuild18 = [1024000, 100000, 200000,]; // 4x Insulas
+const priceBuild18 = [2048000, 100000, 200000,]; // 4x Insulas
 const priceBuild19 = [250000, 20000, 10000,]; // Graveyard
 const priceBuild20 = [400000, 160000, 60000, 120000,]; // University
 const priceBuild21 = [1200000, 60000, 100,]; // Hospital
@@ -621,8 +632,8 @@ const priceBuild24 = [1500000, 20000, 10000,]; // Colosseum
 const priceBuild25 = [750000, 16000,]; // Theater
 const priceBuild26 = 100000; // Private Development
 const priceBuild27 = [100000, 5000, 5000,]; // Oracle
-const priceBuild28 = [1000000, 2000, 333, 333,]; // Astronomers Guild
-const priceBuild100 = [10000000, 9001, 77, 1000, 100000, 100000,]; // Monument
+const priceBuild28 = [1111111, 2222, 333, 333,]; // Astronomers Guild
+const priceBuild100 = [50000000, 9001, 77, 1000, 100000, 100000, 10000, 100,]; // Monument
 
 const pricePort0 = 8000;
 const pricePort1 = 16000;
