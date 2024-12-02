@@ -470,6 +470,7 @@ document.body.onkeyup = function (e) {
 function BeginGame(language) {
     Translate(language, false);
     player.hasBegun = true;
+    JumpToTopPlease();
     UpdateDisplay();
 }
 
@@ -486,6 +487,7 @@ function DismissForeword() {
     player.seesForeword = false;
     player.canTill = true;
     StartTime();
+    JumpToTopPlease();
     UpdateDisplay();
 }
 

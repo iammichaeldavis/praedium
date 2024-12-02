@@ -5,12 +5,6 @@ window.onresize = UpdateDisplay;
 
 Translate('English', false);
 
-function JumpToTopPlease() {
-    divOverlayLoading.scrollTo(0, 0);
-    divOverlayForeword.scrollTo(0, 0);
-    divGameWindow.scrollTo(0, 0);
-    window.scrollTo(0, 0);
-}
 window.onbeforeunload = function(){ JumpToTopPlease(); };
 window.onpagehide =  function(){ JumpToTopPlease(); };
 
@@ -24,7 +18,7 @@ setTimeout(() => {
 
 
 // ╔════════════════════╗
-// ║ PRAEDIUM v1.7.03   ║
+// ║ PRAEDIUM v1.7.04   ║
 // ╟────────────────────╢
 // ║                    ║
 // ║                    ║

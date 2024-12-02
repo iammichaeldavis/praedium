@@ -1,6 +1,15 @@
 // UTILITIES ***************************************************************************************
 // *************************************************************************************************
 
+function JumpToTopPlease() {
+    divOverlayLoading.scrollTo(0, 0);
+    divOverlayForeword.scrollTo(0, 0);
+    divGameWindow.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+}
+
+
+
 function Achievement() {
     achievementSoundRare.play();
     document.querySelector('.achievement').classList.add('rare');
