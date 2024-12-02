@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.7.2';
+const version = '1.7.3';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -142,6 +142,7 @@ portImage.src = 'bitmaps/docks.png';
 const mansionImage = new Image();
 mansionImage.src = 'bitmaps/mansion.png';
 
+const divGameWindow = document.getElementById('divGameWindow');
 const divOverlayLoading = document.getElementById('divOverlayLoading');
 
 const divOverlayForeword = document.getElementById('divOverlayForeword');
