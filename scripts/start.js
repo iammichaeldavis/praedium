@@ -5,8 +5,8 @@ window.onresize = UpdateDisplay;
 
 Translate('English', false);
 
-window.onbeforeunload = function(){ JumpToTopPlease(); };
-window.onpagehide =  function(){ JumpToTopPlease(); };
+window.onbeforeunload = function () { JumpToTopPlease(); };
+window.onpagehide = function () { JumpToTopPlease(); };
 
 setTimeout(() => {
     divOverlayLoading.classList.add('removeLoadingOverlay');
@@ -18,7 +18,7 @@ setTimeout(() => {
 
 
 // ╔════════════════════╗
-// ║ PRAEDIUM v1.7.04   ║
+// ║ PRAEDIUM v1.7.5    ║
 // ╟────────────────────╢
 // ║                    ║
 // ║                    ║

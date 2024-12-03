@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.7.4';
+const version = '1.7.5';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -332,6 +332,7 @@ const buttonCC0 = document.getElementById('buttonCC0');
 
 const buttonWin = document.getElementById('buttonWin');
 const imgNirvana = document.getElementById('imgNirvana');
+const buttonSailWest = document.getElementById('buttonSailWest');
 
 const spanCheevoText = document.getElementById('spanCheevoText');
 
@@ -654,6 +655,7 @@ const achievementSoundRare = new Audio('waveforms/XboxOneRareAchievement.mp3');
 
 const legalTarget = 'https://creativecommons.org/publicdomain/zero/1.0/';
 const winTarget = 'https://youtu.be/dOjFcx3GJHg'; // ♠️♣️♦️♥️ // 'https://youtu.be/AQmFlAB15f8'; // 👨‍🎤💃🎻 // 'https://youtu.be/YnDLlajMxyo'; // 🌼☀️🍂❄️
+const sailWestTarget = 'https://youtu.be/wgtMW38vsUs'; // 🧙‍♂️💍👹
 
 let snapshotLastTurn = null;
 let snapshotThisTurn = null;

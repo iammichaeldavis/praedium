@@ -2202,6 +2202,8 @@ function UpdateText() {
             tableString += '</tbody>';
             tableImports.innerHTML = tableString;
         }
+
+        buttonSailWest.innerHTML = displaySailWest + ' ' + '<span class="icon Ship inlineIcon"></span>';
     }
 
     else if (player.isAt == 'Residence') {
@@ -2884,6 +2886,7 @@ function UpdateVisibilities() {
         imgTradeTin.style.display = player.canImport ? 'none' : '';
         tableImports.style.display = player.canImport ? 'table' : '';
         buttonImportTin.style.display = player.seesImportButton ? '' : 'none';
+        buttonSailWest.style.display = player.hasWon ? 'block' : '';
     }
 
     else if (player.isAt == 'Residence') {

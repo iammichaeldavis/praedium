@@ -161,6 +161,7 @@ let displayLabelBuild100 = '';
 
 let displayLabelTradeRoute = '';
 let displayLabelImportTin = '';
+let displaySailWest = '';
 
 let displayStoryFarm0 = '';
 let displayStoryFarmMildew = '';
@@ -450,6 +451,7 @@ let displayCheevo = '';
 
 
 let displayRandomWisdomsInglés = [
+    '“Thank you so much, friends; we’re so privileged to be able to gather in moments like this when so much of the world is plunged in darkness and chaos.<br><br>“So ring the bells that still can ring<br>Forget your perfect offering<br>There is a crack in everything<br>That’s how the light gets in”<br>—Leonard Cohen',
     '“Have patience. All things are difficult before they become easy.”<br>—Saʿdī Shīrāzī',
     'You can’t make a silk purse out of a sow’s ear.<br><br>Alexander Barclay’s Eclogues',
     'A poor workman blames his tools.<br><br>John Ray’s A Compleat Collection of English Proverbs',
@@ -475,10 +477,12 @@ let displayRandomWisdomsInglés = [
     '“Do you wish God to hear your prayer immediately, brother?” asks Abba Zenon. “When you lift your hands up to heaven, pray first of all, with all of your heart, for your enemies and God will grant you speedily whatever else you request.”<br><br>The Evergetinos',
     '“I hope that when the world comes to an end, I can breathe a sigh of relief, because there will be so much to look forward to.”<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)',
     '“We may prefer to think of ourselves as fallen angels, but in reality we are rising apes.”<br>—Desmond Morris',
+    '“If the milk turns out to be sour, I ain’t the kinda pussy to drink it. Do you know what I mean?”<br>—Rory Breaker<br><br>Lock, Stock and Two Smoking Barrels (HandMade Films, 1998)',
     '“Let me remember that the unintended meaning that people project onto what I do is neither my fault or something I can take credit for.”<br>—ze frank',
     '“Hang in there, friend. It can only get stranger.”<br>—William Gibson',
 ];
 let displayRandomWisdomsEspañol = [
+    '«Muchas gracias amigos; somos muy privilegiados de poder reunirnos en momentos como este cuando gran parte del mundo está sumido en la oscuridad y el caos.<br><br>«Suenen las campanas que aún pueden sonar<br>Olvida tu ofrenda perfecta<br>Hay una grieta en todo<br>Así es como entra la luz»<br>—Leonard Cohen',
     '«Ten paciencia. Todas las cosas son difíciles antes de volverse fáciles.»<br>—Saʿdī Shīrāzī',
     'No se puede hacer un bolso de seda con una oreja de cerdo.<br><br>Eclogues de Alexander Barclay',
     'Un pobre trabajador culpa a sus herramientas.<br><br>Una Colección Completa de Proverbios Ingleses de John Ray',
@@ -504,6 +508,7 @@ let displayRandomWisdomsEspañol = [
     '«¿Deseas que Dios escuche tu oración inmediatamente, hermano?», pregunta Abba Zenon. «Cuando levantes tus manos al cielo, ora ante todo, con todo de tu corazón, por tus enemigos y Dios te concederá rápidamente todo lo demás que pidas.»<br><br>El Evergetinos',
     '«Espero que cuando el mundo llegue a su fin, pueda respirar aliviado, porque habrá mucho que mucho que esperar.»<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)',
     '«Quizás preferimos pensar que somos ángeles caídos, pero en realidad nosotros estamos simios ascendentes.»<br>—Desmond Morris',
+    '«Si resulta que la leche está agria, no soy el tipo de gatito que la bebe. ¿Sabes a qué me refiero?»<br>—Rory Breaker<br><br>Juegos, Trampas y Dos Armas Humeantes (HandMade Films, 1998)',
     '«Déjame recordar a yo mismo que el significado no intencionado que la gente proyecta sobre lo que hago no es mi culpa ni algo por lo que pueda atribuirme el mérito.»<br>—ze frank',
     '«Ánimo, amigo. Esto solo puede volverse más extraño.»<br>—William Gibson',
 ];
@@ -672,6 +677,7 @@ function Translate(language, bark = true) {
 
         displayLabelTradeRoute = 'ESTABLISH NEW TRADE ROUTE';
         displayLabelImportTin = 'ARRANGE FOR THE IMPORT OF TIN';
+        displaySailWest = 'SAIL WEST TO VALINOR';
 
         displayStoryFarm0 = 'NOW I CAN PROVIDE FOR MY FAMILY';
         displayStoryFarmMildew = 'YOU HAVE JUST RECEIVED A MESSAGE FROM THE MAN WHO RUNS THE WAREHOUSE WHERE YOU KEEP YOUR WHEAT:<div id="nasirMessage">Roof damage has let water in; mildew has claimed 90% of all grain in storage; my sincerest apologies<br>—Ea-nāṣir</div>';
@@ -933,7 +939,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.<br><br>Made with CodePen, the GNU Image Manipulation Program, GitHub, Inkscape and Visual Studio Code.';
         displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Michael Christy, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Bashir Hood, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, and the Ultima Dragons (all chapters), Jan van der Crabben, Rebecca Wickersham and W3Schools.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, and the Ultima Dragons (all chapters), Jan van der Crabben, Jordan Webb, Rebecca Wickersham and W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -1117,6 +1123,7 @@ function Translate(language, bark = true) {
 
         displayLabelTradeRoute = 'ESTABLECER NUEVA RUTA COMERCIAL';
         displayLabelImportTin = 'DISPONER LA IMPORTACIÓN DE ESTAÑO';
+        displaySailWest = 'NAVEGAR HACIA EL OESTE HACIA VALINOR';
 
         displayStoryFarm0 = 'AHORA PUEDO PROVEER PARA MI FAMILIA';
         displayStoryFarmMildew = 'ACABAS DE RECIBIR UN MENSAJE DEL HOMBRE QUE DIRIGIE EL ALMACÉN DONDE GUARDAS TU TRIGO:<div id="nasirMessage">Los daños en el techo ha dejado entrar agua; el moho ha reclamado el 90% de todo el grano almacenado; mis más sinceras disculpas<br>—Ea-nāṣir</div>';
@@ -1378,7 +1385,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.<br><br>Hecho con CodePen, el GNU Image Manipulation Program, GitHub, Inkscape y Visual Studio Code.';
         displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Michael Christy, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Bashir Hood, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, y los Ultima Dragons (todos los capítulos), Jan van der Crabben, Rebecca Wickersham y W3Schools.';
+        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, y los Ultima Dragons (todos los capítulos), Jan van der Crabben, Jordan Webb, Rebecca Wickersham y W3Schools.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';

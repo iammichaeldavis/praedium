@@ -508,6 +508,12 @@ button:active {
 
 
 
+#buttonSailWest {
+    margin: 0 auto 6.4vw auto;
+}
+
+
+
 /* // OVERLAYS ////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -537,7 +543,7 @@ button:active {
     color: whitesmoke;
     text-align: center;
     padding-top: 36vh;
-    border-top: calc(3px * var(--pixel-scale)) solid #1d2731;
+    border-top: calc(6px * var(--pixel-scale)) solid #1d2731;
 }
 
 #divOverlayLoading span {
@@ -1901,6 +1907,11 @@ td {
     --j: 5;
 }
 
+.Ship {
+    --i: 27;
+    --j: 11;
+}
+
 
 
 .Crown1 {
@@ -2140,7 +2151,8 @@ td {
 #buttonBuyStone,
 #buttonSellStone,
 #buttonVisitOracle,
-#buttonWin {
+#buttonWin,
+#buttonSailWest {
     display: none;
 }
 

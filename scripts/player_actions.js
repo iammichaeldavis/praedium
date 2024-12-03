@@ -71,6 +71,8 @@ buttonQ.addEventListener('click', function () { Help(); });
 buttonI.addEventListener('click', function () { Info(); });
 buttonCC0.addEventListener('click', function () { Legal(); });
 
+buttonSailWest.addEventListener('click', function () { SailWest(); });
+
 
 
 document.body.onkeyup = function (e) {
@@ -2324,6 +2326,12 @@ function ToggleAnimation() {
 function Legal() {
     SystemMessage(displayLegalFinal);
     window.open(legalTarget, 'PraediumRequestedWindow');
+}
+
+
+
+function SailWest() {
+    window.open(sailWestTarget, 'PRAEDIUM_requested_new_tab');
 }
 
 
