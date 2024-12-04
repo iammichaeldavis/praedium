@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.8.0';
+const version = '1.8.1';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -677,7 +677,7 @@ const animationInterval = 1000 / animationFPS;
 let globalAnimationFrame = 1;
 let animationCycleFrame = 0;
 
-const gameEventDismissDelay = 2000;
+const gameEventDismissDelay = 1600;
 
 let timeoutWinButton = null;
 let frameWinButton = 0;
