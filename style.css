@@ -278,6 +278,12 @@ button:active {
     background: #b8de87;
 }
 
+#buttonGameEventDismiss .AnkhTile {
+    border: calc(1px * var(--pixel-scale)) solid #002000;
+    width: calc(18px * var(--pixel-scale));
+    height: calc(18px * var(--pixel-scale));
+}
+
 
 
 #buttonModsDismiss {

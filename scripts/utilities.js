@@ -151,6 +151,18 @@ function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true) {
     UpdateDisplay();
     buttonGameEventDismiss.focus({ focusVisible: false });
     divOverlayGameEvent.scrollTo(0, 0);
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    player.canDismissEvent = false;
+    buttonGameEventDismiss.innerHTML = '<span class="icon AnkhTile inlineIcon"></span>';
+    //fill button contents with gif, the gif should just play itself, right?
+    //do it as new image = the gif so it plays from start every time?
+    //play_animation, or whatever; if this is necesssary to specifically trigger, we'll see
+
+    setTimeout(() => {
+        buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK;
+        player.canDismissEvent = true;
+    }, gameEventDismissDelay);
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 

@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.7.5';
+const version = '1.8.0';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -63,6 +63,7 @@ const player = {
     seesExportButton: true,
     seesImportButton: true,
 
+    canDismissEvent: false,
     canTill: false,
     canPlant: false,
     canWater: false,
@@ -675,6 +676,8 @@ const animationFPS = 20;
 const animationInterval = 1000 / animationFPS;
 let globalAnimationFrame = 1;
 let animationCycleFrame = 0;
+
+const gameEventDismissDelay = 2000;
 
 let timeoutWinButton = null;
 let frameWinButton = 0;

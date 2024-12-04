@@ -496,9 +496,11 @@ function DismissForeword() {
 
 
 function DismissGameEvent() {
-    if (gameSpeed == 'paused') { StartTime(); }
-    player.seesGameEvent = false;
-    UpdateDisplay();
+    if (player.canDismissEvent) {
+        if (gameSpeed == 'paused') { StartTime(); }
+        player.seesGameEvent = false;
+        UpdateDisplay();    
+    }
 }
 
 

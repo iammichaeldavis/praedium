@@ -2743,7 +2743,7 @@ function UpdateText() {
 
     // SYSTEM ------------------------------
     buttonSystemMessageDismiss.innerHTML = displayIUnderstand;
-    buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK;
+    //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK; // this is now done in gameEvent utility function
     buttonOptionsDismiss.innerHTML = displayOK;
     labelToggleMusic.innerHTML = displayMusic;
     labelToggleSounds.innerHTML = displaySounds;
