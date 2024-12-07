@@ -1,6 +1,9 @@
 // PLAYER INPUT ************************************************************************************
 // *************************************************************************************************
 
+buttonResumeYes.addEventListener('click', function () { ContinuePreviousGame(); });
+buttonResumeNo.addEventListener('click', function () { StartNewGame(); });
+
 buttonSystemMessageDismiss.addEventListener('click', function () { DismissSystemMessage(); });
 buttonForewordEnglish.addEventListener('click', function () { BeginGame('English'); });
 buttonForewordSpanish.addEventListener('click', function () { BeginGame('Spanish'); });
@@ -499,7 +502,7 @@ function DismissGameEvent() {
     if (player.canDismissEvent) {
         if (gameSpeed == 'paused') { StartTime(); }
         player.seesGameEvent = false;
-        UpdateDisplay();    
+        UpdateDisplay();
     }
 }
 
@@ -2300,14 +2303,14 @@ function ToggleAnimation() {
     if (toggleAnimation.checked) {
         player.likesAnimations = true;
         document.documentElement.style.setProperty('--agua', 'url(bitmaps/agua_anim.gif)');
-        //imgWorkshopBakery.src = 'bitmaps/res_bakery.gif';
-        //imgWorkshopOliveMill.src = 'bitmaps/res_olivemill.gif';
-        //imgWorkshopBrewery.src = 'bitmaps/res_brewery.gif';
-        //imgWorkshopWinery.src = 'bitmaps/res_winery.gif';
-        //imgWorkshopKitchen.src = 'bitmaps/res_kitchen.gif';
-        //imgWorkshopPress.src = 'bitmaps/res_press.gif';
-        //imgWorkshopGreenhouse.src = 'bitmaps/res_greenhouse.gif';
-        //imgWorkshopAtelier.src = 'bitmaps/res_atelier.gif';
+        imgWorkshopBakery.src = 'bitmaps/res_bakery.gif';
+        imgWorkshopOliveMill.src = 'bitmaps/res_olivemill.gif';
+        imgWorkshopBrewery.src = 'bitmaps/res_brewery.gif';
+        imgWorkshopWinery.src = 'bitmaps/res_winery.gif';
+        imgWorkshopKitchen.src = 'bitmaps/res_kitchen.gif';
+        imgWorkshopPress.src = 'bitmaps/res_press.gif';
+        imgWorkshopGreenhouse.src = 'bitmaps/res_greenhouse.gif';
+        imgWorkshopAtelier.src = 'bitmaps/res_atelier.gif';
     }
     else {
         player.likesAnimations = false;

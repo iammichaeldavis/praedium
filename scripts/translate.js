@@ -448,6 +448,11 @@ let displayDismissMods = '';
 
 let displayCheevo = '';
 
+let displayResumeQuestion = '';
+let displayResumeYes = '';
+let displayResumeNo = '';
+let displayResumeConfirm = '';
+
 
 
 let displayRandomWisdomsInglés = [
@@ -458,6 +463,7 @@ let displayRandomWisdomsInglés = [
     '“When you are going through hell, keep going.”<br>—Winston Churchill<br><br>“...I mean, why would you stop <span id="there">there</span>?”<br>—Steve Harvey',
     '“Only a fool trips on what is behind him.”<br>—Marcus Aurelius',
     '“Every real story is a never-ending story.”<br>—Michael Ende',
+    'If we ever get to heaven, boys<br>It ain’t because we ain’t done nothin’ wrong<br>—Kris Kristofferson',
     '“There’re two types of fools: people who take religion literally, and people who think religion has no value.”<br>—Jimmy Carr',
     '“The naked man fears no pickpocket.”<br>—Sun Tzu',
     '<span id="signs">SIGNS<br>POINT<br>TO YES</span>',
@@ -489,6 +495,7 @@ let displayRandomWisdomsEspañol = [
     '«Cuando estés pasando por el infierno, sigue adelante.»<br>—Winston Churchill<br><br>«...Quiero decir, ¿por qué tu quería parar <span id="there">ahí?</span>»<br>—Steve Harvey',
     '«Sólo un tonto tropieza con lo que tiene detrás.»<br>—Marco Aurelio',
     '«Toda historia real es una historia sin fin.»<br>—Michael Ende',
+    'Si algún día llegamos al cielo, muchachos<br>No será porque no hayamos hecho nada malo<br>—Kris Kristofferson',
     '«Hay dos tipos de tontos: la gente que toma la religión literalmente, y la gente que piensa que la religión no tiene ningún valor.»<br>—Jimmy Carr',
     '«El hombre desnudo no teme a ningún carterista.»<br>—Sun Tzu',
     '<span id="signs">SEÑALES<br>APUNTAN<br>A SÍ</span>',
@@ -939,7 +946,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.<br><br>Made with CodePen, the GNU Image Manipulation Program, GitHub, Inkscape and Visual Studio Code.';
         displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, and the Ultima Dragons (all chapters), Jan van der Crabben, Jordan Webb, Rebecca Wickersham and W3Schools.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Dave and Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, and the Ultima Dragons (all chapters), Jan van der Crabben, Jordan Webb, Rebecca Wickersham and W3Schools.<br><br>Seagull appears courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. Seagull training by “Wild” Bill Hinchcleath and the Northwest Florida Panhandle Seagull Wranglers Association of America: Florida Chapter.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -958,6 +965,11 @@ function Translate(language, bark = true) {
         displayDismissMods = 'I AM FINISHED HERE';
 
         displayCheevo = 'Gleaned All Wisdom';
+
+        displayResumeQuestion = 'It appears as if someone has already begun playing PRAEDIUM on this device. Would you like to resume that game, or start over from the beginning?';
+        displayResumeYes = 'I WILL CONTINUE THE PREVIOUS GAME';
+        displayResumeNo = 'I WISH TO BEGIN A NEW GAME';
+        displayResumeConfirm = 'Art thou quite certain, milord?';
 
         displayRandomWisdomsDisplay = displayRandomWisdomsInglés;
     }
@@ -1385,7 +1397,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.<br><br>Hecho con CodePen, el GNU Image Manipulation Program, GitHub, Inkscape y Visual Studio Code.';
         displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, Sid Meier, David “aniwey” L., Tom Rothamel, Dave Sim, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, y los Ultima Dragons (todos los capítulos), Jan van der Crabben, Jordan Webb, Rebecca Wickersham y W3Schools.';
+        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Dave y Anna Davis, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, y los Ultima Dragons (todos los capítulos), Jan van der Crabben, Jordan Webb, Rebecca Wickersham y W3Schools.<br><br>Gaviota aparece por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. Entrenamiento de gaviotas por “Loco” Bill Hinchcleath y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Florida.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';
@@ -1404,6 +1416,11 @@ function Translate(language, bark = true) {
         displayDismissMods = 'HE TERMINADO';
 
         displayCheevo = 'Tienes Toda Sabiduría';
+
+        displayResumeQuestion = 'Parece que alguien ya ha empezado a jugar a PRAEDIUM en este dispositivo. ¿Usted quieres reanudar el juego, o empezar desde el principio?';
+        displayResumeYes = 'CONTINUARÉ CON EL JUEGO ANTERIOR';
+        displayResumeNo = 'DESEO COMENZAR UN NUEVO JUEGO';
+        displayResumeConfirm = '¿Usted está seguro, señor?';
 
         displayRandomWisdomsDisplay = displayRandomWisdomsEspañol;
     }

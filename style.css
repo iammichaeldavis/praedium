@@ -520,6 +520,18 @@ button:active {
 
 
 
+#buttonResumeYes {
+    display: block;
+    margin: 6.4vw auto 2vw auto;
+}
+
+#buttonResumeNo {
+    display: block;
+    margin: 0 auto;
+}
+
+
+
 /* // OVERLAYS ////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -844,6 +856,30 @@ button:active {
 #textareaModCode {
     width: 100%;
     display: block;
+}
+
+
+
+#divOverlayResume {
+    background-color: rgba(16, 16, 16, 0.8);
+    z-index: 3900;
+}
+
+#divModalResume {
+    user-select: none;
+    width: 80vw;
+    margin: 10vw auto;
+    border: calc(3px * var(--pixel-scale)) solid #b6b6b6;
+    padding: 8vw;
+    background: #fcfcfc;
+}
+
+#divResumeCorpus {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #121212;
+    line-height: 5.2vw;
+    text-align: left;
 }
 
 
@@ -2096,6 +2132,7 @@ td {
 #divOverlaySystemMessage,
 #divOverlayMods,
 #buttonStar,
+#divOverlayResume,
 #divOverlayOptions,
 #tableFarmInventory,
 #tableFarmStaff,

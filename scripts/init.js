@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.8.1';
+const version = '1.9.0';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -140,11 +140,19 @@ const villageImage = new Image();
 villageImage.src = 'bitmaps/villageNEG05.png';
 const portImage = new Image();
 portImage.src = 'bitmaps/docks.png';
+const portGullImage = new Image();
+portGullImage.src = 'bitmaps/port_gull1.png';
 const mansionImage = new Image();
 mansionImage.src = 'bitmaps/mansion.png';
 
 const divGameWindow = document.getElementById('divGameWindow');
+
 const divOverlayLoading = document.getElementById('divOverlayLoading');
+
+const divOverlayResume = document.getElementById('divOverlayResume');
+const divResumeCorpus = document.getElementById('divResumeCorpus');
+const buttonResumeYes = document.getElementById('buttonResumeYes');
+const buttonResumeNo = document.getElementById('buttonResumeNo');
 
 const divOverlayForeword = document.getElementById('divOverlayForeword');
 const divForewordTitle = document.getElementById('divForewordTitle');
@@ -538,12 +546,6 @@ let valueInWheat1Stone = 8;
 
 // 0. Oil 🪔, 1. Beer 🍺, 2. Wine 🍷, 3. Syrup 🍯, 4. Juice 🧃, 5. Fruit Leather (Sun-Dried Fig) 🫐, 6. Trinkets 💎
 const wheatValuePerUnit = [null, null, null, null, null, null,];
-wheatValuePerUnit[0] = barterExchangeRate[2] * (residenceIngredientsIn[1] / residenceProductOut[1]);//oil
-wheatValuePerUnit[1] = barterExchangeRate[1] * (residenceIngredientsIn[2] / residenceProductOut[2]);//beer
-wheatValuePerUnit[2] = barterExchangeRate[6] * (residenceIngredientsIn[3] / residenceProductOut[3]);//wine
-wheatValuePerUnit[3] = barterExchangeRate[3] * (residenceIngredientsIn[4] / residenceProductOut[4]);//syrup
-wheatValuePerUnit[4] = barterExchangeRate[5] * (residenceIngredientsIn[5] / residenceProductOut[5]);//juice
-wheatValuePerUnit[5] = barterExchangeRate[4] * (residenceIngredientsIn[6] / residenceProductOut[6]);//figs
 const shipmentTimersCurrent = [24, 4, 16, 8, 2, 12, 48, 12,];
 const shipmentTimersDefault = [24, 4, 16, 8, 2, 12, 48, 12,];
 const shipmentDuration = [6, 1, 4, 2, 2, 3, 1, 3,];
@@ -552,7 +554,17 @@ const valueFactor = [12, 42, 24, 16, 9, 6, 10,];
 const shipmentCosts = [0,];
 const importCost = [8000,];
 const importAmount = [40,];
-let trinketValue = ((importCost[0] / importAmount[0]) / residenceProductOut[7]) * valueFactor[6];
+let trinketValue = null;
+function CalculatePortValues() {
+    wheatValuePerUnit[0] = barterExchangeRate[2] * (residenceIngredientsIn[1] / residenceProductOut[1]);//oil
+    wheatValuePerUnit[1] = barterExchangeRate[1] * (residenceIngredientsIn[2] / residenceProductOut[2]);//beer
+    wheatValuePerUnit[2] = barterExchangeRate[6] * (residenceIngredientsIn[3] / residenceProductOut[3]);//wine
+    wheatValuePerUnit[3] = barterExchangeRate[3] * (residenceIngredientsIn[4] / residenceProductOut[4]);//syrup
+    wheatValuePerUnit[4] = barterExchangeRate[5] * (residenceIngredientsIn[5] / residenceProductOut[5]);//juice
+    wheatValuePerUnit[5] = barterExchangeRate[4] * (residenceIngredientsIn[6] / residenceProductOut[6]);//figs
+    trinketValue = ((importCost[0] / importAmount[0]) / residenceProductOut[7]) * valueFactor[6];
+}
+CalculatePortValues();
 
 const priceStage1 = 50;
 const priceStage2 = 100;
@@ -675,12 +687,18 @@ let arrayHourglassInUse = null;
 const animationFPS = 20;
 const animationInterval = 1000 / animationFPS;
 let globalAnimationFrame = 1;
+let residenceAnimationFrame = 1;
+let residenceAnimationToggle = false;
+let portAnimationFrame = 1;
+let portAnimationToggle = false;
 let animationCycleFrame = 0;
 
 const gameEventDismissDelay = 1600;
 
 let timeoutWinButton = null;
 let frameWinButton = 0;
+
+const save_key = 'PRAEDIUM_save_data';
 
 
 

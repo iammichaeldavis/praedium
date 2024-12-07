@@ -10,6 +10,7 @@ window.onpagehide = function () { JumpToTopPlease(); };
 
 setTimeout(() => {
     divOverlayLoading.classList.add('removeLoadingOverlay');
+    CheckForPreviousGame();
     setTimeout(() => {
         divOverlayLoading.style.display = 'none';
     }, 500);
@@ -17,15 +18,16 @@ setTimeout(() => {
 
 
 
+
 // ╔════════════════════╗
-// ║ PRAEDIUM v1.8.1    ║
+// ║ PRAEDIUM v1.9.0    ║
 // ╟────────────────────╢
 // ║                    ║
 // ║                    ║
 // ║                    ║
 // ║                    ║
 // ║   by Michael Davis ║
-// ║         12/04/2024 ║
+// ║         12/06/2024 ║
 // ╚════════════════════╝
 
 

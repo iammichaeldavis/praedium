@@ -151,6 +151,8 @@ function GameTurn() {
         snapshotThisTurn = CollateGameStateReport();
         //reportOutputToWriteToDiskForDataAnalysis = snapshotThisTurn - snapshotLastTurn;
     }
+
+    if (week == 1 && year > 1) { RecordProgress(); }
 }
 
 

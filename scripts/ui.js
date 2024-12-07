@@ -2743,7 +2743,7 @@ function UpdateText() {
 
     // SYSTEM ------------------------------
     buttonSystemMessageDismiss.innerHTML = displayIUnderstand;
-    //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK; // this is now done in gameEvent utility function
+    //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK; // this is now done in gameEvent utility function to facilitate delay
     buttonOptionsDismiss.innerHTML = displayOK;
     labelToggleMusic.innerHTML = displayMusic;
     labelToggleSounds.innerHTML = displaySounds;
@@ -2751,6 +2751,9 @@ function UpdateText() {
     divOptionsFlavour.innerHTML = displayOptionsFlavourFinal;
     buttonOptions.innerHTML = displayOptions;
     spanCheevoText.innerHTML = displayCheevo;
+    divResumeCorpus.innerHTML = displayResumeQuestion;
+    buttonResumeYes.innerHTML = displayResumeYes;
+    buttonResumeNo.innerHTML = displayResumeNo;
 }
 
 
@@ -6568,6 +6571,7 @@ function RedrawResidence() {
 
 function RedrawPort() {
     canvasPortContext.drawImage(portImage, 0, 0, 384, 224, 0, 0, 384, 224);
+    canvasPortContext.drawImage(portGullImage, 0, 0, 384, 224, 0, 0, 384, 224);
 }
 
 
@@ -6868,12 +6872,28 @@ function RedrawCanvases() {
         //else if (player.isAt == 'Township') {
         //    //township animations go here (oh, you sweet, naïve boy 😂)
         //}
-        //else if (player.isAt == 'Residence') {
-        //    // meep meep
-        //}
-        //else if (player.isAt == 'Port') {
-        //    // morp morp
-        //}
+        else if (player.isAt == 'Residence') {
+            if (residenceStage == 14) {
+                if (residenceAnimationToggle) { residenceAnimationToggle = false; }
+                else {
+                    residenceAnimationToggle = true;
+                    residenceAnimationFrame++;
+                }
+                if (residenceAnimationFrame == 14) { residenceAnimationFrame = 1; }
+                residenceImage.src = 'bitmaps/res08_af' + residenceAnimationFrame + '.png';
+            }
+        }
+        else if (player.isAt == 'Port') {
+            if (portAnimationToggle) { portAnimationToggle = false; }
+            else {
+                portAnimationToggle = true;
+                portAnimationFrame++;
+            }
+            if (portAnimationFrame <= 30) {
+                portGullImage.src = 'bitmaps/port_gull' + portAnimationFrame + '.png';
+            }
+            if (portAnimationFrame == 90) { portAnimationFrame = 1; }
+        }
     }
 }
 
