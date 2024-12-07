@@ -2302,27 +2302,11 @@ function DismissOptions() {
 function ToggleAnimation() {
     if (toggleAnimation.checked) {
         player.likesAnimations = true;
-        document.documentElement.style.setProperty('--agua', 'url(bitmaps/agua_anim.gif)');
-        imgWorkshopBakery.src = 'bitmaps/res_bakery.gif';
-        imgWorkshopOliveMill.src = 'bitmaps/res_olivemill.gif';
-        imgWorkshopBrewery.src = 'bitmaps/res_brewery.gif';
-        imgWorkshopWinery.src = 'bitmaps/res_winery.gif';
-        imgWorkshopKitchen.src = 'bitmaps/res_kitchen.gif';
-        imgWorkshopPress.src = 'bitmaps/res_press.gif';
-        imgWorkshopGreenhouse.src = 'bitmaps/res_greenhouse.gif';
-        imgWorkshopAtelier.src = 'bitmaps/res_atelier.gif';
+        DisplayAnimatedImages();
     }
     else {
         player.likesAnimations = false;
-        document.documentElement.style.setProperty('--agua', 'url(bitmaps/agua_still.gif)');
-        imgWorkshopBakery.src = 'bitmaps/res_bakery.png';
-        imgWorkshopOliveMill.src = 'bitmaps/res_olivemill.png';
-        imgWorkshopBrewery.src = 'bitmaps/res_brewery.png';
-        imgWorkshopWinery.src = 'bitmaps/res_winery.png';
-        imgWorkshopKitchen.src = 'bitmaps/res_kitchen.png';
-        imgWorkshopPress.src = 'bitmaps/res_press.png';
-        imgWorkshopGreenhouse.src = 'bitmaps/res_greenhouse.png';
-        imgWorkshopAtelier.src = 'bitmaps/res_atelier.png';
+        DisplayStaticImages();
     }
 }
 

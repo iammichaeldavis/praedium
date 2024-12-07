@@ -463,6 +463,7 @@ function PauseTime() {
     clearTimeout(timeoutHourglass);
     gameSpeed = 'paused';
     AnimateHourglass(gameSpeed);
+    DisplayStaticImages();
 }
 
 
@@ -474,6 +475,7 @@ function StartTime(punchIt = false) {
     else { gameSpeed = 'standard'; }
     if (punchIt) { gameSpeed = 'ultra'; }
     AnimateHourglass(gameSpeed);
+    if (player.likesAnimations) { DisplayAnimatedImages(); }
 }
 
 
