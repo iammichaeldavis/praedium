@@ -522,7 +522,7 @@ button:active {
 
 #buttonResumeYes {
     display: block;
-    margin: 6.4vw auto 2vw auto;
+    margin: 6.4vw auto 6.4vw auto;
 }
 
 #buttonResumeNo {
@@ -1623,6 +1623,16 @@ td {
 .Shovel {
     --i: 7;
     --j: 12;
+}
+
+.Bushel {
+    --i: 20;
+    --j: 2;
+}
+
+.YoMama {
+    --i: 13;
+    --j: 2;
 }
 
 .Axe {

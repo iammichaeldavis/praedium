@@ -8,13 +8,29 @@ function RecordProgress() {
 
 
 function CheckForPreviousGame() {
-    if (localStorage.getItem(save_key)) { AskToResume(); }
+    if (localStorage.getItem(save_key)) {
+        loadedReport = JSON.parse(localStorage.getItem(save_key));
+        if (version == loadedReport.v) { AskToResume(); }
+        else { localStorage.removeItem(save_key); }
+    }
 }
 
 
 
 function AskToResume() {
-    player.speaks = JSON.parse(localStorage.getItem(save_key)).hero.speaks;
+    player.speaks = loadedReport.hero.speaks;
+    loadedIcon = 'Bushel';
+    if (loadedReport.hero.seesReport) { loadedIcon = 'Accountant'; }
+    if (loadedReport.hero.hasArmy) { loadedIcon = 'TaxCollector'; }
+    if (loadedReport.hero.hasMerchantGuildWrit) { loadedIcon = 'Decree'; }
+    if (loadedReport.hero.hasMansion) { loadedIcon = 'LordBritish'; }
+    if (loadedReport.hero.hasWon) { loadedIcon = 'Sphinx'; }
+
+    if (loadedReport.hero.isGod) {
+        player.isGod = true;
+        loadedIcon = 'EspírituSanto';
+    }
+
     Translate(player.speaks, false);
     divOverlayResume.style.display = 'block';
 }
@@ -23,7 +39,6 @@ function AskToResume() {
 
 function ContinuePreviousGame() {
     if (confirm(displayResumeConfirm)) {
-        const loadedReport = JSON.parse(localStorage.getItem(save_key));
         /////////////////////////////////////////////////////////////////////////////////////////
         if (loadedReport.hero.names.length > 1) { player.names.push(loadedReport.hero.names[1]); }
         player.age = loadedReport.hero.age;
@@ -315,6 +330,7 @@ function ContinuePreviousGame() {
         CalculatePortValues();
         if (player.canWin) { AnimateWinButton(); }
         if (farmStage > 17) { buttonBarterOlive.classList.add('noMargin'); }
+        loadedReport = null;
         divOverlayResume.style.display = '';
         UpdateDisplay();
         StartTime(); // ...and everything *should* just work fine 🤞😬
@@ -324,7 +340,7 @@ function ContinuePreviousGame() {
 
 
 function StartNewGame() {
-    if (confirm(displayResumeConfirm)) {
+    if (confirm(displayRestartConfirm)) {
         localStorage.removeItem(save_key);
         divOverlayResume.style.display = '';
     }

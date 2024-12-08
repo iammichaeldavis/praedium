@@ -3,31 +3,34 @@
 
 window.onresize = UpdateDisplay;
 
-Translate('English', false);
-
 window.onbeforeunload = function () { JumpToTopPlease(); };
 window.onpagehide = function () { JumpToTopPlease(); };
 
+Translate('English', false);
+
+CheckForPreviousGame();
+
+PreloadImages();
+
 setTimeout(() => {
-    divOverlayLoading.classList.add('removeLoadingOverlay');
-    CheckForPreviousGame();
     setTimeout(() => {
         divOverlayLoading.style.display = 'none';
     }, 500);
-}, 23);
+    divOverlayLoading.classList.add('removeLoadingOverlay');
+}, 23); // 𝕭𝖊 𝖘𝖚𝖗𝖊 𝖞𝖔𝖚𝖗 𝖘𝖎𝖓 𝖜𝖎𝖑𝖑 𝖋𝖎𝖓𝖉 𝖞𝖔𝖚 𝖔𝖚𝖙
 
 
 
 
 // ╔════════════════════╗
-// ║ PRAEDIUM v1.9.1    ║
+// ║ PRAEDIUM v1.9.2    ║
 // ╟────────────────────╢
 // ║                    ║
 // ║                    ║
 // ║                    ║
 // ║                    ║
 // ║   by Michael Davis ║
-// ║         12/06/2024 ║
+// ║         12/08/2024 ║
 // ╚════════════════════╝
 
 

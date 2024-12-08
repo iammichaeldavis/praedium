@@ -727,7 +727,50 @@ function PlotHarvest(robota = false) {
 
 
 function BuyLand() {
-    if (farmStage == 0 && bushelCount[0] > priceStage1) {
+    if (farmStage == 0 && bushelCount[0] == priceStage1) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+    else if (farmStage == 1 && bushelCount[0] == priceStage2) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+    else if (farmStage == 2 && bushelCount[0] == priceStage3) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+    else if (farmStage == 3 && bushelCount[0] == priceStage4) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+    else if (farmStage == 4 && bushelCount[0] == priceStage5) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+    else if (farmStage == 5 && bushelCount[0] == priceStage6) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+    else if (farmStage == 10 && bushelCount[0] == priceStage11) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+    else if (farmStage == 11 && bushelCount[0] == priceStage12[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (farmStage == 12 && bushelCount[0] == priceStage13) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+    else if (farmStage == 13 && bushelCount[0] == priceStage14[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (farmStage == 14 && bushelCount[0] == priceStage15[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (farmStage == 15 && bushelCount[0] == priceStage16[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (farmStage == 16 && bushelCount[0] == priceStage17[0]) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+    else if (farmStage == 17 && (bushelCount[0] == priceStage18[0] || bushelCount[1] == priceStage18[1])) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+
+    else if (farmStage == 0 && bushelCount[0] > priceStage1) {
         if (player.likesStory) { GameEvent(displayStoryFarm0, 'farm_stage_0'); }
         farmStage++;
         bushelCount[0] -= priceStage1;
@@ -941,7 +984,11 @@ function BuyLand() {
 
 
 function RentWarehouse() {
-    if (warehouseStage == 0 && bushelCount[0] > priceWarehouse0) {
+    if ((warehouseStage == 0 && bushelCount[0] == priceWarehouse0) || (warehouseStage == 1 && bushelCount[0] == priceWarehouse1) || (warehouseStage == 2 && bushelCount[0] == priceWarehouse2)) {
+        GameEvent(displayStoryNotEnoughWarehouse);
+    }
+
+    else if (warehouseStage == 0 && bushelCount[0] > priceWarehouse0) {
         if (player.likesStory) { GameEvent(displayStoryWarehouse0, 'warehouse_stage_0'); }
         bushelCount[0] -= priceWarehouse0;
         spentCount[0] += priceWarehouse0;
@@ -972,7 +1019,11 @@ function RentWarehouse() {
 
 
 function BuyForest() {
-    if (bushelCount[0] > priceForest) {
+    if (bushelCount[0] == priceForest) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+
+    else if (bushelCount[0] > priceForest) {
         if (player.likesStory) { GameEvent(displayStoryForest, 'buy_forest'); }
         bushelCount[0] -= priceForest;
         spentCount[0] += priceForest;
@@ -986,7 +1037,11 @@ function BuyForest() {
 
 
 function BuyMountain() {
-    if (bushelCount[0] > priceQuarry) {
+    if (bushelCount[0] == priceQuarry) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+
+    else if (bushelCount[0] > priceQuarry) {
         if (player.likesStory) { GameEvent(displayStoryQuarry, 'buy_mountain'); }
         bushelCount[0] -= priceQuarry;
         spentCount[0] += priceQuarry;
@@ -999,7 +1054,14 @@ function BuyMountain() {
 
 
 function ForestEvents() {
-    if (!player.canLog && bushelCount[0] > priceLoggingCamp) {
+    if (!player.canLog && bushelCount[0] == priceLoggingCamp) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (!player.canSaw && bushelCount[0] == priceSawmill) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+
+    else if (!player.canLog && bushelCount[0] > priceLoggingCamp) {
         if (player.likesStory) { GameEvent(displayStoryLoggingCamp, 'buy_loggingcamp'); }
         bushelCount[0] -= priceLoggingCamp;
         spentCount[0] += priceLoggingCamp;
@@ -1018,7 +1080,11 @@ function ForestEvents() {
 
 
 function MountainEvents() {
-    if (!player.hasFoundMine && bushelCount[0] > priceMineScout) {
+    if (!player.hasFoundMine && bushelCount[0] == priceMineScout) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+
+    else if (!player.hasFoundMine && bushelCount[0] > priceMineScout) {
         if (player.likesStory) { GameEvent(displayStoryMineScout); }
         bushelCount[0] -= priceMineScout;
         spentCount[0] += priceMineScout;
@@ -1116,7 +1182,11 @@ function HireHand() {
 
 
 function HireAccountant() {
-    if (bushelCount[0] > priceAccountant) {
+    if (bushelCount[0] == priceAccountant) {
+        GameEvent(displayStoryNotEnoughAbacus);
+    }
+
+    else if (bushelCount[0] > priceAccountant) {
         if (player.likesStory) { GameEvent(displayStoryAccountant, 'hire_accountant'); }
         bushelCount[0] -= priceAccountant;
         spentCount[0] += priceAccountant;
@@ -1151,7 +1221,11 @@ function BarterFruit(crop) {
 
 
 function Found() {
-    if (bushelCount[0] > priceVillage) {
+    if (bushelCount[0] == priceVillage) {
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+
+    else if (bushelCount[0] > priceVillage) {
         if (player.likesStory) { GameEvent(displayStoryFound, 'buy_village'); }
         bushelCount[0] -= priceVillage;
         spentCount[0] += priceVillage;
@@ -1182,7 +1256,47 @@ function BuyNewFarm() {
 
 
 function ImproveResidence() {
-    if (residenceStage == 0 && bushelCount[0] > priceResidence00) {
+    if (residenceStage == 0 && bushelCount[0] == priceResidence00) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 1 && bushelCount[0] == priceResidence01[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 2 && bushelCount[0] == priceResidence02[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 3 && bushelCount[0] == priceResidence03[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 4 && bushelCount[0] == priceResidence04[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 5 && bushelCount[0] == priceResidence05[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 6 && bushelCount[0] == priceResidence06[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 7 && bushelCount[0] == priceResidence07[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 8 && bushelCount[0] == priceResidence08[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 9 && bushelCount[0] == priceResidence09[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 10 && bushelCount[0] == priceResidence10[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 11 && bushelCount[0] == priceResidence11[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (residenceStage == 12 && bushelCount[0] == priceResidence12[0]) {
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+
+    else if (residenceStage == 0 && bushelCount[0] > priceResidence00) {
         if (player.likesStory) { GameEvent(displayStoryResidence00); }
         bushelCount[0] -= priceResidence00;
         spentCount[0] += priceResidence00;
@@ -1426,7 +1540,41 @@ function ConsultOracle() {
 
 
 function Build() {
-    if (villageStage == -5 && bushelCount[0] > priceBuildNEG5) {
+    if (villageStage == -5 && bushelCount[0] == priceBuildNEG5) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+    else if (villageStage == -4 && bushelCount[0] == priceBuildNEG4[0]) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+    else if (villageStage == -3 && bushelCount[0] == priceBuildNEG3) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+    else if (villageStage == -2 && bushelCount[0] == priceBuildNEG2) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+    else if (villageStage == -1 && bushelCount[0] == priceBuildNEG1[0]) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+    else if (villageStage == 0 && bushelCount[0] == priceBuild0[0]) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+    else if (villageStage == 1 && bushelCount[0] == priceBuild1[0]) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+    else if (villageStage == 2 && bushelCount[0] == priceBuild2[0]) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+    else if (villageStage == 3 && bushelCount[0] == priceBuild3[0]) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+    else if (villageStage == 4 && bushelCount[0] == priceBuild4[1]) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+    else if (villageStage == 5 && bushelCount[0] == priceBuild5[1]) {
+        GameEvent(displayStoryNotEnoughTown);
+    }
+
+    else if (villageStage == -5 && bushelCount[0] > priceBuildNEG5) {
         if (player.likesStory) { GameEvent(displayStoryVillageNEG5); }
         villageImage.src = 'bitmaps/villageNEG04.png';
         villageStage++;
@@ -1551,7 +1699,7 @@ function Build() {
         rentPrice += 4;
         player.canSell = true;
     }
-    else if (villageStage == 6 && asCount >= priceBuild6[0] && bushelCount[0] > priceBuild6[1] && boardsCount >= priceBuild6[2] && stoneCount >= priceBuild6[3]) {
+    else if (villageStage == 6 && asCount >= priceBuild6[0] && bushelCount[0] >= priceBuild6[1] && boardsCount >= priceBuild6[2] && stoneCount >= priceBuild6[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage6); }
         villageImage.src = 'bitmaps/village07.png';
         villageStage += 1;
@@ -1570,7 +1718,7 @@ function Build() {
         actualBushelPrice -= 500;
         SetMarketPrice();
     }
-    else if (villageStage == 7 && asCount >= priceBuild7[0] && bushelCount[0] > priceBuild7[1] && boardsCount >= priceBuild7[2] && stoneCount >= priceBuild7[3]) {
+    else if (villageStage == 7 && asCount >= priceBuild7[0] && bushelCount[0] >= priceBuild7[1] && boardsCount >= priceBuild7[2] && stoneCount >= priceBuild7[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage7); }
         villageImage.src = 'bitmaps/village08.png';
         villageStage += 1;
@@ -1589,7 +1737,7 @@ function Build() {
         actualBushelPrice -= 500;
         SetMarketPrice();
     }
-    else if (villageStage == 8 && asCount >= priceBuild8[0] && bushelCount[0] > priceBuild8[1] && boardsCount >= priceBuild8[2] && stoneCount >= priceBuild8[3]) {
+    else if (villageStage == 8 && asCount >= priceBuild8[0] && bushelCount[0] >= priceBuild8[1] && boardsCount >= priceBuild8[2] && stoneCount >= priceBuild8[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage8); }
         villageImage.src = 'bitmaps/village09.png';
         villageStage += 1;
@@ -1613,7 +1761,7 @@ function Build() {
         pomegranateMax += 12;
         grapesMax += 18;
     }
-    else if (villageStage == 9 && asCount >= priceBuild9[0] && bushelCount[0] > priceBuild9[1] && boardsCount >= priceBuild9[2] && stoneCount >= priceBuild9[3]) {
+    else if (villageStage == 9 && asCount >= priceBuild9[0] && bushelCount[0] >= priceBuild9[1] && boardsCount >= priceBuild9[2] && stoneCount >= priceBuild9[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage9); }
         villageImage.src = 'bitmaps/village10.png';
         villageStage += 1;
@@ -1632,7 +1780,7 @@ function Build() {
         actualBushelPrice -= 500;
         SetMarketPrice();
     }
-    else if (villageStage == 10 && asCount >= priceBuild10[0] && bushelCount[1] > priceBuild10[1] && boardsCount >= priceBuild10[2]) {
+    else if (villageStage == 10 && asCount >= priceBuild10[0] && bushelCount[1] >= priceBuild10[1] && boardsCount >= priceBuild10[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage10); }
         villageImage.src = 'bitmaps/village11.png';
         villageStage += 1;
@@ -1681,7 +1829,7 @@ function Build() {
         actualBushelPrice -= 500;
         SetMarketPrice();
     }
-    else if (villageStage == 12 && asCount >= priceBuild12[0] && bushelCount[1] > priceBuild12[1] && stoneCount >= priceBuild12[2] && horsesCount >= priceBuild12[3]) {
+    else if (villageStage == 12 && asCount >= priceBuild12[0] && bushelCount[1] >= priceBuild12[1] && stoneCount >= priceBuild12[2] && horsesCount >= priceBuild12[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage12); }
         villageImage.src = 'bitmaps/village13.png';
         villageStage += 1;
@@ -1752,7 +1900,7 @@ function Build() {
         interestRate += 0.0012;
         ratsSpawn = true;
     }
-    else if (villageStage == 16 && asCount >= priceBuild16[0] && bushelCount[1] > priceBuild16[1] && boardsCount >= priceBuild16[2] && stoneCount >= priceBuild16[3]) {
+    else if (villageStage == 16 && asCount >= priceBuild16[0] && bushelCount[1] >= priceBuild16[1] && boardsCount >= priceBuild16[2] && stoneCount >= priceBuild16[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage16); }
         villageImage.src = 'bitmaps/village17.png';
         villageStage++;
@@ -1832,7 +1980,7 @@ function Build() {
         interestRate += 0.0004;
         player.hasGraveyard = true;
     }
-    else if (villageStage == 20 && asCount >= priceBuild20[0] && bushelCount[0] > priceBuild20[1] && boardsCount >= priceBuild20[2] && stoneCount >= priceBuild20[3]) {
+    else if (villageStage == 20 && asCount >= priceBuild20[0] && bushelCount[0] >= priceBuild20[1] && boardsCount >= priceBuild20[2] && stoneCount >= priceBuild20[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage20); }
         villageImage.src = 'bitmaps/village21.png';
         villageStage++;

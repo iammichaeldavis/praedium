@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.9.1';
+const version = '1.9.2';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -672,6 +672,9 @@ const sailWestTarget = 'https://youtu.be/wgtMW38vsUs'; // 🧙‍♂️💍👹
 
 let snapshotLastTurn = null;
 let snapshotThisTurn = null;
+
+let loadedReport = null;
+let loadedIcon = null;
 
 let debugCounter = 0;
 

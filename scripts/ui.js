@@ -2752,8 +2752,9 @@ function UpdateText() {
     buttonOptions.innerHTML = displayOptions;
     spanCheevoText.innerHTML = displayCheevo;
     divResumeCorpus.innerHTML = displayResumeQuestion;
-    buttonResumeYes.innerHTML = displayResumeYes;
-    buttonResumeNo.innerHTML = displayResumeNo;
+
+    buttonResumeYes.innerHTML = displayResumeYes + ' <span class="icon ' + loadedIcon + ' inlineIcon"></span>';
+    buttonResumeNo.innerHTML = displayResumeNo + ' <span class="icon YoMama inlineIcon"></span>';
 }
 
 
@@ -6923,6 +6924,111 @@ function DisplayAnimatedImages() {
     imgWorkshopPress.src = 'bitmaps/res_press.gif';
     imgWorkshopGreenhouse.src = 'bitmaps/res_greenhouse.gif';
     imgWorkshopAtelier.src = 'bitmaps/res_atelier.gif';
+}
+
+
+
+function PreloadImages() {
+    PreloadImage('bitmaps/port_gull2.png');
+    PreloadImage('bitmaps/port_gull3.png');
+    PreloadImage('bitmaps/port_gull4.png');
+    PreloadImage('bitmaps/port_gull5.png');
+    PreloadImage('bitmaps/port_gull6.png');
+    PreloadImage('bitmaps/port_gull7.png');
+    PreloadImage('bitmaps/port_gull8.png');
+    PreloadImage('bitmaps/port_gull9.png');
+    PreloadImage('bitmaps/port_gull10.png');
+    PreloadImage('bitmaps/port_gull11.png');
+    PreloadImage('bitmaps/port_gull12.png');
+    PreloadImage('bitmaps/port_gull13.png');
+    PreloadImage('bitmaps/port_gull14.png');
+    PreloadImage('bitmaps/port_gull15.png');
+    PreloadImage('bitmaps/port_gull16.png');
+    PreloadImage('bitmaps/port_gull17.png');
+    PreloadImage('bitmaps/port_gull18.png');
+    PreloadImage('bitmaps/port_gull19.png');
+    PreloadImage('bitmaps/port_gull20.png');
+    PreloadImage('bitmaps/port_gull21.png');
+    PreloadImage('bitmaps/port_gull22.png');
+    PreloadImage('bitmaps/port_gull23.png');
+    PreloadImage('bitmaps/port_gull24.png');
+    PreloadImage('bitmaps/port_gull25.png');
+    PreloadImage('bitmaps/port_gull26.png');
+    PreloadImage('bitmaps/port_gull27.png');
+    PreloadImage('bitmaps/port_gull28.png');
+    PreloadImage('bitmaps/port_gull29.png');
+    PreloadImage('bitmaps/port_gull30.png');
+    PreloadImage('bitmaps/res01.png');
+    PreloadImage('bitmaps/res02.png');
+    PreloadImage('bitmaps/res03.png');
+    PreloadImage('bitmaps/res04.png');
+    PreloadImage('bitmaps/res05.png');
+    PreloadImage('bitmaps/res06.png');
+    PreloadImage('bitmaps/res07.png');
+    PreloadImage('bitmaps/res08.png');
+    PreloadImage('bitmaps/res08_af1.png');
+    PreloadImage('bitmaps/res08_af2.png');
+    PreloadImage('bitmaps/res08_af3.png');
+    PreloadImage('bitmaps/res08_af4.png');
+    PreloadImage('bitmaps/res08_af5.png');
+    PreloadImage('bitmaps/res08_af6.png');
+    PreloadImage('bitmaps/res08_af7.png');
+    PreloadImage('bitmaps/res08_af8.png');
+    PreloadImage('bitmaps/res08_af9.png');
+    PreloadImage('bitmaps/res08_af10.png');
+    PreloadImage('bitmaps/res08_af11.png');
+    PreloadImage('bitmaps/res08_af12.png');
+    PreloadImage('bitmaps/res08_af13.png');
+    PreloadImage('bitmaps/mansion.png');
+    PreloadImage('bitmaps/villageNEG04.png');
+    PreloadImage('bitmaps/villageNEG03.png');
+    PreloadImage('bitmaps/villageNEG02.png');
+    PreloadImage('bitmaps/villageNEG01.png');
+    PreloadImage('bitmaps/village00.png');
+    PreloadImage('bitmaps/village01.png');
+    PreloadImage('bitmaps/village02.png');
+    PreloadImage('bitmaps/village03.png');
+    PreloadImage('bitmaps/village04.png');
+    PreloadImage('bitmaps/village05.png');
+    PreloadImage('bitmaps/village06.png');
+    PreloadImage('bitmaps/village07.png');
+    PreloadImage('bitmaps/village08.png');
+    PreloadImage('bitmaps/village09.png');
+    PreloadImage('bitmaps/village10.png');
+    PreloadImage('bitmaps/village11.png');
+    PreloadImage('bitmaps/village12.png');
+    PreloadImage('bitmaps/village13.png');
+    PreloadImage('bitmaps/village14.png');
+    PreloadImage('bitmaps/village15.png');
+    PreloadImage('bitmaps/village16.png');
+    PreloadImage('bitmaps/village17.png');
+    PreloadImage('bitmaps/village18.png');
+    PreloadImage('bitmaps/village19.png');
+    PreloadImage('bitmaps/village20.png');
+    PreloadImage('bitmaps/village21.png');
+    PreloadImage('bitmaps/village22.png');
+    PreloadImage('bitmaps/village23.png');
+    PreloadImage('bitmaps/village24.png');
+    PreloadImage('bitmaps/village25.png');
+    PreloadImage('bitmaps/village26.png');
+    PreloadImage('bitmaps/village27.png');
+    PreloadImage('bitmaps/village28.png');
+    PreloadImage('bitmaps/village29.png');
+    PreloadImage('bitmaps/village100.png');
+    PreloadImage('bitmaps/route_alexandria.png');
+    PreloadImage('bitmaps/route_athens.png');
+    PreloadImage('bitmaps/route_damascus.png');
+    PreloadImage('bitmaps/route_jerusalem.png');
+    PreloadImage('bitmaps/route_memphis.png');
+    PreloadImage('bitmaps/route_rhodes.png');
+    PreloadImage('bitmaps/route_rome.png');
+    PreloadImage('bitmaps/route_tartessos.png');
+    PreloadImage('bitmaps/spritesheetCheevo.png');
+    PreloadImage('bitmaps/nirvana.png');
+    function PreloadImage(url) {
+        let img = new Image();
+        img.src = url;
+    }
 }
 
 
