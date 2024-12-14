@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.9.2';
+const version = '1.10.0';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -130,14 +130,37 @@ const player = {
     hasBeenLevied: false,
     hasAllWisdom: false,
     hasWon: false,
+    hasPegasi: false,
 };
 
 const tilemap = new Image();
 tilemap.src = 'bitmaps/tilemap.png';
 const residenceImage = new Image();
 residenceImage.src = 'bitmaps/res00.png';
-const villageImage = new Image();
-villageImage.src = 'bitmaps/villageNEG05.png';
+const residenceTorchImage = new Image();
+residenceTorchImage.src = 'bitmaps/res03plus_af1.png';
+const villageImageActual = new Image();
+villageImageActual.src = 'bitmaps/villageNEG05.png';
+const villageImageCurrent = new Image();
+villageImageCurrent.src = villageImageActual.src;
+const villageImageAnimationLayerA = new Image();
+villageImageAnimationLayerA.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerB = new Image();
+villageImageAnimationLayerB.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerC = new Image();
+villageImageAnimationLayerC.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerD = new Image();
+villageImageAnimationLayerD.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerE = new Image();
+villageImageAnimationLayerE.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerF = new Image();
+villageImageAnimationLayerF.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerG = new Image();
+villageImageAnimationLayerG.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerH = new Image();
+villageImageAnimationLayerH.src = 'bitmaps/blank.png';
+const villageTheaterOverlay = new Image();
+villageTheaterOverlay.src = 'bitmaps/theater.png';
 const portImage = new Image();
 portImage.src = 'bitmaps/docks.png';
 const portGullImage = new Image();
@@ -342,6 +365,7 @@ const buttonCC0 = document.getElementById('buttonCC0');
 const buttonWin = document.getElementById('buttonWin');
 const imgNirvana = document.getElementById('imgNirvana');
 const buttonSailWest = document.getElementById('buttonSailWest');
+const buttonPlayGod = document.getElementById('buttonPlayGod');
 
 const spanCheevoText = document.getElementById('spanCheevoText');
 
@@ -518,6 +542,8 @@ let ratPenaltyFactor = 0;
 
 let cityWalls = false;
 let militaryLifetimeCost = 0;
+let militaryUnitCost = 30;
+let knightsMaxPopulationPortion = 0.2;
 
 let ghostsCount = 0;
 
@@ -608,7 +634,7 @@ const priceResidence09 = [168, 84, 42, 21,]; // Press 🧃
 const priceResidence10 = [168, 84, 42, 21,]; // Greenhouse 🫐
 const priceResidence11 = [336, 168, 84, 42,]; // Stone House 🏠
 const priceResidence12 = [336, 168, 84, 42,]; // Atelier 💎
-const priceResidence13 = [1000000, 8000, 4000, 500, 2000, 100,]; // Mansion 🏡
+const priceResidence13 = [2500000, 12000, 16000, 500, 2000, 100,]; // Mansion 🏡
 
 const priceVillage = 64000;
 const priceBuildNEG5 = 500; // Survey
@@ -642,11 +668,11 @@ const priceBuild19 = [250000, 20000, 10000,]; // Graveyard
 const priceBuild20 = [400000, 160000, 60000, 120000,]; // University
 const priceBuild21 = [1200000, 60000, 100,]; // Hospital
 const priceBuild22 = [1500000, 40000, 100, 100, 100,]; // Courthouse
-const priceBuild23 = [1250000, 10000, 10000,]; // Hippodrome
-const priceBuild24 = [1500000, 20000, 10000,]; // Colosseum
-const priceBuild25 = [750000, 16000,]; // Theater
+const priceBuild23 = [1750000, 10000, 10000,]; // Hippodrome
+const priceBuild24 = [2500000, 20000, 10000,]; // Colosseum
+const priceBuild25 = [1750000, 16000,]; // Theater
 const priceBuild26 = 100000; // Private Development
-const priceBuild27 = [100000, 5000, 5000,]; // Oracle
+const priceBuild27 = [500000, 5000, 5000,]; // Oracle
 const priceBuild28 = [1111111, 2222, 333, 333,]; // Astronomers Guild
 const priceBuild100 = [50000000, 9001, 77, 1000, 100000, 100000, 10000, 100,]; // Monument
 
@@ -657,6 +683,8 @@ const pricePort3 = 64000;
 const pricePort4 = 128000;
 const pricePort5 = 256000;
 const pricePort6 = 512000;
+
+const pricePegasus = 3;
 
 const tributeAmount = 616; // 😈 NRO QSR
 let tributeLifetimePaid = 0;
@@ -694,9 +722,20 @@ let residenceAnimationFrame = 1;
 let residenceAnimationToggle = false;
 let portAnimationFrame = 1;
 let portAnimationToggle = false;
+let villagePlateFrame = 1;
+let villageAnimationFrameA = 1;
+let villageAnimationFrameB = 1;
+let villageAnimationFrameC = 1;
+let villageAnimationFrameD = 1;
+let villageAnimationFrameE = 1;
+let villageAnimationFrameF = 1;
+let villageAnimationFrameG = 1;
+let villageAnimationFrameH = 1;
+let villageAnimationToggle = false;
 let animationCycleFrame = 0;
 
 const gameEventDismissDelay = 1600;
+let timeoutGameEventDismiss = null;
 
 let timeoutWinButton = null;
 let frameWinButton = 0;

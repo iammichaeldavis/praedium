@@ -75,6 +75,7 @@ buttonI.addEventListener('click', function () { Info(); });
 buttonCC0.addEventListener('click', function () { Legal(); });
 
 buttonSailWest.addEventListener('click', function () { SailWest(); });
+buttonPlayGod.addEventListener('click', function () { PlayGod(); });
 
 
 
@@ -151,7 +152,8 @@ document.body.onkeyup = function (e) {
 
         if (e.key == '`') { CollateGameStateReport(true); }
 
-        if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && !player.hasBegun)) { BeginGame('English'); }
+        if (e.key == ' ' && localStorage.getItem(save_key)) { StartNewGame(); }
+        else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && !player.hasBegun)) { BeginGame('English'); }
         else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && player.hasBegun)) { DismissForeword(); }
 
         if (e.key == '1' && !e.altKey && player.canTill) { PlotTill(); }
@@ -1576,14 +1578,14 @@ function Build() {
 
     else if (villageStage == -5 && bushelCount[0] > priceBuildNEG5) {
         if (player.likesStory) { GameEvent(displayStoryVillageNEG5); }
-        villageImage.src = 'bitmaps/villageNEG04.png';
+        villageImageActual.src = 'bitmaps/villageNEG04.png';
         villageStage++;
         bushelCount[0] -= priceBuildNEG5;
         spentCount[0] += priceBuildNEG5;
     }
     else if (villageStage == -4 && bushelCount[0] > priceBuildNEG4[0] && residenceInStockCount[1] >= priceBuildNEG4[1] && bushelCount[5] >= priceBuildNEG4[2] && boardsCount >= priceBuildNEG4[3] && stoneCount >= priceBuildNEG4[4]) {
         if (player.likesStory) { GameEvent(displayStoryVillageNEG4); }
-        villageImage.src = 'bitmaps/villageNEG03.png';
+        villageImageActual.src = 'bitmaps/villageNEG03_af1.png';
         villageStage++;
         bushelCount[0] -= priceBuildNEG4[0];
         spentCount[0] += priceBuildNEG4[0];
@@ -1600,21 +1602,21 @@ function Build() {
     }
     else if (villageStage == -3 && bushelCount[0] > priceBuildNEG3) {
         if (player.likesStory) { GameEvent(displayStoryVillageNEG3); }
-        villageImage.src = 'bitmaps/villageNEG02.png';
+        villageImageActual.src = 'bitmaps/villageNEG02.png';
         villageStage++;
         bushelCount[0] -= priceBuildNEG3;
         spentCount[0] += priceBuildNEG3;
     }
     else if (villageStage == -2 && bushelCount[0] > priceBuildNEG2) {
         if (player.likesStory) { GameEvent(displayStoryVillageNEG2); }
-        villageImage.src = 'bitmaps/villageNEG01.png';
+        villageImageActual.src = 'bitmaps/villageNEG01.png';
         villageStage++;
         bushelCount[0] -= priceBuildNEG2;
         spentCount[0] += priceBuildNEG2;
     }
     else if (villageStage == -1 && bushelCount[0] > priceBuildNEG1[0] && stoneCount >= priceBuildNEG1[1]) {
         if (player.likesStory) { GameEvent(displayStoryVillageNEG1); }
-        villageImage.src = 'bitmaps/village00.png';
+        villageImageActual.src = 'bitmaps/village00.png';
         villageStage++;
         bushelCount[0] -= priceBuildNEG1[0];
         spentCount[0] += priceBuildNEG1[0];
@@ -1623,7 +1625,7 @@ function Build() {
     }
     else if (villageStage == 0 && bushelCount[0] > priceBuild0[0] && logsCount >= priceBuild0[1] && boardsCount >= priceBuild0[2] && stoneCount >= priceBuild0[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage0); }
-        villageImage.src = 'bitmaps/village01.png';
+        villageImageActual.src = 'bitmaps/village01.png';
         villageStage += 1;
         bushelCount[0] -= priceBuild0[0];
         spentCount[0] += priceBuild0[0];
@@ -1636,7 +1638,7 @@ function Build() {
     }
     else if (villageStage == 1 && bushelCount[0] > priceBuild1[0] && boardsCount >= priceBuild1[1] && stoneCount >= priceBuild1[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage1); }
-        villageImage.src = 'bitmaps/village02.png';
+        villageImageActual.src = 'bitmaps/village02.png';
         villageStage += 1;
         bushelCount[0] -= priceBuild1[0];
         spentCount[0] += priceBuild1[0];
@@ -1647,7 +1649,7 @@ function Build() {
     }
     else if (villageStage == 2 && bushelCount[0] > priceBuild2[0] && stoneCount >= priceBuild2[1]) {
         if (player.likesStory) { GameEvent(displayStoryVillage2); }
-        villageImage.src = 'bitmaps/village03.png';
+        villageImageActual.src = 'bitmaps/village03.png';
         villageStage += 1;
         bushelCount[0] -= priceBuild2[0];
         spentCount[0] += priceBuild2[0];
@@ -1656,7 +1658,7 @@ function Build() {
     }
     else if (villageStage == 3 && bushelCount[0] > priceBuild3[0] && boardsCount >= priceBuild3[1] && stoneCount >= priceBuild3[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage3); }
-        villageImage.src = 'bitmaps/village04.png';
+        villageImageActual.src = 'bitmaps/village04.png';
         villageStage += 1;
         bushelCount[0] -= priceBuild3[0];
         spentCount[0] += priceBuild3[0];
@@ -1669,7 +1671,7 @@ function Build() {
     }
     else if (villageStage == 4 && asCount >= priceBuild4[0] && bushelCount[0] > priceBuild4[1] && boardsCount >= priceBuild4[2] && stoneCount >= priceBuild4[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage4); }
-        villageImage.src = 'bitmaps/village05.png';
+        villageImageActual.src = 'bitmaps/village05.png';
         villageStage += 1;
         asCount -= priceBuild4[0];
         asSpent += priceBuild4[0];
@@ -1686,7 +1688,7 @@ function Build() {
     }
     else if (villageStage == 5 && asCount >= priceBuild5[0] && bushelCount[0] > priceBuild5[1] && boardsCount >= priceBuild5[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage5); }
-        villageImage.src = 'bitmaps/village06.png';
+        villageImageActual.src = 'bitmaps/village06.png';
         villageStage += 1;
         asCount -= priceBuild5[0];
         asSpent += priceBuild5[0];
@@ -1701,7 +1703,7 @@ function Build() {
     }
     else if (villageStage == 6 && asCount >= priceBuild6[0] && bushelCount[0] >= priceBuild6[1] && boardsCount >= priceBuild6[2] && stoneCount >= priceBuild6[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage6); }
-        villageImage.src = 'bitmaps/village07.png';
+        villageImageActual.src = 'bitmaps/village07.png';
         villageStage += 1;
         asCount -= priceBuild6[0];
         asSpent += priceBuild6[0];
@@ -1720,7 +1722,7 @@ function Build() {
     }
     else if (villageStage == 7 && asCount >= priceBuild7[0] && bushelCount[0] >= priceBuild7[1] && boardsCount >= priceBuild7[2] && stoneCount >= priceBuild7[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage7); }
-        villageImage.src = 'bitmaps/village08.png';
+        villageImageActual.src = 'bitmaps/village08.png';
         villageStage += 1;
         asCount -= priceBuild7[0];
         asSpent += priceBuild7[0];
@@ -1739,7 +1741,7 @@ function Build() {
     }
     else if (villageStage == 8 && asCount >= priceBuild8[0] && bushelCount[0] >= priceBuild8[1] && boardsCount >= priceBuild8[2] && stoneCount >= priceBuild8[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage8); }
-        villageImage.src = 'bitmaps/village09.png';
+        villageImageActual.src = 'bitmaps/village09.png';
         villageStage += 1;
         asCount -= priceBuild8[0];
         asSpent += priceBuild8[0];
@@ -1763,7 +1765,7 @@ function Build() {
     }
     else if (villageStage == 9 && asCount >= priceBuild9[0] && bushelCount[0] >= priceBuild9[1] && boardsCount >= priceBuild9[2] && stoneCount >= priceBuild9[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage9); }
-        villageImage.src = 'bitmaps/village10.png';
+        villageImageActual.src = 'bitmaps/village10.png';
         villageStage += 1;
         asCount -= priceBuild9[0];
         asSpent += priceBuild9[0];
@@ -1782,7 +1784,7 @@ function Build() {
     }
     else if (villageStage == 10 && asCount >= priceBuild10[0] && bushelCount[1] >= priceBuild10[1] && boardsCount >= priceBuild10[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage10); }
-        villageImage.src = 'bitmaps/village11.png';
+        villageImageActual.src = 'bitmaps/village11.png';
         villageStage += 1;
         asCount -= priceBuild10[0];
         asSpent += priceBuild10[0];
@@ -1799,7 +1801,7 @@ function Build() {
     }
     else if (villageStage == 11 && asCount >= priceBuild11[0] && ingotsCopperCount >= priceBuild11[1] && bushelCount[0] > priceBuild11[2] && bushelCount[1] > priceBuild11[3] && bushelCount[2] >= priceBuild11[4] && bushelCount[3] >= priceBuild11[5] && bushelCount[4] >= priceBuild11[6] && bushelCount[5] >= priceBuild11[7] && bushelCount[6] >= priceBuild11[8] && stoneCount >= priceBuild11[9] && horsesCount >= priceBuild11[10]) {
         if (player.likesStory) { GameEvent(displayStoryVillage11); }
-        villageImage.src = 'bitmaps/village12.png';
+        villageImageActual.src = 'bitmaps/village12.png';
         villageStage += 1;
         asCount -= priceBuild11[0];
         asSpent += priceBuild11[0];
@@ -1831,7 +1833,7 @@ function Build() {
     }
     else if (villageStage == 12 && asCount >= priceBuild12[0] && bushelCount[1] >= priceBuild12[1] && stoneCount >= priceBuild12[2] && horsesCount >= priceBuild12[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage12); }
-        villageImage.src = 'bitmaps/village13.png';
+        villageImageActual.src = 'bitmaps/village13.png';
         villageStage += 1;
         asCount -= priceBuild12[0];
         asSpent += priceBuild12[0];
@@ -1849,7 +1851,7 @@ function Build() {
     }
     else if (villageStage == 13 && asCount >= priceBuild13[0] && ingotsCopperCount >= priceBuild13[1] && stoneCount >= priceBuild13[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage13); }
-        villageImage.src = 'bitmaps/village14.png';
+        villageImageActual.src = 'bitmaps/village14.png';
         villageStage += 1;
         asCount -= priceBuild13[0];
         asSpent += priceBuild13[0];
@@ -1867,7 +1869,7 @@ function Build() {
     }
     else if (villageStage == 14 && asCount >= priceBuild14[0] && beadsCount >= priceBuild14[1] && stoneCount >= priceBuild14[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage14); }
-        villageImage.src = 'bitmaps/village15.png';
+        villageImageActual.src = 'bitmaps/village15.png';
         villageStage += 1;
         asCount -= priceBuild14[0];
         asSpent += priceBuild14[0];
@@ -1884,7 +1886,7 @@ function Build() {
     }
     else if (villageStage == 15 && asCount >= priceBuild15[0] && stoneCount >= priceBuild15[1]) {
         if (player.likesStory) { GameEvent(displayStoryVillage15); }
-        villageImage.src = 'bitmaps/village16.png';
+        villageImageActual.src = 'bitmaps/village16.png';
         villageStage += 1;
         asCount -= priceBuild15[0];
         asSpent += priceBuild15[0];
@@ -1902,7 +1904,7 @@ function Build() {
     }
     else if (villageStage == 16 && asCount >= priceBuild16[0] && bushelCount[1] >= priceBuild16[1] && boardsCount >= priceBuild16[2] && stoneCount >= priceBuild16[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage16); }
-        villageImage.src = 'bitmaps/village17.png';
+        villageImageActual.src = 'bitmaps/village17.png';
         villageStage++;
         asCount -= priceBuild16[0];
         asSpent += priceBuild16[0];
@@ -1924,7 +1926,7 @@ function Build() {
     }
     else if (villageStage == 17 && asCount >= priceBuild17[0] && stoneCount >= priceBuild17[1] && ingotsBronzeCount >= priceBuild17[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage17); }
-        villageImage.src = 'bitmaps/village18.png';
+        villageImageActual.src = 'bitmaps/village18.png';
         villageStage++;
         asCount -= priceBuild17[0];
         asSpent += priceBuild17[0];
@@ -1944,7 +1946,7 @@ function Build() {
     }
     else if (villageStage == 18 && asCount >= priceBuild18[0] && boardsCount >= priceBuild18[1] && stoneCount >= priceBuild18[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage18); }
-        villageImage.src = 'bitmaps/village19.png';
+        villageImageActual.src = 'bitmaps/village19.png';
         villageStage++;
         asCount -= priceBuild18[0];
         asSpent += priceBuild18[0];
@@ -1964,7 +1966,7 @@ function Build() {
     }
     else if (villageStage == 19 && asCount >= priceBuild19[0] && stoneCount >= priceBuild19[1] && oreCopperCount >= priceBuild19[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage19); }
-        villageImage.src = 'bitmaps/village20.png';
+        villageImageActual.src = 'bitmaps/village20.png';
         villageStage++;
         asCount -= priceBuild19[0];
         asSpent += priceBuild19[0];
@@ -1982,7 +1984,7 @@ function Build() {
     }
     else if (villageStage == 20 && asCount >= priceBuild20[0] && bushelCount[0] >= priceBuild20[1] && boardsCount >= priceBuild20[2] && stoneCount >= priceBuild20[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage20); }
-        villageImage.src = 'bitmaps/village21.png';
+        villageImageActual.src = 'bitmaps/village21.png';
         villageStage++;
         asCount -= priceBuild20[0];
         asSpent += priceBuild20[0];
@@ -2011,7 +2013,7 @@ function Build() {
     }
     else if (villageStage == 21 && asCount >= priceBuild21[0] && stoneCount >= priceBuild21[1] && ingotsCopperCount >= priceBuild21[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage21); }
-        villageImage.src = 'bitmaps/village22.png';
+        villageImageActual.src = 'bitmaps/village22.png';
         villageStage++;
         asCount -= priceBuild21[0];
         asSpent += priceBuild21[0];
@@ -2031,7 +2033,7 @@ function Build() {
     }
     else if (villageStage == 22 && asCount >= priceBuild22[0] && stoneCount >= priceBuild22[1] && ingotsCopperCount >= priceBuild22[2] && ingotsTinCount >= priceBuild22[3] && ingotsBronzeCount >= priceBuild22[4]) {
         if (player.likesStory) { GameEvent(displayStoryVillage22); }
-        villageImage.src = 'bitmaps/village23.png';
+        villageImageActual.src = 'bitmaps/village23.png';
         villageStage++;
         asCount -= priceBuild22[0];
         asSpent += priceBuild22[0];
@@ -2055,7 +2057,7 @@ function Build() {
     }
     else if (villageStage == 23 && asCount >= priceBuild23[0] && stoneCount >= priceBuild23[1] && oreCopperCount >= priceBuild23[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage23); }
-        villageImage.src = 'bitmaps/village24.png';
+        villageImageActual.src = 'bitmaps/village24.png';
         villageStage++;
         asCount -= priceBuild23[0];
         asSpent += priceBuild23[0];
@@ -2076,7 +2078,7 @@ function Build() {
     }
     else if (villageStage == 24 && asCount >= priceBuild24[0] && stoneCount >= priceBuild24[1] && oreCopperCount >= priceBuild24[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage24); }
-        villageImage.src = 'bitmaps/village25.png';
+        villageImageActual.src = 'bitmaps/village25.png';
         villageStage++;
         asCount -= priceBuild24[0];
         asSpent += priceBuild24[0];
@@ -2096,7 +2098,7 @@ function Build() {
     }
     else if (villageStage == 25 && asCount >= priceBuild25[0] && stoneCount >= priceBuild25[1]) {
         if (player.likesStory) { GameEvent(displayStoryVillage25); }
-        villageImage.src = 'bitmaps/village26.png';
+        villageImageActual.src = 'bitmaps/village26.png';
         villageStage++;
         asCount -= priceBuild25[0];
         asSpent += priceBuild25[0];
@@ -2113,7 +2115,7 @@ function Build() {
     }
     else if (villageStage == 26 && asCount >= priceBuild26) {
         if (player.likesStory) { GameEvent(displayStoryVillage26); }
-        villageImage.src = 'bitmaps/village27.png';
+        villageImageActual.src = 'bitmaps/village27.png';
         villageStage++;
         asCount -= priceBuild26;
         asSpent += priceBuild26;
@@ -2127,7 +2129,7 @@ function Build() {
     }
     else if (villageStage == 27 && asCount >= priceBuild27[0] && stoneCount >= priceBuild27[1] && crystalsCount >= priceBuild27[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage27); }
-        villageImage.src = 'bitmaps/village28.png';
+        villageImageActual.src = 'bitmaps/village28.png';
         villageStage++;
         asCount -= priceBuild27[0];
         asSpent += priceBuild27[0];
@@ -2142,7 +2144,7 @@ function Build() {
     }
     else if (villageStage == 28 && asCount >= priceBuild28[0] && stoneCount >= priceBuild28[1] && ingotsBronzeCount >= priceBuild28[2] && residenceInStockCount[8] >= priceBuild28[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage28); }
-        villageImage.src = 'bitmaps/village29.png';
+        villageImageActual.src = 'bitmaps/village29.png';
         villageStage = 100;
         asCount -= priceBuild28[0];
         asSpent += priceBuild28[0];
@@ -2158,7 +2160,7 @@ function Build() {
     }
     else if (villageStage == 100 && asCount >= priceBuild100[0] && beadsCount >= priceBuild100[1] && scrollsCount >= priceBuild100[2] && ingotsBronzeCount >= priceBuild100[3] && boardsCount >= priceBuild100[4] && stoneCount >= priceBuild100[5] && crystalsCount >= priceBuild100[6] && residenceInStockCount[8] >= priceBuild100[7]) {
         if (player.likesStory) { GameEvent(displayStoryVillage100); }
-        villageImage.src = 'bitmaps/village100.png';
+        villageImageActual.src = 'bitmaps/village100.png';
         villageStage += 1;
         asCount -= priceBuild100[0];
         asSpent += priceBuild100[0];
@@ -2433,6 +2435,7 @@ function DismissModsWindow() {
 
 function SummonOptions() {
     player.seesOptions = true;
+    PauseTime();
     UpdateDisplay();
     buttonOptionsDismiss.focus({ focusVisible: false });
     divOverlayOptions.scrollTo(0, 0);
@@ -2442,6 +2445,7 @@ function SummonOptions() {
 
 function DismissOptions() {
     player.seesOptions = false;
+    if (gameSpeed == 'paused') { StartTime(); }
     UpdateDisplay();
 }
 
@@ -2468,7 +2472,19 @@ function Legal() {
 
 
 function SailWest() {
+    if (player.likesStory) { GameEvent(displayStorySailWest); }
     window.open(sailWestTarget, 'PRAEDIUM_requested_new_tab');
+}
+
+
+
+function PlayGod() {
+    if (relicCount >= pricePegasus) {
+        relicCount -= pricePegasus;
+        if (player.likesStory) { GameEvent(displayStoryPegasus); }
+        player.hasPegasi = true;
+        UpdateDisplay();
+    }
 }
 
 

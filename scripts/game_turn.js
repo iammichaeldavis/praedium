@@ -89,10 +89,10 @@ function GameTurn() {
     }
 
     if (player.hasArmy) {
-        const knightsMax = Math.floor(residentsCount / 2);
+        const knightsMax = Math.floor(residentsCount * knightsMaxPopulationPortion);
         let knightsCount = horsesCount;
         if (knightsCount > knightsMax) { knightsCount = knightsMax; }
-        const militarySalary = knightsCount * 10;
+        const militarySalary = knightsCount * militaryUnitCost;
         asCount -= militarySalary;
         asSpent += militarySalary;
         militaryLifetimeCost += militarySalary;

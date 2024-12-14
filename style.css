@@ -156,10 +156,8 @@ button:active {
     margin-bottom: 0;
 }
 
-#buttonVisitOracle {
-    margin: 0 auto 6.4vw auto;
-}
-
+#buttonVisitOracle,
+#buttonPlayGod,
 #buttonBuild {
     margin: 0 auto 6.4vw auto;
 }
@@ -1707,6 +1705,11 @@ td {
     --j: 14;
 }
 
+.Orb {
+    --i: 26;
+    --j: 7;
+}
+
 .Loaves {
     --i: 31;
     --j: 7;
@@ -2205,6 +2208,7 @@ td {
 #buttonSellStone,
 #buttonVisitOracle,
 #buttonWin,
+#buttonPlayGod,
 #buttonSailWest {
     display: none;
 }
@@ -2218,7 +2222,9 @@ td {
 #labelToggleMusic,
 #toggleMusic,
 #labelToggleSounds,
-#toggleSounds {
+#toggleSounds,
+#labelToggleAnimation,
+#toggleAnimation {
     display: none;
 }
 

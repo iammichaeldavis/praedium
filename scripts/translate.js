@@ -161,7 +161,8 @@ let displayLabelBuild100 = '';
 
 let displayLabelTradeRoute = '';
 let displayLabelImportTin = '';
-let displaySailWest = '';
+let displayLabelSailWest = '';
+let displayLabelPegasuses = '';
 
 let displayStoryFarm0 = '';
 let displayStoryFarmMildew = '';
@@ -310,6 +311,9 @@ let displayStoryPort05 = '';
 let displayStoryPort06 = '';
 let displayStoryPort07 = '';
 
+let displayStorySailWest = '';
+let displayStoryPegasus = '';
+
 let displayNamePlayer = '';
 
 let displayGoToPraediumFromRes = '';
@@ -330,6 +334,7 @@ let displayVillageTitle6 = '';
 let displayVillageTitle7 = '';
 
 let displayCitizens = '';
+let displayEnlistment = '';
 let displayPilgrims = '';
 let displayDemographics = '';
 let displayFiat = '';
@@ -691,7 +696,8 @@ function Translate(language, bark = true) {
 
         displayLabelTradeRoute = 'ESTABLISH NEW TRADE ROUTE';
         displayLabelImportTin = 'ARRANGE FOR THE IMPORT OF TIN';
-        displaySailWest = 'SAIL WEST TO VALINOR';
+        displayLabelSailWest = 'SAIL WEST TO VALINOR';
+        displayLabelPegasuses = 'BREED PEGASUSES';
 
         displayStoryFarm0 = 'NOW I CAN PROVIDE FOR MY FAMILY';
         displayStoryFarmMildew = 'YOU HAVE JUST RECEIVED A MESSAGE FROM THE MAN WHO RUNS THE WAREHOUSE WHERE YOU KEEP YOUR WHEAT:<div id="nasirMessage">Roof damage has let water in; mildew has claimed 90% of all grain in storage; my sincerest apologies<br>—Ea-nāṣir</div>';
@@ -719,7 +725,7 @@ function Translate(language, bark = true) {
         displayStoryFarm17 = 'THE PREVIOUS OWNER GUARANTEES ITS PROFITABILITY. I AM TOLD DATES WILL BE READY AT THE END OF EVERY SUMMER, AND FIGS IN THE LATE SPRING. POMEGRANATES WILL BE READY IN EARLY WINTER, THEN GRAPES SHOULD COME ALONG A FEW WEEKS LATER, BUT THEY ARE FICKLE';
         displayStoryOlives = 'IT HAS BEEN EIGHT LONG YEARS SINCE YOU PLANTED YOUR OLIVE ORCHARD. FINALLY THE TREES ARE MATURE, EVERY BRANCH LADEN WITH RIPE FRUIT, AND THE HARVEST SHOULD BE AROUND THIS SAME TIME EVERY YEAR FROM NOW ON';
         displayStoryNewFarm = '“THE NATURAL STATE OF MEN BEFORE THEY ENTERED INTO SOCIETY WAS SIMPLY A WAR OF ALL AGAINST ALL”<BR>—THOMAS HOBBES';
-        
+
         displayStoryNotEnoughWheat = 'THE AFFABLE, PORTLY LAND MERCHANT PULLS YOU TO ONE SIDE, DISCREETLY, WHERE NO ONE CAN HEAR AND WHISPERS: “WHY, EFFENDI, YOU SIMPLY MUST NOT SPEND YOUR VERY LAST GRAIN OF WHEAT! OH, EFFENDI! OH MY! WHY, EFFENDI, I ASK YOU NOW, IN THE HERE AND NOW AS TWO GOOD FRIENDS I ASK YE THUS: HOWEVER COULD ONE CONTINUE TO GROW NEW CROPS WITHOUT ANY SEEDS AT ALL TO PLANT WITH, OH EFFENDI! HM? HOWEVER INDEED! ANSWER THAT RIDDLE, EFFENDI, I ASK YOU, I PRITHEE THUS! IF INDEED AN ANSWER THERE COULD BE, EFFENDI, WHICH I MUST HUMBLY SUBMIT TO THEE NOW AND HERE THAT THERE SIMPLY COULD NOT. NOW, BEAT IT, WOULDJA? I GOT PAYIN’ CUSTOMERS OVER HERE” THEN HE CLAPS YOU HARD ON THE BACK AND SAUNTERS REGALLY BACK INTO THE CROWD OF INTERESTED CLIENTELE MILLING ABOUT THE SOAPSTONE AUCTION BLOCK, LEAVING A CLOUD OF SWEET-SMELLING PERFUME IN HIS WAKE';
         displayStoryNotEnoughWarehouse = 'THE WAREHOUSE VENDOR, EXCITED TO MAKE HIS COMMISSION, THEN JUST AS IMMEDIATELY DISAPPOINTED WHEN HE SEES YOUR PURSE: “LOOK, KID: YOU CAN’T SPEND YOUR LAST GRAIN OF WHEAT, YOU WON’T BE ABLE TO KEEP FARMING! COME BACK WHEN YOU CAN ACTUALLY AFFORD MY PRICE! NO ONE LIKES A DEADBEAT”';
         displayStoryNotEnoughAbacus = '“WHY, WHAT SORT OF ACTUARY WOULD I BE IF I ALLOWED YOU TO SPEND YOUR VERY LAST GRAIN OF WHEAT! PLEASE COME BACK WHEN YOU HAVE BUT AT LEAST A LITTLE MORE, TO TRULY AFFORD MY SERVICES”';
@@ -840,6 +846,9 @@ function Translate(language, bark = true) {
         displayStoryPort06 = 'HOUSEWIVES DO SO LOVE THEIR DOODADS AND GEWGAWS';
         displayStoryPort07 = 'WITH THIS TIN, ARTISANS CAN CHURN OUT THOSE LUDICROUS, GAUDY BAUBLES THAT COMMAND SUCH A HIGH PRICE IN ROME';
 
+        displayStorySailWest = 'NOW, TO SET SAIL FOR THE UNDYING LANDS; TO THAT GREAT UNDISCOVERED COUNTRY DO I GO';
+        displayStoryPegasus = 'They bring it to you, thrashing, ferocious, defiant to the very last, requiring the full strength of at least a dozen hired goons to hold it down, bound by those ancient alchemical chains, every link etched with one hundred glowing runes each.<br><br>Its eyes sparkle with cruel intelligence.<br><br>Now... now the work can truly begin.';
+
         displayNamePlayer = '“What is your name, citizen?”';
 
         displayGoToPraediumFromRes = 'GO BACK TO YOUR LANDS →';
@@ -860,6 +869,7 @@ function Translate(language, bark = true) {
         displayVillageTitle7 = 'The Capital of';
 
         displayCitizens = 'Citizens';
+        displayEnlistment = 'Enlistment';
         displayPilgrims = 'Pilgrims';
         displayDemographics = 'Demographics';
         displayFiat = 'Fiat';
@@ -982,8 +992,8 @@ function Translate(language, bark = true) {
         displayResumeQuestion = 'It appears as if someone has already begun playing PRAEDIUM on this device. Would you like to resume that game, or start over from the beginning?';
         displayResumeYes = 'I WILL CONTINUE THE PREVIOUS GAME';
         displayResumeNo = 'I WISH TO BEGIN A NEW GAME';
-        displayResumeConfirm = 'Art thou quite certain thou wish to resume the previous work, milord?';
-        displayRestartConfirm = 'Art thou quite certain thou wish to begin anew, milord?';
+        displayResumeConfirm = 'Art thou quite certain thou wisheth to resume the previous work, milord?';
+        displayRestartConfirm = 'Art thou quite certain thou wisheth to begin anew, milord?';
 
         displayRandomWisdomsDisplay = displayRandomWisdomsInglés;
     }
@@ -1149,7 +1159,8 @@ function Translate(language, bark = true) {
 
         displayLabelTradeRoute = 'ESTABLECER NUEVA RUTA COMERCIAL';
         displayLabelImportTin = 'DISPONER LA IMPORTACIÓN DE ESTAÑO';
-        displaySailWest = 'NAVEGAR HACIA EL OESTE HACIA VALINOR';
+        displayLabelSailWest = 'NAVEGAR HACIA EL OESTE HACIA VALINOR';
+        displayLabelPegasuses = 'CRIAR UNICORNIOS';
 
         displayStoryFarm0 = 'AHORA PUEDO PROVEER PARA MI FAMILIA';
         displayStoryFarmMildew = 'ACABAS DE RECIBIR UN MENSAJE DEL HOMBRE QUE DIRIGIE EL ALMACÉN DONDE GUARDAS TU TRIGO:<div id="nasirMessage">Los daños en el techo ha dejado entrar agua; el moho ha reclamado el 90% de todo el grano almacenado; mis más sinceras disculpas<br>—Ea-nāṣir</div>';
@@ -1298,6 +1309,9 @@ function Translate(language, bark = true) {
         displayStoryPort06 = 'A LAS AMAS DE CASA LES ENCANTAN SUS ADORNOS Y CHUCHERÍAS';
         displayStoryPort07 = 'CON ESTA ESTAÑO, LOS ARTESANOS PUEDEN FABRICAR EN MASA ESA ÑAQUE RIDÍCULA Y LLAMATIVA QUE TIENEN UN PRECIO TAN ALTO EN ROMA';
 
+        displayStorySailWest = 'AHORA, A ZARPAR HACIA LAS TIERRAS IMPERECEDERAS; A ESE GRAN PAÍS NO DESCUBRIDO VOY';
+        displayStoryPegasus = 'Te lo traen, golpeando, feroz, desafiante hasta el final, requiriendo toda la fuerza de al menos una docena de matones a sueldo para sujetarlo, atado por esas antiguas cadenas alquímicas, cada eslabón grabado con cien runas brillantes cada uno.<br><br>Sus ojos brillan con cruel inteligencia.<br><br>Ahora... ahora el trabajo puede realmente comenzar.';
+
         displayNamePlayer = '«¿Cómo te llamas, ciudadano?»';
 
         displayGoToPraediumFromRes = 'VOLVER A TUS TIERRAS →';
@@ -1318,6 +1332,7 @@ function Translate(language, bark = true) {
         displayVillageTitle7 = 'La Capital de';
 
         displayCitizens = 'Ciudadanos';
+        displayEnlistment = 'Alistamiento';
         displayPilgrims = 'Peregrinos';
         displayDemographics = 'Demografía';
         displayFiat = 'Fiduciario';

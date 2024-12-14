@@ -49,12 +49,12 @@ function ContinuePreviousGame() {
         player.likesStory = loadedReport.hero.likesStory;
         player.likesRecords = loadedReport.hero.likesRecords;
 
-        player.seesHint = loadedReport.hero.seesHint;
-        player.seesModsWindow = loadedReport.hero.seesModsWindow;
+        //player.seesHint = loadedReport.hero.seesHint;
+        //player.seesModsWindow = loadedReport.hero.seesModsWindow;
         player.seesForeword = loadedReport.hero.seesForeword;
-        player.seesSystemMessage = loadedReport.hero.seesSystemMessage;
-        player.seesGameEvent = loadedReport.hero.seesGameEvent;
-        player.seesOptions = loadedReport.hero.seesOptions;
+        //player.seesSystemMessage = loadedReport.hero.seesSystemMessage;
+        //player.seesGameEvent = loadedReport.hero.seesGameEvent;
+        //player.seesOptions = loadedReport.hero.seesOptions;
         player.seesInventory = loadedReport.hero.seesInventory;
         player.seesWarehouse = loadedReport.hero.seesWarehouse;
         player.seesStaff = loadedReport.hero.seesStaff;
@@ -68,7 +68,7 @@ function ContinuePreviousGame() {
         player.seesExportButton = loadedReport.hero.seesExportButton;
         player.seesImportButton = loadedReport.hero.seesImportButton;
 
-        player.canDismissEvent = loadedReport.hero.canDismissEvent;
+        //player.canDismissEvent = loadedReport.hero.canDismissEvent;
         player.canTill = loadedReport.hero.canTill;
         player.canPlant = loadedReport.hero.canPlant;
         player.canWater = loadedReport.hero.canWater;
@@ -133,8 +133,9 @@ function ContinuePreviousGame() {
         player.hasFoundCrystalEvidence = loadedReport.hero.hasFoundCrystalEvidence;
         player.hasHiredGemcutters = loadedReport.hero.hasHiredGemcutters;
         player.hasBeenLevied = loadedReport.hero.hasBeenLevied;
-        player.hasAllWisdom = loadedReport.hero.hasAllWisdom;
+        //player.hasAllWisdom = loadedReport.hero.hasAllWisdom;
         player.hasWon = loadedReport.hero.hasWon;
+        player.hasPegasi = loadedReport.hero.hasPegasi;
         /////////////////////////////////////////////////////////////////////////////////////////
         gameTurn = loadedReport.calendar[0];
         year = loadedReport.calendar[1];
@@ -325,7 +326,7 @@ function ContinuePreviousGame() {
         CloneArray(loadedReport.farmland.grapes, arrayVineyard);
         /////////////////////////////////////////////////////////////////////////////////////////
         residenceImage.src = loadedReport.bitmaps[0];
-        villageImage.src = loadedReport.bitmaps[1];
+        villageImageActual.src = loadedReport.bitmaps[1];
         /////////////////////////////////////////////////////////////////////////////////////////
         CalculatePortValues();
         if (player.canWin) { AnimateWinButton(); }
@@ -333,7 +334,7 @@ function ContinuePreviousGame() {
         loadedReport = null;
         divOverlayResume.style.display = '';
         UpdateDisplay();
-        StartTime(); // ...and everything *should* just work fine 🤞😬
+        StartTime(); // ...and everything *should* just work 🤞😬
     }
 }
 
@@ -443,7 +444,7 @@ function CollateGameStateReport(loud = false) {
         grapes: arrayVineyard,
     };
     const report = {
-        bitmaps: [residenceImage.src, villageImage.src,],
+        bitmaps: [residenceImage.src, villageImageActual.src,],
         calendar: [gameTurn, year, week, olivePlantDate, estDate,],
         counts: integerCounts,
         farmland: farmlandArrays,
@@ -526,7 +527,8 @@ function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true) {
     divOverlayGameEvent.scrollTo(0, 0);
     player.canDismissEvent = false;
     buttonGameEventDismiss.innerHTML = '<span class="icon AnkhTile inlineIcon"></span>';
-    setTimeout(() => {
+    clearTimeout(timeoutGameEventDismiss);
+    timeoutGameEventDismiss = setTimeout(() => {
         buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK;
         player.canDismissEvent = true;
     }, gameEventDismissDelay);

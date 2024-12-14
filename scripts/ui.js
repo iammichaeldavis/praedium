@@ -1033,6 +1033,12 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + pilgrimsCount + '<span class="warehouseTotal">/' + pilgrimsMax + '</span>' + '</td>';
                 tableString += '</tr>';
             }
+            if (player.hasArmy) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayEnlistment + ' <span class="icon TaxCollector inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + Math.floor((knightsMaxPopulationPortion * 10000) / 100) + '% <span class="icon Citizen inlineIcon"></span>' + '</td>';
+                tableString += '</tr>';
+            }
             tableString += '</tbody>';
             tableString += '</table>';
 
@@ -1250,14 +1256,14 @@ function UpdateText() {
                 if (horsesStarving) { horsesCost = '<span class="starving">' + displayStarvingHorse + '</span>'; }
                 tableString += '<td>' + horsesCost + '</td>';
                 tableString += '</tr>';
-                const knightsMax = Math.floor(residentsCount / 2);
+                const knightsMax = Math.floor(residentsCount * knightsMaxPopulationPortion);
                 let knightsCount = horsesCount;
                 if (knightsCount > knightsMax) { knightsCount = knightsMax; }
                 if (player.hasArmy) {
                     tableString += '<tr>';
                     tableString += '<td>' + displayCavalry + ' <span class="icon BowAndArrow inlineIcon"></span>:' + '</td>';
                     tableString += '<td class="noPadColumn">' + formatterStandard.format(knightsCount) + '<span class="warehouseTotal">/' + knightsMax + '</span>' + '</td>';
-                    tableString += '<td>(-' + currencySymbol + formatterStandard.format(knightsCount * 10) + '<span class="warehouseTotal">/' + displayWeek + '</span>)</td>';
+                    tableString += '<td>(-' + currencySymbol + formatterStandard.format(knightsCount * militaryUnitCost) + '<span class="warehouseTotal">/' + displayWeek + '</span>)</td>';
                     tableString += '</tr>';
                 }
                 if (trophiesSpawn) {
@@ -1359,7 +1365,7 @@ function UpdateText() {
         // BUILD BUTTON ------------------------
         if (player.canBuild) {
             if (villageStage == -5) { buttonBuild.innerHTML = displayLabelBuildNEG5 + ' <span class="icon HerosDioptra inlineIcon"></span>' + '<br>(' + priceBuildNEG5 + '<span class="icon Wheat inlineIcon"></span>)'; }
-            else if (villageStage == -4) { buttonBuild.innerHTML = displayLabelBuildNEG4 + '<br>(' + priceBuildNEG4[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceBuildNEG4[2] + '<span class="icon Pom inlineIcon"></span>' + ' + ' + priceBuildNEG4[3] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceBuildNEG4[4] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceBuildNEG4[1] + '<span class="icon Amphora inlineIcon"></span>' + ')'; }
+            else if (villageStage == -4) { buttonBuild.innerHTML = displayLabelBuildNEG4 + '<br>(' + priceBuildNEG4[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceBuildNEG4[3] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceBuildNEG4[4] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceBuildNEG4[2] + '<span class="icon Pom inlineIcon"></span>' + ' + ' + priceBuildNEG4[1] + '<span class="icon Amphora inlineIcon"></span>' + ')'; }
             else if (villageStage == -3) { buttonBuild.innerHTML = displayLabelBuildNEG3 + '<br>(' + priceBuildNEG3 + '<span class="icon Wheat inlineIcon"></span>)'; }
             else if (villageStage == -2) { buttonBuild.innerHTML = displayLabelBuildNEG2 + '<br>(' + priceBuildNEG2 + '<span class="icon Wheat inlineIcon"></span>)'; }
             else if (villageStage == -1) { buttonBuild.innerHTML = displayLabelBuildNEG1 + '<br>(' + formatterStandard.format(priceBuildNEG1[0]) + '<span class="icon Wheat inlineIcon"></span> + ' + formatterStandard.format(priceBuildNEG1[1]) + '<span class="icon Stone inlineIcon"></span>' + ')'; }
@@ -1402,10 +1408,10 @@ function UpdateText() {
                 stringyStringerson += formatterStandard.format(priceBuild100[4]) + '<span class="icon Board inlineIcon"></span>';
                 stringyStringerson += ' + ';
                 stringyStringerson += formatterStandard.format(priceBuild100[5]) + '<span class="icon Stone inlineIcon"></span>';
+                stringyStringerson += ' + ';
+                stringyStringerson += priceBuild100[3] + '<span class="icon IngotBronze inlineIcon"></span>';
                 stringyStringerson += '<br>';
                 stringyStringerson += '+ ';
-                stringyStringerson += priceBuild100[3] + '<span class="icon IngotBronze inlineIcon"></span>';
-                stringyStringerson += ' + ';
                 stringyStringerson += formatterStandard.format(priceBuild100[6]) + '<span class="icon Crystal inlineIcon"></span>';
                 stringyStringerson += ' + ';
                 stringyStringerson += priceBuild100[7] + '<span class="icon Gems inlineIcon"></span>';
@@ -2203,7 +2209,7 @@ function UpdateText() {
             tableImports.innerHTML = tableString;
         }
 
-        buttonSailWest.innerHTML = displaySailWest + ' ' + '<span class="icon Ship inlineIcon"></span>';
+        buttonSailWest.innerHTML = displayLabelSailWest + ' ' + '<span class="icon Ship inlineIcon"></span>';
     }
 
     else if (player.isAt == 'Residence') {
@@ -2223,7 +2229,7 @@ function UpdateText() {
         else if (residenceStage == 10) { buttonImproveResidence.innerHTML = displayLabelResidence10 + '<br>' + '(' + priceResidence10[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence10[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence10[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence10[3] + '<span class="icon Fig inlineIcon"></span>' + ')'; }
         else if (residenceStage == 11) { buttonImproveResidence.innerHTML = displayLabelResidence11 + '<br>' + '(' + priceResidence11[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence11[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence11[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence11[3] + '<span class="icon IngotCopper inlineIcon"></span>' + ')'; }
         else if (residenceStage == 12) { buttonImproveResidence.innerHTML = displayLabelResidence12 + '<br>' + '(' + priceResidence12[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence12[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence12[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence12[3] + '<span class="icon IngotTin inlineIcon"></span>' + ')'; }
-        else if (residenceStage == 13) { buttonImproveResidence.innerHTML = displayLabelResidence13 + '<br>' + '(' + currencySymbol + formatterStandard.format(priceResidence13[0]) + ' + ' + priceResidence13[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence13[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence13[3] + '<span class="icon IngotBronze inlineIcon"></span>' + ' + ' + priceResidence13[4] + '<span class="icon Crystal inlineIcon"></span>' + ' + ' + priceResidence13[5] + '<span class="icon Gems inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 13) { buttonImproveResidence.innerHTML = displayLabelResidence13 + '<br>' + '(' + currencySymbol + formatterStandard.format(priceResidence13[0]) + ' + ' + formatterStandard.format(priceResidence13[2]) + '<span class="icon Board inlineIcon"></span>' + ' + ' + formatterStandard.format(priceResidence13[1]) + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence13[4] + '<span class="icon Crystal inlineIcon"></span>' + ' + ' + priceResidence13[3] + '<span class="icon IngotBronze inlineIcon"></span>' + ' + ' + priceResidence13[5] + '<span class="icon Gems inlineIcon"></span>' + ')'; }
 
         if (residenceStage > 2) {
             let tableString = '<thead id="theadResidenceInventory"><tr><td colspan="2">' + displayInStock + '</td></tr></thead>';
@@ -2752,9 +2758,9 @@ function UpdateText() {
     buttonOptions.innerHTML = displayOptions;
     spanCheevoText.innerHTML = displayCheevo;
     divResumeCorpus.innerHTML = displayResumeQuestion;
-
     buttonResumeYes.innerHTML = displayResumeYes + ' <span class="icon ' + loadedIcon + ' inlineIcon"></span>';
     buttonResumeNo.innerHTML = displayResumeNo + ' <span class="icon YoMama inlineIcon"></span>';
+    buttonPlayGod.innerHTML = displayLabelPegasuses + ' <span class="icon Orb inlineIcon"></span><br>(' + pricePegasus + '<span class="icon Relic inlineIcon"></span>)';
 }
 
 
@@ -2881,6 +2887,7 @@ function UpdateVisibilities() {
         buttonSellBoards.style.display = player.canSell ? 'block' : '';
         buttonBuyStone.style.display = player.canSell ? 'block' : '';
         buttonSellStone.style.display = player.canSell ? 'block' : '';
+        buttonPlayGod.style.display = (player.hasWon && !player.hasPegasi) ? 'block' : '';
     }
 
     else if (player.isAt == 'Port') {
@@ -6549,23 +6556,33 @@ function RedrawVillage() {
     divVillageEstDate.innerHTML = tempString;
 
     tempString = displayVillageTitleNEG1;
-    if (villageStage > -4) { tempString = displayVillageTitle0; }
-    if (villageStage > 2) { tempString = displayVillageTitle1; }
-    if (villageStage > 5) { tempString = displayVillageTitle2; }
-    if (villageStage > 8) { tempString = displayVillageTitle3; }
-    if (villageStage > 11) { tempString = displayVillageTitle4; }
-    if (villageStage > 14) { tempString = displayVillageTitle5; }
-    if (villageStage > 17) { tempString = displayVillageTitle6; }
-    if (villageStage > 100) { tempString = displayVillageTitle7; }
+    if (villageStage > -4) { tempString = displayVillageTitle0; } // ceremony
+    if (villageStage > 2) { tempString = displayVillageTitle1; } // town hall
+    if (villageStage > 5) { tempString = displayVillageTitle2; } // market
+    if (villageStage > 9) { tempString = displayVillageTitle3; } // third insula
+    if (villageStage > 13) { tempString = displayVillageTitle4; } // bank
+    if (villageStage > 17) { tempString = displayVillageTitle5; } // army
+    if (villageStage > 24) { tempString = displayVillageTitle6; } // colosseum
+    if (villageStage > 100) { tempString = displayVillageTitle7; } // monument
     divVillageName.innerHTML = tempString + ' ' + nameVillage;
 
-    canvasVillageContext.drawImage(villageImage, 0, 0, 384, 224, 0, 0, 384, 224);
+    canvasVillageContext.drawImage(villageImageCurrent, 0, 0, 384, 224, 0, 0, 384, 224);
+    if (villageImageAnimationLayerA.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerA, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerB.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerB, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerC.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerC, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerD.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerD, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerE.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerE, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerF.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerF, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerG.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerG, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerH.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerH, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageStage > 25) { canvasVillageContext.drawImage(villageTheaterOverlay, 0, 0, 384, 224, 0, 0, 384, 224); }
 }
 
 
 
 function RedrawResidence() {
     canvasResidenceContext.drawImage(residenceImage, 0, 0, 384, 224, 0, 0, 384, 224);
+    if (residenceStage > 2 && residenceStage < 12) { canvasResidenceContext.drawImage(residenceTorchImage, 0, 0, 384, 224, 0, 0, 384, 224); }
 }
 
 
@@ -6870,19 +6887,177 @@ function RedrawCanvases() {
             ];
             tileFurnaceSE = arrayFurnaceSEFrames[animationCycleFrame];
         }
-        //else if (player.isAt == 'Township') {
-        //    //township animations go here (oh, you sweet, naïve boy 😂)
-        //}
+        else if (player.isAt == 'Township') {
+            villageImageCurrent.src = villageImageActual.src;
+            if (week == 1 && year % 10 == 0) { villageImageCurrent.src = 'bitmaps/lunar_event.png'; }
+
+            if (villageAnimationToggle) { villageAnimationToggle = false; }
+            else {
+                villageAnimationToggle = true;
+                villagePlateFrame++;
+                villageAnimationFrameA++;
+                villageAnimationFrameB++;
+                villageAnimationFrameC++;
+                villageAnimationFrameD++;
+                villageAnimationFrameE++;
+                villageAnimationFrameF++;
+                villageAnimationFrameH++;
+            }
+            villageAnimationFrameG++;
+
+
+
+            if (villageStage == -3) {
+                if (villagePlateFrame > 12) { villagePlateFrame = 1; }
+                villageImageActual.src = 'bitmaps/villageNEG03_af' + villagePlateFrame + '.png'; // ritual
+            }
+            else { villagePlateFrame = 1; }
+
+
+
+            if (villageStage == -4 || (villageStage > -2 && villageStage < 17)) {
+                if (villageAnimationFrameA > 6) { villageAnimationFrameA = 1; }
+                villageImageAnimationLayerA.src = 'bitmaps/bigzonies' + villageAnimationFrameA + '.png';
+            }
+            else if (villageStage == -2) {
+                if (villageAnimationFrameA > 8) { villageAnimationFrameA = 1; }
+                villageImageAnimationLayerA.src = 'bitmaps/villageNEG02_af' + villageAnimationFrameA + '.png'; // plans
+            }
+            else if (villageStage > 17) {
+                if (villageAnimationFrameA > 9) { villageAnimationFrameA = 1; }
+                villageImageAnimationLayerA.src = 'bitmaps/AAFES_af' + villageAnimationFrameA + '.png';
+            }
+            else {
+                villageAnimationFrameA = 1;
+                villageImageAnimationLayerA.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage == -4) {
+                if (villageAnimationFrameB > 8) { villageAnimationFrameB = 1; }
+                villageImageAnimationLayerB.src = 'bitmaps/lilzonies' + villageAnimationFrameB + '.png';
+            }
+            else if (villageStage == -1) {
+                if (villageAnimationFrameB > 18) { villageAnimationFrameB = 1; }
+                villageImageAnimationLayerB.src = 'bitmaps/villageNEG01_af' + villageAnimationFrameB + '.png'; // plow
+            }
+            else if (villageStage > 0) {
+                if (villageAnimationFrameB > 11) { villageAnimationFrameB = 1; }
+                villageImageAnimationLayerB.src = 'bitmaps/blacksmith_af' + villageAnimationFrameB + '.png';
+            }
+            else {
+                villageAnimationFrameB = 1;
+                villageImageAnimationLayerB.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage == 1) {
+                if (villageAnimationFrameC > 6) { villageAnimationFrameC = 1; }
+                villageImageAnimationLayerC.src = 'bitmaps/aqueductL_af' + villageAnimationFrameC + '.png';
+            }
+            else if (villageStage == 2) {
+                if (villageAnimationFrameC > 5) { villageAnimationFrameC = 1; }
+                villageImageAnimationLayerC.src = 'bitmaps/aqueductM_af' + villageAnimationFrameC + '.png';
+            }
+            else if (villageStage > 2) {
+                if (villageAnimationFrameC > 8) { villageAnimationFrameC = 1; }
+                villageImageAnimationLayerC.src = 'bitmaps/aqueductF_af' + villageAnimationFrameC + '.png';
+            }
+            else {
+                villageAnimationFrameC = 1;
+                villageImageAnimationLayerC.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage > 1) {
+                if (villageAnimationFrameD > 11) { villageAnimationFrameD = 1; }
+                villageImageAnimationLayerD.src = 'bitmaps/smokeA_af' + villageAnimationFrameD + '.png'; // builder hall
+            }
+            else {
+                villageAnimationFrameD = 1;
+                villageImageAnimationLayerD.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage > 10) {
+                if (villageAnimationFrameE > 11) { villageAnimationFrameE = 1; }
+                villageImageAnimationLayerE.src = 'bitmaps/stables_af' + villageAnimationFrameE + '.png';
+            }
+            else {
+                villageAnimationFrameE = 1;
+                villageImageAnimationLayerE.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage > 15) {
+                if (villageAnimationFrameF > 20) { villageAnimationFrameF = 1; }
+                villageImageAnimationLayerF.src = 'bitmaps/pools_af' + villageAnimationFrameF + '.png';
+                if (villageAnimationFrameF > 10) { villageImageAnimationLayerF.src = 'bitmaps/blank.png'; }
+            }
+            else {
+                villageAnimationFrameF = 1;
+                villageImageAnimationLayerF.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (player.hasMonument) {
+                if (villageAnimationFrameG > 111) { villageAnimationFrameG = 1; }
+                villageImageAnimationLayerG.src = 'bitmaps/village100_af' + villageAnimationFrameG + '.png';
+                if (villageAnimationFrameG > 22) { villageImageAnimationLayerG.src = 'bitmaps/blank.png'; }
+            }
+            else {
+                villageAnimationFrameG = 1;
+                villageImageAnimationLayerG.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (player.hasPegasi) {
+                if (villageAnimationFrameH > 9) { villageAnimationFrameH = 1; }
+                villageImageAnimationLayerH.src = 'bitmaps/pegasus_af' + villageAnimationFrameH + '.png';
+            }
+            else {
+                villageAnimationFrameH = 1;
+                villageImageAnimationLayerH.src = 'bitmaps/blank.png';
+            }
+        }
         else if (player.isAt == 'Residence') {
-            if (residenceStage == 14) {
-                if (residenceAnimationToggle) { residenceAnimationToggle = false; }
-                else {
-                    residenceAnimationToggle = true;
-                    residenceAnimationFrame++;
-                }
+            if (residenceAnimationToggle) { residenceAnimationToggle = false; }
+            else {
+                residenceAnimationToggle = true;
+                residenceAnimationFrame++;
+            }
+            if (residenceStage == 0) {
+                if (residenceAnimationFrame == 5) { residenceAnimationFrame = 1; }
+                residenceImage.src = 'bitmaps/res00_af' + residenceAnimationFrame + '.png';
+            }
+            else if (residenceStage == 1) {
+                if (residenceAnimationFrame == 5) { residenceAnimationFrame = 1; }
+                residenceImage.src = 'bitmaps/res01_af' + residenceAnimationFrame + '.png';
+            }
+            else if (residenceStage == 2) {
+                if (residenceAnimationFrame == 5) { residenceAnimationFrame = 1; }
+                residenceImage.src = 'bitmaps/res02_af' + residenceAnimationFrame + '.png';
+            }
+            else if (residenceStage > 2 && residenceStage < 12) {
+                if (residenceAnimationFrame == 5) { residenceAnimationFrame = 1; }
+                residenceTorchImage.src = 'bitmaps/res03plus_af' + residenceAnimationFrame + '.png';
+            }
+            else if (residenceStage == 12 || residenceStage == 13) {
+                if (residenceAnimationFrame == 5) { residenceAnimationFrame = 1; }
+                residenceImage.src = 'bitmaps/res07_af' + residenceAnimationFrame + '.png';
+            }
+            else if (residenceStage == 14) {
                 if (residenceAnimationFrame == 14) { residenceAnimationFrame = 1; }
                 residenceImage.src = 'bitmaps/res08_af' + residenceAnimationFrame + '.png';
             }
+            else { residenceAnimationFrame = 1; }
         }
         else if (player.isAt == 'Port') {
             if (portAnimationToggle) { portAnimationToggle = false; }
@@ -6929,6 +7104,12 @@ function DisplayAnimatedImages() {
 
 
 function PreloadImages() {
+    PreloadImage('bitmaps/agua_anim.gif');
+    PreloadImage('bitmaps/agua_still.gif');
+    PreloadImage('bitmaps/docks.png');
+    PreloadImage('bitmaps/lunar_event.png');
+    PreloadImage('bitmaps/mansion.png');
+    PreloadImage('bitmaps/nirvana.png');
     PreloadImage('bitmaps/port_gull2.png');
     PreloadImage('bitmaps/port_gull3.png');
     PreloadImage('bitmaps/port_gull4.png');
@@ -6958,13 +7139,33 @@ function PreloadImages() {
     PreloadImage('bitmaps/port_gull28.png');
     PreloadImage('bitmaps/port_gull29.png');
     PreloadImage('bitmaps/port_gull30.png');
+    PreloadImage('bitmaps/res00_af1.png');
+    PreloadImage('bitmaps/res00_af2.png');
+    PreloadImage('bitmaps/res00_af3.png');
+    PreloadImage('bitmaps/res00_af4.png');
     PreloadImage('bitmaps/res01.png');
+    PreloadImage('bitmaps/res01_af1.png');
+    PreloadImage('bitmaps/res01_af2.png');
+    PreloadImage('bitmaps/res01_af3.png');
+    PreloadImage('bitmaps/res01_af4.png');
     PreloadImage('bitmaps/res02.png');
+    PreloadImage('bitmaps/res02_af1.png');
+    PreloadImage('bitmaps/res02_af2.png');
+    PreloadImage('bitmaps/res02_af3.png');
+    PreloadImage('bitmaps/res02_af4.png');
     PreloadImage('bitmaps/res03.png');
+    PreloadImage('bitmaps/res03plus_af1.png');
+    PreloadImage('bitmaps/res03plus_af2.png');
+    PreloadImage('bitmaps/res03plus_af3.png');
+    PreloadImage('bitmaps/res03plus_af4.png');
     PreloadImage('bitmaps/res04.png');
     PreloadImage('bitmaps/res05.png');
     PreloadImage('bitmaps/res06.png');
     PreloadImage('bitmaps/res07.png');
+    PreloadImage('bitmaps/res07_af1.png');
+    PreloadImage('bitmaps/res07_af2.png');
+    PreloadImage('bitmaps/res07_af3.png');
+    PreloadImage('bitmaps/res07_af4.png');
     PreloadImage('bitmaps/res08.png');
     PreloadImage('bitmaps/res08_af1.png');
     PreloadImage('bitmaps/res08_af2.png');
@@ -6979,9 +7180,17 @@ function PreloadImages() {
     PreloadImage('bitmaps/res08_af11.png');
     PreloadImage('bitmaps/res08_af12.png');
     PreloadImage('bitmaps/res08_af13.png');
-    PreloadImage('bitmaps/mansion.png');
+    PreloadImage('bitmaps/route_alexandria.png');
+    PreloadImage('bitmaps/route_athens.png');
+    PreloadImage('bitmaps/route_damascus.png');
+    PreloadImage('bitmaps/route_jerusalem.png');
+    PreloadImage('bitmaps/route_memphis.png');
+    PreloadImage('bitmaps/route_rhodes.png');
+    PreloadImage('bitmaps/route_rome.png');
+    PreloadImage('bitmaps/route_tartessos.png');
+    PreloadImage('bitmaps/spritesheetCheevo.png');
     PreloadImage('bitmaps/villageNEG04.png');
-    PreloadImage('bitmaps/villageNEG03.png');
+    PreloadImage('bitmaps/villageNEG03_af1.png');
     PreloadImage('bitmaps/villageNEG02.png');
     PreloadImage('bitmaps/villageNEG01.png');
     PreloadImage('bitmaps/village00.png');
@@ -7015,16 +7224,10 @@ function PreloadImages() {
     PreloadImage('bitmaps/village28.png');
     PreloadImage('bitmaps/village29.png');
     PreloadImage('bitmaps/village100.png');
-    PreloadImage('bitmaps/route_alexandria.png');
-    PreloadImage('bitmaps/route_athens.png');
-    PreloadImage('bitmaps/route_damascus.png');
-    PreloadImage('bitmaps/route_jerusalem.png');
-    PreloadImage('bitmaps/route_memphis.png');
-    PreloadImage('bitmaps/route_rhodes.png');
-    PreloadImage('bitmaps/route_rome.png');
-    PreloadImage('bitmaps/route_tartessos.png');
-    PreloadImage('bitmaps/spritesheetCheevo.png');
-    PreloadImage('bitmaps/nirvana.png');
+    PreloadImage('bitmaps/village100_af1.png');
+    PreloadImage('bitmaps/village100_af2.png');
+    PreloadImage('bitmaps/village100_af3.png');
+    PreloadImage('bitmaps/village100_af4.png');
     function PreloadImage(url) {
         let img = new Image();
         img.src = url;
