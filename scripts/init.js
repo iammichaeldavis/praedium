@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.10.3';
+const version = '1.10.4';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -655,11 +655,11 @@ const priceBuild6 = [128000, 48000, 12000, 24000,]; // Insula (3rd floor)
 const priceBuild7 = [256000, 64000, 25000, 50000,]; // 2nd Insula
 const priceBuild8 = [200000, 80000, 30000, 60000,]; // School
 const priceBuild9 = [256000, 64000, 25000, 50000,]; // 3rd Insula
-const priceBuild10 = [128000, 8000, 12000,]; // Stables
-const priceBuild11 = [256000, 100, 7, 7, 7, 7, 7, 7, 7, 20000, 4,]; // Temple
-const priceBuild12 = [2000000, 4000, 60000, 12,]; // Arena
+const priceBuild10 = [256000, 8000, 12000,]; // Stables
+const priceBuild11 = [512000, 100, 7, 7, 7, 7, 7, 7, 7, 20000, 3,]; // Temple
+const priceBuild12 = [2000000, 4000, 60000, 6,]; // Arena
 const priceBuild13 = [4000000, 200, 30000,]; // Bank
-const priceBuild14 = [64000, 810, 20000,]; // Monks
+const priceBuild14 = [123456, 810, 20000,]; // Monks
 const priceBuild15 = [1200000, 60000,]; // Sewers
 const priceBuild16 = [2400000, 30000, 60000, 200000,]; // Gates
 const priceBuild17 = [3600000, 100000, 200,]; // Standing Army

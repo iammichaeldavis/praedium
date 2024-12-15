@@ -6892,7 +6892,7 @@ function RedrawCanvases() {
         }
         else if (player.isAt == 'Township') {
             villageImageCurrent.src = villageImageActual.src;
-            if (week == 1 && year % 10 == 0) { villageImageCurrent.src = 'bitmaps/lunar_event.png'; }
+            if ((week == 1 && year % 10 == 0) && player.hasMonument) { villageImageCurrent.src = 'bitmaps/lunar_event.png'; }
 
             if (villageAnimationToggle) { villageAnimationToggle = false; }
             else {

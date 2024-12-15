@@ -327,6 +327,7 @@ function ContinuePreviousGame() {
         /////////////////////////////////////////////////////////////////////////////////////////
         residenceImage.src = loadedReport.bitmaps[0];
         villageImageActual.src = loadedReport.bitmaps[1];
+        tileGrowingOlive = loadedReport.bitmaps[2];
         /////////////////////////////////////////////////////////////////////////////////////////
         CalculatePortValues();
         if (player.canWin) { AnimateWinButton(); }
@@ -444,7 +445,7 @@ function CollateGameStateReport(loud = false) {
         grapes: arrayVineyard,
     };
     const report = {
-        bitmaps: [residenceImage.src, villageImageActual.src,],
+        bitmaps: [residenceImage.src, villageImageActual.src, tileGrowingOlive,],
         calendar: [gameTurn, year, week, olivePlantDate, estDate,],
         counts: integerCounts,
         farmland: farmlandArrays,
