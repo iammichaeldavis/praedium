@@ -478,6 +478,7 @@ function DetermineDevice() {
 
 function PauseTime() {
     clearTimeout(timeoutHourglass);
+    clearTimeout(timeoutCanvases);
     gameSpeed = 'paused';
     AnimateHourglass(gameSpeed);
     DisplayStaticImages();

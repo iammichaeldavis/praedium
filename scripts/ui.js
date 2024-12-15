@@ -7037,27 +7037,27 @@ function RedrawCanvases() {
                 residenceAnimationFrame++;
             }
             if (residenceStage == 0) {
-                if (residenceAnimationFrame == 5) { residenceAnimationFrame = 1; }
+                if (residenceAnimationFrame > 4) { residenceAnimationFrame = 1; }
                 residenceImage.src = 'bitmaps/res00_af' + residenceAnimationFrame + '.png';
             }
             else if (residenceStage == 1) {
-                if (residenceAnimationFrame == 5) { residenceAnimationFrame = 1; }
+                if (residenceAnimationFrame > 4) { residenceAnimationFrame = 1; }
                 residenceImage.src = 'bitmaps/res01_af' + residenceAnimationFrame + '.png';
             }
             else if (residenceStage == 2) {
-                if (residenceAnimationFrame == 5) { residenceAnimationFrame = 1; }
+                if (residenceAnimationFrame > 4) { residenceAnimationFrame = 1; }
                 residenceImage.src = 'bitmaps/res02_af' + residenceAnimationFrame + '.png';
             }
             else if (residenceStage > 2 && residenceStage < 12) {
-                if (residenceAnimationFrame == 5) { residenceAnimationFrame = 1; }
+                if (residenceAnimationFrame > 4) { residenceAnimationFrame = 1; }
                 residenceTorchImage.src = 'bitmaps/res03plus_af' + residenceAnimationFrame + '.png';
             }
             else if (residenceStage == 12 || residenceStage == 13) {
-                if (residenceAnimationFrame == 5) { residenceAnimationFrame = 1; }
+                if (residenceAnimationFrame > 4) { residenceAnimationFrame = 1; }
                 residenceImage.src = 'bitmaps/res07_af' + residenceAnimationFrame + '.png';
             }
             else if (residenceStage == 14) {
-                if (residenceAnimationFrame == 14) { residenceAnimationFrame = 1; }
+                if (residenceAnimationFrame > 13) { residenceAnimationFrame = 1; }
                 residenceImage.src = 'bitmaps/res08_af' + residenceAnimationFrame + '.png';
             }
             else { residenceAnimationFrame = 1; }
@@ -7107,12 +7107,86 @@ function DisplayAnimatedImages() {
 
 
 function PreloadImages() {
+    PreloadImage('bitmaps/AAFES_af1.png');
+    PreloadImage('bitmaps/AAFES_af2.png');
+    PreloadImage('bitmaps/AAFES_af3.png');
+    PreloadImage('bitmaps/AAFES_af4.png');
+    PreloadImage('bitmaps/AAFES_af5.png');
+    PreloadImage('bitmaps/AAFES_af6.png');
+    PreloadImage('bitmaps/AAFES_af7.png');
+    PreloadImage('bitmaps/AAFES_af8.png');
+    PreloadImage('bitmaps/AAFES_af9.png');
     PreloadImage('bitmaps/agua_anim.gif');
     PreloadImage('bitmaps/agua_still.gif');
+    PreloadImage('bitmaps/aqueductF_af1.png');
+    PreloadImage('bitmaps/aqueductF_af2.png');
+    PreloadImage('bitmaps/aqueductF_af3.png');
+    PreloadImage('bitmaps/aqueductF_af4.png');
+    PreloadImage('bitmaps/aqueductF_af5.png');
+    PreloadImage('bitmaps/aqueductF_af6.png');
+    PreloadImage('bitmaps/aqueductF_af7.png');
+    PreloadImage('bitmaps/aqueductF_af8.png');
+    PreloadImage('bitmaps/aqueductL_af1.png');
+    PreloadImage('bitmaps/aqueductL_af2.png');
+    PreloadImage('bitmaps/aqueductL_af3.png');
+    PreloadImage('bitmaps/aqueductL_af4.png');
+    PreloadImage('bitmaps/aqueductL_af5.png');
+    PreloadImage('bitmaps/aqueductL_af6.png');
+    PreloadImage('bitmaps/aqueductM_af1.png');
+    PreloadImage('bitmaps/aqueductM_af2.png');
+    PreloadImage('bitmaps/aqueductM_af3.png');
+    PreloadImage('bitmaps/aqueductM_af4.png');
+    PreloadImage('bitmaps/aqueductM_af5.png');
+    PreloadImage('bitmaps/bigzonies1.png');
+    PreloadImage('bitmaps/bigzonies2.png');
+    PreloadImage('bitmaps/bigzonies3.png');
+    PreloadImage('bitmaps/bigzonies4.png');
+    PreloadImage('bitmaps/bigzonies5.png');
+    PreloadImage('bitmaps/bigzonies6.png');
+    PreloadImage('bitmaps/blacksmith_af1.png');
+    PreloadImage('bitmaps/blacksmith_af2.png');
+    PreloadImage('bitmaps/blacksmith_af3.png');
+    PreloadImage('bitmaps/blacksmith_af4.png');
+    PreloadImage('bitmaps/blacksmith_af5.png');
+    PreloadImage('bitmaps/blacksmith_af6.png');
+    PreloadImage('bitmaps/blacksmith_af7.png');
+    PreloadImage('bitmaps/blacksmith_af8.png');
+    PreloadImage('bitmaps/blacksmith_af9.png');
+    PreloadImage('bitmaps/blacksmith_af10.png');
+    PreloadImage('bitmaps/blacksmith_af11.png');
+    PreloadImage('bitmaps/blank.png');
     PreloadImage('bitmaps/docks.png');
+    PreloadImage('bitmaps/lilzonies1.png');
+    PreloadImage('bitmaps/lilzonies2.png');
+    PreloadImage('bitmaps/lilzonies3.png');
+    PreloadImage('bitmaps/lilzonies4.png');
+    PreloadImage('bitmaps/lilzonies5.png');
+    PreloadImage('bitmaps/lilzonies6.png');
+    PreloadImage('bitmaps/lilzonies7.png');
+    PreloadImage('bitmaps/lilzonies8.png');
     PreloadImage('bitmaps/lunar_event.png');
     PreloadImage('bitmaps/mansion.png');
     PreloadImage('bitmaps/nirvana.png');
+    PreloadImage('bitmaps/pegasus_af1.png');
+    PreloadImage('bitmaps/pegasus_af2.png');
+    PreloadImage('bitmaps/pegasus_af3.png');
+    PreloadImage('bitmaps/pegasus_af4.png');
+    PreloadImage('bitmaps/pegasus_af5.png');
+    PreloadImage('bitmaps/pegasus_af6.png');
+    PreloadImage('bitmaps/pegasus_af7.png');
+    PreloadImage('bitmaps/pegasus_af8.png');
+    PreloadImage('bitmaps/pegasus_af9.png');
+    PreloadImage('bitmaps/pools_af1.png');
+    PreloadImage('bitmaps/pools_af2.png');
+    PreloadImage('bitmaps/pools_af3.png');
+    PreloadImage('bitmaps/pools_af4.png');
+    PreloadImage('bitmaps/pools_af5.png');
+    PreloadImage('bitmaps/pools_af6.png');
+    PreloadImage('bitmaps/pools_af7.png');
+    PreloadImage('bitmaps/pools_af8.png');
+    PreloadImage('bitmaps/pools_af9.png');
+    PreloadImage('bitmaps/pools_af10.png');
+    PreloadImage('bitmaps/port_gull1.png');
     PreloadImage('bitmaps/port_gull2.png');
     PreloadImage('bitmaps/port_gull3.png');
     PreloadImage('bitmaps/port_gull4.png');
@@ -7191,11 +7265,33 @@ function PreloadImages() {
     PreloadImage('bitmaps/route_rhodes.png');
     PreloadImage('bitmaps/route_rome.png');
     PreloadImage('bitmaps/route_tartessos.png');
+    PreloadImage('bitmaps/smokeA_af1.png');
+    PreloadImage('bitmaps/smokeA_af2.png');
+    PreloadImage('bitmaps/smokeA_af3.png');
+    PreloadImage('bitmaps/smokeA_af4.png');
+    PreloadImage('bitmaps/smokeA_af5.png');
+    PreloadImage('bitmaps/smokeA_af6.png');
+    PreloadImage('bitmaps/smokeA_af7.png');
+    PreloadImage('bitmaps/smokeA_af8.png');
+    PreloadImage('bitmaps/smokeA_af9.png');
+    PreloadImage('bitmaps/smokeA_af10.png');
+    PreloadImage('bitmaps/smokeA_af11.png');
     PreloadImage('bitmaps/spritesheetCheevo.png');
-    PreloadImage('bitmaps/villageNEG04.png');
-    PreloadImage('bitmaps/villageNEG03_af1.png');
-    PreloadImage('bitmaps/villageNEG02.png');
-    PreloadImage('bitmaps/villageNEG01.png');
+    PreloadImage('bitmaps/stables_af1.png');
+    PreloadImage('bitmaps/stables_af2.png');
+    PreloadImage('bitmaps/stables_af3.png');
+    PreloadImage('bitmaps/stables_af4.png');
+    PreloadImage('bitmaps/stables_af5.png');
+    PreloadImage('bitmaps/stables_af6.png');
+    PreloadImage('bitmaps/stables_af7.png');
+    PreloadImage('bitmaps/stables_af8.png');
+    PreloadImage('bitmaps/stables_af9.png');
+    PreloadImage('bitmaps/stables_af10.png');
+    PreloadImage('bitmaps/stables_af11.png');
+    PreloadImage('bitmaps/theater.png');
+    PreloadImage('bitmaps/tilemap.png');
+    PreloadImage('bitmaps/trade_goods.png');
+    PreloadImage('bitmaps/trade_tin.png');
     PreloadImage('bitmaps/village00.png');
     PreloadImage('bitmaps/village01.png');
     PreloadImage('bitmaps/village02.png');
@@ -7231,6 +7327,67 @@ function PreloadImages() {
     PreloadImage('bitmaps/village100_af2.png');
     PreloadImage('bitmaps/village100_af3.png');
     PreloadImage('bitmaps/village100_af4.png');
+    PreloadImage('bitmaps/village100_af5.png');
+    PreloadImage('bitmaps/village100_af6.png');
+    PreloadImage('bitmaps/village100_af7.png');
+    PreloadImage('bitmaps/village100_af8.png');
+    PreloadImage('bitmaps/village100_af9.png');
+    PreloadImage('bitmaps/village100_af10.png');
+    PreloadImage('bitmaps/village100_af11.png');
+    PreloadImage('bitmaps/village100_af12.png');
+    PreloadImage('bitmaps/village100_af13.png');
+    PreloadImage('bitmaps/village100_af14.png');
+    PreloadImage('bitmaps/village100_af15.png');
+    PreloadImage('bitmaps/village100_af16.png');
+    PreloadImage('bitmaps/village100_af17.png');
+    PreloadImage('bitmaps/village100_af18.png');
+    PreloadImage('bitmaps/village100_af19.png');
+    PreloadImage('bitmaps/village100_af20.png');
+    PreloadImage('bitmaps/village100_af21.png');
+    PreloadImage('bitmaps/village100_af22.png');
+    PreloadImage('bitmaps/villageNEG01.png');
+    PreloadImage('bitmaps/villageNEG01_af1.png');
+    PreloadImage('bitmaps/villageNEG01_af2.png');
+    PreloadImage('bitmaps/villageNEG01_af3.png');
+    PreloadImage('bitmaps/villageNEG01_af4.png');
+    PreloadImage('bitmaps/villageNEG01_af5.png');
+    PreloadImage('bitmaps/villageNEG01_af6.png');
+    PreloadImage('bitmaps/villageNEG01_af7.png');
+    PreloadImage('bitmaps/villageNEG01_af8.png');
+    PreloadImage('bitmaps/villageNEG01_af9.png');
+    PreloadImage('bitmaps/villageNEG01_af10.png');
+    PreloadImage('bitmaps/villageNEG01_af11.png');
+    PreloadImage('bitmaps/villageNEG01_af12.png');
+    PreloadImage('bitmaps/villageNEG01_af13.png');
+    PreloadImage('bitmaps/villageNEG01_af14.png');
+    PreloadImage('bitmaps/villageNEG01_af15.png');
+    PreloadImage('bitmaps/villageNEG01_af16.png');
+    PreloadImage('bitmaps/villageNEG01_af17.png');
+    PreloadImage('bitmaps/villageNEG01_af18.png');
+    PreloadImage('bitmaps/villageNEG02.png');
+    PreloadImage('bitmaps/villageNEG02_af1.png');
+    PreloadImage('bitmaps/villageNEG02_af2.png');
+    PreloadImage('bitmaps/villageNEG02_af3.png');
+    PreloadImage('bitmaps/villageNEG02_af4.png');
+    PreloadImage('bitmaps/villageNEG02_af5.png');
+    PreloadImage('bitmaps/villageNEG02_af6.png');
+    PreloadImage('bitmaps/villageNEG02_af7.png');
+    PreloadImage('bitmaps/villageNEG02_af8.png');
+    PreloadImage('bitmaps/villageNEG03_af1.png');
+    PreloadImage('bitmaps/villageNEG03_af2.png');
+    PreloadImage('bitmaps/villageNEG03_af3.png');
+    PreloadImage('bitmaps/villageNEG03_af4.png');
+    PreloadImage('bitmaps/villageNEG03_af5.png');
+    PreloadImage('bitmaps/villageNEG03_af6.png');
+    PreloadImage('bitmaps/villageNEG03_af7.png');
+    PreloadImage('bitmaps/villageNEG03_af8.png');
+    PreloadImage('bitmaps/villageNEG03_af9.png');
+    PreloadImage('bitmaps/villageNEG03_af10.png');
+    PreloadImage('bitmaps/villageNEG03_af11.png');
+    PreloadImage('bitmaps/villageNEG03_af12.png');
+    PreloadImage('bitmaps/villageNEG04.png');
+    PreloadImage('bitmaps/villageNEG05.png');
+
     function PreloadImage(url) {
         let img = new Image();
         img.src = url;
