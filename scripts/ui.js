@@ -6761,7 +6761,10 @@ function AnimateHourglass(newSpeed) {
 function AnimateCanvases() {
     RedrawCanvases();
     globalAnimationFrame++;
-    if (globalAnimationFrame != animationFPS) { setTimeout(AnimateCanvases, animationInterval); }
+    if (globalAnimationFrame != animationFPS) {
+        clearTimeout(timeoutCanvases);
+        timeoutCanvases = setTimeout(AnimateCanvases, animationInterval);
+    }
 }
 
 

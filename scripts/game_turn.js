@@ -144,7 +144,8 @@ function GameTurn() {
 
     if (gameSpeed == 'standard' && player.likesAnimations) {
         globalAnimationFrame = 1;
-        setTimeout(AnimateCanvases, animationInterval);
+        clearTimeout(timeoutCanvases);
+        timeoutCanvases = setTimeout(AnimateCanvases, animationInterval);
     }
 
     if (player.likesRecords) {

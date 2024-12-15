@@ -493,6 +493,13 @@ function StartTime(punchIt = false) {
     if (punchIt) { gameSpeed = 'ultra'; }
     AnimateHourglass(gameSpeed);
     if (player.likesAnimations) { DisplayAnimatedImages(); }
+
+    if (gameSpeed == 'standard' && player.likesAnimations) {
+        globalAnimationFrame = 1;
+        clearTimeout(timeoutCanvases);
+        timeoutCanvases = setTimeout(AnimateCanvases, animationInterval);
+    }
+
 }
 
 

@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.10.0';
+const version = '1.10.1';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -709,6 +709,7 @@ let debugCounter = 0;
 let gameSpeed = 'paused';
 let oldSpeed = null;
 let timeoutHourglass = null;
+let timeoutCanvases = null;
 let frameHourglass = 0;
 let frameHourglassMax = 20;
 let turnPerFrame = false;
