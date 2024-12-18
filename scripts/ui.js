@@ -233,6 +233,15 @@ const tileStoneFenceH = [48 + (25 * 16), 9 * 16,];
 const tileStoneFenceEndE = [48 + (26 * 16), 9 * 16,];
 const tileStoneFenceEndS = [48 + (27 * 16), 9 * 16,];
 
+const tileTallFenceNW = [288, 256,];
+const tileTallFenceH = [288 + 16, 256,];
+const tileTallFenceSE = [288 + 32, 256,];
+const tileTallFenceV = [288 + 48, 256,];
+const tileTallFenceSW = [288 + 64, 256,];
+const tileTallFenceNE = [288 + 80, 256,];
+const tileTallFenceEndE = [288 + 96, 256,];
+const tileTallFenceEndS = [288 + 112, 256,];
+
 let tileGrowingOlive = [22 * 16, 96,];
 
 const tileAutograph = [64 + (9 * 16), 7 * 16,];
@@ -452,8 +461,24 @@ function UpdateText() {
         if (warehouseStage > 2) { fruitGap += '&nbsp;'; }
         if (player.seesWarehouse) { countWheat += '<span class="warehouseTotal">/' + formatterStandard.format(bushelMax[0]) + '</span>'; }
         let tableString = '<tr><td>' + displayWheat + '&nbsp;<span class="icon Wheat inlineIcon"></span>:</td><td class="rightPadColumn">' + countWheat + '</td></tr>';
-        if (farmStage > 16) { tableString += '<tr><td>' + displayBarley + '&nbsp;<span class="icon Barley inlineIcon"></span>:</td><td class="rightPadColumn">' + formatterStandard.format(bushelCount[1]) + '<span class="warehouseTotal">/' + formatterStandard.format(bushelMax[1]) + '</span></td></tr>'; }
-        if (player.seesOlives) { tableString += '<tr><td>' + displayOlive + '&nbsp;<span class="icon Olive inlineIcon"></span>:</td><td class="rightPadColumn">' + formatterStandard.format(bushelCount[2]) + '<span class="warehouseTotal">/' + fruitGap + formatterStandard.format(bushelMax[2]) + '</span></td></tr>'; }
+        if (farmStage > 16) {
+            tableString += '<tr><td>' + displayBarley + '&nbsp;<span class="icon Barley inlineIcon"></span>:</td><td class="rightPadColumn">' + formatterStandard.format(bushelCount[1]) + '<span class="warehouseTotal">/' + formatterStandard.format(bushelMax[1]) + '</span></td></tr>';
+        }
+        if (player.hasFlaxFarm) {
+            tableString += '<tr>'
+            tableString += '<td>';
+            tableString += displayFlax;
+            tableString += '&nbsp;<span class="icon Flax inlineIcon"></span>:';
+            tableString += '</td>';
+            tableString += '<td class="rightPadColumn">';
+            tableString += formatterStandard.format(bushelCount[7]);
+            tableString += '<span class="warehouseTotal">/' + formatterStandard.format(bushelMax[7]) + '</span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+        }
+        if (player.seesOlives) {
+            tableString += '<tr><td>' + displayOlive + '&nbsp;<span class="icon Olive inlineIcon"></span>:</td><td class="rightPadColumn">' + formatterStandard.format(bushelCount[2]) + '<span class="warehouseTotal">/' + fruitGap + formatterStandard.format(bushelMax[2]) + '</span></td></tr>';
+        }
         if (farmStage > 17) {
             tableString += '<tr><td>' + displayDate + '&nbsp;<span class="icon Date inlineIcon"></span>:</td><td class="rightPadColumn">' + formatterStandard.format(bushelCount[3]) + '<span class="warehouseTotal">/' + fruitGap + formatterStandard.format(bushelMax[3]) + '</span></td></tr>';
             tableString += '<tr><td>' + displayFig + '&nbsp;<span class="icon Fig inlineIcon"></span>:</td><td class="rightPadColumn">' + formatterStandard.format(bushelCount[4]) + '<span class="warehouseTotal">/' + fruitGap + formatterStandard.format(bushelMax[4]) + '</span></td></tr>';
@@ -525,6 +550,19 @@ function UpdateText() {
                 tableString += '<td>' + formatterStandard.format(spentCount[1] + seededCount[1] + horsesEaten + residenceIngredientConsumedCount[2]) + '</td>';
                 if (player.canBarter) {
                     tableString += '<td>' + formatterStandard.format(soldCount[1]) + '</td>';
+                }
+                tableString += '</tr>';
+            }
+            if (player.hasFlaxFarm) {
+                tableString += '<tr><td><span class="icon Flax"></span></td>';
+                tableString += '<td>' + formatterStandard.format(farmedCount[7]) + '</td>';
+                tableString += '<td>' + formatterStandard.format(harvestedCount[7]) + '</td>';
+                if (player.canBarter) {
+                    tableString += '<td>' + formatterStandard.format(purchasedCount[7]) + '</td>';
+                }
+                tableString += '<td>' + formatterStandard.format(spentCount[7] + seededCount[2]) + '</td>';
+                if (player.canBarter) {
+                    tableString += '<td>' + formatterStandard.format(soldCount[7]) + '</td>';
                 }
                 tableString += '</tr>';
             }
@@ -984,7 +1022,8 @@ function UpdateText() {
         buttonFound.innerHTML = displayLabelFound + '<br>(' + formatterStandard.format(priceVillage) + '<span class="icon Wheat inlineIcon"></span>)';
 
         // NEW FARM BUTTON ---------------------
-        buttonNewFarm.innerHTML = displayLabelNewFarm + '<br>(' + currencySymbol + formatterStandard.format(priceNewFarm) + ')';
+        if (!player.hasNewFarm) { buttonNewFarm.innerHTML = displayLabelNewFarm + '<br>(' + currencySymbol + formatterStandard.format(priceNewFarm) + ')'; }
+        else { buttonNewFarm.innerHTML = displayLabelFlaxFarm + '<br>(' + currencySymbol + formatterStandard.format(priceFlaxFarm) + ')'; }
 
         // BARTER BUTTONS ----------------------
         if (player.canBarter) {
@@ -2230,6 +2269,8 @@ function UpdateText() {
         else if (residenceStage == 11) { buttonImproveResidence.innerHTML = displayLabelResidence11 + '<br>' + '(' + priceResidence11[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence11[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence11[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence11[3] + '<span class="icon IngotCopper inlineIcon"></span>' + ')'; }
         else if (residenceStage == 12) { buttonImproveResidence.innerHTML = displayLabelResidence12 + '<br>' + '(' + priceResidence12[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence12[1] + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence12[2] + '<span class="icon Board inlineIcon"></span>' + ' + ' + priceResidence12[3] + '<span class="icon IngotTin inlineIcon"></span>' + ')'; }
         else if (residenceStage == 13) { buttonImproveResidence.innerHTML = displayLabelResidence13 + '<br>' + '(' + currencySymbol + formatterStandard.format(priceResidence13[0]) + ' + ' + formatterStandard.format(priceResidence13[2]) + '<span class="icon Board inlineIcon"></span>' + ' + ' + formatterStandard.format(priceResidence13[1]) + '<span class="icon Stone inlineIcon"></span>' + ' + ' + priceResidence13[4] + '<span class="icon Crystal inlineIcon"></span>' + ' + ' + priceResidence13[3] + '<span class="icon IngotBronze inlineIcon"></span>' + ' + ' + priceResidence13[5] + '<span class="icon Gems inlineIcon"></span>' + ')'; }
+        else if (residenceStage == 14) { buttonImproveResidence.innerHTML = displayLabelResidence14 + '<br>' + '(' + currencySymbol + formatterStandard.format(priceResidence14[0]) + ')'; }
+        else if (residenceStage == 15) { buttonImproveResidence.innerHTML = displayLabelResidence15 + ' <span class="icon RaisinsLoose inlineIcon"></span>'; }
 
         if (residenceStage > 2) {
             let tableString = '<thead id="theadResidenceInventory"><tr><td colspan="2">' + displayInStock + '</td></tr></thead>';
@@ -2298,6 +2339,17 @@ function UpdateText() {
                 tableString += '</td>';
                 tableString += '</tr>';
             }
+            if (player.hasApiary) {
+                tableString += '<tr>'
+                tableString += '<td>';
+                tableString += displayComb;
+                tableString += '&nbsp;<span class="icon Comb inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceInStockCount[9]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             if (player.hasGreenhouse) {
                 tableString += '<tr>'
                 tableString += '<td>';
@@ -2306,6 +2358,17 @@ function UpdateText() {
                 tableString += '</td>';
                 tableString += '<td class="rightPadColumn">';
                 tableString += formatterStandard.format(residenceInStockCount[6]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasRaisins) {
+                tableString += '<tr>'
+                tableString += '<td>';
+                tableString += displayRaisins;
+                tableString += '&nbsp;<span class="icon Raisins inlineIcon"></span>:';
+                tableString += '</td>';
+                tableString += '<td class="rightPadColumn">';
+                tableString += formatterStandard.format(residenceInStockCount[10]);
                 tableString += '</td>';
                 tableString += '</tr>';
             }
@@ -2459,6 +2522,24 @@ function UpdateText() {
                 }
                 tableString += '</tr>';
             }
+            if (player.hasApiary) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Comb"></span>';
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceProducedCount[9]);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceSpentCount[9]);
+                tableString += '</td>';
+                if (player.canExport) {
+                    tableString += '<td>';
+                    tableString += formatterStandard.format(residenceShippedCount[9]);
+                    tableString += '</td>';
+                }
+                tableString += '</tr>';
+            }
             if (player.hasGreenhouse) {
                 tableString += '<tr>';
                 tableString += '<td>';
@@ -2473,6 +2554,24 @@ function UpdateText() {
                 if (player.canExport) {
                     tableString += '<td>';
                     tableString += formatterStandard.format(residenceShippedCount[6]);
+                    tableString += '</td>';
+                }
+                tableString += '</tr>';
+            }
+            if (player.hasRaisins) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Raisins"></span>';
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceProducedCount[10]);
+                tableString += '</td>';
+                tableString += '<td>';
+                tableString += formatterStandard.format(residenceSpentCount[10]);
+                tableString += '</td>';
+                if (player.canExport) {
+                    tableString += '<td>';
+                    tableString += formatterStandard.format(residenceShippedCount[10]);
                     tableString += '</td>';
                 }
                 tableString += '</tr>';
@@ -2685,16 +2784,37 @@ function UpdateText() {
             tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[6] * 100) + '% <span class="workshopHarvestFruitDecal"></span><span class="icon Fig inlineIcon"></span>';
             tableString += '</td>';
             tableString += '</tr>';
+            if (player.hasRaisins) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[10] * 100) + '% <span class="workshopHarvestFruitDecal"></span><span class="icon Grape inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             tableString += '<tr>';
             tableString += '<td>';
             tableString += residenceIngredientsIn[6] + '<span class="icon Fig inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[6] + '<span class="icon Basket inlineIcon"></span>';
             tableString += '</td>';
             tableString += '</tr>';
+            if (player.hasRaisins) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += residenceIngredientsIn[10] + '<span class="icon Grape inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[10] + '<span class="icon Raisins inlineIcon"></span>';
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             tableString += '<tr>';
             tableString += '<td>';
             tableString += '<span class="icon Fig inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[6]);
             tableString += '</td>';
             tableString += '</tr>';
+            if (player.hasRaisins) {
+                tableString += '<tr>';
+                tableString += '<td>';
+                tableString += '<span class="icon Grape inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[10]);
+                tableString += '</td>';
+                tableString += '</tr>';
+            }
             tableString += '</tbody>';
             tableWorkshopGreenhouse.innerHTML = tableString;
 
@@ -2744,6 +2864,37 @@ function UpdateText() {
             }
             tableString += '</tbody>';
             tableWorkshopAtelier.innerHTML = tableString;
+
+            tableString = '<thead>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayApiary;
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</thead>';
+            tableString += '<tbody>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += displayConsumes + ' ' + (residenceIngredientWorkshopPortion[9] * 100) + '% <span class="icon Honeypot inlineIcon"></span><span class="icon Jug inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += residenceIngredientsIn[9] + '<span class="icon Honeypot inlineIcon"></span> + ' + residenceIngredientsIn[9] + '<span class="icon Jug inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + residenceProductOut[9] + '<span class="icon Comb inlineIcon"></span>';
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon Honeypot inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[9][0]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '<tr>';
+            tableString += '<td>';
+            tableString += '<span class="icon Jug inlineIcon"></span> ' + displayUsed + ': ' + formatterStandard.format(residenceIngredientConsumedCount[9][1]);
+            tableString += '</td>';
+            tableString += '</tr>';
+            tableString += '</tbody>';
+            tableWorkshopApiary.innerHTML = tableString;
         }
     }
 
@@ -2827,7 +2978,8 @@ function UpdateVisibilities() {
         buttonBarterGrape.style.display = (player.canBarter && farmStage > 17) ? 'block' : '';
 
         const pixelScale = window.getComputedStyle(buttonTillDecal).getPropertyValue('--pixel-scale');
-        let plotSearchResult = FindPlot(0, 'all');
+        let plotSearchResult = FindPlot(0, 'cereals');
+        if (plotSearchResult.row == -1 && player.hasFlaxFarm) { plotSearchResult = FindPlot(0, 'flax'); }
         if (plotSearchResult.row != -1) {
             buttonTill.classList.remove('disabled');
             buttonTillDecal.style.backgroundPosition = (-208 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
@@ -2839,7 +2991,8 @@ function UpdateVisibilities() {
 
         plotSearchResult = FindPlot(1, 'wheat');
         let plotSearchResultAlt = FindPlot(1, 'barley');
-        if ((plotSearchResult.row != -1 && bushelCount[0] >= plantCost) || (plotSearchResultAlt.row != -1 && bushelCount[1] >= plantCost)) {
+        let plotSearchResultOtherAlt = FindPlot(1, 'flax');
+        if ((plotSearchResult.row != -1 && bushelCount[0] >= plantCost) || (plotSearchResultAlt.row != -1 && bushelCount[1] >= plantCost) || (player.hasFlaxFarm && (plotSearchResultOtherAlt.row != -1 && bushelCount[7] >= plantCost))) {
             buttonPlant.classList.remove('disabled');
             buttonPlantDecal.style.backgroundPosition = (-240 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
@@ -2848,7 +3001,8 @@ function UpdateVisibilities() {
             buttonPlantDecal.style.backgroundPosition = (-368 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
 
-        plotSearchResult = FindPlot(2, 'all');
+        plotSearchResult = FindPlot(2, 'cereals');
+        if (plotSearchResult.row == -1 && player.hasFlaxFarm) { plotSearchResult = FindPlot(2, 'flax'); }
         if (plotSearchResult.row != -1) {
             buttonWater.classList.remove('disabled');
             buttonWaterDecal.style.backgroundPosition = (-272 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
@@ -2858,7 +3012,8 @@ function UpdateVisibilities() {
             buttonWaterDecal.style.backgroundPosition = (-400 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
         }
 
-        plotSearchResult = FindPlot(14, 'all');
+        plotSearchResult = FindPlot(14, 'cereals');
+        if (plotSearchResult.row == -1 && player.hasFlaxFarm) { plotSearchResult = FindPlot(14, 'flax'); }
         if (plotSearchResult.row != -1 || arrayVineyard.includes(1) || arrayPomOrchard.includes(1) || arrayOlivar.includes(1) || arrayDatePalmGrove.includes(1) || arrayFigOrchard.includes(1)) {
             buttonHarvest.classList.remove('disabled');
             buttonHarvestDecal.style.backgroundPosition = (-304 * pixelScale) + 'px ' + (-32 * pixelScale) + 'px';
@@ -2901,7 +3056,7 @@ function UpdateVisibilities() {
     }
 
     else if (player.isAt == 'Residence') {
-        buttonImproveResidence.style.display = player.hasMansion ? '' : 'block';
+        buttonImproveResidence.style.display = player.hasRaisins ? '' : 'block';
         tableResidenceInventory.style.display = player.hasBakery ? 'table' : '';
         tableResidenceReport.style.display = player.hasBakery ? 'table' : '';
         divWorkshopBakery.style.display = player.hasBakery ? 'block' : '';
@@ -2912,6 +3067,7 @@ function UpdateVisibilities() {
         divWorkshopPress.style.display = player.hasPress ? 'block' : '';
         divWorkshopGreenhouse.style.display = player.hasGreenhouse ? 'block' : '';
         divWorkshopAtelier.style.display = player.hasAtelier ? 'block' : '';
+        divWorkshopApiary.style.display = player.hasApiary ? 'block' : '';
     }
 }
 
@@ -2973,6 +3129,38 @@ function RedrawFarm() {
         let tileChoice = [416, 64,];
         if (post) { tileChoice = [448, 64,]; }
         return (arrayVineyard[grape] == 0) ? tileChoice : [432, 64,];
+    }
+
+    function PickFlaxTile(row, col) {
+        let tileChoice = null;
+        let arrayCropTiles = [
+            [0, 64,],
+            [16, 64,],
+            [32, 64,],
+            [48, 64,],
+            [64, 64,],
+            [80, 64,],
+            [96, 64,],
+            [112, 64,],
+            [128, 64,],
+            [144, 64,],
+            [160, 64,],
+            [176, 64,],
+            [192, 64,],
+            [208, 64,],
+        ];
+        if (arrayFlaxPlots[row][col] == 14) {
+            arrayCropTiles = [
+                [32, 256,],
+                [48, 256,],
+                [64, 256,],
+                [80, 256,],
+                [96, 256,],
+            ];
+            tileChoice = arrayCropTiles[FindWholeRandom(0, 4)];
+        }
+        else { tileChoice = arrayCropTiles[arrayFlaxPlots[row][col]]; }
+        return tileChoice;
     }
 
     const arrayFarmGraph = [
@@ -5162,7 +5350,7 @@ function RedrawFarm() {
                 tileLawn,
                 tileLawn,
                 tileLawn,
-                tileLawnLog,
+                tileLawn,
                 tileLawn,
                 tileLawn,
                 tileLawn,
@@ -5173,6 +5361,464 @@ function RedrawFarm() {
                 tilePathV,
                 tilePathV,
                 tileHitchingPostH,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+            ],
+        );
+
+        if (player.hasMansion) {
+            arrayFarmGraph[44][12] = tilePathV;
+
+            arrayFarmGraph[45][22] = tilePathV;
+
+            arrayFarmGraph[48][22] = tilePathV;
+        }
+    }
+
+    if (player.hasFlaxFarm) {
+        canvasFarm.height = 76 * 16;
+        canvasFarm.style.height = ((76 * 16) + 2) * pixelScale + 'px';
+
+        arrayFarmGraph.push(
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceNW,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceEndE,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
+                tileTallFenceSW,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceNE,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceV,
+                tilePathS2E,
+                tilePathH,
+                tilePathH2S,
+                tilePathH,
+                tilePathH2S,
+                tilePathH,
+                tilePathH2S,
+                tilePathH,
+                tilePathCross,
+                tilePathCross,
+                tilePathH,
+                tilePathH2S,
+                tilePathH,
+                tilePathH2S,
+                tilePathH,
+                tilePathH2S,
+                tilePathH,
+                tilePathS2W,
+                tileTallFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceV,
+                tilePathV,
+                PickFlaxTile(0, 0),
+                tilePathV,
+                PickFlaxTile(0, 3),
+                tilePathV,
+                PickFlaxTile(1, 0),
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                PickFlaxTile(4, 3),
+                tilePathV,
+                PickFlaxTile(5, 0),
+                tilePathV,
+                PickFlaxTile(5, 3),
+                tilePathV,
+                tileTallFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceV,
+                tilePathV,
+                PickFlaxTile(0, 1),
+                tilePathV,
+                PickFlaxTile(0, 4),
+                tilePathV,
+                PickFlaxTile(1, 1),
+                tilePathV,
+                tileWell,
+                tilePathV,
+                tilePathV,
+                tileWell,
+                tilePathV,
+                PickFlaxTile(4, 4),
+                tilePathV,
+                PickFlaxTile(5, 1),
+                tilePathV,
+                PickFlaxTile(5, 4),
+                tilePathV,
+                tileTallFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceEndS,
+                tilePathV,
+                PickFlaxTile(0, 2),
+                tilePathV,
+                PickFlaxTile(0, 5),
+                tilePathV,
+                PickFlaxTile(1, 2),
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                PickFlaxTile(4, 5),
+                tilePathV,
+                PickFlaxTile(5, 2),
+                tilePathV,
+                PickFlaxTile(5, 5),
+                tilePathV,
+                tileTallFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tilePathH,
+                tilePathH,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathV2W,
+                tileTallFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceNE,
+                tilePathV,
+                PickFlaxTile(1, 3),
+                tilePathV,
+                PickFlaxTile(2, 0),
+                tilePathV,
+                PickFlaxTile(2, 3),
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                PickFlaxTile(6, 0),
+                tilePathV,
+                PickFlaxTile(6, 3),
+                tilePathV,
+                PickFlaxTile(7, 0),
+                tilePathV,
+                tileTallFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceV,
+                tilePathV,
+                PickFlaxTile(1, 4),
+                tilePathV,
+                PickFlaxTile(2, 1),
+                tilePathV,
+                PickFlaxTile(2, 4),
+                tilePathV,
+                tileWell,
+                tilePathV,
+                tilePathV,
+                tileWell,
+                tilePathV,
+                PickFlaxTile(6, 1),
+                tilePathV,
+                PickFlaxTile(6, 4),
+                tilePathV,
+                PickFlaxTile(7, 1),
+                tilePathV,
+                tileTallFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceV,
+                tilePathV,
+                PickFlaxTile(1, 5),
+                tilePathV,
+                PickFlaxTile(2, 2),
+                tilePathV,
+                PickFlaxTile(2, 5),
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                PickFlaxTile(6, 2),
+                tilePathV,
+                PickFlaxTile(6, 5),
+                tilePathV,
+                PickFlaxTile(7, 2),
+                tilePathV,
+                tileTallFenceEndS,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceV,
+                tilePathV2E,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathCross,
+                tilePathH,
+                tilePathH,
+                tilePathH,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceV,
+                tilePathV,
+                PickFlaxTile(3, 0),
+                tilePathV,
+                PickFlaxTile(3, 3),
+                tilePathV,
+                PickFlaxTile(4, 0),
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                PickFlaxTile(7, 3),
+                tilePathV,
+                PickFlaxTile(8, 0),
+                tilePathV,
+                PickFlaxTile(8, 3),
+                tilePathV,
+                tileTallFenceNE,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceV,
+                tilePathV,
+                PickFlaxTile(3, 1),
+                tilePathV,
+                PickFlaxTile(3, 4),
+                tilePathV,
+                PickFlaxTile(4, 1),
+                tilePathV,
+                tileWell,
+                tilePathV,
+                tilePathV,
+                tileWell,
+                tilePathV,
+                PickFlaxTile(7, 4),
+                tilePathV,
+                PickFlaxTile(8, 1),
+                tilePathV,
+                PickFlaxTile(8, 4),
+                tilePathV,
+                tileTallFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceV,
+                tilePathV,
+                PickFlaxTile(3, 2),
+                tilePathV,
+                PickFlaxTile(3, 5),
+                tilePathV,
+                PickFlaxTile(4, 2),
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
+                tilePathV,
+                PickFlaxTile(7, 5),
+                tilePathV,
+                PickFlaxTile(8, 2),
+                tilePathV,
+                PickFlaxTile(8, 5),
+                tilePathV,
+                tileTallFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceV,
+                tilePathN2E,
+                tilePathH,
+                tilePathH2N,
+                tilePathH,
+                tilePathH2N,
+                tilePathH,
+                tilePathH2N,
+                tilePathH,
+                tilePathCross,
+                tilePathCross,
+                tilePathH,
+                tilePathH2N,
+                tilePathH,
+                tilePathH2N,
+                tilePathH,
+                tilePathH2N,
+                tilePathH,
+                tilePathN2W,
+                tileTallFenceV,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileTallFenceSW,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceEndE,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
+                tileTallFenceSW,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceH,
+                tileTallFenceSE,
+                tileLawn,
+                tileLawn,
+            ],
+            [
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawnLog,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tileLawn,
+                tilePathV,
+                tilePathV,
+                tileLawn,
                 tileLawn,
                 tileLawn,
                 tileLawn,
@@ -5211,21 +5857,12 @@ function RedrawFarm() {
                 tileAutograph,
             ],
         );
-
-        if (player.hasMansion) {
-            arrayFarmGraph[44][12] = tilePathV;
-
-            arrayFarmGraph[45][22] = tilePathV;
-
-            arrayFarmGraph[48][22] = tilePathV;
-        }
     }
 
     TileRenderer(arrayFarmGraph, canvasFarmContext);
 
-    if (player.hasMansion) {
-        canvasFarmContext.drawImage(mansionImage, 0, 0, 256, 128, 79, 52, 256, 128);
-    }
+    if (player.hasMansion) { canvasFarmContext.drawImage(mansionImage, 0, 0, 256, 128, 79, 52, 256, 128); }
+    if (player.hasApiary) { canvasFarmContext.drawImage(beesImage, 0, 0, 256, 128, 79, 52, 256, 128); }
 }
 
 
@@ -6575,6 +7212,12 @@ function RedrawVillage() {
     if (villageImageAnimationLayerF.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerF, 0, 0, 384, 224, 0, 0, 384, 224); }
     if (villageImageAnimationLayerG.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerG, 0, 0, 384, 224, 0, 0, 384, 224); }
     if (villageImageAnimationLayerH.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerH, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerI.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerI, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerJ.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerJ, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerK.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerK, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerL.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerL, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerM.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerM, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerN.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerN, 0, 0, 384, 224, 0, 0, 384, 224); }
     if (villageStage > 25) { canvasVillageContext.drawImage(villageTheaterOverlay, 0, 0, 384, 224, 0, 0, 384, 224); }
 }
 
@@ -6905,6 +7548,7 @@ function RedrawCanvases() {
                 villageAnimationFrameE++;
                 villageAnimationFrameF++;
                 villageAnimationFrameH++;
+                villageAnimationFrameI++;
             }
             villageAnimationFrameG++;
 
@@ -7010,12 +7654,10 @@ function RedrawCanvases() {
 
 
             if (player.hasMonument) {
-                if (villageAnimationFrameG > 111) { villageAnimationFrameG = 1; }
                 villageImageAnimationLayerG.src = 'bitmaps/village100_af' + villageAnimationFrameG + '.png';
                 if (villageAnimationFrameG > 22) { villageImageAnimationLayerG.src = 'bitmaps/blank.png'; }
             }
             else {
-                villageAnimationFrameG = 1;
                 villageImageAnimationLayerG.src = 'bitmaps/blank.png';
             }
 
@@ -7028,6 +7670,70 @@ function RedrawCanvases() {
             else {
                 villageAnimationFrameH = 1;
                 villageImageAnimationLayerH.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage > 12 && villageStage < 25) {
+                if (villageAnimationFrameI > 20) { villageAnimationFrameI = 1; }
+                villageImageAnimationLayerI.src = 'bitmaps/village13_af' + villageAnimationFrameI + '.png';
+                if (villageAnimationFrameI > 3) { villageImageAnimationLayerI.src = 'bitmaps/blank.png'; }
+            }
+            else {
+                villageAnimationFrameI = 1;
+                villageImageAnimationLayerI.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage > 14) {
+                if (villageAnimationFrameG > 111) { villageAnimationFrameG = 1; }
+                villageImageAnimationLayerJ.src = 'bitmaps/village15_af' + villageAnimationFrameG + '.png';
+                if (villageAnimationFrameG > 15) { villageImageAnimationLayerJ.src = 'bitmaps/blank.png'; }
+            }
+            else {
+                villageAnimationFrameG = 1;
+                villageImageAnimationLayerJ.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage > 27) {
+                villageImageAnimationLayerK.src = 'bitmaps/village28_af' + villageAnimationFrameG + '.png';
+                if (villageAnimationFrameG > 18) { villageImageAnimationLayerK.src = 'bitmaps/blank.png'; }
+            }
+            else {
+                villageImageAnimationLayerK.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage > 22) {
+                villageImageAnimationLayerL.src = 'bitmaps/village23_af' + villageAnimationFrameG + '.png';
+                if (villageAnimationFrameG > 10) { villageImageAnimationLayerL.src = 'bitmaps/blank.png'; }
+            }
+            else {
+                villageImageAnimationLayerL.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage > 19) {
+                villageImageAnimationLayerM.src = 'bitmaps/village20_af' + villageAnimationFrameG + '.png';
+                if (villageAnimationFrameG > 13) { villageImageAnimationLayerM.src = 'bitmaps/blank.png'; }
+            }
+            else {
+                villageImageAnimationLayerM.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage > 28) {
+                villageImageAnimationLayerN.src = 'bitmaps/village29_af' + villageAnimationFrameG + '.png';
+                if (villageAnimationFrameG > 21) { villageImageAnimationLayerN.src = 'bitmaps/blank.png'; }
+            }
+            else {
+                villageImageAnimationLayerN.src = 'bitmaps/blank.png';
             }
         }
         else if (player.isAt == 'Residence') {
@@ -7056,7 +7762,7 @@ function RedrawCanvases() {
                 if (residenceAnimationFrame > 4) { residenceAnimationFrame = 1; }
                 residenceImage.src = 'bitmaps/res07_af' + residenceAnimationFrame + '.png';
             }
-            else if (residenceStage == 14) {
+            else if (residenceStage > 13) {
                 if (residenceAnimationFrame > 13) { residenceAnimationFrame = 1; }
                 residenceImage.src = 'bitmaps/res08_af' + residenceAnimationFrame + '.png';
             }
@@ -7088,6 +7794,7 @@ function DisplayStaticImages() {
     imgWorkshopPress.src = 'bitmaps/res_press.png';
     imgWorkshopGreenhouse.src = 'bitmaps/res_greenhouse.png';
     imgWorkshopAtelier.src = 'bitmaps/res_atelier.png';
+    imgWorkshopApiary.src = 'bitmaps/res_apiary.png';
 }
 
 
@@ -7102,6 +7809,7 @@ function DisplayAnimatedImages() {
     imgWorkshopPress.src = 'bitmaps/res_press.gif';
     imgWorkshopGreenhouse.src = 'bitmaps/res_greenhouse.gif';
     imgWorkshopAtelier.src = 'bitmaps/res_atelier.gif';
+    imgWorkshopApiary.src = 'bitmaps/res_apiary.gif';
 }
 
 

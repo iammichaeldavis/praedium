@@ -347,7 +347,7 @@ button:active {
 #buttonPriorityColon,
 #buttonPriorityOption {
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
 }
 
 #buttonTillDecal {
@@ -1007,21 +1007,21 @@ input {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
 }
 
 #divStonesSeason {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
 }
 
 #divEmbossZodiacChinese {
     width: calc(32px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
 }
 
 #divHourglass {
@@ -1029,35 +1029,35 @@ input {
     height: calc(16px * var(--pixel-scale));
     margin: 0 calc(6px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
 }
 
 #divEmbossSeason {
     width: calc(32px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
 }
 
 #divStonesWeek {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
 }
 
 #divRuneMonth {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
 }
 
 #divRuneElement {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
 }
 
 
@@ -1428,7 +1428,7 @@ td {
 .workshopHarvestMetalDecal,
 .workshopHarvestDigDecal {
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     margin-right: calc(2px * var(--pixel-scale));
@@ -1505,7 +1505,7 @@ td {
     display: block;
     background: var(--tilemap);
     background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1) calc(var(--j) * var(--pixel-scale) * 16px * -1);
-    background-size: calc(512px * var(--pixel-scale)) calc(256px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
 }
 
 .inlineIcon {
@@ -1522,6 +1522,11 @@ td {
 .Barley {
     --i: 1;
     --j: 12;
+}
+
+.Flax {
+    --i: 1;
+    --j: 16;
 }
 
 .Olive {
@@ -1753,6 +1758,21 @@ td {
 .Gems {
     --i: 23;
     --j: 7;
+}
+
+.Comb {
+    --i: 0;
+    --j: 16;
+}
+
+.Raisins {
+    --i: 31;
+    --j: 16;
+}
+
+.RaisinsLoose {
+    --i: 30;
+    --j: 16;
 }
 
 
@@ -2168,6 +2188,7 @@ td {
 #divWorkshopPress,
 #divWorkshopGreenhouse,
 #divWorkshopAtelier,
+#divWorkshopApiary,
 #buttonGoToResidence,
 #divViewTownship,
 #buttonGoToTownship,

@@ -115,7 +115,9 @@ document.body.onkeyup = function (e) {
             ZeroArray(mountainPurchasedCount);
             ZeroArray(mountainSoldCount);
             ZeroArray(residenceIngredientInStockCount);
+            residenceIngredientInStockCount[9] = [0, 0,];
             ZeroArray(residenceIngredientConsumedCount);
+            residenceIngredientConsumedCount[9] = [0, 0,];
             ZeroArray(residenceInStockCount);
             ZeroArray(residenceProducedCount);
             ZeroArray(residenceSpentCount);
@@ -170,7 +172,8 @@ document.body.onkeyup = function (e) {
             else if (player.canBuyLand) { BuyLand(); }
             else if (player.canFound) { Found(); }
             else if (player.canBuild) { Build(); }
-            else if (player.canBuyNewFarm) { BuyNewFarm(); }
+            else if (player.canBuyNewFarm && !player.hasNewFarm) { BuyNewFarm(); }
+            //flax farm
             else if (player.hasFoundCopperEvidence && !player.hasFoundMine) { MountainEvents(); }
             else if (player.hasFoundMine && !player.canMine) { MountainEvents(); }
             else if (player.canMine && !player.canSmelt) { MountainEvents(); }
@@ -364,6 +367,7 @@ document.body.onkeyup = function (e) {
                 bushelCount[4] = amount;
                 bushelCount[5] = amount;
                 bushelCount[6] = amount;
+                bushelCount[7] = amount;
                 logsCount = amount;
                 boardsCount = amount;
                 stoneCount = amount;
@@ -397,6 +401,7 @@ document.body.onkeyup = function (e) {
                 bushelCount[4] -= amount;
                 bushelCount[5] -= amount;
                 bushelCount[6] -= amount;
+                bushelCount[7] -= amount;
                 logsCount -= amount;
                 boardsCount -= amount;
                 stoneCount -= amount;
@@ -430,6 +435,7 @@ document.body.onkeyup = function (e) {
                 bushelCount[4] += amount;
                 bushelCount[5] += amount;
                 bushelCount[6] += amount;
+                bushelCount[7] += amount;
                 logsCount += amount;
                 boardsCount += amount;
                 stoneCount += amount;
@@ -518,11 +524,22 @@ function PlotTill(robota = false) {
 
     let taskComplete = false;
 
-    let plotSearchResult = FindPlot(0, 'all');
-    if (plotSearchResult.row != -1) {
-        arrayFarmPlots[plotSearchResult.row][plotSearchResult.col] = 1;
-        taskComplete = true;
-        if (!robota) { UpdateDisplay(); }
+    if (player.hasFlaxFarm) {
+        let plotSearchResult = FindPlot(0, 'flax');
+        if (plotSearchResult.row != -1) {
+            arrayFlaxPlots[plotSearchResult.row][plotSearchResult.col] = 1;
+            taskComplete = true;
+            if (!robota) { UpdateDisplay(); }
+        }
+    }
+
+    if (!taskComplete) {
+        let plotSearchResult = FindPlot(0, 'cereals');
+        if (plotSearchResult.row != -1) {
+            arrayFarmPlots[plotSearchResult.row][plotSearchResult.col] = 1;
+            taskComplete = true;
+            if (!robota) { UpdateDisplay(); }
+        }
     }
 
     return taskComplete;
@@ -536,8 +553,21 @@ function PlotPlant(robota = false) {
     let taskComplete = false;
     let foundRow = '';
     let foundCol = '';
+    let targetArray = arrayFarmPlots;
 
-    if (bushelCount[0] >= plantCost) {
+    if (bushelCount[7] >= plantCost && player.hasFlaxFarm) {
+        let plotSearchResult = FindPlot(1, 'flax');
+        if (plotSearchResult.row != -1) {
+            taskComplete = true;
+            foundRow = plotSearchResult.row;
+            foundCol = plotSearchResult.col;
+            targetArray = arrayFlaxPlots;
+            bushelCount[7] -= plantCost;
+            seededCount[2] += plantCost;
+        }
+    }
+
+    if (bushelCount[0] >= plantCost && !taskComplete) {
         let plotSearchResult = FindPlot(1, 'wheat');
         if (plotSearchResult.row != -1) {
             taskComplete = true;
@@ -560,7 +590,7 @@ function PlotPlant(robota = false) {
     }
 
     if (taskComplete) {
-        arrayFarmPlots[foundRow][foundCol] = 2;
+        targetArray[foundRow][foundCol] = 2;
         if (!robota) { UpdateDisplay(); }
     }
 
@@ -574,11 +604,22 @@ function PlotWater(robota = false) {
 
     let taskComplete = false;
 
-    let plotSearchResult = FindPlot(2, 'all');
-    if (plotSearchResult.row != -1) {
-        arrayFarmPlots[plotSearchResult.row][plotSearchResult.col] = 3;
-        taskComplete = true;
-        if (!robota) { UpdateDisplay(); }
+    if (player.hasFlaxFarm) {
+        let plotSearchResult = FindPlot(2, 'flax');
+        if (plotSearchResult.row != -1) {
+            arrayFlaxPlots[plotSearchResult.row][plotSearchResult.col] = 3;
+            taskComplete = true;
+            if (!robota) { UpdateDisplay(); }
+        }
+    }
+
+    if (!taskComplete) {
+        let plotSearchResult = FindPlot(2, 'cereals');
+        if (plotSearchResult.row != -1) {
+            arrayFarmPlots[plotSearchResult.row][plotSearchResult.col] = 3;
+            taskComplete = true;
+            if (!robota) { UpdateDisplay(); }
+        }
     }
 
     return taskComplete;
@@ -595,10 +636,17 @@ function PlotHarvest(robota = false) {
         let bounty = FindWholeRandom(grapesMin, grapesMax);
         harvestedCount[6] += bounty;
         if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+        const originalBounty = bounty;
         if (player.hasWinery) {
             const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[3]);
             residenceIngredientInStockCount[3] += workshopShare;
             residenceIngredientConsumedCount[3] += workshopShare;
+            bounty = bounty - workshopShare;
+        }
+        if (player.hasRaisins) {
+            const workshopShare = Math.floor(originalBounty * residenceIngredientWorkshopPortion[10]);
+            residenceIngredientInStockCount[10] += workshopShare;
+            residenceIngredientConsumedCount[10] += workshopShare;
             bounty = bounty - workshopShare;
         }
         if (bushelCount[6] + bounty > bushelMax[6]) { bounty = bushelMax[6] - bushelCount[6]; }
@@ -679,8 +727,22 @@ function PlotHarvest(robota = false) {
         taskComplete = true;
     }
 
+    if (!taskComplete && player.hasFlaxFarm) {
+        let plotSearchResult = FindPlot(14, 'flax');
+        if (plotSearchResult.row != -1) {
+            arrayFlaxPlots[plotSearchResult.row][plotSearchResult.col] = 0;
+            let bounty = FindWholeRandom(yieldMin, yieldMax) * flaxFactor;
+            harvestedCount[7] += bounty;
+            if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+            if ((bushelCount[7] + bounty) > bushelMax[7]) { bounty = bushelMax[7] - bushelCount[7]; }
+            bushelCount[7] += bounty;
+            farmedCount[7] += 1;
+            taskComplete = true;
+        }
+    }
+
     if (!taskComplete) {
-        let plotSearchResult = FindPlot(14, 'all');
+        let plotSearchResult = FindPlot(14, 'cereals');
         if (plotSearchResult.row != -1) {
 
             arrayFarmPlots[plotSearchResult.row][plotSearchResult.col] = 0;
@@ -694,7 +756,7 @@ function PlotHarvest(robota = false) {
                     residenceIngredientConsumedCount[2] += workshopShare;
                     bounty = bounty - workshopShare;
                 }
-                if (bushelCount[1] + bounty > bushelMax[1]) { bounty = bushelMax[1] - bushelCount[1]; }
+                if ((bushelCount[1] + bounty) > bushelMax[1]) { bounty = bushelMax[1] - bushelCount[1]; }
                 bushelCount[1] += bounty;
                 farmedCount[1] += 1;
             }
@@ -707,7 +769,7 @@ function PlotHarvest(robota = false) {
                     residenceIngredientConsumedCount[0] += workshopShare;
                     bounty = bounty - workshopShare;
                 }
-                if (bushelCount[0] + bounty > bushelMax[0]) { bounty = bushelMax[0] - bushelCount[0]; }
+                if ((bushelCount[0] + bounty) > bushelMax[0]) { bounty = bushelMax[0] - bushelCount[0]; }
                 bushelCount[0] += bounty;
                 farmedCount[0] += 1;
             }
@@ -1241,16 +1303,26 @@ function Found() {
 
 
 function BuyNewFarm() {
-    if (asCount >= priceNewFarm) {
+    if (asCount >= priceNewFarm && !player.hasNewFarm) {
         if (player.likesStory) { GameEvent(displayStoryNewFarm); }
         asCount -= priceNewFarm;
         asSpent += priceNewFarm;
         commercialLifetimeSpend += priceNewFarm;
-        player.canBuyNewFarm = false;
         player.hasNewFarm = true;
         farmSize[1] = 15;
         handsHired += 28;
         handsMax += 28;
+        UpdateDisplay();
+    }
+    else if (asCount >= priceFlaxFarm) {
+        if (player.likesStory) { GameEvent(displayStoryFlaxFarm); }
+        asCount -= priceFlaxFarm;
+        asSpent += priceFlaxFarm;
+        commercialLifetimeSpend += priceFlaxFarm;
+        player.canBuyNewFarm = false;
+        player.hasFlaxFarm = true;
+        handsHired += 16;
+        handsMax += 16;
         UpdateDisplay();
     }
 }
@@ -1471,6 +1543,18 @@ function ImproveResidence() {
         residenceImage.src = 'bitmaps/res08.png';
         residenceStage += 1;
         player.hasMansion = true;
+    }
+    else if (residenceStage == 14 && asCount >= priceResidence14[0]) {
+        if (player.likesStory) { GameEvent(displayStoryResidence14); }
+        asCount -= priceResidence14[0];
+        asSpent += priceResidence14[0];
+        commercialLifetimeSpend += priceResidence14[0];
+        residenceStage += 1;
+        player.hasApiary = true;
+    }
+    else if (residenceStage == 15) {
+        if (player.likesStory) { GameEvent(displayStoryResidence15); }
+        player.hasRaisins = true;
     }
     UpdateDisplay();
 }
@@ -2010,6 +2094,9 @@ function Build() {
         residenceIngredientsIn[5] = 2;
         residenceIngredientsIn[6] = 4;
         residenceProductOut[7] = 6;
+        residenceIngredientsIn[8] = 80;
+        residenceIngredientsIn[9] = 4;
+        residenceIngredientsIn[10] = 4;
     }
     else if (villageStage == 21 && asCount >= priceBuild21[0] && stoneCount >= priceBuild21[1] && ingotsCopperCount >= priceBuild21[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage21); }

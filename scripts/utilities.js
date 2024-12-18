@@ -107,6 +107,7 @@ function ContinuePreviousGame() {
         player.hasMildewed = loadedReport.hero.hasMildewed;
         player.hasSeenResidence = loadedReport.hero.hasSeenResidence;
         player.hasNewFarm = loadedReport.hero.hasNewFarm;
+        player.hasFlaxFarm = loadedReport.hero.hasFlaxFarm;
         player.hasBank = loadedReport.hero.hasBank;
         player.hasBakery = loadedReport.hero.hasBakery;
         player.hasOliveMill = loadedReport.hero.hasOliveMill;
@@ -117,6 +118,8 @@ function ContinuePreviousGame() {
         player.hasGreenhouse = loadedReport.hero.hasGreenhouse;
         player.hasAtelier = loadedReport.hero.hasAtelier;
         player.hasMansion = loadedReport.hero.hasMansion;
+        player.hasApiary = loadedReport.hero.hasApiary;
+        player.hasRaisins = loadedReport.hero.hasRaisins;
         player.hasArmy = loadedReport.hero.hasArmy;
         player.hasGraveyard = loadedReport.hero.hasGraveyard;
         player.hasHospital = loadedReport.hero.hasHospital;
@@ -319,6 +322,15 @@ function ContinuePreviousGame() {
         CloneArray(loadedReport.farmland.grain[12], arrayFarmPlots[12]);
         CloneArray(loadedReport.farmland.grain[13], arrayFarmPlots[13]);
         CloneArray(loadedReport.farmland.grain[14], arrayFarmPlots[14]);
+        CloneArray(loadedReport.farmland.linseed[0], arrayFlaxPlots[0]);
+        CloneArray(loadedReport.farmland.linseed[1], arrayFlaxPlots[1]);
+        CloneArray(loadedReport.farmland.linseed[2], arrayFlaxPlots[2]);
+        CloneArray(loadedReport.farmland.linseed[3], arrayFlaxPlots[3]);
+        CloneArray(loadedReport.farmland.linseed[4], arrayFlaxPlots[4]);
+        CloneArray(loadedReport.farmland.linseed[5], arrayFlaxPlots[5]);
+        CloneArray(loadedReport.farmland.linseed[6], arrayFlaxPlots[6]);
+        CloneArray(loadedReport.farmland.linseed[7], arrayFlaxPlots[7]);
+        CloneArray(loadedReport.farmland.linseed[8], arrayFlaxPlots[8]);
         CloneArray(loadedReport.farmland.olives, arrayOlivar);
         CloneArray(loadedReport.farmland.dates, arrayDatePalmGrove);
         CloneArray(loadedReport.farmland.figs, arrayFigOrchard);
@@ -438,6 +450,7 @@ function CollateGameStateReport(loud = false) {
     };
     const farmlandArrays = {
         grain: arrayFarmPlots,
+        linseed: arrayFlaxPlots,
         olives: arrayOlivar,
         dates: arrayDatePalmGrove,
         figs: arrayFigOrchard,
@@ -550,6 +563,23 @@ function FindPlot(typeSought, crop) {
     let row = -1;
     let col = -1;
     let rowCount = farmSize[1];
+
+    if (crop == 'flax') {
+        rowCount = flaxSize[1];
+        for (let i = 0; i < rowCount; i++) {
+            cell[0] += 1;
+            cell[1] = -1;
+            for (let i = 0; i < flaxSize[0]; i++) {
+                cell[1] += 1;
+                if (arrayFlaxPlots[cell[0]][cell[1]] == typeSought) {
+                    row = cell[0];
+                    col = cell[1];
+                    return { row, col };
+                }
+            }
+        }
+        return { row, col };
+    }
 
     if (crop == 'barley') {
         if (rowCount > 6) {

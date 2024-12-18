@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.10.4';
+const version = '1.11.0';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -26,6 +26,18 @@ const arrayDatePalmGrove = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const arrayFigOrchard = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const arrayPomOrchard = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const arrayVineyard = [0, 0, 0, 0, 0, 0, 0, 0,];
+
+const arrayFlaxPlots = [
+    [3, 4, 5, 6, 7, 8,],
+    [9, 10, 11, 12, 13, 14,],
+    [3, 4, 5, 6, 7, 8,],
+    [9, 10, 11, 12, 13, 14,],
+    [3, 4, 5, 6, 7, 8,],
+    [9, 10, 11, 12, 13, 14,],
+    [3, 4, 5, 6, 7, 8,],
+    [9, 10, 11, 12, 13, 14,],
+    [3, 4, 5, 6, 7, 8,],
+];
 
 const player = {
     names: ['Mud',],
@@ -102,6 +114,7 @@ const player = {
     hasMildewed: false,
     hasSeenResidence: false,
     hasNewFarm: false,
+    hasFlaxFarm: false,
     hasBank: false,
     hasBakery: false,
     hasOliveMill: false,
@@ -112,6 +125,8 @@ const player = {
     hasGreenhouse: false,
     hasAtelier: false,
     hasMansion: false,
+    hasApiary: false,
+    hasRaisins: false,
     hasArmy: false,
     hasGraveyard: false,
     hasHospital: false,
@@ -159,6 +174,18 @@ const villageImageAnimationLayerG = new Image();
 villageImageAnimationLayerG.src = 'bitmaps/blank.png';
 const villageImageAnimationLayerH = new Image();
 villageImageAnimationLayerH.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerI = new Image();
+villageImageAnimationLayerI.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerJ = new Image();
+villageImageAnimationLayerJ.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerK = new Image();
+villageImageAnimationLayerK.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerL = new Image();
+villageImageAnimationLayerL.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerM = new Image();
+villageImageAnimationLayerM.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerN = new Image();
+villageImageAnimationLayerN.src = 'bitmaps/blank.png';
 const villageTheaterOverlay = new Image();
 villageTheaterOverlay.src = 'bitmaps/theater.png';
 const portImage = new Image();
@@ -167,6 +194,8 @@ const portGullImage = new Image();
 portGullImage.src = 'bitmaps/port_gull1.png';
 const mansionImage = new Image();
 mansionImage.src = 'bitmaps/mansion.png';
+const beesImage = new Image();
+beesImage.src = 'bitmaps/mansion_abejas.png';
 
 const divGameWindow = document.getElementById('divGameWindow');
 
@@ -256,6 +285,9 @@ const tableWorkshopGreenhouse = document.getElementById('tableWorkshopGreenhouse
 const divWorkshopAtelier = document.getElementById('divWorkshopAtelier');
 const imgWorkshopAtelier = document.getElementById('imgWorkshopAtelier');
 const tableWorkshopAtelier = document.getElementById('tableWorkshopAtelier');
+const divWorkshopApiary = document.getElementById('divWorkshopApiary');
+const imgWorkshopApiary = document.getElementById('imgWorkshopApiary');
+const tableWorkshopApiary = document.getElementById('tableWorkshopApiary');
 
 const divViewPraedium = document.getElementById('divViewPraedium');
 const buttonGoToResidence = document.getElementById('buttonGoToResidence');
@@ -378,21 +410,22 @@ const yearAtStartRoman = 554; // according to https://en.wikipedia.org/wiki/Ab_u
 let year = 1;
 let week = 1;
 
-// 0. Wheat 🌾, 1. Barley 🌾, 2. Olive 🫒, 3. Date 🫐, 4. Fig 🍅, 5. Pomegranate 🍎, 6. Grape 🍇
-const bushelCount = [10, 0, 0, 0, 0, 0, 0,];
-const bushelMax = [30, 3000000, 300, 30000, 30000, 30000, 30000,];
-const seededCount = [0, 0,];
-const farmedCount = [0, 0, 0, 0, 0, 0, 0,];
-const harvestedCount = [0, 0, 0, 0, 0, 0, 0,];
-const spentCount = [0, 0, 0, 0, 0, 0, 0,];
-const purchasedCount = [0, 0, 0, 0, 0, 0, 0,];
-const soldCount = [0, 0, 0, 0, 0, 0, 0,];
+// 0. Wheat 🌾, 1. Barley 🌾, 2. Olive 🫒, 3. Date 🫐, 4. Fig 🍅, 5. Pomegranate 🍎, 6. Grape 🍇, 7. Flax 🌾
+const bushelCount = [10, 0, 0, 0, 0, 0, 0, 0,];
+const bushelMax = [30, 3000000, 300, 30000, 30000, 30000, 30000, 3000000,];
+const seededCount = [0, 0, 0,];
+const farmedCount = [0, 0, 0, 0, 0, 0, 0, 0,];
+const harvestedCount = [0, 0, 0, 0, 0, 0, 0, 0,];
+const spentCount = [0, 0, 0, 0, 0, 0, 0, 0,];
+const purchasedCount = [0, 0, 0, 0, 0, 0, 0, 0,];
+const soldCount = [0, 0, 0, 0, 0, 0, 0, 0,];
 const barterMaxBulkCount = 1000;
 const barterExchangeRate = [1, 1, 10, 14, 18, 24, 32,];
 
 let plantCost = 1;
 let yieldMin = 4;
 let yieldMax = 12;
+let flaxFactor = 2;
 let olivesGrowthCounter = 0;
 let olivesMin = 12;
 let olivesMax = 18;
@@ -406,6 +439,7 @@ let grapesMin = 40;
 let grapesMax = 54;
 
 const farmSize = [1, 1,];
+const flaxSize = [6, 9,];
 let farmStage = 0;
 let warehouseStage = 0;
 const olivePlantDate = [0, 0,];
@@ -481,16 +515,16 @@ const starvingBuffer = 10;
 let residenceStage = 0;
 let loavesPaymentAmount = 14;
 
-// 0. Loaves 🥖, 1. Oil 🪔, 2. Beer 🍺, 3. Wine 🍷, 4. Syrup 🍯, 5. Juice 🧃, 6. Fruit Leather (Sun-Dried Fig) 🫐, 7. Trinkets 💍, 8. Gems 💎
-const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.8];
-const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1, 100,];
-const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5, 1,];
-const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceProducedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceSpentCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceShippedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
+// 0. Loaves 🥖, 1. Oil 🪔, 2. Beer 🍺, 3. Wine 🍷, 4. Syrup 🍯, 5. Juice 🧃, 6. Fruit Leather (Sun-Dried Fig) 🫐, 7. Trinkets 💍, 8. Gems 💎, 9. Honey 🍯, 10. Raisins 🍇
+const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.8, 0.5, 0.2,];
+const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1, 100, 5, 5,];
+const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1,];
+const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0,];
+const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0,];
+const residenceInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const residenceProducedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const residenceSpentCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const residenceShippedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 
 const nameVillage = 'Alʿard al-Janubiyah'; // الأرض الجنوبية == Terra Australis. HBD, Grant! 🎂🫂
 const estDate = [0, 0,];
@@ -582,12 +616,12 @@ const importCost = [8000,];
 const importAmount = [40,];
 let trinketValue = null;
 function CalculatePortValues() {
-    wheatValuePerUnit[0] = barterExchangeRate[2] * (residenceIngredientsIn[1] / residenceProductOut[1]);//oil
-    wheatValuePerUnit[1] = barterExchangeRate[1] * (residenceIngredientsIn[2] / residenceProductOut[2]);//beer
-    wheatValuePerUnit[2] = barterExchangeRate[6] * (residenceIngredientsIn[3] / residenceProductOut[3]);//wine
-    wheatValuePerUnit[3] = barterExchangeRate[3] * (residenceIngredientsIn[4] / residenceProductOut[4]);//syrup
-    wheatValuePerUnit[4] = barterExchangeRate[5] * (residenceIngredientsIn[5] / residenceProductOut[5]);//juice
-    wheatValuePerUnit[5] = barterExchangeRate[4] * (residenceIngredientsIn[6] / residenceProductOut[6]);//figs
+    wheatValuePerUnit[0] = barterExchangeRate[2] * (residenceIngredientsIn[1] / residenceProductOut[1]); // Oil
+    wheatValuePerUnit[1] = barterExchangeRate[1] * (residenceIngredientsIn[2] / residenceProductOut[2]); // Beer
+    wheatValuePerUnit[2] = barterExchangeRate[6] * (residenceIngredientsIn[3] / residenceProductOut[3]); // Wine
+    wheatValuePerUnit[3] = barterExchangeRate[3] * (residenceIngredientsIn[4] / residenceProductOut[4]); // Syrup
+    wheatValuePerUnit[4] = barterExchangeRate[5] * (residenceIngredientsIn[5] / residenceProductOut[5]); // Juice
+    wheatValuePerUnit[5] = barterExchangeRate[4] * (residenceIngredientsIn[6] / residenceProductOut[6]); // Figs
     trinketValue = ((importCost[0] / importAmount[0]) / residenceProductOut[7]) * valueFactor[6];
 }
 CalculatePortValues();
@@ -616,6 +650,7 @@ const priceStage16 = [100, 100,];
 const priceStage17 = [4200, 48000,];
 const priceStage18 = [6400, 3200,];
 const priceNewFarm = 1000000;
+const priceFlaxFarm = 5000000;
 
 const priceWarehouse0 = 20;
 const priceWarehouse1 = 50;
@@ -635,6 +670,7 @@ const priceResidence10 = [168, 84, 42, 21,]; // Greenhouse 🫐
 const priceResidence11 = [336, 168, 84, 42,]; // Stone House 🏠
 const priceResidence12 = [336, 168, 84, 42,]; // Atelier 💎
 const priceResidence13 = [2500000, 12000, 16000, 500, 2000, 100,]; // Mansion 🏡
+const priceResidence14 = [1000000,]; // Apiary 🐝
 
 const priceVillage = 64000;
 const priceBuildNEG5 = 500; // Survey
@@ -732,6 +768,7 @@ let villageAnimationFrameE = 1;
 let villageAnimationFrameF = 1;
 let villageAnimationFrameG = 1;
 let villageAnimationFrameH = 1;
+let villageAnimationFrameI = 1;
 let villageAnimationToggle = false;
 let animationCycleFrame = 0;
 

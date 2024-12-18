@@ -19,7 +19,18 @@ function GameTurn() {
         cell[1] = -1;
         for (let i = 0; i < farmSize[0]; i++) {
             cell[1]++;
-            AdvanceTime(cell);
+            AdvanceTime(arrayFarmPlots, cell);
+        }
+    }
+    if (player.hasFlaxFarm) {
+        cell = [-1, -1];
+        for (let i = 0; i < flaxSize[1]; i++) {
+            cell[0]++;
+            cell[1] = -1;
+            for (let i = 0; i < flaxSize[0]; i++) {
+                cell[1]++;
+                AdvanceTime(arrayFlaxPlots, cell);
+            }
         }
     }
 
@@ -158,9 +169,9 @@ function GameTurn() {
 
 
 
-function AdvanceTime(cell) {
-    if (arrayFarmPlots[cell[0]][cell[1]] == 3 || arrayFarmPlots[cell[0]][cell[1]] == 4 || arrayFarmPlots[cell[0]][cell[1]] == 5 || arrayFarmPlots[cell[0]][cell[1]] == 6 || arrayFarmPlots[cell[0]][cell[1]] == 7 || arrayFarmPlots[cell[0]][cell[1]] == 8 || arrayFarmPlots[cell[0]][cell[1]] == 9 || arrayFarmPlots[cell[0]][cell[1]] == 10 || arrayFarmPlots[cell[0]][cell[1]] == 11 || arrayFarmPlots[cell[0]][cell[1]] == 12 || arrayFarmPlots[cell[0]][cell[1]] == 13) {
-        arrayFarmPlots[cell[0]][cell[1]]++;
+function AdvanceTime(target, cell) {
+    if (target[cell[0]][cell[1]] == 3 || target[cell[0]][cell[1]] == 4 || target[cell[0]][cell[1]] == 5 || target[cell[0]][cell[1]] == 6 || target[cell[0]][cell[1]] == 7 || target[cell[0]][cell[1]] == 8 || target[cell[0]][cell[1]] == 9 || target[cell[0]][cell[1]] == 10 || target[cell[0]][cell[1]] == 11 || target[cell[0]][cell[1]] == 12 || target[cell[0]][cell[1]] == 13) {
+        target[cell[0]][cell[1]]++;
     }
 }
 
@@ -222,6 +233,7 @@ function FruitGrapes() {
 
 
 function WorkshopProduction() {
+    let bloop = false;
     Render(0);
     Render(1);
     Render(2);
@@ -231,12 +243,35 @@ function WorkshopProduction() {
     Render(6);
     Render(7);
     Render(8);
+    Render9();
+    Render(10);
 
     function Render(ingredient) {
         while (residenceIngredientInStockCount[ingredient] >= residenceIngredientsIn[ingredient]) {
             residenceIngredientInStockCount[ingredient] -= residenceIngredientsIn[ingredient];
-            residenceInStockCount[ingredient] += residenceProductOut[ingredient];
+            bloop = !bloop;
+            if (ingredient == 4 && player.hasApiary && bloop) {
+                residenceIngredientInStockCount[9][0]++;
+                residenceIngredientConsumedCount[9][0]++;
+                residenceSpentCount[4]++;
+            }
+            else if (ingredient == 5 && player.hasApiary && bloop) {
+                residenceIngredientInStockCount[9][1]++;
+                residenceIngredientConsumedCount[9][1]++;
+                residenceSpentCount[5]++;
+            }
+            else { residenceInStockCount[ingredient] += residenceProductOut[ingredient]; }
             residenceProducedCount[ingredient] += residenceProductOut[ingredient];
+        }
+    }
+
+    function Render9() {
+        while ((residenceIngredientInStockCount[9][0] >= residenceIngredientsIn[9]) && (residenceIngredientInStockCount[9][1] >= residenceIngredientsIn[9])) {
+            residenceIngredientInStockCount[9][0] -= residenceIngredientsIn[9];
+            residenceIngredientInStockCount[9][1] -= residenceIngredientsIn[9];
+
+            residenceInStockCount[9] += residenceProductOut[9];
+            residenceProducedCount[9] += residenceProductOut[9];
         }
     }
 }
