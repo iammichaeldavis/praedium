@@ -100,6 +100,7 @@ function ContinuePreviousGame() {
         player.canExportTrinkets = loadedReport.hero.canExportTrinkets;
         player.canImport = loadedReport.hero.canImport;
         player.canImportTin = loadedReport.hero.canImportTin;
+        player.canImportSalt = loadedReport.hero.canImportSalt;
         player.canHireBronzeworkers = loadedReport.hero.canHireBronzeworkers;
         player.canWin = loadedReport.hero.canWin;
 
@@ -119,7 +120,11 @@ function ContinuePreviousGame() {
         player.hasAtelier = loadedReport.hero.hasAtelier;
         player.hasMansion = loadedReport.hero.hasMansion;
         player.hasApiary = loadedReport.hero.hasApiary;
+        player.hasCottage = loadedReport.hero.hasCottage;
         player.hasRaisins = loadedReport.hero.hasRaisins;
+        player.hasHardtack = loadedReport.hero.hasHardtack;
+        player.hasRations = loadedReport.hero.hasRations;
+        player.hasBandages = loadedReport.hero.hasBandages;
         player.hasArmy = loadedReport.hero.hasArmy;
         player.hasGraveyard = loadedReport.hero.hasGraveyard;
         player.hasHospital = loadedReport.hero.hasHospital;
@@ -239,7 +244,9 @@ function ContinuePreviousGame() {
         CloneArray(loadedReport.counts.residenceOutputInventory, residenceInStockCount);
         CloneArray(loadedReport.counts.residenceOutputProduced, residenceProducedCount);
         CloneArray(loadedReport.counts.residenceOutputSpent, residenceSpentCount);
+        saltSpent = loadedReport.counts.residenceSaltSpent;
         CloneArray(loadedReport.counts.residenceOutputShipped, residenceShippedCount);
+        saltShipped = loadedReport.counts.residenceSaltShipped;
 
         residentsCount = loadedReport.counts.villageDemographics[0];
         residentsMax = loadedReport.counts.villageDemographics[1];
@@ -429,7 +436,9 @@ function CollateGameStateReport(loud = false) {
         residenceOutputInventory: residenceInStockCount,
         residenceOutputProduced: residenceProducedCount,
         residenceOutputSpent: residenceSpentCount,
+        residenceSaltSpent: saltSpent,
         residenceOutputShipped: residenceShippedCount,
+        residenceSaltShipped: saltShipped,
 
         villageDemographics: [residentsCount, residentsMax, pilgrimsCount, pilgrimsMax, pilgrimsLifetimeCount,],
         villageFiat: [asCount, asSpent, rentPrice, taxesValue, interestRate, tourismValue, actualBushelPrice, currentBushelPrice, actualBarleyAdjustment, currentBarleyAdjustment, valueInWheat1Log, valueInWheat1Board, valueInWheat1Stone,],

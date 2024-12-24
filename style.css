@@ -347,7 +347,7 @@ button:active {
 #buttonPriorityColon,
 #buttonPriorityOption {
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
 }
 
 #buttonTillDecal {
@@ -828,6 +828,29 @@ button:active {
     color: #041204;
 }
 
+#divGameEventCorpus #bookQuote {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #041204;
+    line-height: 4.8vw;
+    text-align: justify;
+}
+
+#divGameEventCorpus #bookCite {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #041204;
+    line-height: 4.3vw;
+    text-align: center;
+}
+
+#divGameEventCorpus #bookTitle {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #041204;
+    font-style: italic;
+}
+
 
 
 #divOverlayMods {
@@ -1007,21 +1030,21 @@ input {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
 }
 
 #divStonesSeason {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
 }
 
 #divEmbossZodiacChinese {
     width: calc(32px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
 }
 
 #divHourglass {
@@ -1029,35 +1052,35 @@ input {
     height: calc(16px * var(--pixel-scale));
     margin: 0 calc(6px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
 }
 
 #divEmbossSeason {
     width: calc(32px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
 }
 
 #divStonesWeek {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
 }
 
 #divRuneMonth {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
 }
 
 #divRuneElement {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
 }
 
 
@@ -1390,7 +1413,11 @@ td {
     border-right: calc(1px * var(--pixel-scale)) solid #9e6b30;
 }
 
-#tableWorkshopsContainer #tdGreenhouse {
+#tableWorkshopsContainer #tdOliveMill,
+#tableWorkshopsContainer #tdPress,
+#tableWorkshopsContainer #tdGreenhouse,
+#tableWorkshopsContainer #tdApiary,
+#tableWorkshopsContainer #tdCottage {
     vertical-align: top;
 }
 
@@ -1428,7 +1455,7 @@ td {
 .workshopHarvestMetalDecal,
 .workshopHarvestDigDecal {
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     margin-right: calc(2px * var(--pixel-scale));
@@ -1505,7 +1532,7 @@ td {
     display: block;
     background: var(--tilemap);
     background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1) calc(var(--j) * var(--pixel-scale) * 16px * -1);
-    background-size: calc(512px * var(--pixel-scale)) calc(272px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
 }
 
 .inlineIcon {
@@ -1663,6 +1690,11 @@ td {
     --j: 7;
 }
 
+.RedCross {
+    --i: 30;
+    --j: 17;
+}
+
 
 
 .Log {
@@ -1773,6 +1805,31 @@ td {
 .RaisinsLoose {
     --i: 30;
     --j: 16;
+}
+
+.LembasBread {
+    --i: 26;
+    --j: 16;
+}
+
+.Sal {
+    --i: 28;
+    --j: 16;
+}
+
+.Linen {
+    --i: 29;
+    --j: 16;
+}
+
+.Bandage {
+    --i: 27;
+    --j: 16;
+}
+
+.Ration {
+    --i: 29;
+    --j: 17;
 }
 
 
@@ -2189,6 +2246,7 @@ td {
 #divWorkshopGreenhouse,
 #divWorkshopAtelier,
 #divWorkshopApiary,
+#divWorkshopCottage,
 #buttonGoToResidence,
 #divViewTownship,
 #buttonGoToTownship,

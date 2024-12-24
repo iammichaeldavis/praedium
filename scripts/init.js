@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.11.0';
+const version = '1.12.0';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -107,6 +107,7 @@ const player = {
     canExportTrinkets: false,
     canImport: false,
     canImportTin: false,
+    canImportSalt: false,
     canHireBronzeworkers: false,
     canWin: false,
 
@@ -126,7 +127,11 @@ const player = {
     hasAtelier: false,
     hasMansion: false,
     hasApiary: false,
+    hasCottage: false,
     hasRaisins: false,
+    hasHardtack: false,
+    hasRations: false,
+    hasBandages: false,
     hasArmy: false,
     hasGraveyard: false,
     hasHospital: false,
@@ -196,6 +201,10 @@ const mansionImage = new Image();
 mansionImage.src = 'bitmaps/mansion.png';
 const beesImage = new Image();
 beesImage.src = 'bitmaps/mansion_abejas.png';
+const cottageAImage = new Image();
+cottageAImage.src = 'bitmaps/res_cottageA.png';
+const cottageBImage = new Image();
+cottageBImage.src = 'bitmaps/res_cottageB.png';
 
 const divGameWindow = document.getElementById('divGameWindow');
 
@@ -288,6 +297,9 @@ const tableWorkshopAtelier = document.getElementById('tableWorkshopAtelier');
 const divWorkshopApiary = document.getElementById('divWorkshopApiary');
 const imgWorkshopApiary = document.getElementById('imgWorkshopApiary');
 const tableWorkshopApiary = document.getElementById('tableWorkshopApiary');
+const divWorkshopCottage = document.getElementById('divWorkshopCottage');
+const imgWorkshopCottage = document.getElementById('imgWorkshopCottage');
+const tableWorkshopCottage = document.getElementById('tableWorkshopCottage');
 
 const divViewPraedium = document.getElementById('divViewPraedium');
 const buttonGoToResidence = document.getElementById('buttonGoToResidence');
@@ -515,16 +527,18 @@ const starvingBuffer = 10;
 let residenceStage = 0;
 let loavesPaymentAmount = 14;
 
-// 0. Loaves 🥖, 1. Oil 🪔, 2. Beer 🍺, 3. Wine 🍷, 4. Syrup 🍯, 5. Juice 🧃, 6. Fruit Leather (Sun-Dried Fig) 🫐, 7. Trinkets 💍, 8. Gems 💎, 9. Honey 🍯, 10. Raisins 🍇
-const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.8, 0.5, 0.2,];
-const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1, 100, 5, 5,];
-const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1,];
-const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0,];
-const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0,];
-const residenceInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceProducedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceSpentCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const residenceShippedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+// 0. Loaves 🥖, 1. Oil 🪔, 2. Beer 🍺, 3. Wine 🍷, 4. Syrup 🍯, 5. Juice 🧃, 6. Fruit Leather (Sun-Dried Fig) 🫐, 7. Trinkets 💍, 8. Gems 💎, 9. Honey 🍯, 10. Raisins 🍇, 11. Rations 🫔, 12. Linen 🧶, 13. Bandages 🩹, 14. Hardtack 🥮
+const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.8, 0.5, 0.2, 1.0, 0.75, 1.0, [0.2, 1.0,],];
+const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1, 100, 5, 5, [10, 1, 30,], 10, 1, [1, 1,],];
+const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5, 1, 20, 1, 10, 1, 4, 1,];
+const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0, 'not a number', 0, 0, [0, 0,],];
+const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0, 0, 0, 0, [0, 0,],];
+const residenceInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const residenceProducedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const residenceSpentCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+let saltSpent = 0;
+const residenceShippedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+let saltShipped = 0;
 
 const nameVillage = 'Alʿard al-Janubiyah'; // الأرض الجنوبية == Terra Australis. HBD, Grant! 🎂🫂
 const estDate = [0, 0,];
@@ -604,16 +618,16 @@ let valueInWheat1Log = 2;
 let valueInWheat1Board = 4;
 let valueInWheat1Stone = 8;
 
-// 0. Oil 🪔, 1. Beer 🍺, 2. Wine 🍷, 3. Syrup 🍯, 4. Juice 🧃, 5. Fruit Leather (Sun-Dried Fig) 🫐, 6. Trinkets 💎
+// 0. Oil 🪔, 1. Beer 🍺, 2. Wine 🍷, 3. Syrup 🍯, 4. Juice 🧃, 5. Fruit Leather (Sun-Dried Fig) 🫐, 6. Trinkets 💎, 7. Tin 🧱, 8. Salt 🧂
 const wheatValuePerUnit = [null, null, null, null, null, null,];
-const shipmentTimersCurrent = [24, 4, 16, 8, 2, 12, 48, 12,];
-const shipmentTimersDefault = [24, 4, 16, 8, 2, 12, 48, 12,];
-const shipmentDuration = [6, 1, 4, 2, 2, 3, 1, 3,];
+const shipmentTimersCurrent = [24, 4, 16, 8, 2, 12, 48, 12, 24,];
+const shipmentTimersDefault = [24, 4, 16, 8, 2, 12, 48, 12, 24,];
+const shipmentDuration = [6, 1, 4, 2, 2, 3, 1, 3, 6,];
 const shipmentProfits = [0, 0, 0, 0, 0, 0, 0,];
 const valueFactor = [12, 42, 24, 16, 9, 6, 10,];
-const shipmentCosts = [0,];
-const importCost = [8000,];
-const importAmount = [40,];
+const shipmentCosts = [0, 0,];
+const importCost = [8000, 100000,];
+const importAmount = [40, 100,];
 let trinketValue = null;
 function CalculatePortValues() {
     wheatValuePerUnit[0] = barterExchangeRate[2] * (residenceIngredientsIn[1] / residenceProductOut[1]); // Oil
@@ -671,6 +685,7 @@ const priceResidence11 = [336, 168, 84, 42,]; // Stone House 🏠
 const priceResidence12 = [336, 168, 84, 42,]; // Atelier 💎
 const priceResidence13 = [2500000, 12000, 16000, 500, 2000, 100,]; // Mansion 🏡
 const priceResidence14 = [1000000,]; // Apiary 🐝
+const priceResidence18 = [1000000, 100,]; // Weavers Cottage 🧵
 
 const priceVillage = 64000;
 const priceBuildNEG5 = 500; // Survey

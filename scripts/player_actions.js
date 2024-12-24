@@ -116,12 +116,16 @@ document.body.onkeyup = function (e) {
             ZeroArray(mountainSoldCount);
             ZeroArray(residenceIngredientInStockCount);
             residenceIngredientInStockCount[9] = [0, 0,];
+            residenceIngredientInStockCount[14] = [0, 0,];
             ZeroArray(residenceIngredientConsumedCount);
             residenceIngredientConsumedCount[9] = [0, 0,];
+            residenceIngredientConsumedCount[14] = [0, 0,];
             ZeroArray(residenceInStockCount);
             ZeroArray(residenceProducedCount);
             ZeroArray(residenceSpentCount);
+            saltSpent = 0;
             ZeroArray(residenceShippedCount);
+            saltShipped = 0;
             residentsCount = 0;
             asCount = 0;
             asSpent = 0;
@@ -154,7 +158,7 @@ document.body.onkeyup = function (e) {
 
         if (e.key == '`') { CollateGameStateReport(true); }
 
-        if (e.key == ' ' && localStorage.getItem(save_key)) { StartNewGame(); }
+        if (e.key == ' ' && localStorage.getItem(save_key) && !player.hasBegun) { StartNewGame(); }
         else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && !player.hasBegun)) { BeginGame('English'); }
         else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && player.hasBegun)) { DismissForeword(); }
 
@@ -173,7 +177,7 @@ document.body.onkeyup = function (e) {
             else if (player.canFound) { Found(); }
             else if (player.canBuild) { Build(); }
             else if (player.canBuyNewFarm && !player.hasNewFarm) { BuyNewFarm(); }
-            //flax farm
+            else if (player.canBuyNewFarm && !player.hasFlaxFarm) { BuyNewFarm(); }
             else if (player.hasFoundCopperEvidence && !player.hasFoundMine) { MountainEvents(); }
             else if (player.hasFoundMine && !player.canMine) { MountainEvents(); }
             else if (player.canMine && !player.canSmelt) { MountainEvents(); }
@@ -248,7 +252,7 @@ document.body.onkeyup = function (e) {
             else if (debugCounter == 3) {
                 player.likesStory = false;
                 setValues(1000000000);
-                for (let i = 0; i < 25; i++) { AdvanceGame(); } // all praedium
+                for (let i = 0; i < 25; i++) { AdvanceGame(); } // completely upgrade praedium
                 HireAccountant();
                 for (let i = 0; i < 36; i++) { HireHand(); }
                 AdvanceGame(); // buy town
@@ -257,12 +261,12 @@ document.body.onkeyup = function (e) {
                 debugCounter++;
             }
             else if (debugCounter == 4) {
-                for (let i = 0; i < 35; i++) { AdvanceGame(); } // all township
+                for (let i = 0; i < 35; i++) { AdvanceGame(); } // upgrade village to capital
                 setValues(5800858008);
                 debugCounter++;
             }
             else if (debugCounter == 5) {
-                for (let i = 0; i < 15; i++) { AdvanceGame(); } // all residence + new farm
+                for (let i = 0; i < 16; i++) { AdvanceGame(); } // ugprade residence to mansion + purchase both new farms
                 setValues(5800858008);
                 debugCounter++;
             }
@@ -276,7 +280,7 @@ document.body.onkeyup = function (e) {
                 PauseTime();
                 for (let i = 0; i < 3; i++) { AdvanceGame(); } // mine & foundry
                 for (let i = 0; i < 7; i++) { EstablishTradeRoute(); }
-                EstablishShippingLanes();
+                EstablishShippingLanes(); // tin
                 AdvanceGame(); // bronzeworkers
                 StartTime();
                 StartTime();
@@ -291,13 +295,27 @@ document.body.onkeyup = function (e) {
                 debugCounter++;
             }
             else if (debugCounter == 9) {
+                AdvanceGame(); // bees
+                AdvanceGame(); // raisins
+                EstablishShippingLanes(); // salt
+                AdvanceGame(); // hard tack
+                AdvanceGame(); // rations
+                AdvanceGame(); // cottage
+                AdvanceGame(); // bandages
+                setValues(5800858008);
+                debugCounter++;
+            }
+            else if (debugCounter == 10) {
                 BurnItDown();
                 FinalReset();
                 debugCounter++;
             }
-            else if (debugCounter == 10) {
+            else if (debugCounter == 11) {
                 StartTime();
                 debugCounter++;
+            }
+            else if (debugCounter == 12) {
+                alert('🚨 debug sequence complete 🚨');
             }
         }
         function FinalReset() {
@@ -360,19 +378,11 @@ document.body.onkeyup = function (e) {
 
         function setValues(amount) {
             if (e.shiftKey) {
-                bushelCount[0] = amount;
-                bushelCount[1] = amount;
-                bushelCount[2] = amount;
-                bushelCount[3] = amount;
-                bushelCount[4] = amount;
-                bushelCount[5] = amount;
-                bushelCount[6] = amount;
-                bushelCount[7] = amount;
+                FillArray(bushelCount, amount);
                 logsCount = amount;
                 boardsCount = amount;
                 stoneCount = amount;
                 crystalsCount = amount;
-                residenceInStockCount[8] = amount;
                 oreCopperCount = amount;
                 ingotsCopperCount = amount;
                 ingotsTinCount = amount;
@@ -384,14 +394,8 @@ document.body.onkeyup = function (e) {
                 scrollsCount = amount;
                 ghostsCount = amount;
                 relicCount = amount;
-                residenceInStockCount[0] = amount;
-                residenceInStockCount[1] = amount;
-                residenceInStockCount[2] = amount;
-                residenceInStockCount[3] = amount;
-                residenceInStockCount[4] = amount;
-                residenceInStockCount[5] = amount;
-                residenceInStockCount[6] = amount;
-                residenceInStockCount[7] = amount;
+                FillArray(residenceInStockCount, amount);
+                residenceIngredientInStockCount[14][1] = amount;
             }
             else if (e.altKey) {
                 bushelCount[0] -= amount;
@@ -406,7 +410,6 @@ document.body.onkeyup = function (e) {
                 boardsCount -= amount;
                 stoneCount -= amount;
                 crystalsCount -= amount;
-                residenceInStockCount[8] -= amount;
                 oreCopperCount -= amount;
                 ingotsCopperCount -= amount;
                 ingotsTinCount -= amount;
@@ -426,6 +429,14 @@ document.body.onkeyup = function (e) {
                 residenceInStockCount[5] -= amount;
                 residenceInStockCount[6] -= amount;
                 residenceInStockCount[7] -= amount;
+                residenceInStockCount[8] -= amount;
+                residenceInStockCount[9] -= amount;
+                residenceInStockCount[10] -= amount;
+                residenceInStockCount[11] -= amount;
+                residenceInStockCount[12] -= amount;
+                residenceInStockCount[13] -= amount;
+                residenceInStockCount[14] -= amount;
+                residenceIngredientInStockCount[14][1] -= amount;
             }
             else {
                 bushelCount[0] += amount;
@@ -440,7 +451,6 @@ document.body.onkeyup = function (e) {
                 boardsCount += amount;
                 stoneCount += amount;
                 crystalsCount += amount;
-                residenceInStockCount[8] += amount;
                 oreCopperCount += amount;
                 ingotsCopperCount += amount;
                 ingotsTinCount += amount;
@@ -460,6 +470,14 @@ document.body.onkeyup = function (e) {
                 residenceInStockCount[5] += amount;
                 residenceInStockCount[6] += amount;
                 residenceInStockCount[7] += amount;
+                residenceInStockCount[8] += amount;
+                residenceInStockCount[9] += amount;
+                residenceInStockCount[10] += amount;
+                residenceInStockCount[11] += amount;
+                residenceInStockCount[12] += amount;
+                residenceInStockCount[13] += amount;
+                residenceInStockCount[14] += amount;
+                residenceIngredientInStockCount[14][1] += amount;
             }
         }
 
@@ -734,6 +752,12 @@ function PlotHarvest(robota = false) {
             let bounty = FindWholeRandom(yieldMin, yieldMax) * flaxFactor;
             harvestedCount[7] += bounty;
             if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+            if (player.hasCottage) {
+                const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[12]);
+                residenceIngredientInStockCount[12] += workshopShare;
+                residenceIngredientConsumedCount[12] += workshopShare;
+                bounty = bounty - workshopShare;
+            }
             if ((bushelCount[7] + bounty) > bushelMax[7]) { bounty = bushelMax[7] - bushelCount[7]; }
             bushelCount[7] += bounty;
             farmedCount[7] += 1;
@@ -763,10 +787,17 @@ function PlotHarvest(robota = false) {
             else {
                 harvestedCount[0] += bounty;
                 if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+                const originalBounty = bounty;
                 if (player.hasBakery) {
                     const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[0]);
                     residenceIngredientInStockCount[0] += workshopShare;
                     residenceIngredientConsumedCount[0] += workshopShare;
+                    bounty = bounty - workshopShare;
+                }
+                if (player.hasHardtack) {
+                    const workshopShare = Math.floor(originalBounty * residenceIngredientWorkshopPortion[14][0]);
+                    residenceIngredientInStockCount[14][0] += workshopShare;
+                    residenceIngredientConsumedCount[14][0] += workshopShare;
                     bounty = bounty - workshopShare;
                 }
                 if ((bushelCount[0] + bounty) > bushelMax[0]) { bounty = bushelMax[0] - bushelCount[0]; }
@@ -1549,12 +1580,39 @@ function ImproveResidence() {
         asCount -= priceResidence14[0];
         asSpent += priceResidence14[0];
         commercialLifetimeSpend += priceResidence14[0];
-        residenceStage += 1;
+        residenceStage++;
         player.hasApiary = true;
     }
     else if (residenceStage == 15) {
         if (player.likesStory) { GameEvent(displayStoryResidence15); }
+        residenceStage++;
         player.hasRaisins = true;
+        player.seesImportButton = true;
+    }
+    else if (residenceStage == 16 && player.canImportSalt) {
+        if (player.likesStory) { GameEvent(displayStoryResidence16); }
+        residenceStage++;
+        player.hasHardtack = true;
+    }
+    else if (residenceStage == 17) {
+        if (player.likesStory) { GameEvent(displayStoryResidence17); }
+        residenceStage++;
+        player.hasRations = true;
+    }
+    else if (residenceStage == 18 && asCount >= priceResidence18[0] && bushelCount[7] >= priceResidence18[1]) {
+        if (player.likesStory) { GameEvent(displayStoryResidence18); }
+        asCount -= priceResidence18[0];
+        asSpent += priceResidence18[0];
+        commercialLifetimeSpend += priceResidence18[0];
+        bushelCount[7] -= priceResidence18[1];
+        spentCount[7] += priceResidence18[1];
+        residenceStage++;
+        player.hasCottage = true;
+    }
+    else if (residenceStage == 19 && player.hasHospital) {
+        if (player.likesStory) { GameEvent(displayStoryResidence19); }
+        residenceStage++;
+        player.hasBandages = true;
     }
     UpdateDisplay();
 }
@@ -2086,17 +2144,22 @@ function Build() {
         actualBushelPrice += 500;
         SetMarketPrice();
         interestRate += 0.004;
-        residenceProductOut[0] = 32;
-        residenceIngredientsIn[1] = 7;
-        residenceIngredientsIn[2] = 3;
-        residenceIngredientsIn[3] = 40;
-        residenceIngredientsIn[4] = 5;
-        residenceIngredientsIn[5] = 2;
-        residenceIngredientsIn[6] = 4;
-        residenceProductOut[7] = 6;
-        residenceIngredientsIn[8] = 80;
-        residenceIngredientsIn[9] = 4;
-        residenceIngredientsIn[10] = 4;
+        residenceProductOut[0] = 32; // bread
+        residenceIngredientsIn[1] = 7; // oil
+        residenceIngredientsIn[2] = 3; // beer
+        residenceIngredientsIn[3] = 40; // wine
+        residenceIngredientsIn[4] = 5; // syrup
+        residenceIngredientsIn[5] = 2; // juice
+        residenceIngredientsIn[6] = 4; // fruit leather
+        residenceProductOut[7] = 6; // trinkets
+        residenceIngredientsIn[8] = 80; // gems
+        residenceIngredientsIn[9] = 4; // honey
+        residenceIngredientsIn[10] = 4; // raisins
+        residenceProductOut[11] = 12; // rations
+        residenceIngredientsIn[12] = 8; // linen
+        residenceProductOut[13] = 5; // bandages (*req. hospital, which is after uni, so player will not see this happen)
+        residenceProductOut[14] = 2; // hardtack
+        CalculatePortValues();
     }
     else if (villageStage == 21 && asCount >= priceBuild21[0] && stoneCount >= priceBuild21[1] && ingotsCopperCount >= priceBuild21[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage21); }
@@ -2340,13 +2403,18 @@ function EstablishTradeRoute() {
 
 
 function EstablishShippingLanes() {
-    if (player.hasMerchantGuildWrit && player.hasBank) {
+    if (player.hasMerchantGuildWrit && player.hasBank && !player.canImportTin) {
         if (player.likesStory) { GameEvent(displayStoryPort07); }
         player.canImport = true;
         player.canImportTin = true;
         player.canHireBronzeworkers = true;
         player.seesMountainButton = true;
         player.seesImportButton = false;
+    }
+    else if (player.canImportTin && !player.canImportSalt) {
+        if (player.likesStory) { GameEvent(displayStoryPort08); }
+        player.seesImportButton = false;
+        player.canImportSalt = true;
     }
     UpdateDisplay();
 }

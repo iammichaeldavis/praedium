@@ -62,6 +62,7 @@ let displayCrystal = '';
 let displayOre = '';
 let displayCopper = '';
 let displayTin = '';
+let displaySalt = '';
 let displayBronze = '';
 let displayVignerons = '';
 let displayArborists = '';
@@ -119,6 +120,10 @@ let displayLabelResidence12 = '';
 let displayLabelResidence13 = '';
 let displayLabelResidence14 = '';
 let displayLabelResidence15 = '';
+let displayLabelResidence16 = '';
+let displayLabelResidence17 = '';
+let displayLabelResidence18 = '';
+let displayLabelResidence19 = '';
 
 let displayLabelFound = '';
 let displayLabelBuildNEG5 = '';
@@ -165,6 +170,7 @@ let displayLabelBuild100 = '';
 
 let displayLabelTradeRoute = '';
 let displayLabelImportTin = '';
+let displayLabelImportSalt = '';
 let displayLabelSailWest = '';
 let displayLabelPegasuses = '';
 
@@ -270,6 +276,10 @@ let displayStoryResidence12 = '';
 let displayStoryResidence13 = '';
 let displayStoryResidence14 = '';
 let displayStoryResidence15 = '';
+let displayStoryResidence16 = '';
+let displayStoryResidence17 = '';
+let displayStoryResidence18 = '';
+let displayStoryResidence19 = '';
 
 let displayStoryVillageFirstVisit = '';
 let displayStoryVillageNEG5 = '';
@@ -317,6 +327,7 @@ let displayStoryPort04 = '';
 let displayStoryPort05 = '';
 let displayStoryPort06 = '';
 let displayStoryPort07 = '';
+let displayStoryPort08 = '';
 
 let displayStorySailWest = '';
 let displayStoryPegasus = '';
@@ -398,6 +409,10 @@ let displayTrinkets = '';
 let displayGems = '';
 let displayComb = '';
 let displayRaisins = '';
+let displayHardtack = '';
+let displayRations = '';
+let displayLinen = '';
+let displayBandages = '';
 
 let displayConsumes = '';
 let displayUsed = '';
@@ -410,6 +425,7 @@ let displayPress = '';
 let displayGreenhouse = '';
 let displayAtelier = '';
 let displayApiary = '';
+let displayCottage = '';
 
 let displayPortName = '';
 let displayPortSubtitle = '';
@@ -426,6 +442,7 @@ let displayJerusalem = '';
 let displayMemphis = '';
 let displayRome = '';
 let displayTartessos = '';
+let displayCyprus = '';
 let displayDuration = '';
 let displayVoyage = '';
 let displayShipped = '';
@@ -607,6 +624,7 @@ function Translate(language, bark = true) {
         displayOre = 'Ore';
         displayCopper = 'Copper';
         displayTin = 'Tin';
+        displaySalt = 'Salt';
         displayBronze = 'Bronze';
         displayVignerons = 'Vignerons';
         displayArborists = 'Arborists';
@@ -664,6 +682,10 @@ function Translate(language, bark = true) {
         displayLabelResidence13 = 'REALLY ZHUZH THIS PLACE UP SOME, SON';
         displayLabelResidence14 = 'HOST APIARY';
         displayLabelResidence15 = 'BEGIN TO PRODUCE RAISINS';
+        displayLabelResidence16 = 'PRODUCE HARDTACK';
+        displayLabelResidence17 = 'PRODUCE RATIONS';
+        displayLabelResidence18 = 'BUILD WEAVERS’ COTTAGE';
+        displayLabelResidence19 = 'PRODUCE BANDAGES';
 
         displayLabelFound = 'FOUND A VILLAGE';
         displayLabelBuildNEG5 = 'CONDUCT GEOLOGICAL SURVEY';
@@ -710,6 +732,7 @@ function Translate(language, bark = true) {
 
         displayLabelTradeRoute = 'ESTABLISH NEW TRADE ROUTE';
         displayLabelImportTin = 'ARRANGE FOR THE IMPORT OF TIN';
+        displayLabelImportSalt = 'ARRANGE FOR THE IMPORT OF SALT';
         displayLabelSailWest = 'SAIL WEST TO VALINOR';
         displayLabelPegasuses = 'BREED PEGASUSES';
 
@@ -739,7 +762,7 @@ function Translate(language, bark = true) {
         displayStoryFarm17 = 'THE PREVIOUS OWNER GUARANTEES ITS PROFITABILITY. I AM TOLD DATES WILL BE READY AT THE END OF EVERY SUMMER, AND FIGS IN THE LATE SPRING. POMEGRANATES WILL BE READY IN EARLY WINTER, THEN GRAPES SHOULD COME ALONG A FEW WEEKS LATER, BUT THEY ARE FICKLE';
         displayStoryOlives = 'IT HAS BEEN EIGHT LONG YEARS SINCE YOU PLANTED YOUR OLIVE ORCHARD. FINALLY THE TREES ARE MATURE, EVERY BRANCH LADEN WITH RIPE FRUIT, AND THE HARVEST SHOULD BE AROUND THIS SAME TIME EVERY YEAR FROM NOW ON';
         displayStoryNewFarm = '“THE NATURAL STATE OF MEN BEFORE THEY ENTERED INTO SOCIETY WAS SIMPLY A WAR OF ALL AGAINST ALL”<BR>—THOMAS HOBBES';
-        displayStoryFlaxFarm = '🚨flax farm english🚨';
+        displayStoryFlaxFarm = '<div id="bookQuote">“Just take a trip to Petrograd. Go to any railroad siding there and you will see perfect hills of scrap iron. Why can’t they melt it up again and put it to use? Soon we shall have no axles left, no tyres for our wagon wheels, no chains for the logs, no ploughs for the fields, no horseshoes for our horses! But still they do nothing! The blind fools! The trouble with those people is that they think all the best things are made in the cities. It is not so. Here we grow the flax and grain; here we raise the meat they eat, and the wool to keep them warm; we cut trees to build their houses and firewood to heat their stoves. They could not even cook without us! Other country districts turn out the coal and the iron ore. All the real things in Russia are done in the villages. What kind of crops do they raise in the cities? Only Grand Dukes, Bolsheviks and drunkards!”<br><br><div id="bookCite">RUSSIAN PEASANT INTERVIEWED BY ERNEST POOLE IN <span id="bookTitle">THE VILLAGE: RUSSIAN IMPRESSIONS</span> (1918)</div></div>';
 
         displayStoryNotEnoughWheat = 'THE AFFABLE, PORTLY LAND MERCHANT PULLS YOU TO ONE SIDE, DISCREETLY, WHERE NO ONE CAN HEAR AND WHISPERS: “WHY, EFFENDI, YOU SIMPLY MUST NOT SPEND YOUR VERY LAST GRAIN OF WHEAT! OH, EFFENDI! OH MY! WHY, EFFENDI, I ASK YOU NOW, IN THE HERE AND NOW AS TWO GOOD FRIENDS I ASK YE THUS: HOWEVER COULD ONE CONTINUE TO GROW NEW CROPS WITHOUT ANY SEEDS AT ALL TO PLANT WITH, OH EFFENDI! HM? HOWEVER INDEED! ANSWER THAT RIDDLE, EFFENDI, I ASK YOU, I PRITHEE THUS! IF INDEED AN ANSWER THERE COULD BE, EFFENDI, WHICH I MUST HUMBLY SUBMIT TO THEE NOW AND HERE THAT THERE SIMPLY COULD NOT. NOW, BEAT IT, WOULDJA? I GOT PAYIN’ CUSTOMERS OVER HERE” THEN HE CLAPS YOU HARD ON THE BACK AND SAUNTERS REGALLY BACK INTO THE CROWD OF INTERESTED CLIENTELE MILLING ABOUT THE SOAPSTONE AUCTION BLOCK, LEAVING A CLOUD OF SWEET-SMELLING PERFUME IN HIS WAKE';
         displayStoryNotEnoughWarehouse = 'THE WAREHOUSE VENDOR, EXCITED TO MAKE HIS COMMISSION, THEN JUST AS IMMEDIATELY DISAPPOINTED WHEN HE SEES YOUR PURSE: “LOOK, KID: YOU CAN’T SPEND YOUR LAST GRAIN OF WHEAT, YOU WON’T BE ABLE TO KEEP FARMING! COME BACK WHEN YOU CAN ACTUALLY AFFORD MY PRICE! NO ONE LIKES A DEADBEAT”';
@@ -814,7 +837,11 @@ function Translate(language, bark = true) {
         displayStoryResidence12 = '“IF HORSES COULD HOLD A PENCIL THEY WOULD DRAW THEIR GODS AS HORSES”<br>—XENOPHANES';
         displayStoryResidence13 = '“IF YOU WANT TO TOTALLY DESTROY A MAN, GIVE HIM EVERYTHING HE EVER WISHED FOR”<br>—BOULET';
         displayStoryResidence14 = 'I FIND THESE TINY CREATURES INFINITELY FASCINATING';
-        displayStoryResidence15 = 'BLEAH; I HATE THESE AWFUL THINGS, BUT MY NIECE LOVES THEM';
+        displayStoryResidence15 = 'BLEAH; I HATE THESE AWFUL THINGS, BUT MY NIECE LOVES THEM<br><br>(<span class="icon Sal inlineIcon"></span> Salt Shipments Now Available)';
+        displayStoryResidence16 = 'IT WILL BREAK YOUR TEETH AND TASTES LIKE SAWDUST, BUT IT IS NUTRITIOUS AND KEEPS FOREVER';
+        displayStoryResidence17 = 'OUR FORCES WILL NEED SUSTENANCE THAT IS EASY TO TRANSPORT AND CALORIE-RICH';
+        displayStoryResidence18 = 'BUT PETER AROSE, AND RAN UNTO THE TOMB; AND STOOPING DOWN, HE SAW THE LINEN BANDAGES LAID BY THEMSELVES, AND HE DEPARTED, WONDERING TO HIMSELF AT THAT WHICH WAS TO COME TO PASS<br><br>MARCION’S GOSPEL OF THE LORD 24:12';
+        displayStoryResidence19 = 'WHEN OUR BOYS COME BACK FROM THE FRONT WE’RE GONNA NEED TO BE ABLE TO PATCH ’EM UP';
 
         displayStoryVillageFirstVisit = 'FROM NOW ON, WE’RE GONNA BE DOING THINGS *MY* WAY AROUND HERE';
         displayStoryVillageNEG5 = 'AN INVESTIGATION OF THIS LAND HAS FOUND NO STAGNANT POOLS OR SWAMPS. A FLAT BUT SLOPING PLAIN TO ENSURE GOOD DRAINAGE, HIGH ENOUGH TO AVOID FUTURE FLOODS. UPON THOROUGH INSPECTION, LIVERS FROM THE LOCAL WILDLIFE APPEAR TO BE HEALTHY';
@@ -862,6 +889,7 @@ function Translate(language, bark = true) {
         displayStoryPort05 = 'THOU HAST FOUND THYSELF IN GOOD ENOUGH STANDING WITH THESE SLIPPERY MERCHANTS AT LAST; THE GUILD HAST FINALLY GRANTED THEE A <span class="icon Decree inlineIcon"></span> <span id="writ">WRIT OF PERMISSION</span> TO IMPORT TIN!';
         displayStoryPort06 = 'HOUSEWIVES DO SO LOVE THEIR DOODADS AND GEWGAWS';
         displayStoryPort07 = 'WITH THIS TIN, ARTISANS CAN CHURN OUT THOSE LUDICROUS, GAUDY BAUBLES THAT COMMAND SUCH A HIGH PRICE IN ROME';
+        displayStoryPort08 = 'YOU SHALL SEASON YOUR EVERY OFFERING OF MEAL WITH SALT; YOU SHALL NOT OMIT FROM YOUR MEAL OFFERING THE SALT OF YOUR COVENANT WITH GOD; WITH ALL YOUR OFFERINGS YOU MUST OFFER SALT<br><br>LEVITICUS 2:13';
 
         displayStorySailWest = 'NOW, TO SET SAIL FOR THE UNDYING LANDS; TO THAT GREAT UNDISCOVERED COUNTRY DO I GO';
         displayStoryPegasus = 'They bring it to you, thrashing, ferocious, defiant to the very last, requiring the full strength of at least a dozen hired goons to hold it down, bound by those ancient alchemical chains, every link etched with one hundred glowing runes each.<br><br>Its eyes sparkle with cruel intelligence.<br><br>Now... now the work can truly begin.';
@@ -943,6 +971,10 @@ function Translate(language, bark = true) {
         displayComb = 'Comb';
         displayRaisins = 'Inedible Garbage';
         displayRaisins = 'Raisins';
+        displayHardtack = 'Hardtack';
+        displayRations = 'Iron Rations';
+        displayLinen = 'Linen';
+        displayBandages = 'Bandages';
 
         displayConsumes = 'Consumes';
         displayUsed = 'Used';
@@ -955,6 +987,7 @@ function Translate(language, bark = true) {
         displayGreenhouse = 'Greenhouse';
         displayAtelier = 'Atelier';
         displayApiary = 'Apiary';
+        displayCottage = 'Weavers’ Cottage';
 
         displayPortName = 'The ʿAkkō Harbour';
         displayPortSubtitle = 'Mercantile Gateway to Cyprus & the Levant';
@@ -971,10 +1004,11 @@ function Translate(language, bark = true) {
         displayMemphis = 'Memphis';
         displayRome = 'Rome';
         displayTartessos = 'Tartessos';
+        displayCyprus = 'Cyprus';
         displayDuration = 'Interval:';
         displayVoyage = 'Voyage';
         displayShipped = 'Shipped';
-        displayImported = 'Imported:';
+        displayImported = 'Imported';
         displayProfit = 'Profit:';
         displayCost = 'Cost:';
         displayNextDelivery = 'Next Delivery In:';
@@ -990,7 +1024,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.<br><br>Made with Blender, CodePen, the GNU Image Manipulation Program, GitHub, Inkscape and Visual Studio Code.';
         displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, David “aniwey” L., Sid Meier, Stephen M. F. Polychronopolous, Tom Rothamel, Dave Sim, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Toast Halasz, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif and Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, and the Ultima Dragons (all chapters), Jan van der Crabben, Jordan Webb, Rebecca Wickersham and W3Schools.<br><br>Very special thanks to my parents for a lifetime of support.<br><br>Seagull appears courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. Seagull training by “Wild” Bill Hinchcleath and the Northwest Florida Panhandle Seagull Wranglers Association of America: Florida Chapter.';
+        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Toast Halasz, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif and Marisol Johansen, Giddy Jones, Ira Lande, John Lawrie, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, and the Ultima Dragons (all chapters), Jan van der Crabben, Jordan Webb, Rebecca Wickersham and W3Schools.<br><br>Very special thanks to my parents for a lifetime of support.<br><br>Seagull appears courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. Seagull training by “Wild” Bill Hinchcleath and the Northwest Florida Panhandle Seagull Wranglers Association of America: Florida Chapter.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -1081,6 +1115,7 @@ function Translate(language, bark = true) {
         displayOre = 'Mineral';
         displayCopper = 'Cobre';
         displayTin = 'Estaño';
+        displaySalt = 'Sal';
         displayBronze = 'Bronce';
         displayVignerons = 'Viticultores';
         displayArborists = 'Arboristas';
@@ -1138,6 +1173,10 @@ function Translate(language, bark = true) {
         displayLabelResidence13 = 'REALMENTE ZHUZH ESTE LUGAR MEJORÓ, HIJO';
         displayLabelResidence14 = 'ACOGER APIARIO';
         displayLabelResidence15 = 'COMENZAR A PRODUCIR PASAS';
+        displayLabelResidence16 = 'PRODUCIR GALLETAS DURAS';
+        displayLabelResidence17 = 'PRODUCIR RACIÓNES';
+        displayLabelResidence18 = 'CONSTRUIR CASITA DE TEJEDORAS';
+        displayLabelResidence19 = 'PRODUCIR VENDAJES';
 
         displayLabelFound = 'COMENZAR UN PUEBLO';
         displayLabelBuildNEG5 = 'REALIZAR ESTUDIO GEOLÓGICO';
@@ -1184,6 +1223,7 @@ function Translate(language, bark = true) {
 
         displayLabelTradeRoute = 'ESTABLECER NUEVA RUTA COMERCIAL';
         displayLabelImportTin = 'DISPONER LA IMPORTACIÓN DE ESTAÑO';
+        displayLabelImportSalt = 'DISPONER LA IMPORTACIÓN DE SAL';
         displayLabelSailWest = 'NAVEGAR HACIA EL OESTE HACIA VALINOR';
         displayLabelPegasuses = 'CRIAR UNICORNIOS';
 
@@ -1213,7 +1253,7 @@ function Translate(language, bark = true) {
         displayStoryFarm17 = 'EL ANTERIOR DUEÑO GARANTIZA SU RENTABILIDAD. ME DICEN QUE LAS DÁTILES ESTARÁN LISTAS AL FINAL DE CADA VERANO Y LOS HIGOS A FINALES DE LA PRIMAVERA. LAS GRANADAS ESTARÁN LISTAS A PRINCIPIOS DEL INVIERNO, LUEGO LAS UVAS DEBERÍAN LLEGAR UNAS SEMANAS MÁS TARDE, PERO SON INCONSTANTE';
         displayStoryOlives = 'HAN PASADO OCHO LARGOS AÑOS DESDE QUE TÚ HUBIERAS PLANTADO TU OLIVAR. FINALMENTE LOS ÁRBOLES SON MADUROS, CADA RAMA CARGADA DE FRUTOS MADUROS, Y DEBERÍAN LLEGAR A LA MISMA ÉPOCA CADA AÑO A PARTIR DE AHORA';
         displayStoryNewFarm = '«EL ESTADO NATURAL DE LOS HOMBRES ANTES DE ENTRAR EN LA SOCIEDAD ERA SIMPLEMENTE UNA GUERRA DE TODOS CONTRA TODOS»<BR>—THOMAS HOBBES';
-        displayStoryFlaxFarm = '🚨flax farm spanish🚨';
+        displayStoryFlaxFarm = '<div id="bookQuote">«Basta con hacer un viaje a Petrogrado. Vaya a cualquier apartadero de ferrocarril y verá montañas perfectas de chatarra. ¿Por qué no pueden fundirlo de nuevo y darle uso? ¡Pronto no tendremos más ejes, ni neumáticos para las ruedas de nuestros vagones, ni cadenas para los troncos, ni arados para los campos, ni herraduras para nuestros caballos! ¡Pero aún así no hacen nada! ¡Qué ciegos! El problema con esa gente es que creen que las mejores cosas se hacen en las ciudades. No es así. Aquí cultivamos el lino y los cereales; aquí criamos la carne que comen y la lana para calentarse; cortamos árboles para construir sus casas y leña para calentar sus estufas. ¡Ni siquiera podrían cocinar sin nosotros! En otros distritos rurales se extrae carbón y mineral de hierro. Todo lo que realmente se hace en Rusia se hace en los pueblos. ¿Qué tipo de cultivos cultivan en las ciudades? ¡Sólo Grandes Duques, Bolcheviques y borrachos!»<br><br><div id="bookCite">CAMPESINO RUSO ENTREVISTADO POR ERNEST POOLE EN <span id="bookTitle">EL PUEBLO: IMPRESIONES RUSAS</span> (1918)</div></div>';
 
         displayStoryNotEnoughWheat = 'EL AMABLE Y CORPULENTO COMERCIANTE TERRESTRE TE LLEVA A UN LADO, DISCRETAMENTE, DONDE NADIE PUEDE OÍR Y SUSURRA: «¡POR QUÉ, EFFENDI, SIMPLEMENTE NO DEBES GASTAR TU ÚLTIMO GRANO DE TRIGO! ¡OH, EFFENDI! ¡DIOS MÍO! ¿POR QUÉ, EFFENDI, OS PREGUNTO AHORA, EN EL AQUÍ Y AHORA COMO DOS BUENOS AMIGOS OS PREGUNTO ASÍ: ¿PERO SE PODRÍA SEGUIR CULTIVANDO NUEVAS COSECHAS SIN NINGUNA SEMILLA PARA PLANTAR, OH EFFENDI! ¿HM? ¡PERO EN VERDAD! RESPONDE ESE ENIGMA, EFFENDI, TE LO PIDO, ¡TE LO RUEGO! SI EN VERDAD PUDIERA HABER UNA RESPUESTA, EFFENDI, PERO QUE DEBO SOMETERTE HUMILDEMENTE A TI AHORA Y AQUÍ QUE SIMPLEMENTE NO A PUEDE. AHORA, PIÉRDASE, ¿QUIERES? TENGO CLIENTES QUE PAGAN AQUÍ» LUEGO TE DA UNA FUERTE PALMADITA EN LA ESPALDA Y CAMINA MAJESTUOSAMENTE HACIA LA MULTITUD DE CLIENTELA INTERESADA QUE SE DANDO VUELTAS DEL BLOQUE DE SUBASTAS DE PIEDRA ESTEATITA, DEJANDO UNA NUBE DE PERFUME DULCE A SU LARGO';
         displayStoryNotEnoughWarehouse = 'EL CAPATAZ DEL ALMACÉN, EMOCIONADO POR GANAR SU COMISIÓN, ENTONCES SE DECEPCIONA IGUAL DE INMEDIATO CUANDO VE TU BOLSO: «MIRA, TONTO: ¡NO PUEDES GASTAR TU ÚLTIMO GRANO DE TRIGO, NO PODRÁS SEGUIR CULTIVANDO! ¡VUELVE CUANDO PUEDAS PAGAR MI PRECIO! A NADIE LE GUSTA UN VAGO»';
@@ -1288,7 +1328,11 @@ function Translate(language, bark = true) {
         displayStoryResidence12 = '«SI LOS CABALLOS PUDIERAN SOSTENER UN LÁPIZ DIBUJARÍAN A SUS DIOSES COMO CABALLOS»<br>—XENOPHANES';
         displayStoryResidence13 = '«SI QUIERES DESTRUIR TOTALMENTE A UN HOMBRE, DALE TODO LO QUE SIEMPRE HA DESEADO»<br>—BOULET';
         displayStoryResidence14 = 'ENCUENTRO ESTAS PEQUEÑAS CRIATURAS INFINITAMENTE FASCINANTES';
-        displayStoryResidence15 = '¡QUÉ ASCO!; ODIO ESTAS COSAS HORRIBLES, PERO A MI SOBRINA LE ENCANTAN';
+        displayStoryResidence15 = '¡QUÉ ASCO!; ODIO ESTAS COSAS HORRIBLES, PERO A MI SOBRINA LE ENCANTAN<br><br>(<span class="icon Sal inlineIcon"></span> Envíos de Sal Ya Disponibles)';
+        displayStoryResidence16 = 'TE ROMPE LOS DIENTES Y TIENE SABOR A ASERRÍN, PERO ES NUTRITIVO Y SE CONSERVA PARA SIEMPRE';
+        displayStoryResidence17 = 'NUESTRAS FUERZAS NECESITARÁN UN SUSTENTO FÁCIL DE TRANSPORTAR Y RICA EN CALORÍAS';
+        displayStoryResidence18 = 'PERO PEDRO SE DESPERTÓ, Y CORRIÓ AL SEPULCRO; E INCLINÁNDOSE, VIO LAS VENDAJES DE LINO PUESTAS ALLÍ SOLO, Y ÉL SE FUE, MARAVILLÁNDOSE DE LO QUE IBA A SUCEDER<br><br>EL EVANGELIO DEL SEÑOR SEGÚN MARCIÓN 24:12';
+        displayStoryResidence19 = 'CUANDO NUESTROS CHICOS REGRESAN DEL FRENTE TENDREMOS QUE PODER PARCHARLOS';
 
         displayStoryVillageFirstVisit = 'A PARTIR DE AHORA, VAMOS A HACER LAS COSAS A *MI* MANERA';
         displayStoryVillageNEG5 = 'UNA INVESTIGACIÓN DE ESTE TERRENO NO HA ENCONTRADO PISCINAS ESTANCADAS NI PANTANOS. UNA LLANURA PLANA PERO CON PENDIENTE PARA ASEGURAR UN BUEN DRENAJE, LO SUFICIENTEMENTE ALTA PARA EVITAR FUTURAS INUNDACIONES. TRAS UNA INSPECCIÓN EXHAUSTIVA, LOS HÍGADOS DE LA FAUNA LOCAL PARECEN ESTAR SALUDABLES';
@@ -1336,6 +1380,7 @@ function Translate(language, bark = true) {
         displayStoryPort05 = '¡POR FIN TE HAS ENCONTRADO EN BUENA POSICIÓN CON ESTOS ESCALOFRÍOS COMERCIANTES; EL GREMIO FINALMENTE TE HA CONCEDIDO UNA <span class="icon Decree inlineIcon"></span> <span id="writ">ORDEN DE PERMISO</span> PARA IMPORTAR ESTAÑO!';
         displayStoryPort06 = 'A LAS AMAS DE CASA LES ENCANTAN SUS ADORNOS Y CHUCHERÍAS';
         displayStoryPort07 = 'CON ESTA ESTAÑO, LOS ARTESANOS PUEDEN FABRICAR EN MASA ESA ÑAQUE RIDÍCULA Y LLAMATIVA QUE TIENEN UN PRECIO TAN ALTO EN ROMA';
+        displayStoryPort08 = 'SAZONARÁS CON SAL TODA OFRENDA DE HARINA QUE HAGAS; NO OMITIRÁS DE TU OFRENDA LA SAL DE TU PACTO CON DIOS; EN TODA TU OFRENDA OFRECERÁS SAL<br><br>LEVÍTICO 2:13';
 
         displayStorySailWest = 'AHORA, A ZARPAR HACIA LAS TIERRAS IMPERECEDERAS; A ESE GRAN PAÍS NO DESCUBRIDO VOY';
         displayStoryPegasus = 'Te lo traen, golpeando, feroz, desafiante hasta el final, requiriendo toda la fuerza de al menos una docena de matones a sueldo para sujetarlo, atado por esas antiguas cadenas alquímicas, cada eslabón grabado con cien runas brillantes cada uno.<br><br>Sus ojos brillan con cruel inteligencia.<br><br>Ahora... ahora el trabajo puede realmente comenzar.';
@@ -1417,6 +1462,10 @@ function Translate(language, bark = true) {
         displayComb = 'Panal';
         displayRaisins = 'Basura No Comestible';
         displayRaisins = 'Pasas';
+        displayHardtack = 'Galletas Duras';
+        displayRations = 'Porciónes de Hierro';
+        displayLinen = 'Lino';
+        displayBandages = 'Vendajes';
 
         displayConsumes = 'Consume';
         displayUsed = 'Utilizado';
@@ -1429,6 +1478,7 @@ function Translate(language, bark = true) {
         displayGreenhouse = 'Invernadero';
         displayAtelier = 'Atelier';
         displayApiary = 'Colmenar';
+        displayCottage = 'Casita de Tejedoras';
 
         displayPortName = 'El Puerto de ʿAkkō';
         displayPortSubtitle = 'Puerta de Entrada Comercial a Chipre y el Levante';
@@ -1445,10 +1495,11 @@ function Translate(language, bark = true) {
         displayMemphis = 'Menfis';
         displayRome = 'Roma';
         displayTartessos = 'Tartesos';
+        displayCyprus = 'Chipre';
         displayDuration = 'Intervalo:';
         displayVoyage = 'Viaje';
         displayShipped = 'Enviado';
-        displayImported = 'Importado:';
+        displayImported = 'Importado';
         displayProfit = 'Lucro:';
         displayCost = 'Costó:';
         displayNextDelivery = 'Próxima Entrega En:';
@@ -1464,7 +1515,7 @@ function Translate(language, bark = true) {
 
         displayInfoMadeWith = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.<br><br>Hecho con Blender, CodePen, el GNU Image Manipulation Program, GitHub, Inkscape y Visual Studio Code.';
         displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, David “aniwey” L., Sid Meier, Stephen M. F. Polychronopolous, Tom Rothamel, Dave Sim, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Toast Halasz, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif y Marisol Johansen, Ira Lande, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, y los Ultima Dragons (todos los capítulos), Jan van der Crabben, Jordan Webb, Rebecca Wickersham y W3Schools.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br>Gaviota aparece por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. Entrenamiento de gaviotas por “Loco” Bill Hinchcleath y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Florida.';
+        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Toast Halasz, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif y Marisol Johansen, Giddy Jones, Ira Lande, John Lawrie, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, y los Ultima Dragons (todos los capítulos), Jan van der Crabben, Jordan Webb, Rebecca Wickersham y W3Schools.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br>Gaviota aparece por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. Entrenamiento de gaviotas por “Loco” Bill Hinchcleath y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Florida.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';

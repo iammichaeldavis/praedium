@@ -245,6 +245,10 @@ function WorkshopProduction() {
     Render(8);
     Render9();
     Render(10);
+    if (player.hasRations) { Render11(); }
+    Render(12);
+    Render(13);
+    Render14();
 
     function Render(ingredient) {
         while (residenceIngredientInStockCount[ingredient] >= residenceIngredientsIn[ingredient]) {
@@ -260,7 +264,14 @@ function WorkshopProduction() {
                 residenceIngredientConsumedCount[9][1]++;
                 residenceSpentCount[5]++;
             }
-            else { residenceInStockCount[ingredient] += residenceProductOut[ingredient]; }
+            else {
+                if (ingredient == 12 && player.hasBandages) {
+                    residenceIngredientInStockCount[13]++;
+                    residenceIngredientConsumedCount[13]++;
+                    residenceSpentCount[12]++;
+                }
+                else { residenceInStockCount[ingredient] += residenceProductOut[ingredient]; }
+            }
             residenceProducedCount[ingredient] += residenceProductOut[ingredient];
         }
     }
@@ -272,6 +283,31 @@ function WorkshopProduction() {
 
             residenceInStockCount[9] += residenceProductOut[9];
             residenceProducedCount[9] += residenceProductOut[9];
+        }
+    }
+
+    function Render11() {
+        while ((residenceInStockCount[9] >= residenceIngredientsIn[11][0]) && (residenceInStockCount[10] >= residenceIngredientsIn[11][1]) && (residenceInStockCount[14] >= residenceIngredientsIn[11][2])) {
+            residenceInStockCount[9] -= residenceIngredientsIn[11][0];
+            residenceSpentCount[9] += residenceIngredientsIn[11][0];
+            residenceInStockCount[10] -= residenceIngredientsIn[11][1];
+            residenceSpentCount[10] += residenceIngredientsIn[11][1];
+            residenceInStockCount[14] -= residenceIngredientsIn[11][2];
+            residenceSpentCount[14] += residenceIngredientsIn[11][2];
+
+            residenceInStockCount[11] += residenceProductOut[11];
+            residenceProducedCount[11] += residenceProductOut[11];
+        }
+    }
+
+    function Render14() {
+        while ((residenceIngredientInStockCount[14][0] >= residenceIngredientsIn[14][0]) && (residenceIngredientInStockCount[14][1] >= residenceIngredientsIn[14][1])) {
+            residenceIngredientInStockCount[14][0] -= residenceIngredientsIn[14][0];
+            residenceIngredientInStockCount[14][1] -= residenceIngredientsIn[14][1];
+            saltSpent += residenceIngredientsIn[14][1];
+
+            residenceInStockCount[14] += residenceProductOut[14];
+            residenceProducedCount[14] += residenceProductOut[14];
         }
     }
 }
@@ -340,6 +376,7 @@ function Shipping() {
     shipmentTimersCurrent[5]--;
     shipmentTimersCurrent[6]--;
     shipmentTimersCurrent[7]--;
+    shipmentTimersCurrent[8]--;
 
     if (shipmentTimersCurrent[0] == 0) {
         shipmentTimersCurrent[0] = shipmentTimersDefault[0];
@@ -439,6 +476,18 @@ function Shipping() {
                 bounty = bounty - workshopShare;
             }
             ingotsTinCount += bounty;
+        }
+    }
+
+    if (shipmentTimersCurrent[8] == 0) {
+        shipmentTimersCurrent[8] = shipmentTimersDefault[8];
+        if (player.canImportSalt && asCount >= importCost[1]) {
+            asCount -= importCost[1];
+            asSpent += importCost[1];
+            shipmentCosts[1] += importCost[1];
+            let bounty = importAmount[1];
+            residenceIngredientInStockCount[14][1] += bounty;
+            residenceIngredientConsumedCount[14][1] += bounty;
         }
     }
 }
