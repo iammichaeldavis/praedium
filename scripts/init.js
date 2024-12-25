@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.12.0';
+const version = '1.12.1';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -531,7 +531,7 @@ let loavesPaymentAmount = 14;
 const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.8, 0.5, 0.2, 1.0, 0.75, 1.0, [0.2, 1.0,],];
 const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1, 100, 5, 5, [10, 1, 30,], 10, 1, [1, 1,],];
 const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5, 1, 20, 1, 10, 1, 4, 1,];
-const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0, 'not a number', 0, 0, [0, 0,],];
+const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0, 'this space intentionally left blank', 0, 0, [0, 0,],];
 const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0, 0, 0, 0, [0, 0,],];
 const residenceInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const residenceProducedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
