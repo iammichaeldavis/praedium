@@ -461,6 +461,7 @@ let displayNewLanguage = '';
 let displayLanguageQuote = '';
 
 let displayInfoFinal = '';
+let displayInfoMadeFor = '';
 let displayInfoMadeWith = '';
 let displayInfoDedication = '';
 let displayInfoThanks = '';
@@ -1022,9 +1023,14 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'The current language is now set to English.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">“There is no true knowledge without right faith, no virtuous conduct is possible without knowledge, without virtue there is no liberation, and without liberation, no nirvana.”</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeWith = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.<br><br>Made with Blender, CodePen, the GNU Image Manipulation Program, GitHub, Inkscape and Visual Studio Code.';
-        displayInfoDedication = 'Dedicated to Lori and Corey Cole, Jeff and ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, David “aniwey” L., Sid Meier, Stephen M. F. Polychronopolous, Tom Rothamel, Dave Sim, Tim Sweeney and Michael Townsend, and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
-        displayInfoThanks = 'Special thanks to Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Toast Halasz, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif and Marisol Johansen, Giddy Jones, Ira Lande, John Lawrie, Erik Lundblad, David Macaulay, the Méndez family, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, and the Ultima Dragons (all chapters), Jan van der Crabben, Jordan Webb, Rebecca Wickersham and W3Schools.<br><br>Very special thanks to my parents for a lifetime of support.<br><br>Seagull appears courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. Seagull training by “Wild” Bill Hinchcleath and the Northwest Florida Panhandle Seagull Wranglers Association of America: Florida Chapter.';
+        displayInfoMadeFor = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.';
+        displayInfoMadeWith = 'Made with Blender, CodePen, DOSBox, Exult Studio, GitHub, the GNU Image Manipulation Program, Inkscape and Visual Studio Code.';
+        displayInfoDedication = 'Dedicated to ';
+        displayInfoDedication += ScribeList(dedicationList);
+        displayInfoDedication += ', and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
+        displayInfoThanks = 'Special thanks to ';
+        displayInfoThanks += ScribeList(gratitudeList);
+        displayInfoThanks += '.<br><br>Very special thanks to my parents for a lifetime of support.<br><br>Seagull appears courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. Seagull training by “Wild” Bill Hinchcleath and the Northwest Florida Panhandle Seagull Wranglers Association of America: Florida Chapter.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -1513,9 +1519,14 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'El idioma actual ahora está configurado en español.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">«No hay conocimiento verdadero sin fe recta, ninguna conducta virtuosa es posible sin conocimiento, sin virtud no hay liberación, y sin liberación, no nirvana.»</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeWith = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.<br><br>Hecho con Blender, CodePen, el GNU Image Manipulation Program, GitHub, Inkscape y Visual Studio Code.';
-        displayInfoDedication = 'Dedicado a Lori y Corey Cole, Jeff y ’Manda Dee, Richard Garriott, ALexis JAnson, Chris “Pumaman” Jones, Denis Loubet, David “aniwey” L., Sid Meier, Stephen M. F. Polychronopolous, Tom Rothamel, Dave Sim, Tim Sweeney y Michael Townsend, y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
-        displayInfoThanks = 'Agradecimientos especiales a Mohammad Alavi, Sheila Bailey, Günter Bechly, Todd T. Brannon, Ryan Butterworth, Colin Campbell, Michael Christy, Adam Cosman, Worth Dayley, Patrick Driggett, Miguel Angel Droz III, Don Dudenhoeffer, Derek Evans, Kenneth Garagnon, Sean Glavin, Hayley Hackett, Toast Halasz, Marty Hirsch, Bashir Hood, Shawn Toao Hughes, Leif y Marisol Johansen, Giddy Jones, Ira Lande, John Lawrie, Erik Lundblad, David Macaulay, la familia Méndez, Brian Moran, Flathead Mike Niles, Rick Ramsey, Jim Shepperd, Todd Spigener, The Spriters Resource, Grant Sutherland, Benjamin A. Taylor, The Ultima Codex, The Codex of Ultima Wisdom, y los Ultima Dragons (todos los capítulos), Jan van der Crabben, Jordan Webb, Rebecca Wickersham y W3Schools.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br>Gaviota aparece por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. Entrenamiento de gaviotas por “Loco” Bill Hinchcleath y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Florida.';
+        displayInfoMadeFor = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.';
+        displayInfoMadeWith = 'Hecho con Blender, CodePen, DOSBox, Exult Studio, GitHub, el GNU Image Manipulation Program, Inkscape y Visual Studio Code.';
+        displayInfoDedication = 'Dedicado a ';
+        displayInfoDedication += ScribeList(dedicationList);
+        displayInfoDedication += ', y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
+        displayInfoThanks = 'Agradecimientos especiales a ';
+        displayInfoThanks += ScribeList(gratitudeList);
+        displayInfoThanks += '.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br>Gaviota aparece por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. Entrenamiento de gaviotas por “Loco” Bill Hinchcleath y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Florida.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';
@@ -1549,13 +1560,100 @@ function Translate(language, bark = true) {
 
     const divider = '<div class="divider">♦♦♦ ♦ ♦♦♦</div>';
     displayInfoFinal = '<div id="divInfoTitle">' + displayGameTitle + '<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) MMXXIV</span></div>';
-    displayInfoFinal += displayInfoMadeWith + '<br><br>' + displayInfoDedication + '<br><br>' + displayInfoThanks;
+    displayInfoFinal += displayInfoMadeFor + '<br><br>' + displayInfoMadeWith + '<br><br>' + displayInfoDedication + '<br><br>' + displayInfoThanks;
     displayInfoFinal += divider + displayInfoScripture;
     displayLegalFinal = displayBoilerplate + divider + displayLegalQuote;
     displayOptionsFlavourFinal = divider + displayOptionsFlavour;
     document.title = displayGameTitle + ' - ' + displayGameEdition;
     UpdateDisplay();
     if (bark) { SystemMessage(displayNewLanguage + divider + displayLanguageQuote); }
+}
+
+
+
+const dedicationList = [
+    ['Lori', 'Corey Cole',], // en.wikipedia.org/wiki/Quest_for_Glory
+    ['Jeff', '’Manda Dee',], // en.wikipedia.org/wiki/Master_of_Magic
+    'Richard Garriott', // en.wikipedia.org/wiki/Ultima_(series)
+    'ALexis JAnson', // museumofzzt.com/file/view/codered
+    'Chris “Pumaman” Jones', // adventuregamestudio.co.uk
+    'Denis Loubet', // denisloubet.com (ARTIST LEVEL: 👑🐐👑 G.O.A.T. Status 👑🐐👑)
+    'David “aniwey” L.', // candybox2.github.io
+    'Sid Meier', // en.wikipedia.org/wiki/Civilization_(series)
+    'Stephen M. F. Polychronopolous',
+    '“PyTom” Rothamel', // renpy.org
+    'Dave Sim', // en.wikipedia.org/wiki/Cerebus_the_Aardvark
+    'Tim Sweeney', // unrealengine.com
+    'Michael Townsend', // adarkroom.doublespeakgames.com
+];
+
+const gratitudeList = [
+    'Mohammad Alavi',
+    'Sheila Bailey',
+    'Günter Bechly', // ???
+    'Todd T. Brannon',
+    'Ryan Butterworth',
+    'Colin Campbell',
+    'Michael Christy',
+    'Adam Cosman', // codepen.io/uenify/pen/KxzKVd
+    'Worth Dayley',
+    'Michael C. DeLucca',
+    'Patrick Driggett',
+    'Miguel Angel Droz III',
+    'Don Dudenhoeffer',
+    'Derek Evans',
+    'Eric Fredricksen', // grumdrig.com/u6map
+    'Kenneth Garagnon',
+    'Sean Glavin',
+    'Hayley Hackett',
+    'Toast Halasz',
+    'Marty Hirsch',
+    'Bashir Hood',
+    'Shawn Toao Hughes',
+    ['Leif', 'Marisol Johansen',],
+    'Giddy Jones', // spriters-resource.com/ms_dos/theelderscrollsiidaggerfall
+    'Ira Lande',
+    'John Lawrie',
+    'Erik Lundblad',
+    'David Macaulay', // youtu.be/9K7Yds8bWz4
+    'Joel “Squall” Mann',
+    ['*', 'the Méndez family', 'la familia Méndez',],
+    'Brian Moran',
+    'Flathead Mike Niles',
+    'Rick Ramsey',
+    'Jim Shepperd',
+    'Todd Spigener',
+    'The Spriters Resource', // spriters-resource.com
+    'Grant Sutherland',
+    'Benjamin A. Taylor',
+    'The Ultima Codex', // ultimacodex.com
+    ['*', 'The Codex of Ultima Wisdom and the Ultima Dragons (all chapters)', 'The Codex of Ultima Wisdom y los Ultima Dragons (todos capítulos)',], // wiki.ultimacodex.com
+    'Jan van der Crabben', // worldhistory.org
+    'Jordan Webb',
+    'Rebecca Wickersham',
+    'W3Schools', // w3schools.com
+];
+
+function ScribeList(rawList) {
+    let scribedList = '';
+    let conjunction = 'and';
+    if (player.speaks == 'Spanish') { conjunction = 'y'; }
+
+    for (let i = 0; i < rawList.length; i++) {
+        if (rawList[i].constructor === Array) {
+            if (rawList[i][0] == '*') {
+                if (player.speaks == 'English') { scribedList += rawList[i][1]; }
+                else { scribedList += rawList[i][2]; }
+            }
+            else { scribedList += rawList[i][0] + ' ' + conjunction + ' ' + rawList[i][1]; }
+        }
+        else { scribedList += rawList[i]; }
+
+        if (i == rawList.length - 2) { scribedList += ', ' + conjunction + ' '; }
+        else if (i == rawList.length - 1) { /* last entry */ }
+        else { scribedList += ', '; }
+    }
+    return scribedList;
 }
 
 

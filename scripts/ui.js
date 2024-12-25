@@ -20,6 +20,7 @@ const tileHitchingPostV = [16, 8 * 16,];
 const tileWell = [32, 8 * 16,];
 const tileSignpostE = [48, 8 * 16,];
 const tileSignpostW = [64, 8 * 16,];
+const tileSignpostS = [0, 272,];
 
 const tileLawn = [0, 9 * 16,];
 const tileTrees = [16, 9 * 16,];
@@ -5898,7 +5899,7 @@ function RedrawFarm() {
             ],
             [
                 tileLawn,
-                tileLawn,
+                tileHitchingPostV,
                 tileTallFenceGateVBottom,
                 tilePathV,
                 PickFlaxTile(1, 3),
@@ -5971,7 +5972,7 @@ function RedrawFarm() {
                 PickFlaxTile(7, 2),
                 tilePathV,
                 tileTallFenceGateVTop,
-                tileLawn,
+                tileHitchingPostV,
                 tileLawn,
             ],
             [
@@ -6140,12 +6141,12 @@ function RedrawFarm() {
                 tileLawn,
                 tileLawn,
                 tileLawn,
-                tileLawn,
+                tileHitchingPostH,
                 tileLawn,
                 tilePathV,
                 tilePathV,
                 tileLawn,
-                tileLawn,
+                tileSignpostS,
                 tileLawn,
                 tileLawn,
                 tileLawn,
