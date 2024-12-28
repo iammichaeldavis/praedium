@@ -1083,7 +1083,7 @@ function UpdateText() {
             if (player.hasArmy) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayEnlistment + ' <span class="icon TaxCollector inlineIcon"></span>:' + '</td>';
-                tableString += '<td class="rightPadColumn">' + Math.floor((knightsMaxPopulationPortion * 10000) / 100) + '% <span class="icon Citizen inlineIcon"></span>' + '</td>';
+                tableString += '<td class="rightPadColumn">' + Math.floor((militaryEnlistment * 10000) / 100) + '% <span class="icon Citizen inlineIcon"></span>' + '</td>';
                 tableString += '</tr>';
             }
             tableString += '</tbody>';
@@ -1287,32 +1287,20 @@ function UpdateText() {
             tableString += '</table>';
 
             if (horsesSpawn) {
-                tableString += '<table id="tableVillageMateriel">';
+                tableString += '<table id="tableVillageInventory">';
                 tableString += '<thead>';
                 tableString += '<tr>';
-                tableString += '<td colspan="3">' + displayMateriel + '</td>';
+                tableString += '<td colspan="3">' + displayInventory + '</td>';
                 tableString += '</tr>';
                 tableString += '</thead>';
                 tableString += '<tbody>';
                 tableString += '<tr>';
-                let tempHorseIcon = '<span class="icon Horsey inlineIcon"></span>';
-                if (trophiesSpawn) { tempHorseIcon = '<span class="icon HorseyMounted inlineIcon"></span>'; }
-                tableString += '<td>' + displayPonies + ' ' + tempHorseIcon + ':' + '</td>';
+                tableString += '<td>' + displayPonies + ' ' + '<span class="icon Horsey inlineIcon"></span>' + ':' + '</td>';
                 tableString += '<td class="noPadColumn">' + formatterStandard.format(horsesCount) + '</td>';
                 let horsesCost = '(-' + formatterStandard.format(horsesCount) + '<span class="icon Barley inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
                 if (horsesStarving) { horsesCost = '<span class="starving">' + displayStarvingHorse + '</span>'; }
                 tableString += '<td>' + horsesCost + '</td>';
                 tableString += '</tr>';
-                const knightsMax = Math.floor(residentsCount * knightsMaxPopulationPortion);
-                let knightsCount = horsesCount;
-                if (knightsCount > knightsMax) { knightsCount = knightsMax; }
-                if (player.hasArmy) {
-                    tableString += '<tr>';
-                    tableString += '<td>' + displayCavalry + ' <span class="icon BowAndArrow inlineIcon"></span>:' + '</td>';
-                    tableString += '<td class="noPadColumn">' + formatterStandard.format(knightsCount) + '<span class="warehouseTotal">/' + knightsMax + '</span>' + '</td>';
-                    tableString += '<td>(-' + currencySymbol + formatterStandard.format(knightsCount * militaryUnitCost) + '<span class="warehouseTotal">/' + displayWeek + '</span>)</td>';
-                    tableString += '</tr>';
-                }
                 if (trophiesSpawn) {
                     tableString += '<tr>';
                     tableString += '<td>' + displayChampionships + ' <span class="icon Trophy inlineIcon"></span>:' + '</td>';
@@ -1381,9 +1369,7 @@ function UpdateText() {
                 tableString += '</tbody>';
                 tableString += '</table>';
 
-                if (cityWalls) {
-                    const calculatedOffenseScore = knightsCount * 20;
-                    const calculatedDefenseScore = 1000;
+                if (player.hasCityWalls) {
                     tableString += '<table id="tableVillageStatistics">';
                     tableString += '<thead>';
                     tableString += '<tr>';
@@ -1393,7 +1379,23 @@ function UpdateText() {
                     tableString += '<tbody>';
                     if (player.hasArmy) {
                         tableString += '<tr>';
+                        tableString += '<td colspan="2" style="text-align:center">' + 1 + '<span class="icon TaxCollector inlineIcon"></span> <span class="icon Sell inlineIcon"></span>';
+                        tableString += ' ' + militaryInfantryCombatValue + '<span class="icon Sword inlineIcon"></span>' + '</td>';
+                        tableString += '</tr>';
+                        tableString += '<tr>';
+                        tableString += '<td colspan="2" style="text-align:center">' + 1 + '<span class="icon HorseyMounted inlineIcon"></span> <span class="icon Sell inlineIcon"></span>';
+                        tableString += ' ' + militaryCavalryCombatValue + '<span class="icon Sword inlineIcon"></span>' + '</td>';
+                        tableString += '</tr>';
+                    }
+                    const calculatedDefenseScore = 1000;
+                    tableString += '<tr>';
+                    tableString += '<td colspan="2" style="text-align:center">' + 1 + '<span class="icon CityWalls inlineIcon"></span> <span class="icon Sell inlineIcon"></span>';
+                    tableString += ' ' + calculatedDefenseScore + '<span class="icon Shield inlineIcon"></span>' + '</td>';
+                    tableString += '</tr>';
+                    if (player.hasArmy) {
+                        tableString += '<tr>';
                         tableString += '<td>' + displayOffense + ' <span class="icon Sword inlineIcon"></span>:' + '</td>';
+                        const calculatedOffenseScore = (militaryInfantry * militaryInfantryCombatValue) + (militaryCavalryCurrent * militaryCavalryCombatValue);
                         tableString += '<td class="rightPadColumn">' + formatterStandard.format(calculatedOffenseScore) + '</td>';
                         tableString += '</tr>';
                     }
@@ -1403,6 +1405,32 @@ function UpdateText() {
                     tableString += '</tr>';
                     tableString += '</tbody>';
                     tableString += '</table>';
+
+                    if (player.hasArmy) {
+                        tableString += '<table id="tableVillageMateriel">';
+                        tableString += '<thead>';
+                        tableString += '<tr>';
+                        tableString += '<td colspan="3">' + displayMateriel + '</td>';
+                        tableString += '</tr>';
+                        tableString += '</thead>';
+                        tableString += '<tbody>';
+                        tableString += '<tr>';
+                        tableString += '<td>' + displaySoldiers + ' <span class="icon TaxCollector inlineIcon"></span>:' + '</td>';
+                        tableString += '<td class="noPadColumn">' + formatterStandard.format(militaryInfantry) + '<span class="warehouseTotal">/' + militarySoldiers + '</span>' + '</td>';
+                        tableString += '<td>(-' + currencySymbol + formatterStandard.format(militaryInfantry * militaryUnitCost) + '<span class="warehouseTotal">/' + displayWeek + '</span>)</td>';
+                        tableString += '</tr>';
+                        tableString += '<tr>';
+                        tableString += '<td colspan="3" style="text-align:center">' + 1 + '<span class="icon TaxCollector inlineIcon"></span> + ' + 1 + '<span class="icon Horsey inlineIcon"></span> <span class="icon Sell inlineIcon"></span>';
+                        tableString += ' ' + 1 + '<span class="icon HorseyMounted inlineIcon"></span>' + '</td>';
+                        tableString += '</tr>';
+                        tableString += '<tr>';
+                        tableString += '<td>' + displayCavalry + ' <span class="icon HorseyMounted inlineIcon"></span>:' + '</td>';
+                        tableString += '<td class="noPadColumn">' + formatterStandard.format(militaryCavalryCurrent) + '<span class="warehouseTotal">/' + militarySoldiers + '</span>' + '</td>';
+                        tableString += '<td>(-' + currencySymbol + formatterStandard.format(militaryCavalryCurrent * (militaryUnitCost * militaryUnitCostFactor)) + '<span class="warehouseTotal">/' + displayWeek + '</span>)</td>';
+                        tableString += '</tr>';
+                        tableString += '</tbody>';
+                        tableString += '</table>';
+                    }
                 }
             }
         }

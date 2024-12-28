@@ -125,6 +125,7 @@ function ContinuePreviousGame() {
         player.hasHardtack = loadedReport.hero.hasHardtack;
         player.hasRations = loadedReport.hero.hasRations;
         player.hasBandages = loadedReport.hero.hasBandages;
+        player.hasCityWalls = loadedReport.hero.hasCityWalls;
         player.hasArmy = loadedReport.hero.hasArmy;
         player.hasGraveyard = loadedReport.hero.hasGraveyard;
         player.hasHospital = loadedReport.hero.hasHospital;
@@ -277,21 +278,20 @@ function ContinuePreviousGame() {
         militaryLifetimeCost = loadedReport.counts.villageSpend[2];
         medicalLifetimeCost = loadedReport.counts.villageSpend[3];
         tributeLifetimePaid = loadedReport.counts.villageSpend[4];
-        horsesCount = loadedReport.counts.villageMateriel[0];
-        beadsCount = loadedReport.counts.villageMateriel[1];
-        trophiesCount = loadedReport.counts.villageMateriel[2];
-        scrollsCount = loadedReport.counts.villageMateriel[3];
-        ratsCount = loadedReport.counts.villageMateriel[4];
-        ghostsCount = loadedReport.counts.villageMateriel[5];
-        patientsCount = loadedReport.counts.villageMateriel[6];
-        relicCount = loadedReport.counts.villageMateriel[7];
+        horsesCount = loadedReport.counts.villageInventory[0];
+        beadsCount = loadedReport.counts.villageInventory[1];
+        trophiesCount = loadedReport.counts.villageInventory[2];
+        scrollsCount = loadedReport.counts.villageInventory[3];
+        ratsCount = loadedReport.counts.villageInventory[4];
+        ghostsCount = loadedReport.counts.villageInventory[5];
+        patientsCount = loadedReport.counts.villageInventory[6];
+        relicCount = loadedReport.counts.villageInventory[7];
         horsesSpawn = loadedReport.counts.villageState[0];
         horsesStarving = loadedReport.counts.villageState[1];
         beadsSpawn = loadedReport.counts.villageState[2];
         trophiesSpawn = loadedReport.counts.villageState[3];
         scrollsSpawn = loadedReport.counts.villageState[4];
         ratsSpawn = loadedReport.counts.villageState[5];
-        cityWalls = loadedReport.counts.villageState[6];
         horseClock = loadedReport.counts.villageCounters[0];
         tributeTimer = loadedReport.counts.villageCounters[1];
         horsesIncAmount = loadedReport.counts.villageDetritus[0];
@@ -444,8 +444,8 @@ function CollateGameStateReport(loud = false) {
         villageFiat: [asCount, asSpent, rentPrice, taxesValue, interestRate, tourismValue, actualBushelPrice, currentBushelPrice, actualBarleyAdjustment, currentBarleyAdjustment, valueInWheat1Log, valueInWheat1Board, valueInWheat1Stone,],
         villageEarn: [rentLifetimeCollected, taxesLifetimeCollected, interestLifetimeCollected, tourismLifetimeProfit, pilgrimLifetimeIncome, marketLifetimeRevenue,],
         villageSpend: [commercialLifetimeSpend, commoditiesLifetimeSpend, militaryLifetimeCost, medicalLifetimeCost, tributeLifetimePaid,],
-        villageMateriel: [horsesCount, beadsCount, trophiesCount, scrollsCount, ratsCount, ghostsCount, patientsCount, relicCount,],
-        villageState: [horsesSpawn, horsesStarving, beadsSpawn, trophiesSpawn, scrollsSpawn, ratsSpawn, cityWalls,],
+        villageInventory: [horsesCount, beadsCount, trophiesCount, scrollsCount, ratsCount, ghostsCount, patientsCount, relicCount,],
+        villageState: [horsesSpawn, horsesStarving, beadsSpawn, trophiesSpawn, scrollsSpawn, ratsSpawn,],
         villageCounters: [horseClock, tributeTimer,],
         villageDetritus: [horsesIncAmount, horsesEaten, trophyChance, ratsHighScore, patientCost, pilgrimPrayerValue, relicSpawnCount,],
 

@@ -2064,7 +2064,7 @@ function Build() {
         actualBushelPrice -= 500;
         SetMarketPrice();
         interestRate += 0.0023;
-        cityWalls = true;
+        player.hasCityWalls = true;
     }
     else if (villageStage == 17 && asCount >= priceBuild17[0] && stoneCount >= priceBuild17[1] && ingotsBronzeCount >= priceBuild17[2]) {
         if (player.likesStory) { GameEvent(displayStoryVillage17); }

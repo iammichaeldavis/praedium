@@ -83,7 +83,7 @@ function GameTurn() {
 
     if (ratsSpawn) { BreedRats(); }
 
-    if (cityWalls) {
+    if (player.hasCityWalls) {
         if (tributeTimer < tributeTimerLimit) {
             tributeTimer++;
             if (tributeTimer == tributeTimerLimit) {
@@ -100,10 +100,12 @@ function GameTurn() {
     }
 
     if (player.hasArmy) {
-        const knightsMax = Math.floor(residentsCount * knightsMaxPopulationPortion);
-        let knightsCount = horsesCount;
-        if (knightsCount > knightsMax) { knightsCount = knightsMax; }
-        const militarySalary = knightsCount * militaryUnitCost;
+        militarySoldiers = Math.floor(residentsCount * militaryEnlistment);
+        militaryCavalryMax = militarySoldiers;
+        militaryCavalryCurrent = horsesCount;
+        if (militaryCavalryCurrent > militaryCavalryMax) { militaryCavalryCurrent = militaryCavalryMax; }
+        militaryInfantry = militarySoldiers - militaryCavalryCurrent;
+        const militarySalary = (militaryInfantry * militaryUnitCost) + (militaryCavalryCurrent * (militaryUnitCost * militaryUnitCostFactor));
         asCount -= militarySalary;
         asSpent += militarySalary;
         militaryLifetimeCost += militarySalary;

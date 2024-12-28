@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.12.2';
+const version = '1.13.0';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -132,6 +132,7 @@ const player = {
     hasHardtack: false,
     hasRations: false,
     hasBandages: false,
+    hasCityWalls: false,
     hasArmy: false,
     hasGraveyard: false,
     hasHospital: false,
@@ -588,10 +589,16 @@ let ratsCount = 1;
 let ratsHighScore = 1;
 let ratPenaltyFactor = 0;
 
-let cityWalls = false;
 let militaryLifetimeCost = 0;
 let militaryUnitCost = 30;
-let knightsMaxPopulationPortion = 0.2;
+let militaryUnitCostFactor = 3;
+let militaryEnlistment = 0.2;
+let militarySoldiers = 0;
+let militaryInfantry = 0;
+let militaryInfantryCombatValue = 5;
+let militaryCavalryMax = 0;
+let militaryCavalryCurrent = 0;
+let militaryCavalryCombatValue = 20;
 
 let ghostsCount = 0;
 
