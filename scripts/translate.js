@@ -1587,13 +1587,13 @@ function Translate(language, bark = true) {
 const dedicationList = [
     ['Lori', 'Corey Cole',], // en.wikipedia.org/wiki/Quest_for_Glory
     ['Jeff', '’Manda Dee',], // en.wikipedia.org/wiki/Master_of_Magic
-    'Richard Garriott', // en.wikipedia.org/wiki/Ultima_(series)
+    'Richard Garriott', // britannica.com/biography/Richard-Garriott
     'ALexis JAnson', // museumofzzt.com/file/view/codered
     'Chris “Pumaman” Jones', // adventuregamestudio.co.uk
     'Denis Loubet', // denisloubet.com (ARTIST LEVEL: 👑🐐👑 G.O.A.T. Status 👑🐐👑)
     'David “aniwey” L.', // candybox2.github.io
     'Sid Meier', // en.wikipedia.org/wiki/Civilization_(series)
-    'Stephen M. F. Polychronopolous',
+    'Stephen M. F. Polychronopolous', // en.wikipedia.org/wiki/What_the_Hell_Happened_to_Me%3F
     '“PyTom” Rothamel', // renpy.org
     'Dave Sim', // en.wikipedia.org/wiki/Cerebus_the_Aardvark
     'Tim Sweeney', // unrealengine.com
@@ -1603,7 +1603,7 @@ const dedicationList = [
 const gratitudeList = [
     'Mohammad Alavi',
     'Sheila Bailey',
-    'Günter Bechly', // ???
+    'Günter Bechly', // evolutionnews.org/2022/04/at-the-bottom-of-the-glass-god-is-waiting
     'Todd T. Brannon',
     'Ryan Butterworth',
     'Colin Campbell',
@@ -1651,6 +1651,7 @@ function ScribeList(rawList) {
     let scribedList = '';
     let conjunction = 'and';
     if (player.speaks == 'Spanish') { conjunction = 'y'; }
+    let gap = ' ';
 
     for (let i = 0; i < rawList.length; i++) {
         if (rawList[i].constructor === Array) {
@@ -1658,13 +1659,13 @@ function ScribeList(rawList) {
                 if (player.speaks == 'English') { scribedList += rawList[i][1]; }
                 else { scribedList += rawList[i][2]; }
             }
-            else { scribedList += rawList[i][0] + ' ' + conjunction + ' ' + rawList[i][1]; }
+            else { scribedList += rawList[i][0] + gap + conjunction + gap + rawList[i][1]; }
         }
         else { scribedList += rawList[i]; }
 
-        if (i == rawList.length - 2) { scribedList += ', ' + conjunction + ' '; }
+        if (i == rawList.length - 2) { scribedList += gap + conjunction + gap; }
         else if (i == rawList.length - 1) { /* last entry */ }
-        else { scribedList += ', '; }
+        else { scribedList += ',' + gap; }
     }
     return scribedList;
 }
