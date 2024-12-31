@@ -516,7 +516,8 @@ function UpdateText() {
             tableString += '<br>' + displayCrop;
             tableString += '</td>';
             tableString += '<td>';
-            tableString += displayAcresFarmed;
+            if (player.canBarter) { tableString += displayAcresFarmedAbbr; }
+            else { tableString += displayAcresFarmed; }
             tableString += '</td>';
             tableString += '<td>';
             tableString += displayBushels + '<br>' + displayHarvested;
@@ -8279,6 +8280,7 @@ function PreloadImages() {
     PreloadImage('bitmaps/pools_af8.png');
     PreloadImage('bitmaps/pools_af9.png');
     PreloadImage('bitmaps/pools_af10.png');
+    PreloadImage('bitmaps/port_frodo1.png');
     PreloadImage('bitmaps/port_gull1.png');
     PreloadImage('bitmaps/port_gull2.png');
     PreloadImage('bitmaps/port_gull3.png');
