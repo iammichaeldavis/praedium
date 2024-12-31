@@ -102,7 +102,7 @@ function ContinuePreviousGame() {
         player.canImportTin = loadedReport.hero.canImportTin;
         player.canImportSalt = loadedReport.hero.canImportSalt;
         player.canHireBronzeworkers = loadedReport.hero.canHireBronzeworkers;
-        player.canWin = loadedReport.hero.canWin;
+        player.canChooseHeir = loadedReport.hero.canChooseHeir;
 
         player.hasBegun = loadedReport.hero.hasBegun;
         player.hasMildewed = loadedReport.hero.hasMildewed;
@@ -145,6 +145,7 @@ function ContinuePreviousGame() {
         //player.hasAllWisdom = loadedReport.hero.hasAllWisdom;
         player.hasWon = loadedReport.hero.hasWon;
         player.hasPegasi = loadedReport.hero.hasPegasi;
+        player.hasWentToAman = loadedReport.hero.hasWentToAman;
         /////////////////////////////////////////////////////////////////////////////////////////
         gameTurn = loadedReport.calendar[0];
         year = loadedReport.calendar[1];
@@ -349,8 +350,17 @@ function ContinuePreviousGame() {
         tileGrowingOlive = loadedReport.bitmaps[2];
         /////////////////////////////////////////////////////////////////////////////////////////
         CalculatePortValues();
-        if (player.canWin) { AnimateWinButton(); }
+
+        militarySoldiers = Math.floor(residentsCount * militaryEnlistment);
+        militaryCavalryMax = militarySoldiers;
+        militaryCavalryCurrent = horsesCount;
+        if (militaryCavalryCurrent > militaryCavalryMax) { militaryCavalryCurrent = militaryCavalryMax; }
+        militaryInfantry = militarySoldiers - militaryCavalryCurrent;
+
+        if (player.canChooseHeir) { AnimateHeirButton(); }
+
         if (farmStage > 17) { buttonBarterOlive.classList.add('noMargin'); }
+        /////////////////////////////////////////////////////////////////////////////////////////
         loadedReport = null;
         divOverlayResume.style.display = '';
         UpdateDisplay();

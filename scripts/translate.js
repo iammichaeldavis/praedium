@@ -24,6 +24,7 @@ let displayHarvest = '';
 let displaySpent = '';
 let displayPurchased = '';
 let displaySold = '';
+let displaySoldAbbr = '';
 let displayGood = '';
 let displayProduced = '';
 let displayScore = '';
@@ -498,6 +499,7 @@ let displayRestartConfirm = '';
 
 let displayRandomWisdomsInglés = [
     '“Thank you so much, friends; we’re so privileged to be able to gather in moments like this when so much of the world is plunged in darkness and chaos.<br><br>“So ring the bells that still can ring<br>Forget your perfect offering<br>There is a crack in everything<br>That’s how the light gets in”<br>—Leonard Cohen',
+    '“When all is said, we cannot, in a world that is ruled by purpose and links an effect with every cause, escape the concept of reward. Action by which nothing is gained is futile.”<br>—E.F. Scott',
     '“Have patience. All things are difficult before they become easy.”<br>—Saʿdī Shīrāzī',
     'You can’t make a silk purse out of a sow’s ear.<br><br>Alexander Barclay’s Eclogues',
     'A poor workman blames his tools.<br><br>John Ray’s A Compleat Collection of English Proverbs',
@@ -530,6 +532,7 @@ let displayRandomWisdomsInglés = [
 ];
 let displayRandomWisdomsEspañol = [
     '«Muchas gracias amigos; somos muy privilegiados de poder reunirnos en momentos como este cuando gran parte del mundo está sumido en la oscuridad y el caos.<br><br>«Suenen las campanas que aún pueden sonar<br>Olvida tu ofrenda perfecta<br>Hay una grieta en todo<br>Así es como entra la luz»<br>—Leonard Cohen',
+    '«Al fin y al cabo, no podemos, en un mundo regido por el propósito y que vincula un efecto a cada causa, escapar del concepto de recompensa. Acción con la que nada se gana es inútil.»<br>—E.F. Scott',
     '«Ten paciencia. Todas las cosas son difíciles antes de volverse fáciles.»<br>—Saʿdī Shīrāzī',
     'No se puede hacer un bolso de seda con una oreja de cerdo.<br><br>Eclogues de Alexander Barclay',
     'Un pobre trabajador culpa a sus herramientas.<br><br>Una Colección Completa de Proverbios Ingleses de John Ray',
@@ -588,6 +591,7 @@ function Translate(language, bark = true) {
         displaySpent = 'Spent';
         displayPurchased = 'Purchased';
         displaySold = 'Sold';
+        displaySoldAbbr = 'Sold';
         displayGood = 'Good';
         displayProduced = 'Produced';
         displayScore = 'Score';
@@ -1079,13 +1083,14 @@ function Translate(language, bark = true) {
         displayFieldhands = 'Labriegos';
         displayHireHand = 'CONTRATAR LABRIEGO';
         displayCrop = 'Bien'; //'Cultivo';
-        displayAcresFarmed = 'Aranzadas<br>Cultivadas';
+        displayAcresFarmed = 'Aranz.<br>Cultiv.'; //'Aranzadas<br>Cultivadas';
         displayBushels = 'Fanegas';
         displayHarvested = 'Cosechadas';
         displayHarvest = 'Cosecha';
         displaySpent = 'Gastadas';
         displayPurchased = 'Comprados';
         displaySold = 'Vendidos';
+        displaySoldAbbr = 'Vend.';
         displayGood = 'Bien';
         displayProduced = 'Producidas';
         displayScore = 'Veintenas';

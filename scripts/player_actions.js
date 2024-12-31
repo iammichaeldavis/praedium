@@ -64,7 +64,7 @@ buttonBuild.addEventListener('click', function () { Build(); });
 buttonEstablishTradeRoute.addEventListener('click', function () { EstablishTradeRoute(); });
 buttonImportTin.addEventListener('click', function () { EstablishShippingLanes(); });
 
-buttonWin.addEventListener('click', function () { Win(); });
+buttonChooseHeir.addEventListener('click', function () { ChooseHeir(); });
 
 buttonOptions.addEventListener('click', function () { SummonOptions(); });
 buttonEnglish.addEventListener('click', function () { Translate('English'); });
@@ -2336,8 +2336,8 @@ function Build() {
         interestRate += 0.0077;
         player.canBuild = false;
         player.hasMonument = true;
-        player.canWin = true;
-        AnimateWinButton();
+        player.canChooseHeir = true;
+        AnimateHeirButton();
     }
     UpdateDisplay();
 }
@@ -2520,8 +2520,8 @@ function PurchaseCommodities(type) {
 
 
 
-function Win() {
-    player.canWin = false;
+function ChooseHeir() {
+    player.canChooseHeir = false;
     player.hasWon = true;
     if (player.likesStory) { GameEvent(displayWinMessage); }
     //window.open(winTarget, 'PRAEDIUM_requested_new_tab');
@@ -2628,7 +2628,9 @@ function Legal() {
 
 function SailWest() {
     if (player.likesStory) { GameEvent(displayStorySailWest); }
-    window.open(sailWestTarget, 'PRAEDIUM_requested_new_tab');
+    player.hasWentToAman = true;
+    UpdateDisplay();
+    //window.open(sailWestTarget, 'PRAEDIUM_requested_new_tab');
 }
 
 

@@ -447,13 +447,13 @@ button:active {
 
 
 
-#buttonWin {
+#buttonChooseHeir {
     border: calc(3px * var(--pixel-scale)) solid;
     border-image: linear-gradient(#60a8fc, #0000a8) 1;
     margin-bottom: 6.4vw;
 }
 
-#buttonWinHeart {
+#buttonChooseHeirHeart {
     color: transparent;
     background-image: linear-gradient(#ff0000, #330000);
     background-clip: text;
@@ -2296,7 +2296,7 @@ td {
 #buttonBuyStone,
 #buttonSellStone,
 #buttonVisitOracle,
-#buttonWin,
+#buttonChooseHeir,
 #buttonPlayGod,
 #buttonSailWest {
     display: none;

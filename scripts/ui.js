@@ -3289,7 +3289,7 @@ function UpdateVisibilities() {
         buttonForewordDismiss.style.display = 'block';
     }
 
-    buttonWin.style.display = player.canWin ? 'inline-block' : '';
+    buttonChooseHeir.style.display = player.canChooseHeir ? 'inline-block' : '';
 
     if (player.isAt == 'Praedium') {
         tableFarmInventory.style.display = player.seesInventory ? 'table' : '';
@@ -3406,7 +3406,7 @@ function UpdateVisibilities() {
         imgTradeTin.style.display = player.canImport ? 'none' : '';
         tableImports.style.display = player.canImport ? 'table' : '';
         buttonImportTin.style.display = player.seesImportButton ? '' : 'none';
-        buttonSailWest.style.display = player.hasWon ? 'block' : '';
+        buttonSailWest.style.display = (player.hasWon && !player.hasWentToAman) ? 'block' : '';
     }
 
     else if (player.isAt == 'Residence') {
@@ -7512,6 +7512,9 @@ function RedrawMountain() {
     }
 
     TileRenderer(arrayMountainGraph, canvasMountainContext);
+
+    if (player.hasHiredBronzeworkers) { canvasMountainContext.drawImage(smeltImage, 0 + smeltImageOffset, 0, 8, 8, 79 + 205, 52 + 88, 8, 8); }
+    if (player.hasHiredGemcutters) { canvasMountainContext.drawImage(crystalMineImage, 0, 0, 32, 32, 48, 32, 32, 32); }
 }
 
 
@@ -7588,27 +7591,32 @@ function RedrawResidence() {
 
 
 function RedrawPort() {
-    canvasPortContext.drawImage(portImage, 0, 0, 384, 224, 0, 0, 384, 224);
-    canvasPortContext.drawImage(portGullImage, 0, 0, 384, 224, 0, 0, 384, 224);
+    if (!player.hasWentToAman) {
+        canvasPortContext.drawImage(portImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        canvasPortContext.drawImage(portGullImage, 0, 0, 384, 224, 0, 0, 384, 224);
+    }
+    else {
+        canvasPortContext.drawImage(portFrodoImage, 0, 0, 384, 224, 0, 0, 384, 224);
+    }
 }
 
 
 
-function AnimateWinButton() {
+function AnimateHeirButton() {
     // disable or enable this based on player.likesAnimations 🚨🚨🚨
     // !! if we do that it won't get translated 😤
-    frameWinButton++;
-    if (frameWinButton == 4) { frameWinButton = 0; }
+    frameHeirButton++;
+    if (frameHeirButton == 4) { frameHeirButton = 0; }
     const greenifyOpen = '<span style="font-weight: bold; color: green;">';
     const greenifyClose = '</span>';
-    const arrayWinFrames = [
-        '<span class="icon Crown1 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown4 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonWinHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
-        '<span class="icon Crown2 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown3 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonWinHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
-        '<span class="icon Crown3 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown2 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonWinHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
-        '<span class="icon Crown4 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown1 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonWinHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
+    const arrayHeirFrames = [
+        '<span class="icon Crown1 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown4 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonChooseHeirHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
+        '<span class="icon Crown2 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown3 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonChooseHeirHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
+        '<span class="icon Crown3 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown2 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonChooseHeirHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
+        '<span class="icon Crown4 inlineIcon"></span> ' + displayHeir + ' <span class="icon Crown1 inlineIcon"></span><br>' + greenifyOpen + '(' + greenifyClose + '<span id="buttonChooseHeirHeart">♥</span>' + greenifyOpen + ')' + greenifyClose,
     ];
-    buttonWin.innerHTML = arrayWinFrames[frameWinButton];
-    timeoutWinButton = setTimeout(AnimateWinButton, 82); // 🤰
+    buttonChooseHeir.innerHTML = arrayHeirFrames[frameHeirButton];
+    timeoutHeirButton = setTimeout(AnimateHeirButton, 82); // 🤰
 }
 
 
@@ -7889,6 +7897,12 @@ function RedrawCanvases() {
                 [17 * 16, 10 * 16,],
             ];
             tileFurnaceSE = arrayFurnaceSEFrames[animationCycleFrame];
+
+            if (smeltImageToggle) {
+                smeltImageOffset += 8;
+                if (smeltImageOffset == 64) { smeltImageOffset = 0; }
+            }
+            smeltImageToggle = !smeltImageToggle;
         }
         else if (player.isAt == 'Township') {
             villageImageCurrent.src = villageImageActual.src;
@@ -8232,6 +8246,7 @@ function PreloadImages() {
     PreloadImage('bitmaps/blacksmith_af10.png');
     PreloadImage('bitmaps/blacksmith_af11.png');
     PreloadImage('bitmaps/blank.png');
+    PreloadImage('bitmaps/crystalmine.png');
     PreloadImage('bitmaps/docks.png');
     PreloadImage('bitmaps/lilzonies1.png');
     PreloadImage('bitmaps/lilzonies2.png');
@@ -8387,6 +8402,7 @@ function PreloadImages() {
     PreloadImage('bitmaps/smokeA_af10.png');
     PreloadImage('bitmaps/smokeA_af11.png');
     PreloadImage('bitmaps/spritesheetCheevo.png');
+    PreloadImage('bitmaps/spritesheetSmelt.png');
     PreloadImage('bitmaps/stables_af1.png');
     PreloadImage('bitmaps/stables_af2.png');
     PreloadImage('bitmaps/stables_af3.png');

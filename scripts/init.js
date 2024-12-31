@@ -1,7 +1,7 @@
 // INIT ********************************************************************************************
 // *************************************************************************************************
 
-const version = '1.13.0';
+const version = '1.13.1';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -109,7 +109,7 @@ const player = {
     canImportTin: false,
     canImportSalt: false,
     canHireBronzeworkers: false,
-    canWin: false,
+    canChooseHeir: false,
 
     hasBegun: false,
     hasMildewed: false,
@@ -152,6 +152,7 @@ const player = {
     hasAllWisdom: false,
     hasWon: false,
     hasPegasi: false,
+    hasWentToAman: false,
 };
 
 const tilemap = new Image();
@@ -198,6 +199,8 @@ const portImage = new Image();
 portImage.src = 'bitmaps/docks.png';
 const portGullImage = new Image();
 portGullImage.src = 'bitmaps/port_gull1.png';
+const portFrodoImage = new Image();
+portFrodoImage.src = 'bitmaps/port_frodo1.png';
 const mansionImage = new Image();
 mansionImage.src = 'bitmaps/mansion.png';
 const beesImage = new Image();
@@ -206,6 +209,10 @@ const cottageAImage = new Image();
 cottageAImage.src = 'bitmaps/res_cottageA.png';
 const cottageBImage = new Image();
 cottageBImage.src = 'bitmaps/res_cottageB.png';
+const smeltImage = new Image();
+smeltImage.src = 'bitmaps/spritesheetSmelt.png';
+const crystalMineImage = new Image();
+crystalMineImage.src = 'bitmaps/crystalmine.png';
 
 const divGameWindow = document.getElementById('divGameWindow');
 
@@ -407,7 +414,7 @@ const buttonStar = document.getElementById('buttonStar');
 const buttonI = document.getElementById('buttonI');
 const buttonCC0 = document.getElementById('buttonCC0');
 
-const buttonWin = document.getElementById('buttonWin');
+const buttonChooseHeir = document.getElementById('buttonChooseHeir');
 const imgNirvana = document.getElementById('imgNirvana');
 const buttonSailWest = document.getElementById('buttonSailWest');
 const buttonPlayGod = document.getElementById('buttonPlayGod');
@@ -637,13 +644,13 @@ const importCost = [8000, 100000,];
 const importAmount = [40, 100,];
 let trinketValue = null;
 function CalculatePortValues() {
-    wheatValuePerUnit[0] = barterExchangeRate[2] * (residenceIngredientsIn[1] / residenceProductOut[1]); // Oil
-    wheatValuePerUnit[1] = barterExchangeRate[1] * (residenceIngredientsIn[2] / residenceProductOut[2]); // Beer
-    wheatValuePerUnit[2] = barterExchangeRate[6] * (residenceIngredientsIn[3] / residenceProductOut[3]); // Wine
-    wheatValuePerUnit[3] = barterExchangeRate[3] * (residenceIngredientsIn[4] / residenceProductOut[4]); // Syrup
-    wheatValuePerUnit[4] = barterExchangeRate[5] * (residenceIngredientsIn[5] / residenceProductOut[5]); // Juice
-    wheatValuePerUnit[5] = barterExchangeRate[4] * (residenceIngredientsIn[6] / residenceProductOut[6]); // Figs
-    trinketValue = ((importCost[0] / importAmount[0]) / residenceProductOut[7]) * valueFactor[6];
+    wheatValuePerUnit[0] = Math.ceil(barterExchangeRate[2] * (residenceIngredientsIn[1] / residenceProductOut[1])); // Oil
+    wheatValuePerUnit[1] = Math.ceil(barterExchangeRate[1] * (residenceIngredientsIn[2] / residenceProductOut[2])); // Beer
+    wheatValuePerUnit[2] = Math.ceil(barterExchangeRate[6] * (residenceIngredientsIn[3] / residenceProductOut[3])); // Wine
+    wheatValuePerUnit[3] = Math.ceil(barterExchangeRate[3] * (residenceIngredientsIn[4] / residenceProductOut[4])); // Syrup
+    wheatValuePerUnit[4] = Math.ceil(barterExchangeRate[5] * (residenceIngredientsIn[5] / residenceProductOut[5])); // Juice
+    wheatValuePerUnit[5] = Math.ceil(barterExchangeRate[4] * (residenceIngredientsIn[6] / residenceProductOut[6])); // Figs
+    trinketValue = Math.ceil(((importCost[0] / importAmount[0]) / residenceProductOut[7]) * valueFactor[6]);
 }
 CalculatePortValues();
 
@@ -732,7 +739,7 @@ const priceBuild25 = [1750000, 16000,]; // Theater
 const priceBuild26 = 100000; // Private Development
 const priceBuild27 = [500000, 5000, 5000,]; // Oracle
 const priceBuild28 = [1111111, 2222, 333, 333,]; // Astronomers Guild
-const priceBuild100 = [50000000, 9001, 77, 1000, 100000, 100000, 10000, 100,]; // Monument
+const priceBuild100 = [20000000, 9001, 77, 1000, 100000, 100000, 10000, 100,]; // Monument
 
 const pricePort0 = 8000;
 const pricePort1 = 16000;
@@ -793,12 +800,14 @@ let villageAnimationFrameH = 1;
 let villageAnimationFrameI = 1;
 let villageAnimationToggle = false;
 let animationCycleFrame = 0;
+let smeltImageOffset = 0;
+let smeltImageToggle = false;
 
 const gameEventDismissDelay = 1600;
 let timeoutGameEventDismiss = null;
 
-let timeoutWinButton = null;
-let frameWinButton = 0;
+let timeoutHeirButton = null;
+let frameHeirButton = 0;
 
 const save_key = 'PRAEDIUM_save_data';
 
