@@ -1,4 +1,4 @@
-// UI **********************************************************************************************
+// ۞ UI ********************************************************************************************
 // *************************************************************************************************
 
 const tileFencePrimH = [13 * 16, 12 * 16,];
@@ -513,7 +513,8 @@ function UpdateText() {
         if (player.seesReport) {
             tableString = '<tr>';
             tableString += '<td>';
-            tableString += '<br>' + displayCrop;
+            if (player.canBarter) { tableString += '<br>' + displayCropAbbr; }
+            else { tableString += '<br>' + displayCrop; }
             tableString += '</td>';
             tableString += '<td>';
             if (player.canBarter) { tableString += displayAcresFarmedAbbr; }
@@ -1022,8 +1023,8 @@ function UpdateText() {
         }
 
         // HIRE BUTTONS ------------------------
-        buttonHire.innerHTML = displayHireHand + '&nbsp;<span class="icon Fieldhand inlineIcon"></span><br>(' + handsAvailable + '&nbsp;' + displayLabelAvailable + ')';
-        buttonAudit.innerHTML = displayHireAccountant + '&nbsp;<span class="icon Accountant inlineIcon"></span><br>(' + priceAccountant + '<span class="icon Wheat inlineIcon"></span>)';
+        buttonHire.innerHTML = displayLabelHireHand + '&nbsp;<span class="icon Fieldhand inlineIcon"></span><br>(' + handsAvailable + '&nbsp;' + displayLabelAvailable + ')';
+        buttonAudit.innerHTML = displayLabelHireAccountant + '&nbsp;<span class="icon Accountant inlineIcon"></span><br>(' + priceAccountant + '<span class="icon Wheat inlineIcon"></span>)';
 
         // NEW VIEW BUTTONS --------------------
         buttonBuyForest.innerHTML = displayLabelForest + '<br>(' + priceForest + '<span class="icon Wheat inlineIcon"></span>)';
@@ -1415,15 +1416,23 @@ function UpdateText() {
                         tableString += '</tr>';
                         tableString += '</thead>';
                         tableString += '<tbody>';
+
+                        tableString += '<tr>';
+                        tableString += '<td colspan="3" style="text-align:center">' + 1 + '<span class="icon Citizen inlineIcon"></span> <span class="icon Sell inlineIcon"></span>';
+                        tableString += ' ' + 1 + '<span class="icon TaxCollector inlineIcon"></span>' + '</td>';
+                        tableString += '</tr>';
+
+                        tableString += '<tr>';
+                        tableString += '<td colspan="3" style="text-align:center">' + 1 + '<span class="icon TaxCollector inlineIcon"></span> + ' + 1 + '<span class="icon Horsey inlineIcon"></span> <span class="icon Sell inlineIcon"></span>';
+                        tableString += ' ' + 1 + '<span class="icon HorseyMounted inlineIcon"></span>' + '</td>';
+                        tableString += '</tr>';
+
                         tableString += '<tr>';
                         tableString += '<td>' + displaySoldiers + ' <span class="icon TaxCollector inlineIcon"></span>:' + '</td>';
                         tableString += '<td class="noPadColumn">' + formatterStandard.format(militaryInfantry) + '<span class="warehouseTotal">/' + militarySoldiers + '</span>' + '</td>';
                         tableString += '<td>(-' + currencySymbol + formatterStandard.format(militaryInfantry * militaryUnitCost) + '<span class="warehouseTotal">/' + displayWeek + '</span>)</td>';
                         tableString += '</tr>';
-                        tableString += '<tr>';
-                        tableString += '<td colspan="3" style="text-align:center">' + 1 + '<span class="icon TaxCollector inlineIcon"></span> + ' + 1 + '<span class="icon Horsey inlineIcon"></span> <span class="icon Sell inlineIcon"></span>';
-                        tableString += ' ' + 1 + '<span class="icon HorseyMounted inlineIcon"></span>' + '</td>';
-                        tableString += '</tr>';
+
                         tableString += '<tr>';
                         tableString += '<td>' + displayCavalry + ' <span class="icon HorseyMounted inlineIcon"></span>:' + '</td>';
                         tableString += '<td class="noPadColumn">' + formatterStandard.format(militaryCavalryCurrent) + '<span class="warehouseTotal">/' + militarySoldiers + '</span>' + '</td>';
@@ -1512,7 +1521,7 @@ function UpdateText() {
             let tempSellIcon = 'SellDisable';
             buttonBuyWheat.classList.add('disabled');
             if (asCount >= buyWheatCost) {
-                tempCommodityIcon = 'Wheat'
+                tempCommodityIcon = 'Wheat';
                 tempSellIcon = 'Sell';
                 buttonBuyWheat.classList.remove('disabled');
             }
@@ -1522,50 +1531,60 @@ function UpdateText() {
             tempSellIcon = 'SellDisable';
             buttonSellWheat.classList.add('disabled');
             if (bushelCount[0] > commodityBulkCount) {
-                tempCommodityIcon = 'Wheat'
+                tempCommodityIcon = 'Wheat';
                 tempSellIcon = 'Sell';
                 buttonSellWheat.classList.remove('disabled');
             }
             buttonSellWheat.innerHTML = formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterStandard.format(currentBushelPrice);
 
-            tempCommodityIcon = 'BarleyDisable'
+            tempCommodityIcon = 'BarleyDisable';
             tempSellIcon = 'SellDisable';
             buttonBuyBarley.classList.add('disabled');
             let adjustedPrice = (currentBushelPrice - currentBarleyAdjustment);
             if (asCount >= adjustedPrice) {
-                tempCommodityIcon = 'Barley'
+                tempCommodityIcon = 'Barley';
                 tempSellIcon = 'Sell';
                 buttonBuyBarley.classList.remove('disabled');
             }
             buttonBuyBarley.innerHTML = currencySymbol + formatterStandard.format(adjustedPrice) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
 
-            tempCommodityIcon = 'BarleyDisable'
+            tempCommodityIcon = 'BarleyDisable';
             tempSellIcon = 'SellDisable';
             buttonSellBarley.classList.add('disabled');
             if (bushelCount[1] > commodityBulkCount) {
-                tempCommodityIcon = 'Barley'
+                tempCommodityIcon = 'Barley';
                 tempSellIcon = 'Sell';
                 buttonSellBarley.classList.remove('disabled');
             }
             adjustedPrice = Math.floor((currentBushelPrice - currentBarleyAdjustment) / 2);
             buttonSellBarley.innerHTML = formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterStandard.format(adjustedPrice);
 
+            tempCommodityIcon = 'FlaxDisable';
+            tempSellIcon = 'SellDisable';
+            buttonSellFlax.classList.add('disabled');
+            if (bushelCount[7] > commodityBulkCount) {
+                tempCommodityIcon = 'Flax';
+                tempSellIcon = 'Sell';
+                buttonSellFlax.classList.remove('disabled');
+            }
+            buttonSellFlax.innerHTML = formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterStandard.format(adjustedPrice);
+
             const currentLogBulkCost = commodityBulkCount * valueInWheat1Log * currentDollarPriceOfOneWheat;
-            tempCommodityIcon = 'LogsDisable'
+            tempCommodityIcon = 'LogsDisable';
             tempSellIcon = 'SellDisable';
             buttonBuyLogs.classList.add('disabled');
             if (asCount >= currentLogBulkCost) {
-                tempCommodityIcon = 'Log'
+                tempCommodityIcon = 'Log';
                 tempSellIcon = 'Sell';
                 buttonBuyLogs.classList.remove('disabled');
             }
             buttonBuyLogs.innerHTML = currencySymbol + formatterStandard.format(currentLogBulkCost) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
 
-            tempCommodityIcon = 'LogsDisable'
+            tempCommodityIcon = 'LogsDisable';
             tempSellIcon = 'SellDisable';
             buttonSellLogs.classList.add('disabled');
             if (logsCount > commodityBulkCount) {
-                tempCommodityIcon = 'Log'
+                tempCommodityIcon = 'Log';
                 tempSellIcon = 'Sell';
                 buttonSellLogs.classList.remove('disabled');
             }
@@ -1573,21 +1592,21 @@ function UpdateText() {
             buttonSellLogs.innerHTML = formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterStandard.format(adjustedPrice);
 
             const currentBoardBulkCost = commodityBulkCount * valueInWheat1Board * currentDollarPriceOfOneWheat;
-            tempCommodityIcon = 'BoardsDisable'
+            tempCommodityIcon = 'BoardsDisable';
             tempSellIcon = 'SellDisable';
             buttonBuyBoards.classList.add('disabled');
             if (asCount >= currentBoardBulkCost) {
-                tempCommodityIcon = 'Board'
+                tempCommodityIcon = 'Board';
                 tempSellIcon = 'Sell';
                 buttonBuyBoards.classList.remove('disabled');
             }
             buttonBuyBoards.innerHTML = currencySymbol + formatterStandard.format(currentBoardBulkCost) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
 
-            tempCommodityIcon = 'BoardsDisable'
+            tempCommodityIcon = 'BoardsDisable';
             tempSellIcon = 'SellDisable';
             buttonSellBoards.classList.add('disabled');
             if (boardsCount >= commodityBulkCount) {
-                tempCommodityIcon = 'Board'
+                tempCommodityIcon = 'Board';
                 tempSellIcon = 'Sell';
                 buttonSellBoards.classList.remove('disabled');
             }
@@ -1595,21 +1614,21 @@ function UpdateText() {
             buttonSellBoards.innerHTML = formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterStandard.format(adjustedPrice);
 
             const currentStoneBulkCost = commodityBulkCount * valueInWheat1Stone * currentDollarPriceOfOneWheat;
-            tempCommodityIcon = 'StoneDisable'
+            tempCommodityIcon = 'StoneDisable';
             tempSellIcon = 'SellDisable';
             buttonBuyStone.classList.add('disabled');
             if (asCount >= currentStoneBulkCost) {
-                tempCommodityIcon = 'Stone'
+                tempCommodityIcon = 'Stone';
                 tempSellIcon = 'Sell';
                 buttonBuyStone.classList.remove('disabled');
             }
             buttonBuyStone.innerHTML = currencySymbol + formatterStandard.format(currentStoneBulkCost) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterStandard.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
 
-            tempCommodityIcon = 'StoneDisable'
+            tempCommodityIcon = 'StoneDisable';
             tempSellIcon = 'SellDisable';
             buttonSellStone.classList.add('disabled');
             if (stoneCount >= commodityBulkCount) {
-                tempCommodityIcon = 'Stone'
+                tempCommodityIcon = 'Stone';
                 tempSellIcon = 'Sell';
                 buttonSellStone.classList.remove('disabled');
             }
@@ -3253,6 +3272,297 @@ function UpdateText() {
         }
     }
 
+    else if (player.isAt == 'Workshop') {
+        divHeirWorkshopForewardHeadline.innerHTML = displayHeirHeadlineForeward;
+        buttonHeirBegin.innerHTML = displayLabelHeirBegin;
+
+        divHeirWorkshopNameHeadline.innerHTML = displayHeirHeadlineName;
+        if (player.names.length == 3) { buttonHeirChooseName.innerHTML = displayLabelMyNameIs + ' ' + player.names[2].toUpperCase(); }
+
+        divHeirWorkshopGenderHeadline.innerHTML = displayHeirHeadlineGender;
+        if (player.gender == 0) {
+            divHeirGenderIcon.classList.add('HeirGenderIconMale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconMaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconIntersex');
+            divHeirGenderIcon.classList.remove('HeirGenderIconNobinario');
+            divHeirGenderIcon.classList.remove('HeirGenderIconOmnigender');
+            divHeirGenderIcon.classList.remove('HeirGenderIconAgender');
+        }
+        else if (player.gender == 1) {
+            divHeirGenderIcon.classList.remove('HeirGenderIconMale');
+            divHeirGenderIcon.classList.add('HeirGenderIconFemale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconMaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconIntersex');
+            divHeirGenderIcon.classList.remove('HeirGenderIconNobinario');
+            divHeirGenderIcon.classList.remove('HeirGenderIconOmnigender');
+            divHeirGenderIcon.classList.remove('HeirGenderIconAgender');
+        }
+        else if (player.gender == 2) {
+            divHeirGenderIcon.classList.remove('HeirGenderIconMale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemale');
+            divHeirGenderIcon.classList.add('HeirGenderIconMaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconIntersex');
+            divHeirGenderIcon.classList.remove('HeirGenderIconNobinario');
+            divHeirGenderIcon.classList.remove('HeirGenderIconOmnigender');
+            divHeirGenderIcon.classList.remove('HeirGenderIconAgender');
+        }
+        else if (player.gender == 3) {
+            divHeirGenderIcon.classList.remove('HeirGenderIconMale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconMaleTrans');
+            divHeirGenderIcon.classList.add('HeirGenderIconFemaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconIntersex');
+            divHeirGenderIcon.classList.remove('HeirGenderIconNobinario');
+            divHeirGenderIcon.classList.remove('HeirGenderIconOmnigender');
+            divHeirGenderIcon.classList.remove('HeirGenderIconAgender');
+        }
+        else if (player.gender == 4) {
+            divHeirGenderIcon.classList.remove('HeirGenderIconMale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconMaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemaleTrans');
+            divHeirGenderIcon.classList.add('HeirGenderIconIntersex');
+            divHeirGenderIcon.classList.remove('HeirGenderIconNobinario');
+            divHeirGenderIcon.classList.remove('HeirGenderIconOmnigender');
+            divHeirGenderIcon.classList.remove('HeirGenderIconAgender');
+        }
+        else if (player.gender == 5) {
+            divHeirGenderIcon.classList.remove('HeirGenderIconMale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconMaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconIntersex');
+            divHeirGenderIcon.classList.add('HeirGenderIconNobinario');
+            divHeirGenderIcon.classList.remove('HeirGenderIconOmnigender');
+            divHeirGenderIcon.classList.remove('HeirGenderIconAgender');
+        }
+        else if (player.gender == 6) {
+            divHeirGenderIcon.classList.remove('HeirGenderIconMale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconMaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconIntersex');
+            divHeirGenderIcon.classList.remove('HeirGenderIconNobinario');
+            divHeirGenderIcon.classList.add('HeirGenderIconOmnigender');
+            divHeirGenderIcon.classList.remove('HeirGenderIconAgender');
+        }
+        else if (player.gender == 7) {
+            divHeirGenderIcon.classList.remove('HeirGenderIconMale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemale');
+            divHeirGenderIcon.classList.remove('HeirGenderIconMaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconFemaleTrans');
+            divHeirGenderIcon.classList.remove('HeirGenderIconIntersex');
+            divHeirGenderIcon.classList.remove('HeirGenderIconNobinario');
+            divHeirGenderIcon.classList.remove('HeirGenderIconOmnigender');
+            divHeirGenderIcon.classList.add('HeirGenderIconAgender');
+        }
+        buttonHeirChooseGender.innerHTML = displayGender[player.gender];
+
+        divHeirWorkshopEthnicityHeadline.innerHTML = displayHeirHeadlineEthnicity;
+        buttonHeirChooseEthnicity.innerHTML = displayLabelSoy + ' ' + displayEthnicities[player.ethnicity].toUpperCase();
+
+        divHeirWorkshopTitleHeadline.innerHTML = displayHeirHeadlineTitle;
+        buttonHeirChooseTitle.innerHTML = displayLabelReferToMeAs + ' ‘' + displayTitles[player.title].toUpperCase() + '’ ' + displayLabelFromNowOn;
+
+        divHeirWorkshopFacesHeadline.innerHTML = displayHeirHeadlineFaces;
+        const arrayFacesDisplaySet = [
+            arrayFacesSorted[0],
+            arrayFacesSorted[1],
+            arrayFacesSorted[2],
+            arrayFacesSorted[3],
+            arrayFacesSorted[4],
+            arrayFacesSorted[5],
+            arrayFacesSorted[6],
+            arrayFacesSorted[7],
+            arrayFacesSorted[8],
+        ];
+        if (heirFacesPageCurrent == 2) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[9];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[10];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[11];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[12];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[13];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[14];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[15];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[16];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[17];
+        }
+        else if (heirFacesPageCurrent == 3) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[18];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[19];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[20];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[21];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[22];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[23];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[24];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[25];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[26];
+        }
+        else if (heirFacesPageCurrent == 4) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[27];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[28];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[29];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[30];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[31];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[32];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[33];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[34];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[35];
+        }
+        else if (heirFacesPageCurrent == 5) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[36];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[37];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[38];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[39];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[40];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[41];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[42];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[43];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[44];
+        }
+        else if (heirFacesPageCurrent == 6) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[45];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[46];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[47];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[48];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[49];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[50];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[51];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[52];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[53];
+        }
+        else if (heirFacesPageCurrent == 7) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[54];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[55];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[56];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[57];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[58];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[59];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[60];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[61];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[62];
+        }
+        else if (heirFacesPageCurrent == 8) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[63];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[64];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[65];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[66];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[67];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[68];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[69];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[70];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[71];
+        }
+        else if (heirFacesPageCurrent == 9) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[72];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[73];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[74];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[75];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[76];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[77];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[78];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[79];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[80];
+        }
+        else if (heirFacesPageCurrent == 10) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[81];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[82];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[83];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[84];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[85];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[86];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[87];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[88];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[89];
+        }
+        else if (heirFacesPageCurrent == 11) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[90];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[91];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[92];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[93];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[94];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[95];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[96];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[97];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[98];
+        }
+        else if (heirFacesPageCurrent == 12) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[99];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[100];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[101];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[102];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[103];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[104];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[105];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[106];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[107];
+        }
+        else if (heirFacesPageCurrent == 13) {
+            arrayFacesDisplaySet[0] = arrayFacesSorted[108];
+            arrayFacesDisplaySet[1] = arrayFacesSorted[109];
+            arrayFacesDisplaySet[2] = arrayFacesSorted[110];
+            arrayFacesDisplaySet[3] = arrayFacesSorted[111];
+            arrayFacesDisplaySet[4] = arrayFacesSorted[112];
+            arrayFacesDisplaySet[5] = arrayFacesSorted[113];
+            arrayFacesDisplaySet[6] = arrayFacesSorted[114];
+            arrayFacesDisplaySet[7] = arrayFacesSorted[115];
+            arrayFacesDisplaySet[8] = arrayFacesSorted[116];
+        }
+        const pixelScale = window.getComputedStyle(buttonHeirChooseFace1).getPropertyValue('--pixel-scale');
+        buttonHeirChooseFace1.innerHTML = '<div style="background-position: -' + arrayFacesDisplaySet[0][1] * pixelScale + 'px -' + arrayFacesDisplaySet[0][0] * pixelScale + 'px;"></div>';
+        buttonHeirChooseFace2.innerHTML = '<div style="background-position: -' + arrayFacesDisplaySet[1][1] * pixelScale + 'px -' + arrayFacesDisplaySet[1][0] * pixelScale + 'px;"></div>';
+        buttonHeirChooseFace3.innerHTML = '<div style="background-position: -' + arrayFacesDisplaySet[2][1] * pixelScale + 'px -' + arrayFacesDisplaySet[2][0] * pixelScale + 'px;"></div>';
+        buttonHeirChooseFace4.innerHTML = '<div style="background-position: -' + arrayFacesDisplaySet[3][1] * pixelScale + 'px -' + arrayFacesDisplaySet[3][0] * pixelScale + 'px;"></div>';
+        buttonHeirChooseFace5.innerHTML = '<div style="background-position: -' + arrayFacesDisplaySet[4][1] * pixelScale + 'px -' + arrayFacesDisplaySet[4][0] * pixelScale + 'px;"></div>';
+        buttonHeirChooseFace6.innerHTML = '<div style="background-position: -' + arrayFacesDisplaySet[5][1] * pixelScale + 'px -' + arrayFacesDisplaySet[5][0] * pixelScale + 'px;"></div>';
+        buttonHeirChooseFace7.innerHTML = '<div style="background-position: -' + arrayFacesDisplaySet[6][1] * pixelScale + 'px -' + arrayFacesDisplaySet[6][0] * pixelScale + 'px;"></div>';
+        buttonHeirChooseFace8.innerHTML = '<div style="background-position: -' + arrayFacesDisplaySet[7][1] * pixelScale + 'px -' + arrayFacesDisplaySet[7][0] * pixelScale + 'px;"></div>';
+        buttonHeirChooseFace9.innerHTML = '<div style="background-position: -' + arrayFacesDisplaySet[8][1] * pixelScale + 'px -' + arrayFacesDisplaySet[8][0] * pixelScale + 'px;"></div>';
+        spanHeirFacesPagination.innerHTML = displayHeirPage + ' ' + heirFacesPageCurrent + ' ' + displayHeirOf + ' ' + heirFacesPageTotal;
+
+        if (heirStage == 6) {
+            let summaryString = displayThouArt + ':<br>';
+
+            summaryString += '<br>';
+
+            summaryString += '<div id="divHeirSelectedPortrait" style="background-position: -' + (arrayFacesDisplaySet[heirFaceChoice][1] * pixelScale * 2) + 'px -' + (arrayFacesDisplaySet[heirFaceChoice][0] * pixelScale * 2) + 'px;"></div>';
+            if (player.gender == 0) { summaryString += '<div id="divHeirSelectedGender" class="HeirGenderIconMaleSm"></div>'; }
+            else if (player.gender == 1) { summaryString += '<div id="divHeirSelectedGender" class="HeirGenderIconFemaleSm"></div>'; }
+            else if (player.gender == 2) { summaryString += '<div id="divHeirSelectedGender" class="HeirGenderIconMaleTransSm"></div>'; }
+            else if (player.gender == 3) { summaryString += '<div id="divHeirSelectedGender" class="HeirGenderIconFemaleTransSm"></div>'; }
+            else if (player.gender == 4) { summaryString += '<div id="divHeirSelectedGender" class="HeirGenderIconIntersexSm"></div>'; }
+            else if (player.gender == 5) { summaryString += '<div id="divHeirSelectedGender" class="HeirGenderIconNobinarioSm"></div>'; }
+            else if (player.gender == 6) { summaryString += '<div id="divHeirSelectedGender" class="HeirGenderIconOmnigenderSm"></div>'; }
+            else if (player.gender == 7) { summaryString += '<div id="divHeirSelectedGender" class="HeirGenderIconAgenderSm"></div>'; }
+
+            summaryString += '<br>';
+            summaryString += '<br>';
+
+            const ethnicitySansArticle = displayEthnicities[player.ethnicity].toUpperCase().split(" ")[1];
+            summaryString += displayTitles[player.title].toUpperCase() + ' ' + player.names[2].toUpperCase() + ' ' + displayDefiniteArticle + ' ' + ethnicitySansArticle.toUpperCase() + '<br>';
+
+            summaryString += '<br>';
+            summaryString += '<br>';
+            summaryString += '<br>';
+
+            summaryString += displayHeirSummaryCorrect + '<br>';
+
+            summaryString += '<br>';
+
+            summaryString += '<button id="buttonHeirConfirmAll" onclick="HeirConfirmAll();">';
+            summaryString += displayItIsI + displayTitles[player.title].toUpperCase() + ' ' + player.names[2].toUpperCase() + ' ' + displayDefiniteArticle + ' ' + displayFirst;
+            summaryString += '</button>';
+
+            divHeirWorkshopSummary.innerHTML = summaryString;
+        }
+
+        buttonHeirGoBack.innerHTML = displayLabelReturnToPrevDecision;
+    }
+
     // SYSTEM ------------------------------
     buttonSystemMessageDismiss.innerHTML = displayIUnderstand;
     //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK; // this is now done in gameEvent utility function to facilitate delay
@@ -3268,6 +3578,168 @@ function UpdateText() {
     buttonResumeNo.innerHTML = displayResumeNo + ' <span class="icon YoMama inlineIcon"></span>';
     buttonPlayGod.innerHTML = displayLabelPegasuses + ' <span class="icon Orb inlineIcon"></span><br>(' + pricePegasus + '<span class="icon Relic inlineIcon"></span>)';
 }
+
+
+
+function RebuildFacesArray() {
+    const arrayFacesMasc = [
+        [0, 0,], // row 1
+        [0, 64,],
+        [0, 128,],
+        [0, 192,],
+        [0, 256,],
+        [0, 320,],
+        [0, 384,],
+        [0, 448,],
+        [0, 512,],
+        [0, 576,],
+        [0, 640,],
+        [64, 0,], // row 2
+        [64, 64,],
+        [64, 128,],
+        [64, 192,],
+        [64, 256,],
+        [64, 320,],
+        [64, 384,],
+        [64, 448,],
+        [64, 512,],
+        [64, 576,],
+        [64, 640,],
+        [128, 0,], // row 3
+        [128, 64,],
+        [128, 128,],
+        [128, 192,],
+        [128, 256,],
+        [128, 320,],
+        [128, 384,],
+        [128, 448,],
+        [128, 512,],
+        [128, 576,],
+        [128, 640,],
+        [192, 0,], // row 4
+        [192, 64,],
+        [192, 128,],
+        [192, 192,],
+        [192, 256,],
+        [192, 320,],
+        [192, 384,],
+        [192, 448,],
+        [192, 512,],
+        [192, 576,],
+        [192, 640,],
+        [256, 0,], // row 5
+        [256, 64,],
+        [256, 128,],
+        [256, 192,],
+        [256, 256,],
+        [256, 320,],
+        [256, 384,],
+        [256, 448,],
+        [256, 512,],
+        [256, 576,],
+        [256, 640,],
+        [320, 0,], // row 6
+        [320, 64,],
+        [320, 128,],
+        [320, 320,],
+    ];
+    const arrayFacesFem = [
+        [640, 640,], // row 11
+        [640, 576,],
+        [640, 512,],
+        [640, 448,],
+        [640, 384,],
+        [640, 320,],
+        [640, 256,],
+        [640, 192,],
+        [640, 128,],
+        [640, 64,],
+        [640, 0,],
+        [576, 640,], // row 10
+        [576, 576,],
+        [576, 512,],
+        [576, 448,],
+        [576, 384,],
+        [576, 320,],
+        [576, 256,],
+        [576, 192,],
+        [576, 128,],
+        [576, 64,],
+        [576, 0,],
+        [512, 640,], // row 9
+        [512, 576,],
+        [512, 512,],
+        [512, 448,],
+        [512, 384,],
+        [512, 320,],
+        [512, 256,],
+        [512, 192,],
+        [512, 128,],
+        [512, 64,],
+        [512, 0,],
+        [448, 640,], // row 8
+        [448, 576,],
+        [448, 512,],
+        [448, 448,],
+        [448, 384,],
+        [448, 320,],
+        [448, 256,],
+        [448, 192,],
+        [448, 128,],
+        [448, 64,],
+        [448, 0,],
+        [384, 640,], // row 7
+        [384, 576,],
+        [384, 512,],
+        [384, 448,],
+        [384, 384,],
+        [384, 320,],
+        [384, 256,],
+        [384, 192,],
+        [384, 128,],
+        [384, 64,],
+        [384, 0,],
+        [320, 640,], // row 6
+        [320, 576,],
+        [320, 512,],
+    ];
+
+    arrayFacesSorted.length = 0;
+
+    if (player.gender == 0 || player.gender == 2) {
+        for (let i = 0; i < arrayFacesMasc.length; i++) {
+            arrayFacesSorted.push(arrayFacesMasc[i]);
+        }
+        for (let i = arrayFacesFem.length; i > 0; i--) {
+            arrayFacesSorted.push(arrayFacesFem[i - 1]);
+        }
+    }
+    else if (player.gender == 1 || player.gender == 3) {
+        for (let i = 0; i < arrayFacesFem.length; i++) {
+            arrayFacesSorted.push(arrayFacesFem[i]);
+        }
+        for (let i = arrayFacesMasc.length; i > 0; i--) {
+            arrayFacesSorted.push(arrayFacesMasc[i - 1]);
+        }
+    }
+    else if (player.gender > 3) {
+        let toggle = false;
+        let counterMasc = arrayFacesMasc.length - 1;
+        let counterFem = arrayFacesFem.length - 1;
+        for (let i = 0; i < (arrayFacesMasc.length + arrayFacesFem.length); i++) {
+            toggle = !toggle;
+            if (toggle) {
+                arrayFacesSorted.push(arrayFacesMasc[counterMasc]);
+                counterMasc--;
+            }
+            else {
+                arrayFacesSorted.push(arrayFacesFem[counterFem]);
+                counterFem--;
+            }
+        }
+    }
+}
+RebuildFacesArray();
 
 
 
@@ -3391,6 +3863,7 @@ function UpdateVisibilities() {
         buttonSellWheat.style.display = player.canSell ? 'block' : '';
         buttonBuyBarley.style.display = player.canSell ? 'block' : '';
         buttonSellBarley.style.display = player.canSell ? 'block' : '';
+        buttonSellFlax.style.display = (player.canSell && player.hasFlaxFarm) ? 'block' : '';
         buttonBuyLogs.style.display = player.canSell ? 'block' : '';
         buttonSellLogs.style.display = player.canSell ? 'block' : '';
         buttonBuyBoards.style.display = player.canSell ? 'block' : '';
@@ -3424,6 +3897,22 @@ function UpdateVisibilities() {
         divWorkshopAtelier.style.display = player.hasAtelier ? 'block' : '';
         divWorkshopApiary.style.display = player.hasApiary ? 'block' : '';
         divWorkshopCottage.style.display = player.hasCottage ? 'block' : '';
+    }
+
+    else if (player.isAt == 'Workshop') {
+        divHeirWorkshopForeward.style.display = (heirStage == 0) ? 'block' : '';
+        divHeirWorkshopName.style.display = (heirStage == 1) ? 'block' : '';
+        divHeirWorkshopGender.style.display = (heirStage == 2) ? 'block' : '';
+        divHeirWorkshopEthnicity.style.display = (heirStage == 3) ? 'block' : '';
+        divHeirWorkshopTitle.style.display = (heirStage == 4) ? 'block' : '';
+        divHeirWorkshopFaces.style.display = (heirStage == 5) ? 'block' : '';
+        divHeirWorkshopSummary.style.display = (heirStage == 6) ? 'block' : '';
+        buttonHeirGoBack.style.display = (heirStage > 1) ? 'block' : '';
+
+        if (heirFacesPageCurrent == 1) { buttonHeirFacesLeft.classList.add('disabled'); }
+        else { buttonHeirFacesLeft.classList.remove('disabled'); }
+        if (heirFacesPageCurrent == heirFacesPageTotal) { buttonHeirFacesRight.classList.add('disabled'); }
+        else { buttonHeirFacesRight.classList.remove('disabled'); }
     }
 }
 
@@ -7606,6 +8095,7 @@ function RedrawPort() {
 function AnimateHeirButton() {
     // disable or enable this based on player.likesAnimations 🚨🚨🚨
     // !! if we do that it won't get translated 😤
+        // this has become a non-issue, disabling animations is no longer allowed
     frameHeirButton++;
     if (frameHeirButton == 4) { frameHeirButton = 0; }
     const greenifyOpen = '<span style="font-weight: bold; color: green;">';

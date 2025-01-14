@@ -1,4 +1,4 @@
-// PLAYER INPUT ************************************************************************************
+// ۞ PLAYER INPUT **********************************************************************************
 // *************************************************************************************************
 
 buttonResumeYes.addEventListener('click', function () { ContinuePreviousGame(); });
@@ -37,6 +37,7 @@ buttonBarterPom.addEventListener('click', function () { BarterFruit(5); });
 buttonBarterGrape.addEventListener('click', function () { BarterFruit(6); });
 buttonSellWheat.addEventListener('click', function () { SellCommodities(0); });
 buttonSellBarley.addEventListener('click', function () { SellCommodities(1); });
+buttonSellFlax.addEventListener('click', function () { SellCommodities(5); });
 buttonSellLogs.addEventListener('click', function () { SellCommodities(2); });
 buttonSellBoards.addEventListener('click', function () { SellCommodities(3); });
 buttonSellStone.addEventListener('click', function () { SellCommodities(4); });
@@ -73,6 +74,24 @@ buttonStar.addEventListener('click', function () { SummonModsWindow(); });
 buttonQ.addEventListener('click', function () { Help(); });
 buttonI.addEventListener('click', function () { Info(); });
 buttonCC0.addEventListener('click', function () { Legal(); });
+
+buttonHeirBegin.addEventListener('click', function () { HeirBegin(); });
+buttonHeirChooseName.addEventListener('click', function () { HeirChooseName(); });
+buttonHeirGendersLeft.addEventListener('click', function () { HeirChangeGender('previous'); });
+buttonHeirGendersRight.addEventListener('click', function () { HeirChangeGender('next'); });
+buttonHeirChooseGender.addEventListener('click', function () { HeirChooseGender(); });
+buttonHeirChooseEthnicity.addEventListener('click', function () { HeirChooseEthnicity(); });
+buttonHeirChooseTitle.addEventListener('click', function () { HeirChooseTitle(); });
+buttonHeirChooseFace1.addEventListener('click', function () { HeirChooseFace(0); });
+buttonHeirChooseFace2.addEventListener('click', function () { HeirChooseFace(1); });
+buttonHeirChooseFace3.addEventListener('click', function () { HeirChooseFace(2); });
+buttonHeirChooseFace4.addEventListener('click', function () { HeirChooseFace(3); });
+buttonHeirChooseFace5.addEventListener('click', function () { HeirChooseFace(4); });
+buttonHeirChooseFace6.addEventListener('click', function () { HeirChooseFace(5); });
+buttonHeirChooseFace7.addEventListener('click', function () { HeirChooseFace(6); });
+buttonHeirChooseFace8.addEventListener('click', function () { HeirChooseFace(7); });
+buttonHeirChooseFace9.addEventListener('click', function () { HeirChooseFace(8); });
+buttonHeirGoBack.addEventListener('click', function () { HeirGoBack(); });
 
 buttonSailWest.addEventListener('click', function () { SailWest(); });
 buttonPlayGod.addEventListener('click', function () { PlayGod(); });
@@ -222,6 +241,7 @@ document.body.onkeyup = function (e) {
         if (e.key == '8' && e.altKey && player.canSell) { PurchaseCommodities(3); }
         if (e.key == '9' && e.altKey && player.canSell) { SellCommodities(4); }
         if (e.key == '0' && e.altKey && player.canSell) { PurchaseCommodities(4); }
+        if (e.key == '-' && e.altKey && player.canSell) { SellCommodities(5); }
 
         if (e.key == 'x' && player.canGoHome && player.isAt == 'Praedium') { GoToResidence(); }
         if (e.key == 'c' && (player.isAt == 'Residence' || player.isAt == 'Township')) { GoToPraedium(); }
@@ -253,6 +273,7 @@ document.body.onkeyup = function (e) {
                 player.likesStory = false;
                 setValues(1000000000);
                 for (let i = 0; i < 25; i++) { AdvanceGame(); } // completely upgrade praedium
+                player.names.push('Pee-Pee Boy');
                 HireAccountant();
                 for (let i = 0; i < 36; i++) { HireHand(); }
                 AdvanceGame(); // buy town
@@ -321,6 +342,7 @@ document.body.onkeyup = function (e) {
         function FinalReset() {
             bushelCount[0] = 1000000;
             bushelCount[1] = 1000000;
+            bushelCount[7] = 1000000;
             bushelCount[2] = 1000;
             bushelCount[3] = 1000;
             bushelCount[4] = 1000;
@@ -495,7 +517,7 @@ document.body.onkeyup = function (e) {
 
 
 
-// PLAYER ACTIONS **********************************************************************************
+// ۞ PLAYER ACTIONS ********************************************************************************
 // *************************************************************************************************
 
 function BeginGame(language) {
@@ -2463,6 +2485,14 @@ function SellCommodities(type) {
         marketLifetimeRevenue += currentStoneBulkSellPrice;
         UpdateDisplay();
     }
+    else if (type == 5 && bushelCount[7] > commodityBulkCount) {
+        bushelCount[7] -= commodityBulkCount;
+        soldCount[7] += commodityBulkCount;
+        const currentFlaxSellPrice = Math.floor((currentBushelPrice - currentBarleyAdjustment) / 2);
+        asCount += currentFlaxSellPrice;
+        marketLifetimeRevenue += currentFlaxSellPrice;
+        UpdateDisplay();
+    }
 }
 
 
@@ -2519,14 +2549,170 @@ function PurchaseCommodities(type) {
 
 
 
-
-function ChooseHeir() {
-    player.canChooseHeir = false;
+function Win() {
     player.hasWon = true;
     if (player.likesStory) { GameEvent(displayWinMessage); }
     //window.open(winTarget, 'PRAEDIUM_requested_new_tab');
     player.saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
+}
+
+
+
+function ChooseHeir() {
+    Translate(player.speaks, false); // this repopulates the bindings in the following string
+    if (player.likesStory) { GameEvent(displayStoryHeir); }
+
+    player.canChooseHeir = false;
+    player.isAt = 'Workshop';
+
+    divViewResidence.style.display = '';
+    divViewPraedium.style.display = 'none';
+    divViewTownship.style.display = '';
+    divViewPort.style.display = '';
+    divViewHeirWorkshop.style.display = 'block';
+
     UpdateDisplay();
+    window.scrollTo(0, 0);
+    clearTimeout(timeoutHeirButton);
+}
+
+
+
+function HeirBegin() {
+    PauseTime();
+    heirStage++;
+    const defaultName = selectHeirNames.options[selectHeirNames.selectedIndex].text;
+    player.names.push(defaultName);
+    UpdateDisplay();
+    window.scrollTo(0, 0);
+}
+
+
+
+function HeirChangeName() {
+    const newChoice = selectHeirNames.options[selectHeirNames.selectedIndex].text;
+    player.names[2] = newChoice;
+    UpdateDisplay();
+}
+
+
+
+function HeirChooseName() {
+    heirStage++;
+    UpdateDisplay();
+    window.scrollTo(0, 0);
+}
+
+
+
+function HeirChangeGender(direction) {
+    if (direction == 'previous') {
+        player.gender--;
+        if (player.gender == -1) { player.gender = 7; }
+    }
+    else if (direction == 'next') {
+        player.gender++;
+        if (player.gender == 8) { player.gender = 0; }
+    }
+    heirFacesPageCurrent = 1;
+    UpdateDisplay();
+}
+
+
+
+function HeirChooseGender() {
+    heirStage++;
+    RebuildFacesArray();
+    Translate(player.speaks, false); // this repopulates the correct honorific binding in Spanish for the string used in the following method call
+    HeirChangeEthnicity(); // this updates the ethnicity button with the correct string
+    //UpdateDisplay(); // redundant because of above method call
+    window.scrollTo(0, 0);
+}
+
+
+
+function HeirChangeEthnicity() {
+    let selectionsString = '';
+    function AddChoiceToList(choice) {
+        if (selectHeirEthnicities.selectedIndex == choice) { selectionsString += '<option value="' + displayNations[choice] + '" selected>' + displayNations[choice] + '</option>'; }
+        else { selectionsString += '<option value="' + displayNations[choice] + '">' + displayNations[choice] + '</option>'; }
+    }
+    for (let i = 0; i < displayEthnicities.length; i++) { AddChoiceToList(i); }
+    selectHeirEthnicities.innerHTML = selectionsString;
+    player.ethnicity = selectHeirEthnicities.selectedIndex;
+    UpdateDisplay();
+}
+
+
+
+function HeirChooseEthnicity() {
+    heirStage++;
+    HeirChangeTitle(); // populates the selections
+    //UpdateDisplay(); // redundant because of above method call
+    window.scrollTo(0, 0);
+}
+
+
+
+function HeirChangeTitle() {
+    let selectionsString = '';
+    function AddChoiceToList(choice) {
+        if (selectHeirTitles.selectedIndex == choice) { selectionsString += '<option value="' + displayTitles[choice] + '" selected>' + displayTitles[choice] + '</option>'; }
+        else { selectionsString += '<option value="' + displayTitles[choice] + '">' + displayTitles[choice] + '</option>'; }
+    }
+    for (let i = 0; i < displayTitles.length; i++) { AddChoiceToList(i); }
+    selectHeirTitles.innerHTML = selectionsString;
+    player.title = selectHeirTitles.selectedIndex;
+    UpdateDisplay();
+}
+
+
+
+function HeirChooseTitle() {
+    heirStage++;
+    UpdateDisplay();
+    window.scrollTo(0, 0);
+}
+
+
+
+function HeirChangeFaces(direction) {
+    if (direction == 'next') {
+        if (heirFacesPageCurrent != heirFacesPageTotal) { heirFacesPageCurrent++; }
+    }
+    else if (direction == 'previous') {
+        if (heirFacesPageCurrent != 1) { heirFacesPageCurrent--; }
+    }
+    UpdateDisplay();
+}
+
+
+
+function HeirChooseFace(chosenChoice) {
+    heirFaceChoice = chosenChoice;
+    heirStage++;
+    UpdateDisplay();
+    window.scrollTo(0, 0);
+}
+
+
+
+function HeirConfirmAll() {
+    if (confirm(displayHeirConfirm)) {
+        player.isAt = 'Praedium';
+        divViewPraedium.style.display = '';
+        divViewHeirWorkshop.style.display = '';
+        UpdateDisplay();
+        Win();
+    }
+}
+
+
+
+function HeirGoBack() {
+    heirStage--;
+    UpdateDisplay();
+    window.scrollTo(0, 0);
 }
 
 
@@ -2621,7 +2807,7 @@ function ToggleAnimation() {
 
 function Legal() {
     SystemMessage(displayLegalFinal);
-    window.open(legalTarget, 'PraediumRequestedWindow');
+    //window.open(legalTarget, 'PraediumRequestedWindow');
 }
 
 

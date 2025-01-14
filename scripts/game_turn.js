@@ -1,5 +1,10 @@
-// GAME TURN ***************************************************************************************
+// ۞ GAME TURN *************************************************************************************
 // *************************************************************************************************
+
+let gameEventTrigger = false;
+let gameEventContainer = '';
+
+
 
 function GameTurn() {
     if (player.likesRecords) { snapshotLastTurn = snapshotThisTurn; }
@@ -56,7 +61,8 @@ function GameTurn() {
         if (mineTimer < mineTimerLimit) {
             mineTimer++;
             if (mineTimer == mineTimerLimit) {
-                if (player.likesStory) { GameEvent(displayStoryFoundCopper, null, false); }
+                gameEventTrigger = true;
+                gameEventContainer = displayStoryFoundCopper;
                 player.seesMountainButton = true;
                 player.hasFoundCopperEvidence = true;
             }
@@ -87,7 +93,8 @@ function GameTurn() {
         if (tributeTimer < tributeTimerLimit) {
             tributeTimer++;
             if (tributeTimer == tributeTimerLimit) {
-                if (player.likesStory) { GameEvent(displayStoryTribute, null, false); }
+                gameEventTrigger = true;
+                gameEventContainer = displayStoryTribute;
                 player.hasBeenLevied = true;
             }
         }
@@ -114,7 +121,8 @@ function GameTurn() {
     if (farmStage == 1 && bushelCount[0] > 88 && !player.hasMildewed) {
         player.hasMildewed = true;
         bushelCount[0] = Math.floor((bushelCount[0] * 0.1));
-        if (player.likesStory) { GameEvent(displayStoryFarmMildew, null, false); }
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryFarmMildew;
     }
 
     if (villageStage > 13 && (week == 52 || week == 26)) {
@@ -140,7 +148,8 @@ function GameTurn() {
         if (crystalTimer < crystalTimerLimit && player.hasAtelier) {
             crystalTimer++;
             if (crystalTimer == crystalTimerLimit) {
-                if (player.likesStory) { GameEvent(displayStoryFoundCrystal, null, false); }
+                gameEventTrigger = true;
+                gameEventContainer = displayStoryFoundCrystal;
                 player.seesMountainButton = true;
                 player.hasFoundCrystalEvidence = true;
             }
@@ -153,12 +162,9 @@ function GameTurn() {
 
     if (player.hasBakery) { WorkshopProduction(); }
 
-    UpdateDisplay();
-
-    if (gameSpeed == 'standard' && player.likesAnimations) {
-        globalAnimationFrame = 1;
-        clearTimeout(timeoutCanvases);
-        timeoutCanvases = setTimeout(AnimateCanvases, animationInterval);
+    if (year == 55 && week == 10) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryRomanConquestofGreece;
     }
 
     if (player.likesRecords) {
@@ -167,6 +173,25 @@ function GameTurn() {
     }
 
     if (week == 1 && year > 1) { RecordProgress(); }
+
+    UpdateDisplay();
+
+    if (gameSpeed == 'standard' && player.likesAnimations) {
+        globalAnimationFrame = 1;
+        clearTimeout(timeoutCanvases);
+        timeoutCanvases = setTimeout(AnimateCanvases, animationInterval);
+    }
+
+    if (gameEventTrigger) {
+        gameEventTrigger = false;
+        setTimeout(FireGameEvent, 50);
+    }
+}
+
+
+
+function FireGameEvent() {
+    if (player.likesStory) { GameEvent(gameEventContainer, null, true); }
 }
 
 
@@ -188,7 +213,9 @@ function FruitOlives() {
 
         if (year >= (olivePlantDate[1] + 8)) {
             if (year == (olivePlantDate[1] + 8)) {
-                if (player.likesStory) { GameEvent(displayStoryOlives, 'buy_olives', false); }
+                gameEventTrigger = true;
+                gameEventContainer = displayStoryOlives;
+                //if (player.likesStory) { GameEvent(displayStoryOlives, 'buy_olives', false); }
                 player.canBarter = true;
             }
             for (let i = 0; i < arrayOlivar.length; i++) { arrayOlivar[i] = 1; }

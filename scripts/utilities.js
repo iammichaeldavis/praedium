@@ -1,4 +1,4 @@
-// UTILITIES ***************************************************************************************
+// ۞ UTILITIES *************************************************************************************
 // *************************************************************************************************
 
 function RecordProgress() {
@@ -42,6 +42,7 @@ function ContinuePreviousGame() {
         /////////////////////////////////////////////////////////////////////////////////////////
         if (loadedReport.hero.names.length > 1) { player.names.push(loadedReport.hero.names[1]); }
         player.age = loadedReport.hero.age;
+        player.saṃsāra = loadedReport.hero.saṃsāra;
 
         player.likesMusic = loadedReport.hero.likesMusic;
         player.likesSounds = loadedReport.hero.likesSounds;

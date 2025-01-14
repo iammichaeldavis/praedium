@@ -1,4 +1,4 @@
-// TRANSLATION *************************************************************************************
+// ۞ TRANSLATION ***********************************************************************************
 // *************************************************************************************************
 
 const displayGameTitle = 'PRAEDIUM';
@@ -6,6 +6,15 @@ let displayGameEdition = '';
 
 const currencySymbol = '<s>𝐼</s>';
 
+const displayGender = ['', '', '', '', '', '', '', '',];
+const displayNations = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
+const displayEthnicities = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
+const displayTitles = ['', '', '', '', '', '', '', '', '', '',];
+
+let displayDefiniteArticle = '';
+let displayThouArt = '';
+let displayItIsI = '';
+let displayFirst = '';
 let displayIUnderstand = '';
 let displayOK = '';
 let displayOptions = '';
@@ -15,8 +24,9 @@ let displayAnimations = '';
 let displayInStock = '';
 let displayStaff = '';
 let displayFieldhands = '';
-let displayHireHand = '';
+let displayLabelHireHand = '';
 let displayCrop = '';
+let displayCropAbbr = '';
 let displayAcresFarmed = '';
 let displayAcresFarmedAbbr = '';
 let displayBushels = '';
@@ -78,7 +88,7 @@ let displayGemcutters = '';
 let displayLabelBuyLand0 = '';
 let displayLabelBuyLand1 = '';
 let displayLabelBuyLand2 = '';
-let displayHireAccountant = '';
+let displayLabelHireAccountant = '';
 let displayLabelBuyLand3 = '';
 let displayLabelBuyLand4 = '';
 let displayLabelBuyLand5 = '';
@@ -176,6 +186,24 @@ let displayLabelImportSalt = '';
 let displayLabelSailWest = '';
 let displayLabelPegasuses = '';
 
+let displayLabelHeirBegin = '';
+let displayLabelMyNameIs = '';
+let displayLabelSoy = '';
+let displayLabelReferToMeAs = '';
+let displayLabelFromNowOn = '';
+let displayLabelReturnToPrevDecision = '';
+
+let displayHeirHeadlineForeward = '';
+let displayHeirHeadlineName = '';
+let displayHeirHeadlineGender = '';
+let displayHeirHeadlineEthnicity = '';
+let displayHeirHeadlineTitle = '';
+let displayHeirHeadlineFaces = '';
+let displayHeirPage = '';
+let displayHeirOf = '';
+let displayHeirSummaryCorrect = '';
+let displayHeirConfirm = '';
+
 let displayStoryFarm0 = '';
 let displayStoryFarmMildew = '';
 let displayStoryFarm1 = '';
@@ -260,6 +288,7 @@ let displayStoryBronzeworkers = '';
 let displayStoryFoundCrystal = '';
 let displayStoryCrystal = '';
 let displayStoryTribute = '';
+let displayStoryRomanConquestofGreece = '';
 
 let displayStoryResidenceFirstVisit = '';
 let displayStoryResidence00 = '';
@@ -331,6 +360,7 @@ let displayStoryPort06 = '';
 let displayStoryPort07 = '';
 let displayStoryPort08 = '';
 
+let displayStoryHeir = '';
 let displayStorySailWest = '';
 let displayStoryPegasus = '';
 
@@ -574,6 +604,94 @@ function Translate(language, bark = true) {
     if (language == 'English') {
         displayGameEdition = 'GOLD EDITION';
 
+        displayGender[0] = 'MALE';
+        displayGender[1] = 'FEMALE';
+        displayGender[2] = 'MALE (TRANS)';
+        displayGender[3] = 'FEMALE (TRANS)';
+        displayGender[4] = 'INTERSEX';
+        displayGender[5] = 'NONBINARY';
+        displayGender[6] = 'OMNIGENDER';
+        displayGender[7] = 'AGENDER';
+
+        displayNations[0] = 'Assyria'; //
+        displayNations[1] = 'Babylon'; //
+        displayNations[2] = 'Canaan'; //
+        displayNations[3] = 'Carthage'; //
+        displayNations[4] = 'Corinth'; // (+10 Armor Crafting) https://en.wikipedia.org/wiki/Corinthian_helmet
+        displayNations[5] = 'Crete'; // (Unique Unit: Minotaurs)
+        displayNations[6] = 'Egypt'; // (+10 Cosmetics)
+        displayNations[7] = 'Etruria'; // (+10 Gastronomy)
+        displayNations[8] = 'Galatia'; // (Unique Unit: Druids)
+        displayNations[9] = 'Greece'; // (+10 Philosophy)
+        displayNations[10] = 'Hattusa'; // (+10 Cuneiform)
+        displayNations[11] = 'Iberia'; // (Unique Unit: Mountain Antelope)
+        displayNations[12] = 'Israel'; //
+        displayNations[13] = 'Judea'; //
+        displayNations[14] = 'Libya'; //
+        displayNations[15] = 'Macedon'; //
+        displayNations[16] = 'Moab'; //
+        displayNations[17] = 'Numidia'; //
+        displayNations[18] = 'Palestine'; //
+        displayNations[19] = 'Persia'; //
+        displayNations[20] = 'Phoenicia'; //
+        displayNations[21] = 'Rome'; //
+        displayNations[22] = 'Sahara'; //
+        displayNations[23] = 'Samaria'; //
+        displayNations[24] = 'Scythia'; //
+        displayNations[25] = 'Sparta'; //
+        displayNations[26] = 'Syria'; //
+        displayNations[27] = 'Tartessia'; //
+        displayNations[28] = 'Thrace'; //
+        displayNations[29] = 'Troy'; //
+        displayNations[30] = 'All over'; //
+
+        displayEthnicities[0] = 'an Assyrian';
+        displayEthnicities[1] = 'a Babylonian';
+        displayEthnicities[2] = 'a Canaanite';
+        displayEthnicities[3] = 'a Carthaginian';
+        displayEthnicities[4] = 'a Corinthian';
+        displayEthnicities[5] = 'a Cretan';
+        displayEthnicities[6] = 'an Egyptian';
+        displayEthnicities[7] = 'an Etruscan';
+        displayEthnicities[8] = 'a Celt';
+        displayEthnicities[9] = 'a Greek';
+        displayEthnicities[10] = 'a Hittite';
+        displayEthnicities[11] = 'an Iberian';
+        displayEthnicities[12] = 'an Israelite';
+        displayEthnicities[13] = 'a Judean';
+        displayEthnicities[14] = 'a Libyan';
+        displayEthnicities[15] = 'a Macedonian';
+        displayEthnicities[16] = 'a Moabite';
+        displayEthnicities[17] = 'a Numidian';
+        displayEthnicities[18] = 'a Philistine';
+        displayEthnicities[19] = 'a Persian';
+        displayEthnicities[20] = 'a Phoenician';
+        displayEthnicities[21] = 'a Roman';
+        displayEthnicities[22] = 'a Saharan';
+        displayEthnicities[23] = 'a Samaritan';
+        displayEthnicities[24] = 'a Scythian';
+        displayEthnicities[25] = 'a Spartan';
+        displayEthnicities[26] = 'a Syrian';
+        displayEthnicities[27] = 'a Tartessian';
+        displayEthnicities[28] = 'a Thracian';
+        displayEthnicities[29] = 'a Trojan';
+        displayEthnicities[30] = 'a Cosmopolitan';
+
+        displayTitles[0] = 'Pharaoh';
+        displayTitles[1] = 'Shah';
+        displayTitles[2] = 'Emperor';
+        displayTitles[3] = 'Empress';
+        displayTitles[4] = 'King';
+        displayTitles[5] = 'Queen';
+        displayTitles[6] = 'Lord';
+        displayTitles[7] = 'Lady';
+        displayTitles[8] = 'Viceroy';
+        displayTitles[9] = 'Vicereine';
+
+        displayDefiniteArticle = 'THE';
+        displayThouArt = 'THOU ART';
+        displayItIsI = 'IT IS I, ';
+        displayFirst = 'FIRST';
         displayIUnderstand = 'I UNDERSTAND';
         displayOK = "I AM READY TO CONTINUE";
         displayOptions = 'Options';
@@ -583,8 +701,9 @@ function Translate(language, bark = true) {
         displayInStock = 'In Stock';
         displayStaff = 'Staff';
         displayFieldhands = 'Fieldhands';
-        displayHireHand = 'HIRE FIELDHAND';
+        displayLabelHireHand = 'HIRE FIELDHAND';
         displayCrop = 'Crop';
+        displayCropAbbr = 'Crop';
         displayAcresFarmed = 'Acres<br>Farmed';
         displayAcresFarmedAbbr = 'Acres<br>Farmed';
         displayBushels = 'Bushels';
@@ -646,7 +765,7 @@ function Translate(language, bark = true) {
         displayLabelBuyLand0 = 'LEASE ANOTHER ACRE';
         displayLabelBuyLand1 = 'LEASE A LARGER PLOT';
         displayLabelBuyLand2 = 'BUY YOUR LAND';
-        displayHireAccountant = 'HIRE AN ACCOUNTANT';
+        displayLabelHireAccountant = 'HIRE AN ACCOUNTANT';
         displayLabelBuyLand3 = 'BUY MORE LAND';
         displayLabelBuyLand4 = 'HAVE A FENCE ERECTED';
         displayLabelBuyLand5 = 'ACQUIRE THE NEARBY MEADOW';
@@ -744,6 +863,24 @@ function Translate(language, bark = true) {
         displayLabelSailWest = 'SAIL WEST TO VALINOR';
         displayLabelPegasuses = 'BREED PEGASUSES';
 
+        displayLabelHeirBegin = 'LET’S GET THIS OVER WITH';
+        displayLabelMyNameIs = 'MY NAME IS';
+        displayLabelSoy = 'I AM';
+        displayLabelReferToMeAs = 'REFER TO ME AS';
+        displayLabelFromNowOn = 'FROM NOW ON';
+        displayLabelReturnToPrevDecision = '← Return to Previous Decision';
+
+        displayHeirHeadlineForeward = 'What follows next is an endless parade of comptrollers, jurists and seneschals, each one bearing a larger heap of papyrus scrolls and clay tablets than the last, and every document covered in inscrutible legalese. You think this day will never end.<br><br>Finally, the court doctor——YOUR doctor, now, it occurs to you——pulls you aside for a moment alone.<br><br>“Well now, sire, all that is left is thy physical. Purely routine, I’m sure thou dost understand.”<br><br><br><div style="width: 100%; text-align: center;">ART THOU READY TO BEGIN?</div>';
+        displayHeirHeadlineName = 'WHAT IS THY GIVEN NAME, YOUR MAJESTY?';
+        displayHeirHeadlineGender = 'AND HOW DOST THOU IDENTIFY, OH LIEGE?';
+        displayHeirHeadlineEthnicity = 'WHERE DO YOUR PEOPLE HAIL FROM, SIRE?';
+        displayHeirHeadlineTitle = 'AND HOW SHALT THOU BE ADDRESSED IN THY COURT?';
+        displayHeirHeadlineFaces = 'PLEASE SELECT THINE OFFICIAL STATE PORTRAIT';
+        displayHeirPage = 'page';
+        displayHeirOf = 'of';
+        displayHeirSummaryCorrect = 'IS THIS CORRECT?';
+        displayHeirConfirm = 'Art thou certain about thy answers?';
+
         displayStoryFarm0 = 'NOW I CAN PROVIDE FOR MY FAMILY';
         displayStoryFarmMildew = 'YOU HAVE JUST RECEIVED A MESSAGE FROM THE MAN WHO RUNS THE WAREHOUSE WHERE YOU KEEP YOUR WHEAT:<div id="nasirMessage">Roof damage has let water in; mildew has claimed 90% of all grain in storage; my sincerest apologies<br>—Ea-nāṣir</div>';
         displayStoryFarm1 = 'WITH TWICE THE LAND I CAN DOUBLE MY PROFITS';
@@ -828,6 +965,7 @@ function Translate(language, bark = true) {
         displayStoryFoundCrystal = 'MASONS AT THE QUARRY HAVE DISCOVERED GEODES OF AMETHYST!!';
         displayStoryCrystal = 'LAPIDARISTS IN OUR ATELIER WILL TRANSFORM THESE INTO SOMETHING TRULY WONDERFUL';
         displayStoryTribute = 'THE LOCAL WARLORD KING HAS CAUGHT WIND OF YOUR SUCCESS AT LAST. QUOTH HIS EMISSARY: “OF COURSE, TARIFFS MUST BE LEVIED”';
+        displayStoryRomanConquestofGreece = 'YOU HAVE JUST RECEIVED WORD: THEY NOW SPEAK LATIN IN ATHENS!';
 
         displayStoryResidenceFirstVisit = 'THERE’S NO PLACE LIKE HOME: YOUR CAMPSITE, ANONYMOUS AMONG THE HUNDREDS OF OTHERS JUST LIKE IT ALL NESTLED HERE, IN THIS NARROW, ARID VALLEY, WHERE YOU RENT THIS PATCH OF DIRT FOR AN EXORBITANT RATE';
         displayStoryResidence00 = 'LIVING ON MY OWN LAND WILL CERTAINLY MAKE IT EASY TO GET TO WORK IN THE MORNING';
@@ -899,6 +1037,7 @@ function Translate(language, bark = true) {
         displayStoryPort07 = 'WITH THIS TIN, ARTISANS CAN CHURN OUT THOSE LUDICROUS, GAUDY BAUBLES THAT COMMAND SUCH A HIGH PRICE IN ROME';
         displayStoryPort08 = 'YOU SHALL SEASON YOUR EVERY OFFERING OF MEAL WITH SALT; YOU SHALL NOT OMIT FROM YOUR MEAL OFFERING THE SALT OF YOUR COVENANT WITH GOD; WITH ALL YOUR OFFERINGS YOU MUST OFFER SALT<br><br>LEVITICUS 2:13';
 
+        if (player.names.length > 1) { displayStoryHeir = 'THE ROYAL PHYSICIAN HAS BEEN BROUGHT TO YOUR CHAMBER UNDER HEAVY GUARD.<br><br>YOU ARE INFORMED THAT SENATOR ' + player.names[1].toUpperCase() + ', THE BELOVED MAGISTRATE OF THE ' + nameVillage.toUpperCase() + ' REGION, PASSED PEACEFULLY IN THEIR SLEEP THIS MORNING AT THE AGE OF ' + player.age + '.<br><br>THEIR LAST OFFICIAL ACT WAS TO NAME *THEE* AS SUCCESSOR!'; }
         displayStorySailWest = 'NOW, TO SET SAIL FOR THE UNDYING LANDS; TO THAT GREAT UNDISCOVERED COUNTRY DO I GO';
         displayStoryPegasus = 'They bring it to you, thrashing, ferocious, defiant to the very last, requiring the full strength of at least a dozen hired goons to hold it down, bound by those ancient alchemical chains, every link etched with one hundred glowing runes each.<br><br>Its eyes sparkle with cruel intelligence.<br><br>Now... now the work can truly begin.';
 
@@ -1036,7 +1175,7 @@ function Translate(language, bark = true) {
         displayInfoMadeWith = 'Made with Blender, CodePen, DOSBox, Exult Studio, GitHub, the GNU Image Manipulation Program, Inkscape and Visual Studio Code.';
         displayInfoDedication = 'Dedicated to ';
         displayInfoDedication += ScribeList(dedicationList);
-        displayInfoDedication += ', and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever and Philip J Reed, VSc. I really, really wish you guys were here.';
+        displayInfoDedication += ', and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez and Philip J Reed, VSc. I really, really wish y’all were here.'; // ۩
         displayInfoThanks = 'Special thanks to ';
         displayInfoThanks += ScribeList(gratitudeList);
         displayInfoThanks += '.<br><br>Very special thanks to my parents for a lifetime of support.<br><br>Seagull appears courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. Seagull training by “Wild” Bill Hinchcleath and the Northwest Florida Panhandle Seagull Wranglers Association of America: Florida Chapter.';
@@ -1074,6 +1213,130 @@ function Translate(language, bark = true) {
     else if (language == 'Spanish') {
         displayGameEdition = 'EDICIÓN DE ORO';
 
+        displayGender[0] = 'HOMBRE';
+        displayGender[1] = 'MUJER';
+        displayGender[2] = 'HOMBRE (TRANS)';
+        displayGender[3] = 'MUJER (TRANS)';
+        displayGender[4] = 'INTERSEXUAL';
+        displayGender[5] = 'NO BINARIO';
+        displayGender[6] = 'OMNIGÉNERO';
+        displayGender[7] = 'AGÉNERO';
+
+        displayNations[0] = 'Asiria';
+        displayNations[1] = 'Babilonia';
+        displayNations[2] = 'Canaán';
+        displayNations[3] = 'Cartago';
+        displayNations[4] = 'Corinto';
+        displayNations[5] = 'Creta';
+        displayNations[6] = 'Egipto';
+        displayNations[7] = 'Etruria';
+        displayNations[8] = 'Galacia';
+        displayNations[9] = 'Grecia';
+        displayNations[10] = 'Hattusa';
+        displayNations[11] = 'Iberia';
+        displayNations[12] = 'Israel';
+        displayNations[13] = 'Judea';
+        displayNations[14] = 'Libia';
+        displayNations[15] = 'Macedonia';
+        displayNations[16] = 'Moab';
+        displayNations[17] = 'Numidia';
+        displayNations[18] = 'Palestina';
+        displayNations[19] = 'Persia';
+        displayNations[20] = 'Fenicia';
+        displayNations[21] = 'Roma';
+        displayNations[22] = 'Sahara';
+        displayNations[23] = 'Samaria';
+        displayNations[24] = 'Escitia';
+        displayNations[25] = 'Esparta';
+        displayNations[26] = 'Siria';
+        displayNations[27] = 'Tartesia';
+        displayNations[28] = 'Tracia';
+        displayNations[29] = 'Troya';
+        displayNations[30] = 'Todas partes';
+
+        displayEthnicities[0] = 'Un asirio';
+        displayEthnicities[1] = 'Un babilónico';
+        displayEthnicities[2] = 'Un cananeo';
+        displayEthnicities[3] = 'Un cartaginés';
+        displayEthnicities[4] = 'Un corintio';
+        displayEthnicities[5] = 'Un cretense';
+        displayEthnicities[6] = 'Un egipcio';
+        displayEthnicities[7] = 'Un etrusco';
+        displayEthnicities[8] = 'Un celta';
+        displayEthnicities[9] = 'Un griego';
+        displayEthnicities[10] = 'Un hitita';
+        displayEthnicities[11] = 'Un ibérico';
+        displayEthnicities[12] = 'Un israelita';
+        displayEthnicities[13] = 'Un judío';
+        displayEthnicities[14] = 'Un libio';
+        displayEthnicities[15] = 'Un macedonio';
+        displayEthnicities[16] = 'Un moabita';
+        displayEthnicities[17] = 'Un númida';
+        displayEthnicities[18] = 'Un filisteo';
+        displayEthnicities[19] = 'Un persa';
+        displayEthnicities[20] = 'Un fenicio';
+        displayEthnicities[21] = 'Un romano';
+        displayEthnicities[22] = 'Un sahariano';
+        displayEthnicities[23] = 'Un samaritano';
+        displayEthnicities[24] = 'Un escita';
+        displayEthnicities[25] = 'Un espartano';
+        displayEthnicities[26] = 'Un sirio';
+        displayEthnicities[27] = 'Un tartésico';
+        displayEthnicities[28] = 'Un tracio';
+        displayEthnicities[29] = 'Un troyano';
+        displayEthnicities[30] = 'Un cosmopolitán';
+
+        if (player.gender == 1 || player.gender == 3) {
+            displayEthnicities[0] = 'Una asiria';
+            displayEthnicities[1] = 'Una babilónica';
+            displayEthnicities[2] = 'Una cananea';
+            displayEthnicities[3] = 'Una cartaginesa';
+            displayEthnicities[4] = 'Una corintia';
+            displayEthnicities[5] = 'Una cretense';
+            displayEthnicities[6] = 'Una egipcia';
+            displayEthnicities[7] = 'Una etrusca';
+            displayEthnicities[8] = 'Una celta';
+            displayEthnicities[9] = 'Una griega';
+            displayEthnicities[10] = 'Una hitita';
+            displayEthnicities[11] = 'Una ibérica';
+            displayEthnicities[12] = 'Una israelita';
+            displayEthnicities[13] = 'Una judía';
+            displayEthnicities[14] = 'Una libia';
+            displayEthnicities[15] = 'Una macedonio';
+            displayEthnicities[16] = 'Una moabita';
+            displayEthnicities[17] = 'Una númida';
+            displayEthnicities[18] = 'Una filistea';
+            displayEthnicities[19] = 'Una persa';
+            displayEthnicities[20] = 'Una fenicia';
+            displayEthnicities[21] = 'Una romana';
+            displayEthnicities[22] = 'Una sahariana';
+            displayEthnicities[23] = 'Una samaritana';
+            displayEthnicities[24] = 'Una escita';
+            displayEthnicities[25] = 'Una espartana';
+            displayEthnicities[26] = 'Una siria';
+            displayEthnicities[27] = 'Una tartésica';
+            displayEthnicities[28] = 'Una tracia';
+            displayEthnicities[29] = 'Una troyana';
+            displayEthnicities[30] = 'Una cosmopolitaña';
+        }
+
+        displayTitles[0] = 'Faraón';
+        displayTitles[1] = 'Shah';
+        displayTitles[2] = 'Emperador';
+        displayTitles[3] = 'Emperatriz';
+        displayTitles[4] = 'Rey';
+        displayTitles[5] = 'Reina';
+        displayTitles[6] = 'Señor';
+        displayTitles[7] = 'Dama';
+        displayTitles[8] = 'Virrey';
+        displayTitles[9] = 'Virreina';
+
+        displayDefiniteArticle = 'EL';
+        if (player.gender == 1 || player.gender == 3) { displayDefiniteArticle = 'LA'; }
+        displayThouArt = 'TÚ ERES';
+        displayItIsI = 'SOY YO, ';
+        displayFirst = 'PRIMERO';
+        if (player.gender == 1 || player.gender == 3) { displayFirst = 'PRIMERA'; }
         displayIUnderstand = 'ENTIENDO';
         displayOK = "ESTOY LISTO<br>PARA CONTINUAR";
         displayOptions = 'Opciones';
@@ -1083,8 +1346,9 @@ function Translate(language, bark = true) {
         displayInStock = 'En Stock';
         displayStaff = 'Personal';
         displayFieldhands = 'Labriegos';
-        displayHireHand = 'CONTRATAR LABRIEGO';
-        displayCrop = 'Bien'; //'Cultivo';
+        displayLabelHireHand = 'CONTRATAR LABRIEGO';
+        displayCrop = 'Cultivo';
+        displayCropAbbr = 'Cult.';
         displayAcresFarmed = 'Aranzadas<br>Cultivadas';
         displayAcresFarmedAbbr = 'Aranz.<br>Cultiv.';
         displayBushels = 'Fanegas';
@@ -1146,7 +1410,7 @@ function Translate(language, bark = true) {
         displayLabelBuyLand0 = 'ARRENDAR OTRO ARANZADA';
         displayLabelBuyLand1 = 'ARRENDAR UNA PARCELA MÁS GRANDE';
         displayLabelBuyLand2 = 'COMPRAR TU TERRENO';
-        displayHireAccountant = 'CONTRATAR UN CONTADOR';
+        displayLabelHireAccountant = 'CONTRATAR UN CONTADOR';
         displayLabelBuyLand3 = 'COMPRAR MÁS TERRENO';
         displayLabelBuyLand4 = 'HACER ELEVAR UNA CERCA';
         displayLabelBuyLand5 = 'ADQUIRIR EL PRADO CERCANO';
@@ -1244,6 +1508,27 @@ function Translate(language, bark = true) {
         displayLabelSailWest = 'NAVEGAR HACIA EL OESTE HACIA VALINOR';
         displayLabelPegasuses = 'CRIAR UNICORNIOS';
 
+        displayLabelHeirBegin = 'TERMINEMOS CON ESTO';
+        displayLabelMyNameIs = 'MI NOMBRE ES';
+        displayLabelSoy = 'SOY';
+        displayLabelReferToMeAs = 'REFIÉRASE A MÍ COMO';
+        displayLabelFromNowOn = 'A PARTIR DE AHORA';
+        displayLabelReturnToPrevDecision = '← Regresar a Decisión Anterior';
+
+        displayHeirHeadlineForeward = 'Lo que sigue a continuación es un desfile interminable de interventores, juristas y senescales, cada uno de ellos con un montón más grande de rollos de papiro y tablillas de arcilla que el anterior, y cada documento cubierto de un lenguaje legal inescrutable. Piensas que este día nunca terminará.<br><br>Finalmente, el médico del tribunal ——TU médico, ahora, te das cuenta—— te lleva aparte para estar a solas un momento.<br><br>«Bueno ahora, mi lieja, todo lo que falta es su examen físico. Puramente rutinario, estoy seguro de que lo entiendes.»<br><br><br><div style="width: 100%; text-align: center;">¿ESTÁS LISTO PARA COMENZAR?</div>';
+        displayHeirHeadlineName = '¿CUAL ES SU NOMBRE DE PILA, SU MAJESTAD?';
+        displayHeirHeadlineGender = '¿Y CÓMO TE IDENTIFICAS, OH LIEJA?';
+        displayHeirHeadlineEthnicity = '¿DE DÓNDE VIENE SU GENTE, SEÑOR?';
+        if (player.gender == 1 || player.gender == 3) { displayHeirHeadlineEthnicity = '¿DE DÓNDE VIENE SU GENTE, SEÑORA?'; }
+        displayHeirHeadlineTitle = '¿Y CÓMO DEBEN DIRIGIRSE A USTED EN SU CORTE?';
+        displayHeirHeadlineFaces = 'POR FAVOR SELECCIONE SU RETRATO OFICIAL DEL ESTADO';
+        displayHeirPage = 'página';
+        displayHeirOf = 'de';
+        displayHeirSummaryCorrect = '¿ES ESTO CORRECTO?';
+        if (player.gender == 1 || player.gender == 3) { displayHeirSummaryCorrect = '¿ES ESTA CORRECTA?'; }
+        displayHeirConfirm = '¿Estás seguro de tus respuestas?';
+        if (player.gender == 1 || player.gender == 3) { displayHeirConfirm = '¿Estás segura de tus respuestas?'; }
+
         displayStoryFarm0 = 'AHORA PUEDO PROVEER PARA MI FAMILIA';
         displayStoryFarmMildew = 'ACABAS DE RECIBIR UN MENSAJE DEL HOMBRE QUE DIRIGIE EL ALMACÉN DONDE GUARDAS TU TRIGO:<div id="nasirMessage">Los daños en el techo ha dejado entrar agua; el moho ha reclamado el 90% de todo el grano almacenado; mis más sinceras disculpas<br>—Ea-nāṣir</div>';
         displayStoryFarm1 = 'CON EL DOBLE DE TERRENO PUEDO DUPLICAR MIS GANANCIAS';
@@ -1328,6 +1613,7 @@ function Translate(language, bark = true) {
         displayStoryFoundCrystal = '¡¡LOS ALBAÑILES DE LA CANTERA HAN DESCUBRIDO GEODAS DE AMATISTA!!';
         displayStoryCrystal = 'LOS LAPIDARISTAS DE NUESTRO TALLER TRANSFORMARÁN ESTOS EN ALGO VERDADERAMENTE MARAVILLOSO';
         displayStoryTribute = 'EL JEFE MILITAR REY LOCAL FINALMENTE HA OÍDO HABLAR DE TI. SU EMISARIO TE DICE: «POR SUPUESTO, SE DEBEN IMPONER ARANCELES»';
+        displayStoryRomanConquestofGreece = 'ACABAS DE RECIBIR UNA NOTICIA: ¡AHORA HABLAN LATÍN EN ATENAS!';
 
         displayStoryResidenceFirstVisit = 'NO HAY LUGAR COMO EL HOGAR: TU CAMPAMENTO, ANÓNIMO ENTRE LOS CIENTOS DE OTROS EXACTAMENTE COMO ÉL QUE SE ENCUENTRAN AQUÍ, EN ESTE VALLE ANGOSTO Y ÁRIDO, DONDE ALQUILAS ESTE TROZO DE TIERRA POR UN PRECIO EXORBITANTE';
         displayStoryResidence00 = 'VIVIR EN MI PROPIA TIERRA SEGURO ME HARÁ MÁS FÁCIL LLEGAR AL TRABAJO POR LA MAÑANA';
@@ -1399,6 +1685,7 @@ function Translate(language, bark = true) {
         displayStoryPort07 = 'CON ESTA ESTAÑO, LOS ARTESANOS PUEDEN FABRICAR EN MASA ESA ÑAQUE RIDÍCULA Y LLAMATIVA QUE TIENEN UN PRECIO TAN ALTO EN ROMA';
         displayStoryPort08 = 'SAZONARÁS CON SAL TODA OFRENDA DE HARINA QUE HAGAS; NO OMITIRÁS DE TU OFRENDA LA SAL DE TU PACTO CON DIOS; EN TODA TU OFRENDA OFRECERÁS SAL<br><br>LEVÍTICO 2:13';
 
+        if (player.names.length > 1) { displayStoryHeir = 'EL MÉDICO REAL HA SIDO TRAÍDO A VUESTRA CÁMARA BAJO FUERTE GUARDIA.<br><br>TE DICEN QUE EL SENADOR ' + player.names[1].toUpperCase() + ', EL AMADO MAGISTRADO DE LA REGIÓN DE ' + nameVillage.toUpperCase() + ', FALLECIÓ PACÍFICAMENTE MIENTRAS SUEÑA ESTA MAÑANA A LA EDAD DE ' + player.age + ' AÑOS.<br><br>¡SU ÚLTIMO ACTO OFICIAL FUE NOMBRARTE *TU* COMO SUCESOR!'; }
         displayStorySailWest = 'AHORA, A ZARPAR HACIA LAS TIERRAS IMPERECEDERAS; A ESE GRAN PAÍS NO DESCUBRIDO VOY';
         displayStoryPegasus = 'Te lo traen, golpeando, feroz, desafiante hasta el final, requiriendo toda la fuerza de al menos una docena de matones a sueldo para sujetarlo, atado por esas antiguas cadenas alquímicas, cada eslabón grabado con cien runas brillantes cada uno.<br><br>Sus ojos brillan con cruel inteligencia.<br><br>Ahora... ahora el trabajo puede realmente comenzar.';
 
@@ -1536,7 +1823,7 @@ function Translate(language, bark = true) {
         displayInfoMadeWith = 'Hecho con Blender, CodePen, DOSBox, Exult Studio, GitHub, el GNU Image Manipulation Program, Inkscape y Visual Studio Code.';
         displayInfoDedication = 'Dedicado a ';
         displayInfoDedication += ScribeList(dedicationList);
-        displayInfoDedication += ', y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.';
+        displayInfoDedication += ', y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.'; // ۩
         displayInfoThanks = 'Agradecimientos especiales a ';
         displayInfoThanks += ScribeList(gratitudeList);
         displayInfoThanks += '.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br>Gaviota aparece por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. Entrenamiento de gaviotas por “Loco” Bill Hinchcleath y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Florida.';
@@ -1642,6 +1929,7 @@ const gratitudeList = [
     'The Ultima Codex', // ultimacodex.com
     ['*', 'The Codex of Ultima Wisdom and the Ultima Dragons (all chapters)', 'The Codex of Ultima Wisdom y los Ultima Dragons (todos capítulos)',], // wiki.ultimacodex.com
     'Jan van der Crabben', // worldhistory.org
+    'Stephanie Ward',
     'Jordan Webb',
     'Rebecca Wickersham',
     'W3Schools', // w3schools.com

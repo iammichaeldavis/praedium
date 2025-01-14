@@ -3,11 +3,24 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <title>PRAEDIUM - EDICIÓN DE ORO</title>
-    <meta name="apple-mobile-web-app-title" content="PRAEDIUM" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="format-detection" content="telephone=no" />
+    <meta name="robots" content="all" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://iammichaeldavis.github.io/praedium/bitmaps/share.png" />
+    <meta name="twitter:image:alt" content="Screenshot of a player’s farm taken early in the game" />
+    <meta property="og:title" content="PRAEDIUM - EDICIÓN DE ORO" />
+    <meta property="og:site_name" content="PRAEDIUM - EDICIÓN DE ORO" />
+    <meta name="apple-mobile-web-app-title" content="PRAEDIUM - EDICIÓN DE ORO" />
+    <meta name="description" content="PRAEDIUM is a Levantine farming simulation set in 200 BC" />
+    <meta property="og:description" content="PRAEDIUM is a Levantine farming simulation set in 200 BC" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:url" content="https://iammichaeldavis.github.io/praedium" />
+    <link rel="canonical" href="https://iammichaeldavis.github.io/praedium" />
+    <meta name="keywords" content="open-source, farming simulator, solitaire, ancient rome" />
+    <link rel="author" href="https://github.com/iammichaeldavis/praedium" />
     <link rel="icon" type="image/png" href="bitmaps/favicon/favicon-48x48.png" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="bitmaps/favicon/favicon.svg" />
     <link rel="shortcut icon" href="bitmaps/favicon/favicon.ico" />
@@ -15,13 +28,17 @@
     <link rel="apple-touch-icon" sizes="16x16" href="bitmaps/favicon/favicon16x.ico" />
     <link rel="manifest" href="bitmaps/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
-    <link rel="stylesheet" href="style.css?v=1133100" />
+    <link rel="stylesheet" href="style.css?v=1140100" />
     <script>history.scrollRestoration = "manual"</script>
 </head>
 
 <body>
     <div id="divOverlayLoading">
         <span>L</span>OADING...
+    </div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divFontPreloads">
+        <span id="spanFontPreload_Alegreya" style="font-family: 'Alegreya Sans SC', serif;"></span>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divCalendar">
@@ -59,7 +76,110 @@
     <div id="divGameWindow">
         <img id="imgNirvana" src="bitmaps/nirvana.png" />
 
+        <button id="buttonReturnToMap" style="margin-bottom: 2vw;">↑ RETURN TO MAP VIEW (VOLVER A VISTA DEL MAPA)</button>
+
         <button id="buttonChooseHeir">👑</button>
+
+        <div id="divViewHeirWorkshop">
+            <div style="font-size: 4.2vw; margin-bottom: 6.4vw;">Build-A-Heir Workshop®</div>
+
+            <div id="divHeirWorkshopForeward">
+                <div id="divHeirWorkshopForewardHeadline"></div>
+                <button id="buttonHeirBegin"></button>
+            </div>
+
+            <div id="divHeirWorkshopName">
+                <div id="divHeirWorkshopNameHeadline"></div>
+                <select name="heirNames" id="selectHeirNames" onchange="HeirChangeName();">
+                    <option value="Aire" selected>Aire</option> <!-- Kylie Jenner and Travis Scott -->
+                    <option value="Apollo">Apollo</option> <!-- Gwen Stefani and Gavin Rossdale -->
+                    <option value="Apple">Apple</option> <!-- Gwyneth Paltrow and Chris Martin -->
+                    <option value="Audio Science">Audio Science</option> <!-- Shannyn Sossamon and Dallas Clayton -->
+                    <option value="Bingham">Bingham</option> <!-- Kate Hudson and Matt Bellamy -->
+                    <option value="Blanket">Blanket</option> <!-- ??? and Michael Jackson -->
+                    <option value="Blue Ivy">Blue Ivy</option> <!-- Beyoncé and Jay-Z -->
+                    <option value="Chicago">Chicago</option> <!-- Kim Kardashian and Kanye West -->
+                    <option value="Chicago">Cosmo</option> <!-- Scarlett Johansson and Colin Jost -->
+                    <option value="Denim">Denim</option> <!-- Toni Braxton and Keri Lewis -->
+                    <option value="Dweezil">Dweezil</option> <!-- Gail and Frank Zappa -->
+                    <option value="Esmeralda">Esmeralda</option> <!-- Eva Mendes and Ryan Gosling -->
+                    <option value="Exa Dark Sideræl">Exa Dark Sideræl</option> <!-- Grimes and Elon Musk -->
+                    <option value="Fuschia">Fuschia</option> <!-- Frances Tomelty and Sting -->
+                    <option value="Future">Future</option> <!-- Ciara and Future -->
+                    <option value="Gravity">Gravity</option> <!-- Stormi Bree and Lucky Blue Smith -->
+                    <option value="Huckleberry">Huckleberry</option> <!-- Shara and Bear Grylls -->
+                    <option value="Jaden">Jaden</option> <!-- Jada Pinkett and Will Smith -->
+                    <option value="Kal-El">Kal-El</option> <!-- Alice Kim and Nicolas Cage -->
+                    <option value="Kingston">Kingston</option> <!-- Gwen Stefani and Gavin Rossdale -->
+                    <option value="Kulture">Kulture</option> <!-- Cardi B and Offset -->
+                    <option value="Lisa Marie">Lisa Marie</option> <!-- Priscilla and Elvis Presley -->
+                    <option value="Lyra">Lyra</option> <!-- Cherry Seaborn and Ed Sheeran -->
+                    <option value="Mason Dash">Mason Dash</option> <!-- Kourtney Kardashian and Scott Disick -->
+                    <option value="Maude">Maude</option> <!-- Leslie Mann and Judd Apatow -->
+                    <option value="Marmaduke">Marmaduke</option> <!-- Shara and Bear Grylls -->
+                    <option value="Moon Unit">Moon Unit</option> <!-- Gail and Frank Zappa -->
+                    <option value="Moroccan">Moroccan</option> <!-- Mariah Carey and Nick Cannon -->
+                    <option value="Moses">Moses</option> <!-- Gwyneth Paltrow and Chris Martin -->
+                    <option value="North">North</option> <!-- Kim Kardashian and Kanye West -->
+                    <option value="Olin">Olin</option> <!-- Blake Lively and Ryan Reynolds -->
+                    <option value="Penelope Scotland">Penelope Scotland</option> <!-- Kourtney Kardashian and Scott Disick -->
+                    <option value="Pilot Inspektor">Pilot Inspektor</option> <!-- Beth Riesgraf and Jason Lee -->
+                    <option value="Psalm">Psalm</option> <!-- Kim Kardashian and Kanye West -->
+                    <option value="Reign Aston">Reign Aston</option> <!-- Kourtney Kardashian and Scott Disick -->
+                    <option value="Riot Rose">Riot Rose</option> <!-- Rihanna and A$AP Rocky -->
+                    <option value="Rumi">Rumi</option> <!-- Beyoncé and Jay-Z -->
+                    <option value="RZA">RZA</option> <!-- Rihanna and A$AP Rocky -->
+                    <option value="Saint">Saint</option> <!-- Kim Kardashian and Kanye West -->
+                    <option value="Sir">Sir</option> <!-- Beyoncé and Jay-Z -->
+                    <option value="Sparrow">Sparrow</option> <!-- Nicole Richie and Joel Madden -->
+                    <option value="Stormi">Stormi</option> <!-- Kylie Jenner and Travis Scott -->
+                    <option value="Summer Rain">Summer Rain</option> <!--  Christina Aguilera and Matthew Rutler -->
+                    <option value="Sunday">Sunday</option> <!-- Kelly Tisdale and Mike Myers -->
+                    <option value="Suri">Suri</option> <!-- Katie Holmes and Tom Cruise -->
+                    <option value="Techno Mechanicus">Techno Mechanicus</option> <!-- Grimes and Elon Musk -->
+                    <option value="Trey">Trey</option> <!-- Sheree Zampino and Will Smith -->
+                    <option value="Willow">Willow</option> <!-- Jada Pinkett and Will Smith -->
+                    <option value="X Æ A-Xii">X Æ A-Xii</option> <!-- Grimes and Elon Musk -->
+                    <option value="Zuma">Zuma</option> <!-- Gwen Stefani and Gavin Rossdale -->
+                </select>
+                <button id="buttonHeirChooseName"></button>
+            </div>
+
+            <div id="divHeirWorkshopGender">
+                <div id="divHeirWorkshopGenderHeadline"></div>
+                <div id="divHeirGenderIcon"></div>
+                <button id="buttonHeirGendersLeft">←</button><button id="buttonHeirChooseGender"></button><button id="buttonHeirGendersRight">→</button>
+            </div>
+
+            <div id="divHeirWorkshopEthnicity">
+                <div id="divHeirWorkshopEthnicityHeadline"></div>
+                <select name="heirEthnicities" id="selectHeirEthnicities" onchange="HeirChangeEthnicity();"></select>
+                <button id="buttonHeirChooseEthnicity"></button>
+            </div>
+
+            <div id="divHeirWorkshopTitle">
+                <div id="divHeirWorkshopTitleHeadline"></div>
+                <select name="heirTitles" id="selectHeirTitles" onchange="HeirChangeTitle();"></select>
+                <button id="buttonHeirChooseTitle"></button>
+            </div>
+
+            <div id="divHeirWorkshopFaces">
+                <div id="divHeirWorkshopFacesHeadline"></div>
+                <div id="divHeirFacesGrid">
+                    <button id="buttonHeirChooseFace1"></button><button id="buttonHeirChooseFace2"></button><button id="buttonHeirChooseFace3"></button>
+                    <div id="divHeirFacesGridMiddleRow">
+                        <button id="buttonHeirChooseFace4"></button><button id="buttonHeirChooseFace5"></button><button id="buttonHeirChooseFace6"></button>
+                    </div>
+                    <button id="buttonHeirChooseFace7"></button><button id="buttonHeirChooseFace8"></button><button id="buttonHeirChooseFace9"></button>
+                </div>
+                <button id="buttonHeirFacesLeft" onclick="HeirChangeFaces('previous');">←</button><span id="spanHeirFacesPagination"></span><button
+                    id="buttonHeirFacesRight" onclick="HeirChangeFaces('next');">→</button>
+            </div>
+
+            <div id="divHeirWorkshopSummary"></div>
+
+            <button id="buttonHeirGoBack"></button>
+        </div>
 
         <div id="divViewResidence">
             <button id="buttonGoToPraediumFromRes"></button>
@@ -240,6 +360,7 @@
                 <button id="buttonPlayGod"></button>
                 <button id="buttonSellWheat"></button>
                 <button id="buttonSellBarley"></button>
+                <button id="buttonSellFlax"></button>
                 <button id="buttonSellLogs"></button>
                 <button id="buttonSellBoards"></button>
                 <button id="buttonSellStone"></button>

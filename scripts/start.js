@@ -1,4 +1,4 @@
-// START *******************************************************************************************
+// ۞ START *****************************************************************************************
 // *************************************************************************************************
 
 window.onresize = UpdateDisplay;
@@ -22,17 +22,27 @@ setTimeout(() => {
 
 
 
-// ╔════════════════════╗
-// ║ PRAEDIUM v1.13.3   ║
-// ╟────────────────────╢
-// ║                    ║
-// ║                    ║
-// ║                    ║
-// ║                    ║
-// ║   by Michael Davis ║
-// ║         12/31/2024 ║
-// ╚════════════════════╝
+// ╔══════════════════╗
+// ║ PRAEDIUM v1.14.0 ║
+// ╟──────────────────╢
+// ║                  ║
+// ║                  ║
+// ║                  ║
+// ║                  ║
+// ║ by Michael Davis ║
+// ║        1/12/2025 ║
+// ╚══════════════════╝
 
+// “The humble semicolon is why spacing and line-ends do not matter
+// to C and C-like languages.  It means we as programmers can focus
+// all of our white space and lines on  communicating our intent to
+// humans.  This freedom is not an excuse  to write obtuse or dense
+// code but instead freedom to describe what we mean or use spacing
+// to help us understand our code.  ...  When I write JavaScript, I
+// meticulously include  semicolons at  the end  of all  statements
+// because "any good C programmer can write C in any language".”
+//                            -Dr. Charles “Doctor Chuck” Severance
 
+// ۝
 
 // End of Document

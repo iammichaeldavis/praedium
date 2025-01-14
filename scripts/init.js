@@ -1,7 +1,7 @@
-// INIT ********************************************************************************************
+// ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.13.3';
+const version = '1.14.0';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -42,11 +42,10 @@ const arrayFlaxPlots = [
 const player = {
     names: ['Mud',],
     age: 11, // longest verified documented human lifespan: Jeanne Calment of France, 122 years and 164 days
+    gender: 0,
+    ethnicity: 0,
+    title: 0,
     saṃsāra: -0,
-
-    isGod: false,
-    isOnMobile: null,
-    isAt: 'Praedium',
 
     speaks: null,
 
@@ -55,6 +54,10 @@ const player = {
     likesAnimations: true,
     likesStory: true,
     likesRecords: false,
+
+    isOnMobile: null,
+    isGod: false,
+    isAt: 'Praedium',
 
     seesHint: false,
     seesModsWindow: false,
@@ -388,6 +391,7 @@ const buttonBuyWheat = document.getElementById('buttonBuyWheat');
 const buttonSellWheat = document.getElementById('buttonSellWheat');
 const buttonBuyBarley = document.getElementById('buttonBuyBarley');
 const buttonSellBarley = document.getElementById('buttonSellBarley');
+const buttonSellFlax = document.getElementById('buttonSellFlax');
 const buttonBuyLogs = document.getElementById('buttonBuyLogs');
 const buttonSellLogs = document.getElementById('buttonSellLogs');
 const buttonBuyBoards = document.getElementById('buttonBuyBoards');
@@ -407,6 +411,45 @@ const buttonEstablishTradeRoute = document.getElementById('buttonEstablishTradeR
 const imgTradeTin = document.getElementById('imgTradeTin');
 const tableImports = document.getElementById('tableImports');
 const buttonImportTin = document.getElementById('buttonImportTin');
+
+const divViewHeirWorkshop = document.getElementById('divViewHeirWorkshop');
+const divHeirWorkshopForeward = document.getElementById('divHeirWorkshopForeward');
+const divHeirWorkshopForewardHeadline = document.getElementById('divHeirWorkshopForewardHeadline');
+const buttonHeirBegin = document.getElementById('buttonHeirBegin');
+const divHeirWorkshopName = document.getElementById('divHeirWorkshopName');
+const divHeirWorkshopNameHeadline = document.getElementById('divHeirWorkshopNameHeadline');
+const selectHeirNames = document.getElementById('selectHeirNames');
+const buttonHeirChooseName = document.getElementById('buttonHeirChooseName');
+const divHeirWorkshopGender = document.getElementById('divHeirWorkshopGender');
+const divHeirWorkshopGenderHeadline = document.getElementById('divHeirWorkshopGenderHeadline');
+const divHeirGenderIcon = document.getElementById('divHeirGenderIcon');
+const buttonHeirGendersLeft = document.getElementById('buttonHeirGendersLeft');
+const buttonHeirChooseGender = document.getElementById('buttonHeirChooseGender');
+const buttonHeirGendersRight = document.getElementById('buttonHeirGendersRight');
+const divHeirWorkshopEthnicity = document.getElementById('divHeirWorkshopEthnicity');
+const divHeirWorkshopEthnicityHeadline = document.getElementById('divHeirWorkshopEthnicityHeadline');
+const selectHeirEthnicities = document.getElementById('selectHeirEthnicities');
+const buttonHeirChooseEthnicity = document.getElementById('buttonHeirChooseEthnicity');
+const divHeirWorkshopTitle = document.getElementById('divHeirWorkshopTitle');
+const divHeirWorkshopTitleHeadline = document.getElementById('divHeirWorkshopTitleHeadline');
+const selectHeirTitles = document.getElementById('selectHeirTitles');
+const buttonHeirChooseTitle = document.getElementById('buttonHeirChooseTitle');
+const divHeirWorkshopFaces = document.getElementById('divHeirWorkshopFaces');
+const divHeirWorkshopFacesHeadline = document.getElementById('divHeirWorkshopFacesHeadline');
+const buttonHeirChooseFace1 = document.getElementById('buttonHeirChooseFace1');
+const buttonHeirChooseFace2 = document.getElementById('buttonHeirChooseFace2');
+const buttonHeirChooseFace3 = document.getElementById('buttonHeirChooseFace3');
+const buttonHeirChooseFace4 = document.getElementById('buttonHeirChooseFace4');
+const buttonHeirChooseFace5 = document.getElementById('buttonHeirChooseFace5');
+const buttonHeirChooseFace6 = document.getElementById('buttonHeirChooseFace6');
+const buttonHeirChooseFace7 = document.getElementById('buttonHeirChooseFace7');
+const buttonHeirChooseFace8 = document.getElementById('buttonHeirChooseFace8');
+const buttonHeirChooseFace9 = document.getElementById('buttonHeirChooseFace9');
+const spanHeirFacesPagination = document.getElementById('spanHeirFacesPagination');
+const buttonHeirFacesLeft = document.getElementById('buttonHeirFacesLeft');
+const buttonHeirFacesRight = document.getElementById('buttonHeirFacesRight');
+const divHeirWorkshopSummary = document.getElementById('divHeirWorkshopSummary');
+const buttonHeirGoBack = document.getElementById('buttonHeirGoBack');
 
 const buttonOptions = document.getElementById('buttonOptions');
 const buttonQ = document.getElementById('buttonQ');
@@ -548,7 +591,7 @@ let saltSpent = 0;
 const residenceShippedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 let saltShipped = 0;
 
-const nameVillage = 'Alʿard al-Janubiyah'; // الأرض الجنوبية == Terra Australis. HBD, Grant! 🎂🫂
+const nameVillage = 'Alʿard al-Janubia'; // الأرض الجنوبية == Terra Australis. HBD, Grant! 🎂🫂
 const estDate = [0, 0,];
 let villageStage = -5;
 
@@ -739,7 +782,7 @@ const priceBuild25 = [1750000, 16000,]; // Theater
 const priceBuild26 = 100000; // Private Development
 const priceBuild27 = [500000, 5000, 5000,]; // Oracle
 const priceBuild28 = [1111111, 2222, 333, 333,]; // Astronomers Guild
-const priceBuild100 = [20000000, 9001, 77, 1000, 100000, 100000, 10000, 100,]; // Monument
+const priceBuild100 = [20000000, 9001, 77, 1000, 100000, 100000, 10000, 333,]; // Monument
 
 const pricePort0 = 8000;
 const pricePort1 = 16000;
@@ -758,6 +801,13 @@ const tributeTimerLimit = 100;
 
 let revealedWisdom = 0;
 const achievementSoundRare = new Audio('waveforms/XboxOneRareAchievement.mp3');
+
+let heirStage = 0;
+
+const arrayFacesSorted = [];
+let heirFacesPageCurrent = 1;
+let heirFacesPageTotal = 13;
+let heirFaceChoice = 0;
 
 const legalTarget = 'https://creativecommons.org/publicdomain/zero/1.0/';
 const winTarget = 'https://youtu.be/dOjFcx3GJHg'; // ♠️♣️♦️♥️ // 'https://youtu.be/AQmFlAB15f8'; // 👨‍🎤💃🎻 // 'https://youtu.be/YnDLlajMxyo'; // 🌼☀️🍂❄️
