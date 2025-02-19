@@ -9406,7 +9406,7 @@ function RedrawCanvases() {
             if (minersAnimationFrameI == arrayBlinksFrames.length) { minersAnimationFrameI = 0; }
 
             neighborsDagsImageA.src = 'bitmaps/cell_dagsWilly_' + arrayDaggoWillyFrames[minersAnimationFrameA] + '.png';
-            neighborsMeeplesImage.src = 'bitmaps/cell_Meeples_' + arrayMeeplesFrames[minersAnimationFrameB] + '.png';
+            neighborsMeeplesImage.src = 'bitmaps/cell_meeples_' + arrayMeeplesFrames[minersAnimationFrameB] + '.png';
             neighborsDagsImageB.src = 'bitmaps/cell_dagsArgos_' + arrayDaggoArgosFrames[minersAnimationFrameC] + '.png';
             neighborsBandidoImage.src = 'bitmaps/cell_bandido_' + arrayBandidoFrames[minersAnimationFrameD] + '.png';
             neighborsCampfireImage.src = 'bitmaps/cell_loomTentFire_' + arrayCampfireFrames[minersAnimationFrameE] + '.png';
