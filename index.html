@@ -28,7 +28,7 @@
     <link rel="apple-touch-icon" sizes="16x16" href="bitmaps/favicon/favicon16x.ico" />
     <link rel="manifest" href="bitmaps/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
-    <link rel="stylesheet" href="style.css?v=1140100" />
+    <link rel="stylesheet" href="style.css?v=1150102" />
     <script>history.scrollRestoration = "manual"</script>
 </head>
 
@@ -73,12 +73,135 @@
     </div>
     <div id="divCalendarGap"></div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <!--    
+    <div id="divEmpireRibbon" style="background-color: brown;">
+        how much golds???!!!
+    </div>
+    <div id="divRibbonGap"></div>
+    -->
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divGameWindow">
         <img id="imgNirvana" src="bitmaps/nirvana.png" />
 
-        <button id="buttonReturnToMap" style="margin-bottom: 2vw;">↑ RETURN TO MAP VIEW (VOLVER A VISTA DEL MAPA)</button>
+        <button id="buttonReturnToMap" onclick="ReturnToMapView();"></button>
 
         <button id="buttonChooseHeir">👑</button>
+
+        <div id="divViewMiners">
+            <div id="divMinersName"></div>
+            <div id="divMinersSubtitle"></div>
+            <canvas id="canvasMiners" width="384" height="224"></canvas>
+            <div id="divMinersReport"></div>
+            <button id="buttonMinersEvents" onclick="MinersEvents();"></button>
+        </div>
+
+        <div id="divViewFarmers">
+            <div id="divFarmersName"></div>
+            <div id="divFarmersSubtitle"></div>
+            <canvas id="canvasFarmers" width="384" height="224"></canvas>
+            <div id="divFarmersReport"></div>
+            <button id="buttonFarmersEvents" onclick="FarmersEvents();"></button>
+        </div>
+
+        <div id="divViewShepherds">
+            <div id="divShepherdsName"></div>
+            <div id="divShepherdsSubtitle"></div>
+            <canvas id="canvasShepherds" width="384" height="224"></canvas>
+            <div id="divShepherdsReport"></div>
+            <button id="buttonShepherdsEvents" onclick="ShepherdsEvents()"></button>
+        </div>
+
+        <div id="divViewMap">
+            <canvas id="canvasMap" width="208" height="173"></canvas>
+            <button id="buttonMapTargetPrev" onclick="MapChangeTarget('previous')"></button><button id="buttonMapTargetNext" onclick="MapChangeTarget('next')"></button><br>
+
+            <div id="divMapTarget"></div>
+
+            DETAILS VIEW: <button>ECONOMIC</button> <button>MILITARY</button> <button>POLITICAL</button>
+
+            <div id="divMapDetailsView" class="economic" style="border: 1px solid black; width: 64%; margin: 6.4vw auto; padding: 1vw; background-color: #429665;">
+                <b style="color: white;">Provincial GDP</b>
+                <div style="border: 1px solid black; margin-top: 1vw; background-color: white;">
+                    <div style="width: 100%; text-align: center; padding: 4vw 0;">
+                        <b>LIQUID FUNDS:</b> <s>𝐼</s><span style="color: #CCCCCC;">0,00</span>1,000,000,000
+                    </div>
+                    <div style="display: flex; padding: 0 0 4vw 0;">
+                        <div style="width: 50%;">
+                            <b>NATURAL<br>RESOURCES:</b><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Stone inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Crystal inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon OreCopper inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon IngotCopper inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon IngotTin inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon IngotBronze inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Log inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Sal inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Horsey inlineIcon"></span>
+                            <div style="height: 4vw; width: 4vw;"></div>
+                            <b>CROPS:</b><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Wheat inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Barley inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Flax inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Olive inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Date inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Fig inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Pom inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Grape inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Comb inlineIcon"></span><br>
+                        </div>
+                        <div style="width: 50%;">
+                            <b>MANUFACTURED<br>PRODUCTS:</b><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Board inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Loaves inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon LembasBread inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Ration inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Linen inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Bandage inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Amphora inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Keg inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Cask inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Honeypot inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Jug inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Basket inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Raisins inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Trinket inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Gems inlineIcon"></span>
+                            <div style="height: 4vw; width: 4vw;"></div>
+                            <b>SACRED ITEMS:</b><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Mala inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Scroll inlineIcon"></span><br>
+                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Relic inlineIcon"></span><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border: 1px solid black; width: 64%; margin: 6.4vw auto; padding: 1vw; background-color: #be6c62;">
+                <b style="color: white;">Provincial Military Strength</b>
+                <div style="border: 1px solid black; margin-top: 1vw; background-color: white; padding: 4vw;">
+                    <b>OFF:</b> 1,420 <span class="icon Sword inlineIcon"></span> &nbsp;&nbsp;&nbsp; <span style="color: #CCCCCC;">0</span>115 <span class="icon TaxCollector inlineIcon"></span><br>
+                    <b>DEF:</b> 1,000 <span class="icon Shield inlineIcon"></span> &nbsp;&nbsp;&nbsp; <span style="color: #CCCCCC;">00</span>40 <span class="icon HorseyMounted inlineIcon"></span><br>
+                </div>
+            </div>
+
+            <div style="border: 1px solid black; width: 64%; margin: 6.4vw auto; padding: 1vw; background-color: #366e94;">
+                <b style="color: white;">Provincial Diplomatic Status</b>
+                <div style="border: 1px solid black; margin-top: 1vw; background-color: white; padding: 4vw;">
+                    <b>CHAMPIONSHIPS:</b> <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Trophy inlineIcon"></span><br>
+                    <br>
+                    <b>RELATIONSHIP WITH:</b><br>
+                    <br>
+                    Çoban Kasabası: ???<br>
+                    <br>
+                    Agrόktima Georgios: ???<br>
+                    <br>
+                    Na’ari Harim: ???
+                </div>
+            </div>
+
+            <button id="buttonMapVisitProvince" onclick="VisitProvince();"></button>
+            <div style="height: 6.4vw; width: 1vw;"></div>
+        </div>
 
         <div id="divViewHeirWorkshop">
             <div style="font-size: 4.2vw; margin-bottom: 6.4vw;">Build-A-Heir Workshop®</div>
@@ -91,13 +214,16 @@
             <div id="divHeirWorkshopName">
                 <div id="divHeirWorkshopNameHeadline"></div>
                 <select name="heirNames" id="selectHeirNames" onchange="HeirChangeName();">
-                    <option value="Aire" selected>Aire</option> <!-- Kylie Jenner and Travis Scott -->
+                    <option value="Adonis" selected>Adonis</option> <!-- Sophie Brussaux and Drake -->
+                    <option value="Aire">Aire</option> <!-- Kylie Jenner and Travis Scott -->
                     <option value="Apollo">Apollo</option> <!-- Gwen Stefani and Gavin Rossdale -->
                     <option value="Apple">Apple</option> <!-- Gwyneth Paltrow and Chris Martin -->
                     <option value="Audio Science">Audio Science</option> <!-- Shannyn Sossamon and Dallas Clayton -->
+                    <option value="Barbara">Barbara</option> <!-- Laura and George W. Bush -->
                     <option value="Bingham">Bingham</option> <!-- Kate Hudson and Matt Bellamy -->
                     <option value="Blanket">Blanket</option> <!-- ??? and Michael Jackson -->
                     <option value="Blue Ivy">Blue Ivy</option> <!-- Beyoncé and Jay-Z -->
+                    <option value="Chelsea">Chelsea</option> <!-- Hillary and Bill Clinton -->
                     <option value="Chicago">Chicago</option> <!-- Kim Kardashian and Kanye West -->
                     <option value="Chicago">Cosmo</option> <!-- Scarlett Johansson and Colin Jost -->
                     <option value="Denim">Denim</option> <!-- Toni Braxton and Keri Lewis -->
@@ -109,9 +235,12 @@
                     <option value="Gravity">Gravity</option> <!-- Stormi Bree and Lucky Blue Smith -->
                     <option value="Huckleberry">Huckleberry</option> <!-- Shara and Bear Grylls -->
                     <option value="Jaden">Jaden</option> <!-- Jada Pinkett and Will Smith -->
+                    <option value="Jenna">Jenna</option> <!-- Laura and George W. Bush -->
                     <option value="Kal-El">Kal-El</option> <!-- Alice Kim and Nicolas Cage -->
+                    <option value="Kinga">Kinga</option> <!-- Laetitia and Richard Garriott de Cayeux -->
                     <option value="Kingston">Kingston</option> <!-- Gwen Stefani and Gavin Rossdale -->
                     <option value="Kulture">Kulture</option> <!-- Cardi B and Offset -->
+                    <option value="Leeloo">Leeloo</option> <!-- Yeni Zhang and American McGee -->
                     <option value="Lisa Marie">Lisa Marie</option> <!-- Priscilla and Elvis Presley -->
                     <option value="Lyra">Lyra</option> <!-- Cherry Seaborn and Ed Sheeran -->
                     <option value="Mason Dash">Mason Dash</option> <!-- Kourtney Kardashian and Scott Disick -->
@@ -127,9 +256,11 @@
                     <option value="Psalm">Psalm</option> <!-- Kim Kardashian and Kanye West -->
                     <option value="Reign Aston">Reign Aston</option> <!-- Kourtney Kardashian and Scott Disick -->
                     <option value="Riot Rose">Riot Rose</option> <!-- Rihanna and A$AP Rocky -->
+                    <option value="Ronin">Ronin</option> <!-- Laetitia and Richard Garriott de Cayeux -->
                     <option value="Rumi">Rumi</option> <!-- Beyoncé and Jay-Z -->
                     <option value="RZA">RZA</option> <!-- Rihanna and A$AP Rocky -->
                     <option value="Saint">Saint</option> <!-- Kim Kardashian and Kanye West -->
+                    <option value="Schuyler">Schuyler</option> <!-- Sissy Spacek and Jack Fisk -->
                     <option value="Sir">Sir</option> <!-- Beyoncé and Jay-Z -->
                     <option value="Sparrow">Sparrow</option> <!-- Nicole Richie and Joel Madden -->
                     <option value="Stormi">Stormi</option> <!-- Kylie Jenner and Travis Scott -->
@@ -364,11 +495,13 @@
                 <button id="buttonSellLogs"></button>
                 <button id="buttonSellBoards"></button>
                 <button id="buttonSellStone"></button>
+                <button id="buttonSellHorses" onclick="SellLivestock();"></button>
                 <button id="buttonBuyWheat"></button>
                 <button id="buttonBuyBarley"></button>
                 <button id="buttonBuyLogs"></button>
                 <button id="buttonBuyBoards"></button>
                 <button id="buttonBuyStone"></button>
+                <button id="buttonBuyHorses" onclick="PurchaseLivestock();"></button>
             </div>
         </div>
 
@@ -429,16 +562,20 @@
     <div id="divOverlayOptions" class="overlay">
         <div id="divModalOptions">
             <div>
-                <label for="toggleMusic" id="labelToggleMusic" class="temporarily_disabled"></label>
-                <input type="checkbox" id="toggleMusic" name="toggleMusic" disabled />
+                <label for="toggleMusic" id="labelToggleMusic"></label>
+                <input type="checkbox" id="toggleMusic" name="toggleMusic" checked onclick="ToggleMusic()" />
             </div>
             <div>
-                <label for="toggleSounds" id="labelToggleSounds" class="temporarily_disabled"></label>
-                <input type="checkbox" id="toggleSounds" name="toggleSounds" disabled />
+                <label for="toggleSounds" id="labelToggleSounds"></label>
+                <input type="checkbox" id="toggleSounds" name="toggleSounds" checked onclick="ToggleSound()" />
             </div>
             <div>
                 <label for="toggleAnimation" id="labelToggleAnimation"></label>
-                <input type="checkbox" id="toggleAnimation" name="toggleAnimation" checked onclick="ToggleAnimation()" />
+                <input type="checkbox" id="toggleAnimation" name="toggleAnimation" checked onclick="ToggleAnimation()" /> <!-- 🚨 DEPRECATED! -->
+            </div>
+            <div>
+                <label for="toggleProfanity" id="labelToggleProfanity"></label>
+                <input type="checkbox" id="toggleProfanity" name="toggleProfanity" checked onclick="ToggleProfanity()" /> <!-- 🚨 DEPRECATED! -->
             </div>
             <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button>
             <div id="divOptionsFlavour"></div>

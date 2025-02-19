@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.14.0';
+const version = '1.15.0';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -49,11 +49,12 @@ const player = {
 
     speaks: null,
 
-    likesMusic: true,
+    likesMusic: false, // 🚨🚨🚨
     likesSounds: true,
     likesAnimations: true,
     likesStory: true,
     likesRecords: false,
+    likesProfanity: true,
 
     isOnMobile: null,
     isGod: false,
@@ -115,8 +116,29 @@ const player = {
     canChooseHeir: false,
 
     hasBegun: false,
+    hasFarmedOnce: false,
+    hasDelegatedOnce: false,
+    hasDelegatedTwice: false,
+    hasDelegatedThrice: false,
+    hasBarteredOlive: false,
+    hasBarteredDate: false,
+    hasBarteredFig: false,
+    hasBarteredPom: false,
+    hasBarteredGrape: false,
+    hasSoldWheat: false,
+    hasSoldBarley: false,
+    hasSoldFlax: false,
+    hasSoldLogs: false,
+    hasSoldBoards: false,
+    hasSoldStone: false,
+    hasSoldPonies: false,
+    hasBoughtWheat: false,
+    hasBoughtBarley: false,
+    hasBoughtLogs: false,
+    hasBoughtBoards: false,
+    hasBoughtStone: false,
+    hasBoughtPonies: false,
     hasMildewed: false,
-    hasSeenResidence: false,
     hasNewFarm: false,
     hasFlaxFarm: false,
     hasBank: false,
@@ -143,8 +165,12 @@ const player = {
     hasRacetrack: false,
     hasOracle: false,
     hasMonument: false,
+    hasSeenResidence: false,
     hasSeenVillage: false,
     hasSeenPort: false,
+    hasSeenMiners: false,
+    hasSeenFarmers: false,
+    hasSeenShepherds: false,
     hasMerchantGuildWrit: false,
     hasFoundCopperEvidence: false,
     hasFoundMine: false,
@@ -153,6 +179,20 @@ const player = {
     hasHiredGemcutters: false,
     hasBeenLevied: false,
     hasAllWisdom: false,
+    hasBecomeHeir: false,
+    hasReturned: false,
+    hasMetMiners: false,
+    hasConsultedMiners: false,
+    hasHelpedMiners: false,
+    hasMetShepherds: false,
+    hasConsultedShepherds: false,
+    hasHelpedShepherds: false,
+    hasBeenSummoned: false,
+    hasBeenReceived: false,
+    hasPrepared: false,
+    hasMetFarmers: false,
+    hasConsultedFarmers: false,
+    hasHelpedFarmers: false,
     hasWon: false,
     hasPegasi: false,
     hasWentToAman: false,
@@ -216,6 +256,50 @@ const smeltImage = new Image();
 smeltImage.src = 'bitmaps/spritesheetSmelt.png';
 const crystalMineImage = new Image();
 crystalMineImage.src = 'bitmaps/crystalmine.png';
+const mapImage = new Image();
+mapImage.src = 'bitmaps/map.png';
+const mapPlayerImage = new Image();
+mapPlayerImage.src = 'bitmaps/map_player.png';
+const mapShepherdsImage = new Image();
+mapShepherdsImage.src = 'bitmaps/map_shepherds.png';
+const mapFarmersImage = new Image();
+mapFarmersImage.src = 'bitmaps/map_farmers.png';
+const mapMinersImage = new Image();
+mapMinersImage.src = 'bitmaps/map_miners.png';
+const mapIconsImage = new Image();
+mapIconsImage.src = 'bitmaps/map_icons.png';
+const neighborsShepherdsImage = new Image();
+neighborsShepherdsImage.src = 'bitmaps/neighborsShepherds.png';
+const neighborsSheepFacingImage = new Image();
+neighborsSheepFacingImage.src = 'bitmaps/cell_sheepFacingCamera_0.png';
+const neighborsSheepHeadImage = new Image();
+neighborsSheepHeadImage.src = 'bitmaps/cell_sheepHead_0.png';
+const neighborsSheepTailImage = new Image();
+neighborsSheepTailImage.src = 'bitmaps/cell_sheepTail_0.png';
+const neighborsMinersImage = new Image();
+neighborsMinersImage.src = 'bitmaps/neighborsMiners.png';
+const neighborsFarmersImage = new Image();
+neighborsFarmersImage.src = 'bitmaps/neighborsFarmers.png';
+const neighborsDucksImage = new Image();
+neighborsDucksImage.src = 'bitmaps/cell_ducks_0.png';
+const neighborsDagsImageA = new Image();
+neighborsDagsImageA.src = 'bitmaps/cell_dagsWilly_0.png';
+const neighborsDagsImageB = new Image();
+neighborsDagsImageB.src = 'bitmaps/cell_dagsArgos_0.png';
+const neighborsMeeplesImage = new Image();
+neighborsMeeplesImage.src = 'bitmaps/cell_meeples_0.png';
+const neighborsBandidoImage = new Image();
+neighborsBandidoImage.src = 'bitmaps/cell_bandido_0.png';
+const neighborsCampfireImage = new Image();
+neighborsCampfireImage.src = 'bitmaps/cell_loomTentFire_0.png';
+const neighborsCoalsImage = new Image();
+neighborsCoalsImage.src = 'bitmaps/cell_coals_0.png';
+const neighborsNeko_tanImage = new Image();
+neighborsNeko_tanImage.src = 'bitmaps/cell_猫娘_0.png';
+const neighborsHerpyImage = new Image();
+neighborsHerpyImage.src = 'bitmaps/cell_noodle_0.png';
+const neighborsBlinksImage = new Image();
+neighborsBlinksImage.src = 'bitmaps/cell_blinks_3.png';
 
 const divGameWindow = document.getElementById('divGameWindow');
 
@@ -256,6 +340,8 @@ const toggleSounds = document.getElementById('toggleSounds');
 const labelToggleSounds = document.getElementById('labelToggleSounds');
 const toggleAnimation = document.getElementById('toggleAnimation');
 const labelToggleAnimation = document.getElementById('labelToggleAnimation');
+const toggleProfanity = document.getElementById('toggleProfanity');
+const labelToggleProfanity = document.getElementById('labelToggleProfanity');
 const buttonEnglish = document.getElementById('buttonEnglish');
 const buttonSpanish = document.getElementById('buttonSpanish');
 const divOptionsFlavour = document.getElementById('divOptionsFlavour');
@@ -398,6 +484,8 @@ const buttonBuyBoards = document.getElementById('buttonBuyBoards');
 const buttonSellBoards = document.getElementById('buttonSellBoards');
 const buttonBuyStone = document.getElementById('buttonBuyStone');
 const buttonSellStone = document.getElementById('buttonSellStone');
+const buttonBuyHorses = document.getElementById('buttonBuyHorses');
+const buttonSellHorses = document.getElementById('buttonSellHorses');
 
 const divViewPort = document.getElementById('divViewPort');
 const buttonGoToTownshipFromPort = document.getElementById('buttonGoToTownshipFromPort');
@@ -451,6 +539,39 @@ const buttonHeirFacesRight = document.getElementById('buttonHeirFacesRight');
 const divHeirWorkshopSummary = document.getElementById('divHeirWorkshopSummary');
 const buttonHeirGoBack = document.getElementById('buttonHeirGoBack');
 
+const divViewMap = document.getElementById('divViewMap');
+const buttonReturnToMap = document.getElementById('buttonReturnToMap');
+const canvasMap = document.getElementById('canvasMap');
+const canvasMapContext = canvasMap.getContext('2d');
+const buttonMapTargetPrev = document.getElementById('buttonMapTargetPrev');
+const buttonMapTargetNext = document.getElementById('buttonMapTargetNext');
+const divMapTarget = document.getElementById('divMapTarget');
+const buttonMapVisitProvince = document.getElementById('buttonMapVisitProvince');
+
+const divViewShepherds = document.getElementById('divViewShepherds');
+const divShepherdsName = document.getElementById('divShepherdsName');
+const divShepherdsSubtitle = document.getElementById('divShepherdsSubtitle');
+const canvasShepherds = document.getElementById('canvasShepherds');
+const canvasShepherdsContext = canvasShepherds.getContext('2d');
+const divShepherdsReport = document.getElementById('divShepherdsReport');
+const buttonShepherdsEvents = document.getElementById('buttonShepherdsEvents');
+
+const divViewMiners = document.getElementById('divViewMiners');
+const divMinersName = document.getElementById('divMinersName');
+const divMinersSubtitle = document.getElementById('divMinersSubtitle');
+const canvasMiners = document.getElementById('canvasMiners');
+const canvasMinersContext = canvasMiners.getContext('2d');
+const divMinersReport = document.getElementById('divMinersReport');
+const buttonMinersEvents = document.getElementById('buttonMinersEvents');
+
+const divViewFarmers = document.getElementById('divViewFarmers');
+const divFarmersName = document.getElementById('divFarmersName');
+const divFarmersSubtitle = document.getElementById('divFarmersSubtitle');
+const canvasFarmers = document.getElementById('canvasFarmers');
+const canvasFarmersContext = canvasFarmers.getContext('2d');
+const divFarmersReport = document.getElementById('divFarmersReport');
+const buttonFarmersEvents = document.getElementById('buttonFarmersEvents');
+
 const buttonOptions = document.getElementById('buttonOptions');
 const buttonQ = document.getElementById('buttonQ');
 const buttonStar = document.getElementById('buttonStar');
@@ -464,7 +585,9 @@ const buttonPlayGod = document.getElementById('buttonPlayGod');
 
 const spanCheevoText = document.getElementById('spanCheevoText');
 
-const formatterStandard = new Intl.NumberFormat('en-US');
+const formatterEnglish = new Intl.NumberFormat('en-US');
+const formatterSpanish = new Intl.NumberFormat('es');
+let formatterCurrent = formatterEnglish;
 
 let gameTurn = 1; // 📅
 const yearAtStartProlepticGregorian = -200; // 200 B.C. ✝️
@@ -618,6 +741,8 @@ let horsesIncAmount = 1;
 let horsesCount = 0;
 let horsesEaten = 0;
 let horsesStarving = false;
+let horsesBought = 0;
+let horsesSold = 0;
 
 let beadsSpawn = false;
 const beadsIncAmount = 42; // Life, the Universe and Everything 👽🤖📖
@@ -665,6 +790,8 @@ let relicSpawnCount = 1;
 let relicCount = 0;
 
 const commodityBulkCount = 10000;
+const commodityHorseCount = 10;
+const commodityHorsePrice = 60000;
 let actualBushelPrice = 50000;
 let currentBushelPrice = actualBushelPrice;
 let actualBarleyAdjustment = 10000;
@@ -701,25 +828,25 @@ const priceStage1 = 50;
 const priceStage2 = 100;
 const priceStage3 = 200;
 const priceAccountant = 150;
-const priceStage4 = 650;
+const priceStage4 = 500;
 const priceStage5 = 300;
-const priceStage6 = 1125;
+const priceStage6 = 1000;
 const priceStage7 = 0;
 const priceStage8 = 0;
 const priceStage9 = 0;
 const priceStage10 = 0;
-const priceStage11 = 1500;
-const priceForest = 800;
+const priceStage11 = 1200;
+const priceForest = 600;
 const priceLoggingCamp = 400;
-const priceSawmill = 1200;
-const priceStage12 = [400, 12000,];
-const priceStage13 = 2800;
-const priceStage14 = [600, 24000,];
-const priceQuarry = 1800;
-const priceStage15 = [8000, 80000,];
+const priceSawmill = 800;
+const priceStage12 = [400, 8000,];
+const priceStage13 = 2400;
+const priceStage14 = [600, 16000,];
+const priceQuarry = 1600;
+const priceStage15 = [4000, 60000,];
 const priceStage16 = [100, 100,];
-const priceStage17 = [4200, 48000,];
-const priceStage18 = [6400, 3200,];
+const priceStage17 = [3200, 32000,];
+const priceStage18 = [4800, 2400,];
 const priceNewFarm = 1000000;
 const priceFlaxFarm = 5000000;
 
@@ -792,6 +919,10 @@ const pricePort4 = 128000;
 const pricePort5 = 256000;
 const pricePort6 = 512000;
 
+const priceMiners = [10000000, 100000, 50,];
+const priceFarmers = [];
+const priceShepherds = 50;
+
 const pricePegasus = 3;
 
 const tributeAmount = 616; // 😈 NRO QSR
@@ -802,12 +933,31 @@ const tributeTimerLimit = 100;
 let revealedWisdom = 0;
 const achievementSoundRare = new Audio('waveforms/XboxOneRareAchievement.mp3');
 
+const audioTheme = new Audio('waveforms/moraffsAria.mp3');
+const audioPeasant = new Audio('waveforms/warcraft.mp3');
+
 let heirStage = 0;
 
 const arrayFacesSorted = [];
 let heirFacesPageCurrent = 1;
 let heirFacesPageTotal = 13;
 let heirFaceChoice = 0;
+
+// 0. Wool 🧶, 1. Milk 🥛, 2. Yoghurt 🍦, 3. Butter 🧈, 4. Cheese 🧀, 5. Mutton 🥩, 6. Offal 🍖, 7. Hide 🏈, 8. Bone 🦴, 9. Blood 🩸, 10. Manure 💩
+const shepherdsInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const shepherdsProduction = [120, 80, 20, 40, 10, 60, 180, 16, 16, 32, 64,];
+const shepherdsCount = 240;
+const shepherdsCost = 1;
+
+// 0. Diamonds 💎, 1. Jacinth 💎, 2. Bismuth 💎, 3. Gold 🧱, 4. Silver 🧱, 5. Iron 🧱, 6. White Copper 🧱, 7. False Silver 🧱, 8. Lead 🧱, 9. Kobold Ore 🪨, 10. Magnes Rock 🪨
+const minersInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const minersProduction = [1, 5, 10, 1, 5, 10, 15, 5, 25, 50, 50,];
+const minersCost = [80, 120,];
+
+// 0. XXX, 1. XXX, 2. XXX, 3. XXX, 4. XXX, 5. XXX, 6. XXX, 7. XXX, 8. XXX, 9. XXX, 10. XXX
+const farmersInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const farmersProduction = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,];
+const ranchersCount = 420;
 
 const legalTarget = 'https://creativecommons.org/publicdomain/zero/1.0/';
 const winTarget = 'https://youtu.be/dOjFcx3GJHg'; // ♠️♣️♦️♥️ // 'https://youtu.be/AQmFlAB15f8'; // 👨‍🎤💃🎻 // 'https://youtu.be/YnDLlajMxyo'; // 🌼☀️🍂❄️
@@ -852,6 +1002,33 @@ let villageAnimationToggle = false;
 let animationCycleFrame = 0;
 let smeltImageOffset = 0;
 let smeltImageToggle = false;
+let shepherdsAnimationFrameA = 0;
+let shepherdsAnimationFrameB = 0;
+let shepherdsAnimationFrameC = 0;
+let shepherdsAnimationToggle = false;
+let farmersAnimationFrame = 0;
+let farmersAnimationToggle = false;
+let minersAnimationFrameA = 0;
+let minersAnimationFrameB = 0;
+let minersAnimationFrameC = 0;
+let minersAnimationFrameD = 0;
+let minersAnimationFrameE = 0;
+let minersAnimationFrameF = 0;
+let minersAnimationFrameG = 0;
+let minersAnimationFrameH = 0;
+let minersAnimationFrameI = 0;
+let minersAnimationToggle = false;
+
+let mapOutlineOpacity = 0;
+let mapOutlineValueClimb = true;
+
+let mapTarget = 0;
+let mapProvinces = [
+    [nameVillage, true,],
+    ['Çoban Kasabası', true,], // 'Shepherd Town' in Turkish
+    ['Agrόktima Georgios', true,], // 'Farm of George' in Greek, 'georgos' (γεωργός) means 'farmer': Farmer's Farm (y=r³/3)
+    ['Na’ari Harim', true,], // 'Mountain Boys' in Hebrew
+]; // first and last entry MUST remain targettable for MapChangeTarget method
 
 const gameEventDismissDelay = 1600;
 let timeoutGameEventDismiss = null;
@@ -860,6 +1037,9 @@ let timeoutHeirButton = null;
 let frameHeirButton = 0;
 
 const save_key = 'PRAEDIUM_save_data';
+
+let gameEventTrigger = false;
+let gameEventContainer = '';
 
 
 

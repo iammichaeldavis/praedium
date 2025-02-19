@@ -1,11 +1,6 @@
 // ۞ GAME TURN *************************************************************************************
 // *************************************************************************************************
 
-let gameEventTrigger = false;
-let gameEventContainer = '';
-
-
-
 function GameTurn() {
     if (player.likesRecords) { snapshotLastTurn = snapshotThisTurn; }
 
@@ -74,6 +69,9 @@ function GameTurn() {
         if (beadsSpawn) { MakeBeads(); }
         if (trophiesSpawn) { HostGladiatorGames(); }
         if (player.hasBank) { AccrueInterest(); }
+        if (player.hasHelpedShepherds) { VassalProduction('Shepherds'); }
+        if (player.hasHelpedMiners) { VassalProduction('Miners'); }
+        if (player.hasHelpedFarmers) { VassalProduction('Farmers'); }
     }
 
     if (week % 2 == 0 && trophiesSpawn) {
@@ -162,9 +160,46 @@ function GameTurn() {
 
     if (player.hasBakery) { WorkshopProduction(); }
 
+    if (player.isAt == 'Map' && player.hasHelpedMiners && player.hasHelpedShepherds && !player.hasBeenSummoned) {
+        player.hasBeenSummoned = true;
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryFarmersSummon;
+    }
+
+    if (player.isAt == 'Farmers' && !player.hasBeenReceived) {
+        player.hasBeenReceived = true;
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryFarmersFirstImpression;
+    }
+
     if (year == 55 && week == 10) {
         gameEventTrigger = true;
         gameEventContainer = displayStoryRomanConquestofGreece;
+    }
+
+    if (year == 125 && week == 33) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryRomanBreadRiot;
+    }
+
+    if (year == 150 && week == 20) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryRomanConquestofFrance;
+    }
+
+    if (year == 450 && week == 5) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStory450Years;
+    }
+
+    if (year == 970 && week == 2) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStory900Years;
+    }
+
+    if (year == 970 && week == 6) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStory901Years;
     }
 
     if (player.likesRecords) {
@@ -172,7 +207,7 @@ function GameTurn() {
         //reportOutputToWriteToDiskForDataAnalysis = snapshotThisTurn - snapshotLastTurn;
     }
 
-    if (week == 1 && year > 1) { RecordProgress(); }
+    if (week == 1 && year > 1 && player.isAt != 'Workshop') { RecordProgress(); }
 
     UpdateDisplay();
 
@@ -343,6 +378,56 @@ function WorkshopProduction() {
 
 
 
+function VassalProduction(whom) {
+    if (whom == 'Shepherds') {
+        residenceInStockCount[8] -= shepherdsCost;
+        residenceShippedCount[8] += shepherdsCost;
+        shepherdsInventory[0] += shepherdsProduction[0];
+        shepherdsInventory[1] += shepherdsProduction[1];
+        shepherdsInventory[2] += shepherdsProduction[2];
+        shepherdsInventory[3] += shepherdsProduction[3];
+        shepherdsInventory[4] += shepherdsProduction[4];
+        shepherdsInventory[5] += shepherdsProduction[5];
+        shepherdsInventory[6] += shepherdsProduction[6];
+        shepherdsInventory[7] += shepherdsProduction[7];
+        shepherdsInventory[8] += shepherdsProduction[8];
+        shepherdsInventory[9] += shepherdsProduction[9];
+        shepherdsInventory[10] += shepherdsProduction[10];
+    }
+    if (whom == 'Miners') {
+        residenceInStockCount[11] -= minersCost[0];
+        residenceSpentCount[11] += minersCost[0];
+        residenceInStockCount[13] -= minersCost[1];
+        residenceSpentCount[13] += minersCost[1];
+        minersInventory[0] += minersProduction[0];
+        minersInventory[1] += minersProduction[1];
+        minersInventory[2] += minersProduction[2];
+        minersInventory[3] += minersProduction[3];
+        minersInventory[4] += minersProduction[4];
+        minersInventory[5] += minersProduction[5];
+        minersInventory[6] += minersProduction[6];
+        minersInventory[7] += minersProduction[7];
+        minersInventory[8] += minersProduction[8];
+        minersInventory[9] += minersProduction[9];
+        minersInventory[10] += minersProduction[10];
+    }
+    if (whom == 'Farmers') {
+        farmersInventory[0] += farmersProduction[0];
+        farmersInventory[1] += farmersProduction[1];
+        farmersInventory[2] += farmersProduction[2];
+        farmersInventory[3] += farmersProduction[3];
+        farmersInventory[4] += farmersProduction[4];
+        farmersInventory[5] += farmersProduction[5];
+        farmersInventory[6] += farmersProduction[6];
+        farmersInventory[7] += farmersProduction[7];
+        farmersInventory[8] += farmersProduction[8];
+        farmersInventory[9] += farmersProduction[9];
+        farmersInventory[10] += farmersProduction[10];
+    }
+}
+
+
+
 function ForgeBronze() {
     bronzeworkCountdownTimer--;
     if (bronzeworkCountdownTimer == 0) {
@@ -370,7 +455,7 @@ function CutCrystals() {
     residenceIngredientConsumedCount[8] += workshopShare;
     bounty = bounty - workshopShare;
     crystalsCount += bounty;
-    mountainSpentCount[5] += bounty;
+    mountainSpentCount[5] += workshopShare;
     PayWorkerGroup(gemcuttersHired, 10);
 }
 

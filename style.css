@@ -174,9 +174,12 @@ button:active {
     margin: 0 auto 6.4vw auto;
 }
 
-#divVillageButtons #buttonBuyWheat,
 #divVillageButtons #buttonSellWheat {
     margin: 0 auto;
+}
+
+#divVillageButtons #buttonBuyWheat {
+    margin: 6.4vw auto 0 auto;
 }
 
 #divVillageButtons #buttonBuyBarley,
@@ -187,13 +190,19 @@ button:active {
 #divVillageButtons #buttonBuyBoards,
 #divVillageButtons #buttonSellBoards,
 #divVillageButtons #buttonBuyStone,
-#divVillageButtons #buttonSellStone {
+#divVillageButtons #buttonSellStone,
+#divVillageButtons #buttonBuyHorses,
+#divVillageButtons #buttonSellHorses {
     margin: 2vw auto 0 auto;
 }
 
 #divVillageButtons #buttonBuyStone,
-#divVillageButtons #buttonSellStone {
+#divVillageButtons #buttonBuyHorses {
     margin-bottom: 6.4vw;
+}
+
+body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideClass {
+    margin-bottom: 0;
 }
 
 #buttonForest,
@@ -360,7 +369,7 @@ button:active {
 #buttonPriorityColon,
 #buttonPriorityOption {
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
 }
 
 #buttonTillDecal {
@@ -539,6 +548,12 @@ button:active {
 #buttonResumeNo {
     display: block;
     margin: 0 auto;
+}
+
+
+
+#buttonReturnToMap {
+    margin-bottom: 2vw;
 }
 
 
@@ -864,6 +879,40 @@ button:active {
     font-style: italic;
 }
 
+#divGameEventCorpus #divMeetings {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #041204;
+    line-height: 4.3vw;
+    text-align: justify;
+}
+
+#divGameEventCorpus #AlaviNames {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #041204;
+    line-height: 4.3vw;
+    text-align: center;
+}
+
+#divGameEventCorpus #AlaviSong {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #041204;
+    line-height: 4.3vw;
+    text-align: justify;
+    font-style: italic;
+}
+
+#divGameEventCorpus #divToadies {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #041204;
+    line-height: 4.3vw;
+    text-align: justify;
+    font-style: italic;
+}
+
 
 
 #divOverlayMods {
@@ -1043,21 +1092,21 @@ input {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
 }
 
 #divStonesSeason {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
 }
 
 #divEmbossZodiacChinese {
     width: calc(32px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
 }
 
 #divHourglass {
@@ -1065,35 +1114,35 @@ input {
     height: calc(16px * var(--pixel-scale));
     margin: 0 calc(6px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
 }
 
 #divEmbossSeason {
     width: calc(32px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
 }
 
 #divStonesWeek {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
 }
 
 #divRuneMonth {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
 }
 
 #divRuneElement {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
 }
 
 
@@ -1164,11 +1213,22 @@ canvas {
 
 #canvasVillage,
 #canvasResidence,
-#canvasPort {
+#canvasPort,
+#canvasShepherds,
+#canvasMiners,
+#canvasFarmers {
     width: calc(386px * var(--pixel-scale));
     height: calc(226px * var(--pixel-scale));
     margin: 0 auto 6.4vw auto;
     display: block;
+}
+
+#canvasMap {
+    width: calc(208px * 2 * var(--pixel-scale));
+    height: calc(173px * 2 * var(--pixel-scale));
+    display: block;
+    margin: 0 auto;
+    border: 0;
 }
 
 
@@ -1478,7 +1538,7 @@ td {
 .workshopHarvestMetalDecal,
 .workshopHarvestDigDecal {
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     margin-right: calc(2px * var(--pixel-scale));
@@ -1545,180 +1605,54 @@ td {
 
 
 
-/* // BUILD-A-HEIR WORKSHOP ///////////////////////////////////////////////////////////////////// */
-/* ////////////////////////////////////////////////////////////////////////////////////////////// */
-
-#divViewHeirWorkshop {
-    margin-bottom: 6.4vw;
+#tableShepherdsReport thead td,
+#tableShepherdsStaff thead td,
+#tableMinersReport thead td,
+#tableMinersStaff thead td {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: calc(1px * var(--pixel-scale)) solid black;
 }
 
-#divHeirWorkshopForewardHeadline {
-    width: 62%;
-    text-align: justify;
-    margin: 0 auto;
+#tableShepherdsReport thead td,
+#tableShepherdsStaff thead td {
+    background: #477fa5;
 }
 
-#buttonHeirBegin {
-    margin-top: 6.4vw;
+#tableMinersReport thead td,
+#tableMinersStaff thead td {
+    background: #be6c62;
 }
 
-#selectHeirNames,
-#selectHeirEthnicities,
-#selectHeirTitles {
-    display: block;
-    margin: 6.4vw auto 6.4vw auto;
+#tableShepherdsReport td,
+#tableShepherdsStaff td,
+#tableMinersReport td,
+#tableMinersStaff td {
+    padding: 1vw 2vw;
+    vertical-align: bottom;
+}
+
+#tableShepherdsReport tr:nth-of-type(even) td,
+#tableShepherdsStaff tr:nth-of-type(even) td,
+#tableMinersReport tr:nth-of-type(even) td,
+#tableMinersStaff tr:nth-of-type(even) td {
+    background: #e9e9e9;
+    border-top: calc(1px * var(--pixel-scale)) solid #d8d8d8;
+    border-bottom: calc(1px * var(--pixel-scale)) solid #d8d8d8;
+}
+
+#tableShepherdsReport,
+#tableShepherdsStaff,
+#tableMinersReport,
+#tableMinersStaff {
     border: calc(1px * var(--pixel-scale)) solid black;
-    padding: 1vw 2vw 1vw 1vw;
-    cursor: pointer;
 }
 
-#divHeirGenderIcon,
-#divHeirSelectedGender {
-    background-image: url(bitmaps/tilemap.png);
-    width: calc(6 * 16px * var(--pixel-scale));
-    height: calc(6 * 16px * var(--pixel-scale));
-    background-size: calc(6 * 512px * var(--pixel-scale)) calc(6 * 288px * var(--pixel-scale));
-    margin: 6.4vw auto;
+#tableShepherdsReport,
+#tableMinersReport {
+    margin-bottom: 2vw;
 }
-
-#buttonHeirChooseGender {
-    margin: 0 3.2vw;
-}
-
-.HeirGenderIconMale {
-    background-position: calc(6 * -32px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconFemale {
-    background-position: calc(6 * -48px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconMaleTrans {
-    background-position: calc(6 * -64px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconFemaleTrans {
-    background-position: calc(6 * -80px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconIntersex {
-    background-position: calc(6 * -96px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconNobinario {
-    background-position: calc(6 * -112px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconOmnigender {
-    background-position: calc(6 * -128px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconAgender {
-    background-position: calc(6 * -144px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconMaleSm {
-    background-position: calc(8 * -32px * var(--pixel-scale)) calc(8 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconFemaleSm {
-    background-position: calc(8 * -48px * var(--pixel-scale)) calc(8 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconMaleTransSm {
-    background-position: calc(8 * -64px * var(--pixel-scale)) calc(8 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconFemaleTransSm {
-    background-position: calc(8 * -80px * var(--pixel-scale)) calc(8 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconIntersexSm {
-    background-position: calc(8 * -96px * var(--pixel-scale)) calc(8 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconNobinarioSm {
-    background-position: calc(8 * -112px * var(--pixel-scale)) calc(8 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconOmnigenderSm {
-    background-position: calc(8 * -128px * var(--pixel-scale)) calc(8 * -272px * var(--pixel-scale));
-}
-
-.HeirGenderIconAgenderSm {
-    background-position: calc(8 * -144px * var(--pixel-scale)) calc(8 * -272px * var(--pixel-scale));
-}
-
-#buttonHeirChooseGender {
-    width: 28vw;
-}
-
-#divHeirFacesGrid {
-    margin: 6.4vw auto;
-}
-
-#divHeirFacesGridMiddleRow {
-    margin: 3.2vw 0;
-}
-
-#divHeirFacesGrid #buttonHeirChooseFace1,
-#divHeirFacesGrid #buttonHeirChooseFace3,
-#divHeirFacesGrid #buttonHeirChooseFace4,
-#divHeirFacesGrid #buttonHeirChooseFace6,
-#divHeirFacesGrid #buttonHeirChooseFace7,
-#divHeirFacesGrid #buttonHeirChooseFace9 {
-    margin: 0;
-}
-
-#divHeirFacesGrid #buttonHeirChooseFace2,
-#divHeirFacesGrid #buttonHeirChooseFace5,
-#divHeirFacesGrid #buttonHeirChooseFace8 {
-    margin: 0  3.2vw;
-}
-
-#divViewHeirWorkshop #divHeirFacesGrid button div,
-#divHeirSelectedPortrait {
-    width: calc(66px * var(--pixel-scale));
-    height: calc(66px * var(--pixel-scale));
-    border: calc(1px * var(--pixel-scale)) solid black;
-    background-image: url(bitmaps/faces.png);
-    background-size: calc(704px * var(--pixel-scale)) calc(704px * var(--pixel-scale));
-}
-
-#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirSelectedPortrait {
-    width: calc(64px * 2 * var(--pixel-scale));
-    height: calc(64px * 2 * var(--pixel-scale));
-    background-size: calc(704px * 2 * var(--pixel-scale)) calc(704px * 2 * var(--pixel-scale));
-    border: 0;
-    margin: 0;
-    display: inline-block;
-}
-
-#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirSelectedGender {
-    width: calc(8 * 16px * var(--pixel-scale));
-    height: calc(8 * 16px * var(--pixel-scale));
-    background-size: calc(8 * 512px * var(--pixel-scale)) calc(8 * 288px * var(--pixel-scale));
-    margin: 0;
-    display: inline-block;
-}
-
-#spanHeirFacesPagination {
-    pointer-events: none;
-}
-
-#buttonHeirFacesLeft {
-    margin-right: 3.2vw;
-}
-
-#buttonHeirFacesRight {
-    margin-left: 3.2vw;
-}
-
-#buttonHeirGoBack {
-    font-size: 1.8vw;
-    margin: 12.8vw auto 0 auto;
-}
-
 
 
 
@@ -1732,14 +1666,48 @@ td {
     display: block;
     background: var(--tilemap);
     background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1) calc(var(--j) * var(--pixel-scale) * 16px * -1);
-    background-size: calc(512px * var(--pixel-scale)) calc(288px * var(--pixel-scale));
+    background-size: calc(512px * var(--pixel-scale)) calc(320px * var(--pixel-scale));
 }
 
 .inlineIcon {
     display: inline-block;
 }
 
+.tripleSize {
+    width: calc(16px * var(--pixel-scale) * 3);
+    height: calc(16px * var(--pixel-scale) * 3);
+    background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1 * 3) calc(var(--j) * var(--pixel-scale) * 16px * -1 * 3);
+    background-size: calc(512px * var(--pixel-scale) * 3) calc(320px * var(--pixel-scale) * 3);
+}
 
+.quadrupleSize {
+    width: calc(16px * var(--pixel-scale) * 4);
+    height: calc(16px * var(--pixel-scale) * 4);
+    background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1 * 4) calc(var(--j) * var(--pixel-scale) * 16px * -1 * 4);
+    background-size: calc(512px * var(--pixel-scale) * 4) calc(320px * var(--pixel-scale) * 4);
+}
+
+.quintupleSize {
+    width: calc(16px * var(--pixel-scale) * 5);
+    height: calc(16px * var(--pixel-scale) * 5);
+    background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1 * 5) calc(var(--j) * var(--pixel-scale) * 16px * -1 * 5);
+    background-size: calc(512px * var(--pixel-scale) * 5) calc(320px * var(--pixel-scale) * 5);
+}
+
+.sextupleSize {
+    width: calc(16px * var(--pixel-scale) * 6);
+    height: calc(16px * var(--pixel-scale) * 6);
+    background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1 * 6) calc(var(--j) * var(--pixel-scale) * 16px * -1 * 6);
+    background-size: calc(512px * var(--pixel-scale) * 6) calc(320px * var(--pixel-scale) * 6);
+}
+
+.tutorialSell {
+    margin: 0 2vw calc(31px * var(--pixel-scale)) 2vw;
+}
+
+
+
+/* resources, farm */
 
 .Wheat {
     --i: 0;
@@ -1783,33 +1751,319 @@ td {
 
 
 
-.Sawyer {
+/* resources, forest */
+
+.Log {
     --i: 0;
-    --j: 13;
+    --j: 14;
 }
 
-.Miner {
+.Board {
     --i: 1;
-    --j: 13;
+    --j: 14;
 }
 
-.Mason {
+
+
+/* resources, mountain */
+
+.Stone {
     --i: 2;
-    --j: 13;
+    --j: 14;
 }
 
-.Logger {
+.Crystal {
+    --i: 30;
+    --j: 5;
+}
+
+.OreCopper {
     --i: 3;
+    --j: 14;
+}
+
+.IngotCopper {
+    --i: 4;
+    --j: 14;
+}
+
+.IngotTin {
+    --i: 25;
+    --j: 14;
+}
+
+.IngotBronze {
+    --i: 26;
+    --j: 14;
+}
+
+
+
+/* resources, workshops */
+
+.Loaves {
+    --i: 31;
+    --j: 7;
+}
+
+.LembasBread {
+    --i: 26;
+    --j: 16;
+}
+
+.Ration {
+    --i: 29;
+    --j: 17;
+}
+
+.Linen {
+    --i: 29;
+    --j: 16;
+}
+
+.Bandage {
+    --i: 27;
+    --j: 16;
+}
+
+.Amphora {
+    --i: 31;
+    --j: 8;
+}
+
+.Keg {
+    --i: 31;
+    --j: 9;
+}
+
+.Cask {
+    --i: 31;
     --j: 13;
 }
 
-.Guard {
-    --i: 4;
+.Honeypot {
+    --i: 31;
+    --j: 10;
+}
+
+.Jug {
+    --i: 31;
+    --j: 12;
+}
+
+.Comb {
+    --i: 0;
+    --j: 16;
+}
+
+.Basket {
+    --i: 31;
+    --j: 11;
+}
+
+.Raisins {
+    --i: 31;
+    --j: 16;
+}
+
+.Sal {
+    --i: 28;
+    --j: 16;
+}
+
+.Trinket {
+    --i: 31;
+    --j: 14;
+}
+
+.Gems {
+    --i: 23;
+    --j: 7;
+}
+
+
+
+/* resources, miners */
+
+.Diamonds {
+    --i: 20;
+    --j: 18;
+}
+
+.Zircon {
+    --i: 18;
+    --j: 18;
+}
+
+.Bismuth {
+    --i: 17;
+    --j: 18;
+}
+
+.IngotGold {
+    --i: 19;
+    --j: 18;
+}
+
+.IngotSilver {
+    --i: 26;
+    --j: 17;
+}
+
+.IngotIron {
+    --i: 25;
+    --j: 17;
+}
+
+.IngotNickel {
+    --i: 15;
+    --j: 18;
+}
+
+.IngotZinc {
+    --i: 16;
+    --j: 18;
+}
+
+.IngotLead {
+    --i: 27;
+    --j: 17;
+}
+
+.OreCobalt {
+    --i: 13;
+    --j: 18;
+}
+
+.Pyrolusite {
+    --i: 14;
+    --j: 18;
+}
+
+
+
+/* resources, shepherds */
+
+.Wool {
+    --i: 14;
+    --j: 17;
+}
+
+.Milk {
+    --i: 16;
+    --j: 17;
+}
+
+.Yoghurt {
+    --i: 1;
+    --j: 18;
+}
+
+.Butter {
+    --i: 28;
+    --j: 17;
+}
+
+.Cheese {
+    --i: 0;
+    --j: 18;
+}
+
+.Mutton {
+    --i: 15;
+    --j: 17;
+}
+
+.Offal {
+    --i: 13;
+    --j: 17;
+}
+
+.LeatherHide {
+    --i: 26;
+    --j: 9;
+}
+
+.Bones {
+    --i: 27;
+    --j: 9;
+}
+
+.Blood {
+    --i: 17;
+    --j: 17;
+}
+
+.Manure {
+    --i: 14;
+    --j: 2;
+}
+
+
+
+/* resources, farmers */
+
+.Poulty {
+    --i: 3;
+    --j: 18;
+}
+
+.Eggs {
+    --i: 2;
+    --j: 18;
+}
+
+.Feathers {
+    --i: 7;
+    --j: 18;
+}
+
+.FavaBeans {
+    --i: 6;
+    --j: 18;
+}
+
+.Chickpeas {
+    --i: 9;
+    --j: 18;
+}
+
+.Lentils {
+    --i: 10;
+    --j: 18;
+}
+
+.Millet {
+    --i: 11;
+    --j: 18;
+}
+
+.Spelt {
+    --i: 12;
+    --j: 18;
+}
+
+.Bananas {
+    --i: 0;
+    --j: 19;
+}
+
+
+
+/* staff */
+
+.Accountant {
+    --i: 7;
     --j: 13;
 }
 
 .Fieldhand {
     --i: 5;
+    --j: 13;
+}
+
+.Vigneron {
+    --i: 10;
     --j: 13;
 }
 
@@ -1823,23 +2077,18 @@ td {
     --j: 14;
 }
 
-.Blacksmith {
-    --i: 6;
+.Logger {
+    --i: 3;
     --j: 13;
 }
 
-.Accountant {
-    --i: 7;
+.Sawyer {
+    --i: 0;
     --j: 13;
 }
 
-.Vigneron {
-    --i: 10;
-    --j: 13;
-}
-
-.Cinderman {
-    --i: 11;
+.Mason {
+    --i: 2;
     --j: 13;
 }
 
@@ -1848,7 +2097,39 @@ td {
     --j: 7;
 }
 
+.Miner {
+    --i: 1;
+    --j: 13;
+}
 
+.Cinderman {
+    --i: 11;
+    --j: 13;
+}
+
+.Blacksmith {
+    --i: 6;
+    --j: 13;
+}
+
+.Shepherd {
+    --i: 8;
+    --j: 18;
+}
+
+.Murray {
+    --i: 31;
+    --j: 19;
+}
+
+
+
+/* button decals */
+
+.AnkhTile {
+    --i: 31;
+    --j: 15;
+}
 
 .Shovel {
     --i: 7;
@@ -1890,56 +2171,14 @@ td {
     --j: 7;
 }
 
+.RaisinsLoose {
+    --i: 30;
+    --j: 16;
+}
+
 .RedCross {
     --i: 30;
     --j: 17;
-}
-
-
-
-.Log {
-    --i: 0;
-    --j: 14;
-}
-
-.Board {
-    --i: 1;
-    --j: 14;
-}
-
-.Stone {
-    --i: 2;
-    --j: 14;
-}
-
-.Crystal {
-    --i: 30;
-    --j: 5;
-}
-
-.OreCopper {
-    --i: 3;
-    --j: 14;
-}
-
-.IngotCopper {
-    --i: 4;
-    --j: 14;
-}
-
-.IngotTin {
-    --i: 25;
-    --j: 14;
-}
-
-.IngotBronze {
-    --i: 26;
-    --j: 14;
-}
-
-.TheLocnar {
-    --i: 27;
-    --j: 14;
 }
 
 .Orb {
@@ -1947,95 +2186,192 @@ td {
     --j: 7;
 }
 
-.Loaves {
-    --i: 31;
-    --j: 7;
+.Decree {
+    --i: 25;
+    --j: 15;
 }
 
-.Amphora {
-    --i: 31;
-    --j: 8;
-}
-
-.Keg {
-    --i: 31;
-    --j: 9;
-}
-
-.Honeypot {
-    --i: 31;
-    --j: 10;
-}
-
-.Basket {
-    --i: 31;
+.Ship {
+    --i: 27;
     --j: 11;
 }
 
-.Jug {
-    --i: 31;
-    --j: 12;
-}
-
-.Cask {
-    --i: 31;
-    --j: 13;
-}
-
-.Trinket {
-    --i: 31;
-    --j: 14;
-}
-
-.Gems {
-    --i: 23;
-    --j: 7;
-}
-
-.Comb {
-    --i: 0;
-    --j: 16;
-}
-
-.Raisins {
-    --i: 31;
-    --j: 16;
-}
-
-.RaisinsLoose {
-    --i: 30;
-    --j: 16;
-}
-
-.LembasBread {
-    --i: 26;
-    --j: 16;
-}
-
-.Sal {
-    --i: 28;
-    --j: 16;
-}
-
-.Linen {
-    --i: 29;
-    --j: 16;
-}
-
-.Bandage {
-    --i: 27;
-    --j: 16;
-}
-
-.Ration {
-    --i: 29;
+.MessageYellow {
+    --i: 11;
     --j: 17;
 }
 
+.MessageRed {
+    --i: 12;
+    --j: 17;
+}
 
+.YesMan {
+    --i: 31;
+    --j: 17;
+}
+
+.Crown1 {
+    --i: 10;
+    --j: 14;
+}
+
+.Crown2 {
+    --i: 13;
+    --j: 14;
+}
+
+.Crown3 {
+    --i: 14;
+    --j: 14;
+}
+
+.Crown4 {
+    --i: 15;
+    --j: 14;
+}
+
+
+
+/* village */
+
+.Citizen {
+    --i: 17;
+    --j: 15;
+}
+
+.Pilgrim {
+    --i: 23;
+    --j: 15;
+}
+
+.TaxCollector {
+    --i: 18;
+    --j: 15;
+}
+
+.MoneyBag {
+    --i: 11;
+    --j: 15;
+}
+
+.MoneyBagSpent {
+    --i: 11;
+    --j: 14;
+}
+
+.MoneyTemple {
+    --i: 12;
+    --j: 15;
+}
+
+.Scales {
+    --i: 26;
+    --j: 10;
+}
+
+.Key {
+    --i: 16;
+    --j: 15;
+}
+
+.ShippingCrate {
+    --i: 30;
+    --j: 15;
+}
+
+.Chuckles {
+    --i: 20;
+    --j: 15;
+}
+
+.Chest {
+    --i: 24;
+    --j: 15;
+}
+
+.CityWalls {
+    --i: 21;
+    --j: 15;
+}
+
+.Patient {
+    --i: 31;
+    --j: 5;
+}
+
+.LordBritish {
+    --i: 19;
+    --j: 15;
+}
 
 .Trophy {
     --i: 0;
+    --j: 15;
+}
+
+.PenitentMan {
+    --i: 13;
+    --j: 15;
+}
+
+.Mala {
+    --i: 7;
+    --j: 15;
+}
+
+.TheWiz {
+    --i: 14;
+    --j: 15;
+}
+
+.Scroll {
+    --i: 4;
+    --j: 15;
+}
+
+.FarmerJoe {
+    --i: 15;
+    --j: 15;
+}
+
+.Horsey {
+    --i: 8;
+    --j: 15;
+}
+
+.Sphinx {
+    --i: 26;
+    --j: 15;
+}
+
+.Relic {
+    --i: 27;
+    --j: 15;
+}
+
+.EspírituSanto {
+    --i: 28;
+    --j: 15;
+}
+
+.Child {
+    --i: 22;
+    --j: 15;
+}
+
+.Ghost {
+    --i: 23;
+    --j: 5;
+}
+
+.Rattata {
+    --i: 5;
+    --j: 15;
+}
+
+.HorseyMounted {
+    --i: 9;
     --j: 15;
 }
 
@@ -2049,18 +2385,12 @@ td {
     --j: 15;
 }
 
+
+
+/* trade */
+
 .Sell {
     --i: 3;
-    --j: 15;
-}
-
-.Scroll {
-    --i: 4;
-    --j: 15;
-}
-
-.Rattata {
-    --i: 5;
     --j: 15;
 }
 
@@ -2099,18 +2429,51 @@ td {
     --j: 8;
 }
 
-.Mala {
-    --i: 7;
-    --j: 15;
+.HorseyDisable {
+    --i: 10;
+    --j: 17;
 }
 
-.Horsey {
-    --i: 8;
-    --j: 15;
+
+
+/* tutorial */
+
+.Weeds {
+    --i: 0;
+    --j: 4;
 }
 
-.HorseyMounted {
-    --i: 9;
+.Soil {
+    --i: 1;
+    --j: 4;
+}
+
+.SoilSeeded {
+    --i: 2;
+    --j: 4;
+}
+
+.SoilWatered {
+    --i: 3;
+    --j: 4;
+}
+
+.Crops {
+    --i: 16;
+    --j: 4;
+}
+
+
+
+/* unused */
+
+.Guard {
+    --i: 4;
+    --j: 13;
+}
+
+.Leo {
+    --i: 29;
     --j: 15;
 }
 
@@ -2119,156 +2482,29 @@ td {
     --j: 15;
 }
 
-.MoneyBag {
-    --i: 11;
-    --j: 15;
-}
-
-.MoneyBagSpent {
-    --i: 11;
+.TheLocnar {
+    --i: 27;
     --j: 14;
 }
 
-.MoneyTemple {
-    --i: 12;
-    --j: 15;
-}
-
-.PenitentMan {
-    --i: 13;
-    --j: 15;
-}
-
-.TheWiz {
-    --i: 14;
-    --j: 15;
-}
-
-.FarmerJoe {
-    --i: 15;
-    --j: 15;
-}
-
-.Key {
-    --i: 16;
-    --j: 15;
-}
-
-.Citizen {
-    --i: 17;
-    --j: 15;
-}
-
-.TaxCollector {
-    --i: 18;
-    --j: 15;
-}
-
-.LordBritish {
-    --i: 19;
-    --j: 15;
-}
-
-.Chuckles {
-    --i: 20;
-    --j: 15;
-}
-
-.CityWalls {
-    --i: 21;
-    --j: 15;
-}
-
-.Child {
-    --i: 22;
-    --j: 15;
-}
-
-.Pilgrim {
-    --i: 23;
-    --j: 15;
-}
-
-.Chest {
-    --i: 24;
-    --j: 15;
-}
-
-.Decree {
-    --i: 25;
-    --j: 15;
-}
-
-.Sphinx {
-    --i: 26;
-    --j: 15;
-}
-
-.Relic {
-    --i: 27;
-    --j: 15;
-}
-
-.EspírituSanto {
-    --i: 28;
-    --j: 15;
-}
-
-.Leo {
-    --i: 29;
-    --j: 15;
-}
-
-.ShippingCrate {
+.PlainMessage {
     --i: 30;
-    --j: 15;
+    --j: 19;
 }
 
-.AnkhTile {
-    --i: 31;
-    --j: 15;
+.Wand {
+    --i: 29;
+    --j: 19;
 }
 
-.Ghost {
-    --i: 23;
-    --j: 5;
+.EmptyJar {
+    --i: 28;
+    --j: 19;
 }
 
-.Scales {
-    --i: 26;
-    --j: 10;
-}
-
-.Patient {
-    --i: 31;
-    --j: 5;
-}
-
-.Ship {
+.Medjed {
     --i: 27;
-    --j: 11;
-}
-
-
-
-.Crown1 {
-    --i: 10;
-    --j: 14;
-}
-
-.Crown2 {
-    --i: 13;
-    --j: 14;
-}
-
-.Crown3 {
-    --i: 14;
-    --j: 14;
-}
-
-.Crown4 {
-    --i: 15;
-    --j: 14;
+    --j: 19;
 }
 
 
@@ -2404,6 +2640,235 @@ td {
 
 
 
+/* // BUILD-A-HEIR WORKSHOP ///////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divViewHeirWorkshop {
+    margin-bottom: 6.4vw;
+}
+
+#divHeirWorkshopForewardHeadline {
+    width: 62%;
+    text-align: justify;
+    margin: 0 auto;
+}
+
+#buttonHeirBegin {
+    margin-top: 6.4vw;
+}
+
+#selectHeirNames,
+#selectHeirEthnicities,
+#selectHeirTitles {
+    display: block;
+    margin: 6.4vw auto 6.4vw auto;
+    border: calc(1px * var(--pixel-scale)) solid black;
+    padding: 1vw 2vw 1vw 1vw;
+    cursor: pointer;
+}
+
+#selectHeirNames,
+#selectHeirNames option {
+    color: rebeccapurple;
+}
+
+#divHeirGenderIcon,
+#divHeirSelectedGender {
+    background-image: url(bitmaps/tilemap.png);
+    width: calc(6 * 16px * var(--pixel-scale));
+    height: calc(6 * 16px * var(--pixel-scale));
+    background-size: calc(6 * 512px * var(--pixel-scale)) calc(6 * 320px * var(--pixel-scale));
+    margin: 6.4vw auto;
+}
+
+#buttonHeirChooseGender {
+    margin: 0 3.2vw;
+}
+
+.HeirGenderIconMale {
+    background-position: calc(6 * -32px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconFemale {
+    background-position: calc(6 * -48px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconMaleTrans {
+    background-position: calc(6 * -64px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconFemaleTrans {
+    background-position: calc(6 * -80px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconIntersex {
+    background-position: calc(6 * -96px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconNobinario {
+    background-position: calc(6 * -112px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconOmnigender {
+    background-position: calc(6 * -128px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconAgender {
+    background-position: calc(6 * -144px * var(--pixel-scale)) calc(6 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconMaleSm {
+    background-position: calc(1 * -32px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconFemaleSm {
+    background-position: calc(1 * -48px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconMaleTransSm {
+    background-position: calc(1 * -64px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconFemaleTransSm {
+    background-position: calc(1 * -80px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconIntersexSm {
+    background-position: calc(1 * -96px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconNobinarioSm {
+    background-position: calc(1 * -112px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconOmnigenderSm {
+    background-position: calc(1 * -128px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+}
+
+.HeirGenderIconAgenderSm {
+    background-position: calc(1 * -144px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+}
+
+#buttonHeirChooseGender {
+    width: 28vw;
+}
+
+#divHeirFacesGrid {
+    margin: 6.4vw auto;
+}
+
+#divHeirFacesGridMiddleRow {
+    margin: 3.2vw 0;
+}
+
+#divHeirFacesGrid #buttonHeirChooseFace1,
+#divHeirFacesGrid #buttonHeirChooseFace3,
+#divHeirFacesGrid #buttonHeirChooseFace4,
+#divHeirFacesGrid #buttonHeirChooseFace6,
+#divHeirFacesGrid #buttonHeirChooseFace7,
+#divHeirFacesGrid #buttonHeirChooseFace9 {
+    margin: 0;
+}
+
+#divHeirFacesGrid #buttonHeirChooseFace2,
+#divHeirFacesGrid #buttonHeirChooseFace5,
+#divHeirFacesGrid #buttonHeirChooseFace8 {
+    margin: 0 3.2vw;
+}
+
+#divViewHeirWorkshop #divHeirFacesGrid button div,
+#divHeirSelectedPortrait {
+    width: calc(66px * var(--pixel-scale));
+    height: calc(66px * var(--pixel-scale));
+    border: calc(1px * var(--pixel-scale)) solid black;
+    background-image: url(bitmaps/faces.png);
+    background-size: calc(704px * var(--pixel-scale)) calc(704px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirSelectedPortrait {
+    width: calc(66px * 3 * var(--pixel-scale));
+    height: calc(66px * 3 * var(--pixel-scale));
+    border: calc(3px * var(--pixel-scale)) solid black;
+    margin: 0 auto;
+    background-size: calc(704px * 3 * var(--pixel-scale)) calc(704px * 3 * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirSelectedGender {
+    width: calc(1 * 16px * var(--pixel-scale));
+    height: calc(1 * 16px * var(--pixel-scale));
+    background-size: calc(1 * 512px * var(--pixel-scale)) calc(1 * 320px * var(--pixel-scale));
+    margin: 0;
+    display: inline-block;
+}
+
+#spanHeirFacesPagination {
+    pointer-events: none;
+}
+
+#buttonHeirFacesLeft {
+    margin-right: 3.2vw;
+}
+
+#buttonHeirFacesRight {
+    margin-left: 3.2vw;
+}
+
+#buttonHeirGoBack {
+    font-size: 1.8vw;
+    margin: 12.8vw auto 0 auto;
+}
+
+
+
+
+/* // MAP /////////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#buttonMapTargetPrev,
+#buttonMapTargetNext {
+    margin-top: 2vw;
+}
+
+#buttonMapTargetPrev {
+    margin-right: 2vw;
+}
+
+#divMapTarget {
+    margin: 6.4vw auto;
+}
+
+#divViewMiners,
+#divViewFarmers,
+#divViewShepherds {
+    margin-bottom: 6.4vw;
+}
+
+#divMinersName,
+#divFarmersName,
+#divShepherdsName {
+    font-size: 3.2vw;
+    line-height: 2vw;
+    font-weight: bold;
+    color: #120404;
+    margin: 0 auto;
+    margin-top: 4.4vw;
+}
+
+#divMinersSubtitle,
+#divFarmersSubtitle,
+#divShepherdsSubtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 1.8vw;
+    line-height: 3.2vw;
+    color: #120404;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+
 /* // FOOTER //////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -2459,6 +2924,7 @@ td {
 #divViewPort,
 #tableExports,
 #tableImports,
+#divViewMap,
 #divViewHeirWorkshop,
 #divHeirWorkshopForeward,
 #divHeirWorkshopName,
@@ -2467,6 +2933,9 @@ td {
 #divHeirWorkshopTitle,
 #divHeirWorkshopFaces,
 #divHeirWorkshopSummary,
+#divViewShepherds,
+#divViewFarmers,
+#divViewMiners,
 #buttonTill,
 #buttonPlant,
 #buttonWater,
@@ -2499,6 +2968,8 @@ td {
 #buttonSellBoards,
 #buttonBuyStone,
 #buttonSellStone,
+#buttonBuyHorses,
+#buttonSellHorses,
 #buttonVisitOracle,
 #buttonChooseHeir,
 #buttonReturnToMap,
@@ -2514,12 +2985,10 @@ td {
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 #buttonQ,
-#labelToggleMusic,
-#toggleMusic,
-#labelToggleSounds,
-#toggleSounds,
 #labelToggleAnimation,
-#toggleAnimation {
+#toggleAnimation,
+#labelToggleProfanity,
+#toggleProfanity {
     display: none;
 }
 

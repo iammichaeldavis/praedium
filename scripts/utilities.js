@@ -25,12 +25,7 @@ function AskToResume() {
     if (loadedReport.hero.hasMerchantGuildWrit) { loadedIcon = 'Decree'; }
     if (loadedReport.hero.hasMansion) { loadedIcon = 'LordBritish'; }
     if (loadedReport.hero.hasWon) { loadedIcon = 'Sphinx'; }
-
-    if (loadedReport.hero.isGod) {
-        player.isGod = true;
-        loadedIcon = 'EspírituSanto';
-    }
-
+    if (loadedReport.hero.isGod) { player.isGod = true; }
     Translate(player.speaks, false);
     divOverlayResume.style.display = 'block';
 }
@@ -41,7 +36,11 @@ function ContinuePreviousGame() {
     if (confirm(displayResumeConfirm)) {
         /////////////////////////////////////////////////////////////////////////////////////////
         if (loadedReport.hero.names.length > 1) { player.names.push(loadedReport.hero.names[1]); }
+        if (loadedReport.hero.names.length > 2) { player.names.push(loadedReport.hero.names[2]); }
         player.age = loadedReport.hero.age;
+        player.gender = loadedReport.hero.gender;
+        player.ethnicity = loadedReport.hero.ethnicity;
+        player.title = loadedReport.hero.title;
         player.saṃsāra = loadedReport.hero.saṃsāra;
 
         player.likesMusic = loadedReport.hero.likesMusic;
@@ -49,6 +48,7 @@ function ContinuePreviousGame() {
         player.likesAnimations = loadedReport.hero.likesAnimations;
         player.likesStory = loadedReport.hero.likesStory;
         player.likesRecords = loadedReport.hero.likesRecords;
+        player.likesProfanity = loadedReport.hero.likesProfanity;
 
         //player.seesHint = loadedReport.hero.seesHint;
         //player.seesModsWindow = loadedReport.hero.seesModsWindow;
@@ -104,10 +104,30 @@ function ContinuePreviousGame() {
         player.canImportSalt = loadedReport.hero.canImportSalt;
         player.canHireBronzeworkers = loadedReport.hero.canHireBronzeworkers;
         player.canChooseHeir = loadedReport.hero.canChooseHeir;
-
         player.hasBegun = loadedReport.hero.hasBegun;
+        player.hasFarmedOnce = loadedReport.hero.hasFarmedOnce;
+        player.hasDelegatedOnce = loadedReport.hero.hasDelegatedOnce;
+        player.hasDelegatedTwice = loadedReport.hero.hasDelegatedTwice;
+        player.hasDelegatedThrice = loadedReport.hero.hasDelegatedThrice;
+        player.hasBarteredOlive = loadedReport.hero.hasBarteredOlive;
+        player.hasBarteredDate = loadedReport.hero.hasBarteredDate;
+        player.hasBarteredFig = loadedReport.hero.hasBarteredFig;
+        player.hasBarteredPom = loadedReport.hero.hasBarteredPom;
+        player.hasBarteredGrape = loadedReport.hero.hasBarteredGrape;
+        player.hasSoldWheat = loadedReport.hero.hasSoldWheat;
+        player.hasSoldBarley = loadedReport.hero.hasSoldBarley;
+        player.hasSoldFlax = loadedReport.hero.hasSoldFlax;
+        player.hasSoldLogs = loadedReport.hero.hasSoldLogs;
+        player.hasSoldBoards = loadedReport.hero.hasSoldBoards;
+        player.hasSoldStone = loadedReport.hero.hasSoldStone;
+        player.hasSoldPonies = loadedReport.hero.hasSoldPonies;
+        player.hasBoughtWheat = loadedReport.hero.hasBoughtWheat;
+        player.hasBoughtBarley = loadedReport.hero.hasBoughtBarley;
+        player.hasBoughtLogs = loadedReport.hero.hasBoughtLogs;
+        player.hasBoughtBoards = loadedReport.hero.hasBoughtBoards;
+        player.hasBoughtStone = loadedReport.hero.hasBoughtStone;
+        player.hasBoughtPonies = loadedReport.hero.hasBoughtPonies;
         player.hasMildewed = loadedReport.hero.hasMildewed;
-        player.hasSeenResidence = loadedReport.hero.hasSeenResidence;
         player.hasNewFarm = loadedReport.hero.hasNewFarm;
         player.hasFlaxFarm = loadedReport.hero.hasFlaxFarm;
         player.hasBank = loadedReport.hero.hasBank;
@@ -134,8 +154,12 @@ function ContinuePreviousGame() {
         player.hasRacetrack = loadedReport.hero.hasRacetrack;
         player.hasOracle = loadedReport.hero.hasOracle;
         player.hasMonument = loadedReport.hero.hasMonument;
+        player.hasSeenResidence = loadedReport.hero.hasSeenResidence;
         player.hasSeenVillage = loadedReport.hero.hasSeenVillage;
         player.hasSeenPort = loadedReport.hero.hasSeenPort;
+        player.hasSeenMiners = loadedReport.hero.hasSeenMiners;
+        player.hasSeenFarmers = loadedReport.hero.hasSeenFarmers;
+        player.hasSeenShepherds = loadedReport.hero.hasSeenShepherds;
         player.hasMerchantGuildWrit = loadedReport.hero.hasMerchantGuildWrit;
         player.hasFoundCopperEvidence = loadedReport.hero.hasFoundCopperEvidence;
         player.hasFoundMine = loadedReport.hero.hasFoundMine;
@@ -144,6 +168,20 @@ function ContinuePreviousGame() {
         player.hasHiredGemcutters = loadedReport.hero.hasHiredGemcutters;
         player.hasBeenLevied = loadedReport.hero.hasBeenLevied;
         //player.hasAllWisdom = loadedReport.hero.hasAllWisdom;
+        player.hasBecomeHeir = loadedReport.hero.hasBecomeHeir;
+        player.hasReturned = loadedReport.hero.hasReturned;
+        player.hasMetMiners = loadedReport.hero.hasMetMiners;
+        player.hasConsultedMiners = loadedReport.hero.hasConsultedMiners;
+        player.hasHelpedMiners = loadedReport.hero.hasHelpedMiners;
+        player.hasMetShepherds = loadedReport.hero.hasMetShepherds;
+        player.hasConsultedShepherds = loadedReport.hero.hasConsultedShepherds;
+        player.hasHelpedShepherds = loadedReport.hero.hasHelpedShepherds;
+        player.hasBeenSummoned = loadedReport.hero.hasBeenSummoned;
+        player.hasBeenReceived = loadedReport.hero.hasBeenReceived;
+        player.hasPrepared = loadedReport.hero.hasPrepared;
+        player.hasMetFarmers = loadedReport.hero.hasMetFarmers;
+        player.hasConsultedFarmers = loadedReport.hero.hasConsultedFarmers;
+        player.hasHelpedFarmers = loadedReport.hero.hasHelpedFarmers;
         player.hasWon = loadedReport.hero.hasWon;
         player.hasPegasi = loadedReport.hero.hasPegasi;
         player.hasWentToAman = loadedReport.hero.hasWentToAman;
@@ -303,6 +341,8 @@ function ContinuePreviousGame() {
         patientCost = loadedReport.counts.villageDetritus[4];
         pilgrimPrayerValue = loadedReport.counts.villageDetritus[5];
         relicSpawnCount = loadedReport.counts.villageDetritus[6];
+        horsesBought = loadedReport.counts.villageDetritus[7];
+        horsesSold = loadedReport.counts.villageDetritus[8];
 
         CloneArray(loadedReport.counts.portDuration, shipmentDuration);
         CloneArray(loadedReport.counts.portYields[0], wheatValuePerUnit);
@@ -365,6 +405,12 @@ function ContinuePreviousGame() {
         loadedReport = null;
         divOverlayResume.style.display = '';
         UpdateDisplay();
+        if (player.likesMusic) { audioTheme.play(); }
+        else { toggleMusic.checked = false; }
+        if (!player.likesSounds) { toggleSounds.checked = false; }
+        if (!player.likesProfanity) { toggleProfanity.checked = false; }
+        if (player.hasBecomeHeir) { buttonReturnToMap.style.display = 'inline-block'; }
+        if (villageStage > 10) { buttonBuyStone.classList.add('BuyStoneMarginOverrideClass'); }
         StartTime(); // ...and everything *should* just work 🤞😬
     }
 }
@@ -390,7 +436,7 @@ function JumpToTopPlease() {
 
 
 function Achievement() {
-    achievementSoundRare.play();
+    if (player.likesSounds) { achievementSoundRare.play(); }
     document.querySelector('.achievement').classList.add('rare');
     document.querySelector('.circle').classList.add('circle_animate');
     document.querySelector('.banner').classList.add('banner-animate');
@@ -458,7 +504,7 @@ function CollateGameStateReport(loud = false) {
         villageInventory: [horsesCount, beadsCount, trophiesCount, scrollsCount, ratsCount, ghostsCount, patientsCount, relicCount,],
         villageState: [horsesSpawn, horsesStarving, beadsSpawn, trophiesSpawn, scrollsSpawn, ratsSpawn,],
         villageCounters: [horseClock, tributeTimer,],
-        villageDetritus: [horsesIncAmount, horsesEaten, trophyChance, ratsHighScore, patientCost, pilgrimPrayerValue, relicSpawnCount,],
+        villageDetritus: [horsesIncAmount, horsesEaten, trophyChance, ratsHighScore, patientCost, pilgrimPrayerValue, relicSpawnCount, horsesBought, horsesSold,],
 
         portDuration: shipmentDuration,
         portYields: [wheatValuePerUnit, valueFactor, importCost, importAmount,],
@@ -678,6 +724,59 @@ function FillArray(targetArray, fillValue) {
 function CloneArray(source, destination) {
     for (let i = 0; i < source.length; i++) { destination[i] = source[i]; }
 }
+
+
+
+// ↑↑ ↓↓ ← → ← → Ⓑ Ⓐ
+const コナミコマンド = [
+    'ArrowUp',
+    'ArrowUp',
+    'ArrowDown',
+    'ArrowDown',
+    'ArrowLeft',
+    'ArrowRight',
+    'ArrowLeft',
+    'ArrowRight',
+    'b',
+    'a',
+];
+let correctInputsKonami = 0;
+const keyHandlerKonami = function (event) {
+    if (コナミコマンド.indexOf(event.key) < 0 || event.key !== コナミコマンド[correctInputsKonami]) {
+        correctInputsKonami = 0;
+        return;
+    }
+    correctInputsKonami++;
+    if (コナミコマンド.length === correctInputsKonami) {
+        correctInputsKonami = 0;
+        window.alert('ALL VIC VIPER POWER-UPS ENABLED');
+    }
+};
+document.addEventListener('keydown', keyHandlerKonami, false);
+
+
+
+// id Delta-Quit-Delta
+const DegreelessnessMode = [
+    'i',
+    'd',
+    'd',
+    'q',
+    'd',
+];
+let correctInputsId = 0;
+const keyHandlerId = function (event) {
+    if (DegreelessnessMode.indexOf(event.key) < 0 || event.key !== DegreelessnessMode[correctInputsId]) {
+        correctInputsId = 0;
+        return;
+    }
+    correctInputsId++;
+    if (DegreelessnessMode.length === correctInputsId) {
+        correctInputsId = 0;
+        window.alert('Degreelessness Mode');
+    }
+};
+document.addEventListener('keydown', keyHandlerId, false);
 
 
 

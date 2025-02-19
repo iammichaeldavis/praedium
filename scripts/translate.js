@@ -9,7 +9,7 @@ const currencySymbol = '<s>𝐼</s>';
 const displayGender = ['', '', '', '', '', '', '', '',];
 const displayNations = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
 const displayEthnicities = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
-const displayTitles = ['', '', '', '', '', '', '', '', '', '',];
+const displayTitles = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
 
 let displayDefiniteArticle = '';
 let displayThouArt = '';
@@ -21,6 +21,7 @@ let displayOptions = '';
 let displayMusic = '';
 let displaySounds = '';
 let displayAnimations = '';
+let displayProfanity = '';
 let displayInStock = '';
 let displayStaff = '';
 let displayFieldhands = '';
@@ -84,6 +85,23 @@ let displayMiners = '';
 let displayCindermen = '';
 let displayMetallurgists = '';
 let displayGemcutters = '';
+let displayWool = '';
+let displayMilk = '';
+let displayYoghurt = '';
+let displayButter = '';
+let displayCheese = '';
+let displayMutton = '';
+let displayOffal = '';
+let displayHide = '';
+let displayBone = '';
+let displayBlood = '';
+let displayManure = '';
+let displayPeasants = '';
+let displayShepherds = '';
+let displayLead = '';
+let displayIron = '';
+let displaySilver = '';
+let displayStationedForces = '';
 
 let displayLabelBuyLand0 = '';
 let displayLabelBuyLand1 = '';
@@ -203,6 +221,31 @@ let displayHeirPage = '';
 let displayHeirOf = '';
 let displayHeirSummaryCorrect = '';
 let displayHeirConfirm = '';
+let displayHeirComplete = '';
+
+let displayStoryFirstTill = '';
+let displayStoryFirstPlant = '';
+let displayStoryFirstWater = '';
+let displayStoryFirstHarvest = '';
+let displayStoryFirstStorage = '';
+let displayStoryFirstTradeOlive = '';
+let displayStoryFirstTradeDate = '';
+let displayStoryFirstTradeFig = '';
+let displayStoryFirstTradePom = '';
+let displayStoryFirstTradeGrape = '';
+let displayStoryFirstSellWheat = '';
+let displayStoryFirstSellBarley = '';
+let displayStoryFirstSellFlax = '';
+let displayStoryFirstSellLogs = '';
+let displayStoryFirstSellBoards = '';
+let displayStoryFirstSellStone = '';
+let displayStoryFirstSellPonies = '';
+let displayStoryFirstBuyWheat = '';
+let displayStoryFirstBuyBarley = '';
+let displayStoryFirstBuyLogs = '';
+let displayStoryFirstBuyBoards = '';
+let displayStoryFirstBuyStone = '';
+let displayStoryFirstBuyPonies = '';
 
 let displayStoryFarm0 = '';
 let displayStoryFarmMildew = '';
@@ -237,6 +280,35 @@ let displayStoryNotEnoughWarehouse = '';
 let displayStoryNotEnoughAbacus = '';
 let displayStoryNotEnoughTown = '';
 let displayStoryNotEnoughGeneral = '';
+let displayStoryPoorWheat = '';
+let displayStoryPoorFarm = '';
+let displayStoryPoorHire = '';
+let displayStoryPoorAcct = '';
+let displayStoryPoorFound = '';
+let displayStoryPoorSalt = '';
+let displayStoryPoorMedicine = '';
+let displayStoryPoorBarter = '';
+let displayStoryPoorVillage = '';
+let displayStoryPoorExport = '';
+let displayStoryPoorOil = '';
+let displayStoryPoorBeer = '';
+let displayStoryPoorWine = '';
+let displayStoryPoorSyrup = '';
+let displayStoryPoorJuice = '';
+let displayStoryPoorFigs = '';
+let displayStoryPoorTrinkets = '';
+let displayStoryPoorBank = '';
+let displayStoryPoorWrit = '';
+let displayStoryPoorBankWrit = '';
+let displayStoryPoorShepherds = '';
+let displayStoryPoorMinersRations = '';
+let displayStoryPoorMinersBandages = '';
+let displayStoryPoorMinersSoldiers = '';
+let displayStoryPoorMinersPrice = '';
+
+let displayStoryDelegateOnce = '';
+let displayStoryDelegateTwice = '';
+let displayStoryDelegateThrice = '';
 
 let displayStoryWarehouse0 = '';
 let displayStoryWarehouse1 = '';
@@ -289,6 +361,11 @@ let displayStoryFoundCrystal = '';
 let displayStoryCrystal = '';
 let displayStoryTribute = '';
 let displayStoryRomanConquestofGreece = '';
+let displayStoryRomanConquestofFrance = '';
+let displayStoryRomanBreadRiot = '';
+let displayStory450Years = '';
+let displayStory900Years = '';
+let displayStory901Years = '';
 
 let displayStoryResidenceFirstVisit = '';
 let displayStoryResidence00 = '';
@@ -372,6 +449,7 @@ let displayGoToTownship = '';
 let displayGoToPraedium = '';
 let displayGoToPort = '';
 let displayGoToTownshipFromPort = '';
+let displayReturnToMapView = '';
 
 let displayVillageTitleNEG1 = '';
 let displayVillageTitle0 = '';
@@ -484,6 +562,36 @@ let displayProfit = '';
 let displayCost = '';
 let displayNextDelivery = '';
 
+let displayMapPrevTarget = '';
+let displayMapNextTarget = '';
+let displayMapCurrTarget = '';
+let displayMapVisit = '';
+
+let displayStoryReturned = '';
+let displayStoryShepherdsFirstVisit = '';
+let displayStoryFarmersFirstVisit = '';
+let displayStoryFarmersFirstImpression = '';
+let displayStoryFarmersPrepare = '';
+let displayStoryMinersFirstVisit = '';
+let displayStoryFarmersRejection = '';
+let displayStoryFarmersSummon = '';
+let displayStoryMinersMeeting = '';
+let displayStoryMinersToadies = '';
+let displayStoryMinersHelp = '';
+let displayStoryShepherdsMeeting = '';
+let displayStoryShepherdsToadies = '';
+let displayStoryShepherdsHelp = '';
+let displayShepherdsSubtitle = '';
+let displayFarmersSubtitle = '';
+let displayMinersSubtitle = '';
+let displayLabelMinersA = '';
+let displayLabelMinersB = '';
+let displayLabelMinersC = '';
+let displayLabelShepherdsA = '';
+let displayLabelShepherdsB = '';
+let displayLabelShepherdsC = '';
+let displayLabelFarmersA = '';
+
 let displayForewordA = '';
 let displayForewordScripture = '';
 let displayForewordSource = '';
@@ -553,12 +661,14 @@ let displayRandomWisdomsInglés = [
     'Eat your vegetables',
     '“For with wisdom did someone once reveal the maxim, now famous, that evil at one time or another seems good, to him whose mind a god leads to ruin.”<br>—Sophocles',
     '“There is an old saying: the first sip from the cup of natural sciences will make you an atheist, but at the bottom of the glass God is waiting for you.”<br>—Carl Friedrich von Weizsäcker, paraphrasing Francis Bacon',
-    '<div id="MrSecretary">Arsenio Hall: Okay, your middle name is “Macho”, but uh, I’m wondering if you ever cry. You ever... Has the Macho Man ever cried?<br><br>Macho Man Randy Savage: Oh, yeah.<br><br>Hall: Really?<br><br>Savage: Uh huh. It’s okay for macho men to show every emotion available, right there, you know, because I’ve cried a thousand times and I’m gonna cry some more. But—I’ve soared with the eagles, and I’ve slithered with the snakes and I’ve been everywhere in between, and I’m gonna tell you something right now, there’s one guarantee in life: in that there are no guarantees, yeah, and—understand this: nobody likes a quitter. Nobody said life was easy. So if you get knocked down, take the standing eight count, get back up and fight again! And you’re a Macho Maniac, dig it.</div><br>The Arsenio Hall Show (Paramount Television, 1992)',
+    '<div id="MrSecretary">Arsenio Hall: Okay, your middle name is “Macho”, but uh, I’m wondering if you ever cry. You ever... Has the Macho Man ever cried?<br><br>Macho Man Randy Savage: Oh, yeah.<br><br>Hall: Really?<br><br>Savage: Uh huh. It’s okay for macho men to show every emotion available, right there, you know, because I’ve cried a thousand times and I’m gonna cry some more. But! I’ve soared with the eagles, and I’ve slithered with the snakes and I’ve been everywhere in between, and I’m gonna tell you something right now, there’s one guarantee in life: in that there are no guarantees, yeah. And! Understand this: nobody likes a quitter. Nobody said life was easy. So if you get knocked down, take the standing eight count, get back up and fight again! And you’re a Macho Maniac, dig it.</div><br>The Arsenio Hall Show (Paramount Television, 1992)',
     '“Do you wish God to hear your prayer immediately, brother?” asks Abba Zenon. “When you lift your hands up to heaven, pray first of all, with all of your heart, for your enemies and God will grant you speedily whatever else you request.”<br><br>The Evergetinos',
     '“I hope that when the world comes to an end, I can breathe a sigh of relief, because there will be so much to look forward to.”<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)',
     '“We may prefer to think of ourselves as fallen angels, but in reality we are rising apes.”<br>—Desmond Morris',
-    '“If the milk turns out to be sour, I ain’t the kinda pussy to drink it. Do you know what I mean?”<br>—Rory Breaker<br><br>Lock, Stock and Two Smoking Barrels (HandMade Films, 1998)',
+    '“If the milk turns out to be sour, I ain’t the kinda pussy to drink it. D’you know what I mean?”<br>—Rory Breaker<br><br>Lock, Stock and Two Smoking Barrels (HandMade Films, 1998)',
     '“Let me remember that the unintended meaning that people project onto what I do is neither my fault or something I can take credit for.”<br>—ze frank',
+    'It’s gon’ be some stuff you gon’ see<br>That’s gon’ make it hard to smile in the future<br>But through whatever you see<br>Through all the rain and the pain<br>You gotta keep your sense of humour<br>You gotta be able to smile through all this bullshit<br>Remember that<br>—Tupac Amaru Shakur',
+    //🔞'I often drift when I drive<br>Havin’ fatal thoughts of suicide<br>Bang! and get it over with<br>And then I’m worry-free<br>But that’s bullshit<br>I got a little boy to look after<br>And if I die, then my child’ll be a bastard<br>—Geto Boys',
     '“Hang in there, friend. It can only get stranger.”<br>—William Gibson',
 ];
 let displayRandomWisdomsEspañol = [
@@ -586,12 +696,14 @@ let displayRandomWisdomsEspañol = [
     'Come tus verduras',
     '«Porque alguien reveló una vez con sabiduría la máxima, ahora famosa, de que el mal en un momento u otro parece bueno a aquel cuya mente es llevada a la ruina por un dios.»<br>—Sófocles',
     '«Hay un viejo dicho: el primer sorbo de la copa de las ciencias naturales te hará un ateo, pero en el fondo del vaso te espera Dios.»<br>—Carl Friedrich von Weizsäcker, parafraseando a Francis Bacon',
-    '<div id="MrSecretary">Arsenio Hall: Vale, tu segundo nombre es “Macho”, pero me pregunto si alguna vez lloras. ¿Alguna vez...? ¿El Macho Man ha llorado alguna vez?<br><br>Macho Man Randy Savage: Oh, sí.<br><br>Hall: ¿En realidad?<br><br>Savage: Sí, claro. Está bien que los hombres machos muestren todas las emociones posibles, ahí mismo, ya sabes, porque he llorado mil veces y voy a llorar aún más. Pero—he volado con las águilas, me he deslizado con las serpientes y he estado en todas partes entremedio, y te voy a decir algo ahora mismo, hay una garantía en la vida: que no hay garantías, sí, y—entiendan esto: a nadie le gustan los que se rinden. Nadie dijo que la vida fuera fácil. Así que si te derriban, toma la cuenta ocho de pie, levántate y ¡vuelve a pelear! Y eres un Macho Maniac, ¡entiéndelo!</div><br>The Arsenio Hall Show (Paramount Television, 1992)',
+    '<div id="MrSecretary">Arsenio Hall: Vale, tu segundo nombre es “Macho”, pero me pregunto si alguna vez lloras. ¿Alguna vez...? ¿El Macho Man ha llorado alguna vez?<br><br>Macho Man Randy Savage: Oh, sí.<br><br>Hall: ¿En realidad?<br><br>Savage: Sí, claro. Está bien que los hombres machos muestren todas las emociones posibles, ahí mismo, ya sabes, porque he llorado mil veces y voy a llorar aún más. ¡Pero! He volado con las águilas, me he deslizado con las serpientes y he estado en todas partes entremedio, y te voy a decir algo ahora mismo, hay una garantía en la vida: que no hay garantías, sí. ¡Y! Entiendan esto: a nadie le gustan los que se rinden. Nadie dijo que la vida fuera fácil. Así que si te derriban, toma la cuenta ocho de pie, levántate y ¡vuelve a pelear! Y eres un Macho Maniac, ¡entiéndelo!</div><br>The Arsenio Hall Show (Paramount Television, 1992)',
     '«¿Deseas que Dios escuche tu oración inmediatamente, hermano?», pregunta Abba Zenon. «Cuando levantes tus manos al cielo, ora ante todo, con todo de tu corazón, por tus enemigos y Dios te concederá rápidamente todo lo demás que pidas.»<br><br>El Evergetinos',
     '«Espero que cuando el mundo llegue a su fin, pueda respirar aliviado, porque habrá mucho que mucho que esperar.»<br>—Donnie Darko<br><br>Donnie Darko (Newmarket, 2001)',
     '«Quizás preferimos pensar que somos ángeles caídos, pero en realidad nosotros estamos simios ascendentes.»<br>—Desmond Morris',
     '«Si resulta que la leche está agria, no soy el tipo de gatito que la bebe. ¿Sabes a qué me refiero?»<br>—Rory Breaker<br><br>Juegos, Trampas y Dos Armas Humeantes (HandMade Films, 1998)',
     '«Déjame recordar a yo mismo que el significado no intencionado que la gente proyecta sobre lo que hago no es mi culpa ni algo por lo que pueda atribuirme el mérito.»<br>—ze frank',
+    'Habrá algunas cosas que verás<br>Que harán que sea difícil sonreír en el futuro<br>Pero a pesar de lo que veas<br>A pesar de toda la lluvia y el dolor<br>Debes conservar tu sentido del humor<br>Debes ser capaz de sonreír a pesar de toda esta mierda<br>Recuerda siempre que<br>—Tupac Amaru Shakur',
+    //🔞'A menudo me desvío cuando conduzco<br>Tengo pensamientos fatales de suicidio<br>¡Estallido! y acabo con esto<br>Y luego estoy libre de preocupaciones<br>Pero eso es una tontería<br>Tengo un niño pequeño al que cuidar<br>Y si muero, entonces mi hijo será un bastardo<br>—Geto Boys',
     '«Ánimo, amigo. Esto solo puede volverse más extraño.»<br>—William Gibson',
 ];
 let displayRandomWisdomsDisplay = null;
@@ -602,6 +714,8 @@ function Translate(language, bark = true) {
     player.speaks = language;
 
     if (language == 'English') {
+        formatterCurrent = formatterEnglish;
+
         displayGameEdition = 'GOLD EDITION';
 
         displayGender[0] = 'MALE';
@@ -614,9 +728,9 @@ function Translate(language, bark = true) {
         displayGender[7] = 'AGENDER';
 
         displayNations[0] = 'Assyria'; //
-        displayNations[1] = 'Babylon'; //
+        displayNations[1] = 'Babylon'; // (Weakness to Hero Unit: Cyrus, Starts Game w/: Lvl. 3 Walls)
         displayNations[2] = 'Canaan'; //
-        displayNations[3] = 'Carthage'; //
+        displayNations[3] = 'Carthage'; // (Unique Unit Formation: Horde)
         displayNations[4] = 'Corinth'; // (+10 Armor Crafting) https://en.wikipedia.org/wiki/Corinthian_helmet
         displayNations[5] = 'Crete'; // (Unique Unit: Minotaurs)
         displayNations[6] = 'Egypt'; // (+10 Cosmetics)
@@ -625,25 +739,25 @@ function Translate(language, bark = true) {
         displayNations[9] = 'Greece'; // (+10 Philosophy)
         displayNations[10] = 'Hattusa'; // (+10 Cuneiform)
         displayNations[11] = 'Iberia'; // (Unique Unit: Mountain Antelope)
-        displayNations[12] = 'Israel'; //
+        displayNations[12] = 'Israel'; // (Unique Unit: Rabbi)
         displayNations[13] = 'Judea'; //
         displayNations[14] = 'Libya'; //
         displayNations[15] = 'Macedon'; //
         displayNations[16] = 'Moab'; //
         displayNations[17] = 'Numidia'; //
         displayNations[18] = 'Palestine'; //
-        displayNations[19] = 'Persia'; //
-        displayNations[20] = 'Phoenicia'; //
-        displayNations[21] = 'Rome'; //
+        displayNations[19] = 'Persia'; // (Unique Unit: Alchemist)
+        displayNations[20] = 'Phoenicia'; // (Unique Unit: Vintner)
+        displayNations[21] = 'Rome'; // (+10 Diplomacy)
         displayNations[22] = 'Sahara'; //
-        displayNations[23] = 'Samaria'; //
-        displayNations[24] = 'Scythia'; //
-        displayNations[25] = 'Sparta'; //
+        displayNations[23] = 'Samaria'; // (Special Trait: Charitability)
+        displayNations[24] = 'Scythia'; // (Unique Unit: Mounted Archer)
+        displayNations[25] = 'Sparta'; /// (Unique Unit Formation: Phalanx)
         displayNations[26] = 'Syria'; //
         displayNations[27] = 'Tartessia'; //
         displayNations[28] = 'Thrace'; //
-        displayNations[29] = 'Troy'; //
-        displayNations[30] = 'All over'; //
+        displayNations[29] = 'Troy'; // (Hero Unit: Hector)
+        displayNations[30] = 'All over'; // (Special Trait: Disease Resistance)
 
         displayEthnicities[0] = 'an Assyrian';
         displayEthnicities[1] = 'a Babylonian';
@@ -678,15 +792,47 @@ function Translate(language, bark = true) {
         displayEthnicities[30] = 'a Cosmopolitan';
 
         displayTitles[0] = 'Pharaoh';
-        displayTitles[1] = 'Shah';
-        displayTitles[2] = 'Emperor';
-        displayTitles[3] = 'Empress';
-        displayTitles[4] = 'King';
-        displayTitles[5] = 'Queen';
-        displayTitles[6] = 'Lord';
-        displayTitles[7] = 'Lady';
-        displayTitles[8] = 'Viceroy';
-        displayTitles[9] = 'Vicereine';
+        displayTitles[1] = 'Prime Minister';
+        displayTitles[2] = 'Premier';
+        displayTitles[3] = 'General Secretary';
+        displayTitles[4] = 'Supreme Leader';
+        displayTitles[5] = 'Shah';
+        displayTitles[6] = 'Muad’dib';
+        displayTitles[7] = 'Sultan';
+        displayTitles[8] = 'Sultanah';
+        displayTitles[9] = 'Emperor';
+        displayTitles[10] = 'Empress';
+        displayTitles[11] = 'King';
+        displayTitles[12] = 'Queen';
+        displayTitles[13] = 'Sheikh';
+        displayTitles[14] = 'Shaykhah';
+        displayTitles[15] = 'Maharaja';
+        displayTitles[16] = 'Maharani';
+        displayTitles[17] = 'Lord';
+        displayTitles[18] = 'Lady';
+        displayTitles[19] = 'President';
+        displayTitles[20] = 'Madam President';
+        displayTitles[21] = 'Khan';
+        displayTitles[22] = 'Khatun';
+        displayTitles[23] = 'Führer';
+        displayTitles[24] = 'Pope';
+        displayTitles[25] = 'Popess';
+        displayTitles[26] = 'Prince';
+        displayTitles[27] = 'Princess';
+        displayTitles[28] = 'HNIC';
+        displayTitles[29] = 'Duke';
+        displayTitles[30] = 'Duchess';
+        displayTitles[31] = 'Count';
+        displayTitles[32] = 'Countess';
+        displayTitles[33] = 'Baron';
+        displayTitles[34] = 'Baroness';
+        displayTitles[35] = 'Shōgun';
+        displayTitles[36] = 'Onna-musha';
+        displayTitles[37] = 'Taoiseach';
+        displayTitles[38] = 'Nawab';
+        displayTitles[39] = 'Nawab Begum';
+        displayTitles[40] = 'Viceroy';
+        displayTitles[41] = 'Vicereine';
 
         displayDefiniteArticle = 'THE';
         displayThouArt = 'THOU ART';
@@ -695,9 +841,10 @@ function Translate(language, bark = true) {
         displayIUnderstand = 'I UNDERSTAND';
         displayOK = "I AM READY TO CONTINUE";
         displayOptions = 'Options';
-        displayMusic = 'Music? (in progress 😔)';
-        displaySounds = 'Sounds? (in progress 😔)';
+        displayMusic = 'Music?';
+        displaySounds = 'Sounds?';
         displayAnimations = 'Cosmetic Animations?';
+        displayProfanity = 'Profanity?';
         displayInStock = 'In Stock';
         displayStaff = 'Staff';
         displayFieldhands = 'Fieldhands';
@@ -761,6 +908,23 @@ function Translate(language, bark = true) {
         displayCindermen = 'Cindermen';
         displayMetallurgists = 'Braziers';
         displayGemcutters = 'Gemcutters';
+        displayWool = 'Wool';
+        displayMilk = 'Milk';
+        displayYoghurt = 'Yoghurt';
+        displayButter = 'Butter';
+        displayCheese = 'Cheese';
+        displayMutton = 'Mutton';
+        displayOffal = 'Offal';
+        displayHide = 'Hide';
+        displayBone = 'Bone';
+        displayBlood = 'Blood';
+        displayManure = 'Manure';
+        displayPeasants = 'Peasants';
+        displayShepherds = 'Shepherds';
+        displayLead = 'Lead';
+        displayIron = 'Iron';
+        displaySilver = 'Silver';
+        displayStationedForces = 'Permanently Stationed<br>Armed Forces';
 
         displayLabelBuyLand0 = 'LEASE ANOTHER ACRE';
         displayLabelBuyLand1 = 'LEASE A LARGER PLOT';
@@ -870,7 +1034,7 @@ function Translate(language, bark = true) {
         displayLabelFromNowOn = 'FROM NOW ON';
         displayLabelReturnToPrevDecision = '← Return to Previous Decision';
 
-        displayHeirHeadlineForeward = 'What follows next is an endless parade of comptrollers, jurists and seneschals, each one bearing a larger heap of papyrus scrolls and clay tablets than the last, and every document covered in inscrutible legalese. You think this day will never end.<br><br>Finally, the court doctor——YOUR doctor, now, it occurs to you——pulls you aside for a moment alone.<br><br>“Well now, sire, all that is left is thy physical. Purely routine, I’m sure thou dost understand.”<br><br><br><div style="width: 100%; text-align: center;">ART THOU READY TO BEGIN?</div>';
+        displayHeirHeadlineForeward = 'What follows next is an endless parade of comptrollers, jurists and seneschals, each one bearing a larger heap of papyrus scrolls and clay tablets than the last, and every document covered in inscrutible legalese. You think this day will never end.<br><br>Finally, the court doctor——YOUR doctor, now, it occurs to you——pulls you aside for a moment alone.<br><br>“Well now, Your Grace, all that remains is thy physical. Purely routine, I’m sure thou dost understand.”<br><br><br><div style="width: 100%; text-align: center;">ART THOU READY TO BEGIN?</div>';
         displayHeirHeadlineName = 'WHAT IS THY GIVEN NAME, YOUR MAJESTY?';
         displayHeirHeadlineGender = 'AND HOW DOST THOU IDENTIFY, OH LIEGE?';
         displayHeirHeadlineEthnicity = 'WHERE DO YOUR PEOPLE HAIL FROM, SIRE?';
@@ -879,7 +1043,34 @@ function Translate(language, bark = true) {
         displayHeirPage = 'page';
         displayHeirOf = 'of';
         displayHeirSummaryCorrect = 'IS THIS CORRECT?';
-        displayHeirConfirm = 'Art thou certain about thy answers?';
+        displayHeirConfirm = 'Art thou certain about thine answers?';
+        displayHeirComplete = 'IT’S ALL ON YOUR SHOULDERS NOW, CHUMMMMMMMMMM...P (replace me plz)';
+
+        displayStoryFirstTill = 'BEFORE ONE CAN SOW,<br>THE EARTH MUST BE TILLED<br><br><span class="icon Weeds inlineIcon sextupleSize"></span><span class="icon Sell inlineIcon tripleSize tutorialSell"></span><span class="icon Soil inlineIcon sextupleSize"></span><br><br>With considerable effort,<br>weeds give way to soil';
+        displayStoryFirstPlant = 'CAST THY SEED<br>UPON THE TILLAGE<br><br><span class="icon Soil inlineIcon sextupleSize"></span><span class="icon Sell inlineIcon tripleSize tutorialSell"></span><span class="icon SoilSeeded inlineIcon sextupleSize"></span><br><br>Spend one bushel of wheat (' + plantCost + '<span class="icon Wheat inlineIcon"></span>)<br>to seed one acre of soil';
+        displayStoryFirstWater = 'ALL LIFE REQUIRES<br>WATER TO SURVIVE<br><br><span class="icon SoilSeeded inlineIcon sextupleSize"></span><span class="icon Sell inlineIcon tripleSize tutorialSell"></span><span class="icon SoilWatered inlineIcon sextupleSize"></span><br><br>“Well, it’s a dirty job,<br>but someone’s gotta do it”<br>—Chuck Mosley';
+        displayStoryFirstHarvest = 'FOR WHATEVER A MAN SOWS,<br>THAT HE WILL ALSO REAP<br><br><span class="icon Crops inlineIcon sextupleSize"></span><span class="icon Sell inlineIcon tripleSize tutorialSell"></span><span class="icon Weeds inlineIcon sextupleSize"></span><br><br>Collecting the abundance<br>leaves the land in disarray';
+        displayStoryFirstStorage = 'EXCESS GRAIN MUST BE STORED';
+        const barterInventoryOlive = (bushelCount[2] < barterMaxBulkCount) ? bushelCount[2] : barterMaxBulkCount;
+        const barterValueOlive = barterInventoryOlive * barterExchangeRate[2];
+        displayStoryFirstTradeOlive = 'AH, NOW! *THERE* IS A FINE LOT OF OLIVES; WHATEVER YOU ARE DOING ON YOUR LAND, MY FRIEND, KEEP IT UP. I WILL HAPPILY TRADE YOU ' + formatterCurrent.format(barterValueOlive) + ' BUSHELS OF WHEAT FOR THOSE ' + formatterCurrent.format(barterInventoryOlive) + ' BUSHELS OF OLIVES';
+        displayStoryFirstTradeDate = 'WHAT DO YOU HAVE FOR US TODAY? AH, DATES! THESE WILL FETCH A FINE PRICE';
+        displayStoryFirstTradeFig = 'AH, NOW, IT MUST BE A GOOD DAY IF YOU ARE HERE, MY FRIEND. THESE FIGS, I WILL HAVE THEM';
+        displayStoryFirstTradePom = 'LOOK WHAT WE HAVE HERE! POMEGRANATES FIT FOR KING SOLOMON’S TABLE. I WILL DEFINITELY TRADE YOU FOR THESE';
+        displayStoryFirstTradeGrape = 'WE ARE ALWAYS HAPPY TO SEE YOU ARRIVE HERE AT THE COMMODITIES EXCHANGE, MY FRIEND. WHEN WE SEE YOU COMING, WE KNOW IT WILL BE SOMETHING GOOD!<br><br>NOW, WHAT HAVE YOU BROUGHT FOR US? AH, NEW GRAPES, FRESH FROM THE VINE! HOW DELICIOUS!';
+        displayStoryFirstSellWheat = 'GOOD WHEAT WILL ALWAYS FETCH A FINE PRICE IN A GROWING ECONOMY';
+        displayStoryFirstSellBarley = 'CHEER UP, FRIEND, SMILE! SURELY GOD LOVES US; IT MUST BE TRUE, FOR HE GAVE US BEER!';
+        displayStoryFirstSellFlax = 'LINSEED IS ALWAYS WELCOME ON THE OPEN MARKET. WHAT WILL YOU TAKE FOR THIS LOAD HERE?';
+        displayStoryFirstSellLogs = 'THE DEMAND FOR TIMBER WILL ALWAYS OUTSTRIP THE SUPPLY';
+        displayStoryFirstSellBoards = 'YOUR MEN ARE DOING A FINE JOB AT THAT MILL OF YOURS, THESE BOARDS ARE AS STRAIGHT AS THE HORIZON! HOW MUCH WILL YOU TAKE FOR THEM?';
+        displayStoryFirstSellStone = 'QUALITY STONE IS ALWAYS IN DEMAND';
+        displayStoryFirstSellPonies = 'WHY, THAT’S A FINE HERD OF FILLIES YOU HAVE THERE. I’LL TAKE THAT BAND OF ’EM OFF YER HANDS';
+        displayStoryFirstBuyWheat = 'GRAIN, THE BACKBONE OF OUR ECONOMY. I ASK YOU, WHERE WOULD WE BE WITHOUT WHEAT?';
+        displayStoryFirstBuyBarley = 'HORSES ARE INSATIABLE';
+        displayStoryFirstBuyLogs = 'RAW LUMBER IS EASY TO COME BY, MY FRIEND. HOW MUCH DO YOU NEED?';
+        displayStoryFirstBuyBoards = 'MY FRIEND, THESE PLANKS ARE HEWN FROM FINEST ALEPPO PINE. YOU WILL NOT REGRET YOUR PURCHASE';
+        displayStoryFirstBuyStone = 'WHEN YOU CAN’T PRODUCE ENOUGH STONE TO MEET LOCAL DEMAND FROM YOUR OWN QUARRY, IT’S NICE TO KNOW THAT IN THIS BUSINESS YOU CAN ALWAYS RELY ON YOUR COMPETITORS. A SALE IS A SALE, AND IT’S A SMALL WORLD: WE MAY NEED TO CALL UPON YOU TOMORROW';
+        displayStoryFirstBuyPonies = 'I SUPPOSE I COULD PART WITH A STUD AND HIS HAREM, FOR THE RIGHT PRICE. LET’S MAKE A DEAL';
 
         displayStoryFarm0 = 'NOW I CAN PROVIDE FOR MY FAMILY';
         displayStoryFarmMildew = 'YOU HAVE JUST RECEIVED A MESSAGE FROM THE MAN WHO RUNS THE WAREHOUSE WHERE YOU KEEP YOUR WHEAT:<div id="nasirMessage">Roof damage has let water in; mildew has claimed 90% of all grain in storage; my sincerest apologies<br>—Ea-nāṣir</div>';
@@ -914,6 +1105,37 @@ function Translate(language, bark = true) {
         displayStoryNotEnoughAbacus = '“WHY, WHAT SORT OF ACTUARY WOULD I BE IF I ALLOWED YOU TO SPEND YOUR VERY LAST GRAIN OF WHEAT! PLEASE COME BACK WHEN YOU HAVE BUT AT LEAST A LITTLE MORE, TO TRULY AFFORD MY SERVICES”';
         displayStoryNotEnoughTown = 'YOUR ARCHITECT TAKES YOU BY THE ARM: “BEGGING YOUR PARDON, YOUR GRACE, BUT I AM AFRAID IF YOU WERE TO SPEND YOUR VERY LAST GRAIN OF WHEAT, YOUR FARMING OPERATION WOULD NOT BE ABLE TO CONTINUE. HAVE PATIENCE, YOU WILL VERY SOON BE ABLE TO AFFORD THE PRICE”';
         displayStoryNotEnoughGeneral = 'A NEARBY WORKER STOPS YOU: “MY FRIEND, IF YOU SPEND YOUR VERY LAST GRAIN OF WHEAT, HOW WILL YOU SEED YOUR FIELDS?”';
+        displayStoryPoorWheat = 'YOU NEED MORE WHEAT, EFFENDI';
+        displayStoryPoorFarm = 'YOU CAN NOT AFFORD THIS, EFFENDI';
+        displayStoryPoorHire = 'WE CAN NOT AFFORD TO BRING ON A NEW MAN RIGHT NOW';
+        displayStoryPoorAcct = 'I CAN NOT AFFORD TO WORK PRO BONO, EFFENDI, I AM SORRY. PLEASE RETURN WHEN YOU CAN AFFORD MY PRICE';
+        displayStoryPoorFound = 'THE CLERK AT THE LAND REGISTRAR’S OFFICE BLINKS, CONFUSED. “MY FRIEND, IF YOU CAN NOT AFFORD THE PRICE, WHY DID YOU COME HERE TODAY?”';
+        displayStoryPoorSalt = 'WE REQUIRE SODIUM, LORD';
+        displayStoryPoorMedicine = 'You Must Build A Hospital';
+        displayStoryPoorBarter = 'MY FRIEND, I MEAN NO DISRESPECT BUT HAVE YOU MAYBE FORGOTTEN YOUR PRODUCE AT HOME? I SEE NOTHING IN YOUR CART TO BARTER FOR, EFFENDI!';
+        displayStoryPoorVillage = 'A THOUSAND PARDONS BUT YOU CAN NOT AFFORD THIS, SIRE';
+        displayStoryPoorExport = 'THOU CANST NOT AFFORD THE EXPORT LICENSE FEE, SIRE';
+        displayStoryPoorOil = 'THOU DOST NOT HAVE ANY OIL TO EXPORT, SIRE!';
+        displayStoryPoorBeer = 'THOU DOST NOT HAVE ANY BEER TO EXPORT, SIRE!';
+        displayStoryPoorWine = 'THOU DOST NOT HAVE ANY WINE TO EXPORT, SIRE!';
+        displayStoryPoorSyrup = 'THOU DOST NOT HAVE ANY SYRUP TO EXPORT, SIRE!';
+        displayStoryPoorJuice = 'THOU DOST NOT HAVE ANY JUICE TO EXPORT, SIRE!';
+        displayStoryPoorFigs = 'THOU DOST NOT HAVE ANY DRIED FIGS TO EXPORT, SIRE!';
+        displayStoryPoorTrinkets = 'THOU DOST NOT HAVE ANY TRINKETS TO EXPORT, SIRE!';
+        displayStoryPoorBank = 'THOU DOST STILL REQUIRE A STABLE LOCAL BANK TO UNDERWRITE THE INSURANCE!';
+        displayStoryPoorWrit = 'THOU DOST STILL REQUIRE IMPORT PERMISSION FROM THE MERCANTILE GUILD!';
+        displayStoryPoorBankWrit = 'THOU DOST REQUIRE IMPORT PERMISSION FROM THE MERCANTILE GUILD AND A STABLE LOCAL BANK TO UNDERWRITE THE INSURANCE!';
+        let displayMilord = "MILORD";
+        if (player.gender == 1 || player.gender == 3) { displayMilord = "MILADY"; }
+        displayStoryPoorShepherds = 'WE DO NOT CURRENTLY HAVE THE PERSONNEL NECESSARY TO SUCCESSFULLY SUBJUGATE THIS REGION, ' + displayMilord;
+        displayStoryPoorMinersRations = 'WE CAN’T ASK OUR BOYS TO OCCUPY A FOREIGN TERRITORY WITHOUT PROPER NUTRITION, SIRE!';
+        displayStoryPoorMinersBandages = 'WE CAN’T EXPECT OUR TROOPS TO ENGAGE WITH THESE RUFFIANS WITHOUT PROPER MEDICAL CARE, SIRE!';
+        displayStoryPoorMinersSoldiers = 'WE CAN NOT SPARE THE CONSIDERABLE MANPOWER IT WOULD REQUIRE TO SUBDUE THIS REGION, SIRE';
+        displayStoryPoorMinersPrice = 'WE CAN NOT AFFORD TO BUILD THE INFRASTRUCTURE IT WOULD REQUIRE TO POLICE THIS AREA, SIRE';
+
+        displayStoryDelegateOnce = 'YOUR WORKERS WILL NOW FOCUS ON TILLING THE SOIL BEFORE ALL ELSE';
+        displayStoryDelegateTwice = 'YOUR WORKERS ARE NOW ON HOLIDAY, YOU SOFT-HEARTED FOOL';
+        displayStoryDelegateThrice = 'YOUR WORKERS WILL ONCE AGAIN PRIORITIZE THE HARVEST';
 
         displayStoryWarehouse0 = 'THIS PLACE COMES HIGHLY RECOMMENDED';
         displayStoryWarehouse1 = '“WHAT IS COMMON TO THE GREATEST NUMBER RECEIVES THE LEAST AMOUNT OF CARE”<br>—ARISTOTLE';
@@ -966,8 +1188,13 @@ function Translate(language, bark = true) {
         displayStoryCrystal = 'LAPIDARISTS IN OUR ATELIER WILL TRANSFORM THESE INTO SOMETHING TRULY WONDERFUL';
         displayStoryTribute = 'THE LOCAL WARLORD KING HAS CAUGHT WIND OF YOUR SUCCESS AT LAST. QUOTH HIS EMISSARY: “OF COURSE, TARIFFS MUST BE LEVIED”';
         displayStoryRomanConquestofGreece = 'YOU HAVE JUST RECEIVED WORD: THEY NOW SPEAK LATIN IN ATHENS!';
+        displayStoryRomanConquestofFrance = 'A messenger has just arrived with an Italian missive meant to be disseminated amongst the general populace: Caesar now has complete authority over all of Gaul! (Well, except for one small village of indomitable barbarians in Armorica...)';
+        displayStoryRomanBreadRiot = 'TROUBLING NEWS FROM ITALY: BREAD RIOTERS THREATEN TO LYNCH THE ENTIRE ROMAN CONSULATE!';
+        displayStory450Years = 'Listen, buddy, I hate to be the bearer of bad news here but if you haven’t figured out Bronze Age-era agriculture in almost five hundred years, maybe this just isn’t the life for you... 🤷‍♂️';
+        displayStory900Years = 'All right, all right, Buster Brown, enough is enough. Even Methuselah was only given 969 years.<br><br><span class="icon Murray inlineIcon quadrupleSize"></span><br><br>GAME OVER MAN, GAME OVER';
+        displayStory901Years = 'I’m just kidding, it’s not Game Over. You take as much time as you need, sport.';
 
-        displayStoryResidenceFirstVisit = 'THERE’S NO PLACE LIKE HOME: YOUR CAMPSITE, ANONYMOUS AMONG THE HUNDREDS OF OTHERS JUST LIKE IT ALL NESTLED HERE, IN THIS NARROW, ARID VALLEY, WHERE YOU RENT THIS PATCH OF DIRT FOR AN EXORBITANT RATE';
+        displayStoryResidenceFirstVisit = 'THERE’S NO PLACE LIKE HOME: YOUR CAMPSITE, ANONYMOUS AMONG THE HUNDREDS OF OTHERS JUST LIKE IT ALL NESTLED HERE, IN THIS NARROW, ARID VALLEY, WHERE YOU RENT THIS PATCH OF DIRT FOR AN EXTORTIONATE RATE';
         displayStoryResidence00 = 'LIVING ON MY OWN LAND WILL CERTAINLY MAKE IT EASY TO GET TO WORK IN THE MORNING';
         displayStoryResidence01 = 'FINALLY SOME SPACE TO STRETCH OUT MY LEGS';
         displayStoryResidence02 = 'MORE THAN ENOUGH ACREAGE IN THIS PRAIRIE FOR A MODEST HOMESTEAD, I RECKON';
@@ -1049,6 +1276,7 @@ function Translate(language, bark = true) {
         displayGoToPraedium = '← RETURN TO YOUR PRAEDIUM';
         displayGoToPort = 'TRAVEL TO THE PORT →';
         displayGoToTownshipFromPort = '← RETURN TO YOUR PROVINCE';
+        displayReturnToMapView = '↑ RETURN TO MAP VIEW';
 
         displayVillageTitleNEG1 = 'The Pasture of';
         displayVillageTitle0 = 'The Settlement of';
@@ -1162,6 +1390,40 @@ function Translate(language, bark = true) {
         displayCost = 'Cost:';
         displayNextDelivery = 'Next Delivery In:';
 
+        displayMapPrevTarget = '← PREV. PROVINCE';
+        displayMapNextTarget = 'NEXT PROVINCE →';
+        displayMapCurrTarget = 'SELECTED PROVINCE:';
+        displayMapVisit = 'VISIT';
+
+        displayStoryReturned = 'PLAYING AT SOLDIERS ALONG THESE RIVERBANKS AS A CHILD, I NEVER DREAMED ALL THIS MIGHT ONE DAY BELONG TO ME. THE FATE OF THIS ENTIRE AREA, AND ALL OF THESE PEOPLE!, IS SOLELY IN MY HANDS, NOW. WILL I PROVE WORTHY?';
+        displayStoryShepherdsFirstVisit = 'It is brought to your attention a representative for this area’s patrimonial shepherding families would like to meet with you. You travel to their lands to witness them for yourself, and to decide if you will answer their request.';
+        displayStoryFarmersFirstVisit = 'Thy retinue is met at the border and escorted to the capital with all the pomp and circumstance traditionally reserved for a prince’s return home from abroad. Thou art humbled and honoured in equal measure.';
+        displayStoryFarmersFirstImpression = '<div id="divMeetings">Thou art given the run of a sizable complex of cottages adjacent a dense patch of farmland just outside the royal tower, the entire area safely ensconced inside the castle grounds’ enormous main bailey. In the far distance is a breathtaking view of the ' + mapProvinces[3][0] + ' mountains.<br><br>Thou art told this farm produces foodstuffs served exclusively at the royal table, and to helpest thyself to anything you see.<br><br>Thine accommodations are modest but exceedingly comfortable: the soaps perfumed with exotic flowers and spices; the linens are plainly embroidered but the finest money can buy. There are more than enough cottages to accommodate thine entire entourage.<br><br>Thy host has clearly gone to great lengths—and spared no expense—to ensure thy comfort during thy visit to his fair lands.</div>';
+        displayStoryFarmersPrepare = '<div id="divMeetings">Thou dost summon thy royal retinue to a meeting to interrogate thine advisors regarding what they make of the situation so far. One of thine eldest diplomats speaks up first:<br><br>“' + displayTitles[player.title] + ', even to our most-learned scholars little is certain about this enigmatic ‘Lord of the West’: Alavi al-Habib, Mighty Sheikh of ' + mapProvinces[2][0] + '.<br><br>“He is said to possess the wisdom of Solomon, the patience of Job, and the courage of Samson.<br><br>“He is said to be known to his people by seven names:<br><br><div id="AlaviNames">علوي الفرد<br>Alavi the Individual,<br><br>علوي المسرف<br>Alavi the Extravagant,<br><br>علوي المجتهد<br>Alavi the Diligent,<br><br>علوي الماسي<br>Alavi the Well-Bedecked,<br><br>علوي لا يستسلم<br>Alavi Who Does Not Yield,<br><br>علوي أخ بين إخوة<br>Alavi, Brother Among Brothers,<br><br>علوي حبيب الله<br>Alavi, Beloved of God.</div><br>“He is said to be addressed by his wives by a different set of seven names, but, *ahem*... forgive me, it would not be polite to repeat them aloud here, amongst mixed company.”<br><br>A young nobleman’s son begins to chant at a sing-song pace: <span id="AlaviSong">“Alawi al-Sayfu, Alawi al-Jhadru, Alawi Yurdi Kula al-Nisa—!”</span> before his mother snatches him from the room by the ear, swatting his rear end and cursing. The rest of the women in the room blush and giggle, hiding their faces behind hand-fans.<br><br>Thy diplomat smooths his robes, and continues: “He is said to be as handsome as his hair is black, and his hair is said to be as black as the night is dark.<br><br>“He would make a formidable opponent, and an invaluable ally. I am excited to learn what this man has to say.”</div>';
+        displayStoryMinersFirstVisit = 'As thou settlest into thy rented apartments in the aristocratic quarter of this region’s capital, a polished and well-bred messenger arrives with a dexterously illuminated scroll bearing the emblem of the Adjudicator of the ' + mapProvinces[3][0] + ' Mining Companies Coalition pressed into the wax seal.<br><br>One of thy literate assistants informs thee the missive formally requests an audience at thine earliest convenience.';
+        displayStoryFarmersRejection = '<div id="divToadies">Thine imperial caravan is met by a company of well-equipped and humourless guards at the territorial border. The po-faced captain bows curtly, then recites in a heavily-accented regional vernacular: “No offense is intended, effendi; but we do not allow travel across our borders or over our lands.”<br><br>Thou art further informed that they mean no disrespect but that their leaders have no interest in foreign diplomacy and are not interested in any meeting.<br><br>Thick bundles of adamantine muscle tense and flex underneath the flesh of their sword arms. Their gleaming and well-oiled weapons are obviously finest Thorbardin steel. Thou art outnumbered; they are heavily armed, with the means to enforce what they claim. Thou decidest to return from whence ye came. The better part of valour *is* discretion, after all.</div>';
+        displayStoryFarmersSummon = 'Thy porter requests thine attention to inform thee of this message that has just arrived amongst the most recent mail shipment from the western hinterlands:<div id="nasirMessage">Tales of thy deeds in the East have not escaped the ears of my people, nor mine own. I shall accept thee at my supper table at thine convenience, shouldst thou be amenable to an invitation such as this.<br><br>الشيخ علوي الحبيب —<br>Sheikh Alavi al-Habib,<br>Lord of ' + mapProvinces[2][0] + '</div>';
+        if (player.names.length == 3) {
+            displayStoryMinersMeeting = '<div id="divMeetings">“Ah, ' + displayTitles[player.title] + ' ' + player.names[2] + '. Truly, I am honored that you have taken the time to come and visit with one such as I, merely an anonymous and humble civil servant. Your journey to our fair city must have been exhausting. May I get you anything? A girl? Or a boy, perhaps? Two?<br><br>“Well then, my dear ' + displayTitles[player.title] + '. To business.<br><br>“We are wealthy, yes, it is true. And our wealth affords for the very fiercest of mercenaries. But they obey the coin, O ' + displayTitles[player.title] + ', not us. Loyalty for sale is no loyalty at all, surely you must agree.<br><br>“Yes, ' + displayTitles[player.title] + ', we are safe here, behind these famous walls of our mighty fortresses. And our bought-and-paid-for mercenaries guard the mouths of our mines most fiercely. But our caravans and trade shipments are an easy ambush, and we suffer enormous losses far too often, both in terms of manpower and inventory. Far worse than these lost profits, however, is the damage to our reputation amongst our most esteemed customers when a waylaid shipment does not arrive on time... or at all!, may all the gods forbid.<br><br>“' + displayTitles[player.title] + ', what vexes one such as I most is the well-known ‘secret’ that a few of the least scrupulous of our freelancers are in cahoots with these bands of vicious highwaymen, selling every detail of our trade routes and our comings and goings to the highest bidders. Some are even rumoured to go so far as to sabotage our operations—or, if it can possibly be believed, the very defensive measures they themselves yet benefit from!—on behalf of their murderous conspirators! All while smiling to our faces as they accept their salaries! The very nerve of these people! Can one even imagine!<br><br>“Great ' + displayTitles[player.title] + ', thine military strength is known far and wide, and thou art as famous for thine integrity as thou art thy fair hand. This land needs a guardian. Wert thou to take this region under thine swift protection, and yet allow us to retain ownership over our ancestral mines, we would happily swear fealty to thy crown and thy crown alone.”</div>';
+        }
+        displayStoryMinersToadies = '<div id="divToadies">“Rich and easy targets, the miners of ' + mapProvinces[3][0] + ' are a proud and patrician people. In exchange for our protection, and the maintenance of their existing mineral rights (tithing an exorbitant amount in taxes, of course), they will kiss the ring. Where is the harm? We can always change our minds later.”</div>';
+        displayStoryMinersHelp = 'You permanently station fifty garrisons of your finest soldiers along the farthest borders of this region, establishing regular guard posts along the frontier. Soon this land infamous for lawlessness becomes celebrated for its law and order.';
+        if (player.names.length == 3) {
+            displayStoryShepherdsMeeting = '<div id="divMeetings">“Why, greetings, O ' + displayTitles[player.title] + ' of the North. Do you mind if I call you ' + player.names[2] + '? We don’t usually find much call to put on airs or stand on ceremony around here, that may be obvious. I s’pose my ‘official title’ might be ‘Governor’, but... well, most of my flock simply refer to me as Father Çoban.<br><br>“Let me be frank: I have been empowered to speak on behalf of all of the families in this region. Thy predecessor always dealt with us fairly. We hope that relationship may now continue with thee.<br><br>“Here in this valley so near the River Jordan we have all that we need, but... maybe not all that we wish. Our revenues are modest, and thus our profits are meager. To put it bluntly, Friend ' + player.names[2] + ': we are limited only by operating capital.<br><br>“The prosperity of ' + nameVillage + ' is legend. If she were willing to invest in our wool enterprises, we would understand, of course, that a certain level of independence would be required to be sacrificed to whosoever keeps the lamp oil flowing, so to speak.<br><br>“To put it most simply: in exchange for an assurance of fair dealings and the promise of regular shipments of your fabled gems, which we might put to use towards growing our wool industry to our mutual benefit, we will bend the knee, O ' + displayTitles[player.title] + '.”</div>';
+        }
+        displayStoryShepherdsToadies = '<div id="divToadies">“They are poor and weak; in exchange for steady investment, they will swear allegiance. Cornering the local wool trade for a bargain sounds like the smart move.”</div>';
+        displayStoryShepherdsHelp = '“After all, the wool of a black sheep is just as warm.”<br>—Ernest Lehman';
+        displayShepherdsSubtitle = 'Source of the Finest Lambswool in the Mediterranean';
+        displayFarmersSubtitle = 'Breadbasket of Western Asia';
+        displayMinersSubtitle = 'Home to the Legendary Silver Mines of Khazad-dûm';
+        displayLabelMinersA = 'ANSWER THE ADJUDICATOR’S SUMMONS';
+        displayLabelMinersB = 'CONSULT THINE ADVISORY STAFF';
+        displayLabelMinersC = 'POLICE THE REALM';
+        displayLabelShepherdsA = 'MEET WITH THE LEADER OF THE SHEPHERDS';
+        displayLabelShepherdsB = 'CONSULT THINE ADVISORY STAFF';
+        displayLabelShepherdsC = 'VASSALIZE THE TERRITORY';
+        displayLabelFarmersA = 'PREPARE FOR THINE AUDIENCE WITH THE SHEIKH';
+
         displayForewordA = 'The year is 200 B.C. and thou art a humble Tartessian sharecropper eking out a modest living under the brutal Mediterranean sun in Palestinian Galilee. From dawn to dusk dost thou work the chalky, unforgiving soil with nothing but thine own calloused hands and a sharp stick.';
         displayForewordScripture = '“O Maker of the material world, thou Holy One! How far from the fire? How far from the water? How far from the consecrated bundles of baresma? How far from the faithful?”';
         displayForewordSource = 'Vendidad 8:6';
@@ -1172,13 +1434,20 @@ function Translate(language, bark = true) {
         displayLanguageQuote = '<div id="divSystemMessageScripture">“There is no true knowledge without right faith, no virtuous conduct is possible without knowledge, without virtue there is no liberation, and without liberation, no nirvana.”</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
         displayInfoMadeFor = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.';
-        displayInfoMadeWith = 'Made with Blender, CodePen, DOSBox, Exult Studio, GitHub, the GNU Image Manipulation Program, Inkscape and Visual Studio Code.';
+        displayInfoMadeWith = 'Made with ';
+        displayInfoMadeWith += ScribeList(appsList);
+        displayInfoMadeWith += '.';
         displayInfoDedication = 'Dedicated to ';
         displayInfoDedication += ScribeList(dedicationList);
         displayInfoDedication += ', and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez and Philip J Reed, VSc. I really, really wish y’all were here.'; // ۩
         displayInfoThanks = 'Special thanks to ';
         displayInfoThanks += ScribeList(gratitudeList);
-        displayInfoThanks += '.<br><br>Very special thanks to my parents for a lifetime of support.<br><br>Seagull appears courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. Seagull training by “Wild” Bill Hinchcleath and the Northwest Florida Panhandle Seagull Wranglers Association of America: Florida Chapter.';
+        displayInfoThanks += '.<br><br>Very special thanks to my parents for a lifetime of support.<br><br>';
+        displayInfoThanks += 'Seagulls appear courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. ';
+        displayInfoThanks += 'Seagull training by “Wild Bill” Stealey and the Northwest Florida Panhandle Seagull Wranglers Association of America: Mediterranean Chapter.<br><br>';
+        displayInfoThanks += 'Argos, Bailey, Boxcar Willie and Spike appear courtesy of The Ken & Roberta Williams Virtual Canine Rescue Center of Oakhurst, California.<br><br>';
+        displayInfoThanks += 'Noodle the Cobra provided by Herpy Derper’s Reptile & Lizardarium of Winter Park, Florida.<br><br>';
+        displayInfoThanks += 'The sheep are just sheep. They don’t get any names.';
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -1211,6 +1480,8 @@ function Translate(language, bark = true) {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     else if (language == 'Spanish') {
+        formatterCurrent = formatterSpanish;
+
         displayGameEdition = 'EDICIÓN DE ORO';
 
         displayGender[0] = 'HOMBRE';
@@ -1321,15 +1592,47 @@ function Translate(language, bark = true) {
         }
 
         displayTitles[0] = 'Faraón';
-        displayTitles[1] = 'Shah';
-        displayTitles[2] = 'Emperador';
-        displayTitles[3] = 'Emperatriz';
-        displayTitles[4] = 'Rey';
-        displayTitles[5] = 'Reina';
-        displayTitles[6] = 'Señor';
-        displayTitles[7] = 'Dama';
-        displayTitles[8] = 'Virrey';
-        displayTitles[9] = 'Virreina';
+        displayTitles[1] = 'Primer Ministro';
+        displayTitles[2] = 'Premier';
+        displayTitles[3] = 'Secretario General';
+        displayTitles[4] = 'Líder Supremo';
+        displayTitles[5] = 'Shah';
+        displayTitles[6] = 'Muad’dib';
+        displayTitles[7] = 'Sultán';
+        displayTitles[8] = 'Sultana';
+        displayTitles[9] = 'Emperador';
+        displayTitles[10] = 'Emperatriz';
+        displayTitles[11] = 'Rey';
+        displayTitles[12] = 'Reina';
+        displayTitles[13] = 'Jeque';
+        displayTitles[14] = 'Sheijá';
+        displayTitles[15] = 'Maharajá';
+        displayTitles[16] = 'Maharani';
+        displayTitles[17] = 'Señor';
+        displayTitles[18] = 'Dama';
+        displayTitles[19] = 'Presidente';
+        displayTitles[20] = 'Señora Presidenta';
+        displayTitles[21] = 'Kan';
+        displayTitles[22] = 'Katun';
+        displayTitles[23] = 'Führer';
+        displayTitles[24] = 'Papa';
+        displayTitles[25] = 'Mama';
+        displayTitles[26] = 'Príncipe';
+        displayTitles[27] = 'Princesa';
+        displayTitles[28] = 'HNIC';
+        displayTitles[29] = 'Duque';
+        displayTitles[30] = 'Duquesa';
+        displayTitles[31] = 'Conde';
+        displayTitles[32] = 'Condesa';
+        displayTitles[33] = 'Barón';
+        displayTitles[34] = 'Baronesa';
+        displayTitles[35] = 'Shōgun';
+        displayTitles[36] = 'Onna-musha';
+        displayTitles[37] = 'Taoiseach';
+        displayTitles[38] = 'Nawab';
+        displayTitles[39] = 'Nawab Begum';
+        displayTitles[40] = 'Virrey';
+        displayTitles[41] = 'Virreina';
 
         displayDefiniteArticle = 'EL';
         if (player.gender == 1 || player.gender == 3) { displayDefiniteArticle = 'LA'; }
@@ -1340,9 +1643,10 @@ function Translate(language, bark = true) {
         displayIUnderstand = 'ENTIENDO';
         displayOK = "ESTOY LISTO<br>PARA CONTINUAR";
         displayOptions = 'Opciones';
-        displayMusic = '¿Música? (en proceso 🙄)';
-        displaySounds = '¿Sonidos? (en proceso 🙄)';
+        displayMusic = '¿Música?';
+        displaySounds = '¿Sonidos?';
         displayAnimations = '¿Animaciones cosméticas?';
+        displayProfanity = '¿Blasfemia?';
         displayInStock = 'En Stock';
         displayStaff = 'Personal';
         displayFieldhands = 'Labriegos';
@@ -1406,6 +1710,23 @@ function Translate(language, bark = true) {
         displayCindermen = 'Forjadores';
         displayMetallurgists = 'Broncistas'; // Metalúrgicos
         displayGemcutters = 'Tallador de Gemas';
+        displayWool = 'Lana';
+        displayMilk = 'Leche';
+        displayYoghurt = 'Yogur';
+        displayButter = 'Mantequilla';
+        displayCheese = 'Queso';
+        displayMutton = 'Cordero';
+        displayOffal = 'Vísceras';
+        displayHide = 'Piel';
+        displayBone = 'Hueso';
+        displayBlood = 'Sangre';
+        displayManure = 'Estiércol';
+        displayPeasants = 'Campesinos';
+        displayShepherds = 'Pastores';
+        displayLead = 'Plomo';
+        displayIron = 'Hierro';
+        displaySilver = 'Plata';
+        displayStationedForces = 'Fuerzas Armadas<br>Estacionadas Permanentemente';
 
         displayLabelBuyLand0 = 'ARRENDAR OTRO ARANZADA';
         displayLabelBuyLand1 = 'ARRENDAR UNA PARCELA MÁS GRANDE';
@@ -1515,7 +1836,7 @@ function Translate(language, bark = true) {
         displayLabelFromNowOn = 'A PARTIR DE AHORA';
         displayLabelReturnToPrevDecision = '← Regresar a Decisión Anterior';
 
-        displayHeirHeadlineForeward = 'Lo que sigue a continuación es un desfile interminable de interventores, juristas y senescales, cada uno de ellos con un montón más grande de rollos de papiro y tablillas de arcilla que el anterior, y cada documento cubierto de un lenguaje legal inescrutable. Piensas que este día nunca terminará.<br><br>Finalmente, el médico del tribunal ——TU médico, ahora, te das cuenta—— te lleva aparte para estar a solas un momento.<br><br>«Bueno ahora, mi lieja, todo lo que falta es su examen físico. Puramente rutinario, estoy seguro de que lo entiendes.»<br><br><br><div style="width: 100%; text-align: center;">¿ESTÁS LISTO PARA COMENZAR?</div>';
+        displayHeirHeadlineForeward = 'Lo que sigue a continuación es un desfile interminable de interventores, juristas y senescales, cada uno de ellos con un montón más grande de rollos de papiro y tablillas de arcilla que el anterior, y cada documento cubierto de un lenguaje legal inescrutable. Piensas que este día nunca terminará.<br><br>Finalmente, el médico del tribunal ——TU médico, ahora, te das cuenta—— te lleva aparte para estar a solas un momento.<br><br>«Bueno ahora, Su Gracia, todo lo que falta es su examen físico. Puramente rutinario, estoy seguro de que lo entiendes.»<br><br><br><div style="width: 100%; text-align: center;">¿ESTÁS LISTO PARA COMENZAR?</div>';
         displayHeirHeadlineName = '¿CUAL ES SU NOMBRE DE PILA, SU MAJESTAD?';
         displayHeirHeadlineGender = '¿Y CÓMO TE IDENTIFICAS, OH LIEJA?';
         displayHeirHeadlineEthnicity = '¿DE DÓNDE VIENE SU GENTE, SEÑOR?';
@@ -1528,6 +1849,34 @@ function Translate(language, bark = true) {
         if (player.gender == 1 || player.gender == 3) { displayHeirSummaryCorrect = '¿ES ESTA CORRECTA?'; }
         displayHeirConfirm = '¿Estás seguro de tus respuestas?';
         if (player.gender == 1 || player.gender == 3) { displayHeirConfirm = '¿Estás segura de tus respuestas?'; }
+        displayHeirComplete = 'displayHeirComplete spanish masc';
+        if (player.gender == 1 || player.gender == 3) { displayHeirComplete = 'displayHeirComplete spanish fem'; }
+
+        displayStoryFirstTill = 'ANTES DE PODER SEMBRAR,<br>HAY QUE LABRAR LA TIERRA<br><br><span class="icon Weeds inlineIcon sextupleSize"></span><span class="icon Sell inlineIcon tripleSize tutorialSell"></span><span class="icon Soil inlineIcon sextupleSize"></span><br><br>Con esfuerzo considerable,<br>malas hierbas dan paso al suelo';
+        displayStoryFirstPlant = 'ECHA TU SEMILLA<br>SOBRE LA LABRANZA<br><br><span class="icon Soil inlineIcon sextupleSize"></span><span class="icon Sell inlineIcon tripleSize tutorialSell"></span><span class="icon SoilSeeded inlineIcon sextupleSize"></span><br><br>Gaste un fanega de trigo (' + plantCost + '<span class="icon Wheat inlineIcon"></span>)<br>para sembrar una aranzada de tierra';
+        displayStoryFirstWater = 'TODA VIDA NECESITA<br>AGUA PARA SOBREVIVIR<br><br><span class="icon SoilSeeded inlineIcon sextupleSize"></span><span class="icon Sell inlineIcon tripleSize tutorialSell"></span><span class="icon SoilWatered inlineIcon sextupleSize"></span><br><br>«Bueno, es un trabajo sucio,<br>pero alguien tiene que hacerlo»<br>—Chuck Mosley';
+        displayStoryFirstHarvest = 'ESO UN HOMBRE SEMBRARE,<br>ESO TAMBIÉN SEGARÁ<br><br><span class="icon Crops inlineIcon sextupleSize"></span><span class="icon Sell inlineIcon tripleSize tutorialSell"></span><span class="icon Weeds inlineIcon sextupleSize"></span><br><br>La recolección de la abundancia<br>deja la tierra en desorden';
+        displayStoryFirstStorage = 'EXCESO DE GRANO DEBE ALMACENARSE';
+        const barterInventoryOlive = (bushelCount[2] < barterMaxBulkCount) ? bushelCount[2] : barterMaxBulkCount;
+        const barterValueOlive = barterInventoryOlive * barterExchangeRate[2];
+        displayStoryFirstTradeOlive = '¡AH, AHORA! *AHÍ* HAY UN BUEN LOTE DE OLIVAS; LO QUE TODO ESTÉS HACIENDO EN TU TERRENO, AMIGO MIO, SIGUE ASÍ. CON GUSTO TE CAMBIARÉ ' + formatterCurrent.format(barterValueOlive) + ' FANEGAS DE TRIGO POR ESOS ' + formatterCurrent.format(barterInventoryOlive) + ' FANEGAS DE OLIVAS';
+        displayStoryFirstTradeDate = '¿QUÉ TIENES PARA NOSOTROS HOY? ¡AH, DÁTILES! SE VENDERAN A UN BUEN PRECIO';
+        displayStoryFirstTradeFig = 'AH, AHORA, DEBE SER UN BUEN DÍA SI ESTÁS AQUÍ, MI AMIGO. ESTOS HIGOS, LOS TENDRÉ';
+        displayStoryFirstTradePom = '¡MIRA LO QUE TENEMOS AQUÍ! GRANADAS DIGNAS PARA LA MESA DEL REY SALOMÓN. DEFINITIVAMENTE CAMBIARÉ CONTIGO POR ESTAS';
+        displayStoryFirstTradeGrape = 'SIEMPRE ESTAMOS FELICES DE VERTE LLEGAR AQUÍ A LA BOLSA DE PRODUCTOS BÁSICOS, MI AMIGO. CUANDO TE VEMOS VENIR, ¡SABEMOS QUE SERÁ ALGO BUENO!<br><br>AHORA, ¿QUÉ HAS TRAÍDO PARA NOSOTROS? ¡AH, UVAS NUEVAS, RECIÉN SALIDAS DE LA VID! ¡QUÉ DELICIOSAS!';
+        displayStoryFirstSellWheat = 'EL BUEN TRIGO SIEMPRE ALCANZARÁ UN BUEN PRECIO EN UNA ECONOMÍA EN CRECIMIENTO';
+        displayStoryFirstSellBarley = '¡ÁNIMO, AMIGO, SONRÍE! SEGURO QUE DIOS NOS AMA; DEBE SER VERDAD, ¡YA QUE NOS DIO CERVEZA!';
+        displayStoryFirstSellFlax = 'LINAZA SIEMPRE ES BIENVENIDA EN EL MERCADO LIBRE. ¿QUÉ TOMARÍAS POR ESTA CARGA?';
+        displayStoryFirstSellLogs = 'DEMANDA DE MADERA SIEMPRE SUPERARÁ LA OFERTA';
+        displayStoryFirstSellBoards = 'TUS HOMBRES ESTÁN HACIENDO UN BUEN TRABAJO EN ESA FÁBRICA TUYA, ¡ESTAS TABLAS SON TAN RECTAS COMO EL HORIZONTE! ¿CUÁNTO ESTÁS DISPUESTO A TOMAR POR ELLAS?';
+        displayStoryFirstSellStone = 'PIEDRA DE CALIDAD SIEMPRE ESTÁ EN DEMANDA';
+        displayStoryFirstSellPonies = 'VAYA, ES UNA HERMOSA MANADA DE POTRAS LA QUE TIENES AHÍ. TE QUITARÉ ESA REBAÑO DE ENCIMA';
+        displayStoryFirstBuyWheat = 'GRANO, LA COLUMNA VERTEBRAL DE NUESTRA ECONOMÍA. YO OS PREGUNTO: ¿DÓNDE ESTARÍAMOS SIN EL TRIGO?';
+        displayStoryFirstBuyBarley = 'CABALLOS SON INSACIABLES';
+        displayStoryFirstBuyLogs = 'ES FÁCIL CONSEGUIR MADERA EN BRUTO, AMIGO. ¿CUÁNTA NECESITAS?';
+        displayStoryFirstBuyBoards = 'AMIGO MIO, ESTAS TABLAS ESTÁN TALLADAS DEL MEJOR PINO DE ALEPO. NO TE ARREPENTIRÁS DE TU COMPRA';
+        displayStoryFirstBuyStone = 'CUANDO NO PUEDES PRODUCIR SUFICIENTE PIEDRA PARA SATISFACER LA DEMANDA LOCAL DESDE TU PROPIA CANTERA, ES BUENO SABER QUE EN ESTE NEGOCIO SIEMPRE PUEDES CONFIAR EN TUS COMPETIDORES. UNA VENTA ES UNA VENTA, Y EL MUNDO ES PEQUEÑO: ES POSIBLE QUE NECESITEMOS CONTAR CON TU AYUDA MAÑANA';
+        displayStoryFirstBuyPonies = 'SUPONGO QUE PODRÍA DESPRENDERME DE UN SEMENTAL Y SU HARÉN POR EL PRECIO JUSTO. HAGAMOS UN TRATO';
 
         displayStoryFarm0 = 'AHORA PUEDO PROVEER PARA MI FAMILIA';
         displayStoryFarmMildew = 'ACABAS DE RECIBIR UN MENSAJE DEL HOMBRE QUE DIRIGIE EL ALMACÉN DONDE GUARDAS TU TRIGO:<div id="nasirMessage">Los daños en el techo ha dejado entrar agua; el moho ha reclamado el 90% de todo el grano almacenado; mis más sinceras disculpas<br>—Ea-nāṣir</div>';
@@ -1562,6 +1911,37 @@ function Translate(language, bark = true) {
         displayStoryNotEnoughAbacus = '«¡¿POR QUÉ, QUÉ CLASE DE ACTUARIO SERÍA YO SI TE PERMITIESE GASTAR TU ÚLTIMO GRANO DE TRIGO?! POR FAVOR VUELVE CUANDO TENGAS AL MENOS UN POCO MÁS, PARA PODER PAGAR VERDADERAMENTE MIS SERVICIOS»';
         displayStoryNotEnoughTown = 'TU ARQUITECTO TE TOMA DEL BRAZO: «LE RUEGO ME PERDONE, SU GRACIA, PERO ME TEMO QUE SI GASTARA SU ÚLTIMO GRANO DE TRIGO, SU OPERACIÓN AGRÍCOLA NO PODRÍA CONTINUAR. TEN PACIENCIA, MUY PRONTO PODRÁS PAGAR EL PRECIO»';
         displayStoryNotEnoughGeneral = 'UN TRABAJADOR CERCANO TE DETIENE: «AMIGO MÍO, SI GASTARAIS VUESTRO ÚLTIMO GRANO DE TRIGO, ¿CÓMO PODRÍAIS SEGUIR SEMBRANDO VUESTROS CAMPOS?»';
+        displayStoryPoorWheat = 'NECESITAS MÁS TRIGO, EFFENDI';
+        displayStoryPoorFarm = 'NO PUEDES PERMITIRTE ESTO, EFFENDI';
+        displayStoryPoorHire = 'NO PODEMOS PERMITIRNOS TRAER A UN HOMBRE NUEVO AHORA MISMO';
+        displayStoryPoorAcct = 'NO PUEDO PERMITIRME TRABAJAR PRO BONO, EFFENDI, LO SIENTO. POR FAVOR, VUELVE CUANDO PUEDA PAGAR MI PRECIO';
+        displayStoryPoorFound = 'EL EMPLEADO DEL REGISTRO DE LA PROPIEDAD PARPADEA CONFUNDIDO: «AMIGO, SI NO PUEDES PAGAR EL PRECIO, ¿POR QUÉ HAS VENIDO HOY AQUÍ?»';
+        displayStoryPoorSalt = 'NECESITAMOS SODIO, SEÑOR';
+        displayStoryPoorMedicine = 'Tu Debes Construir Un Hospital';
+        displayStoryPoorBarter = 'MI AMIGO, NO QUIERO FALTAR AL RESPETO, PERO ¿TAL VEZ HAS OLVIDADO TUS PRODUCTOS EN CASA? ¡NO VEO NADA EN TU CARRITO PARA INTERCAMBIAR, EFFENDI!';
+        displayStoryPoorVillage = 'UN MIL PERDONES PERO NO TE PUEDES PAGAR ESTO, SEÑOR';
+        displayStoryPoorExport = 'NO PUEDE PAGAR LA TARIFA DE LA LICENCIA DE EXPORTACIÓN, SEÑOR';
+        displayStoryPoorOil = '¡NO TIENES ACEITE PARA EXPORTAR, SEÑOR!';
+        displayStoryPoorBeer = '¡NO TIENES CERVESA PARA EXPORTAR, SEÑOR!';
+        displayStoryPoorWine = '¡NO TIENES VINO PARA EXPORTAR, SEÑOR!';
+        displayStoryPoorSyrup = '¡NO TIENES JARABE PARA EXPORTAR, SEÑOR!';
+        displayStoryPoorJuice = '¡NO TIENES JUGO PARA EXPORTAR, SEÑOR!';
+        displayStoryPoorFigs = '¡NO TIENES HIGOS SECOS PARA EXPORTAR, SEÑOR!';
+        displayStoryPoorTrinkets = '¡NO TIENES BARATIJAS PARA EXPORTAR, SEÑOR!';
+        displayStoryPoorBank = '¡AÚN SE NECESITA UN BANCO LOCAL ESTABLE PARA SUSCRIBIR EL SEGURO!';
+        displayStoryPoorWrit = '¡AÚN SE NECESITA PERMISO DE IMPORTACIÓN DEL GREMIO MERCANTIL!';
+        displayStoryPoorBankWrit = '¡NECESITARÁS TENER PERMISO DE IMPORTACIÓN DEL GREMIO MERCANTIL Y UN BANCO LOCAL ESTABLE PARA SUSCRIBIR EL SEGURO!';
+        let displayMilord = "SEÑOR";
+        if (player.gender == 1 || player.gender == 3) { displayMilord = "SEÑORA"; }
+        displayStoryPoorShepherds = 'NO CONTAMOS ACTUALMENTE CON EL PERSONAL NECESARIO PARA SUBYUGAR CON ÉXITO ESTA REGIÓN, ' + displayMilord;
+        displayStoryPoorMinersRations = '¡NO PODEMOS PEDIDOS A NUESTROS MUCHACHOS QUE OCUPEN UN TERRITORIO EXTRANJERO SIN UNA NUTRICIÓN ADECUADA, ' + displayMilord + '!';
+        displayStoryPoorMinersBandages = '¡NO PODEMOS ESPERAR QUE NUESTRAS TROPAS SE ENFRENTEN A ESTOS RUFIANTES SIN ATENCIÓN MÉDICA ADECUADA, ' + displayMilord + '!';
+        displayStoryPoorMinersSoldiers = 'NO PODEMOS PRESENTAR LA CONSIDERABLE MANO DE OBRA QUE SE NECESITARÍA PARA SOMETER ESTA REGIÓN, ' + displayMilord;
+        displayStoryPoorMinersPrice = 'NO PODEMOS PERMITIRNOS CONSTRUIR LA INFRAESTRUCTURA QUE SE NECESITARÍA PARA VIGILAR ESTA ZONA, ' + displayMilord;
+
+        displayStoryDelegateOnce = 'AHORA SUS TRABAJADORES SE CONCENTRARÁN EN LABRAR LA TIERRA ANTE TODO';
+        displayStoryDelegateTwice = 'TUS TRABAJADORES ESTÁN AHORA DE VACACIONES, TU TONTO DE CORAZÓN-BLANDO';
+        displayStoryDelegateThrice = 'TUS TRABAJADORES UNA VEZ MÁS PRIORIZARÁN LA COSECHA';
 
         displayStoryWarehouse0 = 'ESTE LUGAR ES ALTAMENTE RECOMENDABLE';
         displayStoryWarehouse1 = '«LO QUE ES COMÚN PARA LA MAYORÍA RECIBE LA MENOR CANTIDAD DE ATENCIÓN»<br>—ARISTÓTELES';
@@ -1614,6 +1994,11 @@ function Translate(language, bark = true) {
         displayStoryCrystal = 'LOS LAPIDARISTAS DE NUESTRO TALLER TRANSFORMARÁN ESTOS EN ALGO VERDADERAMENTE MARAVILLOSO';
         displayStoryTribute = 'EL JEFE MILITAR REY LOCAL FINALMENTE HA OÍDO HABLAR DE TI. SU EMISARIO TE DICE: «POR SUPUESTO, SE DEBEN IMPONER ARANCELES»';
         displayStoryRomanConquestofGreece = 'ACABAS DE RECIBIR UNA NOTICIA: ¡AHORA HABLAN LATÍN EN ATENAS!';
+        displayStoryRomanConquestofFrance = 'Acaba de llegar un mensajero con una misiva en italiano destinada a ser difundida entre la población en general: ¡César ahora tiene autoridad total sobre toda la Galia! (Bueno, excepto por un pequeño pueblo de bárbaros indomables en Armórica...)';
+        displayStoryRomanBreadRiot = 'NOTICIAS PREOCUPANTES DE ITALIA: ¡LOS ALBOROTADORES QUE TIENEN HAMBRE DE PAN AMENAZAN CON LINCHAR A TODO EL CONSULADO ROMANO!';
+        displayStory450Years = 'Escucha, amigo, odio ser el portador de malas noticias aquí, pero si no has entendido la agricultura de la Edad de Bronce en casi quinientos años, tal vez esta no sea la vida para ti... 🤷‍♂️';
+        displayStory900Years = 'Está bien, está bien, Panchito Bandido, ya es suficiente. Incluso a Matusalén sólo le fueron dados 969 años.<br><br><span class="icon Murray inlineIcon quadrupleSize"></span><br><br>JUEGO TERMINADO HOMBRE, JUEGO TERMINADO';
+        displayStory901Years = 'Estoy bromeando, no es Juego Terminado. Tómate todo el tiempo que necesites, amigo.';
 
         displayStoryResidenceFirstVisit = 'NO HAY LUGAR COMO EL HOGAR: TU CAMPAMENTO, ANÓNIMO ENTRE LOS CIENTOS DE OTROS EXACTAMENTE COMO ÉL QUE SE ENCUENTRAN AQUÍ, EN ESTE VALLE ANGOSTO Y ÁRIDO, DONDE ALQUILAS ESTE TROZO DE TIERRA POR UN PRECIO EXORBITANTE';
         displayStoryResidence00 = 'VIVIR EN MI PROPIA TIERRA SEGURO ME HARÁ MÁS FÁCIL LLEGAR AL TRABAJO POR LA MAÑANA';
@@ -1697,6 +2082,7 @@ function Translate(language, bark = true) {
         displayGoToPraedium = '← REGRESAR A TU PRAEDIUM';
         displayGoToPort = 'VIAJAR AL PUERTO →';
         displayGoToTownshipFromPort = '← REGRESAR A TU PROVINCIA';
+        displayReturnToMapView = '↑ VOLVER A VISTA DEL MAPA';
 
         displayVillageTitleNEG1 = 'El Apacentadero de';
         displayVillageTitle0 = 'El Asentamiento de';
@@ -1810,6 +2196,63 @@ function Translate(language, bark = true) {
         displayCost = 'Costó:';
         displayNextDelivery = 'Próxima Entrega En:';
 
+        displayMapPrevTarget = '← ANTERIOR PROVINCIA';
+        displayMapNextTarget = 'SIGUIENTE PROVINCIA →';
+        displayMapCurrTarget = 'PROVINCIA SELECCIONADA:';
+        displayMapVisit = 'VISITAR';
+
+        let displayNiño = 'NIÑO';
+        let displayDigno = 'DIGNO';
+        if (player.gender == 1 || player.gender == 3) {
+            displayNiño = 'NIÑA';
+            displayDigno = 'DIGNA';
+        }
+        displayStoryReturned = 'JUGANDO COMO LOS SOLDADOS A FINGIR A LO LARGO DE ESTAS ORILLAS DEL RÍO CUANDO ERA ' + displayNiño + ', NUNCA SOÑÉ QUE TODO ESTO ALGÚN DÍA PODRÍA PERTENECERME. EL DESTINO DE TODA ESTA ZONA, ¡Y DE TODA ESTA GENTE!, ESTÁ SOLO EN MIS MANOS, AHORA. ¿PROBARÉ ' + displayDigno + '?';
+        displayStoryShepherdsFirstVisit = 'Se pone en su conocimiento que un representante de las familias de pastores patrimoniales de esta zona desea reunirse con usted. Usted viaja a sus tierras para observarlos por sí mismo y decide si acepta su solicitud.';
+        let displayHonrado = 'honrado';
+        if (player.gender == 1 || player.gender == 3) { displayHonrado = 'honrada'; }
+        displayStoryFarmersFirstVisit = 'Su séquito es recibido en la frontera y escoltado hasta la capital con toda la pompa y circunstancia tradicionalmente reservadas para el regreso de un príncipe a casa desde el extranjero. Te sientes humilde y ' + displayHonrado + ' en igual medida.';
+        displayStoryFarmersFirstImpression = '<div id="divMeetings">Se le otorga el control sobre un complejo considerable de cabañas adyacentes a una densa franja de tierras de cultivo justo afuera de la torre real, toda el área se encuentra segura dentro del enorme patio principal de los terrenos del castillo. A lo lejos hay una vista impresionante de las montañas de ' + mapProvinces[3][0] + '.<br><br>Te dicen que esta granja produce alimentos que se sirven exclusivamente en la mesa real y que puedes servirte todo lo que veas.<br><br>Sus alojamientos son modestos pero sumamente cómodos: los jabones están perfumados con flores exóticas y especias; las sábanas están bordadas de forma sencilla, pero el mejor material que se puede comprar con dinero. Hay cabañas más que suficientes para acomodar a todo su séquito.<br><br>Es evidente que su anfitrión ha hecho todo lo posible (y no ha escatimado en gastos) para garantizar su comodidad durante su visita a sus bellas tierras.</div>';
+        displayStoryFarmersPrepare = '<div id="divMeetings">Convocas a tu séquito real a una reunión para interrogar a tus asesores sobre su opinión de la situación hasta el momento. Uno de sus mayores diplomáticos habla primero:<br><br>«' + displayTitles[player.title] + ', incluso para nuestros eruditos más eruditos, hay poco seguro acerca de este enigmático “Señor de Occidente”: Alavi al-Habeeb, Poderoso Jeque de ' + mapProvinces[2][0] + '.<br><br>»Se dice que posee la sabiduría de Salomón, la paciencia de Job y el coraje de Sansón.<br><br>»Se dice que su pueblo lo conoce por siete nombres:<br><br><div id="AlaviNames">علوي الفرد<br>Alavi el Individual,<br><br>علوي المسرف<br>Alavi el Extravagante,<br><br>علوي المجتهد<br>Alavi el Diligente,<br><br>علوي الماسي<br>Alavi el Bien-Engalanado,<br><br>علوي لا يستسلم<br>Alavi Que No Se Rinde,<br><br>علوي أخ بين إخوة<br>Alavi, Hermano Entre Hermanos,<br><br>علوي حبيب الله<br>Alavi, Amado de Dios.</div><br>»Se dice que sus esposas se dirigen a él por un conjunto diferente de siete nombres, pero, *ejem*... perdóneme, no sería de buena educación repetirlas aquí en voz alta, entre tanta gente.»<br><br>El hijo pequeño de un noble comienza a cantar a un ritmo cantarín: <span id="AlaviSong">«Alawi al-Sayfu, Alawi al-Jhadru, Alawi Yurdi Kula al-Nisa—!»</span> antes de que su madre lo saque de la habitación por la oreja, dándole una palmada en el trasero y maldiciendo. El resto de mujeres en la sala se sonrojan y ríen, escondiendo sus rostros detrás de abanicos.<br><br>Su diplomático se alisa la túnica y continúa: «Se dice que es tan guapo como negro es su cabello, y se dice que su cabello es tan negro como oscura es la noche.<br><br>»Sería un oponente formidable, y un aliado invaluable. Estoy entusiasmado por saber lo que este hombre tiene que decir.»</div>';
+        displayStoryMinersFirstVisit = 'Mientras se instala en su apartamento alquilado en el barrio aristocrático de la capital de esta región, llega un mensajero cortés y bien educado con un pergamino diestramente iluminado que lleva impreso en el sello de lacre el emblema del Adjudicador de la Coalición de Compañías Mineras de ' + mapProvinces[3][0] + '.<br><br>Uno de tus ayudantes alfabetizados le informa de que la misiva solicita formalmente una audiencia a la su mayor brevedad posible.';
+        displayStoryFarmersRejection = '<div id="divToadies">Su caravana imperial se encuentra con una compañía de guardias bien equipados y sin sentido del humor en la frontera territorial. El capitán, de rostro serio, hace una breve reverencia y luego recita en un dialecto regional con un fuerte acento: «No es mi intención ofender a nadie, effendi; pero no permitimos viajes a través de nuestras fronteras ni sobre nuestras tierras.»<br><br>Se le informa además que no tienen intención de faltarle el respeto, pero que sus líderes no tienen ningún interés en la diplomacia extranjera y no están interesados ​​en ninguna reunión.<br><br>Gruesos haces de músculo adamantino se tensan y flexionan debajo de la piel de sus brazos que sostienen las espadas. Sus armas brillantes y bien engrasadas son obviamente del mejor acero Thorbardin. Ustedes están en inferioridad numérica; ellos están fuertemente armados y tienen los medios para hacer cumplir lo que afirman. Decides regresar al lugar de donde viniste. La mejor parte del valor *es* la discreción, después de todo.</div>';
+        displayStoryFarmersSummon = 'Su portero solicita su atención para informarle de este mensaje que acaba de llegar entre el envío de correo más reciente desde el interior del oeste:<div id="nasirMessage">Los relatos de tus hazañas en Oriente no han escapado a los oídos de mi pueblo, ni a los míos propios. Te aceptaré en mi mesa cuando te resulte conveniente, si estás dispuesto a aceptar una invitación como ésta.<br><br>الشيخ علوي الحبيب —<br>Jeque Alawi al-Habeeb,<br>Señor de ' + mapProvinces[2][0] + '</div>';
+        if (player.names.length == 3) {
+            displayStoryMinersMeeting = '<div id="divMeetings">«Ah, ' + displayTitles[player.title] + ' ' + player.names[2] + '. De verdad, me siento honrado de que se haya tomado el tiempo de venir a visitar a alguien como yo, un simple y humilde funcionario público anónimo. Tu viaje a nuestra bella ciudad debe haber sido agotador. ¿Puedo ofrecerte algo? ¿Una niña? ¿O un niño, tal vez? ¿Dos?<br><br>»Pues bien, mi ';
+            let tempGenderedPalabra = 'querido';
+            if (player.gender == 1 || player.gender == 3) { tempGenderedPalabra = 'querida'; }
+            displayStoryMinersMeeting += tempGenderedPalabra;
+            displayStoryMinersMeeting += ' ' + displayTitles[player.title] + ', manos a la obra.<br><br>';
+            displayStoryMinersMeeting += '»Somos ricos, sí, es cierto. Y nuestra riqueza nos permite emplearlos a los mercenarios más feroces. Pero ellos obedecen a la moneda, oh ' + displayTitles[player.title] + ', no a nosotros. La lealtad en venta no es lealtad en absoluto, seguramente estarás de acuerdo.<br><br>»Sí, ' + displayTitles[player.title] + ', estamos a salvo aquí, detrás de estos famosos muros de nuestras poderosas fortalezas. Y nuestros mercenarios comprados-y-pagados guardan las bocas de nuestras minas con gran fiereza. Pero nuestras caravanas y nuestros cargamentos comerciales son una emboscada fácil, y con demasiada frecuencia sufrimos enormes pérdidas, tanto en términos de mano de obra como de inventario. Pero mucho peor que estas pérdidas de beneficios es el daño a nuestra reputación entre nuestros clientes más estimados cuando un envío retrasado no llega a tiempo... ¡o nunca!, que todos los dioses no lo permitan.<br><br>»' + displayTitles[player.title] + ', lo que más irrita a alguien como yo es el conocido “secreto” de que algunos de los menos escrupulosos de nuestros trabajadores autónomos están confabulados con estas bandas de malvados salteadores de caminos, vendiendo cada detalle de nuestras rutas comerciales y nuestras idas y venidas al mejor postor. ¡Se rumorea incluso que algunos llegan tan lejos como para sabotear nuestras operaciones (o, si es que se puede creer, ¡las mismas medidas defensivas de las que ellos mismos se benefician todavía!) en nombre de sus conspiradores asesinos! ¡Todo esto mientras nos sonríen a la cara mientras aceptan sus salarios! ¡Qué descaro el de esta gente! ¿Acaso uno puede siquiera imaginarlo?<br><br>»Gran ' + displayTitles[player.title] + ', su fuerza militar es conocida en todas partes, y ustedes tan ';
+            tempGenderedPalabra = 'famoso';
+            if (player.gender == 1 || player.gender == 3) { tempGenderedPalabra = 'famosa'; }
+            displayStoryMinersMeeting += tempGenderedPalabra;
+            displayStoryMinersMeeting += ' por su integridad como por su ';
+            tempGenderedPalabra = 'justo';
+            if (player.gender == 1 || player.gender == 3) { tempGenderedPalabra = 'justa'; }
+            displayStoryMinersMeeting += tempGenderedPalabra;
+            displayStoryMinersMeeting += ' mano. Esta tierra necesita un guardián. Si tomaras esta región bajo su rápida protección y, aun así, nos permitieras conservar la propiedad de nuestras minas ancestrales, juraríamos con gusto lealtad a su corona y solo a ella.»</div>';
+        }
+        displayStoryMinersToadies = '<div id="divToadies">«Rico y un blanco fácil, los mineros de ' + mapProvinces[3][0] + ' son un pueblo orgulloso y patricio. A cambio de nuestra protección y del mantenimiento de sus derechos mineros (pagando una cantidad exorbitante en impuestos, por supuesto), se besaran el anillo. ¿Qué daño puede haber? Siempre podemos cambiar de opinión más tarde.»</div>';
+        displayStoryMinersHelp = 'Estacionas permanentemente cincuenta guarniciones de tus mejores soldados a lo largo de las fronteras más lejanas de esta región y estableces puestos de guardia regulares a lo largo de la frontera. Pronto, esta tierra tristemente célebre por su anarquía se convierte en famosa por su ley y su orden.';
+        if (player.names.length == 3) {
+            let displayAmigo = 'Amigo';
+            if (player.gender == 1 || player.gender == 3) { displayAmigo = 'Amiga'; }
+            displayStoryShepherdsMeeting = '<div id="divMeetings">«Saludos, O ' + displayTitles[player.title] + ' del Norte. ¿Te importa si te llamo ' + player.names[2] + '? Por aquí no solemos darnos aires ni ser demasiado ceremoniosos, eso puede resultar obvio. Supongo que mi “título oficial” podría ser “Gobernador”, pero… bueno, la mayoría de mi rebaño simplemente se refiere a mí como Padre Çoban.<br><br>»Permítame ser franco: he recibido el poder de hablar en nombre de todas las familias de esta región. Su predecesor siempre nos trató con justicia. Esperamos que esa relación continúe ahora con usted.<br><br>»Aquí, en este valle tan cercano al río Jordán, tenemos todo lo que necesitamos, pero... tal vez no todo lo que deseamos. Nuestros ingresos son modestos y, por lo tanto, nuestras ganancias son exiguas. Para decirlo sin rodeos, ' + displayAmigo + ' ' + player.names[2] + ': estamos limitados únicamente por el capital operativo.<br><br>»La prosperidad de ' + nameVillage + ' es legendaria. Si estuviera dispuesta a invertir en nuestras empresas laneras, comprenderíamos, por supuesto, que sería necesario sacrificar cierto nivel de independencia en beneficio de quien se encargara de mantener el aceite de la lámpara, por así decirlo.<br><br>»Para decirlo de la forma más sencilla: a cambio de la garantía de un trato justo y la promesa de envíos regulares de sus legendarias joyas, que podríamos utilizar para hacer crecer nuestra industria de la lana en beneficio mutuo, nos arrodillaremos, oh ' + displayTitles[player.title] + '.»</div>';
+        }
+        displayStoryShepherdsToadies = '<div id="divToadies">«Son pobres y débiles; a cambio de una inversión constante, jurarán lealtad. Acaparar el comercio local de lana a cambio de una ganga parece una decisión inteligente.»</div>';
+        displayStoryShepherdsHelp = '«Al fin y al cabo, la lana de una oveja negra es igual de cálida.»<br>—Ernest Lehman';
+        displayShepherdsSubtitle = 'Origen de la Más Fina Lana de Cordero del Mediterráneo';
+        displayFarmersSubtitle = 'Granero del Asia Occidental';
+        displayMinersSubtitle = 'Hogar de las Legendarias Minas de Plata de Khazad-dûm';
+        displayLabelMinersA = 'CONTESTAR LA CITACIÓN DEL ADJUDICADOR';
+        displayLabelMinersB = 'CONSULTAR A SU PERSONAL ASESORES';
+        displayLabelMinersC = 'VIGILAR DEL REINO';
+        displayLabelShepherdsA = 'ENCONTRAR CON EL LÍDER DE LOS PASTORES';
+        displayLabelShepherdsB = 'CONSULTAR A SU PERSONAL ASESORES';
+        displayLabelShepherdsC = 'VASALIZAR EL TERRITORIO';
+        displayLabelFarmersA = 'PREPARAR PARA SU AUDIENCIA CON EL JEQUE';
+
         displayForewordA = 'Es el año 200 a.C. y eres un humilde aparcero tartésico que se gana la vida modestamente bajo el brutal sol del Mediterráneo en la Galilea palestina. Desde el amanecer hasta el anochecer trabajas la implacable tierra calcárea sin nada más que tus propias manos y un palo afilado.';
         displayForewordScripture = '«¡O Creador del mundo material, O Santo! ¿A qué distancia del fuego? ¿A qué distancia del agua? ¿A qué distancia de los manojos consagrados de baresma? ¿A qué distancia de los fieles?»';
         displayForewordSource = 'Vendidad 8:6';
@@ -1820,13 +2263,20 @@ function Translate(language, bark = true) {
         displayLanguageQuote = '<div id="divSystemMessageScripture">«No hay conocimiento verdadero sin fe recta, ninguna conducta virtuosa es posible sin conocimiento, sin virtud no hay liberación, y sin liberación, no nirvana.»</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
         displayInfoMadeFor = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.';
-        displayInfoMadeWith = 'Hecho con Blender, CodePen, DOSBox, Exult Studio, GitHub, el GNU Image Manipulation Program, Inkscape y Visual Studio Code.';
+        displayInfoMadeWith = 'Hecho con ';
+        displayInfoMadeWith += ScribeList(appsList);
+        displayInfoMadeWith += '.';
         displayInfoDedication = 'Dedicado a ';
         displayInfoDedication += ScribeList(dedicationList);
         displayInfoDedication += ', y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.'; // ۩
         displayInfoThanks = 'Agradecimientos especiales a ';
         displayInfoThanks += ScribeList(gratitudeList);
-        displayInfoThanks += '.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br>Gaviota aparece por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. Entrenamiento de gaviotas por “Loco” Bill Hinchcleath y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Florida.';
+        displayInfoThanks += '.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br>';
+        displayInfoThanks += 'Gaviotas aparecen por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. ';
+        displayInfoThanks += 'Entrenamiento de gaviotas por “Loco Bill” Stealey y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Mediterráneo.<br><br>';
+        displayInfoThanks += 'Argos, Bailey, Boxcar Willie y Spike aparecen cortesía de El Ken y Roberta Williams Centro Virtual de Rescate Canino de Oakhurst, California.<br><br>';
+        displayInfoThanks += 'Fideo la Cobra proporcionada por Herpy Derper’s Reptil y Lagartorio de Winter Park, Florida.<br><br>';
+        displayInfoThanks += 'Las ovejas son simplemente ovejas. No tienen nombre nada.';
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';
@@ -1871,9 +2321,29 @@ function Translate(language, bark = true) {
 
 
 
+const appsList = [
+    'Blender',
+    'CodePen',
+    'DaVinci Resolve',
+    'DOSBox',
+    'Exult Studio',
+    'GitHub',
+    'Google Chrome',
+    [
+        '*',
+        'the GNU Image Manipulation Program',
+        'el GNU Image Manipulation Program',
+    ],
+    'Inkscape',
+    'SCI Companion',
+    'ScummVM',
+    'Visual Studio Code',
+];
+
 const dedicationList = [
     ['Lori', 'Corey Cole',], // en.wikipedia.org/wiki/Quest_for_Glory
     ['Jeff', '’Manda Dee',], // en.wikipedia.org/wiki/Master_of_Magic
+    'Dr Irving Finkel', // britishmuseum.org/collection/term/BIOG132564
     'Richard Garriott', // britannica.com/biography/Richard-Garriott
     'ALexis JAnson', // museumofzzt.com/file/view/codered
     'Chris “Pumaman” Jones', // adventuregamestudio.co.uk
@@ -1901,13 +2371,18 @@ const gratitudeList = [
     'Patrick Driggett',
     'Miguel Angel Droz III',
     'Don Dudenhoeffer',
+    'Dr. Bart D. Ehrman', // bartehrman.com
     'Derek Evans',
     'Eric Fredricksen', // grumdrig.com/u6map
     'Kenneth Garagnon',
     'Sean Glavin',
+    'GOG', // gog.com
     'Hayley Hackett',
     'Toast Halasz',
-    'Marty Hirsch',
+    'Andrew Mark Henry', // youtube.com/user/ReligionForBreakfast
+    'Filip Holm', // patreon.com/letstalkreligion
+    'Home of the Underdogs', // homeoftheunderdogs.net
+    'Marty Hirsch', // en.wikipedia.org/wiki/MChess_Pro
     'Bashir Hood',
     'Shawn Toao Hughes',
     ['Leif', 'Marisol Johansen',],
@@ -1916,18 +2391,36 @@ const gratitudeList = [
     'John Lawrie',
     'Erik Lundblad',
     'David Macaulay', // youtu.be/9K7Yds8bWz4
+    'Jimmy Maher', // filfre.net
     'Joel “Squall” Mann',
-    ['*', 'the Méndez family', 'la familia Méndez',],
+    'Dan McClellan', // maklelan.org
+    [
+        '*',
+        'the Méndez family',
+        'la familia Méndez',
+    ],
     'Brian Moran',
     'Flathead Mike Niles',
     'Rick Ramsey',
+    'Garrett Ryan', // toldinstone.com
+    'Jason “SketchCow” Scott Sadofsky', // archive.org/details/softwarelibrary_msdos_games
     'Jim Shepperd',
+    'Dr. Justin Sledge', // justinsledge.com/esoterica
     'Todd Spigener',
     'The Spriters Resource', // spriters-resource.com
     'Grant Sutherland',
     'Benjamin A. Taylor',
     'The Ultima Codex', // ultimacodex.com
-    ['*', 'The Codex of Ultima Wisdom and the Ultima Dragons (all chapters)', 'The Codex of Ultima Wisdom y los Ultima Dragons (todos capítulos)',], // wiki.ultimacodex.com
+    [
+        '*',
+        'The Codex of Ultima Wisdom and the Ultima Dragons (all chapters)',
+        'The Codex of Ultima Wisdom y los Ultima Dragons (todos capítulos)',
+    ], // wiki.ultimacodex.com
+    [
+        '*',
+        'the University of Chicago Institute for the Study of Ancient Cultures, West Asia & North Africa',
+        'el Instituto para el Estudio de las Culturas Antiguas de la Universidad de Chicago, Asia Occidental y el Norte de África',
+    ],
     'Jan van der Crabben', // worldhistory.org
     'Stephanie Ward',
     'Jordan Webb',

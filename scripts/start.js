@@ -12,6 +12,8 @@ CheckForPreviousGame();
 
 PreloadImages();
 
+RebuildFacesArray();
+
 setTimeout(() => {
     setTimeout(() => {
         divOverlayLoading.style.display = 'none';
@@ -23,14 +25,14 @@ setTimeout(() => {
 
 
 // ╔══════════════════╗
-// ║ PRAEDIUM v1.14.0 ║
+// ║ PRAEDIUM v1.15.0 ║
 // ╟──────────────────╢
 // ║                  ║
 // ║                  ║
 // ║                  ║
 // ║                  ║
 // ║ by Michael Davis ║
-// ║        1/12/2025 ║
+// ║        2/19/2025 ║
 // ╚══════════════════╝
 
 // “The humble semicolon is why spacing and line-ends do not matter
