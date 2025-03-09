@@ -538,7 +538,7 @@ function UpdateText() {
             }
             tableString += '</tr>';
             theadFarmReport.innerHTML = tableString;
-            const totalEaten = paidOutWheat[0] + paidOutWheat[1] + paidOutWheat[2] + paidOutWheat[3] + paidOutWheat[4] + paidOutWheat[5] + paidOutWheat[6] + paidOutWheat[7] + paidOutWheat[8] + paidOutWheat[9];
+            const totalEaten = paidOutWheat[0] + paidOutWheat[1] + paidOutWheat[2] + paidOutWheat[3] + paidOutWheat[4] + paidOutWheat[5] + paidOutWheat[6] + paidOutWheat[7] + paidOutWheat[8] + paidOutWheat[9] + paidOutWheat[10] + paidOutWheat[11];
             tableString = '<tr><td><span class="icon Wheat"></span></td>';
             tableString += '<td>' + formatterCurrent.format(farmedCount[0]) + '</td>';
             tableString += '<td>' + formatterCurrent.format(harvestedCount[0]) + '</td>';
@@ -1049,6 +1049,7 @@ function UpdateText() {
             const barterValuePom = barterInventoryPom * barterExchangeRate[5];
             const barterValueGrape = barterInventoryGrape * barterExchangeRate[6];
 
+            buttonBarterAll.innerHTML = displayBarterAll + ' <span class="icon Accountant inlineIcon"></span>';
             buttonBarterOlive.innerHTML = barterInventoryOlive + '<span class="icon Olive inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueOlive) + '<span class="icon Wheat inlineIcon"></span>';
             buttonBarterDate.innerHTML = barterInventoryDate + '<span class="icon Date inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueDate) + '<span class="icon Wheat inlineIcon"></span>';
             buttonBarterFig.innerHTML = barterInventoryFig + '<span class="icon Fig inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueFig) + '<span class="icon Wheat inlineIcon"></span>';
@@ -3595,6 +3596,10 @@ function UpdateText() {
         buttonMapTargetNext.innerHTML = displayMapNextTarget;
         const currentProvinceName = mapProvinces[mapTarget][0].toUpperCase();
         divMapTarget.innerHTML = displayMapCurrTarget + '<br><b style="font-size: 4vw;">' + currentProvinceName + '</b>';
+        spanDetailsLabel.innerHTML = displayMapDetails;
+        buttonMapEcon.innerHTML = displayMapEcon;
+        buttonMapMil.innerHTML = displayMapMil;
+        buttonMapPol.innerHTML = displayMapPol;
         buttonMapVisitProvince.innerHTML = displayMapVisit + ' ' + currentProvinceName;
     }
 
@@ -3735,6 +3740,21 @@ function UpdateText() {
             stringyStringerson += '</td>';
             stringyStringerson += '<td>';
             stringyStringerson += '(-' + formatterCurrent.format(shepherdsCost) + '<span class="icon Gems inlineIcon"></span>' + '<span class="warehouseTotal">/' + displayMonth + '</span>' + ')';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayPolice + ' <span class="icon Guard inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += formatterCurrent.format(priceShepherds);
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            const copSalary = priceShepherds * policeCost;
+            let copDisplayCost = '(-' + formatterCurrent.format(copSalary) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
+            if (starving[11]) { copDisplayCost = '<span class="starving">' + displayStarving + '</span>'; }
+            stringyStringerson += copDisplayCost;
             stringyStringerson += '</td>';
             stringyStringerson += '</tr>';
 
@@ -4179,6 +4199,7 @@ function UpdateVisibilities() {
         buttonHire.style.display = player.canHire ? 'block' : '';
         buttonAudit.style.display = player.canAudit ? 'block' : '';
 
+        buttonBarterAll.style.display = player.canSell ? 'block' : '';
         buttonBarterOlive.style.display = player.canBarter ? 'block' : '';
         buttonBarterDate.style.display = (player.canBarter && farmStage > 17) ? 'block' : '';
         buttonBarterFig.style.display = (player.canBarter && farmStage > 17) ? 'block' : '';

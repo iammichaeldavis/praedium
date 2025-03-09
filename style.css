@@ -164,6 +164,10 @@ button:active {
     margin-bottom: 6.4vw;
 }
 
+#divBarterButtons #buttonBarterAll {
+    margin-bottom: 2vw;
+}
+
 #divBarterButtons #buttonBarterOlive.noMargin {
     margin-bottom: 0;
 }
@@ -1673,6 +1677,13 @@ td {
     display: inline-block;
 }
 
+.doubleSize {
+    width: calc(16px * var(--pixel-scale) * 2);
+    height: calc(16px * var(--pixel-scale) * 2);
+    background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1 * 2) calc(var(--j) * var(--pixel-scale) * 16px * -1 * 2);
+    background-size: calc(512px * var(--pixel-scale) * 2) calc(320px * var(--pixel-scale) * 2);
+}
+
 .tripleSize {
     width: calc(16px * var(--pixel-scale) * 3);
     height: calc(16px * var(--pixel-scale) * 3);
@@ -1702,7 +1713,7 @@ td {
 }
 
 .tutorialSell {
-    margin: 0 2vw calc(31px * var(--pixel-scale)) 2vw;
+    margin: 0 2vw calc(29px * var(--pixel-scale)) 2vw;
 }
 
 
@@ -2117,6 +2128,11 @@ td {
     --j: 18;
 }
 
+.Guard {
+    --i: 4;
+    --j: 13;
+}
+
 .Murray {
     --i: 31;
     --j: 19;
@@ -2466,11 +2482,6 @@ td {
 
 
 /* unused */
-
-.Guard {
-    --i: 4;
-    --j: 13;
-}
 
 .Leo {
     --i: 29;
@@ -2952,6 +2963,7 @@ td {
 #buttonBuild,
 #buttonForest,
 #buttonMountain,
+#buttonBarterAll,
 #buttonBarterOlive,
 #buttonBarterDate,
 #buttonBarterFig,

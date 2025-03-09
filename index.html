@@ -117,9 +117,9 @@
 
             <div id="divMapTarget"></div>
 
-            DETAILS VIEW: <button>ECONOMIC</button> <button>MILITARY</button> <button>POLITICAL</button>
+            <span id="spanDetailsLabel"></span>: <button id="buttonMapEcon"></button> <button id="buttonMapMil"></button> <button id="buttonMapPol"></button>
 
-            <div id="divMapDetailsView" class="economic" style="border: 1px solid black; width: 64%; margin: 6.4vw auto; padding: 1vw; background-color: #429665;">
+            <div id="divMapDetailsView" class="mapDetailsEconomic" style="border: 1px solid black; width: 64%; margin: 6.4vw auto; padding: 1vw; background-color: #429665;">
                 <b style="color: white;">Provincial GDP</b>
                 <div style="border: 1px solid black; margin-top: 1vw; background-color: white;">
                     <div style="width: 100%; text-align: center; padding: 4vw 0;">
@@ -226,6 +226,7 @@
                     <option value="Chelsea">Chelsea</option> <!-- Hillary and Bill Clinton -->
                     <option value="Chicago">Chicago</option> <!-- Kim Kardashian and Kanye West -->
                     <option value="Chicago">Cosmo</option> <!-- Scarlett Johansson and Colin Jost -->
+                    <option value="Declan">Declan</option> <!-- Gia Ruiz and Danny McBride -->
                     <option value="Denim">Denim</option> <!-- Toni Braxton and Keri Lewis -->
                     <option value="Dweezil">Dweezil</option> <!-- Gail and Frank Zappa -->
                     <option value="Esmeralda">Esmeralda</option> <!-- Eva Mendes and Ryan Gosling -->
@@ -234,6 +235,7 @@
                     <option value="Future">Future</option> <!-- Ciara and Future -->
                     <option value="Gravity">Gravity</option> <!-- Stormi Bree and Lucky Blue Smith -->
                     <option value="Huckleberry">Huckleberry</option> <!-- Shara and Bear Grylls -->
+                    <option value="Ian">Ian</option> <!-- Peggy and William George Dury -->
                     <option value="Jaden">Jaden</option> <!-- Jada Pinkett and Will Smith -->
                     <option value="Jenna">Jenna</option> <!-- Laura and George W. Bush -->
                     <option value="Kal-El">Kal-El</option> <!-- Alice Kim and Nicolas Cage -->
@@ -251,9 +253,13 @@
                     <option value="Moses">Moses</option> <!-- Gwyneth Paltrow and Chris Martin -->
                     <option value="North">North</option> <!-- Kim Kardashian and Kanye West -->
                     <option value="Olin">Olin</option> <!-- Blake Lively and Ryan Reynolds -->
+                    <option value="Paris">Paris</option> <!-- Debbie Rowe and Michael Jackson -->
+                    <option value="Peanut">Peanut</option> <!-- Gia Ruiz and Danny McBride -->
                     <option value="Penelope Scotland">Penelope Scotland</option> <!-- Kourtney Kardashian and Scott Disick -->
                     <option value="Pilot Inspektor">Pilot Inspektor</option> <!-- Beth Riesgraf and Jason Lee -->
+                    <option value="Prince">Prince</option> <!-- Debbie Rowe and Michael Jackson -->
                     <option value="Psalm">Psalm</option> <!-- Kim Kardashian and Kanye West -->
+                    <option value="Quincy">Quincy</option> <!-- Kim and Tom McMahon -->
                     <option value="Reign Aston">Reign Aston</option> <!-- Kourtney Kardashian and Scott Disick -->
                     <option value="Riot Rose">Riot Rose</option> <!-- Rihanna and A$AP Rocky -->
                     <option value="Ronin">Ronin</option> <!-- Laetitia and Richard Garriott de Cayeux -->
@@ -261,6 +267,7 @@
                     <option value="RZA">RZA</option> <!-- Rihanna and A$AP Rocky -->
                     <option value="Saint">Saint</option> <!-- Kim Kardashian and Kanye West -->
                     <option value="Schuyler">Schuyler</option> <!-- Sissy Spacek and Jack Fisk -->
+                    <option value="Seven">Seven</option> <!-- Erykah Badu and André 3000 -->
                     <option value="Sir">Sir</option> <!-- Beyoncé and Jay-Z -->
                     <option value="Sparrow">Sparrow</option> <!-- Nicole Richie and Joel Madden -->
                     <option value="Stormi">Stormi</option> <!-- Kylie Jenner and Travis Scott -->
@@ -269,8 +276,12 @@
                     <option value="Suri">Suri</option> <!-- Katie Holmes and Tom Cruise -->
                     <option value="Techno Mechanicus">Techno Mechanicus</option> <!-- Grimes and Elon Musk -->
                     <option value="Trey">Trey</option> <!-- Sheree Zampino and Will Smith -->
+                    <option value="Ulysses">Ulysses</option> <!-- Elizabeth and William Peoples -->
+                    <option value="Ursula">Ursula</option> <!-- Anna and Rolf Andress -->
+                    <option value="Violet">Violet</option> <!-- Frances and Rev Reginald Henry Barnes -->
                     <option value="Willow">Willow</option> <!-- Jada Pinkett and Will Smith -->
                     <option value="X Æ A-Xii">X Æ A-Xii</option> <!-- Grimes and Elon Musk -->
+                    <option value="Yuri">Yuri</option> <!-- en.wikipedia.org/wiki/Yuri_Tsaler, cannot find information on parents in English 🤷‍♂️ -->
                     <option value="Zuma">Zuma</option> <!-- Gwen Stefani and Gavin Rossdale -->
                 </select>
                 <button id="buttonHeirChooseName"></button>
@@ -470,6 +481,7 @@
                     <button id="buttonNewFarm"></button>
                 </div>
                 <div id="divBarterButtons">
+                    <button id="buttonBarterAll" onclick="BarterAll();"></button>
                     <button id="buttonBarterOlive"></button>
                     <button id="buttonBarterDate"></button>
                     <button id="buttonBarterFig"></button>
@@ -537,7 +549,7 @@
     <div id="divOverlayForeword" class="overlay">
         <div id="divModalForeword">
             <div id="divForewordTitle"><img src="curves/PRÆDIVM.svg" /></div>
-            <div id="divForewordSubtitle">☙ a solitaire by Michael David Davis II ❧</div>
+            <div id="divForewordSubtitle">☙ an epic solitaire by Michael David Davis II ❧</div>
             <button id="buttonForewordEnglish">English</button><button id="buttonForewordSpanish">Español</button>
             <div id="divForewordCorpus"></div>
             <button id="buttonForewordDismiss"></button>

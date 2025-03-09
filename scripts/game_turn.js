@@ -74,6 +74,11 @@ function GameTurn() {
         if (player.hasHelpedFarmers) { VassalProduction('Farmers'); }
     }
 
+    if (player.hasHelpedShepherds) {
+        const copSalary = priceShepherds * policeCost;
+        PayWorkerGroup(copSalary, 11);
+    }
+
     if (week % 2 == 0 && trophiesSpawn) {
         const tourismTotalIncome = tourismValue * trophiesCount;
         asCount += tourismTotalIncome;

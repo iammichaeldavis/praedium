@@ -132,6 +132,7 @@ const player = {
     hasSoldBoards: false,
     hasSoldStone: false,
     hasSoldPonies: false,
+    hasSoldTheFarm: false,
     hasBoughtWheat: false,
     hasBoughtBarley: false,
     hasBoughtLogs: false,
@@ -181,15 +182,18 @@ const player = {
     hasAllWisdom: false,
     hasBecomeHeir: false,
     hasReturned: false,
+    hasTargettedMiners: false,
     hasMetMiners: false,
     hasConsultedMiners: false,
     hasHelpedMiners: false,
+    hasTargettedShepherds: false,
     hasMetShepherds: false,
     hasConsultedShepherds: false,
     hasHelpedShepherds: false,
     hasBeenSummoned: false,
     hasBeenReceived: false,
     hasPrepared: false,
+    hasTargettedFarmers: false,
     hasMetFarmers: false,
     hasConsultedFarmers: false,
     hasHelpedFarmers: false,
@@ -457,6 +461,7 @@ const buttonFound = document.getElementById('buttonFound');
 const buttonNewFarm = document.getElementById('buttonNewFarm');
 const buttonHire = document.getElementById('buttonHire');
 const buttonAudit = document.getElementById('buttonAudit');
+const buttonBarterAll = document.getElementById('buttonBarterAll');
 const buttonBarterOlive = document.getElementById('buttonBarterOlive');
 const buttonBarterDate = document.getElementById('buttonBarterDate');
 const buttonBarterFig = document.getElementById('buttonBarterFig');
@@ -546,6 +551,10 @@ const canvasMapContext = canvasMap.getContext('2d');
 const buttonMapTargetPrev = document.getElementById('buttonMapTargetPrev');
 const buttonMapTargetNext = document.getElementById('buttonMapTargetNext');
 const divMapTarget = document.getElementById('divMapTarget');
+const spanDetailsLabel = document.getElementById('spanDetailsLabel');
+const buttonMapEcon = document.getElementById('buttonMapEcon');
+const buttonMapMil = document.getElementById('buttonMapMil');
+const buttonMapPol = document.getElementById('buttonMapPol');
 const buttonMapVisitProvince = document.getElementById('buttonMapVisitProvince');
 
 const divViewShepherds = document.getElementById('divViewShepherds');
@@ -693,9 +702,9 @@ const mountainSpentCount = [0, 0, 0, 0, 0, 0,];
 const mountainPurchasedCount = [0, 0, 0, 0, 0, 0,];
 const mountainSoldCount = [0, 0, 0, 0, 0, 0,];
 
-// 0. Hands 🧑‍🌾, 1. Loggers 🪓, 2. Sawyers 🪚, 3. Masons 🔨, 4. Miners ⛏️, 5. Smelters 🔥, 6. Vignerons 🍇, 7. Arborists 🌲, 8. Horticulturalists 🐌, 9. Metallurgists 💍, 10. Gemcutters 💎
-const paidOutWheat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const starving = [false, false, false, false, false, false, false, false, false, false, false,];
+// 0. Hands 🧑‍🌾, 1. Loggers 🪓, 2. Sawyers 🪚, 3. Masons 🔨, 4. Miners ⛏️, 5. Smelters 🔥, 6. Vignerons 🍇, 7. Arborists 🌲, 8. Horticulturalists 🐌, 9. Metallurgists 💍, 10. Gemcutters 💎, 11. Police 👮
+const paidOutWheat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const starving = [false, false, false, false, false, false, false, false, false, false, false, false,];
 const starvingBuffer = 10;
 
 let residenceStage = 0;
@@ -948,6 +957,7 @@ const shepherdsInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const shepherdsProduction = [120, 80, 20, 40, 10, 60, 180, 16, 16, 32, 64,];
 const shepherdsCount = 240;
 const shepherdsCost = 1;
+const policeCost = 2;
 
 // 0. Diamonds 💎, 1. Jacinth 💎, 2. Bismuth 💎, 3. Gold 🧱, 4. Silver 🧱, 5. Iron 🧱, 6. White Copper 🧱, 7. False Silver 🧱, 8. Lead 🧱, 9. Kobold Ore 🪨, 10. Magnes Rock 🪨
 const minersInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
@@ -1040,6 +1050,11 @@ const save_key = 'PRAEDIUM_save_data';
 
 let gameEventTrigger = false;
 let gameEventContainer = '';
+
+
+
+// To anyone wondering why I've done anything the way I've done: let me just say, tech debt is real.
+// This game started out as a single-page 20-minute hack on CodePen. Now just look where we are smdh
 
 
 

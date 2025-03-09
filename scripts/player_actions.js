@@ -1413,7 +1413,31 @@ function TogglePriority() {
 
 
 
-function BarterFruit(crop) {
+function BarterAll() {
+    if (bushelCount[2] > bushelMax[2] || bushelCount[3] > bushelMax[3] || bushelCount[4] > bushelMax[4] || bushelCount[5] > bushelMax[5] || bushelCount[6] > bushelMax[6]) {
+        alert('⚠ TOO MUCH FRUITS! THIS WILL CRASH YOUR BROWSER, HOMIE!');
+    }
+    else if (bushelCount[2] == 0 && bushelCount[3] == 0 && bushelCount[4] == 0 && bushelCount[5] == 0 && bushelCount[6] == 0) {
+        if (player.likesStory) { GameEvent(displayStoryPoorBarter); }
+    }
+    else {
+        if (!player.hasSoldTheFarm) {
+            player.hasSoldTheFarm = true;
+            if (player.likesStory) { GameEvent(displayStoryFirstTradeAll); }
+        }
+        while (bushelCount[2] > 0) { BarterFruit(2, false); }
+        while (bushelCount[3] > 0) { BarterFruit(3, false); }
+        while (bushelCount[4] > 0) { BarterFruit(4, false); }
+        while (bushelCount[5] > 0) { BarterFruit(5, false); }
+        while (bushelCount[6] > 0) { BarterFruit(6, false); }
+        UpdateDisplay();
+    }
+    
+}
+
+
+
+function BarterFruit(crop, refresh = true) {
     let barterAmount = bushelCount[crop];
 
     if (barterAmount == 0) {
@@ -1453,7 +1477,7 @@ function BarterFruit(crop) {
     purchasedCount[0] += barterAmount * barterExchangeRate[crop];
     if (bushelCount[0] > bushelMax[0]) { bushelCount[0] = bushelMax[0]; }
 
-    UpdateDisplay();
+    if (refresh) UpdateDisplay();
 }
 
 
@@ -3115,6 +3139,20 @@ function MapChangeTarget(direction) {
         mapTarget--;
         if (mapTarget == -1) { mapTarget = mapProvinces.length - 1; }
     }
+
+    if (mapTarget == 3 && !player.hasTargettedMiners) {
+        player.hasTargettedMiners = true;
+        alert('first miner target');
+    }
+    else if (mapTarget == 1 && !player.hasTargettedShepherds) {
+        player.hasTargettedShepherds = true;
+        alert('first shepshep target');
+    }
+    else if (mapTarget == 2 && !player.hasTargettedFarmers) {
+        player.hasTargettedFarmers = true;
+        alert('first farmer target');
+    }
+
     mapOutlineOpacity = 0;
     UpdateDisplay();
 }

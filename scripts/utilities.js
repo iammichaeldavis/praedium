@@ -121,6 +121,7 @@ function ContinuePreviousGame() {
         player.hasSoldBoards = loadedReport.hero.hasSoldBoards;
         player.hasSoldStone = loadedReport.hero.hasSoldStone;
         player.hasSoldPonies = loadedReport.hero.hasSoldPonies;
+        player.hasSoldTheFarm = loadedReport.hero.hasSoldTheFarm;
         player.hasBoughtWheat = loadedReport.hero.hasBoughtWheat;
         player.hasBoughtBarley = loadedReport.hero.hasBoughtBarley;
         player.hasBoughtLogs = loadedReport.hero.hasBoughtLogs;
@@ -170,15 +171,18 @@ function ContinuePreviousGame() {
         //player.hasAllWisdom = loadedReport.hero.hasAllWisdom;
         player.hasBecomeHeir = loadedReport.hero.hasBecomeHeir;
         player.hasReturned = loadedReport.hero.hasReturned;
+        player.hasTargettedMiners = loadedReport.hero.hasTargettedMiners;
         player.hasMetMiners = loadedReport.hero.hasMetMiners;
         player.hasConsultedMiners = loadedReport.hero.hasConsultedMiners;
         player.hasHelpedMiners = loadedReport.hero.hasHelpedMiners;
+        player.hasTargettedShepherds = loadedReport.hero.hasTargettedShepherds;
         player.hasMetShepherds = loadedReport.hero.hasMetShepherds;
         player.hasConsultedShepherds = loadedReport.hero.hasConsultedShepherds;
         player.hasHelpedShepherds = loadedReport.hero.hasHelpedShepherds;
         player.hasBeenSummoned = loadedReport.hero.hasBeenSummoned;
         player.hasBeenReceived = loadedReport.hero.hasBeenReceived;
         player.hasPrepared = loadedReport.hero.hasPrepared;
+        player.hasTargettedFarmers = loadedReport.hero.hasTargettedFarmers;
         player.hasMetFarmers = loadedReport.hero.hasMetFarmers;
         player.hasConsultedFarmers = loadedReport.hero.hasConsultedFarmers;
         player.hasHelpedFarmers = loadedReport.hero.hasHelpedFarmers;
