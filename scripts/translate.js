@@ -2482,7 +2482,7 @@ function Translate(language, bark = true) {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     const divider = '<div class="divider">♦♦♦ ♦ ♦♦♦</div>';
-    displayInfoFinal = '<div id="divInfoTitle">' + displayGameTitle + '<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) MMXXIV</span></div>';
+    displayInfoFinal = '<div id="divInfoTitle">' + displayGameTitle + '<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) MMXXV</span></div>';
     displayInfoFinal += displayInfoMadeFor + '<br><br>' + displayInfoMadeWith + '<br><br>' + displayInfoDedication + '<br><br>' + displayInfoThanks;
     displayInfoFinal += divider + displayInfoScripture;
     displayLegalFinal = displayBoilerplate + divider + displayLegalQuote;
