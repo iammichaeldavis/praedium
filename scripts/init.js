@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.15.2';
+const version = '1.15.3';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -49,7 +49,7 @@ const player = {
 
     speaks: null,
 
-    likesMusic: false, // 🚨🚨🚨
+    likesMusic: true, // 🚨🚨🚨
     likesSounds: true,
     likesAnimations: true,
     likesStory: true,
