@@ -2942,21 +2942,43 @@ td {
 /* // ENDING //////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
-#divEnding {
-    background-color: pink;
+#divEndingBackdrop {
+    background-color: gray;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
 }
 
-#divEnding div {
+#divEndingBackdrop div,
+#divEndingBackdrop div b,
+#divEndingBackdrop div i {
     text-align: center;
+    font-family: 'Garamond', serif;
+}
+
+#divEndingFoil {
+    padding: 1vw;
+    background-color: crimson;
+    margin: 6vw;
+}
+
+#divEndingSeal {
+    width: 100%;
+    padding: 1vw;
+    background-color: tan;
+}
+
+#divEndingSheet {
+    width: 100%;
+    padding: 3vw;
+    background-color: blanchedalmond;
 }
 
 #endingPlate {
-    width: 90vw;
+    width: 90%;
 }
 
 

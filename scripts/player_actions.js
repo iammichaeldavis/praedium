@@ -3318,11 +3318,21 @@ function FarmersEvents() {
         //alert('"sup sup" -King Alavi');
 
         PauseTime();
-        const divEnding = document.createElement('div');
-        divEnding.id = 'divEnding';
-        divEnding.innerHTML = '<div><br><br>' + displayToBeContinued + '<br><br><img id="endingPlate" src="curves/PRÆDIVM2.svg" /><br><br><br><br><b>' + displayTheEnd + '</b><br><br>' + displayThankYouForPlaying + ' 🙏</div>';
+        const divEndingBackdrop = document.createElement('div');
+        divEndingBackdrop.id = 'divEndingBackdrop';
+        let lastString = '<div id="divEndingFoil"><div id="divEndingSeal"><div id="divEndingSheet">';
+        lastString += '<i>' + displayToBeContinued + '</i>';
+        lastString += '<br><br>';
+        lastString += '<img id="endingPlate" src="curves/PRÆDIVM2.svg" />';
+        lastString += '<br><br><br><br>';
+        lastString += '<b>' + displayTheEnd + '</b>';
+        lastString += '<br><br>';
+        lastString += displayThankYouForPlaying;
+        lastString += ' 🙏';
+        lastString += '</div></div></div>';
+        divEndingBackdrop.innerHTML = lastString;
         const body = document.getElementsByTagName("body")[0];
-        body.appendChild(divEnding);
+        body.appendChild(divEndingBackdrop);
     }
     else {
         alert('third thing');
