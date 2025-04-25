@@ -3601,6 +3601,283 @@ function UpdateText() {
         buttonMapMil.innerHTML = displayMapMil;
         buttonMapPol.innerHTML = displayMapPol;
         buttonMapVisitProvince.innerHTML = displayMapVisit + ' ' + currentProvinceName;
+
+        function AddInertDigits(comparedDigits, maxDigits, removeLastCharacter = false) {
+            if (comparedDigits < maxDigits) {
+                let neededDigitsCount = maxDigits - comparedDigits;
+                let divider = ',';
+                if (player.speaks == 'Spanish') { divider = '.'; }
+                if (neededDigitsCount > 1) {
+                    let lilStringGuy = '<span class="inertNumerals">';
+                    lilStringGuy += '0' + divider;
+                    neededDigitsCount--;
+                    while (neededDigitsCount > 0) {
+                        let tick = 0;
+                        while (neededDigitsCount > 0 && tick < 3) {
+                            tick++;
+                            neededDigitsCount--;
+                            lilStringGuy += '0';
+                        }
+                        if (neededDigitsCount > 0 || (neededDigitsCount == 0 && tick == 3)) { lilStringGuy += divider; }
+                    }
+                    if (removeLastCharacter) { lilStringGuy = lilStringGuy.slice(0, -1); }
+                    lilStringGuy += '</span>';
+                    return lilStringGuy;
+                }
+                else { return '<span class="inertNumerals">0' + divider + '</span>'; }
+            }
+            else { return ''; }
+        }
+
+        let inventoryFormatter = formatterCurrent;
+        if (player.speaks == 'Spanish') { inventoryFormatter = formatterSpanishInventory; }
+
+        if (mapDetailsCurrent == 'econ') {
+            divMapDetailsView.classList.add('mapDetailsEconomic');
+            divMapDetailsView.classList.remove('mapDetailsMilitary');
+            divMapDetailsView.classList.remove('mapDetailsPolitical');
+            let contentString = '<span id="spanMapDetailsTitle">' + displayMapDetailsTitleEcon + '</span>';
+            contentString += '<div id="divMapDetailsContents">';
+
+            contentString += '<div id="divMapDetailsEconLiquidBar">';
+            contentString += '<b>' + displayMapDetailsEconLiquidBar + ': </b>';
+            contentString += currencySymbol;
+            contentString += AddInertDigits(asCount.toString().length, 13);
+            if (asCount == 0) { contentString += '<span class="inertNumerals">'; }
+            contentString += inventoryFormatter.format(asCount);
+            if (asCount == 0) { contentString += '</span>'; }
+
+            contentString += '</div>';
+
+            const invDigits = 7;
+            contentString += '<div id="divMapDetailsMasterInventoryContainer">';
+            contentString += '<div style="width: 50%;">';
+            contentString += '<b>' + displayNaturalResources + ':</b><br>';
+
+            function ScribeContentString(value, iconString) {
+                contentString += (value == 0) ? AddInertDigits(0, invDigits, true) : AddInertDigits(value.toString().length, invDigits);
+                contentString += (value == 0) ? '' : inventoryFormatter.format(value);
+                contentString += ' <span class="icon ' + iconString + ' inlineIcon"></span><br>';
+            }
+
+            if (player.hasHelpedShepherds) {
+                ScribeContentString(shepherdsInventory[10], 'Manure');
+            }
+            ScribeContentString(logsCount, 'Log');
+            ScribeContentString(stoneCount, 'Stone');
+            ScribeContentString(oreCopperCount, 'OreCopper');
+            if (player.hasHelpedMiners) {
+                ScribeContentString(minersInventory[10], 'Pyrolusite');
+                ScribeContentString(minersInventory[9], 'OreCobalt');
+                ScribeContentString(minersInventory[8], 'IngotLead');
+            }
+            ScribeContentString(ingotsCopperCount, 'IngotCopper');
+            if (player.hasHelpedMiners) {
+                ScribeContentString(minersInventory[6], 'IngotNickel');
+                ScribeContentString(minersInventory[7], 'IngotZinc');
+            }
+            ScribeContentString(ingotsTinCount, 'IngotTin');
+            ScribeContentString(ingotsBronzeCount, 'IngotBronze');
+            if (player.hasHelpedMiners) {
+                ScribeContentString(minersInventory[5], 'IngotIron');
+                ScribeContentString(minersInventory[4], 'IngotSilver');
+                ScribeContentString(minersInventory[3], 'IngotGold');
+                ScribeContentString(minersInventory[2], 'Bismuth');
+            }
+            ScribeContentString(crystalsCount, 'Crystal');
+            if (player.hasHelpedMiners) {
+                ScribeContentString(minersInventory[1], 'Zircon');
+                ScribeContentString(minersInventory[0], 'Diamonds');
+            }
+            ScribeContentString(residenceIngredientInStockCount[14][1], 'Sal');
+            ScribeContentString(horsesCount, 'Horsey');
+
+            contentString += '<div style="height: 4vw; width: 4vw;"></div>';
+            contentString += '<b>' + displayCrops + ':</b><br>';
+            ScribeContentString(bushelCount[0], 'Wheat');
+            ScribeContentString(bushelCount[1], 'Barley');
+            ScribeContentString(bushelCount[7], 'Flax');
+            ScribeContentString(bushelCount[2], 'Olive');
+            ScribeContentString(bushelCount[3], 'Date');
+            ScribeContentString(bushelCount[4], 'Fig');
+            ScribeContentString(bushelCount[5], 'Pom');
+            ScribeContentString(bushelCount[6], 'Grape');
+            ScribeContentString(residenceInStockCount[9], 'Comb');
+            contentString += '</div>';
+
+            contentString += '<div style="width: 50%;">';
+            contentString += '<b>' + displayManufacturedProducts + ':</b><br>';
+            ScribeContentString(boardsCount, 'Board');
+            ScribeContentString(residenceInStockCount[0], 'Loaves');
+            ScribeContentString(residenceInStockCount[14], 'LembasBread');
+            ScribeContentString(residenceInStockCount[11], 'Ration');
+            ScribeContentString(residenceInStockCount[12], 'Linen');
+            ScribeContentString(residenceInStockCount[13], 'Bandage');
+            ScribeContentString(residenceInStockCount[1], 'Amphora');
+            ScribeContentString(residenceInStockCount[2], 'Keg');
+            ScribeContentString(residenceInStockCount[3], 'Cask');
+            ScribeContentString(residenceInStockCount[4], 'Honeypot');
+            ScribeContentString(residenceInStockCount[5], 'Jug');
+            ScribeContentString(residenceInStockCount[6], 'Basket');
+            ScribeContentString(residenceInStockCount[10], 'Raisins');
+            if (player.hasHelpedShepherds) {
+                ScribeContentString(shepherdsInventory[8], 'Bones');
+                ScribeContentString(shepherdsInventory[6], 'Offal');
+                ScribeContentString(shepherdsInventory[9], 'Blood');
+                ScribeContentString(shepherdsInventory[1], 'Milk');
+                ScribeContentString(shepherdsInventory[2], 'Yoghurt');
+                ScribeContentString(shepherdsInventory[3], 'Butter');
+                ScribeContentString(shepherdsInventory[4], 'Cheese');
+                ScribeContentString(shepherdsInventory[5], 'Mutton');
+                ScribeContentString(shepherdsInventory[0], 'Wool');
+                ScribeContentString(shepherdsInventory[7], 'LeatherHide');
+            }
+            ScribeContentString(residenceInStockCount[7], 'Trinket');
+            ScribeContentString(residenceInStockCount[8], 'Gems');
+
+            contentString += '<div style="height: 4vw; width: 4vw;"></div>';
+            contentString += '<b>' + displaySacredItems + ':</b><br>';
+            ScribeContentString(beadsCount, 'Mala');
+            ScribeContentString(scrollsCount, 'Scroll');
+            ScribeContentString(relicCount, 'Relic');
+
+            contentString += '</div>';
+            contentString += '</div>';
+            contentString += '</div>';
+            divMapDetailsView.innerHTML = contentString;
+        }
+        else if (mapDetailsCurrent == 'mil') {
+            divMapDetailsView.classList.remove('mapDetailsEconomic');
+            divMapDetailsView.classList.add('mapDetailsMilitary');
+            divMapDetailsView.classList.remove('mapDetailsPolitical');
+            let contentString = '<span id="spanMapDetailsTitle">' + displayMapDetailsTitleMil + '</span>';
+            contentString += '<div id="divMapDetailsContents">';
+
+            function MilInertGuys(comparedDigits, maxDigits) {
+                let tick = maxDigits - comparedDigits;
+                let output = '';
+                while (tick > 0) {
+                    tick--;
+                    output += '0';
+                }
+                return output;
+            }
+
+            if (player.hasHelpedMiners) {
+                contentString += displayTerritory + ': <b>' + mapProvinces[3][0] + '</b><br>';
+                contentString += '<b>' + displayOffense + ':</b> ';
+                const minerOffenseScore = priceMiners[2] * militaryCavalryCombatValue;
+                if (player.speaks == 'English') { contentString += AddInertDigits(minerOffenseScore.toString().length, 4) + formatterCurrent.format(minerOffenseScore); }
+                else { contentString += '<span class="inertNumerals">' + MilInertGuys(minerOffenseScore.toString().length, 4) + '</span>' + formatterCurrent.format(minerOffenseScore); }
+    
+                contentString += ' <span class="icon Sword inlineIcon"></span>';
+                contentString += ' &nbsp;&nbsp;&nbsp; ';
+                contentString += '<span class="inertNumerals">' + MilInertGuys(0, 4) + '</span>';
+                contentString += ' <span class="icon TaxCollector inlineIcon"></span><br>';
+    
+                contentString += '<b>' + displayDefense + ':</b> ';
+                if (player.speaks == 'English') { contentString += '5,000'; }
+                else { contentString += '5000'; }
+                contentString += ' <span class="icon Shield inlineIcon"></span>';
+                contentString += ' &nbsp;&nbsp;&nbsp; ';
+                contentString += '<span class="inertNumerals">' + MilInertGuys(priceMiners[2].toString().length, 4) + '</span>' + priceMiners[2];
+                contentString += ' <span class="icon HorseyMounted inlineIcon"></span><br>';
+            }
+
+            // home start
+            if (player.hasHelpedMiners) {
+                contentString += '<br>';
+            }
+            if (player.hasHelpedMiners || player.hasHelpedShepherds) {
+                contentString += displayTerritory + ': <b>' + mapProvinces[0][0] + '</b><br>';
+            }
+            contentString += '<b>' + displayOffense + ':</b> ';
+            const calculatedOffenseScore = (militaryInfantry * militaryInfantryCombatValue) + (militaryCavalryCurrent * militaryCavalryCombatValue);
+            if (player.speaks == 'English') {
+                contentString += AddInertDigits(calculatedOffenseScore.toString().length, 4);
+                if (calculatedOffenseScore == 0) { contentString += '<span class="inertNumerals">'; }
+                contentString += formatterCurrent.format(calculatedOffenseScore);
+                if (calculatedOffenseScore == 0) { contentString += '</span>'; }
+            }
+            else {
+                contentString += '<span class="inertNumerals">' + MilInertGuys(calculatedOffenseScore.toString().length, 4) + '</span>';
+                if (calculatedOffenseScore == 0) { contentString += '<span class="inertNumerals">'; }
+                contentString += formatterCurrent.format(calculatedOffenseScore);
+                if (calculatedOffenseScore == 0) { contentString += '</span>'; }
+            }
+
+            contentString += ' <span class="icon Sword inlineIcon"></span>';
+            contentString += ' &nbsp;&nbsp;&nbsp; ';
+            contentString += '<span class="inertNumerals">' + MilInertGuys(militaryInfantry.toString().length, 4) + '</span>';
+            if (militaryInfantry == 0) { contentString += '<span class="inertNumerals">'; }
+            contentString += militaryInfantry;
+            if (militaryInfantry == 0) { contentString += '</span>'; }
+            contentString += ' <span class="icon TaxCollector inlineIcon"></span><br>';
+
+            contentString += '<b>' + displayDefense + ':</b> ';
+            if (player.speaks == 'English') { contentString += '1,000'; }
+            else { contentString += '1000'; }
+            contentString += ' <span class="icon Shield inlineIcon"></span>';
+            contentString += ' &nbsp;&nbsp;&nbsp; ';
+            contentString += '<span class="inertNumerals">' + MilInertGuys(militaryCavalryCurrent.toString().length, 4) + '</span>';
+            if (militaryCavalryCurrent == 0) { contentString += '<span class="inertNumerals">'; }
+            contentString += militaryCavalryCurrent;
+            if (militaryCavalryCurrent == 0) { contentString += '</span>'; }
+            contentString += ' <span class="icon HorseyMounted inlineIcon"></span><br>';
+            // home end
+
+            if (player.hasHelpedShepherds) {
+                contentString += '<br>' + displayTerritory + ': <b>' + mapProvinces[1][0] + '</b><br>';
+                contentString += '<b>' + displayOffense + ':</b> ';
+                const shepherdOffenseScore = priceShepherds * militaryInfantryCombatValue;
+                if (player.speaks == 'English') { contentString += AddInertDigits(shepherdOffenseScore.toString().length, 4) + formatterCurrent.format(shepherdOffenseScore); }
+                else { contentString += '<span class="inertNumerals">' + MilInertGuys(shepherdOffenseScore.toString().length, 4) + '</span>' + formatterCurrent.format(shepherdOffenseScore); }
+    
+                contentString += ' <span class="icon Sword inlineIcon"></span>';
+                contentString += ' &nbsp;&nbsp;&nbsp; ';
+                contentString += '<span class="inertNumerals">' + MilInertGuys(priceShepherds.toString().length, 4) + '</span>' + priceShepherds;
+                contentString += ' <span class="icon TaxCollector inlineIcon"></span><br>';
+    
+                contentString += '<b>' + displayDefense + ':</b> ';
+                if (player.speaks == 'English') { contentString += '<span class="inertNumerals">0,0</span>50'; }
+                else { contentString += '<span class="inertNumerals">00</span>50'; }
+                contentString += ' <span class="icon Shield inlineIcon"></span>';
+                contentString += ' &nbsp;&nbsp;&nbsp; ';
+                contentString += '<span class="inertNumerals">' + MilInertGuys(0, 4) + '</span>';
+                contentString += ' <span class="icon HorseyMounted inlineIcon"></span><br>';
+            }
+
+            contentString += '</div>';
+            divMapDetailsView.innerHTML = contentString;
+        }
+        else if (mapDetailsCurrent == 'pol') {
+            divMapDetailsView.classList.remove('mapDetailsEconomic');
+            divMapDetailsView.classList.remove('mapDetailsMilitary');
+            divMapDetailsView.classList.add('mapDetailsPolitical');
+            let contentString = '<span id="spanMapDetailsTitle">' + displayMapDetailsTitlePol + '</span>';
+            contentString += '<div id="divMapDetailsContents">';
+            contentString += '<b>' + displayChampionships.toUpperCase() + ':</b> ';
+            contentString += AddInertDigits(trophiesCount.toString().length, 4);
+            if (trophiesCount == 0) { contentString += '<span class="inertNumerals">'; }
+            contentString += inventoryFormatter.format(trophiesCount);
+            if (trophiesCount == 0) { contentString += '</span>'; }
+            contentString += ' <span class="icon Trophy inlineIcon"></span><br>';
+            contentString += '<br>';
+            contentString += '<i>' + displayRelationshipWith + '</i>:<br>';
+            contentString += '<br>';
+            contentString += '<b>' + mapProvinces[1][0] + ':</b> ';
+            contentString += displayRelations[mapProvinces[1][2]];
+            contentString += '<br>';
+            contentString += '<br>';
+            contentString += '<b>' + mapProvinces[2][0] + ':</b> ';
+            contentString += displayRelations[mapProvinces[2][2]];
+            contentString += '<br>';
+            contentString += '<br>';
+            contentString += '<b>' + mapProvinces[3][0] + ':</b> ';
+            contentString += displayRelations[mapProvinces[3][2]];
+            contentString += '</div>';
+            divMapDetailsView.innerHTML = contentString;
+        }
     }
 
     else if (player.isAt == 'Shepherds') {
@@ -3783,6 +4060,7 @@ function UpdateText() {
         divFarmersSubtitle.innerHTML = displayFarmersSubtitle;
 
         buttonFarmersEvents.innerHTML = displayLabelFarmersA + ' <span class="icon YesMan inlineIcon"></span>';
+        if (player.hasPrepared) { buttonFarmersEvents.innerHTML = displayLabelFarmersB + ' <span class="icon TurkeyLurkeyLeg inlineIcon"></span>'; }
     }
 
     else if (player.isAt == 'Miners') {
@@ -3803,7 +4081,7 @@ function UpdateText() {
 
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
-            stringyStringerson += 'Diamonds' + ' <span class="icon Diamonds inlineIcon"></span>:';
+            stringyStringerson += displayDiamonds + ' <span class="icon Diamonds inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += formatterCurrent.format(minersInventory[0]);
@@ -3812,7 +4090,7 @@ function UpdateText() {
 
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
-            stringyStringerson += 'Jacinth' + ' <span class="icon Zircon inlineIcon"></span>:';
+            stringyStringerson += displayJacinth + ' <span class="icon Zircon inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += formatterCurrent.format(minersInventory[1]);
@@ -3821,7 +4099,7 @@ function UpdateText() {
 
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
-            stringyStringerson += 'Bismuth' + ' <span class="icon Bismuth inlineIcon"></span>:';
+            stringyStringerson += displayBismuth + ' <span class="icon Bismuth inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += formatterCurrent.format(minersInventory[2]);
@@ -3830,7 +4108,7 @@ function UpdateText() {
 
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
-            stringyStringerson += 'Gold' + ' <span class="icon IngotGold inlineIcon"></span>:';
+            stringyStringerson += displayGold + ' <span class="icon IngotGold inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += formatterCurrent.format(minersInventory[3]);
@@ -3857,7 +4135,7 @@ function UpdateText() {
 
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
-            stringyStringerson += 'White Copper' + ' <span class="icon IngotNickel inlineIcon"></span>:';
+            stringyStringerson += displayWhiteCopper + ' <span class="icon IngotNickel inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += formatterCurrent.format(minersInventory[6]);
@@ -3866,7 +4144,7 @@ function UpdateText() {
 
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
-            stringyStringerson += 'False Silver' + ' <span class="icon IngotZinc inlineIcon"></span>:';
+            stringyStringerson += displayFalseSilver + ' <span class="icon IngotZinc inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += formatterCurrent.format(minersInventory[7]);
@@ -3884,7 +4162,7 @@ function UpdateText() {
 
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
-            stringyStringerson += 'Kobold Ore' + ' <span class="icon OreCobalt inlineIcon"></span>:';
+            stringyStringerson += displayKoboldOre + ' <span class="icon OreCobalt inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += formatterCurrent.format(minersInventory[9]);
@@ -3893,7 +4171,7 @@ function UpdateText() {
 
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
-            stringyStringerson += 'Magnes Rock' + ' <span class="icon Pyrolusite inlineIcon"></span>:';
+            stringyStringerson += displayMagnesRock + ' <span class="icon Pyrolusite inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += formatterCurrent.format(minersInventory[10]);
@@ -3915,13 +4193,14 @@ function UpdateText() {
 
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
-            stringyStringerson += displayCavalry + ' <span class="icon HorseyMounted inlineIcon"></span>:';
+            stringyStringerson += displayGendarmes + ' <span class="icon HorseyMounted inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="noPadColumn">';
             stringyStringerson += formatterCurrent.format(priceMiners[2]);
             stringyStringerson += '</td>';
             stringyStringerson += '<td>';
-            stringyStringerson += '(-' + formatterCurrent.format(minersCost[0]) + '<span class="icon Ration inlineIcon"></span>';
+            stringyStringerson += '(-' + currencySymbol + formatterCurrent.format(minersCost[2]);
+            stringyStringerson += ' -' + formatterCurrent.format(minersCost[0]) + '<span class="icon Ration inlineIcon"></span>';
             stringyStringerson += ' -' + formatterCurrent.format(minersCost[1]) + '<span class="icon Bandage inlineIcon"></span>' + '<span class="warehouseTotal">/' + displayMonth + '</span>' + ')';
             stringyStringerson += '</td>';
             stringyStringerson += '</tr>';
@@ -3979,6 +4258,8 @@ function UpdateText() {
     if (player.isGod) { buttonResumeNo.innerHTML += '<br><span class="icon EspírituSanto inlineIcon"></span>'; }
     buttonPlayGod.innerHTML = displayLabelPegasuses + ' <span class="icon Orb inlineIcon"></span><br>(' + pricePegasus + '<span class="icon Relic inlineIcon"></span>)';
     buttonReturnToMap.innerHTML = displayReturnToMapView;
+    buttonRecords.innerHTML = 'Records: OFF';
+    if (player.likesRecords) { buttonRecords.innerHTML = 'Records: ON'; }
 }
 
 
@@ -4151,6 +4432,7 @@ function UpdateVisibilities() {
     divOverlayOptions.style.display = player.seesOptions ? 'block' : '';
     divOverlayMods.style.display = player.seesModsWindow ? 'block' : '';
     buttonStar.style.display = player.isGod ? 'inline-block' : '';
+    buttonRecords.style.display = player.isGod ? 'inline-block' : '';
 
     imgNirvana.style.display = player.hasWon ? 'block' : '';
 

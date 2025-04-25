@@ -203,6 +203,10 @@ function ContinuePreviousGame() {
         residenceStage = loadedReport.stages[2];
         villageStage = loadedReport.stages[3];
         /////////////////////////////////////////////////////////////////////////////////////////
+        mapProvinces[1][2] = loadedReport.relations[0];
+        mapProvinces[2][2] = loadedReport.relations[1];
+        mapProvinces[3][2] = loadedReport.relations[2];
+        /////////////////////////////////////////////////////////////////////////////////////////
         CloneArray(loadedReport.counts.farmInventory, bushelCount);
         CloneArray(loadedReport.counts.farmMax, bushelMax);
         CloneArray(loadedReport.counts.farmSeeded, seededCount);
@@ -358,6 +362,9 @@ function ContinuePreviousGame() {
         CloneArray(loadedReport.counts.portCounters[0], shipmentTimersCurrent);
         CloneArray(loadedReport.counts.portCounters[1], shipmentTimersDefault);
 
+        CloneArray(loadedReport.counts.civShepherds, shepherdsInventory);
+        CloneArray(loadedReport.counts.civMiners, minersInventory);
+
         debugCounter = loadedReport.counts.debugCounters[0];
         /////////////////////////////////////////////////////////////////////////////////////////
         CloneArray(loadedReport.farmland.grain[0], arrayFarmPlots[0]);
@@ -415,6 +422,7 @@ function ContinuePreviousGame() {
         if (!player.likesProfanity) { toggleProfanity.checked = false; }
         if (player.hasBecomeHeir) { buttonReturnToMap.style.display = 'inline-block'; }
         if (villageStage > 10) { buttonBuyStone.classList.add('BuyStoneMarginOverrideClass'); }
+        Translate(player.speaks, false); // populates the map details header correctly
         StartTime(); // ...and everything *should* just work 🤞😬
     }
 }
@@ -451,6 +459,35 @@ function Achievement() {
         document.querySelector('.achieve_disp').classList.remove('achieve_disp_animate');
         document.querySelector('.achievement').classList.remove('rare');
     }, 12000);
+}
+
+
+
+function WriteReportToDisk() {
+    const d = new Date();
+    let stamp = d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate() + '.';
+    let hour = d.getHours();
+    if (hour < 10) { hour = '0' + hour; }
+    let minute = d.getMinutes();
+    if (minute < 10) { minute = '0' + minute; }
+    let second = d.getSeconds();
+    if (second < 10) { second = '0' + second; }
+    stamp += hour + minute + ';' + second;
+    const filename = 'PRADIUM_FULL_REPORT_' + stamp;
+
+    const JSONToFile = (obj, filename) => {
+        const blob = new Blob([JSON.stringify(obj, null, 2)], {
+            type: 'application/json',
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${filename}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+    JSONToFile(CollateGameStateReport(), filename);
 }
 
 
@@ -516,6 +553,9 @@ function CollateGameStateReport(loud = false) {
         portCosts: shipmentCosts,
         portCounters: [shipmentTimersCurrent, shipmentTimersDefault,],
 
+        civShepherds: shepherdsInventory,
+        civMiners: minersInventory,
+
         debugCounters: [debugCounter,],
     };
     const farmlandArrays = {
@@ -534,6 +574,7 @@ function CollateGameStateReport(loud = false) {
         farmland: farmlandArrays,
         hero: player,
         stages: [farmStage, warehouseStage, residenceStage, villageStage,],
+        relations: [mapProvinces[1][2], mapProvinces[2][2], mapProvinces[3][2],],
         timestamp: Date(),
         v: version,
     };

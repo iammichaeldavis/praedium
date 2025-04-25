@@ -562,6 +562,12 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 
 
+#buttonRecords {
+    margin-left: 2vw;
+}
+
+
+
 /* // OVERLAYS ////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -899,7 +905,8 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     text-align: center;
 }
 
-#divGameEventCorpus #AlaviSong {
+#divGameEventCorpus #AlaviSong,
+#divGameEventCorpus #AlaviSong span {
     font-family: 'Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
@@ -1228,8 +1235,8 @@ canvas {
 }
 
 #canvasMap {
-    width: calc(208px * 2 * var(--pixel-scale));
-    height: calc(173px * 2 * var(--pixel-scale));
+    width: calc(208px * 1 * var(--pixel-scale));
+    height: calc(173px * 1 * var(--pixel-scale));
     display: block;
     margin: 0 auto;
     border: 0;
@@ -2247,6 +2254,11 @@ td {
     --j: 14;
 }
 
+.TurkeyLurkeyLeg {
+    --i: 4;
+    --j: 18;
+}
+
 
 
 /* village */
@@ -2878,6 +2890,71 @@ td {
     margin: 0 auto;
 }
 
+#divMapDetailsView {
+    border: 1px solid black;
+    width: 64%;
+    margin: 6.4vw auto;
+    padding: 1vw;
+    
+}
+
+#divMapDetailsView.mapDetailsEconomic {
+    background-color: #429665;
+}
+
+#divMapDetailsView.mapDetailsMilitary {
+    background-color: #be6c62;
+}
+
+#divMapDetailsView.mapDetailsPolitical {
+    background-color: #366e94;
+}
+
+#spanMapDetailsTitle {
+    font-weight: bold;
+    color: white;
+}
+
+#divMapDetailsContents {
+    border: 1px solid black;
+    margin-top: 1vw;
+    background-color: white;
+    padding: 4vw;
+}
+
+#divMapDetailsEconLiquidBar {
+    width: 100%;
+    text-align: center;
+    padding: 0 0 4vw 0;
+}
+
+.inertNumerals {
+    color: #dddddd;
+}
+
+#divMapDetailsMasterInventoryContainer {
+    display: flex;
+    padding: 0 0 0 0;
+}
+
+
+
+/* // ENDING //////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divEnding {
+    background-color: pink;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#divEnding div {
+    text-align: center;
+}
+
 
 
 /* // FOOTER //////////////////////////////////////////////////////////////////////////////////// */
@@ -2987,7 +3064,8 @@ td {
 #buttonReturnToMap,
 #buttonHeirGoBack,
 #buttonPlayGod,
-#buttonSailWest {
+#buttonSailWest,
+#buttonRecords {
     display: none;
 }
 

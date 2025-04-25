@@ -172,6 +172,8 @@ document.body.onkeyup = function (e) {
             ZeroArray(shipmentCosts);
             interestLifetimeCollected = 0;
             ratsCount = 2;
+            ZeroArray(shepherdsInventory);
+            ZeroArray(minersInventory);
         }
         if (e.key == 'F') { BurnItDown(); }
 
@@ -249,112 +251,147 @@ document.body.onkeyup = function (e) {
         if (e.key == 'b' && player.canSell && player.isAt == 'Township') { GoToPort(); }
 
         if (e.key == 'G') { // 🚨🚨🚨 USE WITH CAUTION!!! ONLY WORKS AT GAME START AND IN *EXACT* SEQUENCE 🚨🚨🚨
-            if (debugCounter == 0) {
-                player.likesStory = false;
-                StartTime();
-                StartTime();
-                PlotTill();
-                PlotPlant();
-                PlotWater();
-                debugCounter++;
-                player.likesStory = true;
+            if (e.altKey) {
+                alert('alt!');
+                //loop a 1-sec timer here that presses this stupid fn G key for me 200 times or whatever (then shrink that time down to whatever minimum is safely repeatable)
+                //maybe time it all so 9 years go by, olives grow and you can barter when its all done
             }
-            else if (debugCounter == 1) {
-                player.likesStory = false;
-                PlotHarvest();
-                PlotTill();
-                PlotPlant();
-                PlotWater();
-                debugCounter++;
-                player.likesStory = true;
-            }
-            else if (debugCounter == 2) {
-                player.likesStory = false;
-                PlotHarvest();
-                StartTime();
-                debugCounter++;
-                player.likesStory = true;
-            }
-            else if (debugCounter == 3) {
-                player.likesStory = false;
-                setValues(1000000000);
-                for (let i = 0; i < 25; i++) { AdvanceGame(); } // completely upgrade praedium
-                player.names.push('Pee-Pee Boy');
-                HireAccountant();
-                for (let i = 0; i < 36; i++) { HireHand(); }
-                AdvanceGame(); // buy town
-                setValues(5800858008);
-                PauseTime();
-                debugCounter++;
-                player.likesStory = true;
-            }
-            else if (debugCounter == 4) {
-                player.likesStory = false;
-                for (let i = 0; i < 35; i++) { AdvanceGame(); } // upgrade village to capital
-                setValues(5800858008);
-                debugCounter++;
-                player.likesStory = true;
-            }
-            else if (debugCounter == 5) {
-                player.likesStory = false;
-                for (let i = 0; i < 16; i++) { AdvanceGame(); } // ugprade residence to mansion + purchase both new farms
-                setValues(5800858008);
-                debugCounter++;
-                player.likesStory = true;
-            }
-            else if (debugCounter == 6) { // discover mine
-                player.likesStory = false;
-                StartTime();
-                StartTime();
-                StartTime();
-                debugCounter++;
-            }
-            else if (debugCounter == 7) {
-                PauseTime();
-                for (let i = 0; i < 3; i++) { AdvanceGame(); } // mine & foundry
-                for (let i = 0; i < 7; i++) { EstablishTradeRoute(); }
-                EstablishShippingLanes(); // tin
-                AdvanceGame(); // bronzeworkers
-                StartTime();
-                StartTime();
-                StartTime();
-                setValues(5800858008);
-                debugCounter++;
-            }
-            else if (debugCounter == 8) {
-                PauseTime();
-                AdvanceGame(); // crystals
-                setValues(5800858008);
-                debugCounter++;
-                player.likesStory = true;
-            }
-            else if (debugCounter == 9) {
-                player.likesStory = false;
-                AdvanceGame(); // bees
-                AdvanceGame(); // raisins
-                EstablishShippingLanes(); // salt
-                AdvanceGame(); // hard tack
-                AdvanceGame(); // rations
-                AdvanceGame(); // cottage
-                AdvanceGame(); // bandages
-                setValues(5800858008);
-                debugCounter++;
-                player.likesStory = true;
-            }
-            else if (debugCounter == 10) {
-                BurnItDown();
-                FinalReset();
-                debugCounter++;
-            }
-
-            // choose heir 🚨🚨🚨
-
-            else if (debugCounter == 11) {
-                StartTime();
-                debugCounter++;
-            }
-            else if (debugCounter == 12) {
-                alert('🚨 debug sequence complete 🚨');
+            else {
+                if (debugCounter == 0) {
+                    player.likesStory = false;
+                    StartTime();
+                    StartTime();
+                    PlotTill();
+                    PlotPlant();
+                    PlotWater();
+                    debugCounter++;
+                    player.likesStory = true;
+                }
+                else if (debugCounter == 1) {
+                    player.likesStory = false;
+                    PlotHarvest();
+                    PlotTill();
+                    PlotPlant();
+                    PlotWater();
+                    debugCounter++;
+                    player.likesStory = true;
+                }
+                else if (debugCounter == 2) {
+                    player.likesStory = false;
+                    PlotHarvest();
+                    StartTime();
+                    debugCounter++;
+                    player.likesStory = true;
+                }
+                else if (debugCounter == 3) {
+                    player.likesStory = false;
+                    setValues(1000000000);
+                    for (let i = 0; i < 25; i++) { AdvanceGame(); } // completely upgrade praedium
+                    player.names.push('Pee-Pee Boy');
+                    HireAccountant();
+                    for (let i = 0; i < 36; i++) { HireHand(); }
+                    AdvanceGame(); // buy town
+                    setValues(5800858008);
+                    PauseTime();
+                    debugCounter++;
+                    player.likesStory = true;
+                }
+                else if (debugCounter == 4) {
+                    player.likesStory = false;
+                    for (let i = 0; i < 35; i++) { AdvanceGame(); } // upgrade village to capital
+                    setValues(5800858008);
+                    debugCounter++;
+                    player.likesStory = true;
+                }
+                else if (debugCounter == 5) {
+                    player.likesStory = false;
+                    for (let i = 0; i < 16; i++) { AdvanceGame(); } // ugprade residence to mansion + purchase both new farms
+                    setValues(5800858008);
+                    debugCounter++;
+                    player.likesStory = true;
+                }
+                else if (debugCounter == 6) { // discover mine
+                    player.likesStory = false;
+                    StartTime();
+                    StartTime();
+                    StartTime();
+                    debugCounter++;
+                }
+                else if (debugCounter == 7) {
+                    PauseTime();
+                    for (let i = 0; i < 3; i++) { AdvanceGame(); } // mine & foundry
+                    for (let i = 0; i < 7; i++) { EstablishTradeRoute(); }
+                    EstablishShippingLanes(); // tin
+                    AdvanceGame(); // bronzeworkers
+                    StartTime();
+                    StartTime();
+                    StartTime();
+                    setValues(5800858008);
+                    debugCounter++;
+                }
+                else if (debugCounter == 8) {
+                    PauseTime();
+                    AdvanceGame(); // crystals
+                    setValues(5800858008);
+                    debugCounter++;
+                    player.likesStory = true;
+                }
+                else if (debugCounter == 9) {
+                    player.likesStory = false;
+                    AdvanceGame(); // bees
+                    AdvanceGame(); // raisins
+                    EstablishShippingLanes(); // salt
+                    AdvanceGame(); // hard tack
+                    AdvanceGame(); // rations
+                    AdvanceGame(); // cottage
+                    AdvanceGame(); // bandages
+                    setValues(5800858008);
+                    debugCounter++;
+                    player.likesStory = true;
+                }
+                else if (debugCounter == 10) {
+                    BurnItDown();
+                    FinalReset();
+                    debugCounter++;
+                }
+                else if (debugCounter == 11) {
+                    player.likesStory = false;
+                    ChooseHeir();
+                    HeirBegin();
+                    HeirChooseName();
+                    HeirChooseGender();
+                    HeirChooseEthnicity();
+                    HeirChooseTitle();
+                    HeirChooseFace(0);
+                    HeirConfirmAll(false);
+                    debugCounter++;
+                    player.likesStory = true;
+                }
+                else if (debugCounter == 12) { // updates military counts
+                    player.likesStory = false;
+                    StartTime();
+                    StartTime();
+                    StartTime();
+                    debugCounter++;
+                }
+                else if (debugCounter == 13) {
+                    PauseTime();
+                    ShepherdsEvents();
+                    ShepherdsEvents();
+                    ShepherdsEvents();
+                    MinersEvents();
+                    MinersEvents();
+                    MinersEvents();
+                    player.likesStory = true;
+                    debugCounter++;
+                }
+                else if (debugCounter == 14) {
+                    StartTime();
+                    debugCounter++;
+                }
+                else if (debugCounter == 15) {
+                    alert('🚨 debug sequence complete 🚨');
+                }
             }
         }
         function FinalReset() {
@@ -376,7 +413,8 @@ document.body.onkeyup = function (e) {
             ingotsTinCount = 10000;
             ingotsBronzeCount = 10000;
             asCount = 1000000000;
-            horsesCount = 1;
+            residentsCount = residentsMax;
+            horsesCount = 50;
             beadsCount = 10000;
             trophiesCount = 100;
             scrollsCount = 1000;
@@ -436,6 +474,8 @@ document.body.onkeyup = function (e) {
                 relicCount = amount;
                 FillArray(residenceInStockCount, amount);
                 residenceIngredientInStockCount[14][1] = amount;
+                FillArray(shepherdsInventory, amount);
+                FillArray(minersInventory, amount);
             }
             else if (e.altKey) {
                 bushelCount[0] -= amount;
@@ -477,6 +517,28 @@ document.body.onkeyup = function (e) {
                 residenceInStockCount[13] -= amount;
                 residenceInStockCount[14] -= amount;
                 residenceIngredientInStockCount[14][1] -= amount;
+                shepherdsInventory[0] -= amount;
+                shepherdsInventory[1] -= amount;
+                shepherdsInventory[2] -= amount;
+                shepherdsInventory[3] -= amount;
+                shepherdsInventory[4] -= amount;
+                shepherdsInventory[5] -= amount;
+                shepherdsInventory[6] -= amount;
+                shepherdsInventory[7] -= amount;
+                shepherdsInventory[8] -= amount;
+                shepherdsInventory[9] -= amount;
+                shepherdsInventory[10] -= amount;
+                minersInventory[0] -= amount;
+                minersInventory[1] -= amount;
+                minersInventory[2] -= amount;
+                minersInventory[3] -= amount;
+                minersInventory[4] -= amount;
+                minersInventory[5] -= amount;
+                minersInventory[6] -= amount;
+                minersInventory[7] -= amount;
+                minersInventory[8] -= amount;
+                minersInventory[9] -= amount;
+                minersInventory[10] -= amount;
             }
             else {
                 bushelCount[0] += amount;
@@ -518,6 +580,28 @@ document.body.onkeyup = function (e) {
                 residenceInStockCount[13] += amount;
                 residenceInStockCount[14] += amount;
                 residenceIngredientInStockCount[14][1] += amount;
+                shepherdsInventory[0] += amount;
+                shepherdsInventory[1] += amount;
+                shepherdsInventory[2] += amount;
+                shepherdsInventory[3] += amount;
+                shepherdsInventory[4] += amount;
+                shepherdsInventory[5] += amount;
+                shepherdsInventory[6] += amount;
+                shepherdsInventory[7] += amount;
+                shepherdsInventory[8] += amount;
+                shepherdsInventory[9] += amount;
+                shepherdsInventory[10] += amount;
+                minersInventory[0] += amount;
+                minersInventory[1] += amount;
+                minersInventory[2] += amount;
+                minersInventory[3] += amount;
+                minersInventory[4] += amount;
+                minersInventory[5] += amount;
+                minersInventory[6] += amount;
+                minersInventory[7] += amount;
+                minersInventory[8] += amount;
+                minersInventory[9] += amount;
+                minersInventory[10] += amount;
             }
         }
 
@@ -530,6 +614,8 @@ document.body.onkeyup = function (e) {
             else { StartTime(); }
         }
 
+        ////////////if (e.key == 'q') { PauseTime(); }///////////////////////////////turn reports on and off
+
         UpdateDisplay();
     }
 }
@@ -538,6 +624,13 @@ document.body.onkeyup = function (e) {
 
 // ۞ PLAYER ACTIONS ********************************************************************************
 // *************************************************************************************************
+
+function ToggleRecords() {
+    player.likesRecords = !player.likesRecords;
+    UpdateDisplay();
+}
+
+
 
 function BeginGame(language) {
     Translate(language, false);
@@ -2342,7 +2435,7 @@ function Build() {
         residenceIngredientsIn[8] = 80; // gems
         residenceIngredientsIn[9] = 4; // honey
         residenceIngredientsIn[10] = 4; // raisins
-        residenceProductOut[11] = 12; // rations
+        residenceProductOut[11] = 300; // rations
         residenceIngredientsIn[12] = 8; // linen
         residenceProductOut[13] = 5; // bandages (*req. hospital, which is after uni, so player will not see this happen)
         residenceProductOut[14] = 2; // hardtack
@@ -3019,8 +3112,13 @@ function HeirChooseFace(chosenChoice) {
 
 
 
-function HeirConfirmAll() {
-    if (confirm(displayHeirConfirm)) {
+function HeirConfirmAll(ask = true) {
+    let doTheThing = false;
+
+    if (!ask) { doTheThing = true; }
+    else { if (confirm(displayHeirConfirm)) { doTheThing = true; } }
+
+    if (doTheThing) {
         player.hasBecomeHeir = true;
         player.isAt = 'Map';
         divViewMap.style.display = 'block';
@@ -3142,15 +3240,15 @@ function MapChangeTarget(direction) {
 
     if (mapTarget == 3 && !player.hasTargettedMiners) {
         player.hasTargettedMiners = true;
-        alert('first miner target');
+        if (player.likesStory) { GameEvent(displayStoryMinersFirstTarget); }
     }
     else if (mapTarget == 1 && !player.hasTargettedShepherds) {
         player.hasTargettedShepherds = true;
-        alert('first shepshep target');
+        if (player.likesStory) { GameEvent(displayStoryShepherdsFirstTarget); }
     }
     else if (mapTarget == 2 && !player.hasTargettedFarmers) {
         player.hasTargettedFarmers = true;
-        alert('first farmer target');
+        if (player.likesStory) { GameEvent(displayStoryFarmersFirstTarget); }
     }
 
     mapOutlineOpacity = 0;
@@ -3159,8 +3257,16 @@ function MapChangeTarget(direction) {
 
 
 
+function MapChangeDetails(format) {
+    mapDetailsCurrent = format;
+    UpdateDisplay();
+}
+
+
+
 function MinersEvents() {
     if (!player.hasMetMiners) {
+        mapProvinces[3][2] = 1;
         player.hasMetMiners = true;
         Translate(player.speaks, false); // populates the following string correctly
         if (player.likesStory) { GameEvent(displayStoryMinersMeeting); }
@@ -3170,6 +3276,7 @@ function MinersEvents() {
         if (player.likesStory) { GameEvent(displayStoryMinersToadies); }
     }
     else if (player.hasMetMiners && player.hasConsultedMiners && !player.hasHelpedMiners && player.hasBandages && asCount >= priceMiners[0] && stoneCount >= priceMiners[1] && militaryCavalryCurrent >= priceMiners[2]) {
+        mapProvinces[3][2] = 2;
         asCount -= priceMiners[0];
         asSpent += priceMiners[0];
         commercialLifetimeSpend += priceMiners[0];
@@ -3179,6 +3286,7 @@ function MinersEvents() {
         horsesCount -= priceMiners[2];
 
         player.hasHelpedMiners = true;
+        Translate(player.speaks, false); // populates the map details header correctly
         if (player.likesStory) { GameEvent(displayStoryMinersHelp); }
     }
     else {
@@ -3206,8 +3314,15 @@ function FarmersEvents() {
         if (player.likesStory) { GameEvent(displayStoryFarmersPrepare); }
     }
     else if (player.hasPrepared && !player.hasMetFarmers) {
-        player.hasMetFarmers = true;
-        alert('"sup sup" -King Alavi');
+        //player.hasMetFarmers = true;
+        //alert('"sup sup" -King Alavi');
+
+        PauseTime();
+        const divEnding = document.createElement('div');
+        divEnding.id = 'divEnding';
+        divEnding.innerHTML = '<div><br><br>' + displayToBeContinued + '<br><br><img src="curves/PRÆDIVM2.svg" /><br><br><br><br><b>' + displayTheEnd + '</b><br><br>' + displayThankYouForPlaying + ' 🙏</div>';
+        const body = document.getElementsByTagName("body")[0];
+        body.appendChild(divEnding);
     }
     else {
         alert('third thing');
@@ -3219,6 +3334,7 @@ function FarmersEvents() {
 
 function ShepherdsEvents() {
     if (!player.hasMetShepherds) {
+        mapProvinces[1][2] = 1;
         player.hasMetShepherds = true;
         Translate(player.speaks, false); // populates the following string correctly
         if (player.likesStory) { GameEvent(displayStoryShepherdsMeeting); }
@@ -3228,8 +3344,10 @@ function ShepherdsEvents() {
         if (player.likesStory) { GameEvent(displayStoryShepherdsToadies); }
     }
     else if (player.hasMetShepherds && player.hasConsultedShepherds && !player.hasHelpedShepherds && militarySoldiers >= priceShepherds) {
+        mapProvinces[1][2] = 3;
         residentsCount -= priceShepherds;
         player.hasHelpedShepherds = true;
+        Translate(player.speaks, false); // populates the map details header correctly
         if (player.likesStory) { GameEvent(displayStoryShepherdsHelp); }
     }
     else {

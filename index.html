@@ -117,87 +117,12 @@
 
             <div id="divMapTarget"></div>
 
-            <span id="spanDetailsLabel"></span>: <button id="buttonMapEcon"></button> <button id="buttonMapMil"></button> <button id="buttonMapPol"></button>
+            <span id="spanDetailsLabel"></span>:
+            <button id="buttonMapEcon" onclick="MapChangeDetails('econ')"></button>
+            <button id="buttonMapMil" onclick="MapChangeDetails('mil')"></button>
+            <button id="buttonMapPol" onclick="MapChangeDetails('pol')"></button>
 
-            <div id="divMapDetailsView" class="mapDetailsEconomic" style="border: 1px solid black; width: 64%; margin: 6.4vw auto; padding: 1vw; background-color: #429665;">
-                <b style="color: white;">Provincial GDP</b>
-                <div style="border: 1px solid black; margin-top: 1vw; background-color: white;">
-                    <div style="width: 100%; text-align: center; padding: 4vw 0;">
-                        <b>LIQUID FUNDS:</b> <s>𝐼</s><span style="color: #CCCCCC;">0,00</span>1,000,000,000
-                    </div>
-                    <div style="display: flex; padding: 0 0 4vw 0;">
-                        <div style="width: 50%;">
-                            <b>NATURAL<br>RESOURCES:</b><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Stone inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Crystal inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon OreCopper inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon IngotCopper inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon IngotTin inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon IngotBronze inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Log inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Sal inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Horsey inlineIcon"></span>
-                            <div style="height: 4vw; width: 4vw;"></div>
-                            <b>CROPS:</b><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Wheat inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Barley inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Flax inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Olive inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Date inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Fig inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Pom inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Grape inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Comb inlineIcon"></span><br>
-                        </div>
-                        <div style="width: 50%;">
-                            <b>MANUFACTURED<br>PRODUCTS:</b><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Board inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Loaves inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon LembasBread inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Ration inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Linen inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Bandage inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Amphora inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Keg inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Cask inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Honeypot inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Jug inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Basket inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Raisins inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Trinket inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Gems inlineIcon"></span>
-                            <div style="height: 4vw; width: 4vw;"></div>
-                            <b>SACRED ITEMS:</b><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Mala inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Scroll inlineIcon"></span><br>
-                            <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Relic inlineIcon"></span><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="border: 1px solid black; width: 64%; margin: 6.4vw auto; padding: 1vw; background-color: #be6c62;">
-                <b style="color: white;">Provincial Military Strength</b>
-                <div style="border: 1px solid black; margin-top: 1vw; background-color: white; padding: 4vw;">
-                    <b>OFF:</b> 1,420 <span class="icon Sword inlineIcon"></span> &nbsp;&nbsp;&nbsp; <span style="color: #CCCCCC;">0</span>115 <span class="icon TaxCollector inlineIcon"></span><br>
-                    <b>DEF:</b> 1,000 <span class="icon Shield inlineIcon"></span> &nbsp;&nbsp;&nbsp; <span style="color: #CCCCCC;">00</span>40 <span class="icon HorseyMounted inlineIcon"></span><br>
-                </div>
-            </div>
-
-            <div style="border: 1px solid black; width: 64%; margin: 6.4vw auto; padding: 1vw; background-color: #366e94;">
-                <b style="color: white;">Provincial Diplomatic Status</b>
-                <div style="border: 1px solid black; margin-top: 1vw; background-color: white; padding: 4vw;">
-                    <b>CHAMPIONSHIPS:</b> <span style="color: #CCCCCC;">0,00</span>1,200 <span class="icon Trophy inlineIcon"></span><br>
-                    <br>
-                    <b>RELATIONSHIP WITH:</b><br>
-                    <br>
-                    Çoban Kasabası: ???<br>
-                    <br>
-                    Agrόktima Georgios: ???<br>
-                    <br>
-                    Na’ari Harim: ???
-                </div>
-            </div>
+            <div id="divMapDetailsView" class="mapDetailsEconomic"></div>
 
             <button id="buttonMapVisitProvince" onclick="VisitProvince();"></button>
             <div style="height: 6.4vw; width: 1vw;"></div>
@@ -225,12 +150,14 @@
                     <option value="Blue Ivy">Blue Ivy</option> <!-- Beyoncé and Jay-Z -->
                     <option value="Chelsea">Chelsea</option> <!-- Hillary and Bill Clinton -->
                     <option value="Chicago">Chicago</option> <!-- Kim Kardashian and Kanye West -->
-                    <option value="Chicago">Cosmo</option> <!-- Scarlett Johansson and Colin Jost -->
+                    <option value="Cosmo">Cosmo</option> <!-- Scarlett Johansson and Colin Jost -->
+                    <option value="Crispian">Crispian</option> <!-- Hayley Mills and Roy Boulting -->
                     <option value="Declan">Declan</option> <!-- Gia Ruiz and Danny McBride -->
                     <option value="Denim">Denim</option> <!-- Toni Braxton and Keri Lewis -->
                     <option value="Dweezil">Dweezil</option> <!-- Gail and Frank Zappa -->
                     <option value="Esmeralda">Esmeralda</option> <!-- Eva Mendes and Ryan Gosling -->
                     <option value="Exa Dark Sideræl">Exa Dark Sideræl</option> <!-- Grimes and Elon Musk -->
+                    <option value="Frances Bean">Frances Bean</option> <!-- Courtney Love and Kurt Cobain -->
                     <option value="Fuschia">Fuschia</option> <!-- Frances Tomelty and Sting -->
                     <option value="Future">Future</option> <!-- Ciara and Future -->
                     <option value="Gravity">Gravity</option> <!-- Stormi Bree and Lucky Blue Smith -->
@@ -536,7 +463,7 @@
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divFooter">
         <button id="buttonOptions">Options</button><button id="buttonQ">?</button><button id="buttonStar">*</button><button id="buttonI">i</button><button
-            id="buttonCC0">(CCØ)</button>
+            id="buttonCC0">(CCØ)</button><button id="buttonRecords" onclick="ToggleRecords();">Records: ???</button>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayGameEvent" class="overlay">

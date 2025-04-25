@@ -2,7 +2,7 @@
 // *************************************************************************************************
 
 function GameTurn() {
-    if (player.likesRecords) { snapshotLastTurn = snapshotThisTurn; }
+    //if (player.likesRecords) { snapshotLastTurn = snapshotThisTurn; }
 
     gameTurn++;
 
@@ -115,6 +115,9 @@ function GameTurn() {
         militaryCavalryCurrent = horsesCount;
         if (militaryCavalryCurrent > militaryCavalryMax) { militaryCavalryCurrent = militaryCavalryMax; }
         militaryInfantry = militarySoldiers - militaryCavalryCurrent;
+        ////////////////////////////////////
+        //alert(militaryUnitCost);
+        //////////////////////////////////
         const militarySalary = (militaryInfantry * militaryUnitCost) + (militaryCavalryCurrent * (militaryUnitCost * militaryUnitCostFactor));
         asCount -= militarySalary;
         asSpent += militarySalary;
@@ -168,6 +171,7 @@ function GameTurn() {
     if (player.isAt == 'Map' && player.hasHelpedMiners && player.hasHelpedShepherds && !player.hasBeenSummoned) {
         player.hasBeenSummoned = true;
         gameEventTrigger = true;
+        mapProvinces[2][2] = 1;
         gameEventContainer = displayStoryFarmersSummon;
     }
 
@@ -208,8 +212,9 @@ function GameTurn() {
     }
 
     if (player.likesRecords) {
-        snapshotThisTurn = CollateGameStateReport();
+        //snapshotThisTurn = CollateGameStateReport();
         //reportOutputToWriteToDiskForDataAnalysis = snapshotThisTurn - snapshotLastTurn;
+        WriteReportToDisk();
     }
 
     if (week == 1 && year > 1 && player.isAt != 'Workshop') { RecordProgress(); }
@@ -404,6 +409,9 @@ function VassalProduction(whom) {
         residenceSpentCount[11] += minersCost[0];
         residenceInStockCount[13] -= minersCost[1];
         residenceSpentCount[13] += minersCost[1];
+        asCount -= minersCost[2];
+        militaryLifetimeCost += minersCost[2];
+
         minersInventory[0] += minersProduction[0];
         minersInventory[1] += minersProduction[1];
         minersInventory[2] += minersProduction[2];

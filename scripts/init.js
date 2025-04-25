@@ -555,6 +555,7 @@ const spanDetailsLabel = document.getElementById('spanDetailsLabel');
 const buttonMapEcon = document.getElementById('buttonMapEcon');
 const buttonMapMil = document.getElementById('buttonMapMil');
 const buttonMapPol = document.getElementById('buttonMapPol');
+const divMapDetailsView = document.getElementById('divMapDetailsView');
 const buttonMapVisitProvince = document.getElementById('buttonMapVisitProvince');
 
 const divViewShepherds = document.getElementById('divViewShepherds');
@@ -586,6 +587,7 @@ const buttonQ = document.getElementById('buttonQ');
 const buttonStar = document.getElementById('buttonStar');
 const buttonI = document.getElementById('buttonI');
 const buttonCC0 = document.getElementById('buttonCC0');
+const buttonRecords = document.getElementById('buttonRecords');
 
 const buttonChooseHeir = document.getElementById('buttonChooseHeir');
 const imgNirvana = document.getElementById('imgNirvana');
@@ -596,6 +598,7 @@ const spanCheevoText = document.getElementById('spanCheevoText');
 
 const formatterEnglish = new Intl.NumberFormat('en-US');
 const formatterSpanish = new Intl.NumberFormat('es');
+const formatterSpanishInventory = new Intl.NumberFormat('de-DE');
 let formatterCurrent = formatterEnglish;
 
 let gameTurn = 1; // 📅
@@ -713,8 +716,8 @@ let loavesPaymentAmount = 14;
 // 0. Loaves 🥖, 1. Oil 🪔, 2. Beer 🍺, 3. Wine 🍷, 4. Syrup 🍯, 5. Juice 🧃, 6. Fruit Leather (Sun-Dried Fig) 🫐, 7. Trinkets 💍, 8. Gems 💎, 9. Honey 🍯, 10. Raisins 🍇, 11. Rations 🫔, 12. Linen 🧶, 13. Bandages 🩹, 14. Hardtack 🥮
 const residenceIngredientWorkshopPortion = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.8, 0.5, 0.2, 1.0, 0.75, 1.0, [0.2, 1.0,],];
 const residenceIngredientsIn = [1, 8, 4, 50, 6, 3, 5, 1, 100, 5, 5, [10, 1, 30,], 10, 1, [1, 1,],];
-const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5, 1, 20, 1, 10, 1, 4, 1,];
-const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0, 'this space intentionally left blank', 0, 0, [0, 0,],];
+const residenceProductOut = [30, 1, 1, 1, 1, 1, 1, 5, 1, 20, 1, 240, 1, 4, 1,];
+const residenceIngredientInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0, '𝑻𝑯𝑰𝑺 𝑺𝑷𝑨𝑪𝑬 𝑰𝑵𝑻𝑬𝑵𝑻𝑰𝑶𝑵𝑨𝑳𝑳𝒀 𝑳𝑬𝑭𝑻 𝑩𝑳𝑨𝑵𝑲', 0, 0, [0, 0,],];
 const residenceIngredientConsumedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, [0, 0,], 0, 0, 0, 0, [0, 0,],];
 const residenceInStockCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const residenceProducedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
@@ -962,7 +965,7 @@ const policeCost = 2;
 // 0. Diamonds 💎, 1. Jacinth 💎, 2. Bismuth 💎, 3. Gold 🧱, 4. Silver 🧱, 5. Iron 🧱, 6. White Copper 🧱, 7. False Silver 🧱, 8. Lead 🧱, 9. Kobold Ore 🪨, 10. Magnes Rock 🪨
 const minersInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const minersProduction = [1, 5, 10, 1, 5, 10, 15, 5, 25, 50, 50,];
-const minersCost = [80, 120,];
+const minersCost = [200, 100, 250000,];
 
 // 0. XXX, 1. XXX, 2. XXX, 3. XXX, 4. XXX, 5. XXX, 6. XXX, 7. XXX, 8. XXX, 9. XXX, 10. XXX
 const farmersInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
@@ -1033,11 +1036,12 @@ let mapOutlineOpacity = 0;
 let mapOutlineValueClimb = true;
 
 let mapTarget = 0;
+let mapDetailsCurrent = 'econ';
 let mapProvinces = [
     [nameVillage, true,],
-    ['Çoban Kasabası', true,], // 'Shepherd Town' in Turkish
-    ['Agrόktima Georgios', true,], // 'Farm of George' in Greek, 'georgos' (γεωργός) means 'farmer': Farmer's Farm (y=r³/3)
-    ['Na’ari Harim', true,], // 'Mountain Boys' in Hebrew
+    ['Çoban Kasabası', true, 0,], // 'Shepherd Town' in Turkish
+    ['Agrόktima Georgios', true, 0,], // 'Farm of George' in Greek, 'georgos' (γεωργός) means 'farmer': Farmer's Farm (y=r³/3)
+    ['Na’ari Harim', true, 0,], // 'Mountain Boys' in Hebrew
 ]; // first and last entry MUST remain targettable for MapChangeTarget method
 
 const gameEventDismissDelay = 1600;
