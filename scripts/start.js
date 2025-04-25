@@ -25,14 +25,14 @@ setTimeout(() => {
 
 
 // ╔══════════════════╗
-// ║ PRAEDIUM v1.15.0 ║
+// ║ PRAEDIUM v1.15.1 ║
 // ╟──────────────────╢
 // ║                  ║
 // ║                  ║
 // ║                  ║
 // ║                  ║
 // ║ by Michael Davis ║
-// ║        4/24/2025 ║
+// ║        4/25/2025 ║
 // ╚══════════════════╝
 
 // “The humble semicolon is why spacing and line-ends do not matter

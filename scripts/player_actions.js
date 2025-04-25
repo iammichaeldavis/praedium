@@ -3320,7 +3320,7 @@ function FarmersEvents() {
         PauseTime();
         const divEnding = document.createElement('div');
         divEnding.id = 'divEnding';
-        divEnding.innerHTML = '<div><br><br>' + displayToBeContinued + '<br><br><img src="curves/PRÆDIVM2.svg" /><br><br><br><br><b>' + displayTheEnd + '</b><br><br>' + displayThankYouForPlaying + ' 🙏</div>';
+        divEnding.innerHTML = '<div><br><br>' + displayToBeContinued + '<br><br><img id="endingPlate" src="curves/PRÆDIVM2.svg" /><br><br><br><br><b>' + displayTheEnd + '</b><br><br>' + displayThankYouForPlaying + ' 🙏</div>';
         const body = document.getElementsByTagName("body")[0];
         body.appendChild(divEnding);
     }
