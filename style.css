@@ -693,7 +693,8 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     background: #d7ebfa;
 }
 
-#divSystemMessageCorpus {
+#divSystemMessageCorpus,
+#divSystemMessageCorpus .nobreak {
     font-family: 'Garamond', serif;
     font-size: 3.6vw;
     color: #040412;
@@ -706,6 +707,10 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     text-align: center;
     margin: 3.2vw auto;
     user-select: none;
+}
+
+#divSystemMessageCorpus .nobreak {
+    white-space: nowrap;
 }
 
 #divSoyMessage {

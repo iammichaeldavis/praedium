@@ -2522,10 +2522,11 @@ const dedicationList = [
     'ALexis JAnson', // museumofzzt.com/file/view/codered
     'Chris “Pumaman” Jones', // adventuregamestudio.co.uk
     'Denis Loubet', // denisloubet.com (ARTIST LEVEL: 👑🐐👑 G.O.A.T. Status 👑🐐👑)
-    'David “aniwey” L.', // candybox2.github.io
+    'David <span class="nobreak">“aniwey” L.</span>', // candybox2.github.io
     'Sid Meier', // en.wikipedia.org/wiki/Civilization_(series)
-    'Stephen M. F. Polychronopolous', // en.wikipedia.org/wiki/What_the_Hell_Happened_to_Me%3F
+    //'Stephen M. F. Polychronopolous', // en.wikipedia.org/wiki/What_the_Hell_Happened_to_Me%3F
     '“PyTom” Rothamel', // renpy.org
+    'Saitō “Yoot” Yutaka', // en.wikipedia.org/wiki/SimTower
     'Dave Sim', // en.wikipedia.org/wiki/Cerebus_the_Aardvark
     'Tim Sweeney', // unrealengine.com
     'Michael Townsend', // adarkroom.doublespeakgames.com
@@ -2543,11 +2544,12 @@ const gratitudeList = [
     'Angelos Chalaris', // 30secondsofcode.org/js/s/json-to-file
     'Michael Christy',
     'Adam Cosman', // codepen.io/uenify/pen/KxzKVd
+    'Dan Davis', // youtube.com/@DanDavisHistory
     'Worth Dayley',
     'Michael C. DeLucca',
     'Paul Dover',
     'Patrick Driggett',
-    'Miguel Angel Droz III',
+    'Miguel Angel <span class="nobreak">Droz III</span>',
     'Don Dudenhoeffer',
     'Dr. Bart D. Ehrman', // bartehrman.com
     'Derek Evans',
@@ -2557,7 +2559,7 @@ const gratitudeList = [
     'GOG', // gog.com
     'Hayley Hackett',
     'Toast Halasz',
-    'Andrew Mark Henry', // youtube.com/user/ReligionForBreakfast
+    'Andrew Mark Henry', // youtube.com/@ReligionForBreakfast
     'Filip Holm', // patreon.com/letstalkreligion
     'Home of the Underdogs', // homeoftheunderdogs.net
     'Marty Hirsch', // en.wikipedia.org/wiki/MChess_Pro
