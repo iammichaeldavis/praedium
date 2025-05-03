@@ -453,6 +453,7 @@ let displayStoryPort08 = '';
 let displayStoryHeir = '';
 let displayStorySailWest = '';
 let displayStoryPegasus = '';
+let displayStoryPegasusNo = '';
 
 let displayNamePlayer = '';
 
@@ -507,6 +508,7 @@ let displayFairRate = '';
 let displayInventory = '';
 let displayMateriel = '';
 let displayPonies = '';
+let displayUnicorns = '';
 let displaySoldiers = '';
 let displayCavalry = '';
 let displayGendarmes = '';
@@ -1344,6 +1346,7 @@ function Translate(language, bark = true) {
         if (player.names.length > 1) { displayStoryHeir = 'THE ROYAL PHYSICIAN HAS BEEN BROUGHT TO YOUR CHAMBER UNDER HEAVY GUARD.<br><br>YOU ARE INFORMED THAT SENATOR ' + player.names[1].toUpperCase() + ', THE BELOVED MAGISTRATE OF THE ' + nameVillage.toUpperCase() + ' REGION, PASSED PEACEFULLY IN THEIR SLEEP THIS MORNING AT THE AGE OF ' + player.age + '.<br><br>THEIR LAST OFFICIAL ACT WAS TO NAME *THEE* AS SUCCESSOR!'; }
         displayStorySailWest = 'NOW, TO SET SAIL FOR THE UNDYING LANDS; TO THAT GREAT UNDISCOVERED COUNTRY DO I GO';
         displayStoryPegasus = 'They bring it to you, thrashing, ferocious, defiant to the very last, requiring the full strength of at least a dozen hired goons to hold it down, bound by those ancient alchemical chains, every link etched with one hundred glowing runes each.<br><br>Its eyes sparkle with cruel intelligence.<br><br>Now... now the work can truly begin.';
+        displayStoryPegasusNo = 'The robed magi solemnly shake their aged heads. “No, Majesty, we do not yet possess the relics we require. Have patience, Your Highness.”';
 
         displayNamePlayer = '“What is your name, citizen?”';
 
@@ -1398,6 +1401,7 @@ function Translate(language, bark = true) {
         displayInventory = 'Inventory';
         displayMateriel = 'Materiel';
         displayPonies = 'Ponies';
+        displayUnicorns = 'Winged Unicorns';
         displaySoldiers = 'Infantry';
         displayCavalry = 'Cavalry';
         displayGendarmes = 'Gendarmerie';
@@ -2218,6 +2222,7 @@ function Translate(language, bark = true) {
         if (player.names.length > 1) { displayStoryHeir = 'EL MÉDICO REAL HA SIDO TRAÍDO A VUESTRA CÁMARA BAJO FUERTE GUARDIA.<br><br>TE DICEN QUE EL SENADOR ' + player.names[1].toUpperCase() + ', EL AMADO MAGISTRADO DE LA REGIÓN DE ' + nameVillage.toUpperCase() + ', FALLECIÓ PACÍFICAMENTE MIENTRAS SUEÑA ESTA MAÑANA A LA EDAD DE ' + player.age + ' AÑOS.<br><br>¡SU ÚLTIMO ACTO OFICIAL FUE NOMBRARTE *TU* COMO SUCESOR!'; }
         displayStorySailWest = 'AHORA, A ZARPAR HACIA LAS TIERRAS IMPERECEDERAS; A ESE GRAN PAÍS NO DESCUBRIDO VOY';
         displayStoryPegasus = 'Te lo traen, golpeando, feroz, desafiante hasta el final, requiriendo toda la fuerza de al menos una docena de matones a sueldo para sujetarlo, atado por esas antiguas cadenas alquímicas, cada eslabón grabado con cien runas brillantes cada uno.<br><br>Sus ojos brillan con cruel inteligencia.<br><br>Ahora... ahora el trabajo puede realmente comenzar.';
+        displayStoryPegasusNo = 'Los magos con túnicas menean solemnemente sus ancianas cabezas. «No, Majestad, aún no poseemos las reliquias que necesitamos. Tenga paciencia, Su Alteza.»';
 
         displayNamePlayer = '«¿Cómo te llamas, ciudadano?»';
 
@@ -2272,6 +2277,7 @@ function Translate(language, bark = true) {
         displayInventory = 'Inventario';
         displayMateriel = 'Material';
         displayPonies = 'Ponis';
+        displayUnicorns = 'Unicornios Alados';
         displaySoldiers = 'Infantería';
         displayCavalry = 'Caballería';
         displayGendarmes = 'Gendarmería';
@@ -2495,6 +2501,7 @@ function Translate(language, bark = true) {
 
 
 const appsList = [
+    'Audacity',
     'Blender',
     'CodePen',
     'DaVinci Resolve',
@@ -2565,6 +2572,11 @@ const gratitudeList = [
     'Marty Hirsch', // en.wikipedia.org/wiki/MChess_Pro
     'Bashir Hood',
     'Shawn Toao Hughes',
+    [
+        '*', // archive.org/details/softwarelibrary_msdos_games (removed SketchCow entry in support of Nathalie Lawhead)
+        'the Internet Archive',
+        'el Archivo de Internet',
+    ],
     ['Leif', 'Marisol Johansen',],
     'Giddy Jones', // spriters-resource.com/ms_dos/theelderscrollsiidaggerfall
     'Derek Lambert', // mythvisionpodcast.com
@@ -2594,7 +2606,6 @@ const gratitudeList = [
     ],
     'Rick Ramsey',
     'Garrett Ryan', // toldinstone.com
-    'Jason “SketchCow” Scott Sadofsky', // archive.org/details/softwarelibrary_msdos_games
     'Jim Shepperd',
     'Dr. Justin Sledge', // justinsledge.com/esoterica
     'Todd Spigener',

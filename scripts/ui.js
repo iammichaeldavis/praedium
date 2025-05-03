@@ -1306,6 +1306,15 @@ function UpdateText() {
                 if (horsesStarving) { horsesCost = '<span class="starving">' + displayStarvingHorse + '</span>'; }
                 tableString += '<td>' + horsesCost + '</td>';
                 tableString += '</tr>';
+                if (player.hasPegasi) {
+                    tableString += '<tr>';
+                    tableString += '<td>' + displayUnicorns + ' <span class="icon Unicorn inlineIcon"></span>:' + '</td>';
+                    tableString += '<td class="noPadColumn">' + formatterCurrent.format(pegasiCount) + '</td>';
+                    tableString += '<td>';
+                    tableString += '(-' + formatterCurrent.format(pegasiCount) + '<span class="icon Diamonds inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
+                    tableString += '</td>';
+                    tableString += '</tr>';
+                }
                 if (trophiesSpawn) {
                     tableString += '<tr>';
                     tableString += '<td>' + displayChampionships + ' <span class="icon Trophy inlineIcon"></span>:' + '</td>';
@@ -3691,6 +3700,9 @@ function UpdateText() {
             }
             ScribeContentString(residenceIngredientInStockCount[14][1], 'Sal');
             ScribeContentString(horsesCount, 'Horsey');
+            if (player.hasPegasi) {
+                ScribeContentString(pegasiCount, 'Unicorn');
+            }
 
             contentString += '<div style="height: 4vw; width: 4vw;"></div>';
             contentString += '<b>' + displayCrops + ':</b><br>';
@@ -4434,7 +4446,7 @@ function UpdateVisibilities() {
     buttonStar.style.display = player.isGod ? 'inline-block' : '';
     buttonRecords.style.display = player.isGod ? 'inline-block' : '';
 
-    imgNirvana.style.display = player.hasWon ? 'block' : '';
+    //imgNirvana.style.display = player.hasWon ? 'block' : '';
 
     if (player.seesForeword && player.hasBegun) {
         divForewordTitle.style.display = 'none';
@@ -9761,6 +9773,108 @@ function DisplayAnimatedImages() {
     imgWorkshopApiary.src = 'bitmaps/res_apiary.gif';
     if (player.hasBandages) { imgWorkshopCottage.src = 'bitmaps/res_cottage2.gif'; }
     else { imgWorkshopCottage.src = 'bitmaps/res_cottage.gif'; }
+}
+
+
+
+class Spark {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.velocity = {
+            x: (Math.random() - 0.5) * 8,
+            y: (Math.random() - 0.5) * 8,
+        };
+        this.alpha = 1;
+        this.friction = 0.99;
+    }
+
+    draw() {
+        canvasFireworksContext.globalAlpha = this.alpha;
+        canvasFireworksContext.beginPath();
+        canvasFireworksContext.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
+        canvasFireworksContext.fillStyle = this.color;
+        canvasFireworksContext.fill();
+    }
+
+    update() {
+        this.velocity.x *= this.friction;
+        this.velocity.y *= this.friction;
+        this.x += this.velocity.x;
+        this.y += this.velocity.y;
+        this.alpha -= 0.01;
+    }
+}
+
+
+
+class Rocket {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.velocity = {x: 0, y: Math.random() * -2.5 - 0.5};
+        this.sparks = [];
+        this.lifespan = 180;
+        this.hasExploded = false;
+    }
+
+    draw() {
+        canvasFireworksContext.beginPath();
+        canvasFireworksContext.arc(this.x, this.y, 3, 0, Math.PI * 2, false);
+        canvasFireworksContext.fillStyle = this.color;
+        canvasFireworksContext.fill();
+    }
+
+    explode() {
+        for (let i = 0; i < 50; i++) {
+            this.sparks.push(new Spark(this.x, this.y, this.color));
+        }
+    }
+
+    update() {
+        this.lifespan--;
+
+        if (this.lifespan <= 0 && !this.hasExploded) {
+            this.explode();
+            this.velocity = {x: 0, y: 0};
+            this.hasExploded = true;
+        }
+        else if (this.lifespan > 0) {
+            this.y += this.velocity.y;
+        }
+
+        for (let i = 0; i < this.sparks.length; i++) {
+            this.sparks[i].update();
+            this.sparks[i].draw();
+        }
+    }
+}
+
+
+
+let rockets = [];
+
+function AnimateFireworks() {
+    requestAnimationFrame(AnimateFireworks);
+    canvasFireworksContext.fillStyle = 'rgba(0, 0, 0, 0.1)';
+    canvasFireworksContext.fillRect(0, 0, canvasFireworks.width, canvasFireworks.height);
+    
+    rockets.forEach((rocket, index) => {
+        rocket.update();
+        rocket.draw();
+        
+        if (rocket.lifespan <= 0 && rocket.sparks.every(p => p.alpha <= 0)) {
+            rockets.splice(index, 1);
+        }
+    });
+
+    if (Math.random() < 0.015) { 
+        const x = Math.random() * canvasFireworks.width;
+        const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
+        rockets.push(new Rocket(x, canvasFireworks.height, color));
+    }
 }
 
 

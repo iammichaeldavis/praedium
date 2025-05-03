@@ -1202,6 +1202,7 @@ input {
 
 canvas {
     border: calc(1px * var(--pixel-scale)) solid black;
+    display: block;
 }
 
 
@@ -1213,7 +1214,6 @@ canvas {
     background-image: var(--agua);
     background-size: calc(16px * var(--pixel-scale));
     margin: 0 auto 6.4vw auto;
-    display: block;
 }
 
 #canvasMountain,
@@ -1224,7 +1224,6 @@ canvas {
     background-image: var(--agua);
     background-size: calc(16px * var(--pixel-scale));
     margin: 0 auto 6.4vw auto;
-    display: block;
 }
 
 #canvasVillage,
@@ -1236,15 +1235,22 @@ canvas {
     width: calc(386px * var(--pixel-scale));
     height: calc(226px * var(--pixel-scale));
     margin: 0 auto 6.4vw auto;
-    display: block;
 }
 
 #canvasMap {
     width: calc(208px * 1 * var(--pixel-scale));
     height: calc(173px * 1 * var(--pixel-scale));
-    display: block;
     margin: 0 auto;
     border: 0;
+}
+
+#canvasFireworks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -2371,6 +2377,11 @@ td {
 .Horsey {
     --i: 8;
     --j: 15;
+}
+
+.Unicorn {
+    --i: 12;
+    --j: 19;
 }
 
 .Sphinx {

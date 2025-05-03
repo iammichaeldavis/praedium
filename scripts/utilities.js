@@ -661,10 +661,15 @@ function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true) {
     player.canDismissEvent = false;
     buttonGameEventDismiss.innerHTML = '<span class="icon AnkhTile inlineIcon"></span>';
     clearTimeout(timeoutGameEventDismiss);
+    let conditionalDelay = gameEventDismissDelay;
+    if (!player.likesDelay) {conditionalDelay = 10; }
     timeoutGameEventDismiss = setTimeout(() => {
-        buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK;
+         // 🚨🚨🚨
+        //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK;
+        buttonGameEventDismiss.innerHTML = displayOK;
+         // 🚨🚨🚨
         player.canDismissEvent = true;
-    }, gameEventDismissDelay);
+    }, conditionalDelay);
 }
 
 

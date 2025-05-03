@@ -3312,12 +3312,20 @@ function FarmersEvents() {
     if (!player.hasPrepared) {
         player.hasPrepared = true;
         if (player.likesStory) { GameEvent(displayStoryFarmersPrepare); }
+
+        // 🚨🚨🚨
+        player.hasWon = true;
+        // 🚨🚨🚨
     }
     else if (player.hasPrepared && !player.hasMetFarmers) {
+        // 🚨🚨🚨
         //player.hasMetFarmers = true;
         //alert('"sup sup" -King Alavi');
+        // 🚨🚨🚨
 
+        // 🚨🚨🚨
         PauseTime();
+        if (player.likesMusic) { audioEnding.play(); }
         const divEndingBackdrop = document.createElement('div');
         divEndingBackdrop.id = 'divEndingBackdrop';
         let lastString = '<div id="divEndingFoil"><div id="divEndingSeal"><div id="divEndingSheet">';
@@ -3330,9 +3338,16 @@ function FarmersEvents() {
         lastString += displayThankYouForPlaying;
         lastString += ' 🙏';
         lastString += '</div></div></div>';
+        //lastString += '<canvas id="canvasFireworks"></canvas>';
         divEndingBackdrop.innerHTML = lastString;
         const body = document.getElementsByTagName("body")[0];
         body.appendChild(divEndingBackdrop);
+        //canvasFireworks = document.getElementById('canvasFireworks');
+        //canvasFireworksContext = canvasFireworks.getContext('2d');
+        //canvasFireworks.width = window.innerWidth;
+        //canvasFireworks.height = window.innerHeight;
+        //AnimateFireworks();
+        // 🚨🚨🚨
     }
     else {
         alert('third thing');
@@ -3451,6 +3466,7 @@ function ToggleMusic() {
     else {
         player.likesMusic = false;
         audioTheme.pause();
+        audioEnding.pause(); // this is meaningless lol
     }
 }
 
@@ -3519,6 +3535,9 @@ function PlayGod() {
         if (player.likesStory) { GameEvent(displayStoryPegasus); }
         player.hasPegasi = true;
         UpdateDisplay();
+    }
+    else {
+        if (player.likesStory) { GameEvent(displayStoryPegasusNo); }
     }
 }
 

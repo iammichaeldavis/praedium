@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.15.5';
+const version = '1.15.6';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -55,6 +55,7 @@ const player = {
     likesStory: true,
     likesRecords: false,
     likesProfanity: true,
+    likesDelay: true,
 
     isOnMobile: null,
     isGod: false,
@@ -596,6 +597,9 @@ const buttonPlayGod = document.getElementById('buttonPlayGod');
 
 const spanCheevoText = document.getElementById('spanCheevoText');
 
+let canvasFireworks = null;
+let canvasFireworksContext = null;
+
 const formatterEnglish = new Intl.NumberFormat('en-US');
 const formatterSpanish = new Intl.NumberFormat('es');
 const formatterSpanishInventory = new Intl.NumberFormat('de-DE');
@@ -751,6 +755,7 @@ let horsesSpawn = false;
 let horseClock = 0;
 let horsesIncAmount = 1;
 let horsesCount = 0;
+let pegasiCount = 0;
 let horsesEaten = 0;
 let horsesStarving = false;
 let horsesBought = 0;
@@ -946,6 +951,7 @@ let revealedWisdom = 0;
 const achievementSoundRare = new Audio('waveforms/XboxOneRareAchievement.mp3');
 
 const audioTheme = new Audio('waveforms/moraffsAria.mp3');
+const audioEnding = new Audio('waveforms/tquestAnthem.mp3');
 const audioPeasant = new Audio('waveforms/warcraft.mp3');
 
 let heirStage = 0;
