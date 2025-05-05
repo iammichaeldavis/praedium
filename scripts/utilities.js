@@ -20,10 +20,32 @@ function CheckForPreviousGame() {
 function AskToResume() {
     player.speaks = loadedReport.hero.speaks;
     loadedIcon = 'Bushel';
+    if (loadedReport.counts.staff[2] > 0) { loadedIcon = 'Fieldhand'; }
     if (loadedReport.hero.seesReport) { loadedIcon = 'Accountant'; }
-    if (loadedReport.hero.hasArmy) { loadedIcon = 'TaxCollector'; }
+    if (loadedReport.calendar[3][0] != 0) { loadedIcon = 'Olive'; }
+    if (loadedReport.hero.canSaw) { loadedIcon = 'Board'; }
+    if (loadedReport.hero.seesMountain) { loadedIcon = 'Stone'; }
+    if (loadedReport.hero.hasBakery) { loadedIcon = 'Loaves'; }
+    if (loadedReport.stages[0] > 16) { loadedIcon = 'Barley'; }
+    if (loadedReport.stages[0] > 17) { loadedIcon = 'Grape'; }
+    if (loadedReport.hero.seesVillage) { loadedIcon = 'FarmerJoe'; }
+    if (loadedReport.stages[3] > 3) { loadedIcon = 'Citizen'; }
+    if (loadedReport.hero.canSell) { loadedIcon = 'Scales'; }
+    if (loadedReport.hero.canSmelt) { loadedIcon = 'IngotCopper'; }
+    if (loadedReport.counts.villageState[0]) { loadedIcon = 'Horsey'; }
+    if (loadedReport.hero.hasBank) { loadedIcon = 'MoneyTemple'; }
     if (loadedReport.hero.hasMerchantGuildWrit) { loadedIcon = 'Decree'; }
+    if (loadedReport.hero.canImportTin) { loadedIcon = 'IngotTin'; }
+    if (loadedReport.hero.hasCityWalls) { loadedIcon = 'CityWalls'; }
+    if (loadedReport.hero.hasArmy) { loadedIcon = 'TaxCollector'; }
     if (loadedReport.hero.hasMansion) { loadedIcon = 'LordBritish'; }
+    if (loadedReport.hero.canImportSalt) { loadedIcon = 'Sal'; }
+    if (loadedReport.hero.hasFlaxFarm) { loadedIcon = 'Flax'; }
+    if (loadedReport.hero.hasBandages) { loadedIcon = 'Bandage'; }
+    if (loadedReport.hero.hasMonument) { loadedIcon = 'Relic'; }
+    if (loadedReport.hero.hasBecomeHeir) { loadedIcon = 'Scepter'; }
+    if (loadedReport.hero.hasHelpedShepherds) { loadedIcon = 'Dolly'; }
+    if (loadedReport.hero.hasHelpedMiners) { loadedIcon = 'IngotGold'; }
     if (loadedReport.hero.hasWon) { loadedIcon = 'Sphinx'; }
     if (loadedReport.hero.isGod) { player.isGod = true; }
     Translate(player.speaks, false);
@@ -662,12 +684,12 @@ function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true) {
     buttonGameEventDismiss.innerHTML = '<span class="icon AnkhTile inlineIcon"></span>';
     clearTimeout(timeoutGameEventDismiss);
     let conditionalDelay = gameEventDismissDelay;
-    if (!player.likesDelay) {conditionalDelay = 10; }
+    if (!player.likesDelay) { conditionalDelay = 10; }
     timeoutGameEventDismiss = setTimeout(() => {
-         // 🚨🚨🚨
+        // 🚨🚨🚨
         //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK;
         buttonGameEventDismiss.innerHTML = displayOK;
-         // 🚨🚨🚨
+        // 🚨🚨🚨
         player.canDismissEvent = true;
     }, conditionalDelay);
 }

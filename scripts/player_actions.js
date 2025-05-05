@@ -1525,7 +1525,6 @@ function BarterAll() {
         while (bushelCount[6] > 0) { BarterFruit(6, false); }
         UpdateDisplay();
     }
-    
 }
 
 

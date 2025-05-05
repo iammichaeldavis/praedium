@@ -3781,12 +3781,12 @@ function UpdateText() {
                 const minerOffenseScore = priceMiners[2] * militaryCavalryCombatValue;
                 if (player.speaks == 'English') { contentString += AddInertDigits(minerOffenseScore.toString().length, 4) + formatterCurrent.format(minerOffenseScore); }
                 else { contentString += '<span class="inertNumerals">' + MilInertGuys(minerOffenseScore.toString().length, 4) + '</span>' + formatterCurrent.format(minerOffenseScore); }
-    
+
                 contentString += ' <span class="icon Sword inlineIcon"></span>';
                 contentString += ' &nbsp;&nbsp;&nbsp; ';
                 contentString += '<span class="inertNumerals">' + MilInertGuys(0, 4) + '</span>';
                 contentString += ' <span class="icon TaxCollector inlineIcon"></span><br>';
-    
+
                 contentString += '<b>' + displayDefense + ':</b> ';
                 if (player.speaks == 'English') { contentString += '5,000'; }
                 else { contentString += '5000'; }
@@ -3844,12 +3844,12 @@ function UpdateText() {
                 const shepherdOffenseScore = priceShepherds * militaryInfantryCombatValue;
                 if (player.speaks == 'English') { contentString += AddInertDigits(shepherdOffenseScore.toString().length, 4) + formatterCurrent.format(shepherdOffenseScore); }
                 else { contentString += '<span class="inertNumerals">' + MilInertGuys(shepherdOffenseScore.toString().length, 4) + '</span>' + formatterCurrent.format(shepherdOffenseScore); }
-    
+
                 contentString += ' <span class="icon Sword inlineIcon"></span>';
                 contentString += ' &nbsp;&nbsp;&nbsp; ';
                 contentString += '<span class="inertNumerals">' + MilInertGuys(priceShepherds.toString().length, 4) + '</span>' + priceShepherds;
                 contentString += ' <span class="icon TaxCollector inlineIcon"></span><br>';
-    
+
                 contentString += '<b>' + displayDefense + ':</b> ';
                 if (player.speaks == 'English') { contentString += '<span class="inertNumerals">0,0</span>50'; }
                 else { contentString += '<span class="inertNumerals">00</span>50'; }
@@ -9814,7 +9814,10 @@ class Rocket {
         this.x = x;
         this.y = y;
         this.color = color;
-        this.velocity = {x: 0, y: Math.random() * -2.5 - 0.5};
+        this.velocity = {
+            x: 0,
+            y: Math.random() * -2.5 - 0.5,
+        };
         this.sparks = [];
         this.lifespan = 180;
         this.hasExploded = false;
@@ -9838,7 +9841,10 @@ class Rocket {
 
         if (this.lifespan <= 0 && !this.hasExploded) {
             this.explode();
-            this.velocity = {x: 0, y: 0};
+            this.velocity = {
+                x: 0,
+                y: 0,
+            };
             this.hasExploded = true;
         }
         else if (this.lifespan > 0) {
@@ -9860,17 +9866,16 @@ function AnimateFireworks() {
     requestAnimationFrame(AnimateFireworks);
     canvasFireworksContext.fillStyle = 'rgba(0, 0, 0, 0.1)';
     canvasFireworksContext.fillRect(0, 0, canvasFireworks.width, canvasFireworks.height);
-    
+
     rockets.forEach((rocket, index) => {
         rocket.update();
         rocket.draw();
-        
         if (rocket.lifespan <= 0 && rocket.sparks.every(p => p.alpha <= 0)) {
             rockets.splice(index, 1);
         }
     });
 
-    if (Math.random() < 0.015) { 
+    if (Math.random() < 0.015) {
         const x = Math.random() * canvasFireworks.width;
         const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
         rockets.push(new Rocket(x, canvasFireworks.height, color));

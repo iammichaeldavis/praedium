@@ -2270,6 +2270,16 @@ td {
     --j: 18;
 }
 
+.Dolly {
+    --i: 11;
+    --j: 19;
+}
+
+.Scepter {
+    --i: 29;
+    --j: 19;
+}
+
 
 
 /* village */
@@ -2528,11 +2538,6 @@ td {
 
 .PlainMessage {
     --i: 30;
-    --j: 19;
-}
-
-.Wand {
-    --i: 29;
     --j: 19;
 }
 
@@ -2911,7 +2916,6 @@ td {
     width: 64%;
     margin: 6.4vw auto;
     padding: 1vw;
-    
 }
 
 #divMapDetailsView.mapDetailsEconomic {
