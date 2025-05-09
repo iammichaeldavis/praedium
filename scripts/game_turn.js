@@ -7,7 +7,7 @@ function GameTurn() {
     gameTurn++;
 
     week++;
-    if (week == 21) { player.age++; }
+    if (week == playerBirthWeek) { player.age++; }
     if (week == 53) {
         week = 1;
         year++;

@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.15.7';
+const version = '1.15.8';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -41,7 +41,7 @@ const arrayFlaxPlots = [
 
 const player = {
     names: ['Mud',],
-    age: 11, // longest verified documented human lifespan: Jeanne Calment of France, 122 years and 164 days
+    age: 7, // longest verified documented human lifespan: Jeanne Calment of France, 122 years and 164 days
     gender: 0,
     ethnicity: 0,
     title: 0,
@@ -241,6 +241,8 @@ const villageImageAnimationLayerM = new Image();
 villageImageAnimationLayerM.src = 'bitmaps/blank.png';
 const villageImageAnimationLayerN = new Image();
 villageImageAnimationLayerN.src = 'bitmaps/blank.png';
+const villageImageAnimationLayerO = new Image();
+villageImageAnimationLayerO.src = 'bitmaps/blank.png';
 const villageTheaterOverlay = new Image();
 villageTheaterOverlay.src = 'bitmaps/theater.png';
 const portImage = new Image();
@@ -609,6 +611,8 @@ let gameTurn = 1; // 📅
 const yearAtStartProlepticGregorian = -200; // 200 B.C. ✝️
 const yearAtStartHebrew = 3560; // according to https://sacred-texts.com/time/cal/jdate.htm ✡️
 const yearAtStartRoman = 554; // according to https://en.wikipedia.org/wiki/Ab_urbe_condita 🔥🐂🔥
+const playerBirthYear = yearAtStartHebrew - player.age;
+const playerBirthWeek = 21;
 let year = 1;
 let week = 1;
 
@@ -954,6 +958,7 @@ const audioTheme = new Audio('waveforms/moraffsAria.mp3');
 const audioEnding = new Audio('waveforms/tquestAnthem.mp3');
 const audioPeasant = new Audio('waveforms/warcraft.mp3');
 
+const heirDate = [0, 0,];
 let heirStage = 0;
 
 const arrayFacesSorted = [];

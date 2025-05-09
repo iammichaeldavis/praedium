@@ -11,7 +11,15 @@ function CheckForPreviousGame() {
     if (localStorage.getItem(save_key)) {
         loadedReport = JSON.parse(localStorage.getItem(save_key));
         if (version == loadedReport.v) { AskToResume(); }
-        else { localStorage.removeItem(save_key); }
+        else {
+            if (loadedReport.hero.speaks == 'English') {
+                alert('It appears that there is data saved on your device from a previous version of PRAEDIUM. It is not compatible with this newer version.');
+            }
+            else {
+                alert('Parece que hay datos guardados en su dispositivo de una versión anterior de PRAEDIUM. No es compatible con esta versión más reciente.');
+            }
+            localStorage.removeItem(save_key);
+        }
     }
 }
 
@@ -219,6 +227,8 @@ function ContinuePreviousGame() {
         olivePlantDate[1] = loadedReport.calendar[3][1];
         estDate[0] = loadedReport.calendar[4][0];
         estDate[1] = loadedReport.calendar[4][1];
+        heirDate[0] = loadedReport.calendar[5][0];
+        heirDate[1] = loadedReport.calendar[5][1];
         /////////////////////////////////////////////////////////////////////////////////////////
         farmStage = loadedReport.stages[0];
         warehouseStage = loadedReport.stages[1];
@@ -591,7 +601,7 @@ function CollateGameStateReport(loud = false) {
     };
     const report = {
         bitmaps: [residenceImage.src, villageImageActual.src, tileGrowingOlive,],
-        calendar: [gameTurn, year, week, olivePlantDate, estDate,],
+        calendar: [gameTurn, year, week, olivePlantDate, estDate, heirDate,],
         counts: integerCounts,
         farmland: farmlandArrays,
         hero: player,

@@ -8779,6 +8779,7 @@ function RedrawVillage() {
     if (villageImageAnimationLayerL.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerL, 0, 0, 384, 224, 0, 0, 384, 224); }
     if (villageImageAnimationLayerM.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerM, 0, 0, 384, 224, 0, 0, 384, 224); }
     if (villageImageAnimationLayerN.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerN, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (villageImageAnimationLayerO.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerO, 0, 0, 384, 224, 0, 0, 384, 224); }
     if (villageStage > 25) { canvasVillageContext.drawImage(villageTheaterOverlay, 0, 0, 384, 224, 0, 0, 384, 224); }
 }
 
@@ -9315,13 +9316,23 @@ function RedrawCanvases() {
 
 
 
-            if (villageStage > 14) {
+            if (villageStage > 13) {
                 if (villageAnimationFrameG > 111) { villageAnimationFrameG = 1; }
+                villageImageAnimationLayerO.src = 'bitmaps/village14_af' + villageAnimationFrameG + '.png';
+                if (villageAnimationFrameG > 8) { villageImageAnimationLayerO.src = 'bitmaps/blank.png'; }
+            }
+            else {
+                villageAnimationFrameG = 1;
+                villageImageAnimationLayerO.src = 'bitmaps/blank.png';
+            }
+
+
+
+            if (villageStage > 14) {
                 villageImageAnimationLayerJ.src = 'bitmaps/village15_af' + villageAnimationFrameG + '.png';
                 if (villageAnimationFrameG > 15) { villageImageAnimationLayerJ.src = 'bitmaps/blank.png'; }
             }
             else {
-                villageAnimationFrameG = 1;
                 villageImageAnimationLayerJ.src = 'bitmaps/blank.png';
             }
 

@@ -2976,6 +2976,9 @@ function ChooseHeir() {
     Translate(player.speaks, false); // this repopulates the bindings in the following string
     if (player.likesStory) { GameEvent(displayStoryHeir); }
 
+    heirDate[0] = week;
+    heirDate[1] = year + yearAtStartHebrew;
+
     player.canChooseHeir = false;
     player.isAt = 'Workshop';
 
