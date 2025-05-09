@@ -10,7 +10,7 @@ function RecordProgress() {
 function CheckForPreviousGame() {
     if (localStorage.getItem(save_key)) {
         loadedReport = JSON.parse(localStorage.getItem(save_key));
-        if (version == loadedReport.v) { AskToResume(); }
+        if (version.substring(0, 7) == loadedReport.v.substring(0, 7)) { AskToResume(); }
         else {
             if (loadedReport.hero.speaks == 'English') {
                 alert('It appears that there is data saved on your device from a previous version of PRAEDIUM. It is not compatible with this newer version.');
