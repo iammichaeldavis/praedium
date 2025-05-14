@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.15.09-B';
+const version = '1.15.09-C';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -59,6 +59,8 @@ const player = {
 
     isOnMobile: null,
     isGod: false,
+    isDegreeless: false,
+    isKonamified: false,
     isAt: 'Praedium',
 
     seesHint: false,
@@ -1065,6 +1067,9 @@ const save_key = 'PRAEDIUM_save_data';
 
 let gameEventTrigger = false;
 let gameEventContainer = '';
+
+let aguaAnimString = 'url(bitmaps/agua_anim.gif)';
+let aguaStillString = 'url(bitmaps/agua_still.gif)';
 
 
 

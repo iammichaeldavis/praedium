@@ -79,6 +79,9 @@ function ContinuePreviousGame() {
         player.likesStory = loadedReport.hero.likesStory;
         player.likesRecords = loadedReport.hero.likesRecords;
         player.likesProfanity = loadedReport.hero.likesProfanity;
+        player.likesDelay = loadedReport.hero.likesDelay;
+
+        player.isDegreeless = loadedReport.hero.isDegreeless;
 
         //player.seesHint = loadedReport.hero.seesHint;
         //player.seesModsWindow = loadedReport.hero.seesModsWindow;
@@ -831,7 +834,14 @@ const keyHandlerKonami = function (event) {
     correctInputsKonami++;
     if (コナミコマンド.length === correctInputsKonami) {
         correctInputsKonami = 0;
-        window.alert('ALL VIC VIPER POWER-UPS ENABLED');
+        //window.alert('ALL VIC VIPER POWER-UPS ENABLED');
+        window.alert('THE GODS OF FORTUNE HAVE ACCURSETH THINE LANDS SO AS TO PUNISHETH THINE MENDACIOUS HEART');
+        tilemap.src = 'bitmaps/tilemapAlt.png';
+        aguaAnimString = 'url(bitmaps/agua_animAlt.gif)';
+        aguaStillString = 'url(bitmaps/agua_stillAlt.gif)';
+        if (gameSpeed == 'paused') { DisplayStaticImages(); }
+        else { DisplayAnimatedImages(); }
+        player.isKonamified = true;
     }
 };
 document.addEventListener('keydown', keyHandlerKonami, false);
@@ -855,7 +865,9 @@ const keyHandlerId = function (event) {
     correctInputsId++;
     if (DegreelessnessMode.length === correctInputsId) {
         correctInputsId = 0;
-        window.alert('Degreelessness Mode');
+        player.isDegreeless = !player.isDegreeless;
+        if (player.isDegreeless) { window.alert('DEGREELESSNESS MODE ON'); }
+        else { window.alert('DEGREELESSNESS MODE OFF'); }
     }
 };
 document.addEventListener('keydown', keyHandlerId, false);

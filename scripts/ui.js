@@ -8781,6 +8781,19 @@ function RedrawVillage() {
     if (villageImageAnimationLayerN.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerN, 0, 0, 384, 224, 0, 0, 384, 224); }
     if (villageImageAnimationLayerO.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerO, 0, 0, 384, 224, 0, 0, 384, 224); }
     if (villageStage > 25) { canvasVillageContext.drawImage(villageTheaterOverlay, 0, 0, 384, 224, 0, 0, 384, 224); }
+
+    //to get this to work, we would want to write everything to our imageData object FIRST, then invert it or don't, then write THAT to the canvas last
+    //or, mess around with CORS header nonsense which frankly just isn't worth it for a gag one other human person MIGHT ever see
+    //if (player.isKonamified) {
+    //    const imgData = canvasVillageContext.getImageData(0, 0, 384, 224);
+    //    for (i = 0; i < imgData.data.length; i += 4) {
+    //        imgData.data[i] = 255 - imgData.data[i]; // check if zero, dont do nothing if so, so like if != 0, do the jahnt
+    //        imgData.data[i+1] = 255 - imgData.data[i+1];
+    //        imgData.data[i+2] = 255 - imgData.data[i+2];
+    //        imgData.data[i+3] = 255;
+    //    }
+    //    canvasVillageContext.putImageData(imgData, 0, 0);
+    //}
 }
 
 
@@ -9747,7 +9760,7 @@ function RedrawCanvases() {
 
 
 function DisplayStaticImages() {
-    document.documentElement.style.setProperty('--agua', 'url(bitmaps/agua_still.gif)');
+    document.documentElement.style.setProperty('--agua', aguaStillString);
     if (player.hasHardtack) { imgWorkshopBakery.src = 'bitmaps/res_bakery2.png'; }
     else { imgWorkshopBakery.src = 'bitmaps/res_bakery.png'; }
     imgWorkshopOliveMill.src = 'bitmaps/res_olivemill.png';
@@ -9768,7 +9781,7 @@ function DisplayStaticImages() {
 
 
 function DisplayAnimatedImages() {
-    document.documentElement.style.setProperty('--agua', 'url(bitmaps/agua_anim.gif)');
+    document.documentElement.style.setProperty('--agua', aguaAnimString);
     if (player.hasHardtack) { imgWorkshopBakery.src = 'bitmaps/res_bakery2.gif'; }
     else { imgWorkshopBakery.src = 'bitmaps/res_bakery.gif'; }
     imgWorkshopOliveMill.src = 'bitmaps/res_olivemill.gif';

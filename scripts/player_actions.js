@@ -719,7 +719,7 @@ function PlotPlant(robota = false) {
             foundRow = plotSearchResult.row;
             foundCol = plotSearchResult.col;
             targetArray = arrayFlaxPlots;
-            bushelCount[7] -= plantCost;
+            if (!player.isDegreeless) { bushelCount[7] -= plantCost; }
             seededCount[2] += plantCost;
         }
     }
@@ -730,7 +730,7 @@ function PlotPlant(robota = false) {
             taskComplete = true;
             foundRow = plotSearchResult.row;
             foundCol = plotSearchResult.col;
-            bushelCount[0] -= plantCost;
+            if (!player.isDegreeless) { bushelCount[0] -= plantCost; }
             seededCount[0] += plantCost;
         }
     }
@@ -741,7 +741,7 @@ function PlotPlant(robota = false) {
             taskComplete = true;
             foundRow = plotSearchResult.row;
             foundCol = plotSearchResult.col;
-            bushelCount[1] -= plantCost;
+            if (!player.isDegreeless) { bushelCount[1] -= plantCost; }
             seededCount[1] += plantCost;
         }
     }
