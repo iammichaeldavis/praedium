@@ -81,7 +81,10 @@ function ContinuePreviousGame() {
         player.likesProfanity = loadedReport.hero.likesProfanity;
         player.likesDelay = loadedReport.hero.likesDelay;
 
-        player.isDegreeless = loadedReport.hero.isDegreeless;
+        //player.isOnMobile = loadedReport.hero.isOnMobile;
+        //player.isDegreeless = loadedReport.hero.isDegreeless;
+        //player.isKonamified = loadedReport.hero.isKonamified;
+        //player.isAt = loadedReport.hero.isAt;
 
         //player.seesHint = loadedReport.hero.seesHint;
         //player.seesModsWindow = loadedReport.hero.seesModsWindow;
