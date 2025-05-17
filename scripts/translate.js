@@ -1586,7 +1586,7 @@ function Translate(language, bark = true) {
         displayResumeConfirm = 'Art thou quite certain thou wisheth to resume the previous work, milord?';
         displayRestartConfirm = 'Art thou quite certain thou wisheth to begin anew, milord?';
 
-        displayGenieAlert = 'THE DJINNI OF FORTUNE HATH ACCURSETH THY FAIR LAND SO AS TO PUNISHETH THINE MENDACIOUS HEART';
+        displayGenieAlert = 'THE DJINNI OF FORTUNE HATH ACCURSETH THY FAIR LAND SO ATH TO PUNISHETH THINE MENDACIOUS HEART';
         displayGenieAttempt = 'DAMN YOU’RE JUST A GLUTTON FOR PUNISHMENT, HUH';
         displayGenieCancel = 'lol jk jk';
 
