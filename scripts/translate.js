@@ -673,6 +673,10 @@ let displayResumeNo = '';
 let displayResumeConfirm = '';
 let displayRestartConfirm = '';
 
+let displayGenieAlert = '';
+let displayGenieAttempt = '';
+let displayGenieCancel = '';
+
 
 
 let displayRandomWisdomsInglés = [
@@ -1582,6 +1586,12 @@ function Translate(language, bark = true) {
         displayResumeConfirm = 'Art thou quite certain thou wisheth to resume the previous work, milord?';
         displayRestartConfirm = 'Art thou quite certain thou wisheth to begin anew, milord?';
 
+        displayGenieAlert = 'THE DJINNI OF FORTUNE HATH ACCURSETH THY FAIR LAND SO AS TO PUNISHETH THINE MENDACIOUS HEART';
+        displayGenieAttempt = 'DAMN YOU’RE JUST A GLUTTON FOR PUNISHMENT, HUH';
+        displayGenieCancel = 'lol jk jk';
+
+
+
         displayRandomWisdomsDisplay = displayRandomWisdomsInglés;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2480,6 +2490,12 @@ function Translate(language, bark = true) {
         displayResumeNo = 'DESEO COMENZAR UN NUEVO JUEGO';
         displayResumeConfirm = '¿Está usted seguro de que desea reanudar el trabajo anterior, señor?';
         displayRestartConfirm = '¿Estáis completamente seguro de que deseáis empezar de nuevo, señor?';
+
+        displayGenieAlert = 'EL DJINNI DE LA FORTUNA HA MALDECIDO TUS BELLAS TIERRAS PARA CASTIGAR TU CORAZÓN MENTIROSO';
+        displayGenieAttempt = 'MALDITA SEA, ERES SOLO UN GLOTÓN DEL CASTIGO, ¿EH?';
+        displayGenieCancel = 'No, no, solo bromeando :D';
+
+
 
         displayRandomWisdomsDisplay = displayRandomWisdomsEspañol;
     }
