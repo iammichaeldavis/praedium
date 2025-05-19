@@ -451,6 +451,7 @@ let displayStoryPort07 = '';
 let displayStoryPort08 = '';
 
 let displayStoryHeir = '';
+
 let displayStorySailWest = '';
 let displayStoryPegasus = '';
 let displayStoryPegasusNo = '';
@@ -630,6 +631,7 @@ let displayLabelFarmersB = '';
 let displayToBeContinued = '';
 let displayTheEnd = '';
 let displayThankYouForPlaying = '';
+let displayLabelDownload = '';
 
 let displayForewordA = '';
 let displayForewordScripture = '';
@@ -676,6 +678,10 @@ let displayRestartConfirm = '';
 let displayGenieAlert = '';
 let displayGenieAttempt = '';
 let displayGenieCancel = '';
+
+let displayHintsOn = '';
+let displayHintsOff = '';
+let displayHintsEnd = '';
 
 
 
@@ -840,8 +846,10 @@ function Translate(language, bark = true) {
             'Premier',
             'General Secretary',
             'Governor-General',
+            'Lord Mayor',
             'Supreme Leader',
             'Supreme Commander-in-Chief',
+            'Great-Grand-Lord-High-Everything',
             'Imperial Potentate',
             'Imperator',
             'Imperious Leader',
@@ -867,11 +875,13 @@ function Translate(language, bark = true) {
             'The Coyote',
             'President',
             'Madam President',
+            'Grand Poobah',
             'Khan',
             'Khatun',
             'Führer',
             'Pope',
             'Popess',
+            'Archbishop',
             'Ayatollah',
             'Prince',
             'Princess',
@@ -1128,10 +1138,10 @@ function Translate(language, bark = true) {
         displayHeirConfirm = 'Art thou certain about thine answers?';
         displayHeirComplete = 'IT’S ALL ON YOUR SHOULDERS NOW, CHUM';
 
-        displayStoryFirstTill = 'BEFORE ONE CAN SOW,<br>THE EARTH MUST BE TILLED<br><br><span class="icon Weeds inlineIcon quintupleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Soil inlineIcon quintupleSize"></span><br><br>With considerable effort,<br>weeds give way to soil';
-        displayStoryFirstPlant = 'CAST THY SEED<br>UPON THE TILLAGE<br><br><span class="icon Soil inlineIcon quintupleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilSeeded inlineIcon quintupleSize"></span><br><br>Spend one bushel of wheat (' + plantCost + '<span class="icon Wheat inlineIcon"></span>)<br>to seed one acre of soil';
-        displayStoryFirstWater = 'ALL LIFE REQUIRES<br>WATER TO SURVIVE<br><br><span class="icon SoilSeeded inlineIcon quintupleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilWatered inlineIcon quintupleSize"></span><br><br>“Well, it’s a dirty job,<br>but someone’s gotta do it”<br>—Chuck Mosley';
-        displayStoryFirstHarvest = 'FOR WHATEVER A MAN SOWS,<br>THAT HE WILL ALSO REAP<br><br><span class="icon Crops inlineIcon quintupleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Weeds inlineIcon quintupleSize"></span><br><br>Harvesting the abundance<br>leaves the land again in disarray';
+        displayStoryFirstTill = 'BEFORE ONE CAN SOW,<br>THE EARTH MUST BE TILLED<br><br><span class="icon Weeds inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Soil inlineIcon tripleSize"></span><br><br>With considerable effort,<br>weeds give way to soil';
+        displayStoryFirstPlant = 'CAST THY SEED<br>UPON THE TILLAGE<br><br><span class="icon Soil inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilSeeded inlineIcon tripleSize"></span><br><br>Spend one bushel of wheat (' + plantCost + '<span class="icon Wheat inlineIcon"></span>)<br>to seed one acre of soil';
+        displayStoryFirstWater = 'ALL LIFE REQUIRES<br>WATER TO SURVIVE<br><br><span class="icon SoilSeeded inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilWatered inlineIcon tripleSize"></span><br><br>“Well, it’s a dirty job,<br>but someone’s gotta do it”<br>—Chuck Mosley';
+        displayStoryFirstHarvest = 'FOR WHATEVER A MAN SOWS,<br>THAT HE WILL ALSO REAP<br><br><span class="icon Crops inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Weeds inlineIcon tripleSize"></span><br><br>Harvesting the abundance<br>leaves the land again in disarray';
         displayStoryFirstStorage = 'EXCESS GRAIN MUST BE STORED';
         const barterInventoryOlive = (bushelCount[2] < barterMaxBulkCount) ? bushelCount[2] : barterMaxBulkCount;
         const barterValueOlive = barterInventoryOlive * barterExchangeRate[2];
@@ -1347,7 +1357,12 @@ function Translate(language, bark = true) {
         displayStoryPort07 = 'WITH THIS TIN, ARTISANS CAN CHURN OUT THOSE LUDICROUS, GAUDY BAUBLES THAT COMMAND SUCH A HIGH PRICE IN ROME';
         displayStoryPort08 = 'YOU SHALL SEASON YOUR EVERY OFFERING OF MEAL WITH SALT; YOU SHALL NOT OMIT FROM YOUR MEAL OFFERING THE SALT OF YOUR COVENANT WITH GOD; WITH ALL YOUR OFFERINGS YOU MUST OFFER SALT<br><br>LEVITICUS 2:13';
 
-        if (player.names.length > 1) { displayStoryHeir = 'THE ROYAL PHYSICIAN HAS BEEN BROUGHT TO YOUR CHAMBER UNDER HEAVY GUARD.<br><br>YOU ARE INFORMED THAT SENATOR ' + player.names[1].toUpperCase() + ', THE BELOVED MAGISTRATE OF THE ' + nameVillage.toUpperCase() + ' REGION, PASSED PEACEFULLY IN THEIR SLEEP THIS MORNING AT THE AGE OF ' + player.age + '.<br><br>THEIR LAST OFFICIAL ACT WAS TO NAME *THEE* AS SUCCESSOR!'; }
+        if (player.names.length > 1) {
+            let nameToShow = player.names[1].toUpperCase();
+            if (nameToShow == '') { nameToShow = 'NOMENESCIO'; } // en.wikipedia.org/wiki/Nomen_nescio
+            displayStoryHeir = 'THE ROYAL PHYSICIAN HAS BEEN BROUGHT TO YOUR CHAMBER UNDER HEAVY GUARD.<br><br>YOU ARE INFORMED THAT SENATOR ' + nameToShow + ', THE BELOVED MAGISTRATE OF THE ' + nameVillage.toUpperCase() + ' REGION, PASSED PEACEFULLY IN THEIR SLEEP THIS MORNING AT THE AGE OF ' + player.age + '.<br><br>THEIR LAST OFFICIAL ACT WAS TO NAME *THEE* AS SUCCESSOR!';
+        }
+
         displayStorySailWest = 'NOW, TO SET SAIL FOR THE UNDYING LANDS; TO THAT GREAT UNDISCOVERED COUNTRY DO I GO';
         displayStoryPegasus = 'They bring it to you, thrashing, ferocious, defiant to the very last, requiring the full strength of at least a dozen hired goons to hold it down, bound by those ancient alchemical chains, every link etched with one hundred glowing runes each.<br><br>Its eyes sparkle with cruel intelligence.<br><br>Now... now the work can truly begin.';
         displayStoryPegasusNo = 'The robed magi solemnly shake their aged heads. “No, Majesty, we do not yet possess the relics we require. Have patience, Your Highness.”';
@@ -1536,6 +1551,7 @@ function Translate(language, bark = true) {
         displayToBeContinued = 'To be continued in...';
         displayTheEnd = 'The End';
         displayThankYouForPlaying = 'Thank you for playing';
+        displayLabelDownload = 'DOWNLOAD FINAL EMPIRE DATA<br>FOR <b>PRAEDIUM Ⅱ</b> IMPORT';
 
         displayForewordA = 'The year is 200 B.C. and thou art a humble Tartessian sharecropper eking out a modest living under the brutal Mediterranean sun in Seleucid Galilee. From dawn to dusk dost thou work the chalky, unforgiving soil with nothing but thine own calloused hands and a sharp stick.';
         displayForewordScripture = '“O Maker of the material world, thou Holy One! How far from the fire? How far from the water? How far from the consecrated bundles of baresma? How far from the faithful?”';
@@ -1589,6 +1605,10 @@ function Translate(language, bark = true) {
         displayGenieAlert = 'THE DJINNI OF FORTUNE HATH ACCURSETH THY FAIR LAND SO ATH TO PUNISHETH THINE MENDACIOUS HEART';
         displayGenieAttempt = 'DAMN YOU’RE JUST A GLUTTON FOR PUNISHMENT, HUH';
         displayGenieCancel = 'lol jk jk';
+
+        displayHintsOn = 'Hints on';
+        displayHintsOff = 'Hints off';
+        displayHintsEnd = 'End of hints';
 
 
 
@@ -1716,8 +1736,10 @@ function Translate(language, bark = true) {
             'Premier',
             'Secretario General',
             'Gobernador-General',
+            'Señor Alcalde',
             'Líder Supremo',
             'Comandante-en-Jefe Supremo',
+            'Gran-Grande-Señor-Alto-Todo',
             'Potentado Imperial',
             'Imperator',
             'Líder Imperioso',
@@ -1743,11 +1765,13 @@ function Translate(language, bark = true) {
             'El Coyote',
             'Presidente',
             'Señora Presidenta',
+            'Gran Poobah',
             'Kan',
             'Katun',
             'Führer',
             'Papa',
             'Mama',
+            'Arzobispo',
             'Ayatolá',
             'Príncipe',
             'Princesa',
@@ -2010,10 +2034,10 @@ function Translate(language, bark = true) {
         displayHeirComplete = 'TODO ESTÁ SOBRE TUS HOMBROS AHORA, COMPAÑERO';
         if (player.gender == 1 || player.gender == 3) { displayHeirComplete = 'TODO ESTÁ SOBRE TUS HOMBROS AHORA, COMPAÑERA'; }
 
-        displayStoryFirstTill = 'ANTES DE PODER SEMBRAR,<br>HAY QUE LABRAR LA TIERRA<br><br><span class="icon Weeds inlineIcon quintupleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Soil inlineIcon quintupleSize"></span><br><br>Con esfuerzo considerable,<br>malas hierbas dan paso al suelo';
-        displayStoryFirstPlant = 'ECHA SU SEMILLA<br>SOBRE LA LABRANZA<br><br><span class="icon Soil inlineIcon quintupleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilSeeded inlineIcon quintupleSize"></span><br><br>Gaste un fanega de trigo (' + plantCost + '<span class="icon Wheat inlineIcon"></span>)<br>para sembrar una aranzada de tierra';
-        displayStoryFirstWater = 'TODA VIDA NECESITA<br>AGUA PARA SOBREVIVIR<br><br><span class="icon SoilSeeded inlineIcon quintupleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilWatered inlineIcon quintupleSize"></span><br><br>«Bueno, es un trabajo sucio,<br>pero alguien tiene que hacerlo»<br>—Chuck Mosley';
-        displayStoryFirstHarvest = 'ESO UN HOMBRE SEMBRARE,<br>ESO TAMBIÉN SEGARÁ<br><br><span class="icon Crops inlineIcon quintupleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Weeds inlineIcon quintupleSize"></span><br><br>La recolección de la abundancia<br>deja la tierra otra vez en desorden';
+        displayStoryFirstTill = 'ANTES DE PODER SEMBRAR,<br>HAY QUE LABRAR LA TIERRA<br><br><span class="icon Weeds inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Soil inlineIcon tripleSize"></span><br><br>Con esfuerzo considerable,<br>malas hierbas dan paso al suelo';
+        displayStoryFirstPlant = 'ECHA SU SEMILLA<br>SOBRE LA LABRANZA<br><br><span class="icon Soil inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilSeeded inlineIcon tripleSize"></span><br><br>Gaste un fanega de trigo (' + plantCost + '<span class="icon Wheat inlineIcon"></span>)<br>para sembrar una aranzada de tierra';
+        displayStoryFirstWater = 'TODA VIDA NECESITA<br>AGUA PARA SOBREVIVIR<br><br><span class="icon SoilSeeded inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilWatered inlineIcon tripleSize"></span><br><br>«Bueno, es un trabajo sucio,<br>pero alguien tiene que hacerlo»<br>—Chuck Mosley';
+        displayStoryFirstHarvest = 'ESO UN HOMBRE SEMBRARE,<br>ESO TAMBIÉN SEGARÁ<br><br><span class="icon Crops inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Weeds inlineIcon tripleSize"></span><br><br>La recolección de la abundancia<br>deja la tierra otra vez en desorden';
         displayStoryFirstStorage = 'EXCESO DE GRANO DEBE ALMACENARSE';
         const barterInventoryOlive = (bushelCount[2] < barterMaxBulkCount) ? bushelCount[2] : barterMaxBulkCount;
         const barterValueOlive = barterInventoryOlive * barterExchangeRate[2];
@@ -2229,7 +2253,12 @@ function Translate(language, bark = true) {
         displayStoryPort07 = 'CON ESTA ESTAÑO, LOS ARTESANOS PUEDEN FABRICAR EN MASA ESA ÑAQUE RIDÍCULA Y LLAMATIVA QUE TIENEN UN PRECIO TAN ALTO EN ROMA';
         displayStoryPort08 = 'SAZONARÁS CON SAL TODA OFRENDA DE HARINA QUE HAGAS; NO OMITIRÁS DE TU OFRENDA LA SAL DE TU PACTO CON DIOS; EN TODA TU OFRENDA OFRECERÁS SAL<br><br>LEVÍTICO 2:13';
 
-        if (player.names.length > 1) { displayStoryHeir = 'EL MÉDICO REAL HA SIDO TRAÍDO A VUESTRA CÁMARA BAJO FUERTE GUARDIA.<br><br>TE DICEN QUE EL SENADOR ' + player.names[1].toUpperCase() + ', EL AMADO MAGISTRADO DE LA REGIÓN DE ' + nameVillage.toUpperCase() + ', FALLECIÓ PACÍFICAMENTE MIENTRAS SUEÑA ESTA MAÑANA A LA EDAD DE ' + player.age + ' AÑOS.<br><br>¡SU ÚLTIMO ACTO OFICIAL FUE NOMBRARTE *TU* COMO SUCESOR!'; }
+        if (player.names.length > 1) {
+            let nameToShow = player.names[1].toUpperCase();
+            if (nameToShow == '') { nameToShow = 'NOMENESCIO'; }
+            displayStoryHeir = 'EL MÉDICO REAL HA SIDO TRAÍDO A VUESTRA CÁMARA BAJO FUERTE GUARDIA.<br><br>TE DICEN QUE EL SENADOR ' + nameToShow + ', EL AMADO MAGISTRADO DE LA REGIÓN DE ' + nameVillage.toUpperCase() + ', FALLECIÓ PACÍFICAMENTE MIENTRAS SUEÑA ESTA MAÑANA A LA EDAD DE ' + player.age + ' AÑOS.<br><br>¡SU ÚLTIMO ACTO OFICIAL FUE NOMBRARTE *TU* COMO SUCESOR!';
+        }
+
         displayStorySailWest = 'AHORA, A ZARPAR HACIA LAS TIERRAS IMPERECEDERAS; A ESE GRAN PAÍS NO DESCUBRIDO VOY';
         displayStoryPegasus = 'Te lo traen, golpeando, feroz, desafiante hasta el final, requiriendo toda la fuerza de al menos una docena de matones a sueldo para sujetarlo, atado por esas antiguas cadenas alquímicas, cada eslabón grabado con cien runas brillantes cada uno.<br><br>Sus ojos brillan con cruel inteligencia.<br><br>Ahora... ahora el trabajo puede realmente comenzar.';
         displayStoryPegasusNo = 'Los magos con túnicas menean solemnemente sus ancianas cabezas. «No, Majestad, aún no poseemos las reliquias que necesitamos. Tenga paciencia, Su Alteza.»';
@@ -2441,6 +2470,7 @@ function Translate(language, bark = true) {
         displayToBeContinued = 'Continuará en...';
         displayTheEnd = 'El fin';
         displayThankYouForPlaying = 'Gracias por jugar';
+        displayLabelDownload = 'DESCARGAR DATOS IMPERIO FINALES<br>PARA <b>PRAEDIUM Ⅱ</b> IMPORTACIÓN';
 
         displayForewordA = 'Es el año 200 a.C. y eres un humilde aparcero tartésico que se gana la vida modestamente bajo el brutal sol del Mediterráneo en la Galilea seléucida. Desde el amanecer hasta el anochecer trabajas la implacable tierra calcárea sin nada más que tus propias manos y un palo afilado.';
         displayForewordScripture = '«¡O Creador del mundo material, O Santo! ¿A qué distancia del fuego? ¿A qué distancia del agua? ¿A qué distancia de los manojos consagrados de baresma? ¿A qué distancia de los fieles?»';
@@ -2494,6 +2524,10 @@ function Translate(language, bark = true) {
         displayGenieAlert = 'EL DJINNI DE LA FORTUNA HA MALDECIDO TUS BELLAS TIERRAS PARA CASTIGAR TU CORAZÓN MENTIROSO';
         displayGenieAttempt = 'MALDITA SEA, ERES SOLO UN GLOTÓN DEL CASTIGO, ¿EH?';
         displayGenieCancel = 'No, no, solo bromeando :D';
+
+        displayHintsOn = 'Pistas activadas';
+        displayHintsOff = 'Pistas desactivadas';
+        displayHintsEnd = 'Fin de las pistas';
 
 
 

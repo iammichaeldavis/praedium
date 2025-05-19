@@ -670,6 +670,8 @@ function DismissGameEvent() {
 
 
 function PlotTill(robota = false) {
+    if (hintLevel == 0 || hintLevel == 4) { hintLevel++; }
+
     if (farmStage == 0 && !player.canPlant) {
         player.canPlant = true;
         player.seesInventory = true;
@@ -702,6 +704,8 @@ function PlotTill(robota = false) {
 
 
 function PlotPlant(robota = false) {
+    if (hintLevel == 1 || hintLevel == 5) { hintLevel++; }
+
     if (farmStage == 0 && !player.canWater) {
         player.canWater = true;
         if (player.likesStory) { GameEvent(displayStoryFirstPlant); }
@@ -757,6 +761,8 @@ function PlotPlant(robota = false) {
 
 
 function PlotWater(robota = false) {
+    if (hintLevel == 2 || hintLevel == 6) { hintLevel++; }
+
     if (farmStage == 0 && !player.canHarvest) {
         player.canHarvest = true;
         if (player.likesStory) { GameEvent(displayStoryFirstWater); }
@@ -955,12 +961,14 @@ function PlotHarvest(robota = false) {
             player.canRentWarehouse = true;
             player.seesWarehouse = true;
             if (player.likesStory) { GameEvent(displayStoryFirstStorage); }
+            JumpToBottom();
         }
         if (farmStage == 0 && !player.hasFarmedOnce) {
             player.hasFarmedOnce = true;
             player.canBuyLand = true;
             if (player.likesStory) { GameEvent(displayStoryFirstHarvest); }
         }
+        if (hintLevel == 3 || hintLevel == 7) { hintLevel++; }
         UpdateDisplay();
     }
     return taskComplete;
@@ -1015,6 +1023,7 @@ function BuyLand() {
     else if (farmStage == 0 && bushelCount[0] > priceStage1) {
         if (player.likesStory) { GameEvent(displayStoryFarm0, 'farm_stage_0'); }
         farmStage++;
+        hintLevel++;
         bushelCount[0] -= priceStage1;
         spentCount[0] += priceStage1;
 
@@ -1023,6 +1032,7 @@ function BuyLand() {
     else if (farmStage == 1 && bushelCount[0] > priceStage2) {
         if (player.likesStory) { GameEvent(displayStoryFarm1, 'farm_stage_1'); }
         farmStage++;
+        hintLevel++;
         bushelCount[0] -= priceStage2;
         spentCount[0] += priceStage2;
 
@@ -1034,6 +1044,7 @@ function BuyLand() {
             GameEvent(displayStoryFarm2, 'farm_stage_2');
         }
         farmStage++;
+        hintLevel++;
         bushelCount[0] -= priceStage3;
         spentCount[0] += priceStage3;
 
@@ -1239,6 +1250,7 @@ function RentWarehouse() {
     }
 
     else if (warehouseStage == 0 && bushelCount[0] > priceWarehouse0) {
+        hintLevel++;
         if (player.likesStory) { GameEvent(displayStoryWarehouse0, 'warehouse_stage_0'); }
         bushelCount[0] -= priceWarehouse0;
         spentCount[0] += priceWarehouse0;
@@ -1285,6 +1297,7 @@ function BuyForest() {
         player.canBuyForest = false;
         player.seesForest = true;
         player.seesForestButton = true;
+        JumpToTopPlease();
         UpdateDisplay();
     }
 
@@ -1306,6 +1319,7 @@ function BuyMountain() {
         spentCount[0] += priceQuarry;
         player.canBuyMountain = false;
         player.seesMountain = true;
+        JumpToTopPlease();
         UpdateDisplay();
     }
 
@@ -1586,6 +1600,7 @@ function Found() {
         player.canFound = false;
         player.canBuild = true;
         player.seesVillage = true;
+        JumpToTopPlease();
         UpdateDisplay();
     }
 
@@ -1704,6 +1719,7 @@ function ImproveResidence() {
         residenceImage.src = 'bitmaps/res04.png';
         residenceStage += 1;
         player.hasBakery = true;
+        JumpToBottom();
     }
     else if (residenceStage == 4 && bushelCount[0] > priceResidence04[0] && stoneCount >= priceResidence04[1] && boardsCount >= priceResidence04[2] && bushelCount[2] >= priceResidence04[3]) {
         if (player.likesStory) { GameEvent(displayStoryResidence04); }
@@ -1718,6 +1734,7 @@ function ImproveResidence() {
         residenceImage.src = 'bitmaps/res05.png';
         residenceStage += 1;
         player.hasOliveMill = true;
+        JumpToBottom();
     }
     else if (residenceStage == 5 && bushelCount[0] > priceResidence05[0] && stoneCount >= priceResidence05[1] && boardsCount >= priceResidence05[2] && ingotsCopperCount >= priceResidence05[3]) {
         if (player.likesStory) { GameEvent(displayStoryResidence05); }
@@ -1744,6 +1761,7 @@ function ImproveResidence() {
         spentCount[1] += priceResidence06[3];
         residenceStage += 1;
         player.hasBrewery = true;
+        JumpToBottom();
     }
     else if (residenceStage == 7 && bushelCount[0] > priceResidence07[0] && stoneCount >= priceResidence07[1] && boardsCount >= priceResidence07[2] && bushelCount[6] >= priceResidence07[3]) {
         if (player.likesStory) { GameEvent(displayStoryResidence07); }
@@ -1757,6 +1775,7 @@ function ImproveResidence() {
         spentCount[6] += priceResidence07[3];
         residenceStage += 1;
         player.hasWinery = true;
+        JumpToBottom();
     }
     else if (residenceStage == 8 && bushelCount[0] > priceResidence08[0] && stoneCount >= priceResidence08[1] && boardsCount >= priceResidence08[2] && bushelCount[3] >= priceResidence08[3]) {
         if (player.likesStory) { GameEvent(displayStoryResidence08); }
@@ -1770,6 +1789,7 @@ function ImproveResidence() {
         spentCount[3] += priceResidence08[3];
         residenceStage += 1;
         player.hasKitchen = true;
+        JumpToBottom();
     }
     else if (residenceStage == 9 && bushelCount[0] > priceResidence09[0] && stoneCount >= priceResidence09[1] && boardsCount >= priceResidence09[2] && bushelCount[5] >= priceResidence09[3]) {
         if (player.likesStory) { GameEvent(displayStoryResidence09); }
@@ -1783,6 +1803,7 @@ function ImproveResidence() {
         spentCount[5] += priceResidence09[3];
         residenceStage += 1;
         player.hasPress = true;
+        JumpToBottom();
     }
     else if (residenceStage == 10 && bushelCount[0] > priceResidence10[0] && stoneCount >= priceResidence10[1] && boardsCount >= priceResidence10[2] && bushelCount[4] >= priceResidence10[3]) {
         if (player.likesStory) { GameEvent(displayStoryResidence10); }
@@ -1796,6 +1817,7 @@ function ImproveResidence() {
         spentCount[4] += priceResidence10[3];
         residenceStage += 1;
         player.hasGreenhouse = true;
+        JumpToBottom();
     }
     else if (residenceStage == 11 && bushelCount[0] > priceResidence11[0] && stoneCount >= priceResidence11[1] && boardsCount >= priceResidence11[2] && ingotsCopperCount >= priceResidence11[3]) {
         if (player.likesStory) { GameEvent(displayStoryResidence11); }
@@ -1822,6 +1844,7 @@ function ImproveResidence() {
         mountainSpentCount[3] += priceResidence12[3];
         residenceStage += 1;
         player.hasAtelier = true;
+        JumpToBottom();
     }
     else if (residenceStage == 13 && asCount >= priceResidence13[0] && stoneCount >= priceResidence13[1] && boardsCount >= priceResidence13[2] && ingotsBronzeCount >= priceResidence13[3] && crystalsCount >= priceResidence13[4] && residenceInStockCount[8] >= priceResidence13[5]) {
         if (player.likesStory) { GameEvent(displayStoryResidence13); }
@@ -1849,6 +1872,7 @@ function ImproveResidence() {
         commercialLifetimeSpend += priceResidence14[0];
         residenceStage++;
         player.hasApiary = true;
+        JumpToBottom();
     }
     else if (residenceStage == 15) {
         if (player.likesStory) { GameEvent(displayStoryResidence15); }
@@ -1878,6 +1902,7 @@ function ImproveResidence() {
         spentCount[7] += priceResidence18[1];
         residenceStage++;
         player.hasCottage = true;
+        JumpToBottom();
     }
     else if (residenceStage == 19 && player.hasHospital) {
         if (player.likesStory) { GameEvent(displayStoryResidence19); }
@@ -3337,8 +3362,12 @@ function FarmersEvents() {
         lastString += '<br><br><br><br>';
         lastString += '<b>' + displayTheEnd + '</b>';
         lastString += '<br><br>';
+        lastString += '<br><br>';
         lastString += displayThankYouForPlaying;
         lastString += ' 🙏';
+        lastString += '<br><br>';
+        lastString += '<br><br>';
+        lastString += '<button onclick="WriteReportToDisk(true);">' + displayLabelDownload + '</button>';
         lastString += '</div></div></div>';
         //lastString += '<canvas id="canvasFireworks"></canvas>';
         divEndingBackdrop.innerHTML = lastString;
@@ -3391,29 +3420,12 @@ function Info() {
 
 
 
-//function Help() {
-//    let hintedElement = null; <- this needs to go to init, of course
-//    hintedElement = buttonTill;
-//    //keep track of what WOULD need a hint. so hintLevel is 0, successfully pressing Till for the very
-//    //first time changes it to 1, so the game just keeps track of what SHOULD be the hintedElement target
-//
-//    if (!player.seesHint) {
-//        player.seesHint = true;
-//        hintedElement.classList.add('hinted');
-//        alert('Hints are not working yet 😬 click [?] again to turn off');
-//    }
-//    else {
-//        player.seesHint = false;
-//        hintedElement.classList.remove('hinted');
-//    }
-//    /*
-//    maybe on ANY click or tap of any kind, it turns off the hint? so just have 
-//    a global clicker catch, like....... just onClick in a general sense, not the onClick
-//    of any specific element
-//    like how the wheat sparkle updates on every keypress... there's a general keyPress catch,
-//    then a function that sorts it out, there's most likely something similar for click/taps 
-//    */
-//}
+function Help() {
+    player.seesHint = !player.seesHint;
+    //if (player.seesHint) { alert(displayHintsOn); }
+    //else { alert(displayHintsOff); }
+    UpdateDisplay();
+}
 
 
 

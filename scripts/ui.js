@@ -260,6 +260,7 @@ function UpdateDisplay() {
     UpdateCalendar();
     UpdateText();
     UpdateVisibilities();
+    UpdateHint();
     RedrawCanvases();
 }
 
@@ -281,7 +282,7 @@ function UpdateCalendar() {
     if (week > 39) { chosenRune = arraySeasonalGods.æolus; }
     else if (week > 26) { chosenRune = arraySeasonalGods.bacchus; }
     else if (week > 13) { chosenRune = arraySeasonalGods.ceres; }
-    divRuneSeason.style.backgroundPosition = chosenRune[0] * pixelScale + 'px ' + chosenRune[1] * pixelScale + 'px';
+    divRuneSeason.style.backgroundPosition = (chosenRune[0] * pixelScale) + 'px ' + (chosenRune[1] * pixelScale) + 'px';
 
     const arraySeasonStones = {
         alpha: [-272, -16],
@@ -311,7 +312,7 @@ function UpdateCalendar() {
     else if (week % 13 == 9) { chosenStone = arraySeasonStones.iota; }
     else if (week % 13 == 10) { chosenStone = arraySeasonStones.kappa; }
     else if (week % 13 == 11) { chosenStone = arraySeasonStones.lambda; }
-    divStonesSeason.style.backgroundPosition = chosenStone[0] * pixelScale + 'px ' + chosenStone[1] * pixelScale + 'px';
+    divStonesSeason.style.backgroundPosition = (chosenStone[0] * pixelScale) + 'px ' + (chosenStone[1] * pixelScale) + 'px';
 
     const arrayZodiacChinese = {
         rat: [0, -48],
@@ -340,7 +341,7 @@ function UpdateCalendar() {
     else if (thisCalculatedYear % 12 == 8) { chosenEmboss = arrayZodiacChinese.dragon; }
     else if (thisCalculatedYear % 12 == 9) { chosenEmboss = arrayZodiacChinese.snake; }
     else if (thisCalculatedYear % 12 == 10) { chosenEmboss = arrayZodiacChinese.horse; }
-    divEmbossZodiacChinese.style.backgroundPosition = chosenEmboss[0] * pixelScale + 'px ' + chosenEmboss[1] * pixelScale + 'px';
+    divEmbossZodiacChinese.style.backgroundPosition = (chosenEmboss[0] * pixelScale) + 'px ' + (chosenEmboss[1] * pixelScale) + 'px';
 
     const arraySeasonalEmboss = {
         spring: [-384, -48],
@@ -352,7 +353,7 @@ function UpdateCalendar() {
     if (week > 39) { chosenEmboss = arraySeasonalEmboss.winter; }
     else if (week > 26) { chosenEmboss = arraySeasonalEmboss.autumn; }
     else if (week > 13) { chosenEmboss = arraySeasonalEmboss.summer; }
-    divEmbossSeason.style.backgroundPosition = chosenEmboss[0] * pixelScale + 'px ' + chosenEmboss[1] * pixelScale + 'px';
+    divEmbossSeason.style.backgroundPosition = (chosenEmboss[0] * pixelScale) + 'px ' + (chosenEmboss[1] * pixelScale) + 'px';
 
     const weekStones = {
         alpha: [-480, 0],
@@ -364,7 +365,7 @@ function UpdateCalendar() {
     if (week % 4 == 0) { chosenStone = weekStones.delta; }
     else if (week % 4 == 1) { chosenStone = weekStones.alpha; }
     else if (week % 4 == 2) { chosenStone = weekStones.beta; }
-    divStonesWeek.style.backgroundPosition = chosenStone[0] * pixelScale + 'px ' + chosenStone[1] * pixelScale + 'px';
+    divStonesWeek.style.backgroundPosition = (chosenStone[0] * pixelScale) + 'px ' + (chosenStone[1] * pixelScale) + 'px';
 
     const arrayClassicalElements = {
         earth: [-400, 0],
@@ -438,8 +439,13 @@ function UpdateCalendar() {
         chosenElement = arrayClassicalElements.air;
         chosenRune = arrayZodiacSidereal.feb;
     }
-    divRuneMonth.style.backgroundPosition = chosenRune[0] * pixelScale + 'px ' + chosenRune[1] * pixelScale + 'px';
-    divRuneElement.style.backgroundPosition = chosenElement[0] * pixelScale + 'px ' + chosenElement[1] * pixelScale + 'px';
+    divRuneMonth.style.backgroundPosition = (chosenRune[0] * pixelScale) + 'px ' + (chosenRune[1] * pixelScale) + 'px';
+    divRuneElement.style.backgroundPosition = (chosenElement[0] * pixelScale) + 'px ' + (chosenElement[1] * pixelScale) + 'px';
+
+    if (player.isGod) {
+        divEmbossZodiacChinese.style.backgroundPosition = (-208 * pixelScale) + 'px ' + (-304 * pixelScale) + 'px';
+        divEmbossSeason.style.backgroundPosition = (-240 * pixelScale) + 'px ' + (-304 * pixelScale) + 'px';
+    }
 }
 
 
@@ -4624,6 +4630,53 @@ function UpdateVisibilities() {
 
     else if (player.isAt == 'Farmers') {
         buttonFarmersEvents.style.display = !player.hasBeenReceived ? 'none' : '';
+    }
+}
+
+
+
+function UpdateHint() {
+    if (hintLevel != 13) {
+        let hintedElementFound = null;
+        if (hintLevel == 0) { hintedElementFound = buttonTill; }
+        else if (hintLevel == 1) { hintedElementFound = buttonPlant; }
+        else if (hintLevel == 2) { hintedElementFound = buttonWater; }
+        else if (hintLevel == 3) { hintedElementFound = buttonHarvest; }
+        else if (hintLevel == 4) { hintedElementFound = buttonTill; }
+        else if (hintLevel == 5) { hintedElementFound = buttonPlant; }
+        else if (hintLevel == 6) { hintedElementFound = buttonWater; }
+        else if (hintLevel == 7) { hintedElementFound = buttonHarvest; }
+        else if (hintLevel == 8) { hintedElementFound = buttonRentWarehouse; }
+        else if (hintLevel > 8 && hintLevel < 12) { hintedElementFound = buttonBuyLand; }
+        else if (hintLevel == 12) { hintedElementFound = buttonRentWarehouse; }
+
+        if (hintedElementPrevious != null && hintedElementPrevious != hintedElementFound) {
+            hintedElementPrevious.classList.remove('hinted');
+            hintedElementPrevious.classList.remove('hintedBW');
+        }
+        if (player.seesHint) { hintedElementFound.classList.add('hinted'); }
+        else {
+            hintedElementFound.classList.remove('hinted');
+            hintedElementFound.classList.remove('hintedBW');
+        }
+
+        if (hintLevel == 12) {
+            hintedElementFound.classList.remove('hinted');
+            //if (player.seesHint) { alert(displayHintsEnd); }
+            player.seesHint = false;
+            buttonQ.style.display = 'none';
+            hintLevel++;
+        }
+
+        if ((hintLevel == 3 || hintLevel == 7) && player.seesHint) {
+            if (buttonHarvest.classList.contains('disabled')) {
+                hintedElementFound.classList.remove('hinted');
+                hintedElementFound.classList.add('hintedBW');
+            }
+            else { hintedElementFound.classList.remove('hintedBW'); }
+        }
+
+        hintedElementPrevious = hintedElementFound;
     }
 }
 
@@ -9872,7 +9925,6 @@ class Rocket {
 
 
 let rockets = [];
-
 function AnimateFireworks() {
     requestAnimationFrame(AnimateFireworks);
     canvasFireworksContext.fillStyle = 'rgba(0, 0, 0, 0.1)';

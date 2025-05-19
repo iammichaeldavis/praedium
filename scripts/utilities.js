@@ -240,6 +240,7 @@ function ContinuePreviousGame() {
         warehouseStage = loadedReport.stages[1];
         residenceStage = loadedReport.stages[2];
         villageStage = loadedReport.stages[3];
+        hintLevel = loadedReport.stages[4];
         /////////////////////////////////////////////////////////////////////////////////////////
         mapProvinces[1][2] = loadedReport.relations[0];
         mapProvinces[2][2] = loadedReport.relations[1];
@@ -460,6 +461,7 @@ function ContinuePreviousGame() {
         if (!player.likesProfanity) { toggleProfanity.checked = false; }
         if (player.hasBecomeHeir) { buttonReturnToMap.style.display = 'inline-block'; }
         if (villageStage > 10) { buttonBuyStone.classList.add('BuyStoneMarginOverrideClass'); }
+        if (hintLevel == 13) { buttonQ.style.display = 'none'; }
         Translate(player.speaks, false); // populates the map details header correctly
         StartTime(); // ...and everything *should* just work 🤞😬
     }
@@ -485,6 +487,13 @@ function JumpToTopPlease() {
 
 
 
+function JumpToBottom() {
+    divGameWindow.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+
+
 function Achievement() {
     if (player.likesSounds) { achievementSoundRare.play(); }
     document.querySelector('.achievement').classList.add('rare');
@@ -501,7 +510,7 @@ function Achievement() {
 
 
 
-function WriteReportToDisk() {
+function WriteReportToDisk(gameOver = false) {
     const d = new Date();
     let stamp = d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate() + '.';
     let hour = d.getHours();
@@ -511,7 +520,7 @@ function WriteReportToDisk() {
     let second = d.getSeconds();
     if (second < 10) { second = '0' + second; }
     stamp += hour + minute + ';' + second;
-    const filename = 'PRADIUM_FULL_REPORT_' + stamp;
+    let filename = 'PRAEDIUM_FULL_REPORT-' + stamp;
 
     const JSONToFile = (obj, filename) => {
         const blob = new Blob([JSON.stringify(obj, null, 2)], {
@@ -524,6 +533,12 @@ function WriteReportToDisk() {
         a.click();
         URL.revokeObjectURL(url);
     };
+
+    if (gameOver) {
+        stamp = d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate();
+        filename = 'PRAEDIUM Final Empire Export (' + stamp + ')';
+        if (player.speaks == 'Spanish') { filename = 'PRAEDIUM Exportación Imperio Final (' + stamp + ')'; }
+    }
 
     JSONToFile(CollateGameStateReport(), filename);
 }
@@ -611,7 +626,7 @@ function CollateGameStateReport(loud = false) {
         counts: integerCounts,
         farmland: farmlandArrays,
         hero: player,
-        stages: [farmStage, warehouseStage, residenceStage, villageStage,],
+        stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel],
         relations: [mapProvinces[1][2], mapProvinces[2][2], mapProvinces[3][2],],
         timestamp: Date(),
         v: version,

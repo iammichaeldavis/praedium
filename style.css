@@ -489,24 +489,105 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 .hinted {
     --hint_border_angle: 0turn;
-    /* For animation */
     --hint_main_bg: conic-gradient(from var(--hint_border_angle),
             #213,
             #112 5%,
             #112 60%,
             #213 95%);
-    border: solid calc(5px * var(--pixel-scale)) transparent;
     --hint_border_ramp: conic-gradient(from var(--hint_border_angle),
             transparent 25%,
             #08f,
             #f03 99%,
             transparent);
+    --hint_inside_bg: conic-gradient(from var(--hint_border_angle),
+            #fefefe,
+            #eaeaea 5%,
+            #eaeaea 60%,
+            #fefefe 95%);
+    border: solid calc(5px * var(--pixel-scale)) transparent;
     background:
-        /* padding-box clip this background in to the overall element except the border */
-        var(--hint_main_bg) padding-box,
-        /* border-box extends this background to the border space */
+        var(--hint_inside_bg) padding-box,
         var(--hint_border_ramp) border-box,
-        /* Duplicate main background to fill in behind the gradient border. You can remove this if you want the border to extend "outside" the box background */
+        var(--hint_main_bg) border-box;
+    background-position: center center;
+    animation: spin_hint 3s linear infinite;
+}
+
+.hinted:hover {
+    --hint_border_angle: 0turn;
+    --hint_main_bg: conic-gradient(from var(--hint_border_angle),
+            #555,
+            #444 5%,
+            #444 60%,
+            #555 95%);
+    --hint_border_ramp: conic-gradient(from var(--hint_border_angle),
+            transparent 25%,
+            #3bf,
+            #f36 99%,
+            transparent);
+    --hint_inside_bg: conic-gradient(from var(--hint_border_angle),
+            #fff,
+            #eee 5%,
+            #eee 60%,
+            #fff 95%);
+    border: solid calc(5px * var(--pixel-scale)) transparent;
+    background:
+        var(--hint_inside_bg) padding-box,
+        var(--hint_border_ramp) border-box,
+        var(--hint_main_bg) border-box;
+    background-position: center center;
+    animation: spin_hint 3s linear infinite;
+}
+
+.hinted:active {
+    --hint_border_angle: 0turn;
+    --hint_main_bg: conic-gradient(from var(--hint_border_angle),
+            #111,
+            #000 5%,
+            #000 60%,
+            #111 95%);
+    --hint_border_ramp: conic-gradient(from var(--hint_border_angle),
+            transparent 25%,
+            #06d,
+            #d01 99%,
+            transparent);
+    --hint_inside_bg: conic-gradient(from var(--hint_border_angle),
+            #dedede,
+            #cdcdcd 5%,
+            #cdcdcd 60%,
+            #dedede 95%);
+    border: solid calc(5px * var(--pixel-scale)) transparent;
+    background:
+        var(--hint_inside_bg) padding-box,
+        var(--hint_border_ramp) border-box,
+        var(--hint_main_bg) border-box;
+    background-position: center center;
+    animation: spin_hint 3s linear infinite;
+}
+
+.hintedBW,
+.hintedBW:hover,
+.hintedBW:active {
+    --hint_border_angle: 0turn;
+    --hint_main_bg: conic-gradient(from var(--hint_border_angle),
+            #222,
+            #111 5%,
+            #111 60%,
+            #222 95%);
+    --hint_border_ramp: conic-gradient(from var(--hint_border_angle),
+            transparent 25%,
+            #999,
+            #888 99%,
+            transparent);
+    --hint_inside_bg: conic-gradient(from var(--hint_border_angle),
+            #dddddd,
+            #cccccc 5%,
+            #cccccc 60%,
+            #dddddd 95%);
+    border: solid calc(5px * var(--pixel-scale)) transparent;
+    background:
+        var(--hint_inside_bg) padding-box,
+        var(--hint_border_ramp) border-box,
         var(--hint_main_bg) border-box;
     background-position: center center;
     animation: spin_hint 3s linear infinite;
@@ -1731,7 +1812,7 @@ td {
 }
 
 .tutorialSell {
-    margin: 0 2vw calc(29px * var(--pixel-scale)) 2vw;
+    margin: 0 2vw calc(13px * var(--pixel-scale)) 2vw;
 }
 
 
@@ -3120,7 +3201,6 @@ td {
 /* // DEPRECATED ELEMENTS /////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
-#buttonQ,
 #labelToggleAnimation,
 #toggleAnimation,
 #labelToggleProfanity,

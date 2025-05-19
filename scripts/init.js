@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.15.09-F';
+const version = '1.16.00-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -1070,6 +1070,9 @@ let gameEventContainer = '';
 
 let aguaAnimString = 'url(bitmaps/agua_anim.gif)';
 let aguaStillString = 'url(bitmaps/agua_still.gif)';
+
+let hintedElementPrevious = null;
+let hintLevel = 0;
 
 
 
