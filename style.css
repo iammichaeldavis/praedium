@@ -74,7 +74,8 @@ table,
 tr,
 td,
 td div,
-canvas {
+canvas,
+img {
     pointer-events: none;
     touch-action: none;
 }
@@ -119,6 +120,7 @@ button:active {
 
 #divGameWindow button span {
     z-index: 50;
+    user-select: none;
 }
 
 
@@ -1670,6 +1672,7 @@ td {
 #tableImports {
     border: calc(1px * var(--pixel-scale)) solid black;
     margin-bottom: 3.2vw;
+    user-select: none;
 }
 
 #tableImports {
@@ -1679,6 +1682,7 @@ td {
 #tableExports table,
 #tableImports table {
     border: calc(1px * var(--pixel-scale)) solid black;
+    user-select: none;
 }
 
 #tableExports td,
@@ -1750,6 +1754,7 @@ td {
 #tableMinersReport,
 #tableMinersStaff {
     border: calc(1px * var(--pixel-scale)) solid black;
+    user-select: none;
 }
 
 #tableShepherdsReport,
@@ -2997,6 +3002,7 @@ td {
     width: 64%;
     margin: 6.4vw auto;
     padding: 1vw;
+    user-select: none;
 }
 
 #divMapDetailsView.mapDetailsEconomic {
