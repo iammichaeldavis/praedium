@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.16.00-C';
+const version = '1.16.01-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -811,6 +811,8 @@ let pilgrimPrayerValue = 1;
 let pilgrimLifetimeIncome = 0;
 let relicSpawnCount = 1;
 let relicCount = 0;
+let messiahSpawnCount = 1;
+let messiahCount = 0;
 
 const commodityBulkCount = 10000;
 const commodityHorseCount = 10;
@@ -979,6 +981,7 @@ const policeCost = 2;
 const minersInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 const minersProduction = [1, 5, 10, 1, 5, 10, 15, 5, 25, 50, 50,];
 const minersCost = [200, 100, 250000,];
+const minersCount = 3600;
 
 // 0. XXX, 1. XXX, 2. XXX, 3. XXX, 4. XXX, 5. XXX, 6. XXX, 7. XXX, 8. XXX, 9. XXX, 10. XXX
 const farmersInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];

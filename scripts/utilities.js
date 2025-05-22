@@ -73,6 +73,8 @@ function ContinuePreviousGame() {
         player.title = loadedReport.hero.title;
         player.saṃsāra = loadedReport.hero.saṃsāra;
 
+        //player.speaks = loadedReport.hero.speaks;
+
         player.likesMusic = loadedReport.hero.likesMusic;
         player.likesSounds = loadedReport.hero.likesSounds;
         player.likesAnimations = loadedReport.hero.likesAnimations;
@@ -82,6 +84,7 @@ function ContinuePreviousGame() {
         player.likesDelay = loadedReport.hero.likesDelay;
 
         //player.isOnMobile = loadedReport.hero.isOnMobile;
+        //player.isGod = loadedReport.hero.isGod;
         //player.isDegreeless = loadedReport.hero.isDegreeless;
         //player.isKonamified = loadedReport.hero.isKonamified;
         //player.isAt = loadedReport.hero.isAt;
@@ -373,6 +376,7 @@ function ContinuePreviousGame() {
         ghostsCount = loadedReport.counts.villageInventory[5];
         patientsCount = loadedReport.counts.villageInventory[6];
         relicCount = loadedReport.counts.villageInventory[7];
+        messiahCount = loadedReport.counts.villageInventory[8];
         horsesSpawn = loadedReport.counts.villageState[0];
         horsesStarving = loadedReport.counts.villageState[1];
         beadsSpawn = loadedReport.counts.villageState[2];
@@ -390,6 +394,7 @@ function ContinuePreviousGame() {
         relicSpawnCount = loadedReport.counts.villageDetritus[6];
         horsesBought = loadedReport.counts.villageDetritus[7];
         horsesSold = loadedReport.counts.villageDetritus[8];
+        messiahSpawnCount = loadedReport.counts.villageDetritus[9];
 
         CloneArray(loadedReport.counts.portDuration, shipmentDuration);
         CloneArray(loadedReport.counts.portYields[0], wheatValuePerUnit);
@@ -595,10 +600,10 @@ function CollateGameStateReport(loud = false) {
         villageFiat: [asCount, asSpent, rentPrice, taxesValue, interestRate, tourismValue, actualBushelPrice, currentBushelPrice, actualBarleyAdjustment, currentBarleyAdjustment, valueInWheat1Log, valueInWheat1Board, valueInWheat1Stone,],
         villageEarn: [rentLifetimeCollected, taxesLifetimeCollected, interestLifetimeCollected, tourismLifetimeProfit, pilgrimLifetimeIncome, marketLifetimeRevenue,],
         villageSpend: [commercialLifetimeSpend, commoditiesLifetimeSpend, militaryLifetimeCost, medicalLifetimeCost, tributeLifetimePaid,],
-        villageInventory: [horsesCount, beadsCount, trophiesCount, scrollsCount, ratsCount, ghostsCount, patientsCount, relicCount,],
+        villageInventory: [horsesCount, beadsCount, trophiesCount, scrollsCount, ratsCount, ghostsCount, patientsCount, relicCount, messiahCount,],
         villageState: [horsesSpawn, horsesStarving, beadsSpawn, trophiesSpawn, scrollsSpawn, ratsSpawn,],
         villageCounters: [horseClock, tributeTimer,],
-        villageDetritus: [horsesIncAmount, horsesEaten, trophyChance, ratsHighScore, patientCost, pilgrimPrayerValue, relicSpawnCount, horsesBought, horsesSold,],
+        villageDetritus: [horsesIncAmount, horsesEaten, trophyChance, ratsHighScore, patientCost, pilgrimPrayerValue, relicSpawnCount, horsesBought, horsesSold, messiahSpawnCount,],
 
         portDuration: shipmentDuration,
         portYields: [wheatValuePerUnit, valueFactor, importCost, importAmount,],

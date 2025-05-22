@@ -101,6 +101,7 @@ buttonPlayGod.addEventListener('click', function () { PlayGod(); });
 document.body.onkeyup = function (e) {
     if (e.key == '~') {
         player.isGod = !player.isGod;
+        player.likesDelay = !player.isGod;
         if (player.isGod) { SystemMessage('<div id="divSoyMessage">☛ I Am Soy ☚</div>And that means all bets are *off*, partner'); }
         else { SystemMessage('<div id="divSoyMessage">☞ I Ain’t No Soy ☜</div>But don’t you think for one second any bets are suddenly now back *on*, Buster Brown'); }
     }
