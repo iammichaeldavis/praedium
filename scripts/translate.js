@@ -40,6 +40,7 @@ let displaySold = '';
 let displaySoldAbbr = '';
 let displayGood = '';
 let displayProduced = '';
+let displayDispensed = '';
 let displayScore = '';
 let displayHomers = '';
 let displayUnits = '';
@@ -293,6 +294,7 @@ let displayStoryNotEnoughWarehouse = '';
 let displayStoryNotEnoughAbacus = '';
 let displayStoryNotEnoughTown = '';
 let displayStoryNotEnoughGeneral = '';
+let displayStoryNotEnoughFish = '';
 let displayStoryPoorWheat = '';
 let displayStoryPoorFarm = '';
 let displayStoryPoorHire = '';
@@ -458,6 +460,9 @@ let displayStoryPegasusNo = '';
 
 let displayNamePlayer = '';
 
+let displayLeaveStore = '';
+let displayGoHome = '';
+let displayGoFishing = '';
 let displayGoToPraediumFromRes = '';
 let displayGoToResidence = '';
 let displayGoToTownship = '';
@@ -602,8 +607,10 @@ let displayMapDetailsTitlePol = '';
 let displayMapDetailsEconLiquidBar = '';
 let displayNaturalResources = '';
 let displayCrops = '';
+let displayLivestock = '';
 let displayManufacturedProducts = '';
 let displaySacredItems = '';
+let displaySecondaryProducts = '';
 let displayRelationshipWith = '';
 let displayMapVisit = '';
 
@@ -690,6 +697,60 @@ let displayGenieCancel = '';
 let displayHintsOn = '';
 let displayHintsOff = '';
 let displayHintsEnd = '';
+
+let displayStoryFishFirstVisit = '';
+let displayFishFish = '';
+let displayFishBegin = '';
+let displayFishPull = '';
+let displayFishWait = '';
+let displayFishMiss = '';
+let displayFishCatchGood = '';
+let displayFishCatchGreat = '';
+let displayFishReady = '';
+let displayFishTimeLeft = '';
+let displayFishCurrentSesh = '';
+let displayFishPreviousSesh = '';
+let displayFishRecords = '';
+let displayFishFishery = '';
+let displayFishFilets = '';
+let displayLabelBuildWharf = '';
+let displayLabelVisitWharf = '';
+let displayLabelWharfUnlockA = '';
+let displayLabelWharfUnlockB = '';
+let displayLabelWharfUnlockBsing = '';
+let displayStoryWharf = '';
+let displayStoryWharfFirstVisit = '';
+let displayCatchReportTitle = '';
+let displayCatchReportYouCaught = '';
+let displayCatchReportYouMissed = '';
+let displayCatchReportTimes = '';
+let displayCatchReportTime = '';
+let displayCatchReportAnd = '';
+let displayCatchReportFishesEscaped = '';
+let displayCatchReportFishEscaped = '';
+let displayCatchReportTotal = '';
+let displayCatchReportSpecies = '';
+let displayCatchReportCount = '';
+let displayCatchReportYield = '';
+let displayCatchReportMinnow = '';
+let displayCatchReportTilapia = '';
+let displayCatchReportBream = '';
+let displayWharfPosca = '';
+let displayWharfPrey = '';
+let displayWharfChum = '';
+let displayWharfKnife = '';
+let displayWharfBait = '';
+let displayWharfRod = '';
+let displayWharfEnvironment = '';
+let displayWharfChewTheFat = '';
+let displayStoryWharfBuyPosca = '';
+let displayStoryWharfBuyPrey = '';
+let displayStoryWharfBuyChum = '';
+let displayStoryWharfBuyKnife = '';
+let displayStoryWharfBuyBait = '';
+let displayStoryWharfBuyRod = '';
+let displayStoryWharfBuyWWF = '';
+let displayTrophyEarned = '';
 
 
 
@@ -951,6 +1012,7 @@ function Translate(language, bark = true) {
         displaySoldAbbr = 'Sold';
         displayGood = 'Good';
         displayProduced = 'Produced';
+        displayDispensed = 'Dispensed';
         displayScore = 'Score';
         displayHomers = 'Homers';
         displayUnits = 'Units';
@@ -1206,6 +1268,7 @@ function Translate(language, bark = true) {
         displayStoryNotEnoughAbacus = '“WHY, WHAT SORT OF ACTUARY WOULD I BE IF I ALLOWED YOU TO SPEND YOUR VERY LAST GRAIN OF WHEAT! PLEASE COME BACK WHEN YOU HAVE BUT AT LEAST A LITTLE MORE, TO TRULY AFFORD MY SERVICES”';
         displayStoryNotEnoughTown = 'YOUR ARCHITECT TAKES YOU BY THE ARM: “BEGGING YOUR PARDON, YOUR GRACE, BUT I AM AFRAID IF YOU WERE TO SPEND YOUR VERY LAST GRAIN OF WHEAT, YOUR FARMING OPERATION WOULD NOT BE ABLE TO CONTINUE. HAVE PATIENCE, YOU WILL VERY SOON BE ABLE TO AFFORD THE PRICE”';
         displayStoryNotEnoughGeneral = 'A NEARBY WORKER STOPS YOU: “MY FRIEND, IF YOU SPEND YOUR VERY LAST GRAIN OF WHEAT, HOW WILL YOU SEED YOUR FIELDS?”';
+        displayStoryNotEnoughFish = 'THE CRUSTY OLD HARBOURMASTER PULLS YOU ASIDE: “NOW LISTEN, YE LANDLUBBER YE, IF YOU SPEND YOUR LAST BUSHEL OF WHEAT YOU WON’T BE ABLE TO CONTINUE FARMING! THINK, FIRST, HUH?”'
         displayStoryPoorWheat = 'YOU NEED MORE WHEAT, EFFENDI';
         displayStoryPoorFarm = 'YOU CAN NOT AFFORD THIS, EFFENDI';
         displayStoryPoorHire = 'WE CAN NOT AFFORD TO BRING ON A NEW MAN RIGHT NOW';
@@ -1377,6 +1440,10 @@ function Translate(language, bark = true) {
 
         displayNamePlayer = '“What is your name, citizen?”';
 
+        displayLeaveStore = '↓ EXIT THE STORE';
+        displayGoHome = 'HEAD ON HOME →';
+        displayGoFishing = '← GO FISHIN’';
+        if (player.seesVillage) { displayGoFishing = '← GO FISHING'; }
         displayGoToPraediumFromRes = 'GO BACK TO YOUR LANDS →';
         displayGoToResidence = '← GO TO YOUR RESIDENCE';
         displayGoToTownship = 'GO TO TOWNSHIP →';
@@ -1524,8 +1591,10 @@ function Translate(language, bark = true) {
         displayMapDetailsEconLiquidBar = 'LIQUID CAPITAL';
         displayNaturalResources = 'NATURAL<br>RESOURCES';
         displayCrops = 'CROPS';
+        displayLivestock = 'LIVESTOCK';
         displayManufacturedProducts = 'MANUFACTURED<br>PRODUCTS';
         displaySacredItems = 'SACRED OBJECTS';
+        displaySecondaryProducts = 'BYPRODUCTS';
         displayRelationshipWith = 'RELATIONSHIP WITH';
         displayMapVisit = 'VISIT';
 
@@ -1625,6 +1694,60 @@ function Translate(language, bark = true) {
         displayHintsOn = 'Hints on';
         displayHintsOff = 'Hints off';
         displayHintsEnd = 'End of hints';
+
+        displayStoryFishFirstVisit = 'AH, THE SIMPLE PLEASURE OF A DAY SPENT AT THE CREEK... ONE OF THE LAST THINGS YOUR FATHER TAUGHT YOU BEFORE HIS UNTIMELY DEMISE<br><br>(Employees Who Receive Fish With Their Pay Work Twice As Hard)';
+        displayFishFish = 'FISH';
+        displayFishBegin = 'BEGIN FISHING';
+        displayFishPull = 'PULL!!!';
+        displayFishWait = 'wait...';
+        displayFishMiss = 'missed!...';
+        displayFishCatchGood = 'GOOD CATCH!';
+        displayFishCatchGreat = 'GREAT CATCH!!!';
+        displayFishReady = 'READY?';
+        displayFishTimeLeft = 'TIME LEFT';
+        displayFishCurrentSesh = 'Current Session';
+        displayFishPreviousSesh = 'Previous Session';
+        displayFishRecords = 'Lifetime Records';
+        displayFishFishery = 'Fishery';
+        displayFishFilets = 'Filets';
+        displayLabelBuildWharf = 'BUILD A WHARF';
+        displayLabelVisitWharf = 'VISIT THE WHARFINGER’S OFFICE';
+        displayLabelWharfUnlockA = 'unlocks: after';
+        displayLabelWharfUnlockB = 'more catches';
+        displayLabelWharfUnlockBsing = 'more catch';
+        displayStoryWharf = 'THESE BUILDERS WANT TO REVIEW THE PLANS FOR DRIVING THE PYLONS... WELL THE COSTS SURE KEEP PILING ON, LET ME TELL YOU';
+        displayStoryWharfFirstVisit = 'WOW, THIS PLACE STINKS';
+        displayCatchReportTitle = 'Levantine Fish & Wildlife Conservation Commission — Post-Catch Report';
+        displayCatchReportYouCaught = 'You caught';
+        displayCatchReportYouMissed = 'You missed';
+        displayCatchReportTimes = 'times';
+        displayCatchReportTime = 'time';
+        displayCatchReportAnd = 'and';
+        displayCatchReportFishesEscaped = 'fish escaped';
+        displayCatchReportFishEscaped = 'fish escaped';
+        displayCatchReportTotal = 'Your total bounty is';
+        displayCatchReportSpecies = 'Species';
+        displayCatchReportCount = 'Count';
+        displayCatchReportYield = 'Yield';
+        displayCatchReportMinnow = 'Minnow';
+        displayCatchReportTilapia = 'Tilapia';
+        displayCatchReportBream = 'Goliath Bream';
+        displayWharfPosca = 'QUAFF A MUG OF POSCA<br>(req. brewery)';
+        displayWharfPrey = 'STOCK RIVER WITH PREY<br>(req. 20 minnows)';
+        displayWharfChum = 'CHUM THE WATERS<br>(req. 10 tilapia)';
+        displayWharfKnife = 'FORGE STARMETAL BONING KNIFE<br>(req. blacksmith)';
+        displayWharfBait = 'IMPORT LEGENDARY BAIT<br>(req. marketplace)';
+        displayWharfRod = 'ENCHANT THY ROD<br>(req. temple)';
+        displayWharfEnvironment = 'REJUVENATE ENVIRONMENT<br>(req. university)';
+        displayWharfChewTheFat = 'CHEW THE FAT';
+        displayStoryWharfBuyPosca = 'PHEW! NOW *THAT* WILL PUT HAIR ON YOUR CHEST<br><br>(Recast Duration Decreased)';
+        displayStoryWharfBuyPrey = 'THE BIG FISH EAT THE LITTLE ONES<br>—RADIOHEAD<br><br>(Tilapia Count Improved)';
+        displayStoryWharfBuyChum = 'A-HA, NOW THESE LITTLE DEVILS ARE BITING<br><br>(Fish More Likely To Bite)';
+        displayStoryWharfBuyKnife = 'THE IRON OF THIS BLADE CAME FROM A METEORITE THAT FELL ON THE NIGHT OF A FULL MOON<br><br>(Flesh Rendered Per Catch Doubled)';
+        displayStoryWharfBuyBait = 'SUPPOSEDLY THIS STUFF CAN’T MISS<br><br>(Critical Success Chance Increased)';
+        displayStoryWharfBuyRod = 'NOW THEY’LL ALL SEE YOUR ROD IS BEST<br><br>(Fish Take Longer To Escape)';
+        displayStoryWharfBuyWWF = '“One of the penalties of an ecological education is that one lives alone in a world of wounds. Much of the damage inflicted on land is quite invisible to laymen. An ecologist must either harden his shell and make believe that the consequences of science are none of his business, or he must be the doctor who sees the marks of death in a community that believes itself well and does not want to be told otherwise.”<br>—Aldo Leopold<br><br>“Try and leave this world a little better than you found it.”<br>—Robert Baden-Powell<br><br>(Goliath Bream Count Improved)';
+        displayTrophyEarned = 'Trophy earned!';
 
 
 
@@ -1851,6 +1974,7 @@ function Translate(language, bark = true) {
         displaySoldAbbr = 'Vend.';
         displayGood = 'Bien';
         displayProduced = 'Producidas';
+        displayDispensed = 'Dispensados';
         displayScore = 'Veintenas';
         displayHomers = 'Homeres';
         displayUnits = 'Unidades';
@@ -2110,6 +2234,7 @@ function Translate(language, bark = true) {
         displayStoryNotEnoughAbacus = '«¡¿POR QUÉ, QUÉ CLASE DE ACTUARIO SERÍA YO SI TE PERMITIESE GASTAR TU ÚLTIMO GRANO DE TRIGO?! POR FAVOR VUELVE CUANDO TENGAS AL MENOS UN POCO MÁS, PARA PODER PAGAR VERDADERAMENTE MIS SERVICIOS»';
         displayStoryNotEnoughTown = 'TU ARQUITECTO TE TOMA DEL BRAZO: «LE RUEGO ME PERDONE, SU GRACIA, PERO ME TEMO QUE SI GASTARA SU ÚLTIMO GRANO DE TRIGO, SU OPERACIÓN AGRÍCOLA NO PODRÍA CONTINUAR. TEN PACIENCIA, MUY PRONTO PODRÁS PAGAR EL PRECIO»';
         displayStoryNotEnoughGeneral = 'UN TRABAJADOR CERCANO TE DETIENE: «AMIGO MÍO, SI GASTARAIS VUESTRO ÚLTIMO GRANO DE TRIGO, ¿CÓMO PODRÍAIS SEGUIR SEMBRANDO VUESTROS CAMPOS?»';
+        displayStoryNotEnoughFish = 'EL VIEJO Y CASCARRABIAS CAPITÁN DEL PUERTO TE LLEVA APARTE: «ESCUCHA, MARINERO DE TIERRA, ¡SI GASTAS TU ÚLTIMO CELEMÍN DE TRIGO NO PODRÁS SEGUIR CULTIVANDO! PIENSA PRIMERO, ¿EH?»'
         displayStoryPoorWheat = 'NECESITAS MÁS TRIGO, EFFENDI';
         displayStoryPoorFarm = 'NO PUEDES PERMITIRTE ESTO, EFFENDI';
         displayStoryPoorHire = 'NO PODEMOS PERMITIRNOS TRAER A UN HOMBRE NUEVO AHORA MISMO';
@@ -2281,6 +2406,9 @@ function Translate(language, bark = true) {
 
         displayNamePlayer = '«¿Cómo te llamas, ciudadano?»';
 
+        displayLeaveStore = '↓ SALIR DE LA TIENDA';
+        displayGoHome = 'IR A CASA →';
+        displayGoFishing = '← IR PESCAR';
         displayGoToPraediumFromRes = 'VOLVER A TUS TIERRAS →';
         displayGoToResidence = '← IR A TU RESIDENCIA';
         displayGoToTownship = 'IR AL MUNICIPIO →';
@@ -2428,8 +2556,10 @@ function Translate(language, bark = true) {
         displayMapDetailsEconLiquidBar = 'CAPITAL LÍQUIDO';
         displayNaturalResources = 'RECURSOS<br>NATURALES';
         displayCrops = 'CULTIVOS';
+        displayLivestock = 'GANADO';
         displayManufacturedProducts = 'PRODUCTOS<br>FABRICADOS';
         displaySacredItems = 'OBJETOS SAGRADOS';
+        displaySecondaryProducts = 'SUBPRODUCTOS';
         displayRelationshipWith = 'RELACIÓN CON';
         displayMapVisit = 'VISITAR';
 
@@ -2553,6 +2683,60 @@ function Translate(language, bark = true) {
         displayHintsOff = 'Pistas desactivadas';
         displayHintsEnd = 'Fin de las pistas';
 
+        displayStoryFishFirstVisit = 'A, EL SIMPLE PLACER DE PASAR UN DÍA EN EL ARROYO... UNA DE LAS ÚLTIMAS COSAS QUE TE ENSEÑÓ TU PADRE ANTES DE SU PREMATURA MUERTE<br><br>(Empleados Que Reciben Pescado Con Su Salario Trabajan El Doble De Duro)';
+        displayFishFish = 'FISH';
+        displayFishBegin = 'COMENZAR PESCAR';
+        displayFishPull = '¡¡¡TIRAR!!!';
+        displayFishWait = 'esperar...';
+        displayFishMiss = '¡fallaste!...';
+        displayFishCatchGood = '¡BUENA CAPTURA!';
+        displayFishCatchGreat = '¡¡¡GENIAL CAPTURA!!!';
+        displayFishReady = '¿LISTO?';
+        displayFishTimeLeft = 'TIEMPO RESTANTE';
+        displayFishCurrentSesh = 'Sesión Actual';
+        displayFishPreviousSesh = 'Sesión Anterior';
+        displayFishRecords = 'Récords de Por Vida';
+        displayFishFishery = 'Pesquería';
+        displayFishFilets = 'Filetes';
+        displayLabelBuildWharf = 'CONSTRUIR UN MUELLE';
+        displayLabelVisitWharf = 'VISITE LA OFICINA DEL ESTIBADOR PRINCIPAL';
+        displayLabelWharfUnlockA = 'desbloquea: después';
+        displayLabelWharfUnlockB = 'capturas más';
+        displayLabelWharfUnlockBsing = 'captura más';
+        displayStoryWharf = 'ESTOS CONSTRUCTORES QUIEREN REVISAR LOS PLANOS PARA EL CLAVAR DE LOS PILONES... BUENO LOS COSTOS SEGURO QUE SIGUEN DE APILAR, DÉJAME DECÍRTELO';
+        displayStoryWharfFirstVisit = 'GUAU, ESTE LUGAR APESTA';
+        displayCatchReportTitle = 'Comisión de Conservación de Pesca y Vida Silvestre del Levante — Informe Posterior a la Captura';
+        displayCatchReportYouCaught = 'Has cogido';
+        displayCatchReportYouMissed = 'Fallaste';
+        displayCatchReportTimes = 'veces';
+        displayCatchReportTime = 'vez';
+        displayCatchReportAnd = 'y';
+        displayCatchReportFishesEscaped = 'peces se escaparon';
+        displayCatchReportFishEscaped = 'pez se escapó';
+        displayCatchReportTotal = 'Tu recompensa total es';
+        displayCatchReportSpecies = 'Especies';
+        displayCatchReportCount = 'Cuenta';
+        displayCatchReportYield = 'Rédito';
+        displayCatchReportMinnow = 'Pececillo';
+        displayCatchReportTilapia = 'Tilapia';
+        displayCatchReportBream = 'Besugo Goliat';
+        displayWharfPosca = 'TOMAR UNA TAZA DE POSCA<br>(req. cervecería)';
+        displayWharfPrey = 'LLENAR RÍO CON PRESA<br>(req. 20 pececillos)';
+        displayWharfChum = 'CARNADA LAS AGUAS<br>(req. 10 tilapias)';
+        displayWharfKnife = 'FORJAR CUCHILLO DESHUESADOR DE METAL ESTELAR<br>(req. herrero)';
+        displayWharfBait = 'IMPORTAR CEBO LEGENDARIO<br>(req. mercado)';
+        displayWharfRod = 'ENCANTAR TU CAÑA<br>(req. templo)';
+        displayWharfEnvironment = 'REJUVENECER EL MEDIO AMBIENTE<br>(req. universidad)';
+        displayWharfChewTheFat = 'MASTICAR LA GRASA';
+        displayStoryWharfBuyPosca = '¡UFF! *ESO* SÍ QUE TE VA A SALIR PELO EN EL PECHO<br><br>(Duración De Re-Lanzado Es Reducida)';
+        displayStoryWharfBuyPrey = 'LOS PECES GRANDES SE COMEN A LOS PEQUEÑOS<br>—RADIOHEAD<br><br>(Recuento De Tilapias Mejoró)';
+        displayStoryWharfBuyChum = 'AJÁ, AHORA ESTOS PEQUEÑOS DIABLOS ESTÁN MORDIENDO<br><br>(Peces Tienen Más Probabilidades De Morder)';
+        displayStoryWharfBuyKnife = 'EL HIERRO DE ESTA HOJA PROVIENE DE UN METEORITO QUE CAYÓ EN UNA NOCHE DE UNA LUNA LLENA<br><br>(Carne Obtenida Por Captura Duplicó)';
+        displayStoryWharfBuyBait = 'SUPUESTAMENTE ESTO NO PUEDE FALTAR<br><br>(Mayor Probabilidad De Éxito Crítico)';
+        displayStoryWharfBuyRod = 'AHORA TODOS VERÁN QUE TU CAÑA ES LA MEJOR<br><br>(Peces Tardan Más En Escapar)';
+        displayStoryWharfBuyWWF = '«Una de las desventajas de la educación ecológica es que uno vive solo en un mundo de heridas. Gran parte del daño infligido a la tierra es prácticamente invisible para el público general. Un ecologista debe endurecer su caparazón y hacer creer que las consecuencias de la ciencia no son asunto suyo, o bien debe ser el médico que ve las marcas de la muerte en una comunidad que cree estar bien y no quiere que le digan lo contrario.»<br>—Aldo Leopold<br><br>«Intentar y dejar este mundo un poco mejor de como lo encontraste.»<br>—Robert Baden-Powell<br><br>(Recuento De Besugos Goliat Mejoró)';
+        displayTrophyEarned = '¡Trofeo ganado!';
+
 
 
         displayRandomWisdomsDisplay = displayRandomWisdomsEspañol;
@@ -2560,6 +2744,8 @@ function Translate(language, bark = true) {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    divPsxSubtitle.innerHTML = displayTrophyEarned;
 
     const divider = '<div class="divider">♦♦♦ ♦ ♦♦♦</div>';
     displayInfoFinal = '<div id="divInfoTitle">' + displayGameTitle + '<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) MMXXV</span></div>';
@@ -2569,6 +2755,7 @@ function Translate(language, bark = true) {
     displayOptionsFlavourFinal = divider + displayOptionsFlavour;
     document.title = displayGameTitle + ' - ' + displayGameEdition;
     UpdateDisplay();
+    UpdateFishDisplay();
     if (bark) { SystemMessage(displayNewLanguage + divider + displayLanguageQuote); }
 }
 
@@ -2582,13 +2769,14 @@ const appsList = [
     'DOSBox',
     'Exult Studio',
     'GitHub',
-    'Google Chrome',
     [
         '*',
         'the GNU Image Manipulation Program',
         'el GNU Image Manipulation Program',
     ],
+    'Google Chrome',
     'Inkscape',
+    'Mesen',
     'SCI Companion',
     'ScummVM',
     'Visual Studio Code',
@@ -2596,32 +2784,47 @@ const appsList = [
 ];
 
 const dedicationList = [
+    'Éric Chahi', // en.wikipedia.org/wiki/Another_World_(video_game)
+    'Sean Clark', // en.wikipedia.org/wiki/The_Dig_(video_game)
     ['Lori', 'Corey Cole',], // en.wikipedia.org/wiki/Quest_for_Glory
     ['Jeff', '’Manda Dee',], // en.wikipedia.org/wiki/Master_of_Magic
+    'Mark J. Ferrari', // markferrari.com (ARTIST LEVEL: 👑🐐👑 G.O.A.T. 👑🐐👑)
     'Dr Irving Finkel', // britishmuseum.org/collection/term/BIOG132564
     'Richard Garriott', // britannica.com/biography/Richard-Garriott
+    'Ron Gilbert', // en.wikipedia.org/wiki/Monkey_Island
+    'Dave Grossman', // en.wikipedia.org/wiki/Day_of_the_Tentacle
     'ALexis JAnson', // museumofzzt.com/file/view/codered
     'Chris “Pumaman” Jones', // adventuregamestudio.co.uk
-    'Denis Loubet', // denisloubet.com (ARTIST LEVEL: 👑🐐👑 G.O.A.T. Status 👑🐐👑)
+    'Denis Loubet', // denisloubet.com (ARTIST LEVEL: 👑🐐👑 G.O.A.T. 👑🐐👑)
     'David <span class="nobreak">“aniwey” L.</span>', // candybox2.github.io
+    'Jordan Mechner', // en.wikipedia.org/wiki/Prince_of_Persia_(1989_video_game)
     'Sid Meier', // en.wikipedia.org/wiki/Civilization_(series)
+    'Brian Moriarty', // en.wikipedia.org/wiki/Loom_(video_game)
     //'Stephen M. F. Polychronopolous', // en.wikipedia.org/wiki/What_the_Hell_Happened_to_Me%3F
+    'Steve Purcell', // en.wikipedia.org/wiki/Sam_%26_Max_Hit_the_Road
     '“PyTom” Rothamel', // renpy.org
     'Saitō “Yoot” Yutaka', // en.wikipedia.org/wiki/SimTower
+    'Tim Schafer', // en.wikipedia.org/wiki/Psychonauts
     'Dave Sim', // en.wikipedia.org/wiki/Cerebus_the_Aardvark
     'Tim Sweeney', // unrealengine.com
     'Michael Townsend', // adarkroom.doublespeakgames.com
+    'Bill Watterson', // gocomics.com/calvinandhobbes
 ];
 
 const gratitudeList = [
+    'Grant Abbitt', // youtube.com/watch?v=lLqep5Q4MiI
     'Mohammad Alavi',
+    ['Howard', 'Lynelle Antonoff'],
+    'David “Polar” Atkins',
     'Sheila Bailey',
     'Matt Baker', // usefulcharts.com
     'Günter Bechly', // evolutionnews.org/2022/04/at-the-bottom-of-the-glass-god-is-waiting
     'James Bleckley', // oldeststories.net
+    'Chester N. Bolingbroke', // crpgaddict.blogspot.com
     'Todd T. Brannon',
     'Ryan Butterworth',
     'Colin Campbell',
+    'Matt Cannon', // codepen.io/matt-cannon/pen/emmbeGb
     'Angelos Chalaris', // 30secondsofcode.org/js/s/json-to-file
     'Michael Christy',
     'Adam Cosman', // codepen.io/uenify/pen/KxzKVd
@@ -2641,9 +2844,10 @@ const gratitudeList = [
     'Hayley Hackett',
     'Toast Halasz',
     'Andrew Mark Henry', // youtube.com/@ReligionForBreakfast
+    'Marty Hirsch', // en.wikipedia.org/wiki/MChess_Pro
+    'Milton “Hozq” Hjort', // hozq3d.gumroad.com/l/LVA4
     'Filip Holm', // patreon.com/letstalkreligion
     'Home of the Underdogs', // homeoftheunderdogs.net
-    'Marty Hirsch', // en.wikipedia.org/wiki/MChess_Pro
     'Bashir Hood',
     'Shawn Toao Hughes',
     [
@@ -2653,8 +2857,9 @@ const gratitudeList = [
     ],
     ['Leif', 'Marisol Johansen',],
     'Giddy Jones', // spriters-resource.com/ms_dos/theelderscrollsiidaggerfall
-    'Derek Lambert', // mythvisionpodcast.com
+    'Barbara Lande',
     'Ira Lande',
+    'Monica Lande', // 🦆💔
     'John Lawrie',
     'Erik Lundblad',
     'David Macaulay', // youtu.be/9K7Yds8bWz4
@@ -2671,8 +2876,10 @@ const gratitudeList = [
         'the Minnesota Educational Computing Consortium',
         'el Consorcio de Computación Educativa de Minnesota',
     ],
+    'MobyGames', // mobygames.com
     'Brian Moran',
     'Flathead Mike Niles',
+    'Photon Storm', // arcade.photonstorm.com
     [
         '*',
         'the Public Broadcasting Service',

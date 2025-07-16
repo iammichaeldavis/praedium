@@ -28,7 +28,7 @@
     <link rel="apple-touch-icon" sizes="16x16" href="bitmaps/favicon/favicon16x.ico" />
     <link rel="manifest" href="bitmaps/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
-    <link rel="stylesheet" href="style.css?v=1150102" />
+    <link rel="stylesheet" href="style.css?v=1.17.00.100" />
     <script>history.scrollRestoration = "manual"</script>
 </head>
 
@@ -113,15 +113,17 @@
 
         <div id="divViewMap">
             <canvas id="canvasMap" width="208" height="173"></canvas>
-            <button id="buttonMapTargetPrev" onclick="MapChangeTarget('previous')"></button><button id="buttonMapTargetNext"
-                onclick="MapChangeTarget('next')"></button><br>
+            <button id="buttonMapTargetPrev" onclick="MapChangeTarget('previous');"></button><button id="buttonMapTargetNext"
+                onclick="MapChangeTarget('next');"></button><br>
 
             <div id="divMapTarget"></div>
 
-            <span id="spanDetailsLabel"></span>:
-            <button id="buttonMapEcon" onclick="MapChangeDetails('econ')"></button>
-            <button id="buttonMapMil" onclick="MapChangeDetails('mil')"></button>
-            <button id="buttonMapPol" onclick="MapChangeDetails('pol')"></button>
+            <div id="divMapControlsRow">
+                <span id="spanDetailsLabel"></span>:
+                <button id="buttonMapEcon" onclick="MapChangeDetails('econ')"></button>
+                <button id="buttonMapMil" onclick="MapChangeDetails('mil')"></button>
+                <button id="buttonMapPol" onclick="MapChangeDetails('pol')"></button>
+            </div>
 
             <div id="divMapDetailsView" class="mapDetailsEconomic"></div>
 
@@ -254,7 +256,7 @@
         </div>
 
         <div id="divViewResidence">
-            <button id="buttonGoToPraediumFromRes"></button>
+            <button id="buttonGoFishing"></button><button id="buttonGoToPraediumFromRes"></button>
             <canvas id="canvasResidence" width="384" height="224"></canvas>
             <div id="divResidenceActionArea">
                 <button id="buttonWasteTime"></button>
@@ -469,6 +471,69 @@
             id="buttonCC0">(CCØ)</button><button id="buttonRecords" onclick="ToggleRecords();"></button>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divMinigameFishing">
+        <div id="divFishingRibbon"></div>
+
+        <button id="buttonGoHome"></button>
+
+        <div id="divFishDisplayWrapper">
+            <canvas id="canvasFishingHole" width="384" height="224"></canvas>
+
+            <div id="divFishTimerContainer">
+                <div id="divFishTimerLabel"></div>
+                <div id="divFishTimerDisplay"></div>
+            </div>
+        </div>
+
+        <button id="buttonFish" onclick="FishButton();"></button>
+        <button id="buttonInitFish" onclick="InitNewFishGame();"></button>
+
+        <table id="tableFishSession"></table>
+        <table id="tableFishRecords"></table>
+        <table id="tableFishInventory"></table>
+        <table id="tableFishReport"></table>
+
+        <button id="buttonFishWharf" onclick="WharfEvents();" class="disabled"></button>
+
+        <div id="divFishingCushion"></div>
+    </div>
+
+    <div id="divViewWharf">
+        <div id="divWharfRibbon"></div>
+
+        <button id="buttonLeaveWharf" onclick="LeaveTheStore();"></button>
+
+        <canvas id="canvasWharf" width="384" height="224"></canvas>
+
+        <button id="buttonWharfPosca" onclick="PurchaseWharfItem(0);" style="display: block; margin: 0 auto 2vw auto;"></button>
+        <button id="buttonWharfPrey" onclick="PurchaseWharfItem(1);" style="display: block; margin: 0 auto 2vw auto;"></button>
+        <button id="buttonWharfChum" onclick="PurchaseWharfItem(2);" style="display: block; margin: 0 auto 2vw auto;"></button>
+        <button id="buttonWharfKnife" onclick="PurchaseWharfItem(3);" style="display: block; margin: 0 auto 2vw auto;"></button>
+        <button id="buttonWharfBait" onclick="PurchaseWharfItem(4);" style="display: block; margin: 0 auto 2vw auto;"></button>
+        <button id="buttonWharfRod" onclick="PurchaseWharfItem(5);" style="display: block; margin: 0 auto 2vw auto;"></button>
+        <button id="buttonWharfWWF" onclick="PurchaseWharfItem(6);" style="display: block; margin: 0 auto 0 auto;"></button>
+        <button id="buttonWharfChewFat" onclick="ChewFat();" style="display: none; margin: 0 auto;"></button>
+
+        <!-- next step for fishermen button: upgrade nets for better yield -->
+        <button id="buttonWharfFishermen" style="display: none; margin: 6.4vw auto 0 auto;">HIRE FISHERMEN/CONTRATAR PESCADORES</button>
+
+        <div id="divWharfCushion"></div>
+    </div>
+    <div id="urToast" class="psxToast" style="display: none;">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAARxJREFUWMPtmLEOgyAQQO+MTTq4dOuv+SvdXPyV/pqbC4OJw3XCNpcLBQ4VDJdgApH4eJyAIhERFBANFBIVtIJW0ETRSo2IeAqMa6VsXJ2OLAAAwzDET72VK0lO3abK0Vz2LW+j2YNWo9XoZY1iCUYRACgtbHKjtF0yMkqCSeQ34NlGLRSy6d4pl/U5Sn8gycEfMLg4o/wBESZDc/mQdRT5FGN46oYbReVbHdn/uJ2JdIMMM6q1qejb+hgl+lkSMf0p32dTab2N0i4bjt4o5nJscoESkfOL8IzAa/127LpvsXUhHq/bVmxdivvzvRVb1xuVoIwRIXnM4ypC8limPoFRDmWMCM+h5nEV4TnUMvWJjBaVoxW0glbQ64B+AJNyuVhKLjsXAAAAAElFTkSuQmCC" class="psxThumbnail" />
+        <div>
+            <div class="psxTitle"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAABKpJREFUOMutzGtsU2Ucx/Hf8/T0nHZtt3W0u8K2dmPIAnIZsixgxhtfkOmihARFMJkvdBFjNF4C8YVRo2HES8AMTIi3NwYJSwiSGJQEEJAAG7c5YYO5Ubuu3dbTnrWn5zzn8hxfGBKDoCTz9/J5/t8PSf0+sFAeu7Ce5abrBNEjcNsQLp/9adWSlc21KzbsqJwdO4rhU9+hkLPgclHYNmA6gaSsOLGK2vClYFC0wR1mG9ptTcn8IJzr++BYYnQoksnqAAC3AMyPRsFycRCHwbENOCBwHAecO+C2A0PPVqZSeuXPZy+vLi2W4BYIwkEJofLS14Sp0WsRTsqs+mjwKHUY4/DONxhbw7kXqqrBNE2oBQ5wB4pqwiO64HAHFBRLV7Sd8/CxP0SpSJxOKU/o2Vy9IAaK0+lYMvHyvthTALD79Q2btMmra+pqfcjPTkOAAcuywZkNptvIFSz4RQHhinmIrH16T+tjmw4AwM5nHr7mq6mupmpBH17Q0BANBAIEACTJC8PiUBUFLHMdcjKGQt7AVFqHwzmUrI6CbkFwcVgmcwDA6/WSmqbmCIg+Qjl3zrN80re7e30jAGiaptiQIE/lweWrYPJtSAJBwO8GXBTVVX5wDhhaAbnM9CwAvLO5vUFyMb+O8HmaVe3jasFEiS/fAQD9V65n/MFqTMsGBs/0Y/zWDAgh0A0HobIiWBaHA4K0bMJFkQGARYvrO2zbAvTYcfrNSeVHIrgScjrzPAAsaGweMSEim7cgpxkUxUAhb8IwbBAAkluATShEXxCGWH4TADJT8S5Rcie2fjp8jN6Kpay85uzU9ZmlX7/ZsXXn/r6MYxYGNQvweD0oL/PBoRShoAdKzkCecUiEggulvz73wqvyZ92PboGdWsY0uQdG1iIAAOoWPu6KnCTctcwXWrIqOXGzcyI5tattaRgVYQ8ENwGlLhBCwImAWFyH5l+2PZ8aP8y12MVwmXfwoyOJ9uGxpEUBANy0Ull7oyiRuJwcOuUWpRt+SUikFQO6bsFgNgyDw7IcWNwFxQgk5FT8NzU7djIY9ExwT8nG4bGkBQB/gQB29Y0mVZSuDYWKBgJS+kikRjQEtwSbU+RmTciyDsOimC24cGt8wtDloSPVVSWXuTe49sWeE5N3HIK7Jooi3f/G6sdzSn57VjHaHmqsQGYmA7Vgoq6xDv2Dcbipfa6yvLjnld6B7w3D4H/v/wHemdfrpT3drYsEgm0erm5TCwZCdc29IyOjvR8euDrMGOP36u4L3tnm9obKjrZ5l0pKRPCSlpWdL+1OYq47/e1bVw7uaLnyILf0vw5CoRAprl5YXTwvVPO/gFvaI343oeEiP0JfffJ2YM7g8oVSq9/LUOQTML94tnXOYH20slNNnoVbpJAEp3NO4I3Te1qiy9d1MSbCdlwQ3aRr9MKhln9rXPf7WP/ksyQq3jihCbVVU8lRTE6mkIiPi4zRdROTmd7xxMw9O+Fej9cHDol05tS+yJp3m4SiWsR/MXHm4Odglg8NEV/TF3vf+9IONHQ3LW5hDwT27X2/vLR+ZWtUvagK9JLPnJ5GjhHIWRX9F4fUWe3mI2VVTWEA8bvbPwEXfUZ4niNaLwAAAABJRU5ErkJggg==" width="20" height="24" /> Rare Fish Investor</div>
+            <div id="divPsxSubtitle" class="psxSubtitle"></div>
+        </div>
+        <div class="psxGlyph">
+            <svg width="38" height="38" viewbox="0 0 38 38" class="psxRing" xmlns="http://www.w3.org/2000/svg">
+                <circle id="donut" r="17" cx="19" cy="19" fill="#17171c" stroke="white" stroke-width="3" />
+            </svg>
+            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iNDgiCiAgIGhlaWdodD0iNDgiCiAgIHZpZXdCb3g9IjAgMCA0OCA0OCIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnMSIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzMSIgLz4KICA8ZwogICAgIGlkPSJsYXllcjEiPgogICAgPGNpcmNsZQogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZiIKICAgICAgIGlkPSJwYXRoMSIKICAgICAgIGN4PSIyNC4wODkyMiIKICAgICAgIGN5PSIyNC4wNTk0NzkiCiAgICAgICByPSIyNCIgLz4KICAgIDxwYXRoCiAgICAgICBkPSJtIDcuNzE0NDc5MSwyOS42OTU2NzEgYyAtMS4yNjQ5MjQzLDAuODQzMjgyIC0wLjg0MzI4MywyLjQ0NTUyMSAxLjg1NTIxOSwzLjIwNDQ3NyAyLjc4MjgyNzksMC45Mjc2MDkgNS44MTg2NDM5LDEuMTgwNTkgOC43NzAxMjQ5LDAuNjc0NjIxIDAuMTY4NjU0LDAgMC4zMzczMDcsLTAuMDg0MzMgMC40MjE2MzQsLTAuMDg0MzMgdiAtMi44NjcxNjMgbCAtMi44NjcxNjIsMC45Mjc2MSBjIC0xLjA5NjI2MywwLjMzNzMwNyAtMi4xOTI1MzMsMC40MjE2MzQgLTMuMjg4Nzk2LDAuMTY4NjUzIC0wLjg0MzI4MywtMC4yNTI5OCAtMC42NzQ2MjksLTAuNzU4OTU2IDAuMzM3MzA3LC0xLjE4MDU5IEwgMTguNzYxNDUsMjguNTE1MDcgdiAtMy4xMjAxNDMgbCAtOC4wOTU1MDQsMi43ODI4MjggQyA5LjY1NDAwOTEsMjguNTE1MDYyIDguNjQyMDY2MSwyOS4wMjEwMzggNy43MTQ0NTYxLDI5LjY5NTY2NyBaIE0gMjcuMjc4NjEsMTcuMDQ2NDQ2IHYgOC4xNzk4MzEgYyAzLjQ1NzQ1OCwxLjY4NjU2NiA2LjE1NTk1OSwwIDYuMTU1OTU5LC00LjM4NTA2NyAwLC00LjQ2OTM5MyAtMS42MDIyMzgsLTYuNDkzMjY1IC02LjI0MDI4NSwtOC4wOTU0OTcgLTIuNDQ1NTIyLC0wLjg0MzI4MiAtNC45NzUzNjIsLTEuNjAyMjM4IC03LjUwNTIxLC0yLjEwODIwNiB2IDI0LjM3MDg0IGwgNS45MDI5NzEsMS43NzA4OTIgViAxNi4yODc0OSBjIDAsLTAuOTI3NjAyIDAsLTEuNjAyMjM4IDAuNjc0NjI5LC0xLjM0OTI1MSAwLjkyNzYxLDAuMjUyOTgxIDEuMDExOTM2LDEuMTgwNTk4IDEuMDExOTM2LDIuMTA4MjA3IHogbSAxMC45NjI2NiwxMC43MDk2NzkgYyAtMi40NDU1MTQsLTAuODQzMjgyIC01LjA1OTY4OSwtMS4xODA1OTcgLTcuNTg5NTM2LC0wLjkyNzYwOSAtMS4zNDkyNDQsMC4wODQzMyAtMi42MTQxNjgsMC40MjE2MzQgLTMuNzk0NzY1LDAuODQzMjgyIGwgLTAuMjUyOTgsMC4wODQzMyB2IDMuMjg4Nzk3IGwgNS40ODEzMjksLTIuMDIzODggYyAxLjA5NjI2MywtMC4zMzczIDIuMTkyNTM0LC0wLjQyMTYyNyAzLjI4ODgwNCwtMC4xNjg2NTQgMC44NDMyNzUsMC4yNTI5OCAwLjY3NDYyMiwwLjc1ODk1NiAtMC4zMzczMDcsMS4xODA1OTcgbCAtOC40MzI4MTEsMy4xMjAxNDMgdiAzLjIwNDQ3IGwgMTEuNjM3MjgxLC00LjMwMDczNiBjIDAuODQzMjgyLC0wLjMzNzMwNyAxLjYwMjIzOCwtMC43NTg5NTYgMi4yNzY4NiwtMS40MzM1ODUgMC41OTAyODcsLTAuODQzMjgyIDAuMzM3MzA3LC0yLjAyMzg3MiAtMi4yNzY4NiwtMi44NjcxNTUgeiIKICAgICAgIGZpbGw9ImN1cnJlbnRDb2xvciIKICAgICAgIGlkPSJwYXRoMS04IgogICAgICAgc3R5bGU9InN0cm9rZS13aWR0aDowLjg0MzI4MyIgLz4KICA8L2c+Cjwvc3ZnPgo=" class="psxLogo" />
+        </div>
+    </div>
+    <div id="toast-container"></div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayGameEvent" class="overlay">
         <div id="divModalGameEvent">
             <div id="divGameEventFaçade"></div>
@@ -573,6 +638,7 @@
     <script src="scripts/ui.js"></script>
     <script src="scripts/player_actions.js"></script>
     <script src="scripts/game_turn.js"></script>
+    <script src="scripts/fish.js"></script>
     <!-- <script src="scripts/harp.js"></script> -->
     <script src="scripts/start.js"></script>
     <script src="scripts/mods.js"></script>

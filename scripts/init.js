@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.16.01-A';
+const version = '1.17.00-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -203,6 +203,8 @@ const player = {
     hasWon: false,
     hasPegasi: false,
     hasWentToAman: false,
+    hasFished: false,
+    hasFishRecords: false,
 };
 
 const tilemap = new Image();
@@ -310,6 +312,8 @@ neighborsHerpyImage.src = 'bitmaps/cell_noodle_0.png';
 const neighborsBlinksImage = new Image();
 neighborsBlinksImage.src = 'bitmaps/cell_blinks_3.png';
 
+const body = document.getElementsByTagName('body')[0];
+
 const divGameWindow = document.getElementById('divGameWindow');
 
 const divOverlayLoading = document.getElementById('divOverlayLoading');
@@ -368,6 +372,7 @@ const divRuneMonth = document.getElementById('divRuneMonth');
 const divRuneElement = document.getElementById('divRuneElement');
 
 const divViewResidence = document.getElementById('divViewResidence');
+const buttonGoFishing = document.getElementById('buttonGoFishing');
 const buttonGoToPraediumFromRes = document.getElementById('buttonGoToPraediumFromRes');
 const canvasResidence = document.getElementById('canvasResidence');
 const canvasResidenceContext = canvasResidence.getContext('2d');
@@ -601,6 +606,37 @@ const buttonPlayGod = document.getElementById('buttonPlayGod');
 
 const spanCheevoText = document.getElementById('spanCheevoText');
 
+const divMinigameFishing = document.getElementById('divMinigameFishing');
+const buttonGoHome = document.getElementById('buttonGoHome');
+const divFishDisplayWrapper = document.getElementById('divFishDisplayWrapper');
+const canvasFishingHole = document.getElementById('canvasFishingHole');
+const canvasFishingHoleContext = canvasFishingHole.getContext('2d');
+const divFishTimerContainer = document.getElementById('divFishTimerContainer');
+const divFishTimerLabel = document.getElementById('divFishTimerLabel');
+const divFishTimerDisplay = document.getElementById('divFishTimerDisplay');
+const buttonFish = document.getElementById('buttonFish');
+const buttonInitFish = document.getElementById('buttonInitFish');
+const tableFishSession = document.getElementById('tableFishSession');
+const tableFishRecords = document.getElementById('tableFishRecords');
+const tableFishInventory = document.getElementById('tableFishInventory');
+const tableFishReport = document.getElementById('tableFishReport');
+const buttonFishWharf = document.getElementById('buttonFishWharf');
+const divViewWharf = document.getElementById('divViewWharf');
+const buttonLeaveWharf = document.getElementById('buttonLeaveWharf');
+const canvasWharf = document.getElementById('canvasWharf');
+const canvasWharfContext = canvasWharf.getContext('2d');
+const buttonWharfPosca = document.getElementById('buttonWharfPosca');
+const buttonWharfPrey = document.getElementById('buttonWharfPrey');
+const buttonWharfChum = document.getElementById('buttonWharfChum');
+const buttonWharfKnife = document.getElementById('buttonWharfKnife');
+const buttonWharfBait = document.getElementById('buttonWharfBait');
+const buttonWharfRod = document.getElementById('buttonWharfRod');
+const buttonWharfWWF = document.getElementById('buttonWharfWWF');
+const buttonWharfChewFat = document.getElementById('buttonWharfChewFat');
+const divPsxSubtitle = document.getElementById('divPsxSubtitle');
+
+const divFooter = document.getElementById('divFooter');
+
 let canvasFireworks = null;
 let canvasFireworksContext = null;
 
@@ -617,6 +653,8 @@ const playerBirthYear = yearAtStartHebrew - player.age;
 const playerBirthWeek = 21;
 let year = 1;
 let week = 1;
+let timeAtStart = null;
+let timeAtWin = null;
 
 // 0. Wheat 🌾, 1. Barley 🌾, 2. Olive 🫒, 3. Date 🫐, 4. Fig 🍅, 5. Pomegranate 🍎, 6. Grape 🍇, 7. Flax 🌾
 const bushelCount = [10, 0, 0, 0, 0, 0, 0, 0,];
@@ -958,9 +996,12 @@ const tributeTimerLimit = 100;
 let revealedWisdom = 0;
 const achievementSoundRare = new Audio('waveforms/XboxOneRareAchievement.mp3');
 
+const audioTrophy = new Audio('waveforms/ps4_trophy.mp3');
 const audioTheme = new Audio('waveforms/moraffsAria.mp3');
 const audioEnding = new Audio('waveforms/tquestAnthem.mp3');
 const audioPeasant = new Audio('waveforms/warcraft.mp3');
+const audioFish = new Audio('waveforms/SM64_Slider.mp3');
+const audioWhistle = new Audio('waveforms/whistle.mp3');
 
 const heirDate = [0, 0,];
 let heirStage = 0;
@@ -1076,6 +1117,67 @@ let aguaStillString = 'url(bitmaps/agua_still.gif)';
 
 let hintedElementPrevious = null;
 let hintLevel = 0;
+
+let fishTimeLeftMax = 15.0;
+let fishTimeLeft = fishTimeLeftMax;
+let fishTimerLoop = null;
+const fishTimerIntervalSeconds = 0.1;
+const fishTimerIntervalMilliseconds = 100;
+let fishAvailableChanceUpperLimit = 12;
+let fishAvailable = false;
+let fishAvailableCountdownMax = 0.5;
+let fishAvailableCountdown = fishAvailableCountdownMax;
+let fishButtonStunned = false;
+let stunnedFishButtonCountdown = null;
+let stunnedFishButtonWiggleDurationS = '0.4s';
+let stunnedFishButtonCountdownDurationMS = 800;
+let fishGameStarted = false;
+let fishGameOver = false;
+let fishInNet = false;
+const fishInNetNodDurationS = '0.4s';
+const fishInNetDurationMS = 1000;
+let fishGreatCatch = false;
+let fishGreatCatchThresholdS = 0.2;
+let fishLargeChanceUpperLimit = 10;
+let fishRareChanceUpperLimit = 100;
+let mostRecentCatch = 0;
+let fishMissCountLifetime = 0;
+let fishMissCountSession = 0;
+let fishEscapeCountLifetime = 0;
+let fishEscapeCountSession = 0;
+let fishWarmup = false;
+let lifetimeFishEarnings = 0;
+let filetCount = 0;
+let filetsSpent = [0, 0, 0,]; // 0. masons, 1. sawyers, 2. loggers
+let fishState = {
+    hasVisited: false,
+    hasWharf: false,
+    hasSeenWharf: false,
+    hasPosca: false,
+    hasPrey: false,
+    hasChum: false,
+    hasKnife: false,
+    hasBait: false,
+    hasRod: false,
+    hasWWF: false,
+    hasFishermen: false,
+    hasNets: false,
+};
+let totalCatches = 0;
+const priceWharf = [12, 400, 600, 800, 200,];
+
+let splashTimer = null;
+const splashFPS = 10;
+let splashFrame = 0;
+
+let rippleTimer = null;
+const rippleFPS = 3;
+let rippleFrame = 0;
+
+// smallGood 🐟, smallGreat 🐟🥇, largeGood 🐬, largeGreat 🐬🥇, rareGood 🦑, rareGreat 🦑🥇
+const caughtFishSession = [0, 0, 0, 0, 0, 0,];
+const caughtFishLifetime = [0, 0, 0, 0, 0, 0,];
+let caughtFishBounty = [1, 2, 5, 10, 50, 100,];
 
 
 

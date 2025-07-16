@@ -52,6 +52,8 @@ buttonNewFarm.addEventListener('click', function () { BuyNewFarm(); });
 
 buttonImproveResidence.addEventListener('click', function () { ImproveResidence(); });
 
+buttonGoHome.addEventListener('click', function () { GoHerm(); });
+buttonGoFishing.addEventListener('click', function () { GoFishing(); });
 buttonGoToPraediumFromRes.addEventListener('click', function () { GoToPraedium(); });
 buttonGoToResidence.addEventListener('click', function () { GoToResidence(); });
 buttonGoToTownship.addEventListener('click', function () { GoToTownship(); });
@@ -102,12 +104,419 @@ document.body.onkeyup = function (e) {
     if (e.key == '~') {
         player.isGod = !player.isGod;
         player.likesDelay = !player.isGod;
-        if (player.isGod) { SystemMessage('<div id="divSoyMessage">☛ I Am Soy ☚</div>And that means all bets are *off*, partner'); }
-        else { SystemMessage('<div id="divSoyMessage">☞ I Ain’t No Soy ☜</div>But don’t you think for one second any bets are suddenly now back *on*, Buster Brown'); }
+        let theVoice = '<div id="divSoyMessage">☞ I Ain’t No Soy ☜</div>But don’t you think for one second any bets are suddenly now back *on*, Buster Brown';
+        if (player.isGod) { theVoice = '<div id="divSoyMessage">☛ I Am Soy ☚</div>And that means all bets are *off*, partner'; }
+        SystemMessage(theVoice);
     }
 
+    const stepFactor = 100; // ⚠️ DEFAULT 100!
+    const stepDelays = [
+        0,
+        10,
+        10,
+
+        1,
+        1,
+        1,
+        1,
+
+        10,
+        10,
+
+        1,
+        1,
+        1,
+        1,
+
+        10,
+        1,
+        10,
+        10,
+        1,
+    ];
+    let stepBegin = null;
+    let stepEnd = null;
+
     if (player.isGod) {
+        if (e.key == ' ' && localStorage.getItem(save_key) && !player.hasBegun) { StartNewGame(); }
+        else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && !player.hasBegun)) { BeginGame('English'); }
+        else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && player.hasBegun)) { DismissForeword(); }
+
+        if (e.key == '1' && !e.altKey && player.canTill) { PlotTill(); }
+        if (e.key == '2' && !e.altKey && player.canPlant) { PlotPlant(); }
+        if (e.key == '3' && !e.altKey && player.canWater) { PlotWater(); }
+        if (e.key == '4' && !e.altKey && player.canHarvest) { PlotHarvest(); }
+
+        if (e.key == '5' && !e.altKey) { AdvanceGame(); }
+        function AdvanceGame() {
+            if (player.canRentWarehouse) { RentWarehouse(); }
+            else if (player.canBuyForest) { BuyForest(); }
+            else if (farmStage == 11 && !player.canLog) { ForestEvents(); }
+            else if (farmStage == 11 && !player.canSaw) { ForestEvents(); }
+            else if (player.canBuyMountain) { BuyMountain(); }
+            else if (player.canBuyLand) { BuyLand(); }
+            else if (player.canFound) { Found(); }
+            else if (player.canBuild) { Build(); }
+            else if (player.canBuyNewFarm && !player.hasNewFarm) { BuyNewFarm(); }
+            else if (player.canBuyNewFarm && !player.hasFlaxFarm) { BuyNewFarm(); }
+            else if (player.hasFoundCopperEvidence && !player.hasFoundMine) { MountainEvents(); }
+            else if (player.hasFoundMine && !player.canMine) { MountainEvents(); }
+            else if (player.canMine && !player.canSmelt) { MountainEvents(); }
+            else if (player.canHireBronzeworkers) { MountainEvents(); }
+            else if (player.hasFoundCrystalEvidence && !player.hasHiredGemcutters) { MountainEvents(); }
+            else { ImproveResidence(); }
+        }
+
+        if (e.key == '6' && !e.altKey && player.canHire) {
+            if (!player.seesReport) { HireAccountant(); }
+            else { HireHand(); }
+        }
+        if (e.code == 'KeyW') {
+            if (e.shiftKey) {
+                if (handsHired != 1000) { handsHired = 1000; }
+                else { handsHired = 0; }
+            }
+            else if (e.altKey) { handsHired -= 1; }
+            else { handsHired += 1; }
+        }
+        if (e.key == 'd' && player.canDelegate) { TogglePriority(); }
+
+        if (e.key == '7' && !e.altKey) { EstablishTradeRoute(); }
+        if (e.key == '8' && !e.altKey) { EstablishShippingLanes(); }
+
+        if (e.key == '9' && !e.altKey) { ConsultOracle(); }
+
+        if (e.key == '0' && !e.altKey) { SummonOptions(); }
+
+        if (e.key == '-' && !e.altKey) { ShowToast(); }
+        if (e.key == '=' && !e.altKey) { Achievement(); }
+
+        if (e.key == '!' && player.canBarter) { BarterFruit(2); }
+        if (e.key == '@' && player.canBarter) { BarterFruit(3); }
+        if (e.key == '#' && player.canBarter) { BarterFruit(4); }
+        if (e.key == '$' && player.canBarter) { BarterFruit(5); }
+        if (e.key == '%' && player.canBarter) { BarterFruit(6); }
+        if (e.key == '^' && player.canBarter) { BarterAll(); }
+
+        // & AVAILABLE
+        // * AVAILABLE
+        // ( AVAILABLE
+        // ) AVAILABLE
+        // _ AVAILABLE
+        // + AVAILABLE
+
+        if (e.key == '1' && e.altKey && player.canSell) { SellCommodities(0); }
+        if (e.key == '2' && e.altKey && player.canSell) { SellCommodities(1); }
+        if (e.key == '3' && e.altKey && player.canSell) { SellCommodities(5); }
+        if (e.key == '4' && e.altKey && player.canSell) { SellCommodities(2); }
+        if (e.key == '5' && e.altKey && player.canSell) { SellCommodities(3); }
+        if (e.key == '6' && e.altKey && player.canSell) { SellCommodities(4); }
+        if (e.key == '7' && e.altKey && player.canSell) { SellLivestock(); }
+        if (e.key == '8' && e.altKey && player.canSell) { PurchaseCommodities(0); }
+        if (e.key == '9' && e.altKey && player.canSell) { PurchaseCommodities(1); }
+        if (e.key == '0' && e.altKey && player.canSell) { PurchaseCommodities(2); }
+        if (e.key == '-' && e.altKey && player.canSell) { PurchaseCommodities(3); }
+        if (e.key == '=' && e.altKey && player.canSell) { PurchaseCommodities(4); }
+        if (e.key == ']' && e.altKey && player.canSell) { PurchaseLivestock(); }
+
+        if (e.key == 'z' && player.isAt == 'Residence') { GoFishing(); }
+        else if (e.key == 'x' && player.canGoHome && player.isAt == 'Praedium') { GoToResidence(); }
+        else if (e.key == 'x' && player.isAt == 'Creek') { GoHerm(); }
+        else if (e.key == 'c' && (player.isAt == 'Residence' || player.isAt == 'Township')) { GoToPraedium(); }
+        else if (e.key == 'v' && player.seesVillage && (player.isAt == 'Praedium' || player.isAt == 'Port')) { GoToTownship(); }
+        else if (e.key == 'b' && player.canSell && player.isAt == 'Township') { GoToPort(); }
+        if (e.key == '[' && !e.altKey && player.isAt == 'Map') { MapChangeTarget('previous'); }
+        if (e.key == ']' && !e.altKey && player.isAt == 'Map') { MapChangeTarget('next'); }
+        if (e.key == '\\' && !e.altKey && player.isAt == 'Map') { VisitProvince(); }
+        if (e.key == '|' && !e.altKey && player.isAt != 'Creek') { ReturnToMapView(); }
+
+        // { AVAILABLE
+        // } AVAILABLE
+
+        if (e.key == 'G') { // 🚨🚨🚨 USE WITH CAUTION!!! ONLY WORKS AT START OF GAME, AND IN *EXACT* SEQUENCE 🚨🚨🚨
+            if (e.altKey) {
+                console.log('==================================================');
+                console.log('🚨 COMMENCING AUTOMATIC WALKTHROUGH SEQUENCE! 🚨');
+                console.log('⚠️ (Please do not touch anything until complete!)');
+                if (toggleMusic.checked) { toggleMusic.checked = false; }
+                ToggleMusic();
+                console.log('🔇 (🎵🚫 Music Disabled)');
+                console.log('🕰️ Game time at start: Y' + year + ' W' + week);
+                stepBegin = new Date();
+                console.log('🕰️ Real time at start: ' + stepBegin);
+                AutoWalkthrough();
+            }
+            else { WalkthroughSteps(); }
+        }
+        function AutoWalkthrough() {
+            if (debugCounter > 0) {
+                console.log('-----------------------------------');
+                console.log('⌛ Waiting For STEP ' + debugCounter + ' Complete!');
+            }
+
+            if (debugCounter == 8) {
+                console.log('-----------------------------------');
+                console.log('🛎️ Initiating Barter Check Loop!');
+                BarterCheck();
+            }
+            else {
+                console.log('-----------------------------------');
+                console.log('🛎️ Automatically Performing STEP ' + debugCounter);
+                WalkthroughSteps();
+                if (debugCounter < stepDelays.length) {
+                    console.log('-----------------------------------');
+                    console.log('🛎️ STEP ' + (debugCounter - 1) + ' Complete!');
+                    console.log('-----------------------------------');
+                    console.log('⏳ Now Waiting For STEP ' + debugCounter + '...');
+                    console.log('-----------------------------------');
+                    console.log('⏲️ Waiting For ' + (stepDelays[debugCounter]) * stepFactor + 'ms (STEP ' + debugCounter + ' Delay: ' + stepDelays[debugCounter] + 'ms * Factor: ' + stepFactor + ')');
+                    setTimeout(AutoWalkthrough, (stepDelays[debugCounter]) * stepFactor);
+                }
+                else {
+                    console.log('-----------------------------------');
+                    console.log('🛎️ STEP ' + (debugCounter - 1) + ' Complete!');
+                    console.log('-----------------------------------');
+                    //alert('🚨 AUTOMATIC WALKTHROUGH SEQUENCE COMPLETE! 🚨');
+                    console.log('🚨 AUTOMATIC WALKTHROUGH SEQUENCE COMPLETE! 🚨');
+                    console.log('⚠️ (You are now free to move about the cabin)');
+                    console.log('🛎️ debugCounter Current Value: ' + debugCounter);
+                    console.log('🕰️ Game time at end: Y' + year + ' W' + week);
+                    stepEnd = new Date();
+                    console.log('🕰️ Real time at end: ' + stepEnd);
+                    console.log('⏱️ Elapsed time for total sequence: ' + (stepEnd - stepBegin) + 'ms');
+                    console.log('==================================================');
+                }
+            }
+        }
+        function BarterCheck() {
+            if (!player.canBarter) {
+                console.log('🙂‍↔️ Can not barter!');
+                setTimeout(BarterCheck, 1000);
+            }
+            else {
+                console.log('🙂‍↕️ Barter is OK!');
+                console.log('-----------------------------------');
+                console.log('🛎️ Automatically Performing: STEP ' + debugCounter);
+                WalkthroughSteps();
+                console.log('-----------------------------------');
+                console.log('🛎️ STEP ' + (debugCounter - 1) + ' Complete!');
+                console.log('-----------------------------------');
+                console.log('⏳ Now Waiting For: STEP ' + debugCounter);
+                console.log('-----------------------------------');
+                console.log('⏲️ Waiting For: ' + (stepDelays[debugCounter]) * stepFactor + 'ms (STEP ' + debugCounter + ' Delay: ' + stepDelays[debugCounter] + 'ms * Factor: ' + stepFactor + ')');
+                setTimeout(AutoWalkthrough, (stepDelays[debugCounter]) * stepFactor);
+            }
+        }
+        function WalkthroughSteps() {
+            console.log('===================================');
+            console.log('📆 STEP ' + debugCounter);
+            if (debugCounter == 0) {
+                player.likesStory = false;
+                StartTime();
+                StartTime();
+                PlotTill();
+                PlotPlant();
+                PlotWater();
+                debugCounter++;
+                player.likesStory = true;
+                console.log('🆗 fast-forward time;');
+                console.log('🆗 first round of farming tasks;');
+                console.log('🆗 wait for first growth; (⏰❗)');
+            }
+            else if (debugCounter == 1) {
+                player.likesStory = false;
+                PlotHarvest();
+                PlotTill();
+                PlotPlant();
+                PlotWater();
+                debugCounter++;
+                player.likesStory = true;
+                console.log('🆗 second round of farming tasks;');
+                console.log('🆗 wait for second growth; (⏰❗)');
+            }
+            else if (debugCounter == 2) {
+                player.likesStory = false;
+                PlotHarvest();
+                StartTime();
+                debugCounter++;
+                player.likesStory = true;
+                console.log('🆗 pause time; (⚠️ regular gameplay can resume from here)');
+            }
+            else if (debugCounter == 3) {
+                player.likesStory = false;
+                setValues(1000000000);
+                for (let i = 0; i < 25; i++) { AdvanceGame(); } // completely upgrade praedium
+                player.names.push('Pee-Pee Boy');
+                HireAccountant();
+                for (let i = 0; i < 36; i++) { HireHand(); }
+                AdvanceGame(); // buy town
+                setValues(5800858008);
+                PauseTime();
+                debugCounter++;
+                player.likesStory = true;
+                console.log('🆗 completely upgrade praedium tab;');
+                console.log('🆗 set dummy name;');
+                console.log('🆗 hire all staff;');
+                console.log('🆗 buy town;');
+            }
+            else if (debugCounter == 4) {
+                player.likesStory = false;
+                for (let i = 0; i < 35; i++) { AdvanceGame(); } // upgrade village to capital
+                setValues(5800858008);
+                debugCounter++;
+                player.likesStory = true;
+                console.log('🆗 completely upgrade township tab;');
+            }
+            else if (debugCounter == 5) {
+                player.likesStory = false;
+                for (let i = 0; i < 16; i++) { AdvanceGame(); } // ugprade residence to mansion + purchase both new farms
+                setValues(5800858008);
+                debugCounter++;
+                player.likesStory = true;
+                console.log('🆗 upgrade residence to mansion;');
+                console.log('🆗 purchase both new farms;');
+            }
+            else if (debugCounter == 6) { // discover mine
+                player.likesStory = false;
+                StartTime();
+                StartTime();
+                StartTime();
+                debugCounter++;
+                console.log('🆗 start time;');
+                console.log('🆗 fast-forward time;');
+                console.log('🆗 wait to discover mine; (⏰❗)');
+            }
+            else if (debugCounter == 7) {
+                PauseTime();
+                for (let i = 0; i < 3; i++) { AdvanceGame(); } // mine & foundry
+                for (let i = 0; i < 7; i++) { EstablishTradeRoute(); }
+                EstablishShippingLanes(); // tin
+                AdvanceGame(); // bronzeworkers
+                StartTime();
+                StartTime();
+                StartTime();
+                setValues(5800858008);
+                debugCounter++;
+                console.log('🆗 upgrade mountain to bronze;');
+                console.log('🆗 unlock all trade;');
+                console.log('🆗 wait for barter; (⏰❗)');
+            }
+            else if (debugCounter == 8) {
+                PauseTime();
+                AdvanceGame(); // crystals
+                setValues(5800858008);
+                debugCounter++;
+                player.likesStory = true;
+                console.log('🆗 pause time;');
+                console.log('🆗 completely upgrade mountain;');
+            }
+            else if (debugCounter == 9) {
+                player.likesStory = false;
+                AdvanceGame(); // bees
+                AdvanceGame(); // raisins
+                EstablishShippingLanes(); // salt
+                AdvanceGame(); // hard tack
+                AdvanceGame(); // rations
+                AdvanceGame(); // cottage
+                AdvanceGame(); // bandages
+                setValues(5800858008);
+                debugCounter++;
+                player.likesStory = true;
+                console.log('🆗 completely upgrade residence tab;');
+            }
+            else if (debugCounter == 10) {
+                BurnItDown();
+                FinalReset();
+                debugCounter++;
+                console.log('🆗 zero all values;');
+                console.log('🆗 force conservative values; (⚠️ regular gameplay can resume from here)');
+            }
+            else if (debugCounter == 11) {
+                player.likesStory = false;
+                ChooseHeir();
+                HeirBegin();
+                HeirChooseName();
+                HeirChooseGender();
+                HeirChooseEthnicity();
+                HeirChooseTitle();
+                HeirChooseFace(0);
+                HeirConfirmAll(false);
+                debugCounter++;
+                player.likesStory = true;
+                console.log('🆗 install puppet heir on the throne;');
+            }
+            else if (debugCounter == 12) { // updates military counts
+                player.likesStory = false;
+                StartTime();
+                StartTime();
+                StartTime();
+                debugCounter++;
+                console.log('🆗 start time;');
+                console.log('🆗 fast-forward time;');
+                console.log('🆗 wait for military values to update; (⏰❗)');
+            }
+            else if (debugCounter == 13) {
+                PauseTime();
+                ShepherdsEvents();
+                ShepherdsEvents();
+                ShepherdsEvents();
+                MinersEvents();
+                MinersEvents();
+                MinersEvents();
+                player.likesStory = true;
+                debugCounter++;
+                console.log('🆗 pause time;');
+                console.log('🆗 perform all diplomacy;');
+            }
+            else if (debugCounter == 14) {
+                player.likesStory = false;
+                StartTime();
+                StartTime();
+                StartTime();
+                debugCounter++;
+                console.log('🆗 start time;');
+                console.log('🆗 fast-forward time;');
+                console.log('🆗 wait for Alavi invite; (⏰❗)');
+            }
+            else if (debugCounter == 15) {
+                PauseTime();
+                MapChangeTarget('next');
+                MapChangeTarget('next');
+                VisitProvince();
+                StartTime();
+                StartTime();
+                StartTime();
+                debugCounter++;
+                console.log('🆗 visit Alavi;');
+                console.log('🆗 wait for Alavi introduction; (⏰❗)');
+            }
+            else if (debugCounter == 16) {
+                PauseTime();
+                FarmersEvents(); // meet with your advisors
+                BurnItDown();
+                FinalReset();
+                player.likesStory = true;
+                debugCounter++;
+                console.log('🆗 pause time;');
+                console.log('🆗 meet with your advisors;');
+                console.log('🆗 zero all values;');
+                console.log('🆗 force conservative values;');
+            }
+            else if (debugCounter == 17) {
+                StartTime();
+                debugCounter++;
+                RecordProgress();
+                console.log('🆗 save game;');
+                console.log('🆗 start time; (⚠️ regular gameplay can resume from here)');
+            }
+            else if (debugCounter == 18) {
+                console.log('🚨 SEQUENCE COMPLETE!');
+                alert('🚨 SEQUENCE COMPLETE!');
+            }
+        }
+        if (e.key == 'F') { BurnItDown(); }
         function BurnItDown() {
+            console.log('🚨 ZERO ALL VALUES!');
             ZeroArray(bushelCount);
             ZeroArray(seededCount);
             ZeroArray(farmedCount);
@@ -175,227 +584,20 @@ document.body.onkeyup = function (e) {
             ratsCount = 2;
             ZeroArray(shepherdsInventory);
             ZeroArray(minersInventory);
+            filetCount = 0;
+            ZeroArray(filetsSpent);
+            lifetimeFishEarnings = 0;
+            ZeroArray(caughtFishSession);
+            ZeroArray(caughtFishLifetime);
+            fishMissCountLifetime = 0;
+            fishMissCountSession = 0;
+            fishEscapeCountLifetime = 0;
+            fishEscapeCountSession = 0;
+            totalCatches = 0;
         }
-        if (e.key == 'F') { BurnItDown(); }
-
-        if (e.key == '`') { CollateGameStateReport(true); }
-
-        if (e.key == ' ' && localStorage.getItem(save_key) && !player.hasBegun) { StartNewGame(); }
-        else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && !player.hasBegun)) { BeginGame('English'); }
-        else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && player.hasBegun)) { DismissForeword(); }
-
-        if (e.key == '1' && !e.altKey && player.canTill) { PlotTill(); }
-        if (e.key == '2' && !e.altKey && player.canPlant) { PlotPlant(); }
-        if (e.key == '3' && !e.altKey && player.canWater) { PlotWater(); }
-        if (e.key == '4' && !e.altKey && player.canHarvest) { PlotHarvest(); }
-
-        function AdvanceGame() {
-            if (player.canRentWarehouse) { RentWarehouse(); }
-            else if (player.canBuyForest) { BuyForest(); }
-            else if (farmStage == 11 && !player.canLog) { ForestEvents(); }
-            else if (farmStage == 11 && !player.canSaw) { ForestEvents(); }
-            else if (player.canBuyMountain) { BuyMountain(); }
-            else if (player.canBuyLand) { BuyLand(); }
-            else if (player.canFound) { Found(); }
-            else if (player.canBuild) { Build(); }
-            else if (player.canBuyNewFarm && !player.hasNewFarm) { BuyNewFarm(); }
-            else if (player.canBuyNewFarm && !player.hasFlaxFarm) { BuyNewFarm(); }
-            else if (player.hasFoundCopperEvidence && !player.hasFoundMine) { MountainEvents(); }
-            else if (player.hasFoundMine && !player.canMine) { MountainEvents(); }
-            else if (player.canMine && !player.canSmelt) { MountainEvents(); }
-            else if (player.canHireBronzeworkers) { MountainEvents(); }
-            else if (player.hasFoundCrystalEvidence && !player.hasHiredGemcutters) { MountainEvents(); }
-            else { ImproveResidence(); }
-        }
-        if (e.key == '5' && !e.altKey) { AdvanceGame(); }
-
-        if (e.key == '6' && !e.altKey && player.canHire) {
-            if (!player.seesReport) { HireAccountant(); }
-            else { HireHand(); }
-        }
-        if (e.code == 'KeyW') {
-            if (e.shiftKey) {
-                if (handsHired != 1000) { handsHired = 1000; }
-                else { handsHired = 0; }
-            }
-            else if (e.altKey) { handsHired -= 1; }
-            else { handsHired += 1; }
-        }
-        if (e.key == 'd' && player.canDelegate) { TogglePriority(); }
-
-        if (e.key == '7' && !e.altKey) { EstablishTradeRoute(); }
-        if (e.key == '8' && !e.altKey) { EstablishShippingLanes(); }
-
-        if (e.key == '9' && !e.altKey) { ConsultOracle(); }
-
-        if (e.key == '!' && player.canBarter) { BarterFruit(2); }
-        if (e.key == '@' && player.canBarter) { BarterFruit(3); }
-        if (e.key == '#' && player.canBarter) { BarterFruit(4); }
-        if (e.key == '$' && player.canBarter) { BarterFruit(5); }
-        if (e.key == '%' && player.canBarter) { BarterFruit(6); }
-
-        if (e.key == '1' && e.altKey && player.canSell) { SellCommodities(0); }
-        if (e.key == '2' && e.altKey && player.canSell) { PurchaseCommodities(0); }
-        if (e.key == '3' && e.altKey && player.canSell) { SellCommodities(1); }
-        if (e.key == '4' && e.altKey && player.canSell) { PurchaseCommodities(1); }
-        if (e.key == '5' && e.altKey && player.canSell) { SellCommodities(2); }
-        if (e.key == '6' && e.altKey && player.canSell) { PurchaseCommodities(2); }
-        if (e.key == '7' && e.altKey && player.canSell) { SellCommodities(3); }
-        if (e.key == '8' && e.altKey && player.canSell) { PurchaseCommodities(3); }
-        if (e.key == '9' && e.altKey && player.canSell) { SellCommodities(4); }
-        if (e.key == '0' && e.altKey && player.canSell) { PurchaseCommodities(4); }
-        if (e.key == '-' && e.altKey && player.canSell) { SellCommodities(5); }
-
-        if (e.key == 'x' && player.canGoHome && player.isAt == 'Praedium') { GoToResidence(); }
-        if (e.key == 'c' && (player.isAt == 'Residence' || player.isAt == 'Township')) { GoToPraedium(); }
-        if (e.key == 'v' && player.seesVillage && (player.isAt == 'Praedium' || player.isAt == 'Port')) { GoToTownship(); }
-        if (e.key == 'b' && player.canSell && player.isAt == 'Township') { GoToPort(); }
-
-        if (e.key == 'G') { // 🚨🚨🚨 USE WITH CAUTION!!! ONLY WORKS AT GAME START AND IN *EXACT* SEQUENCE 🚨🚨🚨
-            if (e.altKey) {
-                alert('alt!');
-                //loop a 1-sec timer here that presses this stupid fn G key for me 200 times or whatever (then shrink that time down to whatever minimum is safely repeatable)
-                //maybe time it all so 9 years go by, olives grow and you can barter when its all done
-            }
-            else {
-                if (debugCounter == 0) {
-                    player.likesStory = false;
-                    StartTime();
-                    StartTime();
-                    PlotTill();
-                    PlotPlant();
-                    PlotWater();
-                    debugCounter++;
-                    player.likesStory = true;
-                }
-                else if (debugCounter == 1) {
-                    player.likesStory = false;
-                    PlotHarvest();
-                    PlotTill();
-                    PlotPlant();
-                    PlotWater();
-                    debugCounter++;
-                    player.likesStory = true;
-                }
-                else if (debugCounter == 2) {
-                    player.likesStory = false;
-                    PlotHarvest();
-                    StartTime();
-                    debugCounter++;
-                    player.likesStory = true;
-                }
-                else if (debugCounter == 3) {
-                    player.likesStory = false;
-                    setValues(1000000000);
-                    for (let i = 0; i < 25; i++) { AdvanceGame(); } // completely upgrade praedium
-                    player.names.push('Pee-Pee Boy');
-                    HireAccountant();
-                    for (let i = 0; i < 36; i++) { HireHand(); }
-                    AdvanceGame(); // buy town
-                    setValues(5800858008);
-                    PauseTime();
-                    debugCounter++;
-                    player.likesStory = true;
-                }
-                else if (debugCounter == 4) {
-                    player.likesStory = false;
-                    for (let i = 0; i < 35; i++) { AdvanceGame(); } // upgrade village to capital
-                    setValues(5800858008);
-                    debugCounter++;
-                    player.likesStory = true;
-                }
-                else if (debugCounter == 5) {
-                    player.likesStory = false;
-                    for (let i = 0; i < 16; i++) { AdvanceGame(); } // ugprade residence to mansion + purchase both new farms
-                    setValues(5800858008);
-                    debugCounter++;
-                    player.likesStory = true;
-                }
-                else if (debugCounter == 6) { // discover mine
-                    player.likesStory = false;
-                    StartTime();
-                    StartTime();
-                    StartTime();
-                    debugCounter++;
-                }
-                else if (debugCounter == 7) {
-                    PauseTime();
-                    for (let i = 0; i < 3; i++) { AdvanceGame(); } // mine & foundry
-                    for (let i = 0; i < 7; i++) { EstablishTradeRoute(); }
-                    EstablishShippingLanes(); // tin
-                    AdvanceGame(); // bronzeworkers
-                    StartTime();
-                    StartTime();
-                    StartTime();
-                    setValues(5800858008);
-                    debugCounter++;
-                }
-                else if (debugCounter == 8) {
-                    PauseTime();
-                    AdvanceGame(); // crystals
-                    setValues(5800858008);
-                    debugCounter++;
-                    player.likesStory = true;
-                }
-                else if (debugCounter == 9) {
-                    player.likesStory = false;
-                    AdvanceGame(); // bees
-                    AdvanceGame(); // raisins
-                    EstablishShippingLanes(); // salt
-                    AdvanceGame(); // hard tack
-                    AdvanceGame(); // rations
-                    AdvanceGame(); // cottage
-                    AdvanceGame(); // bandages
-                    setValues(5800858008);
-                    debugCounter++;
-                    player.likesStory = true;
-                }
-                else if (debugCounter == 10) {
-                    BurnItDown();
-                    FinalReset();
-                    debugCounter++;
-                }
-                else if (debugCounter == 11) {
-                    player.likesStory = false;
-                    ChooseHeir();
-                    HeirBegin();
-                    HeirChooseName();
-                    HeirChooseGender();
-                    HeirChooseEthnicity();
-                    HeirChooseTitle();
-                    HeirChooseFace(0);
-                    HeirConfirmAll(false);
-                    debugCounter++;
-                    player.likesStory = true;
-                }
-                else if (debugCounter == 12) { // updates military counts
-                    player.likesStory = false;
-                    StartTime();
-                    StartTime();
-                    StartTime();
-                    debugCounter++;
-                }
-                else if (debugCounter == 13) {
-                    PauseTime();
-                    ShepherdsEvents();
-                    ShepherdsEvents();
-                    ShepherdsEvents();
-                    MinersEvents();
-                    MinersEvents();
-                    MinersEvents();
-                    player.likesStory = true;
-                    debugCounter++;
-                }
-                else if (debugCounter == 14) {
-                    StartTime();
-                    debugCounter++;
-                }
-                else if (debugCounter == 15) {
-                    alert('🚨 debug sequence complete 🚨');
-                }
-            }
-        }
+        if (e.key == 'g') { FinalReset(); }
         function FinalReset() {
+            console.log('🚨 FORCE CONSERVATIVE VALUES!');
             bushelCount[0] = 1000000;
             bushelCount[1] = 1000000;
             bushelCount[7] = 1000000;
@@ -419,15 +621,16 @@ document.body.onkeyup = function (e) {
             beadsCount = 10000;
             trophiesCount = 100;
             scrollsCount = 1000;
+            filetCount = 1000;
+            caughtFishLifetime[0] = 50;
+            caughtFishLifetime[2] = 50;
+            totalCatches = 100;
         }
-        if (e.key == 'g') { FinalReset(); }
 
         if (e.key == 'e') { Translate('English'); }
         if (e.key == 'E') { Translate('English', false); }
         if (e.key == 'r') { Translate('Spanish'); }
         if (e.key == 'R') { Translate('Spanish', false); }
-
-        if (e.key == 'z') { SummonOptions(); }
 
         if (e.code == 'KeyA') {
             if (e.shiftKey) {
@@ -437,8 +640,7 @@ document.body.onkeyup = function (e) {
             else if (e.altKey) { residentsCount -= 1; }
             else { residentsCount += 1; }
         }
-
-        if (e.key == 'd') {
+        if (e.key == 'D') {
             if (ratsCount != 100000000) { ratsCount = 100000000; }
             else { ratsCount = 0; }
         }
@@ -454,7 +656,6 @@ document.body.onkeyup = function (e) {
         if (e.code == 'KeyL') { setValues(10); }
         if (e.code == 'KeyN') { setValues(1); }
         if (e.code == 'KeyM') { setValues(0); }
-
         function setValues(amount) {
             if (e.shiftKey) {
                 FillArray(bushelCount, amount);
@@ -477,16 +678,10 @@ document.body.onkeyup = function (e) {
                 residenceIngredientInStockCount[14][1] = amount;
                 FillArray(shepherdsInventory, amount);
                 FillArray(minersInventory, amount);
+                filetCount = amount;
             }
             else if (e.altKey) {
-                bushelCount[0] -= amount;
-                bushelCount[1] -= amount;
-                bushelCount[2] -= amount;
-                bushelCount[3] -= amount;
-                bushelCount[4] -= amount;
-                bushelCount[5] -= amount;
-                bushelCount[6] -= amount;
-                bushelCount[7] -= amount;
+                GooseArray(bushelCount, -amount);
                 logsCount -= amount;
                 boardsCount -= amount;
                 stoneCount -= amount;
@@ -502,54 +697,14 @@ document.body.onkeyup = function (e) {
                 scrollsCount -= amount;
                 ghostsCount -= amount;
                 relicCount -= amount;
-                residenceInStockCount[0] -= amount;
-                residenceInStockCount[1] -= amount;
-                residenceInStockCount[2] -= amount;
-                residenceInStockCount[3] -= amount;
-                residenceInStockCount[4] -= amount;
-                residenceInStockCount[5] -= amount;
-                residenceInStockCount[6] -= amount;
-                residenceInStockCount[7] -= amount;
-                residenceInStockCount[8] -= amount;
-                residenceInStockCount[9] -= amount;
-                residenceInStockCount[10] -= amount;
-                residenceInStockCount[11] -= amount;
-                residenceInStockCount[12] -= amount;
-                residenceInStockCount[13] -= amount;
-                residenceInStockCount[14] -= amount;
+                GooseArray(residenceInStockCount, -amount);
                 residenceIngredientInStockCount[14][1] -= amount;
-                shepherdsInventory[0] -= amount;
-                shepherdsInventory[1] -= amount;
-                shepherdsInventory[2] -= amount;
-                shepherdsInventory[3] -= amount;
-                shepherdsInventory[4] -= amount;
-                shepherdsInventory[5] -= amount;
-                shepherdsInventory[6] -= amount;
-                shepherdsInventory[7] -= amount;
-                shepherdsInventory[8] -= amount;
-                shepherdsInventory[9] -= amount;
-                shepherdsInventory[10] -= amount;
-                minersInventory[0] -= amount;
-                minersInventory[1] -= amount;
-                minersInventory[2] -= amount;
-                minersInventory[3] -= amount;
-                minersInventory[4] -= amount;
-                minersInventory[5] -= amount;
-                minersInventory[6] -= amount;
-                minersInventory[7] -= amount;
-                minersInventory[8] -= amount;
-                minersInventory[9] -= amount;
-                minersInventory[10] -= amount;
+                GooseArray(shepherdsInventory, -amount);
+                GooseArray(minersInventory, -amount);
+                filetCount -= amount;
             }
             else {
-                bushelCount[0] += amount;
-                bushelCount[1] += amount;
-                bushelCount[2] += amount;
-                bushelCount[3] += amount;
-                bushelCount[4] += amount;
-                bushelCount[5] += amount;
-                bushelCount[6] += amount;
-                bushelCount[7] += amount;
+                GooseArray(bushelCount, amount);
                 logsCount += amount;
                 boardsCount += amount;
                 stoneCount += amount;
@@ -565,44 +720,11 @@ document.body.onkeyup = function (e) {
                 scrollsCount += amount;
                 ghostsCount += amount;
                 relicCount += amount;
-                residenceInStockCount[0] += amount;
-                residenceInStockCount[1] += amount;
-                residenceInStockCount[2] += amount;
-                residenceInStockCount[3] += amount;
-                residenceInStockCount[4] += amount;
-                residenceInStockCount[5] += amount;
-                residenceInStockCount[6] += amount;
-                residenceInStockCount[7] += amount;
-                residenceInStockCount[8] += amount;
-                residenceInStockCount[9] += amount;
-                residenceInStockCount[10] += amount;
-                residenceInStockCount[11] += amount;
-                residenceInStockCount[12] += amount;
-                residenceInStockCount[13] += amount;
-                residenceInStockCount[14] += amount;
+                GooseArray(residenceInStockCount, amount);
                 residenceIngredientInStockCount[14][1] += amount;
-                shepherdsInventory[0] += amount;
-                shepherdsInventory[1] += amount;
-                shepherdsInventory[2] += amount;
-                shepherdsInventory[3] += amount;
-                shepherdsInventory[4] += amount;
-                shepherdsInventory[5] += amount;
-                shepherdsInventory[6] += amount;
-                shepherdsInventory[7] += amount;
-                shepherdsInventory[8] += amount;
-                shepherdsInventory[9] += amount;
-                shepherdsInventory[10] += amount;
-                minersInventory[0] += amount;
-                minersInventory[1] += amount;
-                minersInventory[2] += amount;
-                minersInventory[3] += amount;
-                minersInventory[4] += amount;
-                minersInventory[5] += amount;
-                minersInventory[6] += amount;
-                minersInventory[7] += amount;
-                minersInventory[8] += amount;
-                minersInventory[9] += amount;
-                minersInventory[10] += amount;
+                GooseArray(shepherdsInventory, amount);
+                GooseArray(minersInventory, amount);
+                filetCount += amount;
             }
         }
 
@@ -615,9 +737,11 @@ document.body.onkeyup = function (e) {
             else { StartTime(); }
         }
 
-        ////////////if (e.key == 'q') { PauseTime(); }///////////////////////////////turn reports on and off
+        if (e.key == '/') { CollateGameStateReport(true); }
+        if (e.key == '?') { ToggleRecords(); }
 
         UpdateDisplay();
+        UpdateFishDisplay();
     }
 }
 
@@ -662,7 +786,7 @@ function DismissForeword() {
 
 function DismissGameEvent() {
     if (player.canDismissEvent) {
-        if (gameSpeed == 'paused') { StartTime(); }
+        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf') { StartTime(); }
         player.seesGameEvent = false;
         UpdateDisplay();
     }
@@ -1601,6 +1725,7 @@ function Found() {
         player.canFound = false;
         player.canBuild = true;
         player.seesVillage = true;
+        Translate(player.speaks, false); // this repopulates the 'Go Fishin(’/g)' label
         JumpToTopPlease();
         UpdateDisplay();
     }
@@ -1919,6 +2044,40 @@ function ImproveResidence() {
     }
 
     UpdateDisplay();
+}
+
+
+
+function GoHerm() {
+    if (!fishGameStarted && !fishWarmup) {
+        if (gameSpeed == 'paused') { StartTime(); }
+        divGameWindow.style.display = '';
+        divViewResidence.style.display = 'block';
+        divMinigameFishing.style.display = '';
+        body.appendChild(divFooter);
+        player.isAt = 'Residence';
+        UpdateDisplay();
+        window.scrollTo(0, 0);
+    }
+}
+
+
+
+function GoFishing() {
+    if (!fishState.hasVisited) {
+        fishState.hasVisited = true;
+        if (player.likesStory) { GameEvent(displayStoryFishFirstVisit); }
+    }
+    PauseTime();
+    divGameWindow.style.display = 'none';
+    divViewResidence.style.display = '';
+    divMinigameFishing.style.display = 'block';
+    divMinigameFishing.appendChild(divFooter);
+    player.isAt = 'Creek';
+    fishGameOver = false;
+    UpdateDisplay();
+    UpdateFishDisplay();
+    window.scrollTo(0, 0);
 }
 
 
@@ -2989,12 +3148,11 @@ function PurchaseLivestock() {
 
 
 
-function Win() {
-    player.hasWon = true;
-    if (player.likesStory) { GameEvent(displayWinMessage); }
-    //window.open(winTarget, 'PRAEDIUM_requested_new_tab');
-    player.saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
-}
+//function Win() {
+//    player.hasWon = true;
+//    if (player.likesStory) { GameEvent(displayWinMessage); }
+//    //window.open(winTarget, 'PRAEDIUM_requested_new_tab');
+//}
 
 
 
@@ -3340,10 +3498,6 @@ function FarmersEvents() {
     if (!player.hasPrepared) {
         player.hasPrepared = true;
         if (player.likesStory) { GameEvent(displayStoryFarmersPrepare); }
-
-        // 🚨🚨🚨
-        player.hasWon = true;
-        // 🚨🚨🚨
     }
     else if (player.hasPrepared && !player.hasMetFarmers) {
         // 🚨🚨🚨
@@ -3352,6 +3506,10 @@ function FarmersEvents() {
         // 🚨🚨🚨
 
         // 🚨🚨🚨
+        player.saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
+        player.hasWon = true;
+        if (timeAtWin == null) { timeAtWin = new Date(); }
+        RecordProgress();
         PauseTime();
         if (player.likesMusic) { audioEnding.play(); }
         const divEndingBackdrop = document.createElement('div');
@@ -3372,7 +3530,6 @@ function FarmersEvents() {
         lastString += '</div></div></div>';
         //lastString += '<canvas id="canvasFireworks"></canvas>';
         divEndingBackdrop.innerHTML = lastString;
-        const body = document.getElementsByTagName("body")[0];
         body.appendChild(divEndingBackdrop);
         //canvasFireworks = document.getElementById('canvasFireworks');
         //canvasFireworksContext = canvasFireworks.getContext('2d');
@@ -3467,7 +3624,7 @@ function SummonOptions() {
 
 function DismissOptions() {
     player.seesOptions = false;
-    if (gameSpeed == 'paused') { StartTime(); }
+    if (gameSpeed == 'paused' && player.isAt != 'Creek') { StartTime(); }
     UpdateDisplay();
 }
 
@@ -3481,6 +3638,7 @@ function ToggleMusic() {
     else {
         player.likesMusic = false;
         audioTheme.pause();
+        audioFish.pause();
         audioEnding.pause(); // this is meaningless lol
     }
 }
@@ -3490,12 +3648,14 @@ function ToggleMusic() {
 function ToggleSound() {
     if (toggleSounds.checked) {
         player.likesSounds = true;
+        audioPeasant.currentTime = 0;
         audioPeasant.play();
     }
     else {
+        audioTrophy.pause();
         achievementSoundRare.pause();
         audioPeasant.pause();
-        audioPeasant.currentTime = 0;
+        audioWhistle.pause();
         player.likesSounds = false;
     }
 }
@@ -3538,6 +3698,7 @@ function Legal() {
 function SailWest() {
     if (player.likesStory) { GameEvent(displayStorySailWest); }
     player.hasWentToAman = true;
+    RecordProgress();
     UpdateDisplay();
     //window.open(sailWestTarget, 'PRAEDIUM_requested_new_tab');
 }
@@ -3549,6 +3710,7 @@ function PlayGod() {
         relicCount -= pricePegasus;
         if (player.likesStory) { GameEvent(displayStoryPegasus); }
         player.hasPegasi = true;
+        RecordProgress();
         UpdateDisplay();
     }
     else {

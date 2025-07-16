@@ -217,7 +217,10 @@ function GameTurn() {
         WriteReportToDisk();
     }
 
-    if (week == 1 && year > 1 && player.isAt != 'Workshop') { RecordProgress(); }
+    if (week == 1 && year > 1 && player.isAt != 'Workshop') {
+        if (year == 2) { timeAtStart = new Date(); }
+        RecordProgress();
+    }
 
     UpdateDisplay();
 
@@ -674,7 +677,12 @@ function FieldhandWork() {
 
 
 function FellTrees() {
-    const loggedAmount = FindWholeRandom(logsMin, logsMax) * loggersHired;
+    let loggedAmount = FindWholeRandom(logsMin, logsMax) * loggersHired;
+    if (filetCount >= loggersHired) {
+        filetCount -= loggersHired;
+        filetsSpent[2] += loggersHired;
+        loggedAmount = loggedAmount * 2;
+    }
     logsCount += loggedAmount;
     forestProducedCount[0] += loggedAmount;
     PayWorkerGroup(loggersHired, 1);
@@ -684,7 +692,12 @@ function FellTrees() {
 
 function SawLogs() {
     const processedAmount = sawyersHired * logsSawnPerWeek;
-    const producedAmount = processedAmount * boardsPerLog;
+    let producedAmount = processedAmount * boardsPerLog;
+    if (filetCount >= sawyersHired) {
+        filetCount -= sawyersHired;
+        filetsSpent[1] += sawyersHired;
+        producedAmount = producedAmount * 2;
+    }
     logsCount -= processedAmount;
     forestSpentCount[0] += processedAmount;
     boardsCount += producedAmount;
@@ -695,7 +708,12 @@ function SawLogs() {
 
 
 function QuarryStone() {
-    const producedAmount = masonsHired * FindWholeRandom(stoneMin, stoneMax);
+    let producedAmount = masonsHired * FindWholeRandom(stoneMin, stoneMax);
+    if (filetCount >= masonsHired) {
+        filetCount -= masonsHired;
+        filetsSpent[0] += masonsHired;
+        producedAmount = producedAmount * 2;
+    }
     stoneCount += producedAmount;
     mountainProducedCount[0] += producedAmount;
     PayWorkerGroup(masonsHired, 3);

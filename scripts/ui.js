@@ -2423,6 +2423,7 @@ function UpdateText() {
     }
 
     else if (player.isAt == 'Residence') {
+        buttonGoFishing.innerHTML = displayGoFishing;
         buttonGoToPraediumFromRes.innerHTML = displayGoToPraediumFromRes;
         buttonWasteTime.innerHTML = displayLabelWasteTime;
 
@@ -3615,7 +3616,7 @@ function UpdateText() {
         buttonMapEcon.innerHTML = displayMapEcon;
         buttonMapMil.innerHTML = displayMapMil;
         buttonMapPol.innerHTML = displayMapPol;
-        buttonMapVisitProvince.innerHTML = displayMapVisit + ' ' + currentProvinceName;
+        buttonMapVisitProvince.innerHTML = '↓ ' + displayMapVisit + ' ' + currentProvinceName;
 
         function AddInertDigits(comparedDigits, maxDigits, removeLastCharacter = false) {
             if (comparedDigits < maxDigits) {
@@ -3675,73 +3676,69 @@ function UpdateText() {
                 contentString += ' <span class="icon ' + iconString + ' inlineIcon"></span><br>';
             }
 
-            if (player.hasHelpedShepherds) {
-                ScribeContentString(shepherdsInventory[10], 'Manure');
-            }
-            ScribeContentString(logsCount, 'Log');
-            ScribeContentString(stoneCount, 'Stone');
-            ScribeContentString(oreCopperCount, 'OreCopper');
-            if (player.hasHelpedMiners) {
-                ScribeContentString(minersInventory[10], 'Pyrolusite');
-                ScribeContentString(minersInventory[9], 'OreCobalt');
-                ScribeContentString(minersInventory[8], 'IngotLead');
-            }
-            ScribeContentString(ingotsCopperCount, 'IngotCopper');
+            if (player.canLog) { ScribeContentString(logsCount, 'Log'); }
+            if (player.seesMountain) { ScribeContentString(stoneCount, 'Stone'); }
+            if (player.canMine) { ScribeContentString(oreCopperCount, 'OreCopper'); }
+            if (player.hasHelpedMiners) { ScribeContentString(minersInventory[8], 'IngotLead'); }
+            if (player.canSmelt) { ScribeContentString(ingotsCopperCount, 'IngotCopper'); }
             if (player.hasHelpedMiners) {
                 ScribeContentString(minersInventory[6], 'IngotNickel');
                 ScribeContentString(minersInventory[7], 'IngotZinc');
             }
-            ScribeContentString(ingotsTinCount, 'IngotTin');
-            ScribeContentString(ingotsBronzeCount, 'IngotBronze');
+            if (player.canImportTin) { ScribeContentString(ingotsTinCount, 'IngotTin'); }
+            if (player.hasHiredBronzeworkers) { ScribeContentString(ingotsBronzeCount, 'IngotBronze'); }
             if (player.hasHelpedMiners) {
                 ScribeContentString(minersInventory[5], 'IngotIron');
                 ScribeContentString(minersInventory[4], 'IngotSilver');
                 ScribeContentString(minersInventory[3], 'IngotGold');
                 ScribeContentString(minersInventory[2], 'Bismuth');
             }
-            ScribeContentString(crystalsCount, 'Crystal');
+            if (player.hasHiredGemcutters) { ScribeContentString(crystalsCount, 'Crystal'); }
             if (player.hasHelpedMiners) {
                 ScribeContentString(minersInventory[1], 'Zircon');
                 ScribeContentString(minersInventory[0], 'Diamonds');
             }
-            ScribeContentString(residenceIngredientInStockCount[14][1], 'Sal');
-            ScribeContentString(horsesCount, 'Horsey');
-            if (player.hasPegasi) {
-                ScribeContentString(pegasiCount, 'Unicorn');
-            }
+            if (player.canImportSalt) { ScribeContentString(residenceIngredientInStockCount[14][1], 'Sal'); }
+            ScribeContentString(filetCount, 'FishSteak');
 
             contentString += '<div style="height: 4vw; width: 4vw;"></div>';
             contentString += '<b>' + displayCrops + ':</b><br>';
             ScribeContentString(bushelCount[0], 'Wheat');
-            ScribeContentString(bushelCount[1], 'Barley');
-            ScribeContentString(bushelCount[7], 'Flax');
+            if (farmStage > 16) { ScribeContentString(bushelCount[1], 'Barley'); }
+            if (player.hasFlaxFarm) { ScribeContentString(bushelCount[7], 'Flax'); }
             ScribeContentString(bushelCount[2], 'Olive');
-            ScribeContentString(bushelCount[3], 'Date');
-            ScribeContentString(bushelCount[4], 'Fig');
-            ScribeContentString(bushelCount[5], 'Pom');
-            ScribeContentString(bushelCount[6], 'Grape');
-            ScribeContentString(residenceInStockCount[9], 'Comb');
+            if (farmStage > 17) {
+                ScribeContentString(bushelCount[3], 'Date');
+                ScribeContentString(bushelCount[4], 'Fig');
+                ScribeContentString(bushelCount[5], 'Pom');
+                ScribeContentString(bushelCount[6], 'Grape');
+            }
+            if (player.hasApiary) { ScribeContentString(residenceInStockCount[9], 'Comb'); }
+
+            contentString += '<div style="height: 4vw; width: 4vw;"></div>';
+            contentString += '<b>' + displaySacredItems + ':</b><br>';
+            ScribeContentString(beadsCount, 'Mala');
+            ScribeContentString(scrollsCount, 'Scroll');
+            ScribeContentString(relicCount, 'Relic');
+            if (player.isGod) { ScribeContentString(messiahCount, 'Child'); }
             contentString += '</div>';
 
             contentString += '<div style="width: 50%;">';
             contentString += '<b>' + displayManufacturedProducts + ':</b><br>';
-            ScribeContentString(boardsCount, 'Board');
+            if (player.canSaw) { ScribeContentString(boardsCount, 'Board'); }
             ScribeContentString(residenceInStockCount[0], 'Loaves');
-            ScribeContentString(residenceInStockCount[14], 'LembasBread');
-            ScribeContentString(residenceInStockCount[11], 'Ration');
-            ScribeContentString(residenceInStockCount[12], 'Linen');
-            ScribeContentString(residenceInStockCount[13], 'Bandage');
+            if (player.hasHardtack) { ScribeContentString(residenceInStockCount[14], 'LembasBread'); }
+            if (player.hasRations) { ScribeContentString(residenceInStockCount[11], 'Ration'); }
+            if (player.hasCottage) { ScribeContentString(residenceInStockCount[12], 'Linen'); }
+            if (player.hasBandages) { ScribeContentString(residenceInStockCount[13], 'Bandage'); }
             ScribeContentString(residenceInStockCount[1], 'Amphora');
             ScribeContentString(residenceInStockCount[2], 'Keg');
             ScribeContentString(residenceInStockCount[3], 'Cask');
             ScribeContentString(residenceInStockCount[4], 'Honeypot');
             ScribeContentString(residenceInStockCount[5], 'Jug');
             ScribeContentString(residenceInStockCount[6], 'Basket');
-            ScribeContentString(residenceInStockCount[10], 'Raisins');
+            if (player.hasRaisins) { ScribeContentString(residenceInStockCount[10], 'Raisins'); }
             if (player.hasHelpedShepherds) {
-                ScribeContentString(shepherdsInventory[8], 'Bones');
-                ScribeContentString(shepherdsInventory[6], 'Offal');
-                ScribeContentString(shepherdsInventory[9], 'Blood');
                 ScribeContentString(shepherdsInventory[1], 'Milk');
                 ScribeContentString(shepherdsInventory[2], 'Yoghurt');
                 ScribeContentString(shepherdsInventory[3], 'Butter');
@@ -3750,17 +3747,32 @@ function UpdateText() {
                 ScribeContentString(shepherdsInventory[0], 'Wool');
                 ScribeContentString(shepherdsInventory[7], 'LeatherHide');
             }
-            ScribeContentString(residenceInStockCount[7], 'Trinket');
-            ScribeContentString(residenceInStockCount[8], 'Gems');
+            if (player.hasAtelier) { ScribeContentString(residenceInStockCount[7], 'Trinket'); }
+            if (player.hasHiredGemcutters) { ScribeContentString(residenceInStockCount[8], 'Gems'); }
 
-            contentString += '<div style="height: 4vw; width: 4vw;"></div>';
-            contentString += '<b>' + displaySacredItems + ':</b><br>';
-            ScribeContentString(beadsCount, 'Mala');
-            ScribeContentString(scrollsCount, 'Scroll');
-            ScribeContentString(relicCount, 'Relic');
-            if (player.isGod) { ScribeContentString(messiahCount, 'Child'); }
+            if (player.hasHelpedShepherds || player.hasHelpedMiners) {
+                contentString += '<div style="height: 4vw; width: 4vw;"></div>';
+                contentString += '<b>' + displaySecondaryProducts + ':</b><br>';
+            }
+            if (player.hasHelpedShepherds) {
+                ScribeContentString(shepherdsInventory[10], 'Manure');
+                ScribeContentString(shepherdsInventory[6], 'Offal');
+                ScribeContentString(shepherdsInventory[9], 'Blood');
+                ScribeContentString(shepherdsInventory[8], 'Bones');
+            }
+            if (player.hasHelpedMiners) {
+                ScribeContentString(minersInventory[10], 'Pyrolusite');
+                ScribeContentString(minersInventory[9], 'OreCobalt');
+            }
 
+            if (horsesSpawn) {
+                contentString += '<div style="height: 4vw; width: 4vw;"></div>';
+                contentString += '<b>' + displayLivestock + ':</b><br>';
+                ScribeContentString(horsesCount, 'Horsey');
+            }
+            if (player.hasPegasi) { ScribeContentString(pegasiCount, 'Unicorn'); }
             contentString += '</div>';
+
             contentString += '</div>';
             contentString += '</div>';
             divMapDetailsView.innerHTML = contentString;
@@ -3919,10 +3931,12 @@ function UpdateText() {
                 contentString += displayTotal;
                 contentString += ':</b> ';
                 let totalJabronis = residentsCount + deployedServiceMembers + secondClassCitizensCount;
+                contentString += '<b>';
                 contentString += AddInertDigits(totalJabronis.toString().length, 4);
                 if (totalJabronis == 0) { contentString += '<span class="inertNumerals">'; }
                 contentString += inventoryFormatter.format(totalJabronis);
                 if (totalJabronis == 0) { contentString += '</span>'; }
+                contentString += '</b>';
                 contentString += ' ' + '<span class="icon CityWalls inlineIcon"></span>';
                 contentString += '<br>';
                 contentString += '</div>';
@@ -9554,6 +9568,12 @@ function RedrawCanvases() {
                 residenceImage.src = 'bitmaps/res08_af' + residenceAnimationFrame + '.png';
             }
             else { residenceAnimationFrame = 1; }
+
+            if (player.hasWon) {
+                residenceImage.src = 'bitmaps/res08_win.png';
+                if (player.gender == 1 || player.gender == 3) { residenceImage.src = 'bitmaps/res08_winFem.png'; }
+            }
+            if (player.hasWon && player.hasPegasi) { residenceImage.src = 'bitmaps/res08_unicorn.png'; }
         }
         else if (player.isAt == 'Port') {
             if (portAnimationToggle) { portAnimationToggle = false; }
@@ -10438,6 +10458,8 @@ function PreloadImages() {
     PreloadImage('bitmaps/villageNEG03_af12.png');
     PreloadImage('bitmaps/villageNEG04.png');
     PreloadImage('bitmaps/villageNEG05.png');
+    PreloadImage('bitmaps/res08_win.png');
+    PreloadImage('bitmaps/res08_unicorn.png');
 
     function PreloadImage(url) {
         let img = new Image();

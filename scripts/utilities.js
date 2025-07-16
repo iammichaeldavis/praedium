@@ -55,7 +55,11 @@ function AskToResume() {
     if (loadedReport.hero.hasHelpedShepherds) { loadedIcon = 'Dolly'; }
     if (loadedReport.hero.hasHelpedMiners) { loadedIcon = 'IngotGold'; }
     if (loadedReport.hero.hasWon) { loadedIcon = 'Sphinx'; }
-    if (loadedReport.hero.isGod) { player.isGod = true; }
+    if (loadedReport.hero.hasWon && loadedReport.hero.hasWentToAman && loadedReport.hero.hasPegasi) { loadedIcon = 'SphinxSecondQuest'; }
+    if (loadedReport.hero.isGod) {
+        player.isGod = true;
+        player.likesDelay = false;
+    }
     Translate(player.speaks, false);
     divOverlayResume.style.display = 'block';
 }
@@ -228,6 +232,8 @@ function ContinuePreviousGame() {
         player.hasWon = loadedReport.hero.hasWon;
         player.hasPegasi = loadedReport.hero.hasPegasi;
         player.hasWentToAman = loadedReport.hero.hasWentToAman;
+        player.hasFished = loadedReport.hero.hasFished;
+        player.hasFishRecords = loadedReport.hero.hasFishRecords;
         /////////////////////////////////////////////////////////////////////////////////////////
         gameTurn = loadedReport.calendar[0];
         year = loadedReport.calendar[1];
@@ -238,6 +244,8 @@ function ContinuePreviousGame() {
         estDate[1] = loadedReport.calendar[4][1];
         heirDate[0] = loadedReport.calendar[5][0];
         heirDate[1] = loadedReport.calendar[5][1];
+        timeAtStart = loadedReport.timestamps[1];
+        timeAtWin = loadedReport.timestamps[2];
         /////////////////////////////////////////////////////////////////////////////////////////
         farmStage = loadedReport.stages[0];
         warehouseStage = loadedReport.stages[1];
@@ -410,6 +418,26 @@ function ContinuePreviousGame() {
         CloneArray(loadedReport.counts.civMiners, minersInventory);
 
         debugCounter = loadedReport.counts.debugCounters[0];
+
+        fishAvailableChanceUpperLimit = loadedReport.counts.miniGameFish[0];
+        fishAvailableCountdownMax = loadedReport.counts.miniGameFish[1];
+        stunnedFishButtonWiggleDurationS = loadedReport.counts.miniGameFish[2];
+        stunnedFishButtonCountdownDurationMS = loadedReport.counts.miniGameFish[3];
+        fishGreatCatchThresholdS = loadedReport.counts.miniGameFish[4];
+        fishLargeChanceUpperLimit = loadedReport.counts.miniGameFish[5];
+        fishRareChanceUpperLimit = loadedReport.counts.miniGameFish[6];
+        fishMissCountLifetime = loadedReport.counts.miniGameFish[7];
+        fishMissCountSession = loadedReport.counts.miniGameFish[8];
+        fishEscapeCountLifetime = loadedReport.counts.miniGameFish[9];
+        fishEscapeCountSession = loadedReport.counts.miniGameFish[10];
+        lifetimeFishEarnings = loadedReport.counts.miniGameFish[11];
+        CloneArray(loadedReport.counts.miniGameFish[12], caughtFishSession);
+        CloneArray(loadedReport.counts.miniGameFish[13], caughtFishLifetime);
+        CloneArray(loadedReport.counts.miniGameFish[14], caughtFishBounty);
+        filetCount = loadedReport.counts.miniGameFish[15];
+        filetsSpent = loadedReport.counts.miniGameFish[16];
+        fishState = loadedReport.counts.miniGameFish[17];
+        totalCatches = loadedReport.counts.miniGameFish[18];
         /////////////////////////////////////////////////////////////////////////////////////////
         CloneArray(loadedReport.farmland.grain[0], arrayFarmPlots[0]);
         CloneArray(loadedReport.farmland.grain[1], arrayFarmPlots[1]);
@@ -435,6 +463,7 @@ function ContinuePreviousGame() {
         CloneArray(loadedReport.farmland.linseed[6], arrayFlaxPlots[6]);
         CloneArray(loadedReport.farmland.linseed[7], arrayFlaxPlots[7]);
         CloneArray(loadedReport.farmland.linseed[8], arrayFlaxPlots[8]);
+        if (loadedReport.farmland.olives.length != arrayOlivar.length) { arrayOlivar.push(0, 0, 0, 0, 0, 0,); }
         CloneArray(loadedReport.farmland.olives, arrayOlivar);
         CloneArray(loadedReport.farmland.dates, arrayDatePalmGrove);
         CloneArray(loadedReport.farmland.figs, arrayFigOrchard);
@@ -500,7 +529,10 @@ function JumpToBottom() {
 
 
 function Achievement() {
-    if (player.likesSounds) { achievementSoundRare.play(); }
+    if (player.likesSounds) {
+        achievementSoundRare.currentTime = 0;
+        achievementSoundRare.play();
+    }
     document.querySelector('.achievement').classList.add('rare');
     document.querySelector('.circle').classList.add('circle_animate');
     document.querySelector('.banner').classList.add('banner-animate');
@@ -515,17 +547,55 @@ function Achievement() {
 
 
 
+function ShowToast() {
+    if (player.likesSounds) {
+        audioTrophy.currentTime = 0;
+        audioTrophy.play();
+    }
+
+    const container = document.getElementById('toast-container');
+    const urToast = document.getElementById('urToast');
+    const toast = document.createElement('div');
+    toast.className = 'psxToast';
+    toast.innerHTML = urToast.innerHTML;
+
+    container.appendChild(toast);
+
+    toast.style.animationName = 'slide_in';
+    toast.style.animationDuration = '0.4s';
+    toast.style.animationTimingFunction = 'ease-out';
+    toast.style.animationFillMode = 'both';
+
+    const rings = document.getElementsByClassName('psxRing');
+    const ring = rings[rings.length - 1];
+    ring.style.animationName = 'psxRingSequence';
+    ring.style.animationDuration = '7s';
+    ring.style.animationTimingFunction = 'ease-out';
+    ring.style.animationFillMode = 'both';
+
+    setTimeout(() => {
+        toast.style.animationName = 'slide_out';
+        toast.style.animationDuration = '0.4s';
+        toast.style.animationTimingFunction = 'ease-in';
+        toast.style.animationFillMode = 'both';
+    }, 7000);
+    setTimeout(() => toast.remove(), 8000);
+}
+
+
+
 function WriteReportToDisk(gameOver = false) {
     const d = new Date();
-    let stamp = d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate() + '.';
+    let stamp = d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate();
     let hour = d.getHours();
     if (hour < 10) { hour = '0' + hour; }
     let minute = d.getMinutes();
     if (minute < 10) { minute = '0' + minute; }
     let second = d.getSeconds();
     if (second < 10) { second = '0' + second; }
-    stamp += hour + minute + ';' + second;
-    let filename = 'PRAEDIUM_FULL_REPORT-' + stamp;
+    stamp += '-';
+    stamp += hour + ';' + minute + ';' + second;
+    let filename = 'PRAEDIUM_REPORT-' + stamp;
 
     const JSONToFile = (obj, filename) => {
         const blob = new Blob([JSON.stringify(obj, null, 2)], {
@@ -615,6 +685,28 @@ function CollateGameStateReport(loud = false) {
         civMiners: minersInventory,
 
         debugCounters: [debugCounter,],
+
+        miniGameFish: [
+            fishAvailableChanceUpperLimit,
+            fishAvailableCountdownMax,
+            stunnedFishButtonWiggleDurationS,
+            stunnedFishButtonCountdownDurationMS,
+            fishGreatCatchThresholdS,
+            fishLargeChanceUpperLimit,
+            fishRareChanceUpperLimit,
+            fishMissCountLifetime,
+            fishMissCountSession,
+            fishEscapeCountLifetime,
+            fishEscapeCountSession,
+            lifetimeFishEarnings,
+            caughtFishSession,
+            caughtFishLifetime,
+            caughtFishBounty,
+            filetCount,
+            filetsSpent,
+            fishState,
+            totalCatches,
+        ],
     };
     const farmlandArrays = {
         grain: arrayFarmPlots,
@@ -625,6 +717,7 @@ function CollateGameStateReport(loud = false) {
         poms: arrayPomOrchard,
         grapes: arrayVineyard,
     };
+    const timeAtSave = new Date();
     const report = {
         bitmaps: [residenceImage.src, villageImageActual.src, tileGrowingOlive,],
         calendar: [gameTurn, year, week, olivePlantDate, estDate, heirDate,],
@@ -633,7 +726,7 @@ function CollateGameStateReport(loud = false) {
         hero: player,
         stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel],
         relations: [mapProvinces[1][2], mapProvinces[2][2], mapProvinces[3][2],],
-        timestamp: Date(),
+        timestamps: [timeAtSave, timeAtStart, timeAtWin,],
         v: version,
     };
     if (loud) {
@@ -818,7 +911,7 @@ function RomanceNumber(originalNumber) {
 
 
 function ZeroArray(targetArray) {
-    for (i = 0; i < targetArray.length; i++) { targetArray[i] = 0; }
+    FillArray(targetArray, 0);
 }
 
 
@@ -829,8 +922,17 @@ function FillArray(targetArray, fillValue) {
 
 
 
+function GooseArray(targetArray, gooseAmount) {
+    for (i = 0; i < targetArray.length; i++) { targetArray[i] += gooseAmount; }
+}
+
+
+
 function CloneArray(source, destination) {
-    for (let i = 0; i < source.length; i++) { destination[i] = source[i]; }
+    if (source.length == destination.length) {
+        for (let i = 0; i < source.length; i++) { destination[i] = source[i]; }
+    }
+    else { alert('Can not clone arrays of different lengths!'); }
 }
 
 

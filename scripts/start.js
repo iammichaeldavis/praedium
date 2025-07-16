@@ -10,9 +10,12 @@ Translate('English', false);
 
 CheckForPreviousGame();
 
+//PreloadFishImages();
 PreloadImages();
 
 RebuildFacesArray();
+
+UpdateFishDisplay();
 
 setTimeout(() => {
     setTimeout(() => {
@@ -28,9 +31,9 @@ setTimeout(() => {
 // ╠══════════════════╣
 // ║ by Michael Davis ║
 // ╟──────────────────╢
-// ║    v1.16.01-A    ║
+// ║    v1.17.00-A    ║
 // ╟──────────────────╢
-// ║    05/22/2025    ║
+// ║    06/02/2025    ║ 🎂
 // ╚══════════════════╝
 
 // “The humble semicolon is why spacing and line-ends do not matter
