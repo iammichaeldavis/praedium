@@ -3624,7 +3624,7 @@ function SummonOptions() {
 
 function DismissOptions() {
     player.seesOptions = false;
-    if (gameSpeed == 'paused' && player.isAt != 'Creek') { StartTime(); }
+    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf') { StartTime(); }
     UpdateDisplay();
 }
 
