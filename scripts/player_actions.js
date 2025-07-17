@@ -3511,6 +3511,7 @@ function FarmersEvents() {
         if (timeAtWin == null) { timeAtWin = new Date(); }
         RecordProgress();
         PauseTime();
+        audioTheme.pause();
         if (player.likesMusic) { audioEnding.play(); }
         const divEndingBackdrop = document.createElement('div');
         divEndingBackdrop.id = 'divEndingBackdrop';
