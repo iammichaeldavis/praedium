@@ -1876,139 +1876,6 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     border-right: 0;
 }
 
-/* trophy */
-#toast-container {
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.psxToast {
-    position: relative;
-    animation-fill-mode: both;
-    height: 82px;
-    width: 380px;
-    border: 3px solid black;
-    border-radius: 12px;
-    background-image: linear-gradient(to bottom right, #2a2a2a, #17171c);
-    padding: 0 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.psxThumbnail {
-    width: 42px;
-    height: 42px;
-}
-.psxTitle {
-    color: #edeef0;
-    font-size: 24px;
-    font-family: 'Arial Narrow', Arial, sans-serif;
-
-}
-.psxSubtitle {
-    color: #b2b4b6;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-}
-.psxGlyph {
-    width: 38px;
-    height: 38px;
-}
-.psxLogo {
-    position: absolute;
-    width: 38px;
-    height: 38px;
-}
-.psxRing {
-    position: absolute;
-}
-
-@keyframes slide_in {
-    0% {
-        opacity: 0;
-        transform: translateX(40px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slide_out {
-    0% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(40px);
-    }
-}
-
-@keyframes psxRingSequence {
-    /* ONCE */
-    0% {
-        opacity: 0;
-        transform: scale(1);
-    }
-    10% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    20% {
-        opacity: 1;
-        transform: scale(1.4);
-    }
-    25% {
-        opacity: 0;
-        transform: scale(1.5);
-    }
-    /* TWICE */
-    30% {
-        opacity: 0;
-        transform: scale(1);
-    }
-    40% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.4);
-    }
-    55% {
-        opacity: 0;
-        transform: scale(1.5);
-    }
-    /* THRICE */
-    60% {
-        opacity: 0;
-        transform: scale(1);
-    }
-    70% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    80% {
-        opacity: 1;
-        transform: scale(1.4);
-    }
-    85% {
-        opacity: 0;
-        transform: scale(1.5);
-    }
-    /* END */    
-    100% {
-        opacity: 0;
-        transform: scale(1);
-    }
-}
-
 
 
 /* // ICONS ///////////////////////////////////////////////////////////////////////////////////// */
@@ -4102,6 +3969,164 @@ body #divCheevo .brilliant {
     background-size: 11025px 75px;
     background-position: right;
     animation: brilliant 7.4s steps(147) 2s;
+}
+
+
+
+/* // PSX TROPHY //////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#toast-container {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.psxToast {
+    position: relative;
+    animation-fill-mode: both;
+    height: 82px;
+    width: 380px;
+    border: 3px solid black;
+    border-radius: 12px;
+    background-image: linear-gradient(to bottom right, #2a2a2a, #17171c);
+    padding: 0 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.psxThumbnail {
+    width: 42px;
+    height: 42px;
+}
+
+.psxTitle {
+    color: #edeef0;
+    font-size: 24px;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.psxSubtitle {
+    color: #b2b4b6;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.psxGlyph {
+    width: 38px;
+    height: 38px;
+}
+
+.psxLogo {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+}
+
+.psxRing {
+    position: absolute;
+}
+
+@keyframes slide_in {
+    0% {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide_out {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
+
+@keyframes psxRingSequence {
+
+    /* ONCE */
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    10% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    20% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+
+    25% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+
+    /* TWICE */
+    30% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+
+    55% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+
+    /* THRICE */
+    60% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    80% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+
+    85% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+
+    /* END */
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
 }
 
 
