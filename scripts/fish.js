@@ -303,7 +303,7 @@ function WharfEvents() {
                 divViewWharf.style.display = 'block';
                 divViewWharf.appendChild(divFooter);
                 player.isAt = 'Wharf';
-                window.scrollTo(0, 0);
+                JumpToTopPlease();
                 if (!fishState.hasSeenWharf) {
                     fishState.hasSeenWharf = true;
                     if (player.likesStory) { GameEvent(displayStoryWharfFirstVisit); }
@@ -467,7 +467,7 @@ function LeaveTheStore() {
     divMinigameFishing.appendChild(divFooter);
     player.isAt = 'Creek';
     UpdateFishDisplay();
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
 }
 
 

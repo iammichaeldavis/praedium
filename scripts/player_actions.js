@@ -2057,7 +2057,7 @@ function GoHerm() {
         body.appendChild(divFooter);
         player.isAt = 'Residence';
         UpdateDisplay();
-        window.scrollTo(0, 0);
+        JumpToTopPlease();
     }
 }
 
@@ -2077,7 +2077,7 @@ function GoFishing() {
     fishGameOver = false;
     UpdateDisplay();
     UpdateFishDisplay();
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
 }
 
 
@@ -2305,6 +2305,7 @@ function Build() {
 
         rentPrice += 4;
         player.canSell = true;
+        JumpToTopPlease();
     }
     else if (villageStage == 6 && asCount >= priceBuild6[0] && bushelCount[0] >= priceBuild6[1] && boardsCount >= priceBuild6[2] && stoneCount >= priceBuild6[3]) {
         if (player.likesStory) { GameEvent(displayStoryVillage6); }
@@ -3173,7 +3174,7 @@ function ChooseHeir() {
     divViewHeirWorkshop.style.display = 'block';
 
     UpdateDisplay();
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
     clearTimeout(timeoutHeirButton);
 }
 
@@ -3185,7 +3186,7 @@ function HeirBegin() {
     const defaultName = selectHeirNames.options[selectHeirNames.selectedIndex].text;
     player.names.push(defaultName);
     UpdateDisplay();
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
 }
 
 
@@ -3201,7 +3202,7 @@ function HeirChangeName() {
 function HeirChooseName() {
     heirStage++;
     UpdateDisplay();
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
 }
 
 
@@ -3227,7 +3228,7 @@ function HeirChooseGender() {
     Translate(player.speaks, false); // this repopulates the correct honorific binding in Spanish for the string used in the following method call
     HeirChangeEthnicity(); // this updates the ethnicity button with the correct string
     //UpdateDisplay(); // redundant because of above method call
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
 }
 
 
@@ -3250,7 +3251,7 @@ function HeirChooseEthnicity() {
     heirStage++;
     HeirChangeTitle(); // populates the selections
     //UpdateDisplay(); // redundant because of above method call
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
 }
 
 
@@ -3272,7 +3273,7 @@ function HeirChangeTitle() {
 function HeirChooseTitle() {
     heirStage++;
     UpdateDisplay();
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
 }
 
 
@@ -3293,7 +3294,7 @@ function HeirChooseFace(chosenChoice) {
     heirFaceChoice = chosenChoice;
     heirStage++;
     UpdateDisplay();
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
 }
 
 
@@ -3310,7 +3311,7 @@ function HeirConfirmAll(ask = true) {
         divViewMap.style.display = 'block';
         divViewHeirWorkshop.style.display = '';
         UpdateDisplay();
-        window.scrollTo(0, 0);
+        JumpToTopPlease();
         if (player.likesStory) { GameEvent(displayHeirComplete); }
     }
 }
@@ -3320,7 +3321,7 @@ function HeirConfirmAll(ask = true) {
 function HeirGoBack() {
     heirStage--;
     UpdateDisplay();
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
 }
 
 
@@ -3336,7 +3337,7 @@ function VisitProvince() {
         player.isAt = 'Praedium';
         buttonReturnToMap.style.display = 'inline-block';
         UpdateDisplay();
-        window.scrollTo(0, 0);
+        JumpToTopPlease();
     }
     else if (mapTarget == 1) {
         divViewMap.style.display = '';
@@ -3344,7 +3345,7 @@ function VisitProvince() {
         player.isAt = 'Shepherds';
         buttonReturnToMap.style.display = 'inline-block';
         UpdateDisplay();
-        window.scrollTo(0, 0);
+        JumpToTopPlease();
         if (!player.hasSeenShepherds) {
             player.hasSeenShepherds = true;
             if (player.likesStory) { GameEvent(displayStoryShepherdsFirstVisit); }
@@ -3357,7 +3358,7 @@ function VisitProvince() {
             player.isAt = 'Farmers';
             buttonReturnToMap.style.display = 'inline-block';
             UpdateDisplay();
-            window.scrollTo(0, 0);
+            JumpToTopPlease();
             if (!player.hasSeenFarmers) {
                 player.hasSeenFarmers = true;
                 if (player.likesStory) { GameEvent(displayStoryFarmersFirstVisit); }
@@ -3373,7 +3374,7 @@ function VisitProvince() {
         player.isAt = 'Miners';
         buttonReturnToMap.style.display = 'inline-block';
         UpdateDisplay();
-        window.scrollTo(0, 0);
+        JumpToTopPlease();
         if (!player.hasSeenMiners) {
             player.hasSeenMiners = true;
             if (player.likesStory) { GameEvent(displayStoryMinersFirstVisit); }
@@ -3395,7 +3396,7 @@ function ReturnToMapView() {
     buttonReturnToMap.style.display = '';
     player.isAt = 'Map';
     UpdateDisplay();
-    window.scrollTo(0, 0);
+    JumpToTopPlease();
 }
 
 
