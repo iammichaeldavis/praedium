@@ -11,6 +11,7 @@ const displayNations = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', 
 const displayEthnicities = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
 let displayTitles = ['',];
 let displayRelations = ['', '', '', '',];
+let displayStateType = ['', '', '', '',];
 
 let displayDefiniteArticle = '';
 let displayThouArt = '';
@@ -147,6 +148,7 @@ let displayLabelRentWarehouse1 = '';
 let displayLabelRentWarehouse2 = '';
 
 let displayLabelWasteTime = '';
+let displayLabelThrowParty = '';
 let displayLabelResidence00 = '';
 let displayLabelResidence01 = '';
 let displayLabelResidence02 = '';
@@ -207,6 +209,46 @@ let displayLabelBuild24 = '';
 let displayLabelBuild25 = '';
 let displayLabelBuild26 = '';
 let displayLabelBuild27 = '';
+let displayLabelArena = '';
+let displayLabelLeaveArena = '';
+let displayLabelBetBlue = '';
+let displayLabelBetRed = '';
+let displayLabelArenaStandings = '';
+let displayLabelArenaBetsPlaced = '';
+let displayLabelArenaTotalWagered = '';
+let displayLabelArenaWins = '';
+let displayLabelArenaTotalWon = '';
+let displayLabelArenaLosses = '';
+let displayLabelArenaTotalLost = '';
+let displayStoryArenaFirstVisit = '';
+let displayTOTT1 = '';
+let displayTOTTBlue = '';
+let displayTOTTRed = '';
+let displayTOTTTeamToWin = '';
+let displayTOTTWager = '';
+let displayTOTT2 = '';
+let displayTOTT3 = '';
+let displayTOTT4 = '';
+let displayTOTT5 = '';
+let displayTOTT6 = '';
+let displayTOTTy = '';
+let displayTOTTpero = '';
+let displayTOTT7 = '';
+let displayTOTT8 = '';
+let displayTOTT9 = '';
+let displayTOTTalto = '';
+let displayTOTTpasar = '';
+let displayTOTT10 = '';
+let displayTOTTexclaims = '';
+let displayTOTTsighs = '';
+let displayTOTT11 = '';
+let displayTOTT12 = '';
+let displayTOTTYouBetOn = '';
+let displayTOTTTeam = '';
+let displayTOTTWinTeam = '';
+let displayTOTTAmount = '';
+let displayTOTTWon = '';
+let displayTOTTLost = '';
 let displayLabelOracle = '';
 let displayLabelBuild28 = '';
 let displayLabelBuild100 = '';
@@ -403,6 +445,7 @@ let displayStoryResidence16 = '';
 let displayStoryResidence17 = '';
 let displayStoryResidence18 = '';
 let displayStoryResidence19 = '';
+let displayStoryParty = '';
 
 let displayStoryVillageFirstVisit = '';
 let displayStoryVillageNEG5 = '';
@@ -503,6 +546,7 @@ let displayRealEstate = '';
 let displayMarket = '';
 let displayWholesale = '';
 let displayCommodities = '';
+let displayStatecraft = '';
 let displayComDev = '';
 let displayFreight = '';
 let displayHusbandry = '';
@@ -510,6 +554,7 @@ let displayConjunction = '';
 let displayTourism = '';
 let displayWorship = '';
 let displayTribute = '';
+let displayGaming = '';
 let displayMilitary = '';
 let displayMedical = '';
 let displayStudy = '';
@@ -612,6 +657,8 @@ let displayManufacturedProducts = '';
 let displaySacredItems = '';
 let displaySecondaryProducts = '';
 let displayRelationshipWith = '';
+let displayRelationship = '';
+let displayRegionState = '';
 let displayMapVisit = '';
 
 let displayStoryReturned = '';
@@ -924,6 +971,7 @@ function Translate(language, bark = true) {
             'Imperious Leader',
             'Grand Moff',
             'Generalissimo',
+            'Vizier',
             'Shah',
             'Muad’Dib',
             'Sultan',
@@ -983,6 +1031,12 @@ function Translate(language, bark = true) {
             'FRIENDLY',
             'OCCUPIED',
             'SUBJUGATED',
+        ];
+        displayStateType = [
+            'UNKNOWN',
+            'FREE STATE',
+            'PROTECTORATE',
+            'COLONY',
         ];
 
         displayDefiniteArticle = 'THE';
@@ -1075,7 +1129,7 @@ function Translate(language, bark = true) {
         displayPeasants = 'Peasants';
         displayShepherds = 'Shepherds';
         displayPolice = 'Constabulary';
-        displayDiamonds = 'Diamonds';
+        displayDiamonds = 'Adamant';
         displayJacinth = 'Hyacinth';
         displayBismuth = 'Bismuth';
         displayGold = 'Gold';
@@ -1120,6 +1174,7 @@ function Translate(language, bark = true) {
         displayLabelRentWarehouse2 = 'PURCHASE A WAREHOUSE';
 
         displayLabelWasteTime = 'RELAX AND DO NOTHING';
+        displayLabelThrowParty = 'HOST LAVISH STATE FUNCTION';
         displayLabelResidence00 = 'BUILD SHANTY ON YOUR OWN LAND';
         displayLabelResidence01 = 'IMPROVE YOUR SHANTY';
         displayLabelResidence02 = 'IMPROVE YOUR CABIN';
@@ -1180,6 +1235,46 @@ function Translate(language, bark = true) {
         displayLabelBuild25 = 'ERECT THEATER';
         displayLabelBuild26 = 'ZONE FOR PRIVATE DEVELOPMENT';
         displayLabelBuild27 = 'INAUGURATE ORACLE';
+        displayLabelArena = 'ATTEND GLADIATOR BATTLE';
+        displayLabelLeaveArena = '↓ LEAVE THE ARENA';
+        displayLabelBetBlue = 'PLACE BET ON BLUE';
+        displayLabelBetRed = 'PLACE BET ON RED';
+        displayLabelArenaStandings = 'Latest Standings';
+        displayLabelArenaBetsPlaced = 'Bets Placed';
+        displayLabelArenaTotalWagered = 'Total Wagered';
+        displayLabelArenaWins = '&nbsp;&nbsp;Wins';
+        displayLabelArenaTotalWon = 'Total Won';
+        displayLabelArenaLosses = 'Losses';
+        displayLabelArenaTotalLost = 'Total Lost';
+        displayStoryArenaFirstVisit = 'DIE CATTLE, DIE KINSFOLK,<br>SO DIE WE ALL JUST THE SAME,<br>BUT GLORY DIES NEVER,<br>FOR THOSE WHO EARN IT FAIRLY.<br><br>DIE CATTLE, DIE KINSFOLK,<br>SO DIE WE ALL JUST THE SAME,<br>BUT I KNOW ONE THING, THAT NEVER DIES:<br>JUDGMENT ON EVERY DEATH.<br><br>HÁVAMÁL 76-77';
+        displayTOTT1 = 'The box office attendant bows low and hands you your receipt';
+        displayTOTTBlue = 'Blue';
+        displayTOTTRed = 'Red';
+        displayTOTTTeamToWin = 'Team to Win';
+        displayTOTTWager = 'WAGER';
+        displayTOTT2 = 'You and your party find your seats, and soon enough it is time for the main event!';
+        displayTOTT3 = 'At first, it looked like the';
+        displayTOTT4 = 'team had the upper hand';
+        displayTOTT5 = 'then it got really ugly, and a';
+        displayTOTT6 = 'gladiator scored a devastating shot';
+        displayTOTTy = 'and';
+        displayTOTTpero = 'but';
+        displayTOTT7 = 'after some fierce fighting, and with the crowd going wild, the';
+        displayTOTT8 = 'team finally won!';
+        displayTOTT9 = 'As you';
+        displayTOTTalto = 'stop by';
+        displayTOTTpasar = 'pass';
+        displayTOTT10 = 'the cashier’s cage on your way out, the valet takes your ticket and';
+        displayTOTTexclaims = 'exclaims';
+        displayTOTTsighs = 'sighs';
+        displayTOTT11 = '“Hey now, your team won! You just doubled your money! (Well, minus the 5% house take, of course...)”';
+        displayTOTT12 = '“Ahh, your team lost. Too bad. Better luck next time, hoss!”';
+        displayTOTTYouBetOn = 'You Bet On';
+        displayTOTTTeam = 'Team';
+        displayTOTTWinTeam = 'Winning Team';
+        displayTOTTAmount = 'Amount';
+        displayTOTTWon = 'Won';
+        displayTOTTLost = 'Lost';
         displayLabelOracle = 'VISIT ORACLE';
         displayLabelBuild28 = 'COMMISSION ASTRONOMERS’ GUILD';
         displayLabelBuild100 = 'ESTABLISH MONUMENT';
@@ -1380,6 +1475,7 @@ function Translate(language, bark = true) {
         displayStoryResidence17 = 'OUR FORCES WILL NEED SUSTENANCE THAT IS EASY TO TRANSPORT AND CALORIE-RICH';
         displayStoryResidence18 = 'BUT PETER AROSE, AND RAN UNTO THE TOMB; AND STOOPING DOWN, HE SAW THE LINEN BANDAGES LAID BY THEMSELVES, AND HE DEPARTED, WONDERING TO HIMSELF AT THAT WHICH WAS TO COME TO PASS<br><br>MARCION’S GOSPEL OF THE LORD 24:12';
         displayStoryResidence19 = 'WHEN OUR BOYS COME BACK FROM THE FRONT WE’RE GONNA NEED TO BE ABLE TO PATCH ’EM UP';
+        displayStoryParty = '<div id="divMeetings">Most of the important guests have now arrived.<br><br>In your Great Hall, a mixed group are gathered in front of the grand fireplace. An open blaze crackles there, casting flickers of orange light onto jewels and laces and costly fabrics.<br><br>You recognize in the group an armor manufacturer down from Carthage, an alchemy equipment importer, a water-shipper whose summer mansion overlooks Lake Asphaltites, a representative of the Sanhedrin Treasury (lean and remote, that one), a dealer in mineral mining equipment, a thin and hard-faced woman whose escort service for foreign dignitaries reputedly operates as cover for various smuggling, spying, and blackmail operations.<br><br>Boy, anyone who is *anyone* is here! How splendid!<br><br>A slender, wan footman appears suddenly in an ornately gilded doorway, clears his throat and announces with a curtsy: “Ladies and gentlemen, my Lord... Dinner is served.”<br><br><div class="centerMePlease">——— ⦿ ———</div><br>Each new course and cocktail is received with progressively greater delight by your many guests.<br><br>Cakes baked with dates and sweetened with honey, whole roast oxen, a peppery lentil stew served alongside brass platters stacked high with piping-hot fresh bread, broiled duck, sautéed goose, fried pigeon, exotic foreign fish, pongi rice in sauce dolsa, barbecued ‘Lamprey a la Augustus’, and all washed down with endless goblets of chilled Caladani wine and imported juices... the meal seems endless.<br><br>“What is this dish?”, the armorer asks one of your ladling girls. “It’s delicious.”<br><br>“Tongues of wild flamingo in a mushroom-yeast sauce, milord,” she replies. “A very old recipe.”<br><br>“I must have that recipe,” the man says.<br><br>She nods. “I’ll see that you get it.”<br><br><div class="centerMePlease">——— ⦿ ———</div><br>During the post-dinner show, as scores of flamboyantly-painted trapeze artists catapult through the air over an undulating, writhing formation of beautiful dancing girls trailing variegated ribbons, a portly and impeccably garbed nobleman presses through the thronged crowd to your side; it’s the local Finance Minister, and he seems quite obviously drunk.<br><br>With a toddler’s grip he pulls you aside by the sleeve and whispers his wine-soaked breath into your ear:<br><br>“By All The Known Gods, what a <span class="tiltMePlease">wonderful</span> event! Come see me next week, my dear, send someone round yon the morrow to make the appointment with my girl, she manages my calendar; and let us see what can be done about these pesky imperial tariffs and levies, eh?”<br><br><div class="centerMePlease">(Export Profits Increased 25%)</div></div>';
 
         displayStoryVillageFirstVisit = 'FROM NOW ON, WE’RE GONNA BE DOING THINGS *MY* WAY AROUND HERE';
         displayStoryVillageNEG5 = 'AN INVESTIGATION OF THIS LAND HAS FOUND NO STAGNANT POOLS OR SWAMPS. A FLAT BUT SLOPING PLAIN TO ENSURE GOOD DRAINAGE, HIGH ENOUGH TO AVOID FUTURE FLOODS. UPON THOROUGH INSPECTION, LIVERS FROM THE LOCAL WILDLIFE APPEAR TO BE HEALTHY';
@@ -1394,9 +1490,9 @@ function Translate(language, bark = true) {
         displayStoryVillage4 = 'MO’ APARTMENTS MEANS MO’ TENANTS, MO’ TENANTS MEANS MO’ RENT';
         displayStoryVillage5 = 'THE SPICES OF THE MARKET ARE FRAGRANT INDEED';
         displayStoryVillage6 = 'THE BUILDERS ASSURE THERE IS NO DANGER';
-        displayStoryVillage7 = 'CITIZENS FLOW IN FROM THE COUNTRYSIDE NOW, SEEKING OPPORTUNITY';
+        displayStoryVillage7 = 'CITIZENS FLOW IN FROM THE COUNTRYSIDE NOW, SEEKING OPPORTUNITY<br><br>(+' + loggersHired + ' Loggers <span class="icon Logger inlineIcon"></span> Hired)';
         displayStoryVillage8 = '“TEACH A MAN TO FISH AND YOU FEED HIM FOR A LIFETIME”<br>—MAIMONIDES<br><br>(Per Harvest Yield Maximum +33%)';
-        displayStoryVillage9 = 'LIVE IN A GOOD PLACE<br><br>TAO TE CHING 8:5';
+        displayStoryVillage9 = 'LIVE IN A GOOD PLACE<br><br>TAO TE CHING 8:5<br><br>(+' + masonsHired + ' Quarry Workers <span class="icon Mason inlineIcon"></span> Hired)';
         displayStoryVillage10 = 'HORSES DRIVE PROGRESS';
         displayStoryVillage11 = 'THE TRUE SERVANTS OF GOD ARE THOSE WHO WALK UPON THE EARTH EASILY, AND WHEN THE IGNORANT ADDRESS THEM HARSHLY, THEY REPLY WITH WORDS OF PEACE<br><br>AL-FURQAN 63';
         displayStoryVillage12 = '“THEY DESIRE JUST TWO THINGS, BREAD AND CIRCUSES”<br>—JUVENAL';
@@ -1485,6 +1581,7 @@ function Translate(language, bark = true) {
         displayMarket = 'Retail';
         displayWholesale = 'Wholesale';
         displayCommodities = 'Commodities';
+        displayStatecraft = 'Statecraft';
         displayComDev = 'Development';
         displayFreight = 'Freight';
         displayHusbandry = 'Husbandry';
@@ -1492,6 +1589,7 @@ function Translate(language, bark = true) {
         displayTourism = 'Tourism';
         displayWorship = 'Worship';
         displayTribute = 'Tribute';
+        displayGaming = 'Gaming';
         displayMilitary = 'Military';
         displayMedical = 'Medical';
         displayStudy = 'Study';
@@ -1597,6 +1695,8 @@ function Translate(language, bark = true) {
         displaySacredItems = 'SACRED OBJECTS';
         displaySecondaryProducts = 'BYPRODUCTS';
         displayRelationshipWith = 'RELATIONSHIP WITH';
+        displayRelationship = 'Relationship';
+        displayRegionState = 'Regional Status';
         displayMapVisit = 'VISIT';
 
         displayStoryReturned = 'PLAYING AT SOLDIERS ALONG THESE RIVERBANKS AS A CHILD, I NEVER DREAMT ALL THIS MIGHT ONE DAY BELONG TO ME. THE FATE OF THIS ENTIRE AREA, AND ALL OF THESE PEOPLE!, IS SOLELY IN MY HANDS, NOW. WILL I PROVE WORTHY?';
@@ -1885,6 +1985,7 @@ function Translate(language, bark = true) {
             'Líder Imperioso',
             'Gran Moff',
             'Generalísimo',
+            'Visir',
             'Sha',
             'Muad’Dib',
             'Sultán',
@@ -1944,6 +2045,12 @@ function Translate(language, bark = true) {
             'AMIGABLES',
             'OCUPADO',
             'SUBYUGADO',
+        ];
+        displayStateType = [
+            'DESCONOCIDO',
+            'ESTADO LIBRE',
+            'PROTECTORADO',
+            'COLONIA',
         ];
 
         displayDefiniteArticle = 'EL';
@@ -2038,7 +2145,7 @@ function Translate(language, bark = true) {
         displayPeasants = 'Campesinos';
         displayShepherds = 'Pastores';
         displayPolice = 'Policías';
-        displayDiamonds = 'Diamantes';
+        displayDiamonds = 'Adamanto';//'Diamantes';
         displayJacinth = 'Jacinto';
         displayBismuth = 'Bismuto';
         displayGold = 'Oro';
@@ -2083,6 +2190,7 @@ function Translate(language, bark = true) {
         displayLabelRentWarehouse2 = 'COMPRAR UN ALMACÉN';
 
         displayLabelWasteTime = 'RELAJARSE Y NO HACER NADA';
+        displayLabelThrowParty = 'ORGANIZAR FUNCIÓN ESTATAL LUJOSA';
         displayLabelResidence00 = 'CONSTRUIR UNA CHOZA EN TU PROPIO TERRENO';
         displayLabelResidence01 = 'MEJORAR TU CHOZA';
         displayLabelResidence02 = 'MEJORAR TU CABAÑA';
@@ -2143,6 +2251,46 @@ function Translate(language, bark = true) {
         displayLabelBuild25 = 'ERIGIR TEATRO';
         displayLabelBuild26 = 'ZONIFICAR PARA EL DESARROLLO PRIVADO';
         displayLabelBuild27 = 'INAUGURAR ORÁCULO';
+        displayLabelArena = 'ASISTIR BATALLA DE GLADIADORES';
+        displayLabelLeaveArena = '↓ ABANDONAR LA ARENA';
+        displayLabelBetBlue = 'HAZ APUESTA EN AZUL';
+        displayLabelBetRed = 'HAZ APUESTA EN ROJO';
+        displayLabelArenaStandings = 'Últimas Clasificaciones';
+        displayLabelArenaBetsPlaced = 'Apuestas'; // Realizadas
+        displayLabelArenaTotalWagered = 'Total Apostando';
+        displayLabelArenaWins = '&nbsp;Ganados';
+        displayLabelArenaTotalWon = 'Total Ganancia';
+        displayLabelArenaLosses = 'Derrotas';
+        displayLabelArenaTotalLost = 'Total Perdido';
+        displayStoryArenaFirstVisit = 'GANADO MUERE, FAMILIA MUERE,<br>TODOS MORIMOS IGUAL,<br>PERO GLORIA MUERE NUNCA,<br>PARA QUIENES LA GANAN JUSTAMENTE.<br><br>GANADO MUERE, FAMILIA MUERE,<br>TODOS MORIMOS IGUAL,<br>PERO SÉ UNA COSA, QUE NUNCA MUERE:<br>JUICIO SOBRE CADA MUERTE.<br><br>HÁVAMÁL 76-77';
+        displayTOTT1 = 'El encargado de la taquilla hace una reverencia y te entrega su recibo';
+        displayTOTTBlue = 'Azul';
+        displayTOTTRed = 'Rojo';
+        displayTOTTTeamToWin = 'Equipo para Ganar';
+        displayTOTTWager = 'APOSTAR';
+        displayTOTT2 = 'Tú y tu grupo encuentran sus asientos, ¡y pronto llegará el momento del evento principal!';
+        displayTOTT3 = 'Al principio, parecía que el';
+        displayTOTT4 = 'equipo tenía la ventaja';
+        displayTOTT5 = 'luego la cosa se puso realmente fea, y un';
+        displayTOTT6 = 'gladiador anotó un tiro devastador';
+        displayTOTTy = 'y';
+        displayTOTTpero = 'pero';
+        displayTOTT7 = 'después de una lucha feroz, y con la multitud enloquecida, ¡el';
+        displayTOTT8 = 'equipo finalmente ganó!';
+        displayTOTT9 = 'Cuando usted';
+        displayTOTTalto = 'se detiene en';
+        displayTOTTpasar = 'pasas por';
+        displayTOTT10 = 'la caja al salir, el valet le toma el ticket y';
+        displayTOTTexclaims = 'exclama';
+        displayTOTTsighs = 'suspira';
+        displayTOTT11 = '«¡Oye, tu equipo ganó! ¡Acabas de duplicar tu dinero! (Bueno, menos el 5% de la casa, claro...)»';
+        displayTOTT12 = '«Ahh, tu equipo perdió. Qué lástima. ¡Mejor suerte la próxima vez, camarada!»';
+        displayTOTTYouBetOn = 'Tú Apuestas En';
+        displayTOTTTeam = 'Equipo';
+        displayTOTTWinTeam = 'Equipo Ganador';
+        displayTOTTAmount = 'Cantidad';
+        displayTOTTWon = 'Ganada';
+        displayTOTTLost = 'Perdida';
         displayLabelOracle = 'VISITAR ORÁCULO';
         displayLabelBuild28 = 'ENCARGAR UN GREMIO DE ASTRÓNOMOS';
         displayLabelBuild100 = 'ESTABLECER MONUMENTO';
@@ -2347,6 +2495,7 @@ function Translate(language, bark = true) {
         displayStoryResidence17 = 'NUESTRAS FUERZAS NECESITARÁN UN SUSTENTO FÁCIL DE TRANSPORTAR Y RICA EN CALORÍAS';
         displayStoryResidence18 = 'PERO PEDRO SE DESPERTÓ, Y CORRIÓ AL SEPULCRO; E INCLINÁNDOSE, VIO LAS VENDAJES DE LINO PUESTAS ALLÍ SOLO, Y ÉL SE FUE, MARAVILLÁNDOSE DE LO QUE IBA A SUCEDER<br><br>EL EVANGELIO DEL SEÑOR SEGÚN MARCIÓN 24:12';
         displayStoryResidence19 = 'CUANDO NUESTROS CHICOS REGRESAN DEL FRENTE TENDREMOS QUE PODER PARCHARLOS';
+        displayStoryParty = '<div id="divMeetings">La mayoría de los invitados importantes ya han llegado.<br><br>En su Gran Salón, un grupo diverso se reúne frente a la gran chimenea. Una llama viva crepita allí, proyectando destellos de luz naranja sobre joyas, encajes y telas costosas.<br><br>Reconoces en el grupo a un fabricante de armaduras llegado de Cartago, a un importador de equipos de alquimia, a un transportista de agua cuya mansión de verano tiene vistas al lago Asphaltites, a un representante de la Tesorería del Sanedrín (delgado y remoto, ese), a un comerciante de equipos para la extracción de minerales, a una mujer delgada y de rostro duro cuyo servicio de acompañantes para dignatarios extranjeros supuestamente funciona como tapadera para varias operaciones de contrabando, espionaje y chantaje.<br><br>¡Vaya, aquí están todos los que son *realmente* importantes! ¡Qué espléndido!<br><br>Un lacayo delgado y pálido aparece de repente en una puerta ricamente decorada con oro, se aclara la garganta y anuncia con una reverencia: «Damas y caballeros, mi Señor... La cena está servida».<br><br><div class="centerMePlease">——— ⦿ ———</div><br>Cada nuevo plato y cóctel es recibido con creciente deleite por sus numerosos invitados.<br><br>Pasteles horneados con dátiles y endulzados con miel, bueyes enteros asados, un guiso de lentejas picantes servido junto a bandejas de bronce repletas de pan fresco recién hecho, pato asado, ganso salteado, paloma frita, pescado extranjero exótico, arroz pongi en salsa dolsa, ‘Lamprea a la Augusto’ a la parrilla, y todo regado con interminables copas de vino Caladani frío y jugos importados... la comida parece interminable.<br><br>«¿Qué plato es este?», le pregunta el armero a una de sus sirvientas. «Está delicioso».<br><br>«Lenguas de flamenco silvestre en salsa de champiñones y levadura, milord», responde ella. «Una receta muy antigua».<br><br>«Necesito esa receta», dice el hombre.<br><br>Ella asiente. «Me encargaré de que la consiga».<br><br><div class="centerMePlease">——— ⦿ ———</div><br>Durante el espectáculo posterior a la cena, mientras decenas de trapecistas extravagantemente pintados se catapultan por el aire sobre una formación ondulante y retorcida de hermosas bailarinas que arrastran cintas abigarradas, un noble corpulento e impecablemente vestido se abre paso entre la multitud hasta su lado; es el Ministro de Finanzas local, y parece bastante obviamente borracho.<br><br>Con el agarre de un niño pequeño, te toma a un lado por la manga y te susurra su aliento empapado en vino al oído:<br><br>«¡Por Todos Los Dioses Conocidos, qué acontecimiento tan <span class="tiltMePlease">maravilloso</span>! Ven a verme la semana que viene, querida, envía a alguien mañana para concertar una cita con mi chica, ella me lleva la agenda; y veamos qué podemos hacer con estos molestos aranceles y gravámenes imperiales, ¿de acuerdo?»<br><br><div class="centerMePlease">(Ganancias de Exportación<br>Aumentaron 25%)</div></div>';
 
         displayStoryVillageFirstVisit = 'A PARTIR DE AHORA, VAMOS A HACER LAS COSAS A *MI* MANERA';
         displayStoryVillageNEG5 = 'UNA INVESTIGACIÓN DE ESTE TERRENO NO HA ENCONTRADO PISCINAS ESTANCADAS NI PANTANOS. UNA LLANURA PLANA PERO CON PENDIENTE PARA ASEGURAR UN BUEN DRENAJE, LO SUFICIENTEMENTE ALTA PARA EVITAR FUTURAS INUNDACIONES. TRAS UNA INSPECCIÓN EXHAUSTIVA, LOS HÍGADOS DE LA FAUNA LOCAL PARECEN ESTAR SALUDABLES';
@@ -2361,9 +2510,9 @@ function Translate(language, bark = true) {
         displayStoryVillage4 = 'MÁS APARTAMENTOS SIGNIFICA MÁS INQUILINOS, MÁS INQUILINOS SIGNIFICA MÁS RENTA';
         displayStoryVillage5 = 'LAS ESPECIAS DEL MERCADO SON VERDADERAMENTE FRAGANTES';
         displayStoryVillage6 = 'LOS CONSTRUCTORES ASEGURAN QUE NO HAY PELIGRO';
-        displayStoryVillage7 = 'LOS CIUDADANOS LLEGAN DEL CAMPO AHORA EN BUSCA DE OPORTUNIDADES';
+        displayStoryVillage7 = 'LOS CIUDADANOS LLEGAN DEL CAMPO AHORA EN BUSCA DE OPORTUNIDADES<br><br>(+' + loggersHired + ' Leñadores <span class="icon Logger inlineIcon"></span> Contratados)';
         displayStoryVillage8 = '«ENSEÑA A UN HOMBRE A PESCAR Y LO ALIMENTARÁS TODA LA VIDA»<br>—MAIMÓNIDES<br><br>(Rendimiento Máximo Por Cosecha +33%)';
-        displayStoryVillage9 = 'VIVIR EN UN BUEN LUGAR<br><br>DÀO DÉ JĪNG 8:5';
+        displayStoryVillage9 = 'VIVIR EN UN BUEN LUGAR<br><br>DÀO DÉ JĪNG 8:5<br><br>(+' + masonsHired + ' Trabajadores de Cantera <span class="icon Mason inlineIcon"></span> Contratados)';
         displayStoryVillage10 = 'LOS CABALLOS IMPULSAN EL PROGRESO';
         displayStoryVillage11 = 'LOS VERDADEROS SIERVOS DE DIOS SON LOS QUE VIAJAN POR LA TIERRA CON GRACIA, Y CUANDO LOS IGNORANTES SE DIRIGEN A LES GROSERAMENTE, RESPONDEN CON PALABRAS DE PAZ<br><br>’AL-FURQĀN 63';
         displayStoryVillage12 = '«SÓLO DESEAN DOS COSAS, PAN Y CIRCOS»<br>—JUVENAL';
@@ -2451,6 +2600,7 @@ function Translate(language, bark = true) {
         displayMarket = 'Minorista';
         displayWholesale = 'Al Por Mayor';
         displayCommodities = 'Materias Primas';
+        displayStatecraft = 'Política';
         displayComDev = 'Desarrollo';
         displayFreight = 'Carga';
         displayHusbandry = 'Ganadería';
@@ -2458,6 +2608,7 @@ function Translate(language, bark = true) {
         displayTourism = 'Turismo';
         displayWorship = 'Adoración';
         displayTribute = 'Homenaje';
+        displayGaming = 'Juego de Azar';
         displayMilitary = 'Militar';
         displayMedical = 'Médica';
         displayStudy = 'Estudio';
@@ -2563,6 +2714,8 @@ function Translate(language, bark = true) {
         displaySacredItems = 'OBJETOS SAGRADOS';
         displaySecondaryProducts = 'SUBPRODUCTOS';
         displayRelationshipWith = 'RELACIÓN CON';
+        displayRelationship = 'Relación';
+        displayRegionState = 'Estatus Regional';
         displayMapVisit = 'VISITAR';
 
         let displayNiño = 'NIÑO';
@@ -2758,6 +2911,7 @@ function Translate(language, bark = true) {
     document.title = displayGameTitle + ' - ' + displayGameEdition;
     UpdateDisplay();
     UpdateFishDisplay();
+    UpdateArenaDisplay();
     if (bark) { SystemMessage(displayNewLanguage + divider + displayLanguageQuote); }
 }
 
@@ -2839,6 +2993,7 @@ const gratitudeList = [
     'Don Dudenhoeffer',
     'Dr. Bart D. Ehrman', // bartehrman.com
     'Derek Evans',
+    'Howard Feldman', // mocagh.org
     'Eric Fredricksen', // grumdrig.com/u6map
     'Kenneth Garagnon',
     'Sean Glavin',

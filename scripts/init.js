@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.17.01-C';
+const version = '1.18.00-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -171,6 +171,7 @@ const player = {
     hasMonument: false,
     hasSeenResidence: false,
     hasSeenVillage: false,
+    hasSeenArena: false,
     hasSeenPort: false,
     hasSeenMiners: false,
     hasSeenFarmers: false,
@@ -205,6 +206,7 @@ const player = {
     hasWentToAman: false,
     hasFished: false,
     hasFishRecords: false,
+    hasHosted: false,
 };
 
 const tilemap = new Image();
@@ -376,6 +378,7 @@ const buttonGoFishing = document.getElementById('buttonGoFishing');
 const buttonGoToPraediumFromRes = document.getElementById('buttonGoToPraediumFromRes');
 const canvasResidence = document.getElementById('canvasResidence');
 const canvasResidenceContext = canvasResidence.getContext('2d');
+const buttonHostParty = document.getElementById('buttonHostParty');
 const buttonWasteTime = document.getElementById('buttonWasteTime');
 const buttonImproveResidence = document.getElementById('buttonImproveResidence');
 const tableResidenceInventory = document.getElementById('tableResidenceInventory');
@@ -487,6 +490,7 @@ const canvasVillage = document.getElementById('canvasVillage');
 const canvasVillageContext = canvasVillage.getContext('2d');
 const divVillageLasTablas = document.getElementById('divVillageLasTablas');
 const buttonBuild = document.getElementById('buttonBuild');
+const buttonVisitArena = document.getElementById('buttonVisitArena');
 const buttonVisitOracle = document.getElementById('buttonVisitOracle');
 const buttonBuyWheat = document.getElementById('buttonBuyWheat');
 const buttonSellWheat = document.getElementById('buttonSellWheat');
@@ -605,6 +609,14 @@ const buttonSailWest = document.getElementById('buttonSailWest');
 const buttonPlayGod = document.getElementById('buttonPlayGod');
 
 const spanCheevoText = document.getElementById('spanCheevoText');
+
+const divMinigameArena = document.getElementById('divMinigameArena');
+const buttonLeaveArena = document.getElementById('buttonLeaveArena');
+const canvasArena = document.getElementById('canvasArena');
+const canvasArenaContext = canvasArena.getContext('2d');
+const buttonArenaBetBlue = document.getElementById('buttonArenaBetBlue');
+const buttonArenaBetRed = document.getElementById('buttonArenaBetRed');
+const divArenaTables = document.getElementById('divArenaTables');
 
 const divMinigameFishing = document.getElementById('divMinigameFishing');
 const buttonGoHome = document.getElementById('buttonGoHome');
@@ -785,6 +797,7 @@ let asCount = 0;
 let asSpent = 0;
 let commercialLifetimeSpend = 0;
 let commoditiesLifetimeSpend = 0;
+let statecraftLifetimeSpend = 0;
 
 let rentPrice = 10;
 let rentLifetimeCollected = 0;
@@ -931,6 +944,7 @@ const priceResidence10 = [168, 84, 42, 21,]; // Greenhouse 🫐
 const priceResidence11 = [336, 168, 84, 42,]; // Stone House 🏠
 const priceResidence12 = [336, 168, 84, 42,]; // Atelier 💎
 const priceResidence13 = [2500000, 12000, 16000, 500, 2000, 100,]; // Mansion 🏡
+const priceResidenceParty = 1000000; // State Dinner 🎉
 const priceResidence14 = [1000000,]; // Apiary 🐝
 const priceResidence18 = [1000000, 100,]; // Weavers Cottage 🧵
 

@@ -228,7 +228,10 @@ document.body.onkeyup = function (e) {
         if (e.key == '[' && !e.altKey && player.isAt == 'Map') { MapChangeTarget('previous'); }
         if (e.key == ']' && !e.altKey && player.isAt == 'Map') { MapChangeTarget('next'); }
         if (e.key == '\\' && !e.altKey && player.isAt == 'Map') { VisitProvince(); }
-        if (e.key == '|' && !e.altKey && player.isAt != 'Creek') { ReturnToMapView(); }
+        if (e.key == '|' && !e.altKey && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena') { ReturnToMapView(); }
+        if (e.key == '|' && !e.altKey && player.isAt == 'Creek') { GoHerm(); }
+        if (e.key == '|' && !e.altKey && player.isAt == 'Wharf') { LeaveTheStore(); }
+        if (e.key == '|' && !e.altKey && player.isAt == 'Arena') { LeaveArena(); }
 
         // { AVAILABLE
         // } AVAILABLE
@@ -786,7 +789,7 @@ function DismissForeword() {
 
 function DismissGameEvent() {
     if (player.canDismissEvent) {
-        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf') { StartTime(); }
+        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena') { StartTime(); }
         player.seesGameEvent = false;
         UpdateDisplay();
     }
@@ -2048,6 +2051,22 @@ function ImproveResidence() {
 
 
 
+function ThrowParty() {
+    if (asCount >= priceResidenceParty) {
+        if (player.likesStory) { GameEvent(displayStoryParty); }
+        asCount -= priceResidenceParty;
+        statecraftLifetimeSpend += priceResidenceParty;
+
+        player.hasHosted = true;
+        UpdateDisplay();
+    }
+    else {
+        if (player.likesStory) { GameEvent(displayStoryPoorVillage); }
+    }
+}
+
+
+
 function GoHerm() {
     if (!fishGameStarted && !fishWarmup) {
         if (gameSpeed == 'paused') { StartTime(); }
@@ -2340,6 +2359,7 @@ function Build() {
         stoneCount -= priceBuild7[3];
         mountainSpentCount[0] += priceBuild7[3];
 
+        loggersHired += loggersHired;
         residentsMax += 42;
         rentPrice += 3;
         actualBushelPrice -= 500;
@@ -2383,6 +2403,7 @@ function Build() {
         stoneCount -= priceBuild9[3];
         mountainSpentCount[0] += priceBuild9[3];
 
+        masonsHired += masonsHired;
         residentsMax += 42;
         rentPrice += 5;
         actualBushelPrice -= 500;
@@ -2710,6 +2731,7 @@ function Build() {
         SetMarketPrice();
         interestRate += 0.004;
         trophyChance = 20;
+        arenaBet = 1000000;
     }
     else if (villageStage == 25 && asCount >= priceBuild25[0] && stoneCount >= priceBuild25[1]) {
         if (player.likesStory) { GameEvent(displayStoryVillage25); }
@@ -3626,7 +3648,7 @@ function SummonOptions() {
 
 function DismissOptions() {
     player.seesOptions = false;
-    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf') { StartTime(); }
+    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena') { StartTime(); }
     UpdateDisplay();
 }
 

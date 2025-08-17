@@ -200,6 +200,7 @@ function ContinuePreviousGame() {
         player.hasMonument = loadedReport.hero.hasMonument;
         player.hasSeenResidence = loadedReport.hero.hasSeenResidence;
         player.hasSeenVillage = loadedReport.hero.hasSeenVillage;
+        player.hasSeenArena = loadedReport.hero.hasSeenArena;
         player.hasSeenPort = loadedReport.hero.hasSeenPort;
         player.hasSeenMiners = loadedReport.hero.hasSeenMiners;
         player.hasSeenFarmers = loadedReport.hero.hasSeenFarmers;
@@ -234,6 +235,7 @@ function ContinuePreviousGame() {
         player.hasWentToAman = loadedReport.hero.hasWentToAman;
         player.hasFished = loadedReport.hero.hasFished;
         player.hasFishRecords = loadedReport.hero.hasFishRecords;
+        player.hasHosted = loadedReport.hero.hasHosted;
         /////////////////////////////////////////////////////////////////////////////////////////
         gameTurn = loadedReport.calendar[0];
         year = loadedReport.calendar[1];
@@ -376,6 +378,7 @@ function ContinuePreviousGame() {
         militaryLifetimeCost = loadedReport.counts.villageSpend[2];
         medicalLifetimeCost = loadedReport.counts.villageSpend[3];
         tributeLifetimePaid = loadedReport.counts.villageSpend[4];
+        statecraftLifetimeSpend = loadedReport.counts.villageSpend[5];
         horsesCount = loadedReport.counts.villageInventory[0];
         beadsCount = loadedReport.counts.villageInventory[1];
         trophiesCount = loadedReport.counts.villageInventory[2];
@@ -438,6 +441,12 @@ function ContinuePreviousGame() {
         filetsSpent = loadedReport.counts.miniGameFish[16];
         fishState = loadedReport.counts.miniGameFish[17];
         totalCatches = loadedReport.counts.miniGameFish[18];
+
+        arenaTotalBet = loadedReport.counts.miniGameArena[0];
+        arenaTotalWin = loadedReport.counts.miniGameArena[1];
+        arenaTotalLoss = loadedReport.counts.miniGameArena[2];
+        CloneArray(loadedReport.counts.miniGameArena[3], arenaWins);
+        CloneArray(loadedReport.counts.miniGameArena[4], arenaLosses);
         /////////////////////////////////////////////////////////////////////////////////////////
         CloneArray(loadedReport.farmland.grain[0], arrayFarmPlots[0]);
         CloneArray(loadedReport.farmland.grain[1], arrayFarmPlots[1]);
@@ -485,6 +494,8 @@ function ContinuePreviousGame() {
         if (player.canChooseHeir) { AnimateHeirButton(); }
 
         if (farmStage > 17) { buttonBarterOlive.classList.add('noMargin'); }
+
+        if (villageStage > 24) { arenaBet = 1000000; }
         /////////////////////////////////////////////////////////////////////////////////////////
         loadedReport = null;
         divOverlayResume.style.display = '';
@@ -669,7 +680,7 @@ function CollateGameStateReport(loud = false) {
         villageDemographics: [residentsCount, residentsMax, pilgrimsCount, pilgrimsMax, pilgrimsLifetimeCount,],
         villageFiat: [asCount, asSpent, rentPrice, taxesValue, interestRate, tourismValue, actualBushelPrice, currentBushelPrice, actualBarleyAdjustment, currentBarleyAdjustment, valueInWheat1Log, valueInWheat1Board, valueInWheat1Stone,],
         villageEarn: [rentLifetimeCollected, taxesLifetimeCollected, interestLifetimeCollected, tourismLifetimeProfit, pilgrimLifetimeIncome, marketLifetimeRevenue,],
-        villageSpend: [commercialLifetimeSpend, commoditiesLifetimeSpend, militaryLifetimeCost, medicalLifetimeCost, tributeLifetimePaid,],
+        villageSpend: [commercialLifetimeSpend, commoditiesLifetimeSpend, militaryLifetimeCost, medicalLifetimeCost, tributeLifetimePaid, statecraftLifetimeSpend,],
         villageInventory: [horsesCount, beadsCount, trophiesCount, scrollsCount, ratsCount, ghostsCount, patientsCount, relicCount, messiahCount,],
         villageState: [horsesSpawn, horsesStarving, beadsSpawn, trophiesSpawn, scrollsSpawn, ratsSpawn,],
         villageCounters: [horseClock, tributeTimer,],
@@ -706,6 +717,14 @@ function CollateGameStateReport(loud = false) {
             filetsSpent,
             fishState,
             totalCatches,
+        ],
+
+        miniGameArena: [
+            arenaTotalBet,
+            arenaTotalWin,
+            arenaTotalLoss,
+            arenaWins,
+            arenaLosses,
         ],
     };
     const farmlandArrays = {

@@ -28,7 +28,7 @@
     <link rel="apple-touch-icon" sizes="16x16" href="bitmaps/favicon/favicon16x.ico" />
     <link rel="manifest" href="bitmaps/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
-    <link rel="stylesheet" href="style.css?v=1.17.01.102" />
+    <link rel="stylesheet" href="style.css?v=1.18.00.100" />
     <script>history.scrollRestoration = "manual"</script>
 </head>
 
@@ -259,6 +259,7 @@
             <button id="buttonGoFishing"></button><button id="buttonGoToPraediumFromRes"></button>
             <canvas id="canvasResidence" width="384" height="224"></canvas>
             <div id="divResidenceActionArea">
+                <button id="buttonHostParty" onclick="ThrowParty();"></button>
                 <button id="buttonWasteTime"></button>
                 <button id="buttonImproveResidence"></button>
                 <table id="tableResidenceInventory"></table>
@@ -430,6 +431,7 @@
             <canvas id="canvasVillage" width="384" height="224"></canvas>
             <div id="divVillageLasTablas"></div>
             <div id="divVillageButtons">
+                <button id="buttonVisitArena" onclick="GoToArena();"></button>
                 <button id="buttonVisitOracle"></button>
                 <button id="buttonBuild"></button>
                 <button id="buttonPlayGod"></button>
@@ -538,6 +540,20 @@
     </div>
     <div id="toast-container"></div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divMinigameArena">
+        <div id="divArenaRibbon"></div>
+
+        <button id="buttonLeaveArena" onclick="LeaveArena();"></button>
+
+        <canvas id="canvasArena" width="384" height="224"></canvas>
+
+        <button id="buttonArenaBetBlue" onclick="PlaceBet(0);" style="margin-right: 2vw;"></button><button id="buttonArenaBetRed" onclick="PlaceBet(1);"></button>
+
+        <div id="divArenaTables" style="margin-top: 6.4vw;"></div>
+
+        <div id="divArenaCushion"></div>
+    </div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayGameEvent" class="overlay">
         <div id="divModalGameEvent">
             <div id="divGameEventFaçade"></div>
@@ -548,7 +564,7 @@
     <div id="divOverlayForeword" class="overlay">
         <div id="divModalForeword">
             <div id="divForewordTitle"><img src="curves/PRÆDIVM.svg" /></div>
-            <div id="divForewordSubtitle">☙ an epic solitaire by Michael David Davis II ❧</div>
+            <div id="divForewordSubtitle"><img id="imgLeafL" src="curves/leafL.svg" /> an epic solitaire by Michael David Davis II <img id="imgLeafR" src="curves/leafR.svg" /></div>
             <button id="buttonForewordEnglish">English</button><button id="buttonForewordSpanish">Español</button>
             <div id="divForewordCorpus"></div>
             <button id="buttonForewordDismiss"></button>
@@ -643,6 +659,7 @@
     <script src="scripts/player_actions.js"></script>
     <script src="scripts/game_turn.js"></script>
     <script src="scripts/fish.js"></script>
+    <script src="scripts/arena.js"></script>
     <!-- <script src="scripts/harp.js"></script> -->
     <script src="scripts/start.js"></script>
     <script src="scripts/mods.js"></script>

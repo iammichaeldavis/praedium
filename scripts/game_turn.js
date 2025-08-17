@@ -512,9 +512,10 @@ function Shipping() {
         shipmentTimersCurrent[0] = shipmentTimersDefault[0];
         if (player.canExportOil) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[0] * currentDollarPriceOfOneWheat) * valueFactor[0];
-            const bounty = currentDollarValueOfUnit * residenceInStockCount[1];
+            let bounty = currentDollarValueOfUnit * residenceInStockCount[1];
             residenceShippedCount[1] += residenceInStockCount[1];
             residenceInStockCount[1] = 0;
+            if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[0] += bounty;
         }
@@ -524,9 +525,10 @@ function Shipping() {
         shipmentTimersCurrent[1] = shipmentTimersDefault[1];
         if (player.canExportBeer) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[1] * currentDollarPriceOfOneWheat) * valueFactor[1];
-            const bounty = currentDollarValueOfUnit * residenceInStockCount[2];
+            let bounty = currentDollarValueOfUnit * residenceInStockCount[2];
             residenceShippedCount[2] += residenceInStockCount[2];
             residenceInStockCount[2] = 0;
+            if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[1] += bounty;
         }
@@ -536,9 +538,10 @@ function Shipping() {
         shipmentTimersCurrent[2] = shipmentTimersDefault[2];
         if (player.canExportWine) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[2] * currentDollarPriceOfOneWheat) * valueFactor[2];
-            const bounty = currentDollarValueOfUnit * residenceInStockCount[3];
+            let bounty = currentDollarValueOfUnit * residenceInStockCount[3];
             residenceShippedCount[3] += residenceInStockCount[3];
             residenceInStockCount[3] = 0;
+            if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[2] += bounty;
         }
@@ -548,9 +551,10 @@ function Shipping() {
         shipmentTimersCurrent[3] = shipmentTimersDefault[3];
         if (player.canExportSyrup) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[3] * currentDollarPriceOfOneWheat) * valueFactor[3];
-            const bounty = currentDollarValueOfUnit * residenceInStockCount[4];
+            let bounty = currentDollarValueOfUnit * residenceInStockCount[4];
             residenceShippedCount[4] += residenceInStockCount[4];
             residenceInStockCount[4] = 0;
+            if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[3] += bounty;
         }
@@ -560,9 +564,10 @@ function Shipping() {
         shipmentTimersCurrent[4] = shipmentTimersDefault[4];
         if (player.canExportJuice) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[4] * currentDollarPriceOfOneWheat) * valueFactor[4];
-            const bounty = currentDollarValueOfUnit * residenceInStockCount[5];
+            let bounty = currentDollarValueOfUnit * residenceInStockCount[5];
             residenceShippedCount[5] += residenceInStockCount[5];
             residenceInStockCount[5] = 0;
+            if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[4] += bounty;
         }
@@ -572,9 +577,10 @@ function Shipping() {
         shipmentTimersCurrent[5] = shipmentTimersDefault[5];
         if (player.canExportFigs) {
             const currentDollarValueOfUnit = (wheatValuePerUnit[5] * currentDollarPriceOfOneWheat) * valueFactor[5];
-            const bounty = currentDollarValueOfUnit * residenceInStockCount[6];
+            let bounty = currentDollarValueOfUnit * residenceInStockCount[6];
             residenceShippedCount[6] += residenceInStockCount[6];
             residenceInStockCount[6] = 0;
+            if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[5] += bounty;
         }
@@ -583,9 +589,10 @@ function Shipping() {
     if (shipmentTimersCurrent[6] == 0) {
         shipmentTimersCurrent[6] = shipmentTimersDefault[6];
         if (player.canExportTrinkets) {
-            const bounty = residenceInStockCount[7] * trinketValue;
+            let bounty = residenceInStockCount[7] * trinketValue;
             residenceShippedCount[7] += residenceInStockCount[7];
             residenceInStockCount[7] = 0;
+            if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[6] += bounty;
         }

@@ -1180,6 +1180,12 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(interestLifetimeCollected) + '</td>';
                 tableString += '</tr>';
             }
+            if (arenaTotalWin > 0) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayGaming + ' <span class="icon GamingDie inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(arenaTotalWin) + '</td>';
+                tableString += '</tr>';
+            }
             if (asSpent > 0) {
                 tableString += '<tr>';
                 tableString += '<td colspan="2" class="rightPadColumn">' + '</td>';
@@ -1190,6 +1196,12 @@ function UpdateText() {
                 tableString += '<tr>';
                 tableString += '<td>' + displayComDev + ' <span class="icon CityWalls inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(commercialLifetimeSpend) + '</td>';
+                tableString += '</tr>';
+            }
+            if (statecraftLifetimeSpend > 0) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayStatecraft + ' <span class="icon CrownNew inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(statecraftLifetimeSpend) + '</td>';
                 tableString += '</tr>';
             }
             if (player.canSell) {
@@ -1221,6 +1233,12 @@ function UpdateText() {
                 tableString += '<tr>';
                 tableString += '<td>' + displayTribute + ' <span class="icon LordBritish inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(tributeLifetimePaid) + '</td>';
+                tableString += '</tr>';
+            }
+            if (arenaTotalBet > 0) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayGaming + ' <span class="icon GamingDie inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(arenaTotalBet) + '</td>';
                 tableString += '</tr>';
             }
             tableString += '</tbody>';
@@ -1527,6 +1545,9 @@ function UpdateText() {
             }
         }
 
+        // ARENA BUTTON ------------------------
+        buttonVisitArena.innerHTML = displayLabelArena + ' <span class="icon Flail inlineIcon"></span>';
+
         // ORACLE BUTTON -----------------------
         buttonVisitOracle.innerHTML = displayLabelOracle + ' <span class="icon Oracle inlineIcon"></span>';
 
@@ -1734,6 +1755,7 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[0] * (wheatValuePerUnit[0] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[1];
+                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[1]) + '<span class="icon Amphora inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -1810,6 +1832,7 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[1] * (wheatValuePerUnit[1] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[2];
+                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[2]) + '<span class="icon Keg inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -1886,6 +1909,7 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[2] * (wheatValuePerUnit[2] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[3];
+                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[3]) + '<span class="icon Cask inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -1962,6 +1986,7 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[3] * (wheatValuePerUnit[3] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[4];
+                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[4]) + '<span class="icon Honeypot inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -2038,6 +2063,7 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[4] * (wheatValuePerUnit[4] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[5];
+                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[5]) + '<span class="icon Jug inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -2114,6 +2140,7 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[5] * (wheatValuePerUnit[5] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[6];
+                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[6]) + '<span class="icon Basket inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -2189,6 +2216,7 @@ function UpdateText() {
                 tableString += '</td>';
                 tableString += '<td class="rightPadColumn">';
                 bounty = residenceInStockCount[7] * trinketValue;
+                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[7]) + '<span class="icon Trinket inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -2426,6 +2454,7 @@ function UpdateText() {
         buttonGoFishing.innerHTML = displayGoFishing;
         buttonGoToPraediumFromRes.innerHTML = displayGoToPraediumFromRes;
         buttonWasteTime.innerHTML = displayLabelWasteTime;
+        buttonHostParty.innerHTML = displayLabelThrowParty + '<br>(' + currencySymbol + formatterCurrent.format(priceResidenceParty) + ')';
 
         if (residenceStage == 0) { buttonImproveResidence.innerHTML = displayLabelResidence00 + '<br>' + '(' + priceResidence00 + '<span class="icon Wheat inlineIcon"></span>' + ')'; }
         else if (residenceStage == 1) { buttonImproveResidence.innerHTML = displayLabelResidence01 + '<br>' + '(' + priceResidence01[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence01[1] + '<span class="icon Log inlineIcon"></span>' + ')'; }
@@ -3989,18 +4018,34 @@ function UpdateText() {
             contentString += '--------<br>';
             contentString += '<br>';
 
-            contentString += '<i>' + displayRelationshipWith + '</i>:<br>';
+            contentString += '<i>' + displayRelationshipWith + '</i>:';
             contentString += '<br>';
-            contentString += '<b>' + mapProvinces[1][0] + ':</b> ';
+            contentString += '<br>';
+            contentString += '<b>' + mapProvinces[1][0] + ':</b>';
+            contentString += '<br>';
+            contentString += displayRelationship + ': ';
             contentString += displayRelations[mapProvinces[1][2]];
             contentString += '<br>';
+            contentString += displayRegionState + ': ';
+            contentString += displayStateType[mapProvinces[1][2]];
             contentString += '<br>';
-            contentString += '<b>' + mapProvinces[2][0] + ':</b> ';
+            contentString += '<br>';
+            contentString += '<b>' + mapProvinces[2][0] + ':</b>';
+            contentString += '<br>';
+            contentString += displayRelationship + ': ';
             contentString += displayRelations[mapProvinces[2][2]];
             contentString += '<br>';
+            contentString += displayRegionState + ': ';
+            contentString += displayStateType[mapProvinces[2][2]];
             contentString += '<br>';
-            contentString += '<b>' + mapProvinces[3][0] + ':</b> ';
+            contentString += '<br>';
+            contentString += '<b>' + mapProvinces[3][0] + ':</b>';
+            contentString += '<br>';
+            contentString += displayRelationship + ': ';
             contentString += displayRelations[mapProvinces[3][2]];
+            contentString += '<br>';
+            contentString += displayRegionState + ': ';
+            contentString += displayStateType[mapProvinces[3][2]];
             contentString += '</div>';
             divMapDetailsView.innerHTML = contentString;
         }
@@ -4668,6 +4713,10 @@ function UpdateVisibilities() {
     else if (player.isAt == 'Township') {
         buttonGoToPort.style.display = player.canSell ? 'inline-block' : '';
         buttonBuild.style.display = player.canBuild ? 'block' : '';
+        buttonVisitArena.style.display = trophiesSpawn ? 'block' : '';
+        if (player.hasOracle) {
+            buttonVisitArena.style.marginBottom = '2vw';
+        }
         buttonVisitOracle.style.display = player.hasOracle ? 'block' : '';
         buttonBuyWheat.style.display = player.canSell ? 'block' : '';
         buttonSellWheat.style.display = player.canSell ? 'block' : '';
@@ -4696,6 +4745,7 @@ function UpdateVisibilities() {
     }
 
     else if (player.isAt == 'Residence') {
+        buttonHostParty.style.display = (player.hasMansion && !player.hasHosted) ? 'block' : '';
         buttonImproveResidence.style.display = player.hasBandages ? '' : 'block';
         tableResidenceInventory.style.display = player.hasBakery ? 'table' : '';
         tableResidenceReport.style.display = player.hasBakery ? 'table' : '';

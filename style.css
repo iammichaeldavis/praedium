@@ -184,6 +184,7 @@ button.disabled s {
     margin-bottom: 0;
 }
 
+#buttonVisitArena,
 #buttonVisitOracle,
 #buttonPlayGod,
 #buttonBuild {
@@ -634,6 +635,10 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     margin: 0 auto;
 }
 
+#divViewResidence #divResidenceActionArea #buttonHostParty {
+    margin: 0 auto 2vw auto;
+}
+
 #buttonImproveResidence {
     display: block;
     margin: 2vw auto 0 auto;
@@ -760,6 +765,11 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     text-align: center;
     margin: 2.2vw auto 4.2vw auto;
     user-select: none;
+}
+
+#imgLeafL,
+#imgLeafR {
+    height: 1.6vw;
 }
 
 #divForewordScripture {
@@ -933,6 +943,20 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     line-height: 4.3vw;
 }
 
+#divGameEventCorpus .redTeam {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: red;
+    line-height: 4.3vw;
+}
+
+#divGameEventCorpus .blueTeam {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: blue;
+    line-height: 4.3vw;
+}
+
 #divGameEventCorpus #MrSecretary,
 #divGameEventCorpus #MrSecretary i {
     font-family: Arial, Helvetica, sans-serif;
@@ -1003,6 +1027,23 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     color: #041204;
     line-height: 4.3vw;
     text-align: justify;
+}
+
+#divGameEventCorpus .centerMePlease {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #041204;
+    line-height: 4.3vw;
+    text-align: center;
+}
+
+#divGameEventCorpus .tiltMePlease {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #041204;
+    line-height: 4.3vw;
+    text-align: center;
+    font-style: italic;
 }
 
 #divGameEventCorpus #AlaviNames {
@@ -1460,7 +1501,8 @@ td {
     text-align: center;
 }
 
-#divGameWindow .noPadColumn {
+#divGameWindow .noPadColumn,
+#divMinigameArena .noPadColumn {
     padding: 1vw 0;
 }
 
@@ -2485,6 +2527,26 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     --j: 18;
 }
 
+.Flail {
+    --i: 26;
+    --j: 18;
+}
+
+.doorShieldRed {
+    --i: 27;
+    --j: 18;
+}
+
+.doorShieldBlue {
+    --i: 28;
+    --j: 18;
+}
+
+.doorShieldGrey {
+    --i: 29;
+    --j: 18;
+}
+
 
 
 /* village */
@@ -2644,6 +2706,16 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     --j: 15;
 }
 
+.CrownNew {
+    --i: 30;
+    --j: 18;
+}
+
+.GamingDie {
+    --i: 31;
+    --j: 18;
+}
+
 
 
 /* trade */
@@ -2724,7 +2796,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 
 
-/* fishing*/
+/* fishing */
 
 .FishLargeCommon {
     --i: 17;
@@ -2773,6 +2845,25 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 
 
+/* arena */
+
+.PlainMessage {
+    --i: 30;
+    --j: 19;
+}
+
+.ArenaWin {
+    --i: 23;
+    --j: 18;
+}
+
+.ArenaLoss {
+    --i: 24;
+    --j: 18;
+}
+
+
+
 /* unused */
 
 .Leo {
@@ -2788,11 +2879,6 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 .TheLocnar {
     --i: 27;
     --j: 14;
-}
-
-.PlainMessage {
-    --i: 30;
-    --j: 19;
 }
 
 .EmptyJar {
@@ -3297,6 +3383,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divViewMountain,
 #tableMountainReport,
 #divViewResidence,
+#buttonHostParty,
 #buttonImproveResidence,
 #tableResidenceInventory,
 #tableResidenceReport,
@@ -3329,6 +3416,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divViewShepherds,
 #divViewFarmers,
 #divViewMiners,
+#divMinigameArena,
+#divArenaTables,
 #divMinigameFishing,
 #buttonTill,
 #buttonPlant,
@@ -3365,6 +3454,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #buttonSellStone,
 #buttonBuyHorses,
 #buttonSellHorses,
+#buttonVisitArena,
 #buttonVisitOracle,
 #buttonChooseHeir,
 #buttonReturnToMap,
@@ -4127,6 +4217,78 @@ body #divCheevo .brilliant {
         opacity: 0;
         transform: scale(1);
     }
+}
+
+
+
+/* // ARENA ///////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divMinigameArena {
+    width: 100%;
+    position: absolute;
+    border-top: calc(5px * var(--pixel-scale)) solid #006800;
+    top: 0;
+    left: 0;
+    background: #fef;
+    text-align: center;
+}
+
+#divArenaRibbon {
+    width: 100%;
+    height: calc(2px * var(--pixel-scale));
+    background: black;
+}
+
+#divArenaCushion {
+    width: 100%;
+    height: 12.8vw;
+}
+
+#buttonLeaveArena {
+    display: block;
+    margin: 6.4vw auto;
+}
+
+#canvasArena {
+    background: black;
+    display: block;
+    width: calc(386px * var(--pixel-scale));
+    height: calc(226px * var(--pixel-scale));
+    margin: 0 auto 6.4vw auto;
+}
+
+#tableArenaStandings {
+    border: calc(1px * var(--pixel-scale)) solid black;
+    background: white;
+}
+
+#tableArenaStandings thead td {
+    border-bottom: calc(1px * var(--pixel-scale)) solid black;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background: #9fa332;
+}
+
+#tableArenaStandings td {
+    padding: 1vw 2vw;
+    vertical-align: bottom;
+}
+
+#imgArenaWinnerR1 {
+    width: calc(126px * var(--pixel-scale));
+    height: calc(141px * var(--pixel-scale));
+}
+
+#imgArenaWinnerR2 {
+    width: calc(150px * var(--pixel-scale));
+    height: calc(141px * var(--pixel-scale));
+}
+
+#imgArenaWinnerR3 {
+    width: calc(189px * var(--pixel-scale));
+    height: calc(138px * var(--pixel-scale));
 }
 
 
