@@ -50,7 +50,7 @@
 }
 
 * {
-    font-family: 'Courier New', monospace;
+    font-family: 'Typewriter', 'Courier New', monospace;
     font-size: 2.4vw;
     color: black;
     box-sizing: border-box;
@@ -145,6 +145,8 @@ button.disabled s {
 #buttonWater,
 #buttonHarvest,
 #buttonEnglish,
+#buttonWindow1x,
+#buttonWindow2x,
 #buttonOptions,
 #buttonI,
 #buttonQ,
@@ -239,7 +241,10 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #buttonEnglish,
-#buttonSpanish {
+#buttonSpanish,
+#buttonWindow1x,
+#buttonWindow2x,
+#buttonWindowAuto {
     font-size: 2.4vw;
 }
 
@@ -354,7 +359,10 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #buttonOptionsDismiss,
 #buttonEnglish,
-#buttonSpanish {
+#buttonSpanish,
+#buttonWindow1x,
+#buttonWindow2x,
+#buttonWindowAuto {
     color: #b6b600;
     border: calc(1px * var(--pixel-scale)) solid #b6b600;
     background: #fcfce5;
@@ -362,7 +370,10 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #buttonOptionsDismiss:hover,
 #buttonEnglish:hover,
-#buttonSpanish:hover {
+#buttonSpanish:hover,
+#buttonWindow1x:hover,
+#buttonWindow2x:hover,
+#buttonWindowAuto:hover {
     color: #c2c200;
     border: calc(1px * var(--pixel-scale)) solid #c2c200;
     background: #ffffc4;
@@ -370,10 +381,17 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #buttonOptionsDismiss:active,
 #buttonEnglish:active,
-#buttonSpanish:active {
+#buttonSpanish:active,
+#buttonWindow1x:active,
+#buttonWindow2x:active,
+#buttonWindowAuto:active {
     color: #808000;
     border: calc(1px * var(--pixel-scale)) solid #808000;
     background: #dede87;
+}
+
+.selectedOption {
+    text-decoration: underline;
 }
 
 
@@ -636,6 +654,10 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divViewResidence #divResidenceActionArea #buttonHostParty {
+    margin: 0 auto 2vw auto;
+}
+
+#divViewResidence #divResidenceActionArea #buttonGoOnHike {
     margin: 0 auto 2vw auto;
 }
 
@@ -920,12 +942,17 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     padding: 1vw 3vw;
 }
 
-#divGameEventCorpus #Dumas {
+#divGameEventCorpus #Dumas,
+#divGameEventCorpus .hikeTilt {
     font-family: 'Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
     font-style: italic;
+}
+
+#divGameEventCorpus .hikeRed {
+    color: crimson;
 }
 
 #divGameEventCorpus #fin {
@@ -1162,6 +1189,25 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     margin-bottom: 6.4vw;
 }
 
+#divModalOptions input[type='checkbox'] {
+    width: 2.6vw;
+    height: 2.6vw;
+    /*outline: 2px solid #005ca1;*/
+}
+
+#divModalOptions #spanOptionLanguage,
+#divModalOptions #spanOptionWindowSize {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #b6b600;
+    display: block;
+    margin-bottom: 0.5vw;
+}
+
+#divModalOptions #divOptionWindowSize {
+    margin-top: 3.2vw;
+}
+
 #divOptionsFlavour {
     font-family: 'Garamond', serif;
     font-size: 3.6vw;
@@ -1190,6 +1236,48 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 input {
     cursor: pointer;
+}
+
+
+
+/* // FONTS ///////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+@font-face {
+    font-family: 'RuneScape';
+    src: url('fonts/RuneScape-Plain-11.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: 'Typewriter';
+    src: url('fonts/type-cour.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Typewriter';
+    src: url('fonts/type-couri.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Typewriter';
+    src: url('fonts/type-courbd.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Typewriter';
+    src: url('fonts/type-courbi.ttf');
+    font-weight: bold;
+    font-style: italic;
 }
 
 
@@ -1230,13 +1318,6 @@ input {
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-@font-face {
-    font-family: 'RuneScape';
-    src: url('fonts/RuneScape-Plain-11.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
 }
 
 #divYear,
@@ -2905,7 +2986,6 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #divVillageEstDate {
-    font-family: 'Courier New', monospace;
     font-size: 1.8vw;
     line-height: 3.2vw;
     color: #120404;
@@ -2950,7 +3030,6 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #divPortSubtitle {
-    font-family: 'Courier New', monospace;
     font-size: 1.8vw;
     line-height: 3.2vw;
     color: #120404;
@@ -3245,7 +3324,6 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divMinersSubtitle,
 #divFarmersSubtitle,
 #divShepherdsSubtitle {
-    font-family: 'Courier New', monospace;
     font-size: 1.8vw;
     line-height: 3.2vw;
     color: #120404;
@@ -3416,6 +3494,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divViewShepherds,
 #divViewFarmers,
 #divViewMiners,
+#buttonGoOnHike,
+#divMinigameHike,
 #divMinigameArena,
 #divArenaTables,
 #divMinigameFishing,
@@ -3479,7 +3559,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #labelToggleAnimation,
 #toggleAnimation,
 #labelToggleProfanity,
-#toggleProfanity {
+#toggleProfanity,
+#divOptionWindowSize {
     display: none;
 }
 
@@ -4221,6 +4302,45 @@ body #divCheevo .brilliant {
 
 
 
+/* // HIKE ////////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divMinigameHike {
+    width: 100%;
+    position: absolute;
+    border-top: calc(5px * var(--pixel-scale)) solid #006800;
+    top: 0;
+    left: 0;
+    background: #fef;
+    text-align: center;
+}
+
+#divHikeRibbon {
+    width: 100%;
+    height: calc(2px * var(--pixel-scale));
+    background: black;
+}
+
+#divHikeCushion {
+    width: 100%;
+    height: 12.8vw;
+}
+
+#buttonLeaveHike {
+    display: block;
+    margin: 6.4vw auto;
+}
+
+#canvasHike {
+    background: black;
+    display: block;
+    width: calc(386px * var(--pixel-scale));
+    height: calc(226px * var(--pixel-scale));
+    margin: 0 auto 6.4vw auto;
+}
+
+
+
 /* // ARENA ///////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -4230,7 +4350,7 @@ body #divCheevo .brilliant {
     border-top: calc(5px * var(--pixel-scale)) solid #006800;
     top: 0;
     left: 0;
-    background: #fef;
+    background: #ffe;
     text-align: center;
 }
 
@@ -4660,7 +4780,7 @@ body #divCheevo .brilliant {
     border-top: calc(5px * var(--pixel-scale)) solid #006800;
     top: 0;
     left: 0;
-    background: #fee;
+    background: #eef;
 }
 
 #divWharfRibbon {

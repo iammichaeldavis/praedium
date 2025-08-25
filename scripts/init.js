@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.18.00-B';
+const version = '1.19.00-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -81,6 +81,7 @@ const player = {
     seesVillage: false,
     seesExportButton: true,
     seesImportButton: true,
+    seesHikeButton: false,
 
     canDismissEvent: false,
     canTill: false,
@@ -207,6 +208,7 @@ const player = {
     hasFished: false,
     hasFishRecords: false,
     hasHosted: false,
+    hasHiked: false,
 };
 
 const tilemap = new Image();
@@ -313,6 +315,8 @@ const neighborsHerpyImage = new Image();
 neighborsHerpyImage.src = 'bitmaps/cell_noodle_0.png';
 const neighborsBlinksImage = new Image();
 neighborsBlinksImage.src = 'bitmaps/cell_blinks_3.png';
+const hikeImage = new Image();
+hikeImage.src = 'bitmaps/eranasPeace.png';
 
 const body = document.getElementsByTagName('body')[0];
 
@@ -361,6 +365,11 @@ const buttonEnglish = document.getElementById('buttonEnglish');
 const buttonSpanish = document.getElementById('buttonSpanish');
 const divOptionsFlavour = document.getElementById('divOptionsFlavour');
 const buttonOptionsDismiss = document.getElementById('buttonOptionsDismiss');
+const spanOptionLanguage = document.getElementById('spanOptionLanguage');
+const spanOptionWindowSize = document.getElementById('spanOptionWindowSize');
+const buttonWindow1x = document.getElementById('buttonWindow1x');
+const buttonWindow2x = document.getElementById('buttonWindow2x');
+const buttonWindowAuto = document.getElementById('buttonWindowAuto');
 
 const divYear = document.getElementById('divYear');
 const divRuneSeason = document.getElementById('divRuneSeason');
@@ -646,6 +655,13 @@ const buttonWharfRod = document.getElementById('buttonWharfRod');
 const buttonWharfWWF = document.getElementById('buttonWharfWWF');
 const buttonWharfChewFat = document.getElementById('buttonWharfChewFat');
 const divPsxSubtitle = document.getElementById('divPsxSubtitle');
+
+const buttonGoOnHike = document.getElementById('buttonGoOnHike');
+const divMinigameHike = document.getElementById('divMinigameHike');
+const buttonLeaveHike = document.getElementById('buttonLeaveHike');
+const canvasHike = document.getElementById('canvasHike');
+const canvasHikeContext = canvasHike.getContext('2d');
+const buttonRelax = document.getElementById('buttonRelax');
 
 const divFooter = document.getElementById('divFooter');
 
@@ -1192,6 +1208,10 @@ let rippleFrame = 0;
 const caughtFishSession = [0, 0, 0, 0, 0, 0,];
 const caughtFishLifetime = [0, 0, 0, 0, 0, 0,];
 let caughtFishBounty = [1, 2, 5, 10, 50, 100,];
+
+let relaxLevel = 0;
+let meditateCount = 0;
+let superMeditatorWizardPowersActivated = false;
 
 
 

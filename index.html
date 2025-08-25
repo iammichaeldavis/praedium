@@ -28,7 +28,7 @@
     <link rel="apple-touch-icon" sizes="16x16" href="bitmaps/favicon/favicon16x.ico" />
     <link rel="manifest" href="bitmaps/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
-    <link rel="stylesheet" href="style.css?v=1.18.00.101" />
+    <link rel="stylesheet" href="style.css?v=1.19.00.1" />
     <script>history.scrollRestoration = "manual"</script>
 </head>
 
@@ -259,6 +259,7 @@
             <button id="buttonGoFishing"></button><button id="buttonGoToPraediumFromRes"></button>
             <canvas id="canvasResidence" width="384" height="224"></canvas>
             <div id="divResidenceActionArea">
+                <button id="buttonGoOnHike" onclick="SetOutOnSojourn();"></button>
                 <button id="buttonHostParty" onclick="ThrowParty();"></button>
                 <button id="buttonWasteTime"></button>
                 <button id="buttonImproveResidence"></button>
@@ -554,6 +555,18 @@
         <div id="divArenaCushion"></div>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <div id="divMinigameHike">
+        <div id="divHikeRibbon"></div>
+
+        <button id="buttonLeaveHike" onclick="LeaveHike();"></button>
+
+        <canvas id="canvasHike" width="384" height="224"></canvas>
+
+        <button id="buttonRelax" onclick="Relax();"></button>
+
+        <div id="divHikeCushion"></div>
+    </div>
+    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayGameEvent" class="overlay">
         <div id="divModalGameEvent">
             <div id="divGameEventFaçade"></div>
@@ -564,7 +577,8 @@
     <div id="divOverlayForeword" class="overlay">
         <div id="divModalForeword">
             <div id="divForewordTitle"><img src="curves/PRÆDIVM.svg" /></div>
-            <div id="divForewordSubtitle"><img id="imgLeafL" src="curves/leafL.svg" /> an epic solitaire by Michael David Davis II <img id="imgLeafR" src="curves/leafR.svg" /></div>
+            <div id="divForewordSubtitle"><img id="imgLeafL" src="curves/leafL.svg" /> an epic solitaire by Michael David Davis II <img id="imgLeafR"
+                    src="curves/leafR.svg" /></div>
             <button id="buttonForewordEnglish">English</button><button id="buttonForewordSpanish">Español</button>
             <div id="divForewordCorpus"></div>
             <button id="buttonForewordDismiss"></button>
@@ -604,7 +618,13 @@
                 <label for="toggleProfanity" id="labelToggleProfanity"></label>
                 <input type="checkbox" id="toggleProfanity" name="toggleProfanity" checked onclick="ToggleProfanity()" /> <!-- 🚨 DEPRECATED! -->
             </div>
+            <span id="spanOptionLanguage"></span>
             <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button>
+            <div id="divOptionWindowSize"> <!-- 🚨 DEPRECATED! -->
+                <span id="spanOptionWindowSize"></span>
+                <button id="buttonWindow1x" onclick="SetWidth(1)">1x</button><button id="buttonWindow2x" onclick="SetWidth(2)">2x</button><button id="buttonWindowAuto"
+                    onclick="SetWidth(0)" class="selectedOption">auto</button>
+            </div>
             <div id="divOptionsFlavour"></div>
             <button id="buttonOptionsDismiss"></button>
         </div>

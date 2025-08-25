@@ -24,6 +24,8 @@ let displayMusic = '';
 let displaySounds = '';
 let displayAnimations = '';
 let displayProfanity = '';
+let displayLanguage = '';
+let displayWindowSize = '';
 let displayInStock = '';
 let displayStaff = '';
 let displayFieldhands = '';
@@ -149,6 +151,9 @@ let displayLabelRentWarehouse2 = '';
 
 let displayLabelWasteTime = '';
 let displayLabelThrowParty = '';
+let displayLabelGoHike = '';
+let displayLabelRelax = [];
+let displayLabelLeaveHike = '';
 let displayLabelResidence00 = '';
 let displayLabelResidence01 = '';
 let displayLabelResidence02 = '';
@@ -745,6 +750,10 @@ let displayHintsOn = '';
 let displayHintsOff = '';
 let displayHintsEnd = '';
 
+let displayStoryHikeGo = '';
+let displayStoryHikeLeave = '';
+let displayStoryHikeRelax = [];
+
 let displayStoryFishFirstVisit = '';
 let displayFishFish = '';
 let displayFishBegin = '';
@@ -879,6 +888,8 @@ function Translate(language, bark = true) {
     player.speaks = language;
 
     if (language == 'English') {
+        buttonEnglish.classList.add('selectedOption');
+        buttonSpanish.classList.remove('selectedOption');
         formatterCurrent = formatterEnglish;
 
         displayGameEdition = 'GOLD EDITION';
@@ -1050,6 +1061,8 @@ function Translate(language, bark = true) {
         displaySounds = 'Sounds?';
         displayAnimations = 'Cosmetic Animations?';
         displayProfanity = 'Profanity?';
+        displayLanguage = 'Language:';
+        displayWindowSize = 'Window Size:';
         displayInStock = 'In Stock';
         displayStaff = 'Staff';
         displayFieldhands = 'Fieldhands';
@@ -1175,6 +1188,18 @@ function Translate(language, bark = true) {
 
         displayLabelWasteTime = 'RELAX AND DO NOTHING';
         displayLabelThrowParty = 'HOST LAVISH STATE FUNCTION';
+        displayLabelGoHike = 'GO ON A HIKE';
+        displayLabelRelax = [
+            'TAKE A MOMENT',
+            'TARRY HERE',
+            'LINGER',
+            'PONDER',
+            'REFLECT',
+            'THINK',
+            'CONSIDER',
+            'MEDITATE',
+        ];
+        displayLabelLeaveHike = '↓ MAKE YOUR WAY BACK';
         displayLabelResidence00 = 'BUILD SHANTY ON YOUR OWN LAND';
         displayLabelResidence01 = 'IMPROVE YOUR SHANTY';
         displayLabelResidence02 = 'IMPROVE YOUR CABIN';
@@ -1796,6 +1821,19 @@ function Translate(language, bark = true) {
         displayHintsOff = 'Hints off';
         displayHintsEnd = 'End of hints';
 
+        displayStoryHikeGo = '<div id="divMeetings">You can’t remember the last time you allowed yourself even a moment of leisure time.<br><br>Deciding to make a day of it in your nearby foothills, you clear your schedule, pack a light lunch and set out at first light.<br><br>After a few hours tramping through the woods, you finally arrive at the craggy base of the formidable Al-Janūbīyah mountain range. Here at the treeline you are surrounded by shrubbery and light vegetation, but less and less seems to grow the higher you look, until the spartan, bare, wind-swept peaks stretch off into the horizon in either direction. The ruthless sun hangs high in the cloudless firmament.<br><br>Here where the forest ends a jumble of bright red, pink and orange rocks and sand and boulders begins, the pile progressively sloping higher and higher until it meets the sheer face of the mountain, which seems to touch the very sky. It’s hard going for a few minutes, scrambling over these stones—some of them covered in torturously sharp edges or agonizingly rough surfaces, catching on any bit of exposed flesh or scrap of loose fabric!—until suddenly you arrive at a lovely glade seemingly cut directly into the hills.<br><br>Wiping the sweat from your brow with a handkerchief, you decide that this seems like a wonderful place to stop and rest.</div>';
+        displayStoryHikeLeave = '<div id="divMeetings">Well, you realize, it will certainly be quite late by the time you finally make it all the way back. And boy will your legs be sore tomorrow!<br><br>But today has definitely been worth it.<br><br>Gathering yourself, you take one last long look across the entire meadow.<br><br>What a beautiful place.<br><br>Setting off for home, you make a mental note of the area, picking out a few landmarks you can use later to find your way back here, vowing to return soon.</div>';
+        displayStoryHikeRelax = [
+            'You take a moment to catch your breath and appreciate your surroundings.<br><br>In the center of this clearing stands a majestic, flourishing ilex, its thick, twisting limbs flush with vibrant green leaves. You make your way underneath it, seeking relief from the oppressive heat of the midday sun. Countless acorns litter this shaded area directly beneath the great boughs of the ancient oak. Everywhere else, the ground is barely visible due to a thick blanket of tiny gay flowers. A cool breeze from the forest brings with it the crisp smells of cedar and pine.<br><br>The day is warm, the sun directly overhead, and the sky is a clear, piercing blue. To your west, the high, barren peaks and steep cliffs of the Al-Janūbīyah Mountains tower above all else, and far beyond them lies the Great Sea. Back east, the deep forest through which you came to this meadow, and home.<br><br>The perimeter of the glade is ringed by rocky escarpments on all sides. The air that gathers here in this bowl-shaped valley is sweet, fragrant from the flowers, and cool from the surrounding stone. The atmosphere in this place is peaceful and calm.',
+            'Flapping out the woven blanket you brought along for just such a purpose, you make yourself comfortable at the base of the tree and enjoy your lunch in her shade.',
+            'The day is quite warm, so every cooling breeze is appreciated. You stretch out your limbs, roll your neck, and lean back on your elbows.<br><br>Slowly, you draw in a very deep breath. The air has the fresh, clean scent of the mountains, accompanied by numerous perfume-like fragrances. There is almost an aura of magic throughout this meadow. It seems to be benevolent and restorative.<br><br>After staring absentmindedly for a while, you happen to notice that into the trunk of the tree, in large block letters, someone has carved the name ‘ERANA’. From the deeply weathered appearance of the cuts, this must have taken place long, long ago.',
+            'Free from any focused direction, your mind begins to wander:<br><br>Why are any of us here? From whence have we come? To what goal are any of us destined? Do the gods love us? What is the meaning or purpose of life? What happens when we die? Are the universe and time infinite, or did they have a start and will they have an end? What is the smallest unit of matter? Why must bad things happen to good people? Why do the gods even allow evil in the first place? Will <span class="hikeTilt">I</span> ever be good enough? Have I ever been?<br><br>The questions that demand answers in your mind feel endless! Sometimes you feel as if you are being pulled apart in all directions.',
+            'Sitting up, you stretch your neck and your arms, relishing the sensation of fresh blood flowing through your veins.<br><br>You cross your legs and gaze out to the middle distance, at nothing at all, allowing a mixture of complex emotions to wash over and through you in waves.<br><br>Boy, it has been a wild ride.<br><br>It’s almost unbelievable to think that this meadow and everything around it belongs to you, as does so much else, now, to do with all as you see fit.<br><br>Are you worthy of these responsibilities? Cunning enough? Wise enough?<br><br>Could any one person be?<br><br><span class="hikeTilt hikeRed">“Power corrupts; and absolute power corrupts absolutely. Great men are almost always bad men.”</span><br><br>You are but one limited, mortal being, only human, after all; all too human. You’re not perfect and you’ve never claimed to be. And sometimes it feels as though this life is nothing more than a never-ending series of insurmountable crises and challenges. The more we have the more can be taken away, the more we have to lose, the more there is to defend.<br><br>There is a tremendous pressure that comes with being the one in charge.',
+            'Now your harried mind again begins to race, down whatever random mental avenues it happens to stumble upon, a fearful coldness shivering up your spine:<br><br>Am I on the right track in life?<br><br>Do any of my friends truly care about me? And if I am honest with myself, do <span class="hikeTilt">I</span> truly care about any of <span class="hikeTilt">them</span>?<br><br>Are the gods pleased with my decisions, with how I choose to live my life?<br><br>How could I ever know for sure?<br><br>For that matter, how could <span class="hikeTilt">anyone</span> be sure of <span class="hikeTilt">anything</span>, at <span class="hikeTilt">any</span> possible moment? How can we know for certain what is <span class="hikeTilt">absolutely</span> right, or <span class="hikeTilt">absolutely</span> wrong? How can we be sure we know what is true, and what is false? If the gods know, they have certainly not shared this information with man.<br><br>What is <span class="hikeTilt">truth</span>? Does there exist an absolute, objective reality, or is every detail of existence subjective and relative? But if so, relative to <span class="hikeTilt">what</span>? One’s own perspective?<br><br>You stare at the sky, but the sky has no answers for your many questions.',
+            'Finally, you reach a conclusion in your mind:<br><br>I suppose all that we can really do is to just try our best and be grateful.<br><br>Grateful for what we have, grateful for what we do not. Grateful for everything we have ever enjoyed and for everything we have ever suffered or endured, because either way we learned priceless lessons along the way.<br><br>And there is always tomorrow to look forward to. The ending to our story has not yet been written.',
+            'Adjusting your weight, you stretch out your legs, re-cross them, make yourself again comfortable, place your palms in your lap and close your eyes, searching inward for tranquility.<br><br>You take a deep breath in through your nose, filling your lungs to capacity with cool, salubrious mountain air, then clear your mind of all thought as you gently exhale out of your mouth.',
+        ];
+
         displayStoryFishFirstVisit = 'AH, THE SIMPLE PLEASURE OF A DAY SPENT AT THE CREEK... ONE OF THE LAST THINGS YOUR FATHER TAUGHT YOU BEFORE HIS UNTIMELY DEMISE<br><br>(Employees Who Receive Fish With Their Pay Work Twice As Hard)';
         displayFishFish = 'FISH';
         displayFishBegin = 'BEGIN FISHING';
@@ -1859,6 +1897,8 @@ function Translate(language, bark = true) {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     else if (language == 'Spanish') {
+        buttonEnglish.classList.remove('selectedOption');
+        buttonSpanish.classList.add('selectedOption');
         formatterCurrent = formatterSpanish;
 
         displayGameEdition = 'EDICIÓN DE ORO';
@@ -2066,6 +2106,8 @@ function Translate(language, bark = true) {
         displaySounds = '¿Sonidos?';
         displayAnimations = '¿Animaciones cosméticas?';
         displayProfanity = '¿Blasfemia?';
+        displayLanguage = 'Idioma:';
+        displayWindowSize = 'Tamaño de la Ventana:';
         displayInStock = 'En Stock';
         displayStaff = 'Personal';
         displayFieldhands = 'Labriegos';
@@ -2191,6 +2233,18 @@ function Translate(language, bark = true) {
 
         displayLabelWasteTime = 'RELAJARSE Y NO HACER NADA';
         displayLabelThrowParty = 'ORGANIZAR FUNCIÓN ESTATAL LUJOSA';
+        displayLabelGoHike = 'IR DE CAMINATA';
+        displayLabelRelax = [
+            'TÓMATE UN MOMENTO',
+            'ESPERAR AQUÍ',
+            'PERSISTIR',
+            'REFLEXIONAR',
+            'REFLEJAR',
+            'PENSAR',
+            'CONSIDERAR',
+            'MEDITAR',
+        ];
+        displayLabelLeaveHike = '↓ REGRESAR HACIA ATRÁS';
         displayLabelResidence00 = 'CONSTRUIR UNA CHOZA EN TU PROPIO TERRENO';
         displayLabelResidence01 = 'MEJORAR TU CHOZA';
         displayLabelResidence02 = 'MEJORAR TU CABAÑA';
@@ -2837,6 +2891,19 @@ function Translate(language, bark = true) {
         displayHintsOn = 'Pistas activadas';
         displayHintsOff = 'Pistas desactivadas';
         displayHintsEnd = 'Fin de las pistas';
+
+        displayStoryHikeGo = '<div id="divMeetings">No puedes recordar la última vez que te permitiste siquiera un momento de tiempo libre.<br><br>Decides pasar el día en tus colinas cercanas, despejas tu agenda, preparas un almuerzo ligero y sales al amanecer.<br><br>Tras unas horas de caminata por el bosque, se llega a la escarpada base de la imponente cordillera de Al-Janūbīyah. Aquí, en el límite arbóreo, uno se encuentra rodeado de arbustos y vegetación ligera, pero a medida que miras más y más alto, la vegetación parece disminuir, hasta que los espartanos picos desnudos, azotados por el viento, se extienden en el horizonte en ambas direcciones. El implacable sol se cierne en lo alto del firmamento sin nubes.<br><br>Aquí donde termina el bosque, comienza una revoltijo de rocas, arena y cantos rodados de un rojo, rosa y naranja brillante. El montón se va elevando progresivamente hasta tocar la escarpada cara de la montaña, que parece tocar el cielo mismo. Es difícil avanzar durante unos minutos, trepando por estas piedras —algunas cubiertas de bordes tortuosamente afilados o superficies ásperamente ásperas, ¡que se enganchan con cualquier trozo de carne expuesta o retazo de tela suelta!— hasta que, de repente, se llega a un hermoso claro que parece excavado directamente en las colinas.<br><br>Secándose el sudor de la frente con un pañuelo, decides que éste parece un lugar maravilloso para detenerte y descansar.</div>';
+        displayStoryHikeLeave = '<div id="divMeetings">Bueno, te das cuenta de que será ciertamente bastante tarde cuando finalmente regreses a tu casa. ¡Y vaya si te dolerán las piernas mañana!<br><br>Pero hoy definitivamente ha valido la pena.<br><br>Reuniéndose, echas una última mirada larga a todo el prado.<br><br>Qué lugar tan hermoso.<br><br>Al partir hacia casa, tomas nota mental del área, y escoges algunos puntos de referencia que puedes usar más tarde para encontrar el camino de regreso; prometes regresar pronto.</div>';
+        displayStoryHikeRelax = [
+            'Tómate un momento para recuperar el aliento y apreciar tu entorno.<br><br>En el centro de este claro se alza un majestuoso y floreciente encino, con sus gruesas y retorcidas ramas cubiertas de vibrantes hojas verdes. Te abres paso bajo él, buscando alivio del calor opresivo del sol del mediodía. Innumerables bellotas cubren esta zona sombreada, justo debajo de las grandes ramas del antiguo roble. En el resto del prado, el suelo apenas es visible debido a un denso manto de diminutas y alegres flores. Una brisa fresca del bosque trae consigo los aromas frescos del cedro y el pino.<br><br>El día es cálido, el sol brilla con fuerza y el cielo es de un azul claro y penetrante. Al oeste, los altos y áridos picos y los escarpados acantilados de las montañas Al-Janūbīyah se alzan por encima de todo, y mucho más allá se extiende el Gran Mar. Al este, el denso bosque por el que llegaste a esta pradera, y tu hogar.<br><br>El perímetro del claro está rodeado por escarpes rocosos. El aire que se respira en este valle con forma de cuenco es dulce, fragante gracias a las flores, y fresco gracias a la piedra circundante. El ambiente en este lugar es tranquilo y apacible.',
+            'Extiendes la manta tejida que trajiste para tal propósito, te pones cómodo en la base del árbol y disfrutas tu almuerzo a su sombra.',
+            'El día es bastante cálido, así que cualquier brisa refrescante se agradece. Estiras las extremidades, giras el cuello y te apoyas en los codos.<br><br>Lentamente, respiras profundamente. El aire desprende el aroma fresco y limpio de las montañas, acompañado de numerosas fragancias perfumadas. Hay casi un aura mágica en esta pradera. Parece benévola y restauradora.<br><br>Tras observar distraídamente un rato, te das cuenta de que en el tronco del árbol, en grandes letras mayúsculas, alguien ha grabado el nombre ‹ERANA›. Por el aspecto erosionado de los cortes, esto debió de ocurrir hace muchísimo, muchísimo tiempo.',
+            'Libre de cualquier dirección enfocada, tu mente comienza a divagar:<br><br>¿Por qué estamos aquí? ¿De dónde venimos? ¿A qué meta estamos destinados? ¿Nos aman los dioses? ¿Cuál es el sentido o propósito de la vida? ¿Qué sucede al morir? ¿Son infinitos el universo y el tiempo, o tuvieron un principio y tendrán un fin? ¿Cuál es la unidad más pequeña de materia? ¿Por qué deben pasarle cosas malas a la gente buena? ¿Por qué los dioses aún permiten el mal? ¿<span class="hikeTilt">Yo</span> seré alguna vez lo suficientemente bueno? ¿Lo he sido alguna vez?<br><br>¡Las preguntas que exigen respuestas en tu mente parecen interminables! A veces sientes como si te estuvieran desgarrando en todas direcciones.',
+            'Sentado, estira el cuello y los brazos, saboreando la sensación de sangre fresca fluyendo por tus venas.<br><br>Cruzas las piernas y miras a lo lejos, a la nada en absoluto, permitiendo que una mezcla de emociones complejas te inunde y te atraviese en oleadas.<br><br>Vaya, ha sido un viaje increíble.<br><br>Es casi increíble pensar que este prado y todo lo que lo rodea te pertenece, como tantas otras cosas, y que ahora puedes hacer con todo lo que creas conveniente.<br><br>¿Eres digno de estas responsabilidades? ¿Lo suficientemente astuto? ¿Lo suficientemente sabio?<br><br>¿Podría alguien serlo?<br><br><span class="hikeTilt hikeRed">«El poder corrompe; y el poder absoluto corrompe absolutamente. Los grandes hombres casi siempre son malos hombres.»</span><br><br>Eres solo un ser mortal y limitado, solo humano, después de todo; demasiado humano. No eres perfecto y nunca lo has pretendido. Y a veces parece que esta vida no es más que una serie interminable de crisis y desafíos insuperables. Cuanto más tenemos, más nos pueden quitar, más tenemos que perder, más hay que defender.<br><br>Ser el que manda conlleva una enorme presión.',
+            'Ahora tu mente agobiada comienza de nuevo a correr, por cualquier avenida mental aleatoria con la que se tope, mientras una frialdad aterradora te recorre la columna:<br><br>¿Voy por buen camino en la vida?<br><br>¿Alguno de mis amigos se preocupa de verdad por mí? Y, siendo sincero conmigo mismo, ¿<span class="hikeTilt">me</span> preocupo de verdad por alguno de <span class="hikeTilt">ellos</span>?<br><br>¿Están los dioses contentos con mis decisiones, con cómo elijo vivir mi vida?<br><br>¿Cómo podría saberlo con seguridad?<br><br>De hecho, ¿cómo podría <span class="hikeTilt">alguien</span> estar seguro de <span class="hikeTilt">algo</span>, en <span class="hikeTilt">cualquier</span> momento? ¿Cómo podemos saber con certeza qué es <span class="hikeTilt">absolutamente</span> correcto o <span class="hikeTilt">absolutamente</span> incorrecto? ¿Cómo podemos estar seguros de saber qué es verdadero y qué es falso? Si los dioses lo saben, ciertamente no han compartido esta información con el hombre.<br><br>¿Qué es <span class="hikeTilt">la verdad</span>? ¿Existe una realidad absoluta y objetiva, o cada detalle de la existencia es subjetivo y relativo? Pero si es así, ¿relativo a <span class="hikeTilt">qué</span>? ¿A la propia perspectiva?<br><br>Miras al cielo, pero el cielo no tiene respuestas a tus muchas preguntas.',
+            'Finalmente, llegas a una conclusión en tu mente:<br><br>Supongo que lo único que podemos hacer es dar lo mejor de nosotros y estar agradecidos.<br><br>Agradecidos por lo que tenemos, agradecidos por lo que no. Agradecidos por todo lo que hemos disfrutado y por todo lo que hemos sufrido o soportado, porque, de cualquier manera, aprendimos lecciones invaluables en el camino.<br><br>Y siempre hay un mañana que esperar con ilusión. El final de nuestra historia aún no se ha escrito.',
+            'Ajustando tu peso, estiras las piernas, las vuelves a cruzar, te pones nuevamente cómodo, colocas las palmas de las manos en el regazo y cierras los ojos, buscando en tu interior la tranquilidad.<br><br>Tu respira profundamente por la nariz, llenando tus pulmones con el aire fresco y saludable de la montaña, luego despejas tu mente de todo pensamiento mientras exhalas suavemente por la boca.',
+        ];
 
         displayStoryFishFirstVisit = 'A, EL SIMPLE PLACER DE PASAR UN DÍA EN EL ARROYO... UNA DE LAS ÚLTIMAS COSAS QUE TE ENSEÑÓ TU PADRE ANTES DE SU PREMATURA MUERTE<br><br>(Empleados Que Reciben Pescado Con Su Salario Trabajan El Doble De Duro)';
         displayFishFish = 'FISH';

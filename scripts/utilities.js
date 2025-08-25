@@ -111,6 +111,7 @@ function ContinuePreviousGame() {
         player.seesVillage = loadedReport.hero.seesVillage;
         player.seesExportButton = loadedReport.hero.seesExportButton;
         player.seesImportButton = loadedReport.hero.seesImportButton;
+        player.seesHikeButton = loadedReport.hero.seesHikeButton;
 
         //player.canDismissEvent = loadedReport.hero.canDismissEvent;
         player.canTill = loadedReport.hero.canTill;
@@ -236,6 +237,7 @@ function ContinuePreviousGame() {
         player.hasFished = loadedReport.hero.hasFished;
         player.hasFishRecords = loadedReport.hero.hasFishRecords;
         player.hasHosted = loadedReport.hero.hasHosted;
+        player.hasHiked = loadedReport.hero.hasHiked;
         /////////////////////////////////////////////////////////////////////////////////////////
         gameTurn = loadedReport.calendar[0];
         year = loadedReport.calendar[1];
@@ -254,6 +256,8 @@ function ContinuePreviousGame() {
         residenceStage = loadedReport.stages[2];
         villageStage = loadedReport.stages[3];
         hintLevel = loadedReport.stages[4];
+        relaxLevel = loadedReport.stages[5];
+        meditateCount = loadedReport.stages[6];
         /////////////////////////////////////////////////////////////////////////////////////////
         mapProvinces[1][2] = loadedReport.relations[0];
         mapProvinces[2][2] = loadedReport.relations[1];
@@ -507,6 +511,7 @@ function ContinuePreviousGame() {
         if (player.hasBecomeHeir) { buttonReturnToMap.style.display = 'inline-block'; }
         if (villageStage > 10) { buttonBuyStone.classList.add('BuyStoneMarginOverrideClass'); }
         if (hintLevel == 13) { buttonQ.style.display = 'none'; }
+        if (meditateCount > 9) { superMeditatorWizardPowersActivated = true; }
         Translate(player.speaks, false); // populates the map details header correctly
         StartTime(); // ...and everything *should* just work 🤞😬
     }
@@ -743,7 +748,7 @@ function CollateGameStateReport(loud = false) {
         counts: integerCounts,
         farmland: farmlandArrays,
         hero: player,
-        stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel],
+        stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel, relaxLevel, meditateCount,],
         relations: [mapProvinces[1][2], mapProvinces[2][2], mapProvinces[3][2],],
         timestamps: [timeAtSave, timeAtStart, timeAtWin,],
         v: version,
@@ -952,6 +957,27 @@ function CloneArray(source, destination) {
         for (let i = 0; i < source.length; i++) { destination[i] = source[i]; }
     }
     else { alert('Can not clone arrays of different lengths!'); }
+}
+
+
+
+function SetWidth(multiplier) {
+    if (multiplier == 1) {
+        buttonWindow1x.classList.add('selectedOption');
+        buttonWindow2x.classList.remove('selectedOption');
+        buttonWindowAuto.classList.remove('selectedOption');
+    }
+    else if (multiplier == 2) {
+        buttonWindow1x.classList.remove('selectedOption');
+        buttonWindow2x.classList.add('selectedOption');
+        buttonWindowAuto.classList.remove('selectedOption');
+    }
+    else {
+        buttonWindow1x.classList.remove('selectedOption');
+        buttonWindow2x.classList.remove('selectedOption');
+        buttonWindowAuto.classList.add('selectedOption');
+    }
+
 }
 
 

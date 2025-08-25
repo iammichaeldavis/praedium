@@ -789,7 +789,7 @@ function DismissForeword() {
 
 function DismissGameEvent() {
     if (player.canDismissEvent) {
-        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena') { StartTime(); }
+        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike') { StartTime(); }
         player.seesGameEvent = false;
         UpdateDisplay();
     }
@@ -1960,6 +1960,7 @@ function ImproveResidence() {
         mountainSpentCount[2] += priceResidence11[3];
         residenceImage.src = 'bitmaps/res07.png';
         residenceStage += 1;
+        player.seesHikeButton = true;
     }
     else if (residenceStage == 12 && bushelCount[0] > priceResidence12[0] && stoneCount >= priceResidence12[1] && boardsCount >= priceResidence12[2] && ingotsTinCount >= priceResidence12[3]) {
         if (player.likesStory) { GameEvent(displayStoryResidence12); }
@@ -3596,6 +3597,52 @@ function ShepherdsEvents() {
 
 
 
+function SetOutOnSojourn() {
+    if (player.likesStory) { GameEvent(displayStoryHikeGo); }
+    PauseTime();
+    divGameWindow.style.display = 'none';
+    divViewResidence.style.display = '';
+    divMinigameHike.style.display = 'block';
+    divMinigameHike.appendChild(divFooter);
+    player.isAt = 'Hike';
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function LeaveHike() {
+    player.seesHikeButton = false;
+    player.hasHiked = true;
+    if (gameSpeed == 'paused') { StartTime(); }
+    divGameWindow.style.display = '';
+    divViewResidence.style.display = 'block';
+    divMinigameHike.style.display = '';
+    body.appendChild(divFooter);
+    player.isAt = 'Residence';
+    UpdateDisplay();
+    JumpToTopPlease();
+    if (player.likesStory) { GameEvent(displayStoryHikeLeave); }
+}
+
+
+
+function Relax() {
+    //alert('*******🚨🚨🚨YOU ARE VERY RELAXED NOW!!!!!🚨🚨🚨*******');
+    if (player.likesStory) {
+        GameEvent('<div id="divMeetings">' + displayStoryHikeRelax[relaxLevel] + '</div>');
+    }
+    relaxLevel++;
+    if (relaxLevel == displayStoryHikeRelax.length) {
+        relaxLevel--;
+        meditateCount++;
+        if (meditateCount == 10) { superMeditatorWizardPowersActivated = true; }
+    }
+    UpdateDisplay();
+}
+
+
+
 function Info() {
     SystemMessage(displayInfoFinal);
 }
@@ -3648,7 +3695,7 @@ function SummonOptions() {
 
 function DismissOptions() {
     player.seesOptions = false;
-    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena') { StartTime(); }
+    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike') { StartTime(); }
     UpdateDisplay();
 }
 

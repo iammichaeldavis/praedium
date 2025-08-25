@@ -2455,6 +2455,7 @@ function UpdateText() {
         buttonGoToPraediumFromRes.innerHTML = displayGoToPraediumFromRes;
         buttonWasteTime.innerHTML = displayLabelWasteTime;
         buttonHostParty.innerHTML = displayLabelThrowParty + '<br>(' + currencySymbol + formatterCurrent.format(priceResidenceParty) + ')';
+        buttonGoOnHike.innerHTML = displayLabelGoHike;
 
         if (residenceStage == 0) { buttonImproveResidence.innerHTML = displayLabelResidence00 + '<br>' + '(' + priceResidence00 + '<span class="icon Wheat inlineIcon"></span>' + ')'; }
         else if (residenceStage == 1) { buttonImproveResidence.innerHTML = displayLabelResidence01 + '<br>' + '(' + priceResidence01[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence01[1] + '<span class="icon Log inlineIcon"></span>' + ')'; }
@@ -3340,6 +3341,11 @@ function UpdateText() {
             tableString += '</tbody>';
             tableWorkshopCottage.innerHTML = tableString;
         }
+    }
+
+    else if (player.isAt == 'Hike') {
+        buttonLeaveHike.innerHTML = displayLabelLeaveHike;
+        buttonRelax.innerHTML = displayLabelRelax[relaxLevel];
     }
 
     else if (player.isAt == 'Workshop') {
@@ -4413,12 +4419,14 @@ function UpdateText() {
 
     // SYSTEM ------------------------------
     buttonSystemMessageDismiss.innerHTML = displayIUnderstand;
-    //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK; // this is now done in gameEvent utility function to facilitate delay
+    //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK; // 🚨 this is now done in gameEvent utility function to facilitate delay
     buttonOptionsDismiss.innerHTML = displayOK;
     labelToggleMusic.innerHTML = displayMusic;
     labelToggleSounds.innerHTML = displaySounds;
     labelToggleAnimation.innerHTML = displayAnimations;
     labelToggleProfanity.innerHTML = displayProfanity;
+    spanOptionLanguage.innerHTML = displayLanguage;
+    spanOptionWindowSize.innerHTML = displayWindowSize;
     divOptionsFlavour.innerHTML = displayOptionsFlavourFinal;
     buttonOptions.innerHTML = displayOptions;
     spanCheevoText.innerHTML = displayCheevo;
@@ -4746,6 +4754,7 @@ function UpdateVisibilities() {
 
     else if (player.isAt == 'Residence') {
         buttonHostParty.style.display = (player.hasMansion && !player.hasHosted) ? 'block' : '';
+        buttonGoOnHike.style.display = (player.seesHikeButton) ? 'block' : '';
         buttonImproveResidence.style.display = player.hasBandages ? '' : 'block';
         tableResidenceInventory.style.display = player.hasBakery ? 'table' : '';
         tableResidenceReport.style.display = player.hasBakery ? 'table' : '';
@@ -9076,6 +9085,12 @@ function RedrawFarmers() {
 
 
 
+function RedrawHike() {
+    canvasHikeContext.drawImage(hikeImage, 0, 0, 384, 224, 0, 0, 384, 224);
+}
+
+
+
 function AnimateHeirButton() {
     frameHeirButton++;
     if (frameHeirButton == 4) { frameHeirButton = 0; }
@@ -9262,6 +9277,7 @@ function RedrawCanvases() {
     else if (player.isAt == 'Shepherds') { RedrawShepherds(); }
     else if (player.isAt == 'Miners') { RedrawMiners(); }
     else if (player.isAt == 'Farmers') { RedrawFarmers(); }
+    else if (player.isAt == 'Hike') { RedrawHike(); }
 
     if (player.likesAnimations) {
         animationCycleFrame++;
