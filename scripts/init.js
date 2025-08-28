@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.19.00-A';
+const version = '1.20.00-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -318,8 +318,9 @@ neighborsBlinksImage.src = 'bitmaps/cell_blinks_3.png';
 const hikeImage = new Image();
 hikeImage.src = 'bitmaps/eranasPeace.png';
 
+const stylesheetActive = document.getElementById('stylesheetActive');
 const body = document.getElementsByTagName('body')[0];
-
+const divWidthClamp = document.getElementById('divWidthClamp');
 const divGameWindow = document.getElementById('divGameWindow');
 
 const divOverlayLoading = document.getElementById('divOverlayLoading');
@@ -371,6 +372,7 @@ const buttonWindow1x = document.getElementById('buttonWindow1x');
 const buttonWindow2x = document.getElementById('buttonWindow2x');
 const buttonWindowAuto = document.getElementById('buttonWindowAuto');
 
+const divCalendar = document.getElementById('divCalendar');
 const divYear = document.getElementById('divYear');
 const divRuneSeason = document.getElementById('divRuneSeason');
 const divStonesSeason = document.getElementById('divStonesSeason');
@@ -667,6 +669,8 @@ const divFooter = document.getElementById('divFooter');
 
 let canvasFireworks = null;
 let canvasFireworksContext = null;
+
+let resolutionScale = 0;
 
 const formatterEnglish = new Intl.NumberFormat('en-US');
 const formatterSpanish = new Intl.NumberFormat('es');

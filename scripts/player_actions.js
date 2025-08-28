@@ -203,7 +203,8 @@ document.body.onkeyup = function (e) {
         // ( AVAILABLE
         // ) AVAILABLE
         // _ AVAILABLE
-        // + AVAILABLE
+
+        if (e.key == '+') { DetermineDevice(true); }
 
         if (e.key == '1' && e.altKey && player.canSell) { SellCommodities(0); }
         if (e.key == '2' && e.altKey && player.canSell) { SellCommodities(1); }
@@ -2074,7 +2075,7 @@ function GoHerm() {
         divGameWindow.style.display = '';
         divViewResidence.style.display = 'block';
         divMinigameFishing.style.display = '';
-        body.appendChild(divFooter);
+        divWidthClamp.appendChild(divFooter);
         player.isAt = 'Residence';
         UpdateDisplay();
         JumpToTopPlease();
@@ -3618,7 +3619,7 @@ function LeaveHike() {
     divGameWindow.style.display = '';
     divViewResidence.style.display = 'block';
     divMinigameHike.style.display = '';
-    body.appendChild(divFooter);
+    divWidthClamp.appendChild(divFooter);
     player.isAt = 'Residence';
     UpdateDisplay();
     JumpToTopPlease();

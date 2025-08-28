@@ -1317,7 +1317,7 @@ function Translate(language, bark = true) {
         displayLabelFromNowOn = 'FROM NOW ON';
         displayLabelReturnToPrevDecision = '← Return to Previous Decision';
 
-        displayHeirHeadlineForeward = 'What follows next is an endless parade of comptrollers, jurists and seneschals, each one bearing a larger heap of papyrus scrolls and clay tablets than the last, and every document covered in inscrutible legalese. You think this day will never end.<br><br>Finally, the court doctor——YOUR doctor, now, it occurs to you——pulls you aside for a moment alone.<br><br>“Well now, Your Grace, all that remains is thy physical. Purely routine, I’m sure thou dost understand.”<br><br><br><div style="width: 100%; text-align: center;">ART THOU READY TO BEGIN?</div>';
+        displayHeirHeadlineForeward = 'What follows next is an endless parade of comptrollers, jurists and seneschals, each one bearing a larger heap of papyrus scrolls and clay tablets than the last, and every document covered in inscrutible legalese. You think this day will never end.<br><br>Finally, the court doctor——YOUR doctor, now, it occurs to you——pulls you aside for a moment alone.<br><br>“Well now, Your Grace, all that remains is thy physical. Purely routine, I’m sure thou dost understand.”<br><br><br><div id="divHeirWorkshopQuestion">ART THOU READY TO BEGIN?</div>';
         displayHeirHeadlineName = 'WHAT IS THY GIVEN NAME, YOUR MAJESTY?';
         displayHeirHeadlineGender = 'AND HOW DOST THOU IDENTIFY, OH LIEGE?';
         displayHeirHeadlineEthnicity = 'WHERE DO YOUR PEOPLE HAIL FROM, SIRE?';
@@ -2362,7 +2362,7 @@ function Translate(language, bark = true) {
         displayLabelFromNowOn = 'A PARTIR DE AHORA';
         displayLabelReturnToPrevDecision = '← Regresar a Decisión Anterior';
 
-        displayHeirHeadlineForeward = 'Lo que sigue a continuación es un desfile interminable de interventores, juristas y senescales, cada uno de ellos con un montón más grande de rollos de papiro y tablillas de arcilla que el anterior, y cada documento cubierto de un lenguaje legal inescrutable. Piensas que este día nunca terminará.<br><br>Finalmente, el médico del tribunal ——TU médico, ahora, te das cuenta—— te lleva aparte para estar a solas un momento.<br><br>«Bueno ahora, Su Gracia, todo lo que falta es su examen físico. Puramente rutinario, estoy seguro de que lo entiendes.»<br><br><br><div style="width: 100%; text-align: center;">¿ESTÁS LISTO PARA COMENZAR?</div>';
+        displayHeirHeadlineForeward = 'Lo que sigue a continuación es un desfile interminable de interventores, juristas y senescales, cada uno de ellos con un montón más grande de rollos de papiro y tablillas de arcilla que el anterior, y cada documento cubierto de un lenguaje legal inescrutable. Piensas que este día nunca terminará.<br><br>Finalmente, el médico del tribunal ——TU médico, ahora, te das cuenta—— te lleva aparte para estar a solas un momento.<br><br>«Bueno ahora, Su Gracia, todo lo que falta es su examen físico. Puramente rutinario, estoy seguro de que lo entiendes.»<br><br><br><div id="divHeirWorkshopQuestion">¿ESTÁS LISTO PARA COMENZAR?</div>';
         displayHeirHeadlineName = '¿CUAL ES SU NOMBRE DE PILA, SU MAJESTAD?';
         displayHeirHeadlineGender = '¿Y CÓMO TE IDENTIFICAS, OH LIEJA?';
         displayHeirHeadlineEthnicity = '¿DE DÓNDE VIENE SU GENTE, SEÑOR?';

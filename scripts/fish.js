@@ -553,36 +553,46 @@ function UpdateFishDisplay() {
     if (fishTimeLeft > 0) {
         const valueToWrite = fishTimeLeft.toFixed(1);
         divFishTimerDisplay.innerHTML = valueToWrite;
-        if (valueToWrite == '3.0') { divFishTimerDisplay.style.fontSize = '4.8vw'; }
-        else if (valueToWrite == '2.9') { divFishTimerDisplay.style.fontSize = '4.2vw'; }
-        else if (valueToWrite == '2.8') { divFishTimerDisplay.style.fontSize = '3.8vw'; }
-        else if (valueToWrite == '2.7') { divFishTimerDisplay.style.fontSize = '3.6vw'; }
-        else if (valueToWrite == '2.6') { divFishTimerDisplay.style.fontSize = '3.4vw'; }
-        else if (valueToWrite == '2.5') { divFishTimerDisplay.style.fontSize = '3.2vw'; }
-        else if (valueToWrite == '2.4') { divFishTimerDisplay.style.fontSize = '3.0vw'; }
-        else if (valueToWrite == '2.3') { divFishTimerDisplay.style.fontSize = '2.8vw'; }
-        else if (valueToWrite == '2.2') { divFishTimerDisplay.style.fontSize = '2.6vw'; }
-        else if (valueToWrite == '2.1') { divFishTimerDisplay.style.fontSize = '2.4vw'; }
-        else if (valueToWrite == '2.0') { divFishTimerDisplay.style.fontSize = '4.8vw'; }
-        else if (valueToWrite == '1.9') { divFishTimerDisplay.style.fontSize = '4.2vw'; }
-        else if (valueToWrite == '1.8') { divFishTimerDisplay.style.fontSize = '3.8vw'; }
-        else if (valueToWrite == '1.7') { divFishTimerDisplay.style.fontSize = '3.6vw'; }
-        else if (valueToWrite == '1.6') { divFishTimerDisplay.style.fontSize = '3.4vw'; }
-        else if (valueToWrite == '1.5') { divFishTimerDisplay.style.fontSize = '3.2vw'; }
-        else if (valueToWrite == '1.4') { divFishTimerDisplay.style.fontSize = '3.0vw'; }
-        else if (valueToWrite == '1.3') { divFishTimerDisplay.style.fontSize = '2.8vw'; }
-        else if (valueToWrite == '1.2') { divFishTimerDisplay.style.fontSize = '2.6vw'; }
-        else if (valueToWrite == '1.1') { divFishTimerDisplay.style.fontSize = '2.4vw'; }
-        else if (valueToWrite == '1.0') { divFishTimerDisplay.style.fontSize = '4.8vw'; }
-        else if (valueToWrite == '0.9') { divFishTimerDisplay.style.fontSize = '4.2vw'; }
-        else if (valueToWrite == '0.8') { divFishTimerDisplay.style.fontSize = '3.8vw'; }
-        else if (valueToWrite == '0.7') { divFishTimerDisplay.style.fontSize = '3.6vw'; }
-        else if (valueToWrite == '0.6') { divFishTimerDisplay.style.fontSize = '3.4vw'; }
-        else if (valueToWrite == '0.5') { divFishTimerDisplay.style.fontSize = '3.2vw'; }
-        else if (valueToWrite == '0.4') { divFishTimerDisplay.style.fontSize = '3.0vw'; }
-        else if (valueToWrite == '0.3') { divFishTimerDisplay.style.fontSize = '2.8vw'; }
-        else if (valueToWrite == '0.2') { divFishTimerDisplay.style.fontSize = '2.6vw'; }
-        else if (valueToWrite == '0.1') { divFishTimerDisplay.style.fontSize = '2.4vw'; }
+        divFishTimerDisplay.classList.remove('divFishTimerDisplayA');
+        divFishTimerDisplay.classList.remove('divFishTimerDisplayB');
+        divFishTimerDisplay.classList.remove('divFishTimerDisplayC');
+        divFishTimerDisplay.classList.remove('divFishTimerDisplayD');
+        divFishTimerDisplay.classList.remove('divFishTimerDisplayE');
+        divFishTimerDisplay.classList.remove('divFishTimerDisplayF');
+        divFishTimerDisplay.classList.remove('divFishTimerDisplayG');
+        divFishTimerDisplay.classList.remove('divFishTimerDisplayH');
+        divFishTimerDisplay.classList.remove('divFishTimerDisplayI');
+        divFishTimerDisplay.classList.remove('divFishTimerDisplayJ');
+        if (valueToWrite == '3.0') { divFishTimerDisplay.classList.add('divFishTimerDisplayA'); }
+        else if (valueToWrite == '2.9') { divFishTimerDisplay.classList.add('divFishTimerDisplayB'); }
+        else if (valueToWrite == '2.8') { divFishTimerDisplay.classList.add('divFishTimerDisplayC'); }
+        else if (valueToWrite == '2.7') { divFishTimerDisplay.classList.add('divFishTimerDisplayD'); }
+        else if (valueToWrite == '2.6') { divFishTimerDisplay.classList.add('divFishTimerDisplayE'); }
+        else if (valueToWrite == '2.5') { divFishTimerDisplay.classList.add('divFishTimerDisplayF'); }
+        else if (valueToWrite == '2.4') { divFishTimerDisplay.classList.add('divFishTimerDisplayG'); }
+        else if (valueToWrite == '2.3') { divFishTimerDisplay.classList.add('divFishTimerDisplayH'); }
+        else if (valueToWrite == '2.2') { divFishTimerDisplay.classList.add('divFishTimerDisplayI'); }
+        else if (valueToWrite == '2.1') { divFishTimerDisplay.classList.add('divFishTimerDisplayJ'); }
+        else if (valueToWrite == '2.0') { divFishTimerDisplay.classList.add('divFishTimerDisplayA'); }
+        else if (valueToWrite == '1.9') { divFishTimerDisplay.classList.add('divFishTimerDisplayB'); }
+        else if (valueToWrite == '1.8') { divFishTimerDisplay.classList.add('divFishTimerDisplayC'); }
+        else if (valueToWrite == '1.7') { divFishTimerDisplay.classList.add('divFishTimerDisplayD'); }
+        else if (valueToWrite == '1.6') { divFishTimerDisplay.classList.add('divFishTimerDisplayE'); }
+        else if (valueToWrite == '1.5') { divFishTimerDisplay.classList.add('divFishTimerDisplayF'); }
+        else if (valueToWrite == '1.4') { divFishTimerDisplay.classList.add('divFishTimerDisplayG'); }
+        else if (valueToWrite == '1.3') { divFishTimerDisplay.classList.add('divFishTimerDisplayH'); }
+        else if (valueToWrite == '1.2') { divFishTimerDisplay.classList.add('divFishTimerDisplayI'); }
+        else if (valueToWrite == '1.1') { divFishTimerDisplay.classList.add('divFishTimerDisplayJ'); }
+        else if (valueToWrite == '1.0') { divFishTimerDisplay.classList.add('divFishTimerDisplayA'); }
+        else if (valueToWrite == '0.9') { divFishTimerDisplay.classList.add('divFishTimerDisplayB'); }
+        else if (valueToWrite == '0.8') { divFishTimerDisplay.classList.add('divFishTimerDisplayC'); }
+        else if (valueToWrite == '0.7') { divFishTimerDisplay.classList.add('divFishTimerDisplayD'); }
+        else if (valueToWrite == '0.6') { divFishTimerDisplay.classList.add('divFishTimerDisplayE'); }
+        else if (valueToWrite == '0.5') { divFishTimerDisplay.classList.add('divFishTimerDisplayF'); }
+        else if (valueToWrite == '0.4') { divFishTimerDisplay.classList.add('divFishTimerDisplayG'); }
+        else if (valueToWrite == '0.3') { divFishTimerDisplay.classList.add('divFishTimerDisplayH'); }
+        else if (valueToWrite == '0.2') { divFishTimerDisplay.classList.add('divFishTimerDisplayI'); }
+        else if (valueToWrite == '0.1') { divFishTimerDisplay.classList.add('divFishTimerDisplayJ'); }
     }
     else { divFishTimerDisplay.innerHTML = '0.0'; }
 

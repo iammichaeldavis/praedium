@@ -28,8 +28,8 @@
     <link rel="apple-touch-icon" sizes="16x16" href="bitmaps/favicon/favicon16x.ico" />
     <link rel="manifest" href="bitmaps/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
-    <link rel="stylesheet" href="style.css?v=1.19.00.1" />
-    <script>history.scrollRestoration = "manual"</script>
+    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.20.00.1" />
+    <script>history.scrollRestoration = 'manual';</script>
 </head>
 
 <body>
@@ -41,530 +41,534 @@
         <span id="spanFontPreload_Alegreya" style="font-family: 'Alegreya Sans SC', serif;"></span>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <div id="divCalendar">
-        <div class="divCalendarCell">
-            <div class="divCalendarCellLiner">
-                <div id="divYear"></div>
-                <div class="divCalendarFlexbox">
-                    <div id="divRuneSeason"></div>
-                    <div id="divStonesSeason"></div>
-                </div>
-            </div>
-        </div>
-        <div class="divCalendarCell">
-            <div class="divCalendarCellLiner">
-                <div class="divCalendarFlexbox">
-                    <div id="divEmbossZodiacChinese"></div>
-                    <div id="divHourglass"></div>
-                    <div id="divEmbossSeason"></div>
-                </div>
-            </div>
-        </div>
-        <div class="divCalendarCell">
-            <div class="divCalendarCellLiner">
-                <div id="divWeek"></div>
-                <div class="divCalendarFlexbox">
-                    <div id="divStonesWeek"></div>
-                    <div id="divRuneMonth"></div>
-                    <div id="divRuneElement"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="divCalendarGap"></div>
-    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <!--    
-    <div id="divEmpireRibbon" style="background-color: brown;">
-        how much golds???!!!
-    </div>
-    <div id="divRibbonGap"></div>
-    -->
-    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <div id="divGameWindow">
-        <img id="imgNirvana" src="bitmaps/nirvana.png" />
-
-        <button id="buttonReturnToMap" onclick="ReturnToMapView();"></button>
-
-        <button id="buttonChooseHeir">👑</button>
-
-        <div id="divViewMiners">
-            <div id="divMinersName"></div>
-            <div id="divMinersSubtitle"></div>
-            <canvas id="canvasMiners" width="384" height="224"></canvas>
-            <div id="divMinersReport"></div>
-            <button id="buttonMinersEvents" onclick="MinersEvents();"></button>
-        </div>
-
-        <div id="divViewFarmers">
-            <div id="divFarmersName"></div>
-            <div id="divFarmersSubtitle"></div>
-            <canvas id="canvasFarmers" width="384" height="224"></canvas>
-            <div id="divFarmersReport"></div>
-            <button id="buttonFarmersEvents" onclick="FarmersEvents();"></button>
-        </div>
-
-        <div id="divViewShepherds">
-            <div id="divShepherdsName"></div>
-            <div id="divShepherdsSubtitle"></div>
-            <canvas id="canvasShepherds" width="384" height="224"></canvas>
-            <div id="divShepherdsReport"></div>
-            <button id="buttonShepherdsEvents" onclick="ShepherdsEvents()"></button>
-        </div>
-
-        <div id="divViewMap">
-            <canvas id="canvasMap" width="208" height="173"></canvas>
-            <button id="buttonMapTargetPrev" onclick="MapChangeTarget('previous');"></button><button id="buttonMapTargetNext"
-                onclick="MapChangeTarget('next');"></button><br>
-
-            <div id="divMapTarget"></div>
-
-            <div id="divMapControlsRow">
-                <span id="spanDetailsLabel"></span>:
-                <button id="buttonMapEcon" onclick="MapChangeDetails('econ')"></button>
-                <button id="buttonMapMil" onclick="MapChangeDetails('mil')"></button>
-                <button id="buttonMapPol" onclick="MapChangeDetails('pol')"></button>
-            </div>
-
-            <div id="divMapDetailsView" class="mapDetailsEconomic"></div>
-
-            <button id="buttonMapVisitProvince" onclick="VisitProvince();"></button>
-            <div style="height: 6.4vw; width: 1vw;"></div>
-        </div>
-
-        <div id="divViewHeirWorkshop">
-            <div style="font-size: 4.2vw; margin-bottom: 6.4vw;">Build-A-Heir Workshop®</div>
-
-            <div id="divHeirWorkshopForeward">
-                <div id="divHeirWorkshopForewardHeadline"></div>
-                <button id="buttonHeirBegin"></button>
-            </div>
-
-            <div id="divHeirWorkshopName">
-                <div id="divHeirWorkshopNameHeadline"></div>
-                <select name="heirNames" id="selectHeirNames" onchange="HeirChangeName();">
-                    <option value="Adonis" selected>Adonis</option> <!-- Sophie Brussaux and Drake -->
-                    <option value="Aire">Aire</option> <!-- Kylie Jenner and Travis Scott -->
-                    <option value="Apollo">Apollo</option> <!-- Gwen Stefani and Gavin Rossdale -->
-                    <option value="Apple">Apple</option> <!-- Gwyneth Paltrow and Chris Martin -->
-                    <option value="Audio Science">Audio Science</option> <!-- Shannyn Sossamon and Dallas Clayton -->
-                    <option value="Barbara">Barbara</option> <!-- Laura and George W. Bush -->
-                    <option value="Bingham">Bingham</option> <!-- Kate Hudson and Matt Bellamy -->
-                    <option value="Blanket">Blanket</option> <!-- ??? and Michael Jackson -->
-                    <option value="Blue Ivy">Blue Ivy</option> <!-- Beyoncé and Jay-Z -->
-                    <option value="Chelsea">Chelsea</option> <!-- Hillary and Bill Clinton -->
-                    <option value="Chicago">Chicago</option> <!-- Kim Kardashian and Kanye West -->
-                    <option value="Cosmo">Cosmo</option> <!-- Scarlett Johansson and Colin Jost -->
-                    <option value="Crispian">Crispian</option> <!-- Hayley Mills and Roy Boulting -->
-                    <option value="Declan">Declan</option> <!-- Gia Ruiz and Danny McBride -->
-                    <option value="Denim">Denim</option> <!-- Toni Braxton and Keri Lewis -->
-                    <option value="Dweezil">Dweezil</option> <!-- Gail and Frank Zappa -->
-                    <option value="Enoch">Enoch</option> <!-- Whitney Alford and Kendrick Lamar -->
-                    <option value="Esmeralda">Esmeralda</option> <!-- Eva Mendes and Ryan Gosling -->
-                    <option value="Exa Dark Sideræl">Exa Dark Sideræl</option> <!-- Grimes and Elon Musk -->
-                    <option value="Frances Bean">Frances Bean</option> <!-- Courtney Love and Kurt Cobain -->
-                    <option value="Fuschia">Fuschia</option> <!-- Frances Tomelty and Sting -->
-                    <option value="Future">Future</option> <!-- Ciara and Future -->
-                    <option value="Gravity">Gravity</option> <!-- Stormi Bree and Lucky Blue Smith -->
-                    <option value="Huckleberry">Huckleberry</option> <!-- Shara and Bear Grylls -->
-                    <option value="Ian">Ian</option> <!-- Peggy and William George Dury -->
-                    <option value="Jaden">Jaden</option> <!-- Jada Pinkett and Will Smith -->
-                    <option value="Jenna">Jenna</option> <!-- Laura and George W. Bush -->
-                    <option value="Kal-El">Kal-El</option> <!-- Alice Kim and Nicolas Cage -->
-                    <option value="Kinga">Kinga</option> <!-- Laetitia and Richard Garriott de Cayeux -->
-                    <option value="Kingston">Kingston</option> <!-- Gwen Stefani and Gavin Rossdale -->
-                    <option value="Kulture">Kulture</option> <!-- Cardi B and Offset -->
-                    <option value="Leeloo">Leeloo</option> <!-- Yeni Zhang and American McGee -->
-                    <option value="Lisa Marie">Lisa Marie</option> <!-- Priscilla and Elvis Presley -->
-                    <option value="Lyra">Lyra</option> <!-- Cherry Seaborn and Ed Sheeran -->
-                    <option value="Mason Dash">Mason Dash</option> <!-- Kourtney Kardashian and Scott Disick -->
-                    <option value="Maude">Maude</option> <!-- Leslie Mann and Judd Apatow -->
-                    <option value="Marmaduke">Marmaduke</option> <!-- Shara and Bear Grylls -->
-                    <option value="Moon Unit">Moon Unit</option> <!-- Gail and Frank Zappa -->
-                    <option value="Moroccan">Moroccan</option> <!-- Mariah Carey and Nick Cannon -->
-                    <option value="Moses">Moses</option> <!-- Gwyneth Paltrow and Chris Martin -->
-                    <option value="North">North</option> <!-- Kim Kardashian and Kanye West -->
-                    <option value="Olin">Olin</option> <!-- Blake Lively and Ryan Reynolds -->
-                    <option value="Paris">Paris</option> <!-- Debbie Rowe and Michael Jackson -->
-                    <option value="Peanut">Peanut</option> <!-- Gia Ruiz and Danny McBride -->
-                    <option value="Penelope Scotland">Penelope Scotland</option> <!-- Kourtney Kardashian and Scott Disick -->
-                    <option value="Pilot Inspektor">Pilot Inspektor</option> <!-- Beth Riesgraf and Jason Lee -->
-                    <option value="Prince">Prince</option> <!-- Debbie Rowe and Michael Jackson -->
-                    <option value="Psalm">Psalm</option> <!-- Kim Kardashian and Kanye West -->
-                    <option value="Quincy">Quincy</option> <!-- Kim and Tom McMahon -->
-                    <option value="Reign Aston">Reign Aston</option> <!-- Kourtney Kardashian and Scott Disick -->
-                    <option value="Riot Rose">Riot Rose</option> <!-- Rihanna and A$AP Rocky -->
-                    <option value="Ronin">Ronin</option> <!-- Laetitia and Richard Garriott de Cayeux -->
-                    <option value="Rumi">Rumi</option> <!-- Beyoncé and Jay-Z -->
-                    <option value="RZA">RZA</option> <!-- Rihanna and A$AP Rocky -->
-                    <option value="Saint">Saint</option> <!-- Kim Kardashian and Kanye West -->
-                    <option value="Schuyler">Schuyler</option> <!-- Sissy Spacek and Jack Fisk -->
-                    <option value="Seven">Seven</option> <!-- Erykah Badu and André 3000 -->
-                    <option value="Sir">Sir</option> <!-- Beyoncé and Jay-Z -->
-                    <option value="Sparrow">Sparrow</option> <!-- Nicole Richie and Joel Madden -->
-                    <option value="Stormi">Stormi</option> <!-- Kylie Jenner and Travis Scott -->
-                    <option value="Summer Rain">Summer Rain</option> <!--  Christina Aguilera and Matthew Rutler -->
-                    <option value="Sunday">Sunday</option> <!-- Kelly Tisdale and Mike Myers -->
-                    <option value="Suri">Suri</option> <!-- Katie Holmes and Tom Cruise -->
-                    <option value="Techno Mechanicus">Techno Mechanicus</option> <!-- Grimes and Elon Musk -->
-                    <option value="Trey">Trey</option> <!-- Sheree Zampino and Will Smith -->
-                    <option value="Ulysses">Ulysses</option> <!-- Elizabeth and William Peoples -->
-                    <option value="Ursula">Ursula</option> <!-- Anna and Rolf Andress -->
-                    <option value="Uzi">Uzi</option> <!-- Whitney Alford and Kendrick Lamar -->
-                    <option value="Violet">Violet</option> <!-- Frances and Rev Reginald Henry Barnes -->
-                    <option value="Willow">Willow</option> <!-- Jada Pinkett and Will Smith -->
-                    <option value="X Æ A-Xii">X Æ A-Xii</option> <!-- Grimes and Elon Musk -->
-                    <option value="Yuri">Yuri</option> <!-- en.wikipedia.org/wiki/Yuri_Tsaler, cannot find information on parents in English 🤷‍♂️ -->
-                    <option value="Zuma">Zuma</option> <!-- Gwen Stefani and Gavin Rossdale -->
-                </select>
-                <button id="buttonHeirChooseName"></button>
-            </div>
-
-            <div id="divHeirWorkshopGender">
-                <div id="divHeirWorkshopGenderHeadline"></div>
-                <div id="divHeirGenderIcon"></div>
-                <button id="buttonHeirGendersLeft">←</button><button id="buttonHeirChooseGender"></button><button id="buttonHeirGendersRight">→</button>
-            </div>
-
-            <div id="divHeirWorkshopEthnicity">
-                <div id="divHeirWorkshopEthnicityHeadline"></div>
-                <select name="heirEthnicities" id="selectHeirEthnicities" onchange="HeirChangeEthnicity();"></select>
-                <button id="buttonHeirChooseEthnicity"></button>
-            </div>
-
-            <div id="divHeirWorkshopTitle">
-                <div id="divHeirWorkshopTitleHeadline"></div>
-                <select name="heirTitles" id="selectHeirTitles" onchange="HeirChangeTitle();"></select>
-                <button id="buttonHeirChooseTitle"></button>
-            </div>
-
-            <div id="divHeirWorkshopFaces">
-                <div id="divHeirWorkshopFacesHeadline"></div>
-                <div id="divHeirFacesGrid">
-                    <button id="buttonHeirChooseFace1"></button><button id="buttonHeirChooseFace2"></button><button id="buttonHeirChooseFace3"></button>
-                    <div id="divHeirFacesGridMiddleRow">
-                        <button id="buttonHeirChooseFace4"></button><button id="buttonHeirChooseFace5"></button><button id="buttonHeirChooseFace6"></button>
+    <div id="divWidthClamp">
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+        <div id="divCalendar" class="divCalendarWidthAuto">
+            <div class="divCalendarCell">
+                <div class="divCalendarCellLiner">
+                    <div id="divYear"></div>
+                    <div class="divCalendarFlexbox">
+                        <div id="divRuneSeason"></div>
+                        <div id="divStonesSeason"></div>
                     </div>
-                    <button id="buttonHeirChooseFace7"></button><button id="buttonHeirChooseFace8"></button><button id="buttonHeirChooseFace9"></button>
                 </div>
-                <button id="buttonHeirFacesLeft" onclick="HeirChangeFaces('previous');">←</button><span id="spanHeirFacesPagination"></span><button
-                    id="buttonHeirFacesRight" onclick="HeirChangeFaces('next');">→</button>
             </div>
-
-            <div id="divHeirWorkshopSummary"></div>
-
-            <button id="buttonHeirGoBack"></button>
-        </div>
-
-        <div id="divViewResidence">
-            <button id="buttonGoFishing"></button><button id="buttonGoToPraediumFromRes"></button>
-            <canvas id="canvasResidence" width="384" height="224"></canvas>
-            <div id="divResidenceActionArea">
-                <button id="buttonGoOnHike" onclick="SetOutOnSojourn();"></button>
-                <button id="buttonHostParty" onclick="ThrowParty();"></button>
-                <button id="buttonWasteTime"></button>
-                <button id="buttonImproveResidence"></button>
-                <table id="tableResidenceInventory"></table>
-                <table id="tableResidenceReport"></table>
-                <table id="tableWorkshopsContainer">
-                    <tr>
-                        <td style="width: 50%;">
-                            <div id="divWorkshopBakery">
-                                <img id="imgWorkshopBakery" src="bitmaps/res_bakery.gif" width="130" height="86" />
-                                <table id="tableWorkshopBakery" class="residenceWorkshopTable"></table>
-                            </div>
-                        </td>
-                        <td id="tdOliveMill" style="width: 50%;">
-                            <div id="divWorkshopOliveMill">
-                                <img id="imgWorkshopOliveMill" src="bitmaps/res_olivemill.gif" width="130" height="86" />
-                                <table id="tableWorkshopOliveMill" class="residenceWorkshopTable"></table>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div id="divWorkshopBrewery">
-                                <img id="imgWorkshopBrewery" src="bitmaps/res_brewery.gif" width="130" height="86" />
-                                <table id="tableWorkshopBrewery" class="residenceWorkshopTable"></table>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="divWorkshopWinery">
-                                <img id="imgWorkshopWinery" src="bitmaps/res_winery.gif" width="130" height="86" />
-                                <table id="tableWorkshopWinery" class="residenceWorkshopTable"></table>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div id="divWorkshopKitchen">
-                                <img id="imgWorkshopKitchen" src="bitmaps/res_kitchen.gif" width="130" height="86" />
-                                <table id="tableWorkshopKitchen" class="residenceWorkshopTable"></table>
-                            </div>
-                        </td>
-                        <td id="tdPress">
-                            <div id="divWorkshopPress">
-                                <img id="imgWorkshopPress" src="bitmaps/res_press.gif" width="130" height="86" />
-                                <table id="tableWorkshopPress" class="residenceWorkshopTable"></table>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="tdGreenhouse">
-                            <div id="divWorkshopGreenhouse">
-                                <img id="imgWorkshopGreenhouse" src="bitmaps/res_greenhouse.gif" width="130" height="86" />
-                                <table id="tableWorkshopGreenhouse" class="residenceWorkshopTable"></table>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="divWorkshopAtelier">
-                                <img id="imgWorkshopAtelier" src="bitmaps/res_atelier.gif" width="130" height="86" />
-                                <table id="tableWorkshopAtelier" class="residenceWorkshopTable"></table>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="tdApiary">
-                            <div id="divWorkshopApiary">
-                                <img id="imgWorkshopApiary" src="bitmaps/res_apiary.gif" width="130" height="86" />
-                                <table id="tableWorkshopApiary" class="residenceWorkshopTable"></table>
-                            </div>
-                        </td>
-                        <td id="tdCottage">
-                            <div id="divWorkshopCottage">
-                                <img id="imgWorkshopCottage" src="bitmaps/res_cottage.gif" width="130" height="86" />
-                                <table id="tableWorkshopCottage" class="residenceWorkshopTable"></table>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+            <div class="divCalendarCell">
+                <div class="divCalendarCellLiner">
+                    <div class="divCalendarFlexbox">
+                        <div id="divEmbossZodiacChinese"></div>
+                        <div id="divHourglass"></div>
+                        <div id="divEmbossSeason"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="divCalendarCell">
+                <div class="divCalendarCellLiner">
+                    <div id="divWeek"></div>
+                    <div class="divCalendarFlexbox">
+                        <div id="divStonesWeek"></div>
+                        <div id="divRuneMonth"></div>
+                        <div id="divRuneElement"></div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div id="divCalendarGap"></div>
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+        <!--
+        <div id="divEmpireRibbon" style="background-color: brown;">
+            how much golds???!!!
+        </div>
+        <div id="divRibbonGap"></div>
+        -->
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+        <div id="divGameWindow">
+            <img id="imgNirvana" src="bitmaps/nirvana.png" />
 
-        <div id="divViewPraedium">
-            <button id="buttonGoToResidence"></button><button id="buttonGoToTownship"></button>
-            <div id="divViewMountain">
-                <canvas id="canvasMountain" width="384" height="224"></canvas>
-                <table id="tableMountainInventory">
-                    <thead id="theadMountainInventory"></thead>
-                    <tbody id="tbodyMountainInventory"></tbody>
-                </table>
-                <table id="tableMountainStaff">
-                    <thead id="theadMountainStaff"></thead>
-                    <tbody id="tbodyMountainStaff"></tbody>
-                </table>
-                <table id="tableMountainReport">
-                    <thead id="theadMountainReport"></thead>
-                    <tbody id="tbodyMountainReport"></tbody>
-                </table>
-                <button id="buttonMountain"></button>
+            <button id="buttonReturnToMap" onclick="ReturnToMapView();"></button>
+
+            <button id="buttonChooseHeir">👑</button>
+
+            <div id="divViewMiners">
+                <div id="divMinersName"></div>
+                <div id="divMinersSubtitle"></div>
+                <canvas id="canvasMiners" width="384" height="224"></canvas>
+                <div id="divMinersReport"></div>
+                <button id="buttonMinersEvents" onclick="MinersEvents();"></button>
             </div>
-            <div id="divViewForest">
-                <canvas id="canvasForest" width="384" height="224"></canvas>
-                <table id="tableForestInventory">
-                    <thead id="theadForestInventory"></thead>
-                    <tbody id="tbodyForestInventory"></tbody>
-                </table>
-                <table id="tableForestStaff">
-                    <thead id="theadForestStaff"></thead>
-                    <tbody id="tbodyForestStaff"></tbody>
-                </table>
-                <table id="tableForestReport">
-                    <thead id="theadForestReport"></thead>
-                    <tbody id="tbodyForestReport"></tbody>
-                </table>
-                <button id="buttonForest"></button>
+
+            <div id="divViewFarmers">
+                <div id="divFarmersName"></div>
+                <div id="divFarmersSubtitle"></div>
+                <canvas id="canvasFarmers" width="384" height="224"></canvas>
+                <div id="divFarmersReport"></div>
+                <button id="buttonFarmersEvents" onclick="FarmersEvents();"></button>
             </div>
-            <div id="divViewFarm">
-                <canvas id="canvasFarm" width="16" height="16"></canvas>
-                <div id="divFarmingGameplayControls">
-                    <button id="buttonTill">
-                        <span id="buttonTillDecal"></span>
-                    </button><button id="buttonPlant">
-                        <span id="buttonPlantDecal"></span>
-                    </button><button id="buttonWater">
-                        <span id="buttonWaterDecal"></span>
-                    </button><button id="buttonHarvest">
-                        <span id="buttonHarvestDecal"></span>
+
+            <div id="divViewShepherds">
+                <div id="divShepherdsName"></div>
+                <div id="divShepherdsSubtitle"></div>
+                <canvas id="canvasShepherds" width="384" height="224"></canvas>
+                <div id="divShepherdsReport"></div>
+                <button id="buttonShepherdsEvents" onclick="ShepherdsEvents()"></button>
+            </div>
+
+            <div id="divViewMap">
+                <canvas id="canvasMap" width="208" height="173"></canvas>
+                <button id="buttonMapTargetPrev" onclick="MapChangeTarget('previous');"></button><button id="buttonMapTargetNext"
+                    onclick="MapChangeTarget('next');"></button><br>
+
+                <div id="divMapTarget"></div>
+
+                <div id="divMapControlsRow">
+                    <span id="spanDetailsLabel"></span>:
+                    <button id="buttonMapEcon" onclick="MapChangeDetails('econ')"></button>
+                    <button id="buttonMapMil" onclick="MapChangeDetails('mil')"></button>
+                    <button id="buttonMapPol" onclick="MapChangeDetails('pol')"></button>
+                </div>
+
+                <div id="divMapDetailsView" class="mapDetailsEconomic"></div>
+
+                <button id="buttonMapVisitProvince" onclick="VisitProvince();"></button>
+                <div id="divMapCushion"></div>
+            </div>
+
+            <div id="divViewHeirWorkshop">
+                <div id="divHeirWorkshopMarquee">Build-A-Heir Workshop®</div>
+
+                <div id="divHeirWorkshopForeward">
+                    <div id="divHeirWorkshopForewardHeadline"></div>
+                    <button id="buttonHeirBegin"></button>
+                </div>
+
+                <div id="divHeirWorkshopName">
+                    <div id="divHeirWorkshopNameHeadline"></div>
+                    <select name="heirNames" id="selectHeirNames" onchange="HeirChangeName();">
+                        <option value="Adonis" selected>Adonis</option> <!-- Sophie Brussaux and Drake -->
+                        <option value="Aire">Aire</option> <!-- Kylie Jenner and Travis Scott -->
+                        <option value="Apollo">Apollo</option> <!-- Gwen Stefani and Gavin Rossdale -->
+                        <option value="Apple">Apple</option> <!-- Gwyneth Paltrow and Chris Martin -->
+                        <option value="Audio Science">Audio Science</option> <!-- Shannyn Sossamon and Dallas Clayton -->
+                        <option value="Barbara">Barbara</option> <!-- Laura and George W. Bush -->
+                        <option value="Bingham">Bingham</option> <!-- Kate Hudson and Matt Bellamy -->
+                        <option value="Blanket">Blanket</option> <!-- ??? and Michael Jackson -->
+                        <option value="Blue Ivy">Blue Ivy</option> <!-- Beyoncé and Jay-Z -->
+                        <option value="Chelsea">Chelsea</option> <!-- Hillary and Bill Clinton -->
+                        <option value="Chicago">Chicago</option> <!-- Kim Kardashian and Kanye West -->
+                        <option value="Cosmo">Cosmo</option> <!-- Scarlett Johansson and Colin Jost -->
+                        <option value="Crispian">Crispian</option> <!-- Hayley Mills and Roy Boulting -->
+                        <option value="Declan">Declan</option> <!-- Gia Ruiz and Danny McBride -->
+                        <option value="Denim">Denim</option> <!-- Toni Braxton and Keri Lewis -->
+                        <option value="Dweezil">Dweezil</option> <!-- Gail and Frank Zappa -->
+                        <option value="Enoch">Enoch</option> <!-- Whitney Alford and Kendrick Lamar -->
+                        <option value="Esmeralda">Esmeralda</option> <!-- Eva Mendes and Ryan Gosling -->
+                        <option value="Exa Dark Sideræl">Exa Dark Sideræl</option> <!-- Grimes and Elon Musk -->
+                        <option value="Frances Bean">Frances Bean</option> <!-- Courtney Love and Kurt Cobain -->
+                        <option value="Fuschia">Fuschia</option> <!-- Frances Tomelty and Sting -->
+                        <option value="Future">Future</option> <!-- Ciara and Future -->
+                        <option value="Gravity">Gravity</option> <!-- Stormi Bree and Lucky Blue Smith -->
+                        <option value="Huckleberry">Huckleberry</option> <!-- Shara and Bear Grylls -->
+                        <option value="Ian">Ian</option> <!-- Peggy and William George Dury -->
+                        <option value="Jaden">Jaden</option> <!-- Jada Pinkett and Will Smith -->
+                        <option value="Jenna">Jenna</option> <!-- Laura and George W. Bush -->
+                        <option value="Kal-El">Kal-El</option> <!-- Alice Kim and Nicolas Cage -->
+                        <option value="Kinga">Kinga</option> <!-- Laetitia and Richard Garriott de Cayeux -->
+                        <option value="Kingston">Kingston</option> <!-- Gwen Stefani and Gavin Rossdale -->
+                        <option value="Kulture">Kulture</option> <!-- Cardi B and Offset -->
+                        <option value="Leeloo">Leeloo</option> <!-- Yeni Zhang and American McGee -->
+                        <option value="Lisa Marie">Lisa Marie</option> <!-- Priscilla and Elvis Presley -->
+                        <option value="Lyra">Lyra</option> <!-- Cherry Seaborn and Ed Sheeran -->
+                        <option value="Mason Dash">Mason Dash</option> <!-- Kourtney Kardashian and Scott Disick -->
+                        <option value="Maude">Maude</option> <!-- Leslie Mann and Judd Apatow -->
+                        <option value="Marmaduke">Marmaduke</option> <!-- Shara and Bear Grylls -->
+                        <option value="Moon Unit">Moon Unit</option> <!-- Gail and Frank Zappa -->
+                        <option value="Moroccan">Moroccan</option> <!-- Mariah Carey and Nick Cannon -->
+                        <option value="Moses">Moses</option> <!-- Gwyneth Paltrow and Chris Martin -->
+                        <option value="North">North</option> <!-- Kim Kardashian and Kanye West -->
+                        <option value="Olin">Olin</option> <!-- Blake Lively and Ryan Reynolds -->
+                        <option value="Paris">Paris</option> <!-- Debbie Rowe and Michael Jackson -->
+                        <option value="Peanut">Peanut</option> <!-- Gia Ruiz and Danny McBride -->
+                        <option value="Penelope Scotland">Penelope Scotland</option> <!-- Kourtney Kardashian and Scott Disick -->
+                        <option value="Pilot Inspektor">Pilot Inspektor</option> <!-- Beth Riesgraf and Jason Lee -->
+                        <option value="Prince">Prince</option> <!-- Debbie Rowe and Michael Jackson -->
+                        <option value="Psalm">Psalm</option> <!-- Kim Kardashian and Kanye West -->
+                        <option value="Quincy">Quincy</option> <!-- Kim and Tom McMahon -->
+                        <option value="Reign Aston">Reign Aston</option> <!-- Kourtney Kardashian and Scott Disick -->
+                        <option value="Riot Rose">Riot Rose</option> <!-- Rihanna and A$AP Rocky -->
+                        <option value="Ronin">Ronin</option> <!-- Laetitia and Richard Garriott de Cayeux -->
+                        <option value="Rumi">Rumi</option> <!-- Beyoncé and Jay-Z -->
+                        <option value="RZA">RZA</option> <!-- Rihanna and A$AP Rocky -->
+                        <option value="Saint">Saint</option> <!-- Kim Kardashian and Kanye West -->
+                        <option value="Schuyler">Schuyler</option> <!-- Sissy Spacek and Jack Fisk -->
+                        <option value="Seven">Seven</option> <!-- Erykah Badu and André 3000 -->
+                        <option value="Sir">Sir</option> <!-- Beyoncé and Jay-Z -->
+                        <option value="Sparrow">Sparrow</option> <!-- Nicole Richie and Joel Madden -->
+                        <option value="Stormi">Stormi</option> <!-- Kylie Jenner and Travis Scott -->
+                        <option value="Summer Rain">Summer Rain</option> <!--  Christina Aguilera and Matthew Rutler -->
+                        <option value="Sunday">Sunday</option> <!-- Kelly Tisdale and Mike Myers -->
+                        <option value="Suri">Suri</option> <!-- Katie Holmes and Tom Cruise -->
+                        <option value="Techno Mechanicus">Techno Mechanicus</option> <!-- Grimes and Elon Musk -->
+                        <option value="Trey">Trey</option> <!-- Sheree Zampino and Will Smith -->
+                        <option value="Ulysses">Ulysses</option> <!-- Elizabeth and William Peoples -->
+                        <option value="Ursula">Ursula</option> <!-- Anna and Rolf Andress -->
+                        <option value="Uzi">Uzi</option> <!-- Whitney Alford and Kendrick Lamar -->
+                        <option value="Violet">Violet</option> <!-- Frances and Rev Reginald Henry Barnes -->
+                        <option value="Willow">Willow</option> <!-- Jada Pinkett and Will Smith -->
+                        <option value="X Æ A-Xii">X Æ A-Xii</option> <!-- Grimes and Elon Musk -->
+                        <option value="Yuri">Yuri</option> <!-- en.wikipedia.org/wiki/Yuri_Tsaler, cannot find information on parents in English 🤷‍♂️ -->
+                        <option value="Zuma">Zuma</option> <!-- Gwen Stefani and Gavin Rossdale -->
+                    </select>
+                    <button id="buttonHeirChooseName"></button>
+                </div>
+
+                <div id="divHeirWorkshopGender">
+                    <div id="divHeirWorkshopGenderHeadline"></div>
+                    <div id="divHeirGenderIcon"></div>
+                    <button id="buttonHeirGendersLeft">←</button><button id="buttonHeirChooseGender"></button><button id="buttonHeirGendersRight">→</button>
+                </div>
+
+                <div id="divHeirWorkshopEthnicity">
+                    <div id="divHeirWorkshopEthnicityHeadline"></div>
+                    <select name="heirEthnicities" id="selectHeirEthnicities" onchange="HeirChangeEthnicity();"></select>
+                    <button id="buttonHeirChooseEthnicity"></button>
+                </div>
+
+                <div id="divHeirWorkshopTitle">
+                    <div id="divHeirWorkshopTitleHeadline"></div>
+                    <select name="heirTitles" id="selectHeirTitles" onchange="HeirChangeTitle();"></select>
+                    <button id="buttonHeirChooseTitle"></button>
+                </div>
+
+                <div id="divHeirWorkshopFaces">
+                    <div id="divHeirWorkshopFacesHeadline"></div>
+                    <div id="divHeirFacesGrid">
+                        <button id="buttonHeirChooseFace1"></button><button id="buttonHeirChooseFace2"></button><button id="buttonHeirChooseFace3"></button>
+                        <div id="divHeirFacesGridMiddleRow">
+                            <button id="buttonHeirChooseFace4"></button><button id="buttonHeirChooseFace5"></button><button id="buttonHeirChooseFace6"></button>
+                        </div>
+                        <button id="buttonHeirChooseFace7"></button><button id="buttonHeirChooseFace8"></button><button id="buttonHeirChooseFace9"></button>
+                    </div>
+                    <button id="buttonHeirFacesLeft" onclick="HeirChangeFaces('previous');">←</button><span id="spanHeirFacesPagination"></span><button
+                        id="buttonHeirFacesRight" onclick="HeirChangeFaces('next');">→</button>
+                </div>
+
+                <div id="divHeirWorkshopSummary"></div>
+
+                <button id="buttonHeirGoBack"></button>
+            </div>
+
+            <div id="divViewResidence">
+                <button id="buttonGoFishing"></button><button id="buttonGoToPraediumFromRes"></button>
+                <canvas id="canvasResidence" width="384" height="224"></canvas>
+                <div id="divResidenceActionArea">
+                    <button id="buttonGoOnHike" onclick="SetOutOnSojourn();"></button>
+                    <button id="buttonHostParty" onclick="ThrowParty();"></button>
+                    <button id="buttonWasteTime"></button>
+                    <button id="buttonImproveResidence"></button>
+                    <table id="tableResidenceInventory"></table>
+                    <table id="tableResidenceReport"></table>
+                    <table id="tableWorkshopsContainer">
+                        <tr>
+                            <td class="tdWorkshopsContainer">
+                                <div id="divWorkshopBakery">
+                                    <img id="imgWorkshopBakery" src="bitmaps/res_bakery.gif" width="130" height="86" />
+                                    <table id="tableWorkshopBakery" class="residenceWorkshopTable"></table>
+                                </div>
+                            </td>
+                            <td class="tdWorkshopsContainer" id="tdOliveMill">
+                                <div id="divWorkshopOliveMill">
+                                    <img id="imgWorkshopOliveMill" src="bitmaps/res_olivemill.gif" width="130" height="86" />
+                                    <table id="tableWorkshopOliveMill" class="residenceWorkshopTable"></table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="divWorkshopBrewery">
+                                    <img id="imgWorkshopBrewery" src="bitmaps/res_brewery.gif" width="130" height="86" />
+                                    <table id="tableWorkshopBrewery" class="residenceWorkshopTable"></table>
+                                </div>
+                            </td>
+                            <td>
+                                <div id="divWorkshopWinery">
+                                    <img id="imgWorkshopWinery" src="bitmaps/res_winery.gif" width="130" height="86" />
+                                    <table id="tableWorkshopWinery" class="residenceWorkshopTable"></table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="divWorkshopKitchen">
+                                    <img id="imgWorkshopKitchen" src="bitmaps/res_kitchen.gif" width="130" height="86" />
+                                    <table id="tableWorkshopKitchen" class="residenceWorkshopTable"></table>
+                                </div>
+                            </td>
+                            <td id="tdPress">
+                                <div id="divWorkshopPress">
+                                    <img id="imgWorkshopPress" src="bitmaps/res_press.gif" width="130" height="86" />
+                                    <table id="tableWorkshopPress" class="residenceWorkshopTable"></table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="tdGreenhouse">
+                                <div id="divWorkshopGreenhouse">
+                                    <img id="imgWorkshopGreenhouse" src="bitmaps/res_greenhouse.gif" width="130" height="86" />
+                                    <table id="tableWorkshopGreenhouse" class="residenceWorkshopTable"></table>
+                                </div>
+                            </td>
+                            <td>
+                                <div id="divWorkshopAtelier">
+                                    <img id="imgWorkshopAtelier" src="bitmaps/res_atelier.gif" width="130" height="86" />
+                                    <table id="tableWorkshopAtelier" class="residenceWorkshopTable"></table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="tdApiary">
+                                <div id="divWorkshopApiary">
+                                    <img id="imgWorkshopApiary" src="bitmaps/res_apiary.gif" width="130" height="86" />
+                                    <table id="tableWorkshopApiary" class="residenceWorkshopTable"></table>
+                                </div>
+                            </td>
+                            <td id="tdCottage">
+                                <div id="divWorkshopCottage">
+                                    <img id="imgWorkshopCottage" src="bitmaps/res_cottage.gif" width="130" height="86" />
+                                    <table id="tableWorkshopCottage" class="residenceWorkshopTable"></table>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="divViewPraedium">
+                <button id="buttonGoToResidence"></button><button id="buttonGoToTownship"></button>
+                <div id="divViewMountain">
+                    <canvas id="canvasMountain" width="384" height="224"></canvas>
+                    <table id="tableMountainInventory">
+                        <thead id="theadMountainInventory"></thead>
+                        <tbody id="tbodyMountainInventory"></tbody>
+                    </table>
+                    <table id="tableMountainStaff">
+                        <thead id="theadMountainStaff"></thead>
+                        <tbody id="tbodyMountainStaff"></tbody>
+                    </table>
+                    <table id="tableMountainReport">
+                        <thead id="theadMountainReport"></thead>
+                        <tbody id="tbodyMountainReport"></tbody>
+                    </table>
+                    <button id="buttonMountain"></button>
+                </div>
+                <div id="divViewForest">
+                    <canvas id="canvasForest" width="384" height="224"></canvas>
+                    <table id="tableForestInventory">
+                        <thead id="theadForestInventory"></thead>
+                        <tbody id="tbodyForestInventory"></tbody>
+                    </table>
+                    <table id="tableForestStaff">
+                        <thead id="theadForestStaff"></thead>
+                        <tbody id="tbodyForestStaff"></tbody>
+                    </table>
+                    <table id="tableForestReport">
+                        <thead id="theadForestReport"></thead>
+                        <tbody id="tbodyForestReport"></tbody>
+                    </table>
+                    <button id="buttonForest"></button>
+                </div>
+                <div id="divViewFarm">
+                    <canvas id="canvasFarm" width="16" height="16"></canvas>
+                    <div id="divFarmingGameplayControls">
+                        <button id="buttonTill">
+                            <span id="buttonTillDecal"></span>
+                        </button><button id="buttonPlant">
+                            <span id="buttonPlantDecal"></span>
+                        </button><button id="buttonWater">
+                            <span id="buttonWaterDecal"></span>
+                        </button><button id="buttonHarvest">
+                            <span id="buttonHarvestDecal"></span>
+                        </button>
+                    </div>
+                    <button id="buttonPriority">
+                        <span id="buttonPriorityDecal"></span>
+                        <span id="buttonPriorityColon"></span>
+                        <span id="buttonPriorityOption"></span>
                     </button>
-                </div>
-                <button id="buttonPriority">
-                    <span id="buttonPriorityDecal"></span>
-                    <span id="buttonPriorityColon"></span>
-                    <span id="buttonPriorityOption"></span>
-                </button>
-                <table id="tableFarmInventory">
-                    <thead id="theadFarmInventory"></thead>
-                    <tbody id="tbodyFarmInventory"></tbody>
-                </table>
-                <table id="tableFarmStaff">
-                    <thead id="theadFarmStaff"></thead>
-                    <tbody id="tbodyFarmStaff"></tbody>
-                </table>
-                <table id="tableFarmReport">
-                    <thead id="theadFarmReport"></thead>
-                    <tbody id="tbodyFarmReport"></tbody>
-                </table>
-                <div id="divFarmButtons">
-                    <button id="buttonBuyLand"></button>
-                    <button id="buttonBuyForest"></button>
-                    <button id="buttonBuyMountain"></button>
-                    <button id="buttonRentWarehouse"></button>
-                    <button id="buttonFound"></button>
-                    <button id="buttonHire"></button>
-                    <button id="buttonAudit"></button>
-                    <button id="buttonNewFarm"></button>
-                </div>
-                <div id="divBarterButtons">
-                    <button id="buttonBarterAll" onclick="BarterAll();"></button>
-                    <button id="buttonBarterOlive"></button>
-                    <button id="buttonBarterDate"></button>
-                    <button id="buttonBarterFig"></button>
-                    <button id="buttonBarterPom"></button>
-                    <button id="buttonBarterGrape"></button>
+                    <table id="tableFarmInventory">
+                        <thead id="theadFarmInventory"></thead>
+                        <tbody id="tbodyFarmInventory"></tbody>
+                    </table>
+                    <table id="tableFarmStaff">
+                        <thead id="theadFarmStaff"></thead>
+                        <tbody id="tbodyFarmStaff"></tbody>
+                    </table>
+                    <table id="tableFarmReport">
+                        <thead id="theadFarmReport"></thead>
+                        <tbody id="tbodyFarmReport"></tbody>
+                    </table>
+                    <div id="divFarmButtons">
+                        <button id="buttonBuyLand"></button>
+                        <button id="buttonBuyForest"></button>
+                        <button id="buttonBuyMountain"></button>
+                        <button id="buttonRentWarehouse"></button>
+                        <button id="buttonFound"></button>
+                        <button id="buttonHire"></button>
+                        <button id="buttonAudit"></button>
+                        <button id="buttonNewFarm"></button>
+                    </div>
+                    <div id="divBarterButtons">
+                        <button id="buttonBarterAll" onclick="BarterAll();"></button>
+                        <button id="buttonBarterOlive"></button>
+                        <button id="buttonBarterDate"></button>
+                        <button id="buttonBarterFig"></button>
+                        <button id="buttonBarterPom"></button>
+                        <button id="buttonBarterGrape"></button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="divViewTownship">
-            <button id="buttonGoToPraedium"></button><button id="buttonGoToPort"></button>
-            <div id="divVillageName"></div>
-            <div id="divVillageEstDate"></div>
-            <canvas id="canvasVillage" width="384" height="224"></canvas>
-            <div id="divVillageLasTablas"></div>
-            <div id="divVillageButtons">
-                <button id="buttonVisitArena" onclick="GoToArena();"></button>
-                <button id="buttonVisitOracle"></button>
-                <button id="buttonBuild"></button>
-                <button id="buttonPlayGod"></button>
-                <button id="buttonSellWheat"></button>
-                <button id="buttonSellBarley"></button>
-                <button id="buttonSellFlax"></button>
-                <button id="buttonSellLogs"></button>
-                <button id="buttonSellBoards"></button>
-                <button id="buttonSellStone"></button>
-                <button id="buttonSellHorses" onclick="SellLivestock();"></button>
-                <button id="buttonBuyWheat"></button>
-                <button id="buttonBuyBarley"></button>
-                <button id="buttonBuyLogs"></button>
-                <button id="buttonBuyBoards"></button>
-                <button id="buttonBuyStone"></button>
-                <button id="buttonBuyHorses" onclick="PurchaseLivestock();"></button>
+            <div id="divViewTownship">
+                <button id="buttonGoToPraedium"></button><button id="buttonGoToPort"></button>
+                <div id="divVillageName"></div>
+                <div id="divVillageEstDate"></div>
+                <canvas id="canvasVillage" width="384" height="224"></canvas>
+                <div id="divVillageLasTablas"></div>
+                <div id="divVillageButtons">
+                    <button id="buttonVisitArena" onclick="GoToArena();" class="buttonVisitArenaConditionA"></button>
+                    <button id="buttonVisitOracle"></button>
+                    <button id="buttonBuild"></button>
+                    <button id="buttonPlayGod"></button>
+                    <button id="buttonSellWheat"></button>
+                    <button id="buttonSellBarley"></button>
+                    <button id="buttonSellFlax"></button>
+                    <button id="buttonSellLogs"></button>
+                    <button id="buttonSellBoards"></button>
+                    <button id="buttonSellStone"></button>
+                    <button id="buttonSellHorses" onclick="SellLivestock();"></button>
+                    <button id="buttonBuyWheat"></button>
+                    <button id="buttonBuyBarley"></button>
+                    <button id="buttonBuyLogs"></button>
+                    <button id="buttonBuyBoards"></button>
+                    <button id="buttonBuyStone"></button>
+                    <button id="buttonBuyHorses" onclick="PurchaseLivestock();"></button>
+                </div>
+            </div>
+
+            <div id="divViewPort">
+                <button id="buttonGoToTownshipFromPort"></button>
+                <div id="divPortName"></div>
+                <div id="divPortSubtitle"></div>
+                <canvas id="canvasPort" width="384" height="224"></canvas>
+                <div id="divPortActionArea">
+                    <button id="buttonSailWest"></button>
+                    <img id="imgTradeGoods" src="bitmaps/trade_goods.png" width="130" height="86" />
+                    <table id="tableExports"></table>
+                    <button id="buttonEstablishTradeRoute"></button>
+                    <img id="imgTradeTin" src="bitmaps/trade_tin.png" width="130" height="86" />
+                    <table id="tableImports"></table>
+                    <button id="buttonImportTin"></button>
+                </div>
             </div>
         </div>
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+        <div id="divFooter">
+            <button id="buttonOptions">Options</button><button id="buttonQ">?</button><button id="buttonStar">*</button><button id="buttonI">i</button><button
+                id="buttonCC0">(CCØ)</button><button id="buttonRecords" onclick="ToggleRecords();"></button>
+        </div>
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+        <div id="divMinigameFishing">
+            <div id="divFishingRibbon"></div>
 
-        <div id="divViewPort">
-            <button id="buttonGoToTownshipFromPort"></button>
-            <div id="divPortName"></div>
-            <div id="divPortSubtitle"></div>
-            <canvas id="canvasPort" width="384" height="224"></canvas>
-            <div id="divPortActionArea">
-                <button id="buttonSailWest"></button>
-                <img id="imgTradeGoods" src="bitmaps/trade_goods.png" width="130" height="86" />
-                <table id="tableExports"></table>
-                <button id="buttonEstablishTradeRoute"></button>
-                <img id="imgTradeTin" src="bitmaps/trade_tin.png" width="130" height="86" />
-                <table id="tableImports"></table>
-                <button id="buttonImportTin"></button>
+            <button id="buttonGoHome"></button>
+
+            <div id="divFishDisplayWrapper">
+                <canvas id="canvasFishingHole" width="384" height="224"></canvas>
+
+                <div id="divFishTimerContainer">
+                    <div id="divFishTimerLabel"></div>
+                    <div id="divFishTimerDisplay" class="divFishTimerDisplayJ"></div>
+                </div>
+            </div>
+
+            <button id="buttonFish" onclick="FishButton();"></button>
+            <button id="buttonInitFish" onclick="InitNewFishGame();"></button>
+
+            <table id="tableFishSession"></table>
+            <table id="tableFishRecords"></table>
+            <table id="tableFishInventory"></table>
+            <table id="tableFishReport"></table>
+
+            <button id="buttonFishWharf" onclick="WharfEvents();" class="disabled"></button>
+
+            <div id="divFishingCushion"></div>
+        </div>
+
+        <div id="divViewWharf">
+            <div id="divWharfRibbon"></div>
+
+            <button id="buttonLeaveWharf" onclick="LeaveTheStore();"></button>
+
+            <canvas id="canvasWharf" width="384" height="224"></canvas>
+
+            <button id="buttonWharfPosca" onclick="PurchaseWharfItem(0);"></button>
+            <button id="buttonWharfPrey" onclick="PurchaseWharfItem(1);"></button>
+            <button id="buttonWharfChum" onclick="PurchaseWharfItem(2);"></button>
+            <button id="buttonWharfKnife" onclick="PurchaseWharfItem(3);"></button>
+            <button id="buttonWharfBait" onclick="PurchaseWharfItem(4);"></button>
+            <button id="buttonWharfRod" onclick="PurchaseWharfItem(5);"></button>
+            <button id="buttonWharfWWF" onclick="PurchaseWharfItem(6);"></button>
+            <button id="buttonWharfChewFat" onclick="ChewFat();"></button>
+
+            <!-- next step for fishermen button: upgrade nets for better yield -->
+            <button id="buttonWharfFishermen">HIRE FISHERMEN/CONTRATAR PESCADORES</button>
+
+            <div id="divWharfCushion"></div>
+        </div>
+        <div id="urToast" class="psxToast" style="display: none;">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAARxJREFUWMPtmLEOgyAQQO+MTTq4dOuv+SvdXPyV/pqbC4OJw3XCNpcLBQ4VDJdgApH4eJyAIhERFBANFBIVtIJW0ETRSo2IeAqMa6VsXJ2OLAAAwzDET72VK0lO3abK0Vz2LW+j2YNWo9XoZY1iCUYRACgtbHKjtF0yMkqCSeQ34NlGLRSy6d4pl/U5Sn8gycEfMLg4o/wBESZDc/mQdRT5FGN46oYbReVbHdn/uJ2JdIMMM6q1qejb+hgl+lkSMf0p32dTab2N0i4bjt4o5nJscoESkfOL8IzAa/127LpvsXUhHq/bVmxdivvzvRVb1xuVoIwRIXnM4ypC8limPoFRDmWMCM+h5nEV4TnUMvWJjBaVoxW0glbQ64B+AJNyuVhKLjsXAAAAAElFTkSuQmCC"
+                class="psxThumbnail" />
+            <div>
+                <div class="psxTitle"><img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAABKpJREFUOMutzGtsU2Ucx/Hf8/T0nHZtt3W0u8K2dmPIAnIZsixgxhtfkOmihARFMJkvdBFjNF4C8YVRo2HES8AMTIi3NwYJSwiSGJQEEJAAG7c5YYO5Ubuu3dbTnrWn5zzn8hxfGBKDoCTz9/J5/t8PSf0+sFAeu7Ce5abrBNEjcNsQLp/9adWSlc21KzbsqJwdO4rhU9+hkLPgclHYNmA6gaSsOLGK2vClYFC0wR1mG9ptTcn8IJzr++BYYnQoksnqAAC3AMyPRsFycRCHwbENOCBwHAecO+C2A0PPVqZSeuXPZy+vLi2W4BYIwkEJofLS14Sp0WsRTsqs+mjwKHUY4/DONxhbw7kXqqrBNE2oBQ5wB4pqwiO64HAHFBRLV7Sd8/CxP0SpSJxOKU/o2Vy9IAaK0+lYMvHyvthTALD79Q2btMmra+pqfcjPTkOAAcuywZkNptvIFSz4RQHhinmIrH16T+tjmw4AwM5nHr7mq6mupmpBH17Q0BANBAIEACTJC8PiUBUFLHMdcjKGQt7AVFqHwzmUrI6CbkFwcVgmcwDA6/WSmqbmCIg+Qjl3zrN80re7e30jAGiaptiQIE/lweWrYPJtSAJBwO8GXBTVVX5wDhhaAbnM9CwAvLO5vUFyMb+O8HmaVe3jasFEiS/fAQD9V65n/MFqTMsGBs/0Y/zWDAgh0A0HobIiWBaHA4K0bMJFkQGARYvrO2zbAvTYcfrNSeVHIrgScjrzPAAsaGweMSEim7cgpxkUxUAhb8IwbBAAkluATShEXxCGWH4TADJT8S5Rcie2fjp8jN6Kpay85uzU9ZmlX7/ZsXXn/r6MYxYGNQvweD0oL/PBoRShoAdKzkCecUiEggulvz73wqvyZ92PboGdWsY0uQdG1iIAAOoWPu6KnCTctcwXWrIqOXGzcyI5tattaRgVYQ8ENwGlLhBCwImAWFyH5l+2PZ8aP8y12MVwmXfwoyOJ9uGxpEUBANy0Ull7oyiRuJwcOuUWpRt+SUikFQO6bsFgNgyDw7IcWNwFxQgk5FT8NzU7djIY9ExwT8nG4bGkBQB/gQB29Y0mVZSuDYWKBgJS+kikRjQEtwSbU+RmTciyDsOimC24cGt8wtDloSPVVSWXuTe49sWeE5N3HIK7Jooi3f/G6sdzSn57VjHaHmqsQGYmA7Vgoq6xDv2Dcbipfa6yvLjnld6B7w3D4H/v/wHemdfrpT3drYsEgm0erm5TCwZCdc29IyOjvR8euDrMGOP36u4L3tnm9obKjrZ5l0pKRPCSlpWdL+1OYq47/e1bVw7uaLnyILf0vw5CoRAprl5YXTwvVPO/gFvaI343oeEiP0JfffJ2YM7g8oVSq9/LUOQTML94tnXOYH20slNNnoVbpJAEp3NO4I3Te1qiy9d1MSbCdlwQ3aRr9MKhln9rXPf7WP/ksyQq3jihCbVVU8lRTE6mkIiPi4zRdROTmd7xxMw9O+Fej9cHDol05tS+yJp3m4SiWsR/MXHm4Odglg8NEV/TF3vf+9IONHQ3LW5hDwT27X2/vLR+ZWtUvagK9JLPnJ5GjhHIWRX9F4fUWe3mI2VVTWEA8bvbPwEXfUZ4niNaLwAAAABJRU5ErkJggg=="
+                        width="20" height="24" /> Rare Fish Investor</div>
+                <div id="divPsxSubtitle" class="psxSubtitle"></div>
+            </div>
+            <div class="psxGlyph">
+                <svg width="38" height="38" viewbox="0 0 38 38" class="psxRing" xmlns="http://www.w3.org/2000/svg">
+                    <circle id="donut" r="17" cx="19" cy="19" fill="#17171c" stroke="white" stroke-width="3" />
+                </svg>
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iNDgiCiAgIGhlaWdodD0iNDgiCiAgIHZpZXdCb3g9IjAgMCA0OCA0OCIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnMSIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzMSIgLz4KICA8ZwogICAgIGlkPSJsYXllcjEiPgogICAgPGNpcmNsZQogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZiIKICAgICAgIGlkPSJwYXRoMSIKICAgICAgIGN4PSIyNC4wODkyMiIKICAgICAgIGN5PSIyNC4wNTk0NzkiCiAgICAgICByPSIyNCIgLz4KICAgIDxwYXRoCiAgICAgICBkPSJtIDcuNzE0NDc5MSwyOS42OTU2NzEgYyAtMS4yNjQ5MjQzLDAuODQzMjgyIC0wLjg0MzI4MywyLjQ0NTUyMSAxLjg1NTIxOSwzLjIwNDQ3NyAyLjc4MjgyNzksMC45Mjc2MDkgNS44MTg2NDM5LDEuMTgwNTkgOC43NzAxMjQ5LDAuNjc0NjIxIDAuMTY4NjU0LDAgMC4zMzczMDcsLTAuMDg0MzMgMC40MjE2MzQsLTAuMDg0MzMgdiAtMi44NjcxNjMgbCAtMi44NjcxNjIsMC45Mjc2MSBjIC0xLjA5NjI2MywwLjMzNzMwNyAtMi4xOTI1MzMsMC40MjE2MzQgLTMuMjg4Nzk2LDAuMTY4NjUzIC0wLjg0MzI4MywtMC4yNTI5OCAtMC42NzQ2MjksLTAuNzU4OTU2IDAuMzM3MzA3LC0xLjE4MDU5IEwgMTguNzYxNDUsMjguNTE1MDcgdiAtMy4xMjAxNDMgbCAtOC4wOTU1MDQsMi43ODI4MjggQyA5LjY1NDAwOTEsMjguNTE1MDYyIDguNjQyMDY2MSwyOS4wMjEwMzggNy43MTQ0NTYxLDI5LjY5NTY2NyBaIE0gMjcuMjc4NjEsMTcuMDQ2NDQ2IHYgOC4xNzk4MzEgYyAzLjQ1NzQ1OCwxLjY4NjU2NiA2LjE1NTk1OSwwIDYuMTU1OTU5LC00LjM4NTA2NyAwLC00LjQ2OTM5MyAtMS42MDIyMzgsLTYuNDkzMjY1IC02LjI0MDI4NSwtOC4wOTU0OTcgLTIuNDQ1NTIyLC0wLjg0MzI4MiAtNC45NzUzNjIsLTEuNjAyMjM4IC03LjUwNTIxLC0yLjEwODIwNiB2IDI0LjM3MDg0IGwgNS45MDI5NzEsMS43NzA4OTIgViAxNi4yODc0OSBjIDAsLTAuOTI3NjAyIDAsLTEuNjAyMjM4IDAuNjc0NjI5LC0xLjM0OTI1MSAwLjkyNzYxLDAuMjUyOTgxIDEuMDExOTM2LDEuMTgwNTk4IDEuMDExOTM2LDIuMTA4MjA3IHogbSAxMC45NjI2NiwxMC43MDk2NzkgYyAtMi40NDU1MTQsLTAuODQzMjgyIC01LjA1OTY4OSwtMS4xODA1OTcgLTcuNTg5NTM2LC0wLjkyNzYwOSAtMS4zNDkyNDQsMC4wODQzMyAtMi42MTQxNjgsMC40MjE2MzQgLTMuNzk0NzY1LDAuODQzMjgyIGwgLTAuMjUyOTgsMC4wODQzMyB2IDMuMjg4Nzk3IGwgNS40ODEzMjksLTIuMDIzODggYyAxLjA5NjI2MywtMC4zMzczIDIuMTkyNTM0LC0wLjQyMTYyNyAzLjI4ODgwNCwtMC4xNjg2NTQgMC44NDMyNzUsMC4yNTI5OCAwLjY3NDYyMiwwLjc1ODk1NiAtMC4zMzczMDcsMS4xODA1OTcgbCAtOC40MzI4MTEsMy4xMjAxNDMgdiAzLjIwNDQ3IGwgMTEuNjM3MjgxLC00LjMwMDczNiBjIDAuODQzMjgyLC0wLjMzNzMwNyAxLjYwMjIzOCwtMC43NTg5NTYgMi4yNzY4NiwtMS40MzM1ODUgMC41OTAyODcsLTAuODQzMjgyIDAuMzM3MzA3LC0yLjAyMzg3MiAtMi4yNzY4NiwtMi44NjcxNTUgeiIKICAgICAgIGZpbGw9ImN1cnJlbnRDb2xvciIKICAgICAgIGlkPSJwYXRoMS04IgogICAgICAgc3R5bGU9InN0cm9rZS13aWR0aDowLjg0MzI4MyIgLz4KICA8L2c+Cjwvc3ZnPgo="
+                    class="psxLogo" />
             </div>
         </div>
-    </div>
-    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <div id="divFooter">
-        <button id="buttonOptions">Options</button><button id="buttonQ">?</button><button id="buttonStar">*</button><button id="buttonI">i</button><button
-            id="buttonCC0">(CCØ)</button><button id="buttonRecords" onclick="ToggleRecords();"></button>
-    </div>
-    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <div id="divMinigameFishing">
-        <div id="divFishingRibbon"></div>
+        <div id="toast-container"></div>
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+        <div id="divMinigameArena">
+            <div id="divArenaRibbon"></div>
 
-        <button id="buttonGoHome"></button>
+            <button id="buttonLeaveArena" onclick="LeaveArena();"></button>
 
-        <div id="divFishDisplayWrapper">
-            <canvas id="canvasFishingHole" width="384" height="224"></canvas>
+            <canvas id="canvasArena" width="384" height="224"></canvas>
 
-            <div id="divFishTimerContainer">
-                <div id="divFishTimerLabel"></div>
-                <div id="divFishTimerDisplay"></div>
-            </div>
+            <button id="buttonArenaBetBlue" onclick="PlaceBet(0);"></button><button id="buttonArenaBetRed" onclick="PlaceBet(1);"></button>
+
+            <div id="divArenaTables"></div>
+
+            <div id="divArenaCushion"></div>
         </div>
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+        <div id="divMinigameHike">
+            <div id="divHikeRibbon"></div>
 
-        <button id="buttonFish" onclick="FishButton();"></button>
-        <button id="buttonInitFish" onclick="InitNewFishGame();"></button>
+            <button id="buttonLeaveHike" onclick="LeaveHike();"></button>
 
-        <table id="tableFishSession"></table>
-        <table id="tableFishRecords"></table>
-        <table id="tableFishInventory"></table>
-        <table id="tableFishReport"></table>
+            <canvas id="canvasHike" width="384" height="224"></canvas>
 
-        <button id="buttonFishWharf" onclick="WharfEvents();" class="disabled"></button>
+            <button id="buttonRelax" onclick="Relax();"></button>
 
-        <div id="divFishingCushion"></div>
-    </div>
-
-    <div id="divViewWharf">
-        <div id="divWharfRibbon"></div>
-
-        <button id="buttonLeaveWharf" onclick="LeaveTheStore();"></button>
-
-        <canvas id="canvasWharf" width="384" height="224"></canvas>
-
-        <button id="buttonWharfPosca" onclick="PurchaseWharfItem(0);" style="display: block; margin: 0 auto 2vw auto;"></button>
-        <button id="buttonWharfPrey" onclick="PurchaseWharfItem(1);" style="display: block; margin: 0 auto 2vw auto;"></button>
-        <button id="buttonWharfChum" onclick="PurchaseWharfItem(2);" style="display: block; margin: 0 auto 2vw auto;"></button>
-        <button id="buttonWharfKnife" onclick="PurchaseWharfItem(3);" style="display: block; margin: 0 auto 2vw auto;"></button>
-        <button id="buttonWharfBait" onclick="PurchaseWharfItem(4);" style="display: block; margin: 0 auto 2vw auto;"></button>
-        <button id="buttonWharfRod" onclick="PurchaseWharfItem(5);" style="display: block; margin: 0 auto 2vw auto;"></button>
-        <button id="buttonWharfWWF" onclick="PurchaseWharfItem(6);" style="display: block; margin: 0 auto 0 auto;"></button>
-        <button id="buttonWharfChewFat" onclick="ChewFat();" style="display: none; margin: 0 auto;"></button>
-
-        <!-- next step for fishermen button: upgrade nets for better yield -->
-        <button id="buttonWharfFishermen" style="display: none; margin: 6.4vw auto 0 auto;">HIRE FISHERMEN/CONTRATAR PESCADORES</button>
-
-        <div id="divWharfCushion"></div>
-    </div>
-    <div id="urToast" class="psxToast" style="display: none;">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAARxJREFUWMPtmLEOgyAQQO+MTTq4dOuv+SvdXPyV/pqbC4OJw3XCNpcLBQ4VDJdgApH4eJyAIhERFBANFBIVtIJW0ETRSo2IeAqMa6VsXJ2OLAAAwzDET72VK0lO3abK0Vz2LW+j2YNWo9XoZY1iCUYRACgtbHKjtF0yMkqCSeQ34NlGLRSy6d4pl/U5Sn8gycEfMLg4o/wBESZDc/mQdRT5FGN46oYbReVbHdn/uJ2JdIMMM6q1qejb+hgl+lkSMf0p32dTab2N0i4bjt4o5nJscoESkfOL8IzAa/127LpvsXUhHq/bVmxdivvzvRVb1xuVoIwRIXnM4ypC8limPoFRDmWMCM+h5nEV4TnUMvWJjBaVoxW0glbQ64B+AJNyuVhKLjsXAAAAAElFTkSuQmCC"
-            class="psxThumbnail" />
-        <div>
-            <div class="psxTitle"><img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAABKpJREFUOMutzGtsU2Ucx/Hf8/T0nHZtt3W0u8K2dmPIAnIZsixgxhtfkOmihARFMJkvdBFjNF4C8YVRo2HES8AMTIi3NwYJSwiSGJQEEJAAG7c5YYO5Ubuu3dbTnrWn5zzn8hxfGBKDoCTz9/J5/t8PSf0+sFAeu7Ce5abrBNEjcNsQLp/9adWSlc21KzbsqJwdO4rhU9+hkLPgclHYNmA6gaSsOLGK2vClYFC0wR1mG9ptTcn8IJzr++BYYnQoksnqAAC3AMyPRsFycRCHwbENOCBwHAecO+C2A0PPVqZSeuXPZy+vLi2W4BYIwkEJofLS14Sp0WsRTsqs+mjwKHUY4/DONxhbw7kXqqrBNE2oBQ5wB4pqwiO64HAHFBRLV7Sd8/CxP0SpSJxOKU/o2Vy9IAaK0+lYMvHyvthTALD79Q2btMmra+pqfcjPTkOAAcuywZkNptvIFSz4RQHhinmIrH16T+tjmw4AwM5nHr7mq6mupmpBH17Q0BANBAIEACTJC8PiUBUFLHMdcjKGQt7AVFqHwzmUrI6CbkFwcVgmcwDA6/WSmqbmCIg+Qjl3zrN80re7e30jAGiaptiQIE/lweWrYPJtSAJBwO8GXBTVVX5wDhhaAbnM9CwAvLO5vUFyMb+O8HmaVe3jasFEiS/fAQD9V65n/MFqTMsGBs/0Y/zWDAgh0A0HobIiWBaHA4K0bMJFkQGARYvrO2zbAvTYcfrNSeVHIrgScjrzPAAsaGweMSEim7cgpxkUxUAhb8IwbBAAkluATShEXxCGWH4TADJT8S5Rcie2fjp8jN6Kpay85uzU9ZmlX7/ZsXXn/r6MYxYGNQvweD0oL/PBoRShoAdKzkCecUiEggulvz73wqvyZ92PboGdWsY0uQdG1iIAAOoWPu6KnCTctcwXWrIqOXGzcyI5tattaRgVYQ8ENwGlLhBCwImAWFyH5l+2PZ8aP8y12MVwmXfwoyOJ9uGxpEUBANy0Ull7oyiRuJwcOuUWpRt+SUikFQO6bsFgNgyDw7IcWNwFxQgk5FT8NzU7djIY9ExwT8nG4bGkBQB/gQB29Y0mVZSuDYWKBgJS+kikRjQEtwSbU+RmTciyDsOimC24cGt8wtDloSPVVSWXuTe49sWeE5N3HIK7Jooi3f/G6sdzSn57VjHaHmqsQGYmA7Vgoq6xDv2Dcbipfa6yvLjnld6B7w3D4H/v/wHemdfrpT3drYsEgm0erm5TCwZCdc29IyOjvR8euDrMGOP36u4L3tnm9obKjrZ5l0pKRPCSlpWdL+1OYq47/e1bVw7uaLnyILf0vw5CoRAprl5YXTwvVPO/gFvaI343oeEiP0JfffJ2YM7g8oVSq9/LUOQTML94tnXOYH20slNNnoVbpJAEp3NO4I3Te1qiy9d1MSbCdlwQ3aRr9MKhln9rXPf7WP/ksyQq3jihCbVVU8lRTE6mkIiPi4zRdROTmd7xxMw9O+Fej9cHDol05tS+yJp3m4SiWsR/MXHm4Odglg8NEV/TF3vf+9IONHQ3LW5hDwT27X2/vLR+ZWtUvagK9JLPnJ5GjhHIWRX9F4fUWe3mI2VVTWEA8bvbPwEXfUZ4niNaLwAAAABJRU5ErkJggg=="
-                    width="20" height="24" /> Rare Fish Investor</div>
-            <div id="divPsxSubtitle" class="psxSubtitle"></div>
+            <div id="divHikeCushion"></div>
         </div>
-        <div class="psxGlyph">
-            <svg width="38" height="38" viewbox="0 0 38 38" class="psxRing" xmlns="http://www.w3.org/2000/svg">
-                <circle id="donut" r="17" cx="19" cy="19" fill="#17171c" stroke="white" stroke-width="3" />
-            </svg>
-            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iNDgiCiAgIGhlaWdodD0iNDgiCiAgIHZpZXdCb3g9IjAgMCA0OCA0OCIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnMSIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzMSIgLz4KICA8ZwogICAgIGlkPSJsYXllcjEiPgogICAgPGNpcmNsZQogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZiIKICAgICAgIGlkPSJwYXRoMSIKICAgICAgIGN4PSIyNC4wODkyMiIKICAgICAgIGN5PSIyNC4wNTk0NzkiCiAgICAgICByPSIyNCIgLz4KICAgIDxwYXRoCiAgICAgICBkPSJtIDcuNzE0NDc5MSwyOS42OTU2NzEgYyAtMS4yNjQ5MjQzLDAuODQzMjgyIC0wLjg0MzI4MywyLjQ0NTUyMSAxLjg1NTIxOSwzLjIwNDQ3NyAyLjc4MjgyNzksMC45Mjc2MDkgNS44MTg2NDM5LDEuMTgwNTkgOC43NzAxMjQ5LDAuNjc0NjIxIDAuMTY4NjU0LDAgMC4zMzczMDcsLTAuMDg0MzMgMC40MjE2MzQsLTAuMDg0MzMgdiAtMi44NjcxNjMgbCAtMi44NjcxNjIsMC45Mjc2MSBjIC0xLjA5NjI2MywwLjMzNzMwNyAtMi4xOTI1MzMsMC40MjE2MzQgLTMuMjg4Nzk2LDAuMTY4NjUzIC0wLjg0MzI4MywtMC4yNTI5OCAtMC42NzQ2MjksLTAuNzU4OTU2IDAuMzM3MzA3LC0xLjE4MDU5IEwgMTguNzYxNDUsMjguNTE1MDcgdiAtMy4xMjAxNDMgbCAtOC4wOTU1MDQsMi43ODI4MjggQyA5LjY1NDAwOTEsMjguNTE1MDYyIDguNjQyMDY2MSwyOS4wMjEwMzggNy43MTQ0NTYxLDI5LjY5NTY2NyBaIE0gMjcuMjc4NjEsMTcuMDQ2NDQ2IHYgOC4xNzk4MzEgYyAzLjQ1NzQ1OCwxLjY4NjU2NiA2LjE1NTk1OSwwIDYuMTU1OTU5LC00LjM4NTA2NyAwLC00LjQ2OTM5MyAtMS42MDIyMzgsLTYuNDkzMjY1IC02LjI0MDI4NSwtOC4wOTU0OTcgLTIuNDQ1NTIyLC0wLjg0MzI4MiAtNC45NzUzNjIsLTEuNjAyMjM4IC03LjUwNTIxLC0yLjEwODIwNiB2IDI0LjM3MDg0IGwgNS45MDI5NzEsMS43NzA4OTIgViAxNi4yODc0OSBjIDAsLTAuOTI3NjAyIDAsLTEuNjAyMjM4IDAuNjc0NjI5LC0xLjM0OTI1MSAwLjkyNzYxLDAuMjUyOTgxIDEuMDExOTM2LDEuMTgwNTk4IDEuMDExOTM2LDIuMTA4MjA3IHogbSAxMC45NjI2NiwxMC43MDk2NzkgYyAtMi40NDU1MTQsLTAuODQzMjgyIC01LjA1OTY4OSwtMS4xODA1OTcgLTcuNTg5NTM2LC0wLjkyNzYwOSAtMS4zNDkyNDQsMC4wODQzMyAtMi42MTQxNjgsMC40MjE2MzQgLTMuNzk0NzY1LDAuODQzMjgyIGwgLTAuMjUyOTgsMC4wODQzMyB2IDMuMjg4Nzk3IGwgNS40ODEzMjksLTIuMDIzODggYyAxLjA5NjI2MywtMC4zMzczIDIuMTkyNTM0LC0wLjQyMTYyNyAzLjI4ODgwNCwtMC4xNjg2NTQgMC44NDMyNzUsMC4yNTI5OCAwLjY3NDYyMiwwLjc1ODk1NiAtMC4zMzczMDcsMS4xODA1OTcgbCAtOC40MzI4MTEsMy4xMjAxNDMgdiAzLjIwNDQ3IGwgMTEuNjM3MjgxLC00LjMwMDczNiBjIDAuODQzMjgyLC0wLjMzNzMwNyAxLjYwMjIzOCwtMC43NTg5NTYgMi4yNzY4NiwtMS40MzM1ODUgMC41OTAyODcsLTAuODQzMjgyIDAuMzM3MzA3LC0yLjAyMzg3MiAtMi4yNzY4NiwtMi44NjcxNTUgeiIKICAgICAgIGZpbGw9ImN1cnJlbnRDb2xvciIKICAgICAgIGlkPSJwYXRoMS04IgogICAgICAgc3R5bGU9InN0cm9rZS13aWR0aDowLjg0MzI4MyIgLz4KICA8L2c+Cjwvc3ZnPgo="
-                class="psxLogo" />
-        </div>
-    </div>
-    <div id="toast-container"></div>
-    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <div id="divMinigameArena">
-        <div id="divArenaRibbon"></div>
-
-        <button id="buttonLeaveArena" onclick="LeaveArena();"></button>
-
-        <canvas id="canvasArena" width="384" height="224"></canvas>
-
-        <button id="buttonArenaBetBlue" onclick="PlaceBet(0);" style="margin-right: 2vw;"></button><button id="buttonArenaBetRed" onclick="PlaceBet(1);"></button>
-
-        <div id="divArenaTables" style="margin-top: 6.4vw;"></div>
-
-        <div id="divArenaCushion"></div>
-    </div>
-    <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <div id="divMinigameHike">
-        <div id="divHikeRibbon"></div>
-
-        <button id="buttonLeaveHike" onclick="LeaveHike();"></button>
-
-        <canvas id="canvasHike" width="384" height="224"></canvas>
-
-        <button id="buttonRelax" onclick="Relax();"></button>
-
-        <div id="divHikeCushion"></div>
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayGameEvent" class="overlay">
@@ -620,7 +624,7 @@
             </div>
             <span id="spanOptionLanguage"></span>
             <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button>
-            <div id="divOptionWindowSize"> <!-- 🚨 DEPRECATED! -->
+            <div id="divOptionWindowSize">
                 <span id="spanOptionWindowSize"></span>
                 <button id="buttonWindow1x" onclick="SetWidth(1)">1x</button><button id="buttonWindow2x" onclick="SetWidth(2)">2x</button><button id="buttonWindowAuto"
                     onclick="SetWidth(0)" class="selectedOption">auto</button>

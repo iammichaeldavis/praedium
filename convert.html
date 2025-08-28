@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>VW to Pixel Conversion Daemon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+
+    <style>
+        #buttonGo {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="textareaInput" name="textareaInput" autofocus autocorrect="off" autocomplete="off"></textarea>
+    <textarea id="textareaOutput" name="textareaOutput" readonly></textarea>
+    <button id="buttonGo" onclick="Go();">GO</button>
+</body>
+
+<script type="text/javascript">
+    // INIT ====================================================================
+
+    const windowSize = 500;
+    const pixelsPerUnit = Math.floor(windowSize / 100);
+
+    textareaInput.cols = 120;
+    textareaOutput.cols = 120;
+    textareaInput.rows = 20;
+    textareaOutput.rows = 20;
+    textareaInput.placeholder = 'paste contents of style.css here';
+    textareaOutput.placeholder = 'copy these results to styleClamped.css';
+
+
+
+    // DUMMY SETUP =============================================================
+
+    //const sampleString = ``;
+    //textareaInput.value = sampleString;
+
+
+
+    // SYSTEM ==================================================================
+
+    function RefactorMeasurement(foundVW) {
+        const refactorOutput = 'calc(' + Math.floor(foundVW * pixelsPerUnit) + 'px * var(--pixel-scale))';
+        return refactorOutput;
+    }
+
+    function Go() {
+        const arrayInput = textareaInput.value.split(' ');
+        let finalOutput = '';
+        for (let i = 0; i < arrayInput.length; i++) {
+            if (arrayInput[i].includes('vw')) {
+                if (arrayInput[i].includes(';')) {
+                    if (arrayInput[i].includes('}')) {
+                        const arrayItem = arrayInput[i].split(';');
+                        const strippedItem = arrayItem[0].split('vw');
+                        finalOutput += RefactorMeasurement(strippedItem[0]);
+                        finalOutput += ';';
+                        finalOutput += arrayItem[1];
+                    }
+                    else {
+                        const arrayItem = arrayInput[i].split(';');
+                        const strippedItem = arrayItem[0].split('vw');
+                        finalOutput += RefactorMeasurement(strippedItem[0]);
+                        finalOutput += ';\n';
+                    }
+                }
+                else {
+                    const strippedItem = arrayInput[i].split('vw');
+                    finalOutput += RefactorMeasurement(strippedItem[0]);
+                }
+            }
+            else {
+                if (arrayInput[i].includes('@media')) {
+                    const arrayItem = arrayInput[i].split('@media');
+                    finalOutput += arrayItem[0];
+                    i += 345;
+                    finalOutput += '*';
+                }
+                else { finalOutput += arrayInput[i]; }
+            }
+            if (i < (arrayInput.length - 1)) { finalOutput += ' '; }
+            else {
+                finalOutput += '\n\n';
+                finalOutput += '#divWidthClamp {\n';
+                finalOutput += '    margin: 0 auto;\n';
+                finalOutput += '    width: calc(504px * var(--pixel-scale));\n';
+                finalOutput += '    border: calc(2px * var(--pixel-scale)) solid black;\n';
+                finalOutput += '    border-top: 0;\n';
+                finalOutput += '}';
+            }
+        }
+        textareaOutput.value = finalOutput;
+    }
+</script>
+
+</html>
+
+
+
+<!-- End of Document -->

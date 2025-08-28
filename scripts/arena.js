@@ -37,7 +37,7 @@ function LeaveArena() {
     divGameWindow.style.display = '';
     divViewTownship.style.display = 'block';
     divMinigameArena.style.display = '';
-    body.appendChild(divFooter);
+    divWidthClamp.appendChild(divFooter);
     player.isAt = 'Township';
     UpdateDisplay();
     JumpToTopPlease();

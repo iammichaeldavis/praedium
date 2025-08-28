@@ -1726,7 +1726,7 @@ function UpdateText() {
             tableString += '</thead>';
             tableString += '<tbody>';
             tableString += '<tr>';
-            tableString += '<td style="padding: 3.2vw;">';
+            tableString += '<td id="tdTableExportsBodyCell">';
             const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / commodityBulkCount);
             let currentDollarValueOfUnit = null;
             let bounty = null;
@@ -2292,7 +2292,7 @@ function UpdateText() {
             tableString += '</thead>';
             tableString += '<tbody>';
             tableString += '<tr>';
-            tableString += '<td style="padding: 3.2vw;">';
+            tableString += '<td id="tdTableImportsBodyCell">';
             if (player.canImportTin) {
                 tableString += '<div class="divTradeRouteWrapper" id="divTradeRouteWrapperTin">';
                 tableString += '<table id="tableTradeRouteTin">';
@@ -3646,7 +3646,7 @@ function UpdateText() {
         buttonMapTargetPrev.innerHTML = displayMapPrevTarget;
         buttonMapTargetNext.innerHTML = displayMapNextTarget;
         const currentProvinceName = mapProvinces[mapTarget][0].toUpperCase();
-        divMapTarget.innerHTML = displayMapCurrTarget + '<br><b style="font-size: 4vw;">' + currentProvinceName + '</b>';
+        divMapTarget.innerHTML = displayMapCurrTarget + '<br><b>' + currentProvinceName + '</b>';
         spanDetailsLabel.innerHTML = displayMapDetails;
         buttonMapEcon.innerHTML = displayMapEcon;
         buttonMapMil.innerHTML = displayMapMil;
@@ -3702,7 +3702,7 @@ function UpdateText() {
 
             const invDigits = 7;
             contentString += '<div id="divMapDetailsMasterInventoryContainer">';
-            contentString += '<div style="width: 50%;">';
+            contentString += '<div class="divEconColumn">';
             contentString += '<b>' + displayNaturalResources + ':</b><br>';
 
             function ScribeContentString(value, iconString) {
@@ -3736,7 +3736,7 @@ function UpdateText() {
             if (player.canImportSalt) { ScribeContentString(residenceIngredientInStockCount[14][1], 'Sal'); }
             ScribeContentString(filetCount, 'FishSteak');
 
-            contentString += '<div style="height: 4vw; width: 4vw;"></div>';
+            contentString += '<div class="divEconGap"></div>';
             contentString += '<b>' + displayCrops + ':</b><br>';
             ScribeContentString(bushelCount[0], 'Wheat');
             if (farmStage > 16) { ScribeContentString(bushelCount[1], 'Barley'); }
@@ -3750,7 +3750,7 @@ function UpdateText() {
             }
             if (player.hasApiary) { ScribeContentString(residenceInStockCount[9], 'Comb'); }
 
-            contentString += '<div style="height: 4vw; width: 4vw;"></div>';
+            contentString += '<div class="divEconGap"></div>';
             contentString += '<b>' + displaySacredItems + ':</b><br>';
             ScribeContentString(beadsCount, 'Mala');
             ScribeContentString(scrollsCount, 'Scroll');
@@ -3758,7 +3758,7 @@ function UpdateText() {
             if (player.isGod) { ScribeContentString(messiahCount, 'Child'); }
             contentString += '</div>';
 
-            contentString += '<div style="width: 50%;">';
+            contentString += '<div class="divEconColumn">';
             contentString += '<b>' + displayManufacturedProducts + ':</b><br>';
             if (player.canSaw) { ScribeContentString(boardsCount, 'Board'); }
             ScribeContentString(residenceInStockCount[0], 'Loaves');
@@ -3786,7 +3786,7 @@ function UpdateText() {
             if (player.hasHiredGemcutters) { ScribeContentString(residenceInStockCount[8], 'Gems'); }
 
             if (player.hasHelpedShepherds || player.hasHelpedMiners) {
-                contentString += '<div style="height: 4vw; width: 4vw;"></div>';
+                contentString += '<div class="divEconGap"></div>';
                 contentString += '<b>' + displaySecondaryProducts + ':</b><br>';
             }
             if (player.hasHelpedShepherds) {
@@ -3801,7 +3801,7 @@ function UpdateText() {
             }
 
             if (horsesSpawn) {
-                contentString += '<div style="height: 4vw; width: 4vw;"></div>';
+                contentString += '<div class="divEconGap"></div>';
                 contentString += '<b>' + displayLivestock + ':</b><br>';
                 ScribeContentString(horsesCount, 'Horsey');
             }
@@ -3929,7 +3929,7 @@ function UpdateText() {
                 contentString += '</i></b>';
                 contentString += '<br>';
 
-                contentString += '<div style="text-align: right;width: fit-content;margin:0 auto;">';
+                contentString += '<div style="text-align: right; width: fit-content; margin:0 auto;">';
                 contentString += '<b>';
                 contentString += displayNative;
                 contentString += ':</b> ';
@@ -4723,7 +4723,8 @@ function UpdateVisibilities() {
         buttonBuild.style.display = player.canBuild ? 'block' : '';
         buttonVisitArena.style.display = trophiesSpawn ? 'block' : '';
         if (player.hasOracle) {
-            buttonVisitArena.style.marginBottom = '2vw';
+            buttonVisitArena.classList.remove('buttonVisitArenaConditionA');
+            buttonVisitArena.classList.add('buttonVisitArenaConditionB');
         }
         buttonVisitOracle.style.display = player.hasOracle ? 'block' : '';
         buttonBuyWheat.style.display = player.canSell ? 'block' : '';

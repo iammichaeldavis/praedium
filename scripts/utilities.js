@@ -26,6 +26,7 @@ function CheckForPreviousGame() {
 
 
 function AskToResume() {
+    SetWidth(loadedReport.system[0]);
     player.speaks = loadedReport.hero.speaks;
     loadedIcon = 'Bushel';
     if (loadedReport.counts.staff[2] > 0) { loadedIcon = 'Fieldhand'; }
@@ -751,6 +752,7 @@ function CollateGameStateReport(loud = false) {
         stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel, relaxLevel, meditateCount,],
         relations: [mapProvinces[1][2], mapProvinces[2][2], mapProvinces[3][2],],
         timestamps: [timeAtSave, timeAtStart, timeAtWin,],
+        system: [resolutionScale,],
         v: version,
     };
     if (loud) {
@@ -763,14 +765,16 @@ function CollateGameStateReport(loud = false) {
 
 
 
-function DetermineDevice() {
+function DetermineDevice(bark) {
     const regexp = /android|iphone|kindle|ipad/i; // regular expression containing known mobile device keywords; this may need to grow 🤔
     player.isOnMobile = regexp.test(navigator.userAgent);
 
     if (player.isOnMobile) {
-        alert('I am a mobile device 📱');
+        if (bark) { alert('I am a mobile device 📱'); }
+        SetWidth(0);
     } else {
-        alert('I am a desktop 🖥️ or laptop 💻');
+        if (bark) { alert('I am a desktop 🖥️⌨️🖱️ or laptop 💻'); }
+        SetWidth(2);
     }
 }
 
@@ -962,22 +966,33 @@ function CloneArray(source, destination) {
 
 
 function SetWidth(multiplier) {
-    if (multiplier == 1) {
+    resolutionScale = multiplier;
+    buttonWindow1x.classList.remove('selectedOption');
+    buttonWindow2x.classList.remove('selectedOption');
+    buttonWindowAuto.classList.remove('selectedOption');
+    divCalendar.classList.remove('divCalendarWidthClamped');
+    divCalendar.classList.remove('divCalendarWidthAuto');
+    if (resolutionScale == 1) {
         buttonWindow1x.classList.add('selectedOption');
-        buttonWindow2x.classList.remove('selectedOption');
-        buttonWindowAuto.classList.remove('selectedOption');
+        divCalendar.classList.add('divCalendarWidthClamped');
+        stylesheetActive.setAttribute('href', 'styleClamped.css?v=7777');
+        const rootElement = document.documentElement;
+        rootElement.style.setProperty('--pixel-scale', '1');
     }
-    else if (multiplier == 2) {
-        buttonWindow1x.classList.remove('selectedOption');
+    else if (resolutionScale == 2) {
         buttonWindow2x.classList.add('selectedOption');
-        buttonWindowAuto.classList.remove('selectedOption');
+        divCalendar.classList.add('divCalendarWidthClamped');
+        stylesheetActive.setAttribute('href', 'styleClamped.css?v=8888');
+        const rootElement = document.documentElement;
+        rootElement.style.setProperty('--pixel-scale', '2');
     }
     else {
-        buttonWindow1x.classList.remove('selectedOption');
-        buttonWindow2x.classList.remove('selectedOption');
         buttonWindowAuto.classList.add('selectedOption');
+        divCalendar.classList.add('divCalendarWidthAuto');
+        stylesheetActive.setAttribute('href', 'style.css?v=9999');
+        const rootElement = document.documentElement;
+        rootElement.style.setProperty('--pixel-scale', '');
     }
-
 }
 
 

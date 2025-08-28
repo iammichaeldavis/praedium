@@ -7,99 +7,9 @@
     --pixel-scale: 1;
 }
 
-@media screen and (min-width: 1000px) {
-    :root {
-        --pixel-scale: 2;
-    }
-}
-
-@media screen and (min-width: 1500px) {
-    :root {
-        --pixel-scale: 3;
-    }
-}
-
-@media screen and (min-width: 2000px) {
-    :root {
-        --pixel-scale: 4;
-    }
-}
-
-@media screen and (min-width: 2500px) {
-    :root {
-        --pixel-scale: 5;
-    }
-}
-
-@media screen and (min-width: 3000px) {
-    :root {
-        --pixel-scale: 6;
-    }
-}
-
-@media screen and (min-width: 3500px) {
-    :root {
-        --pixel-scale: 7;
-    }
-}
-
-@media screen and (min-width: 4000px) {
-    :root {
-        --pixel-scale: 8;
-    }
-}
-
-@media screen and (min-width: 4500px) {
-    :root {
-        --pixel-scale: 9;
-    }
-}
-
-@media screen and (min-width: 5000px) {
-    :root {
-        --pixel-scale: 10;
-    }
-}
-
-@media screen and (min-width: 5500px) {
-    :root {
-        --pixel-scale: 11;
-    }
-}
-
-@media screen and (min-width: 6000px) {
-    :root {
-        --pixel-scale: 12;
-    }
-}
-
-@media screen and (min-width: 6500px) {
-    :root {
-        --pixel-scale: 13;
-    }
-}
-
-@media screen and (min-width: 7000px) {
-    :root {
-        --pixel-scale: 14;
-    }
-}
-
-@media screen and (min-width: 7500px) {
-    :root {
-        --pixel-scale: 15;
-    }
-}
-
-@media screen and (min-width: 8000px) {
-    :root {
-        --pixel-scale: 16;
-    }
-}
-
 * {
     font-family: 'Typewriter', 'Courier New', monospace;
-    font-size: 2.4vw;
+    font-size: calc(12px * var(--pixel-scale));
     color: black;
     box-sizing: border-box;
     margin: 0;
@@ -111,7 +21,7 @@
 }
 
 s {
-    font-size: 2.5vw;
+    font-size: calc(12px * var(--pixel-scale));
 }
 
 body {
@@ -140,7 +50,7 @@ img {
 button {
     text-decoration: none;
     border: calc(1px * var(--pixel-scale)) solid #1a1a1a;
-    padding: 0.8vw 2.4vw;
+    padding: calc(4px * var(--pixel-scale)) calc(12px * var(--pixel-scale));
     background: #f0f0f0;
     user-select: none;
     cursor: pointer;
@@ -184,7 +94,7 @@ button.disabled s {
 
 
 #buttonTill {
-    margin-left: 2vw;
+    margin-left: calc(10px * var(--pixel-scale));
 }
 
 #buttonForewordEnglish,
@@ -200,7 +110,7 @@ button.disabled s {
 #buttonQ,
 #buttonStar,
 #buttonArenaBetBlue {
-    margin-right: 2vw;
+    margin-right: calc(10px * var(--pixel-scale));
 }
 
 #divFarmButtons button,
@@ -219,16 +129,16 @@ button.disabled s {
 #divBarterButtons #buttonBarterFig,
 #divBarterButtons #buttonBarterPom,
 #divBarterButtons #buttonBarterGrape {
-    margin-top: 2vw;
+    margin-top: calc(10px * var(--pixel-scale));
 }
 
 #divBarterButtons #buttonBarterOlive,
 #divBarterButtons #buttonBarterGrape {
-    margin-bottom: 6.4vw;
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 #divBarterButtons #buttonBarterAll {
-    margin-bottom: 2vw;
+    margin-bottom: calc(10px * var(--pixel-scale));
 }
 
 #divBarterButtons #buttonBarterOlive.noMargin {
@@ -238,15 +148,15 @@ button.disabled s {
 #buttonVisitOracle,
 #buttonPlayGod,
 #buttonBuild {
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #divViewTownship #divVillageButtons .buttonVisitArenaConditionA {
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #divViewTownship #divVillageButtons .buttonVisitArenaConditionB {
-    margin: 0 auto 2vw auto;
+    margin: 0 auto calc(10px * var(--pixel-scale)) auto;
 }
 
 #divVillageButtons #buttonSellWheat {
@@ -254,7 +164,7 @@ button.disabled s {
 }
 
 #divVillageButtons #buttonBuyWheat {
-    margin: 6.4vw auto 0 auto;
+    margin: calc(32px * var(--pixel-scale)) auto 0 auto;
 }
 
 #divVillageButtons #buttonBuyBarley,
@@ -268,12 +178,12 @@ button.disabled s {
 #divVillageButtons #buttonSellStone,
 #divVillageButtons #buttonBuyHorses,
 #divVillageButtons #buttonSellHorses {
-    margin: 2vw auto 0 auto;
+    margin: calc(10px * var(--pixel-scale)) auto 0 auto;
 }
 
 #divVillageButtons #buttonBuyStone,
 #divVillageButtons #buttonBuyHorses {
-    margin-bottom: 6.4vw;
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideClass {
@@ -282,18 +192,18 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #buttonForest,
 #buttonMountain {
-    margin: 6.4vw auto 0 auto;
+    margin: calc(32px * var(--pixel-scale)) auto 0 auto;
 }
 
 #buttonForewordDismiss {
-    font-size: 3.8vw;
+    font-size: calc(19px * var(--pixel-scale));
     display: block;
-    margin: 6.4vw auto 0 auto;
+    margin: calc(32px * var(--pixel-scale)) auto 0 auto;
 }
 
 #buttonForewordEnglish,
 #buttonForewordSpanish {
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
 }
 
 #buttonEnglish,
@@ -301,7 +211,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #buttonWindow1x,
 #buttonWindow2x,
 #buttonWindowAuto {
-    font-size: 2.4vw;
+    font-size: calc(12px * var(--pixel-scale));
 }
 
 
@@ -333,10 +243,10 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 
 #buttonSystemMessageDismiss {
-    font-size: 3.8vw;
+    font-size: calc(19px * var(--pixel-scale));
     color: #3c14dc;
     display: block;
-    margin: 6.4vw auto 0 auto;
+    margin: calc(32px * var(--pixel-scale)) auto 0 auto;
     border: calc(1px * var(--pixel-scale)) solid #3c14dc;
     background: #d7ebfa;
 }
@@ -356,10 +266,10 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 
 #buttonGameEventDismiss {
-    font-size: 3.8vw;
+    font-size: calc(19px * var(--pixel-scale));
     color: #24b600;
     display: block;
-    margin: 6.4vw auto 0 auto;
+    margin: calc(32px * var(--pixel-scale)) auto 0 auto;
     border: calc(1px * var(--pixel-scale)) solid #24b600;
     background: #f2fce5;
 }
@@ -385,9 +295,9 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 
 #buttonModsDismiss {
-    font-size: 3.8vw;
+    font-size: calc(19px * var(--pixel-scale));
     display: block;
-    margin: 6.4vw auto 0 auto;
+    margin: calc(32px * var(--pixel-scale)) auto 0 auto;
     color: #883e88;
     border: calc(1px * var(--pixel-scale)) solid #883e88;
     background: #faebfa;
@@ -408,9 +318,9 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 
 #buttonOptionsDismiss {
-    font-size: 3.8vw;
+    font-size: calc(19px * var(--pixel-scale));
     display: block;
-    margin: 6.4vw auto 0 auto;
+    margin: calc(32px * var(--pixel-scale)) auto 0 auto;
 }
 
 #buttonOptionsDismiss,
@@ -494,7 +404,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 
 #buttonPriority {
-    margin-top: 2vw;
+    margin-top: calc(10px * var(--pixel-scale));
 }
 
 #buttonPriorityDecal {
@@ -524,7 +434,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 
 #divFooter button {
-    font-size: 2.4vw;
+    font-size: calc(12px * var(--pixel-scale));
     color: #1a1a1a;
     border: calc(1px * var(--pixel-scale)) solid #1a1a1a;
     background: #d4d4e4;
@@ -553,19 +463,19 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #buttonGoToPraedium,
 #buttonGoToPort,
 #buttonGoToTownshipFromPort {
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #buttonGoToPraediumFromRes,
 #buttonGoToTownship,
 #buttonGoToPort {
-    margin-left: 2vw;
+    margin-left: calc(10px * var(--pixel-scale));
 }
 
 #buttonGoHome,
 #buttonLeaveWharf {
     display: block;
-    margin-top: 6.4vw;
+    margin-top: calc(32px * var(--pixel-scale));
 }
 
 #buttonWharfPosca,
@@ -575,7 +485,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #buttonWharfBait,
 #buttonWharfRod {
     display: block;
-    margin: 0 auto 2vw auto;
+    margin: 0 auto calc(10px * var(--pixel-scale)) auto;
 }
 
 #buttonWharfWWF {
@@ -590,7 +500,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #buttonWharfFishermen {
     display: none;
-    margin: 6.4vw auto 0 auto;
+    margin: calc(32px * var(--pixel-scale)) auto 0 auto;
 }
 
 
@@ -598,7 +508,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #buttonChooseHeir {
     border: calc(3px * var(--pixel-scale)) solid;
     border-image: linear-gradient(#60a8fc, #0000a8) 1;
-    margin-bottom: 6.4vw;
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 #buttonChooseHeirHeart {
@@ -735,29 +645,29 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divViewResidence #divResidenceActionArea #buttonHostParty {
-    margin: 0 auto 2vw auto;
+    margin: 0 auto calc(10px * var(--pixel-scale)) auto;
 }
 
 #divViewResidence #divResidenceActionArea #buttonGoOnHike {
-    margin: 0 auto 2vw auto;
+    margin: 0 auto calc(10px * var(--pixel-scale)) auto;
 }
 
 #buttonImproveResidence {
     display: block;
-    margin: 2vw auto 0 auto;
+    margin: calc(10px * var(--pixel-scale)) auto 0 auto;
 }
 
 
 
 #buttonSailWest {
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 
 
 #buttonResumeYes {
     display: block;
-    margin: 6.4vw auto 6.4vw auto;
+    margin: calc(32px * var(--pixel-scale)) auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #buttonResumeNo {
@@ -768,13 +678,13 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 
 #buttonReturnToMap {
-    margin-bottom: 2vw;
+    margin-bottom: calc(10px * var(--pixel-scale));
 }
 
 
 
 #buttonRecords {
-    margin-left: 2vw;
+    margin-left: calc(10px * var(--pixel-scale));
 }
 
 
@@ -804,7 +714,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     height: 100%;
     background-color: #323e49;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 6vw;
+    font-size: calc(30px * var(--pixel-scale));
     color: whitesmoke;
     text-align: center;
     padding-top: 36vh;
@@ -813,7 +723,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divOverlayLoading span {
     font-family: 'Times New Roman', Times, serif;
-    font-size: 8vw;
+    font-size: calc(40px * var(--pixel-scale));
     color: whitesmoke;
 }
 
@@ -831,25 +741,25 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divModalForeword {
     text-align: center;
-    width: 90vw;
-    margin: 5vw auto;
+    width: calc(450px * var(--pixel-scale));
+    margin: calc(25px * var(--pixel-scale)) auto;
     border: calc(3px * var(--pixel-scale)) solid crimson;
-    padding: 14vw 8vw;
+    padding: calc(70px * var(--pixel-scale)) calc(40px * var(--pixel-scale));
     background: antiquewhite;
 }
 
 #divForewordCorpus {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #120404;
-    line-height: 5.2vw;
+    line-height: calc(26px * var(--pixel-scale));
     text-align: justify;
 }
 
 #divForewordTitle {
     font-family: 'Garamond', serif;
-    font-size: 14vw;
-    line-height: 8vw;
+    font-size: calc(70px * var(--pixel-scale));
+    line-height: calc(40px * var(--pixel-scale));
     color: crimson;
     text-align: center;
     margin: 0 auto;
@@ -862,36 +772,36 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divForewordSubtitle {
     font-family: 'Garamond', serif;
-    font-size: 2.8vw;
+    font-size: calc(14px * var(--pixel-scale));
     font-style: italic;
     color: crimson;
     text-align: center;
-    margin: 2.2vw auto 4.2vw auto;
+    margin: calc(11px * var(--pixel-scale)) auto calc(21px * var(--pixel-scale)) auto;
     user-select: none;
 }
 
 #imgLeafL,
 #imgLeafR {
-    height: 1.6vw;
+    height: calc(8px * var(--pixel-scale));
 }
 
 #divForewordScripture {
     font-family: 'Garamond', serif;
-    font-size: 4vw;
+    font-size: calc(20px * var(--pixel-scale));
     font-style: italic;
     color: crimson;
-    line-height: 5.2vw;
+    line-height: calc(26px * var(--pixel-scale));
     text-align: justify;
-    width: 60vw;
-    margin: 6.4vw auto;
+    width: calc(300px * var(--pixel-scale));
+    margin: calc(32px * var(--pixel-scale)) auto;
 }
 
 #divForewordSource {
     font-family: 'Garamond', serif;
-    font-size: 3.4vw;
+    font-size: calc(17px * var(--pixel-scale));
     font-style: italic;
     color: crimson;
-    margin-top: 1.4vw;
+    margin-top: calc(7px * var(--pixel-scale));
 }
 
 
@@ -902,26 +812,26 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divModalSystemMessage {
-    width: 80vw;
-    margin: 10vw auto;
+    width: calc(400px * var(--pixel-scale));
+    margin: calc(50px * var(--pixel-scale)) auto;
     border: calc(3px * var(--pixel-scale)) solid #3c14dc;
-    padding: 8vw;
+    padding: calc(40px * var(--pixel-scale));
     background: #d7ebfa;
 }
 
 #divSystemMessageCorpus,
 #divSystemMessageCorpus .nobreak {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #040412;
-    line-height: 5.2vw;
+    line-height: calc(26px * var(--pixel-scale));
     text-align: justify;
 }
 
 #divSystemMessageCorpus .divider {
     color: #3c14dc;
     text-align: center;
-    margin: 3.2vw auto;
+    margin: calc(16px * var(--pixel-scale)) auto;
     user-select: none;
 }
 
@@ -931,18 +841,18 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divSoyMessage {
     font-family: 'Brush Script MT', cursive;
-    font-size: 6.9vw;
+    font-size: calc(34px * var(--pixel-scale));
     font-weight: bold;
     text-align: center;
-    margin-bottom: 4vw;
+    margin-bottom: calc(20px * var(--pixel-scale));
 }
 
 #divSystemMessageScripture {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #040412;
     font-style: italic;
-    line-height: 5.2vw;
+    line-height: calc(26px * var(--pixel-scale));
     text-align: justify;
 }
 
@@ -950,32 +860,32 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     font-family: 'Garamond', serif;
     font-weight: bold;
     color: #040412;
-    font-size: 4.4vw;
+    font-size: calc(22px * var(--pixel-scale));
     text-align: center;
-    line-height: 3vw;
-    margin: 2.8vw auto 6.4vw auto;
+    line-height: calc(15px * var(--pixel-scale));
+    margin: calc(14px * var(--pixel-scale)) auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #spanInfoVersion {
     font-family: 'Garamond', serif;
     font-weight: bold;
     color: #040412;
-    font-size: 2vw;
+    font-size: calc(10px * var(--pixel-scale));
 }
 
 #spanInfoCC0 {
     font-family: 'Garamond', serif;
     font-weight: bold;
     color: #040412;
-    font-size: 1.6vw;
+    font-size: calc(8px * var(--pixel-scale));
 }
 
 #divSystemMessageSource {
     font-family: 'Garamond', serif;
-    font-size: 3vw;
+    font-size: calc(15px * var(--pixel-scale));
     font-style: italic;
     color: #040412;
-    margin-top: 1.2vw;
+    margin-top: calc(6px * var(--pixel-scale));
 }
 
 
@@ -986,16 +896,16 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divModalGameEvent {
-    width: 80vw;
-    margin: 10vw auto;
+    width: calc(400px * var(--pixel-scale));
+    margin: calc(50px * var(--pixel-scale)) auto;
     border: calc(3px * var(--pixel-scale)) solid #24b600;
-    padding: 8vw;
+    padding: calc(40px * var(--pixel-scale));
     background: #f2fce5;
 }
 
 #divGameEventFaçade {
-    width: 60vw;
-    margin: 0 auto 3.2vw auto;
+    width: calc(300px * var(--pixel-scale));
+    margin: 0 auto calc(16px * var(--pixel-scale)) auto;
     user-select: none;
 }
 
@@ -1007,28 +917,28 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divGameEventCorpus {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
     text-align: center;
 }
 
 #divGameEventCorpus #nasirMessage {
     font-family: 'Alegreya Sans SC', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.2vw;
-    margin-top: 3.2vw;
+    line-height: calc(21px * var(--pixel-scale));
+    margin-top: calc(16px * var(--pixel-scale));
     border: calc(1px * var(--pixel-scale)) solid black;
-    padding: 1vw 3vw;
+    padding: calc(5px * var(--pixel-scale)) calc(15px * var(--pixel-scale));
 }
 
 #divGameEventCorpus #Dumas,
 #divGameEventCorpus .hikeTilt {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
     font-style: italic;
 }
 
@@ -1038,31 +948,31 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divGameEventCorpus #fin {
     font-family: 'Garamond', serif;
-    font-size: 2.8vw;
+    font-size: calc(14px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
     font-weight: bold;
 }
 
 #divGameEventCorpus #writ {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: crimson;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
 }
 
 #divGameEventCorpus .redTeam {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: red;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
 }
 
 #divGameEventCorpus .blueTeam {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: blue;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
 }
 
 #divGameEventCorpus #MrSecretary,
@@ -1072,111 +982,111 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus #shootingScript {
-    font-size: 2.6vw;
-    line-height: 3.2vw;
-    margin-bottom: 4.8vw;
+    font-size: calc(13px * var(--pixel-scale));
+    line-height: calc(16px * var(--pixel-scale));
+    margin-bottom: calc(24px * var(--pixel-scale));
 }
 
 #divGameEventCorpus #shootingScript sup {
-    font-size: 1.6vw;
+    font-size: calc(8px * var(--pixel-scale));
 }
 
 #divGameEventCorpus #shootingScript .action {
-    font-size: 2.6vw;
+    font-size: calc(13px * var(--pixel-scale));
     text-align: left;
-    margin-bottom: 3.2vw;
+    margin-bottom: calc(16px * var(--pixel-scale));
 }
 
 #divGameEventCorpus #shootingScript .dialogue {
-    font-size: 2.6vw;
+    font-size: calc(13px * var(--pixel-scale));
     width: 70%;
-    margin: 0 auto 3.2vw auto;
+    margin: 0 auto calc(16px * var(--pixel-scale)) auto;
     text-align: left;
 }
 
 #divGameEventCorpus #signs {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 3.2vw;
+    font-size: calc(16px * var(--pixel-scale));
 }
 
 #divGameEventCorpus #there {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     font-style: italic;
     color: #041204;
 }
 
 #divGameEventCorpus #bookQuote {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.8vw;
+    line-height: calc(24px * var(--pixel-scale));
     text-align: justify;
 }
 
 #divGameEventCorpus #bookCite {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
     text-align: center;
 }
 
 #divGameEventCorpus #bookTitle {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
     font-style: italic;
 }
 
 #divGameEventCorpus #divMeetings {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
     text-align: justify;
 }
 
 #divGameEventCorpus .centerMePlease {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
     text-align: center;
 }
 
 #divGameEventCorpus .tiltMePlease {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
     text-align: center;
     font-style: italic;
 }
 
 #divGameEventCorpus #AlaviNames {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
     text-align: center;
 }
 
 #divGameEventCorpus #AlaviSong,
 #divGameEventCorpus #AlaviSong span {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
     text-align: justify;
     font-style: italic;
 }
 
 #divGameEventCorpus #divToadies {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #041204;
-    line-height: 4.3vw;
+    line-height: calc(21px * var(--pixel-scale));
     text-align: justify;
     font-style: italic;
 }
@@ -1189,18 +1099,18 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divModalMods {
-    width: 80vw;
-    margin: 10vw auto;
+    width: calc(400px * var(--pixel-scale));
+    margin: calc(50px * var(--pixel-scale)) auto;
     border: calc(3px * var(--pixel-scale)) solid #883e88;
-    padding: 8vw;
+    padding: calc(40px * var(--pixel-scale));
     background: #faebfa;
 }
 
 #divModsCorpus {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #120412;
-    line-height: 5.2vw;
+    line-height: calc(26px * var(--pixel-scale));
     text-align: center;
 }
 
@@ -1218,18 +1128,18 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divModalResume {
     user-select: none;
-    width: 80vw;
-    margin: 10vw auto;
+    width: calc(400px * var(--pixel-scale));
+    margin: calc(50px * var(--pixel-scale)) auto;
     border: calc(3px * var(--pixel-scale)) solid #b6b6b6;
-    padding: 8vw;
+    padding: calc(40px * var(--pixel-scale));
     background: #fcfcfc;
 }
 
 #divResumeCorpus {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #121212;
-    line-height: 5.2vw;
+    line-height: calc(26px * var(--pixel-scale));
     text-align: left;
 }
 
@@ -1243,10 +1153,10 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #divModalOptions {
     user-select: none;
     text-align: center;
-    width: 80vw;
-    margin: 10vw auto;
+    width: calc(400px * var(--pixel-scale));
+    margin: calc(50px * var(--pixel-scale)) auto;
     border: calc(3px * var(--pixel-scale)) solid #b6b600;
-    padding: 8vw;
+    padding: calc(40px * var(--pixel-scale));
     background: #fcfce5;
 }
 
@@ -1254,7 +1164,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     cursor: pointer;
     user-select: none;
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #b6b600;
 }
 
@@ -1263,55 +1173,55 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divModalOptions div {
-    margin-bottom: 3.2vw;
+    margin-bottom: calc(16px * var(--pixel-scale));
 }
 
 #divModalOptions div:last-of-type {
-    margin-bottom: 6.4vw;
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 #divModalOptions input[type='checkbox'] {
-    width: 2.6vw;
-    height: 2.6vw;
+    width: calc(13px * var(--pixel-scale));
+    height: calc(13px * var(--pixel-scale));
     /*outline: 2px solid #005ca1;*/
 }
 
 #divModalOptions #spanOptionLanguage,
 #divModalOptions #spanOptionWindowSize {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #b6b600;
     display: block;
-    margin-bottom: 0.5vw;
+    margin-bottom: calc(2px * var(--pixel-scale));
 }
 
 #divModalOptions #divOptionWindowSize {
-    margin-top: 3.2vw;
+    margin-top: calc(16px * var(--pixel-scale));
 }
 
 #divOptionsFlavour {
     font-family: 'Garamond', serif;
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
     color: #121204;
     font-style: italic;
-    line-height: 5.2vw;
+    line-height: calc(26px * var(--pixel-scale));
     text-align: justify;
     user-select: text;
 }
 
 #divOptionsFlavour .divider {
     color: #b6b600;
-    margin: 3.2vw auto;
+    margin: calc(16px * var(--pixel-scale)) auto;
     user-select: none;
     text-align: center;
 }
 
 #divOptionsSource {
     font-family: 'Garamond', serif;
-    font-size: 3vw;
+    font-size: calc(15px * var(--pixel-scale));
     font-style: italic;
     color: #121204;
-    margin-top: 1.2vw;
+    margin-top: calc(6px * var(--pixel-scale));
     user-select: text;
 }
 
@@ -1481,13 +1391,13 @@ body #divWidthClamp .divCalendarWidthClamped {
 
 #divGameWindow {
     text-align: center;
-    padding: 6.4vw 0;
+    padding: calc(32px * var(--pixel-scale)) 0;
     background: #f6f6ff;
 }
 
 #divViewForest,
 #divViewMountain {
-    padding-bottom: 6.4vw;
+    padding-bottom: calc(32px * var(--pixel-scale));
 }
 
 .starving {
@@ -1497,7 +1407,7 @@ body #divWidthClamp .divCalendarWidthClamped {
 
 #divFarmButtons,
 #divBarterButtons {
-    margin-top: 6.4vw;
+    margin-top: calc(32px * var(--pixel-scale));
 }
 
 #imgNirvana {
@@ -1505,7 +1415,7 @@ body #divWidthClamp .divCalendarWidthClamped {
     height: calc(226px * var(--pixel-scale));
     border: calc(1px * var(--pixel-scale)) solid black;
     display: none;
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 
@@ -1526,7 +1436,7 @@ canvas {
     background-color: transparent;
     background-image: var(--agua);
     background-size: calc(16px * var(--pixel-scale));
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #canvasMountain,
@@ -1536,7 +1446,7 @@ canvas {
     background-color: transparent;
     background-image: var(--agua);
     background-size: calc(16px * var(--pixel-scale));
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #canvasVillage,
@@ -1548,7 +1458,7 @@ canvas {
 #canvasWharf {
     width: calc(386px * var(--pixel-scale));
     height: calc(226px * var(--pixel-scale));
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #canvasMap {
@@ -1582,7 +1492,7 @@ td {
 }
 
 .warehouseTotal {
-    font-size: 1.8vw;
+    font-size: calc(9px * var(--pixel-scale));
     color: #666666;
 }
 
@@ -1597,7 +1507,7 @@ td {
 #tableMountainInventory,
 #tableMountainStaff,
 #tableMountainReport {
-    margin-top: 2vw;
+    margin-top: calc(10px * var(--pixel-scale));
     border: calc(1px * var(--pixel-scale)) solid black;
     user-select: none;
 }
@@ -1605,7 +1515,7 @@ td {
 #tableFarmInventory,
 #tableForestInventory,
 #tableMountainInventory {
-    margin-top: 6.4vw;
+    margin-top: calc(32px * var(--pixel-scale));
 }
 
 #tableFarmInventory thead td,
@@ -1660,24 +1570,24 @@ td {
 #tableForestStaff td,
 #tableMountainInventory td,
 #tableMountainStaff td {
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
 }
 
 #tableFarmReport td,
 #tableForestReport td,
 #tableMountainReport td {
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     text-align: center;
 }
 
 #divGameWindow .noPadColumn,
 #divMinigameArena .noPadColumn {
-    padding: 1vw 0;
+    padding: calc(5px * var(--pixel-scale)) 0;
 }
 
 #divGameWindow .rightPadColumn,
 html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadColumn {
-    padding: 1vw 2vw 1vw 0;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale)) calc(5px * var(--pixel-scale)) 0;
 }
 
 
@@ -1714,7 +1624,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #tableVillageInventory,
 #tableVillageStatistics,
 #tableVillageMateriel {
-    margin-top: 2vw;
+    margin-top: calc(10px * var(--pixel-scale));
 }
 
 #tableVillageDemographics td,
@@ -1723,7 +1633,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #tableVillageInventory td,
 #tableVillageStatistics td,
 #tableVillageMateriel td {
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
 }
 
 #tableVillageDemographics thead td,
@@ -1791,11 +1701,11 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 
 #tableResidenceInventory {
-    margin-top: 6.4vw;
+    margin-top: calc(32px * var(--pixel-scale));
 }
 
 #tableResidenceReport {
-    margin-top: 2vw;
+    margin-top: calc(10px * var(--pixel-scale));
 }
 
 #tableResidenceInventory,
@@ -1811,7 +1721,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 #tableResidenceInventory td,
 #tableResidenceReport td {
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     vertical-align: bottom;
     border-bottom: calc(1px * var(--pixel-scale)) solid #d8d8d8;
 }
@@ -1845,7 +1755,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 
 #tableWorkshopsContainer {
-    width: 95vw;
+    width: calc(475px * var(--pixel-scale));
 }
 
 .tdWorkshopsContainer {
@@ -1860,7 +1770,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 .residenceWorkshopTable td {
     vertical-align: bottom;
     text-align: center;
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     border-bottom: calc(1px * var(--pixel-scale)) solid #d8d8d8;
 }
 
@@ -1908,17 +1818,17 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #tableExports,
 #tableImports {
     border: calc(1px * var(--pixel-scale)) solid black;
-    margin-bottom: 3.2vw;
+    margin-bottom: calc(16px * var(--pixel-scale));
     user-select: none;
 }
 
 #tableImports {
-    margin-top: 6.4vw;
+    margin-top: calc(32px * var(--pixel-scale));
 }
 
 #tableExports #tdTableExportsBodyCell,
 #tableImports #tdTableImportsBodyCell {
-    padding: 3.2vw;
+    padding: calc(16px * var(--pixel-scale));
 }
 
 #tableExports table,
@@ -1929,7 +1839,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 #tableExports td,
 #tableImports td {
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     vertical-align: bottom;
 }
 
@@ -1978,7 +1888,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #tableShepherdsStaff td,
 #tableMinersReport td,
 #tableMinersStaff td {
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     vertical-align: bottom;
 }
 
@@ -2001,21 +1911,21 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 #tableShepherdsReport,
 #tableMinersReport {
-    margin-bottom: 2vw;
+    margin-bottom: calc(10px * var(--pixel-scale));
 }
 
 
 
 #tableFishSession {
-    margin: 6.4vw auto 2vw auto;
+    margin: calc(32px * var(--pixel-scale)) auto calc(10px * var(--pixel-scale)) auto;
 }
 
 #tableFishRecords {
-    margin-bottom: 6.4vw;
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 #tableFishReport {
-    margin-top: 2vw;
+    margin-top: calc(10px * var(--pixel-scale));
 }
 
 #tableFishSession,
@@ -2069,7 +1979,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #tableFishRecords td,
 #tableFishInventory td,
 #tableFishReport td {
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     vertical-align: bottom;
 }
 
@@ -2079,14 +1989,14 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 #tableFishSession tr.fishTableFirstRow td,
 #tableFishRecords tr.fishTableFirstRow td {
-    padding: 1vw 2vw 0 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale)) 0 calc(10px * var(--pixel-scale));
     border-right: calc(1px * var(--pixel-scale)) solid #e0e0e0;
     text-align: center;
 }
 
 #tableFishSession tr.fishTableSecondRow td,
 #tableFishRecords tr.fishTableSecondRow td {
-    padding: 0 2vw 1vw 2vw;
+    padding: 0 calc(10px * var(--pixel-scale)) calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     border-right: calc(1px * var(--pixel-scale)) solid #e0e0e0;
     text-align: center;
 }
@@ -2151,7 +2061,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 .tutorialSell {
-    margin: 0 2vw calc(13px * var(--pixel-scale)) 2vw;
+    margin: 0 calc(10px * var(--pixel-scale)) calc(13px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
 }
 
 
@@ -3075,16 +2985,16 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 #divVillageName {
-    font-size: 3.2vw;
-    line-height: 2vw;
+    font-size: calc(16px * var(--pixel-scale));
+    line-height: calc(10px * var(--pixel-scale));
     font-weight: bold;
     color: #120404;
     margin: 0;
 }
 
 #divVillageEstDate {
-    font-size: 1.8vw;
-    line-height: 3.2vw;
+    font-size: calc(9px * var(--pixel-scale));
+    line-height: calc(16px * var(--pixel-scale));
     color: #120404;
     text-align: center;
     display: inline-block;
@@ -3093,7 +3003,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #divVillageLasTablas {
-    margin-bottom: 6.4vw;
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 
@@ -3102,7 +3012,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 #divResidenceActionArea {
-    margin-bottom: 6.4vw;
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 #tableWorkshopsContainer img {
@@ -3110,7 +3020,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     height: calc(86px * var(--pixel-scale));
     border: calc(1px * var(--pixel-scale)) solid black;
     display: block;
-    margin: 6.4vw auto 2vw auto;
+    margin: calc(32px * var(--pixel-scale)) auto calc(10px * var(--pixel-scale)) auto;
 }
 
 
@@ -3119,16 +3029,16 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 #divPortName {
-    font-size: 3.2vw;
-    line-height: 2vw;
+    font-size: calc(16px * var(--pixel-scale));
+    line-height: calc(10px * var(--pixel-scale));
     font-weight: bold;
     color: #120404;
     margin: 0;
 }
 
 #divPortSubtitle {
-    font-size: 1.8vw;
-    line-height: 3.2vw;
+    font-size: calc(9px * var(--pixel-scale));
+    line-height: calc(16px * var(--pixel-scale));
     color: #120404;
     text-align: center;
     display: inline-block;
@@ -3137,7 +3047,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #divPortActionArea {
-    margin-bottom: 6.4vw;
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 #divGameWindow #divPortActionArea img {
@@ -3149,7 +3059,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #imgTradeTin {
     width: calc(130px * var(--pixel-scale));
     height: calc(86px * var(--pixel-scale));
-    margin: 6.4vw auto 3.2vw auto;
+    margin: calc(32px * var(--pixel-scale)) auto calc(16px * var(--pixel-scale)) auto;
 }
 
 .divTradeRouteWrapper,
@@ -3159,7 +3069,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     align-items: center;
     flex-wrap: nowrap;
     justify-content: center;
-    margin-top: 6.4vw;
+    margin-top: calc(32px * var(--pixel-scale));
 }
 
 #divTradeRouteWrapperOil,
@@ -3168,7 +3078,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 .divDeliveryColumnWrapper {
-    margin-left: 2vw;
+    margin-left: calc(10px * var(--pixel-scale));
     text-align: center;
 }
 
@@ -3176,26 +3086,26 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divPortActionArea .divImportsWrapper img {
     width: calc(66px * var(--pixel-scale));
     height: calc(66px * var(--pixel-scale));
-    margin: 0 auto 2vw auto;
+    margin: 0 auto calc(10px * var(--pixel-scale)) auto;
 }
 
 .divDeliveryTimerBox {
     border: calc(1px * var(--pixel-scale)) solid black;
-    padding: 1vw 2vw 2vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale)) calc(10px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     text-align: center;
     color: white;
     font-weight: bold;
-    font-size: 1.8vw;
+    font-size: calc(9px * var(--pixel-scale));
 }
 
 .divDeliveryTimerBoxLiner {
     border: calc(1px * var(--pixel-scale)) solid black;
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     text-align: center;
     background-color: aliceblue;
     font-weight: normal;
-    margin-top: 1vw;
-    font-size: 2.8vw;
+    margin-top: calc(5px * var(--pixel-scale));
+    font-size: calc(14px * var(--pixel-scale));
 }
 
 
@@ -3204,12 +3114,12 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 
 #divViewHeirWorkshop {
-    margin-bottom: 6.4vw;
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 #divHeirWorkshopMarquee {
-    font-size: 4.2vw;
-    margin-bottom: 6.4vw;
+    font-size: calc(21px * var(--pixel-scale));
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 #divHeirWorkshopForewardHeadline {
@@ -3224,16 +3134,16 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #buttonHeirBegin {
-    margin-top: 6.4vw;
+    margin-top: calc(32px * var(--pixel-scale));
 }
 
 #selectHeirNames,
 #selectHeirEthnicities,
 #selectHeirTitles {
     display: block;
-    margin: 6.4vw auto 6.4vw auto;
+    margin: calc(32px * var(--pixel-scale)) auto calc(32px * var(--pixel-scale)) auto;
     border: calc(1px * var(--pixel-scale)) solid black;
-    padding: 1vw 2vw 1vw 1vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale)) calc(5px * var(--pixel-scale)) calc(5px * var(--pixel-scale));
     cursor: pointer;
 }
 
@@ -3248,11 +3158,11 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     width: calc(6 * 16px * var(--pixel-scale));
     height: calc(6 * 16px * var(--pixel-scale));
     background-size: calc(6 * 512px * var(--pixel-scale)) calc(6 * 320px * var(--pixel-scale));
-    margin: 6.4vw auto;
+    margin: calc(32px * var(--pixel-scale)) auto;
 }
 
 #buttonHeirChooseGender {
-    margin: 0 3.2vw;
+    margin: 0 calc(16px * var(--pixel-scale));
 }
 
 .HeirGenderIconMale {
@@ -3320,15 +3230,15 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #buttonHeirChooseGender {
-    width: 28vw;
+    width: calc(140px * var(--pixel-scale));
 }
 
 #divHeirFacesGrid {
-    margin: 6.4vw auto;
+    margin: calc(32px * var(--pixel-scale)) auto;
 }
 
 #divHeirFacesGridMiddleRow {
-    margin: 3.2vw 0;
+    margin: calc(16px * var(--pixel-scale)) 0;
 }
 
 #divHeirFacesGrid #buttonHeirChooseFace1,
@@ -3343,7 +3253,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divHeirFacesGrid #buttonHeirChooseFace2,
 #divHeirFacesGrid #buttonHeirChooseFace5,
 #divHeirFacesGrid #buttonHeirChooseFace8 {
-    margin: 0 3.2vw;
+    margin: 0 calc(16px * var(--pixel-scale));
 }
 
 #divViewHeirWorkshop #divHeirFacesGrid button div,
@@ -3376,16 +3286,16 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #buttonHeirFacesLeft {
-    margin-right: 3.2vw;
+    margin-right: calc(16px * var(--pixel-scale));
 }
 
 #buttonHeirFacesRight {
-    margin-left: 3.2vw;
+    margin-left: calc(16px * var(--pixel-scale));
 }
 
 #buttonHeirGoBack {
-    font-size: 1.8vw;
-    margin: 12.8vw auto 0 auto;
+    font-size: calc(9px * var(--pixel-scale));
+    margin: calc(64px * var(--pixel-scale)) auto 0 auto;
 }
 
 
@@ -3396,19 +3306,19 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 #buttonMapTargetPrev,
 #buttonMapTargetNext {
-    margin-top: 2vw;
+    margin-top: calc(10px * var(--pixel-scale));
 }
 
 #buttonMapTargetPrev {
-    margin-right: 2vw;
+    margin-right: calc(10px * var(--pixel-scale));
 }
 
 #divMapTarget {
-    margin: 6.4vw auto;
+    margin: calc(32px * var(--pixel-scale)) auto;
 }
 
 #divMapTarget b {
-    font-size: 4vw;
+    font-size: calc(20px * var(--pixel-scale));
 }
 
 #divMapControlsRow {
@@ -3418,25 +3328,25 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divViewMiners,
 #divViewFarmers,
 #divViewShepherds {
-    margin-bottom: 6.4vw;
+    margin-bottom: calc(32px * var(--pixel-scale));
 }
 
 #divMinersName,
 #divFarmersName,
 #divShepherdsName {
-    font-size: 3.2vw;
-    line-height: 2vw;
+    font-size: calc(16px * var(--pixel-scale));
+    line-height: calc(10px * var(--pixel-scale));
     font-weight: bold;
     color: #120404;
     margin: 0 auto;
-    margin-top: 4.4vw;
+    margin-top: calc(22px * var(--pixel-scale));
 }
 
 #divMinersSubtitle,
 #divFarmersSubtitle,
 #divShepherdsSubtitle {
-    font-size: 1.8vw;
-    line-height: 3.2vw;
+    font-size: calc(9px * var(--pixel-scale));
+    line-height: calc(16px * var(--pixel-scale));
     color: #120404;
     text-align: center;
     display: inline-block;
@@ -3447,8 +3357,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divMapDetailsView {
     border: 1px solid black;
     width: 64%;
-    margin: 6.4vw auto;
-    padding: 1vw;
+    margin: calc(32px * var(--pixel-scale)) auto;
+    padding: calc(5px * var(--pixel-scale));
     user-select: none;
 }
 
@@ -3457,8 +3367,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #divMapDetailsMasterInventoryContainer .divEconGap {
-    height: 4vw;
-    width: 4vw;
+    height: calc(20px * var(--pixel-scale));
+    width: calc(20px * var(--pixel-scale));
 }
 
 #divMapDetailsView.mapDetailsEconomic {
@@ -3480,15 +3390,15 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 #divMapDetailsContents {
     border: 1px solid black;
-    margin-top: 1vw;
+    margin-top: calc(5px * var(--pixel-scale));
     background-color: white;
-    padding: 4vw;
+    padding: calc(20px * var(--pixel-scale));
 }
 
 #divMapDetailsEconLiquidBar {
     width: 100%;
     text-align: center;
-    padding: 0 0 4vw 0;
+    padding: 0 0 calc(20px * var(--pixel-scale)) 0;
 }
 
 .inertNumerals {
@@ -3501,8 +3411,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #divMapCushion {
-    height: 6.4vw;
-    width: 1vw;
+    height: calc(32px * var(--pixel-scale));
+    width: calc(5px * var(--pixel-scale));
 }
 
 
@@ -3528,20 +3438,20 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #divEndingFoil {
-    padding: 1vw;
+    padding: calc(5px * var(--pixel-scale));
     background-color: crimson;
-    margin: 6vw;
+    margin: calc(30px * var(--pixel-scale));
 }
 
 #divEndingSeal {
     width: 100%;
-    padding: 1vw;
+    padding: calc(5px * var(--pixel-scale));
     background-color: tan;
 }
 
 #divEndingSheet {
     width: 100%;
-    padding: 3vw;
+    padding: calc(15px * var(--pixel-scale));
     background-color: blanchedalmond;
 }
 
@@ -3558,7 +3468,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     width: 100%;
     text-align: center;
     border-top: calc(1px * var(--pixel-scale)) solid black;
-    padding: 2.3vw 0;
+    padding: calc(11px * var(--pixel-scale)) 0;
     background: #AFAFBF;
 }
 
@@ -4447,12 +4357,12 @@ body #divCheevo .brilliant {
 
 #divHikeCushion {
     width: 100%;
-    height: 12.8vw;
+    height: calc(64px * var(--pixel-scale));
 }
 
 #buttonLeaveHike {
     display: block;
-    margin: 6.4vw auto;
+    margin: calc(32px * var(--pixel-scale)) auto;
 }
 
 #canvasHike {
@@ -4460,7 +4370,7 @@ body #divCheevo .brilliant {
     display: block;
     width: calc(386px * var(--pixel-scale));
     height: calc(226px * var(--pixel-scale));
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 
@@ -4485,17 +4395,17 @@ body #divCheevo .brilliant {
 }
 
 #divArenaTables {
-    margin-top: 6.4vw;
+    margin-top: calc(32px * var(--pixel-scale));
 }
 
 #divArenaCushion {
     width: 100%;
-    height: 12.8vw;
+    height: calc(64px * var(--pixel-scale));
 }
 
 #buttonLeaveArena {
     display: block;
-    margin: 6.4vw auto;
+    margin: calc(32px * var(--pixel-scale)) auto;
 }
 
 #canvasArena {
@@ -4503,7 +4413,7 @@ body #divCheevo .brilliant {
     display: block;
     width: calc(386px * var(--pixel-scale));
     height: calc(226px * var(--pixel-scale));
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #tableArenaStandings {
@@ -4520,7 +4430,7 @@ body #divCheevo .brilliant {
 }
 
 #tableArenaStandings td {
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     vertical-align: bottom;
 }
 
@@ -4562,7 +4472,7 @@ body #divCheevo .brilliant {
 #divFishingCushion,
 #divWharfCushion {
     width: 100%;
-    height: 12.8vw;
+    height: calc(64px * var(--pixel-scale));
 }
 
 #divFishDisplayWrapper {
@@ -4576,7 +4486,7 @@ body #divCheevo .brilliant {
     display: block;
     width: calc(386px * var(--pixel-scale));
     height: calc(226px * var(--pixel-scale));
-    margin: 0 auto 6.4vw auto;
+    margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #divTHREE,
@@ -4592,7 +4502,7 @@ body #divCheevo .brilliant {
 
     font-family: Arial, sans-serif;
     font-weight: bold;
-    font-size: 20vw;
+    font-size: calc(100px * var(--pixel-scale));
     background-image: linear-gradient(white, pink);
     color: transparent;
     background-clip: text;
@@ -4613,43 +4523,43 @@ body #divCheevo .brilliant {
 }
 
 #divFishDisplayWrapper #divFishTimerContainer .divFishTimerDisplayA {
-    font-size: 4.8vw;
+    font-size: calc(24px * var(--pixel-scale));
 }
 
 #divFishDisplayWrapper #divFishTimerContainer .divFishTimerDisplayB {
-    font-size: 4.2vw;
+    font-size: calc(21px * var(--pixel-scale));
 }
 
 #divFishDisplayWrapper #divFishTimerContainer .divFishTimerDisplayC {
-    font-size: 3.8vw;
+    font-size: calc(19px * var(--pixel-scale));
 }
 
 #divFishDisplayWrapper #divFishTimerContainer .divFishTimerDisplayD {
-    font-size: 3.6vw;
+    font-size: calc(18px * var(--pixel-scale));
 }
 
 #divFishDisplayWrapper #divFishTimerContainer .divFishTimerDisplayE {
-    font-size: 3.4vw;
+    font-size: calc(17px * var(--pixel-scale));
 }
 
 #divFishDisplayWrapper #divFishTimerContainer .divFishTimerDisplayF {
-    font-size: 3.2vw;
+    font-size: calc(16px * var(--pixel-scale));
 }
 
 #divFishDisplayWrapper #divFishTimerContainer .divFishTimerDisplayG {
-    font-size: 3.0vw;
+    font-size: calc(15px * var(--pixel-scale));
 }
 
 #divFishDisplayWrapper #divFishTimerContainer .divFishTimerDisplayH {
-    font-size: 2.8vw;
+    font-size: calc(14px * var(--pixel-scale));
 }
 
 #divFishDisplayWrapper #divFishTimerContainer .divFishTimerDisplayI {
-    font-size: 2.6vw;
+    font-size: calc(13px * var(--pixel-scale));
 }
 
 #divFishDisplayWrapper #divFishTimerContainer .divFishTimerDisplayJ {
-    font-size: 2.4vw;
+    font-size: calc(12px * var(--pixel-scale));
 }
 
 #buttonInitFish {
@@ -4665,13 +4575,13 @@ body #divCheevo .brilliant {
 
 #buttonFishWharf {
     display: block;
-    margin: 6.4vw auto 0 auto;
+    margin: calc(32px * var(--pixel-scale)) auto 0 auto;
 }
 
 @keyframes fishCount3 {
     0% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     5% {
@@ -4679,45 +4589,45 @@ body #divCheevo .brilliant {
     }
 
     15% {
-        font-size: 26vw;
+        font-size: calc(130px * var(--pixel-scale));
         opacity: 1;
     }
 
     20% {
-        font-size: 30vw;
+        font-size: calc(150px * var(--pixel-scale));
         opacity: 0;
     }
 
     25% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     50% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     75% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     100% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 }
 
 @keyframes fishCount2 {
     0% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     25% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     30% {
@@ -4725,45 +4635,45 @@ body #divCheevo .brilliant {
     }
 
     40% {
-        font-size: 26vw;
+        font-size: calc(130px * var(--pixel-scale));
         opacity: 1;
     }
 
     45% {
-        font-size: 30vw;
+        font-size: calc(150px * var(--pixel-scale));
         opacity: 0;
     }
 
     50% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     75% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     100% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 }
 
 @keyframes fishCount1 {
     0% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     25% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     50% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     55% {
@@ -4771,45 +4681,45 @@ body #divCheevo .brilliant {
     }
 
     65% {
-        font-size: 26vw;
+        font-size: calc(130px * var(--pixel-scale));
         opacity: 1;
     }
 
     70% {
-        font-size: 30vw;
+        font-size: calc(150px * var(--pixel-scale));
         opacity: 0;
     }
 
     75% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 
     100% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 }
 
 @keyframes fishCountFISH {
     0% {
         opacity: 0;
-        font-size: 18vw;
+        font-size: calc(90px * var(--pixel-scale));
     }
 
     25% {
         opacity: 0;
-        font-size: 18vw;
+        font-size: calc(90px * var(--pixel-scale));
     }
 
     50% {
         opacity: 0;
-        font-size: 18vw;
+        font-size: calc(90px * var(--pixel-scale));
     }
 
     75% {
         opacity: 0;
-        font-size: 18vw;
+        font-size: calc(90px * var(--pixel-scale));
     }
 
     80% {
@@ -4817,18 +4727,18 @@ body #divCheevo .brilliant {
     }
 
     90% {
-        font-size: 23vw;
+        font-size: calc(115px * var(--pixel-scale));
         opacity: 1;
     }
 
     95% {
-        font-size: 26vw;
+        font-size: calc(130px * var(--pixel-scale));
         opacity: 0;
     }
 
     100% {
         opacity: 0;
-        font-size: 20vw;
+        font-size: calc(100px * var(--pixel-scale));
     }
 }
 
@@ -4960,11 +4870,11 @@ body #divCheevo .brilliant {
 #tableCatchReport {
     border: calc(1px * var(--pixel-scale)) solid black;
     user-select: none;
-    margin: 1vw auto 6.4vw auto;
+    margin: calc(5px * var(--pixel-scale)) auto calc(32px * var(--pixel-scale)) auto;
 }
 
 #tableCatchReport td {
-    padding: 1vw 2vw;
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
     text-align: center;
 }
 
@@ -4992,16 +4902,16 @@ body #divCheevo .brilliant {
     width: 100%;
     height: 1px;
     background: black;
-    margin: 0.5vw 0 6.4vw 0;
+    margin: calc(2px * var(--pixel-scale)) 0 calc(32px * var(--pixel-scale)) 0;
 }
 
 .flawless {
-    font-size: 1.6vw;
+    font-size: calc(8px * var(--pixel-scale));
 }
 
 #divCatchReportFinePrint {
-    font-size: 1.4vw;
-    line-height: 1.6vw;
+    font-size: calc(7px * var(--pixel-scale));
+    line-height: calc(8px * var(--pixel-scale));
     text-align: left;
     font-family: 'Garamond', serif;
 }
@@ -5009,3 +4919,10 @@ body #divCheevo .brilliant {
 
 
 /* End of Document */
+
+#divWidthClamp {
+    margin: 0 auto;
+    width: calc(504px * var(--pixel-scale));
+    border: calc(2px * var(--pixel-scale)) solid black;
+    border-top: 0;
+}
