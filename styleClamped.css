@@ -705,35 +705,6 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 
 
-#divOverlayLoading {
-    z-index: 4000;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #323e49;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: calc(30px * var(--pixel-scale));
-    color: whitesmoke;
-    text-align: center;
-    padding-top: 36vh;
-    border-top: calc(6px * var(--pixel-scale)) solid #1d2731;
-}
-
-#divOverlayLoading span {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: calc(40px * var(--pixel-scale));
-    color: whitesmoke;
-}
-
-.removeLoadingOverlay {
-    transform: translateY(101%);
-    transition: transform 0.42s ease-in-out;
-}
-
-
-
 #divOverlayForeword {
     background-color: rgba(16, 0, 0, 0.8);
     z-index: 2000;
