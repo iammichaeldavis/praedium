@@ -25,7 +25,7 @@ setTimeout(() => {
         divOverlayLoading.style.display = 'none';
     }, 500);
     divOverlayLoading.classList.add('removeLoadingOverlay');
-}, 23); // 𝕭𝖊 𝖘𝖚𝖗𝖊 𝖞𝖔𝖚𝖗 𝖘𝖎𝖓 𝖜𝖎𝖑𝖑 𝖋𝖎𝖓𝖉 𝖞𝖔𝖚 𝖔𝖚𝖙
+}, 1000); // 𝕭𝖊 𝖘𝖚𝖗𝖊 𝖞𝖔𝖚𝖗 𝖘𝖎𝖓 𝖜𝖎𝖑𝖑 𝖋𝖎𝖓𝖉 𝖞𝖔𝖚 𝖔𝖚𝖙 <- this value was previously '23'; concordantly, this Easter Egg is now confusing and makes no sense to leave here, but I just love it so much 😮‍💨
 
 
 
@@ -34,7 +34,7 @@ setTimeout(() => {
 // ╠══════════════════╣
 // ║ by Michael Davis ║
 // ╟──────────────────╢
-// ║    v1.20.00-C    ║
+// ║    v1.20.00-D    ║
 // ╟──────────────────╢
 // ║    08/29/2025    ║
 // ╚══════════════════╝
