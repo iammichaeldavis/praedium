@@ -2741,8 +2741,9 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 .Ghost {
-    --i: 23;
     --j: 5;
+    --i: 23;
+    /* 𝕭𝖊 𝖘𝖚𝖗𝖊 𝖞𝖔𝖚𝖗 𝖘𝖎𝖓 𝖜𝖎𝖑𝖑 𝖋𝖎𝖓𝖉 𝖞𝖔𝖚 𝖔𝖚𝖙 */
 }
 
 .Rattata {

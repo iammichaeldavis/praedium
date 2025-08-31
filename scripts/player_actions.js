@@ -790,7 +790,7 @@ function DismissForeword() {
 
 function DismissGameEvent() {
     if (player.canDismissEvent) {
-        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike') { StartTime(); }
+        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop') { StartTime(); }
         player.seesGameEvent = false;
         UpdateDisplay();
     }
@@ -3696,7 +3696,7 @@ function SummonOptions() {
 
 function DismissOptions() {
     player.seesOptions = false;
-    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike') { StartTime(); }
+    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop') { StartTime(); }
     UpdateDisplay();
 }
 
