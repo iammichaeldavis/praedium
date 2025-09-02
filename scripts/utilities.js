@@ -766,7 +766,7 @@ function CollateGameStateReport(loud = false) {
 
 
 function DetermineDevice(bark) {
-    const regexp = /android|iphone|kindle|ipad/i; // regular expression containing known mobile device keywords; this may need to grow 🤔
+    const regexp = /android|iphone|ipod|ipad|kindle/i; // regular expression containing known mobile device keywords; this may need to grow 🤔
     player.isOnMobile = regexp.test(navigator.userAgent);
 
     if (player.isOnMobile) {
