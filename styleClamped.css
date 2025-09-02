@@ -915,6 +915,8 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divGameEventCorpus .hikeRed {
     color: crimson;
+    display: block;
+    text-align: center;
 }
 
 #divGameEventCorpus #fin {
