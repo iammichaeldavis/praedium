@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.20.03-A';
+const version = '1.20.03-B';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -1036,6 +1036,7 @@ const audioEnding = new Audio('waveforms/tquestAnthem.mp3');
 const audioPeasant = new Audio('waveforms/warcraft.mp3');
 const audioFish = new Audio('waveforms/SM64_Slider.mp3');
 const audioWhistle = new Audio('waveforms/whistle.mp3');
+const audioChime = new Audio('waveforms/SMK_ChristmasTreeChime.mp3');
 
 const heirDate = [0, 0,];
 let heirStage = 0;

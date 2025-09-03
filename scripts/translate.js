@@ -713,6 +713,7 @@ let displayInfoFinal = '';
 let displayInfoMadeFor = '';
 let displayInfoMadeWith = '';
 let displayInfoDedication = '';
+let displayInfoMusic = '';
 let displayInfoThanks = '';
 let displayInfoScripture = '';
 
@@ -1823,9 +1824,11 @@ function Translate(language, bark = true) {
         displayInfoDedication = 'Dedicated to ';
         displayInfoDedication += ScribeList(dedicationList);
         displayInfoDedication += ', and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez and Philip J Reed, VSc. I really, really wish y’all were here.'; // ۩
+        displayInfoMusic = '<div id="divMusicCredits">“Moraff’s Aria”<br>Composed by Steve Moraff<br>&copy; 1989 MoraffWare<br><br>“The Temporal Corps Goes Rolling Along”<br>Composed by Arfing Dog, Glen R. Dahlgren & Michael Lindner<br>&copy; 1991 Legend Entertainment<br><br>“Slider”<br>Composed by Koji Kondo<br>&copy; 1996 Nintendo Co., Ltd.</div>';
         displayInfoThanks = 'Special thanks to ';
         displayInfoThanks += ScribeList(gratitudeList);
         displayInfoThanks += '.<br><br>Very special thanks to my parents for a lifetime of support.<br><br>';
+        displayInfoThanks += displayInfoMusic + '<br>';
         displayInfoThanks += 'Seagulls appear courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. ';
         displayInfoThanks += 'Seagull training by “Wild Bill” Stealey and the Northwest Florida Panhandle Seagull Wranglers Association of America: Mediterranean Chapter.<br><br>';
         displayInfoThanks += 'Argos, Bailey, Boxcar Willie and Spike appear courtesy of The Ken & Roberta Williams Virtual Canine Rescue Center of Oakhurst, California.<br><br>';
@@ -2937,9 +2940,11 @@ function Translate(language, bark = true) {
         displayInfoDedication = 'Dedicado a ';
         displayInfoDedication += ScribeList(dedicationList);
         displayInfoDedication += ', y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.'; // ۩
+        displayInfoMusic = '<div id="divMusicCredits">«Moraff’s Aria»<br>Compuesta por Steve Moraff<br>&copy; 1989 MoraffWare<br><br>«El Cuerpo Temporal Va Sigue Adelante»<br>Compuesta por Arfing Dog, Glen R. Dahlgren y Michael Lindner<br>&copy; 1991 Legend Entertainment<br><br>«Deslizador»<br>Compuesta por Koji Kondo<br>&copy; 1996 Nintendo Co., Ltd.</div>';
         displayInfoThanks = 'Agradecimientos especiales a ';
         displayInfoThanks += ScribeList(gratitudeList);
         displayInfoThanks += '.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br>';
+        displayInfoThanks += displayInfoMusic + '<br>';
         displayInfoThanks += 'Gaviotas aparecen por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. ';
         displayInfoThanks += 'Entrenamiento de gaviotas por “Loco Bill” Stealey y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Mediterráneo.<br><br>';
         displayInfoThanks += 'Argos, Bailey, Boxcar Willie y Spike aparecen cortesía de El Ken y Roberta Williams Centro Virtual de Rescate Canino de Oakhurst, California.<br><br>';

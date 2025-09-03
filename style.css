@@ -889,11 +889,20 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     text-align: justify;
 }
 
+#divSystemMessageCorpus #divMusicCredits {
+    font-family: 'Garamond', serif;
+    font-size: 3.6vw;
+    color: #040412;
+    line-height: 5.2vw;
+    text-align: center;
+}
+
 #divSystemMessageCorpus .divider {
     color: #3c14dc;
     text-align: center;
     margin: 3.2vw auto;
     user-select: none;
+    font-style: normal;
 }
 
 #divSystemMessageCorpus .nobreak {
@@ -1277,6 +1286,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     margin: 3.2vw auto;
     user-select: none;
     text-align: center;
+    font-style: normal;
 }
 
 #divOptionsSource {

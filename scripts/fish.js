@@ -5,6 +5,26 @@
 
 function FishTimerBehaviour() {
     fishTimeLeft -= fishTimerIntervalSeconds;
+
+    if (fishTimeLeft > 2.95 && fishTimeLeft < 3.05) {
+        if (player.likesSounds) {
+            audioChime.currentTime = 0;
+            audioChime.play();
+        }
+    }
+    if (fishTimeLeft > 1.95 && fishTimeLeft < 2.05) {
+        if (player.likesSounds) {
+            audioChime.currentTime = 0;
+            audioChime.play();
+        }
+    }
+    if (fishTimeLeft > 0.95 && fishTimeLeft < 1.05) {
+        if (player.likesSounds) {
+            audioChime.currentTime = 0;
+            audioChime.play();
+        }
+    }
+
     if (fishTimeLeft > 0) {
         if (!fishAvailable) {
             if (FindWholeRandom(1, fishAvailableChanceUpperLimit) == 1) {
