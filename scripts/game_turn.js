@@ -196,6 +196,16 @@ function GameTurn() {
         gameEventContainer = displayStoryRomanConquestofGreece;
     }
 
+    if (year == 79 && week == 20) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryGaul;
+    }
+
+    if (year == 109 && week == 45) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStorySocialWar;
+    }
+
     if (year == 125 && week == 33) {
         gameEventTrigger = true;
         gameEventContainer = displayStoryRomanBreadRiot;
