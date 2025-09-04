@@ -181,6 +181,16 @@ function GameTurn() {
         gameEventContainer = displayStoryFarmersFirstImpression;
     }
 
+    if (year == 12 && week == 12) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStorySeleucids;
+    }
+
+    if (year == 33 && week == 25) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryMaccabees;
+    }
+
     if (year == 55 && week == 10) {
         gameEventTrigger = true;
         gameEventContainer = displayStoryRomanConquestofGreece;
@@ -191,9 +201,44 @@ function GameTurn() {
         gameEventContainer = displayStoryRomanBreadRiot;
     }
 
+    if (year == 129 && week == 45) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStorySpartacus;
+    }
+
+    if (year == 137 && week == 18) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryJerusalem;
+    }
+
     if (year == 150 && week == 20) {
         gameEventTrigger = true;
         gameEventContainer = displayStoryRomanConquestofFrance;
+    }
+
+    if (year == 155 && week == 2) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryJulian;
+    }
+
+    if (year == 156 && week == 11) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryIdesOfMarch;
+    }
+
+    if (year == 158 && week == 42) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryRevenge;
+    }
+
+    if (year == 170 && week == 35) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryCleopatra;
+    }
+
+    if (year == 173 && week == 3) {
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryRomanEmpire;
     }
 
     if (year == 450 && week == 5) {

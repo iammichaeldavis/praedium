@@ -422,8 +422,17 @@ let displayStoryBronzeworkers = '';
 let displayStoryFoundCrystal = '';
 let displayStoryCrystal = '';
 let displayStoryTribute = '';
+let displayStorySeleucids = '';
+let displayStoryMaccabees = '';
+let displayStorySpartacus = '';
+let displayStoryJerusalem = '';
 let displayStoryRomanConquestofGreece = '';
 let displayStoryRomanConquestofFrance = '';
+let displayStoryJulian = '';
+let displayStoryIdesOfMarch = '';
+let displayStoryRevenge = '';
+let displayStoryCleopatra = '';
+let displayStoryRomanEmpire = '';
 let displayStoryRomanBreadRiot = '';
 let displayStory450Years = '';
 let displayStory900Years = '';
@@ -1041,6 +1050,20 @@ function Translate(language, bark = true) {
             'Ayatollah',
             'Cardinal',
             'High Septon',
+            'Rabbi',
+            'Superior General',
+            'Father',
+            'Mother Superior',
+            'Abbot',
+            'Abbess',
+            'Rector',
+            'Rectrix',
+            'Saṅghanāyaka',
+            'Fāngzhàng',
+            'Zhùchí',
+            'Jūjishoku',
+            'Brother',
+            'Sister',
             'Prior',
             'Prioress',
             'Prince',
@@ -1516,8 +1539,17 @@ function Translate(language, bark = true) {
         displayStoryFoundCrystal = 'MASONS AT THE QUARRY HAVE DISCOVERED GEODES OF AMETHYST!!';
         displayStoryCrystal = 'LAPIDARISTS IN OUR ATELIER WILL TRANSFORM THESE INTO SOMETHING TRULY WONDERFUL';
         displayStoryTribute = 'THE LOCAL WARLORD KING HAS CAUGHT WIND OF YOUR SUCCESS AT LAST. QUOTH HIS EMISSARY: “OF COURSE, TARIFFS MUST BE LEVIED”';
+        displayStorySeleucids = 'MY FRIEND, HAVE YOU HEARD THE NEWS? THOSE OLIVE-MUNCHING ROMANS HAVE JUST DEFEATED THE SELEUCIDS! WE ARE NOW ALL UNDER ROMAN OCCUPATION. MAY THE GODS PROTECT US';
+        displayStoryMaccabees = 'THEY SAY THE MACCABEES ARE REVOLTING, BUT I DON’T THINK THEY’RE SO BAD';
+        displayStorySpartacus = 'Spartacus is dead, defeated at the Battle of the Silarius River. His slave uprising is over.';
+        displayStoryJerusalem = 'The Judeans have just been conquered, Jerusalem besieged. Pompey himself entered the Holy of Holies! Now they must pay tribute to Syria. Well... I guess that’s probably the last history will ever hear of them, huh? I can’t imagine they’ll ever have a major impact on world events again after this.';
         displayStoryRomanConquestofGreece = 'YOU HAVE JUST RECEIVED WORD: THEY NOW SPEAK LATIN IN ATHENS!';
         displayStoryRomanConquestofFrance = 'A messenger has just arrived with an Italian missive meant to be disseminated amongst the general populace: Caesar now has complete authority over all of Gaul! (Well, except for one small village of indomitable barbarians in Armorica...)';
+        displayStoryJulian = 'They say Julius Caesar has developed a new system for tracking years and months: they’re calling it the ‘Julian Calendar’. I can’t imagine it will catch on.';
+        displayStoryIdesOfMarch = 'News from Rome: Caesar has been assassinated! And by his best friend, no less!';
+        displayStoryRevenge = 'Octavian has defeated Caesar’s traitors! What an auspicious day!';
+        displayStoryCleopatra = 'Cleopatra’s reign as the last ruler of the Ptolemaic Kingdom has just come to an end. She has taken her own life.';
+        displayStoryRomanEmpire = 'One can scarcely believe it, but... Rome is officially a Republic no longer. Today marks the start of the ‘Roman Empire’.';
         displayStoryRomanBreadRiot = 'TROUBLING NEWS FROM ITALY: BREAD RIOTERS THREATEN TO LYNCH THE ENTIRE ROMAN CONSULATE!';
         displayStory450Years = 'Listen, buddy, I hate to be the bearer of bad news here but if you haven’t figured out Bronze Age-era agriculture in almost five hundred years, maybe this just isn’t the life for you... 🤷‍♂️';
         displayStory900Years = 'All right, all right, Buster Brown, enough is enough. Even Methuselah was only given 969 years.<br><br><span class="icon Murray inlineIcon quadrupleSize"></span><br><br>GAME OVER MAN, GAME OVER';
@@ -2129,6 +2161,20 @@ function Translate(language, bark = true) {
             'Ayatolá',
             'Cardenal',
             'Septón Supremo',
+            'Rabino',
+            'Superior General',
+            'Padre',
+            'Madre Superiora',
+            'Abad',
+            'Abadesa',
+            'Rector',
+            'Rectora',
+            'Saṅghanāyaka',
+            'Fāngzhàng',
+            'Zhùchí',
+            'Jūjishoku',
+            'Hermano',
+            'Hermana',
             'Prior',
             'Priora',
             'Príncipe',
@@ -2610,8 +2656,17 @@ function Translate(language, bark = true) {
         displayStoryFoundCrystal = '¡¡LOS ALBAÑILES DE LA CANTERA HAN DESCUBRIDO GEODAS DE AMATISTA!!';
         displayStoryCrystal = 'LOS LAPIDARISTAS DE NUESTRO TALLER TRANSFORMARÁN ESTOS EN ALGO VERDADERAMENTE MARAVILLOSO';
         displayStoryTribute = 'EL JEFE MILITAR REY LOCAL FINALMENTE HA OÍDO HABLAR DE TI. SU EMISARIO TE DICE: «POR SUPUESTO, SE DEBEN IMPONER ARANCELES»';
+        displayStorySeleucids = 'AMIGO, ¿HAS OÍDO LAS NOTICIAS? ¡ESOS ROMANOS COMEDORES DE ACEITUNAS ACABARON DE DERROTAR A LOS SELÉUCIDAS! AHORA TODOS ESTAMOS BAJO OCUPACIÓN ROMANA. QUE LOS DIOSES NOS PROTEJAN';
+        displayStoryMaccabees = 'DICEN QUE LOS MACABEOS SE REBELAN. ANTÍOCO IV LOS HA EMPUJADO DEMASIADO LEJOS';
+        displayStorySpartacus = 'Espartaco ha muerto, derrotado en la Batalla del Río Silario. Su rebelión de esclavos ha terminado.';
+        displayStoryJerusalem = 'Los judíos acaban de ser conquistados, Jerusalén sitiada. ¡El mismísimo Pompeyo entró en el Sanctasanctórum! Ahora deben pagar tributo a Siria. Bueno... Supongo que esa será la última vez que la historia oirá hablar de ellos, ¿no? No me imagino que vuelvan a tener un impacto importante en los acontecimientos mundiales después de esto.';
         displayStoryRomanConquestofGreece = 'ACABAS DE RECIBIR UNA NOTICIA: ¡AHORA HABLAN LATÍN EN ATENAS!';
         displayStoryRomanConquestofFrance = 'Acaba de llegar un mensajero con una misiva en italiano destinada a ser difundida entre la población en general: ¡César ahora tiene autoridad total sobre toda la Galia! (Bueno, excepto por un pequeño pueblo de bárbaros indomables en Armórica...)';
+        displayStoryJulian = 'Dicen que Julio César desarrolló un nuevo sistema para contar años y meses: lo llaman el «Calendario Juliano». No creo que se popularice.';
+        displayStoryIdesOfMarch = 'Noticias de Roma: ¡César ha sido asesinado! ¡Y nada menos que por su mejor amigo!';
+        displayStoryRevenge = '¡Octavio ha derrotado a los traidores de César! ¡Qué día tan auspicioso!';
+        displayStoryCleopatra = 'El reinado de Cleopatra como última gobernante del Reino Ptolemaico acaba de llegar a su fin. Ella se quitó la vida.';
+        displayStoryRomanEmpire = 'Apenas se puede creer, pero... Roma ya no es oficialmente una República. Hoy se conmemora el inicio del «Imperio Romano».';
         displayStoryRomanBreadRiot = 'NOTICIAS PREOCUPANTES DE ITALIA: ¡LOS ALBOROTADORES QUE TIENEN HAMBRE DE PAN AMENAZAN CON LINCHAR A TODO EL CONSULADO ROMANO!';
         displayStory450Years = 'Escucha, amigo, odio ser el portador de malas noticias aquí, pero si no has entendido la agricultura de la Edad de Bronce en casi quinientos años, tal vez esta no sea la vida para ti... 🤷‍♂️';
         displayStory900Years = 'Está bien, está bien, Panchito Bandido, ya es suficiente. Incluso a Matusalén sólo le fueron dados 969 años.<br><br><span class="icon Murray inlineIcon quadrupleSize"></span><br><br>JUEGO TERMINADO HOMBRE, JUEGO TERMINADO';
