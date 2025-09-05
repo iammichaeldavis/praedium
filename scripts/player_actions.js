@@ -5,6 +5,8 @@ buttonResumeYes.addEventListener('click', function () { ContinuePreviousGame(); 
 buttonResumeNo.addEventListener('click', function () { StartNewGame(); });
 
 buttonSystemMessageDismiss.addEventListener('click', function () { DismissSystemMessage(); });
+buttonSystemMessageDismiss.addEventListener('touchstart', function () { GodMenuHold(); }, { passive: true });
+buttonSystemMessageDismiss.addEventListener('touchend', function () { GodMenuLift(); }, { passive: true });
 buttonForewordEnglish.addEventListener('click', function () { BeginGame('English'); });
 buttonForewordSpanish.addEventListener('click', function () { BeginGame('Spanish'); });
 buttonForewordDismiss.addEventListener('click', function () { DismissForeword(); });
@@ -774,6 +776,21 @@ function BeginGame(language) {
 function DismissSystemMessage() {
     player.seesSystemMessage = false;
     UpdateDisplay();
+}
+
+
+
+function GodMenuHold() {
+    godHoldToggle = true;
+    setTimeout(() => {
+        if (godHoldToggle) { SummonGodMenu(); }
+    }, 10000);
+}
+
+
+
+function GodMenuLift() {
+    godHoldToggle = false;
 }
 
 

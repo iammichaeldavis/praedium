@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.20.04-B';
+const version = '1.20.04-C';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -1075,6 +1075,7 @@ let loadedReport = null;
 let loadedIcon = null;
 
 let debugCounter = 0;
+let godHoldToggle = false;
 
 let gameSpeed = 'paused';
 let oldSpeed = null;

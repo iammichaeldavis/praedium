@@ -965,6 +965,51 @@ function CloneArray(source, destination) {
 
 
 
+function SummonGodMenu() {
+    player.isGod = true;
+    player.likesDelay = false;
+
+    bushelCount[0] = 1000000;
+    bushelCount[1] = 1000000;
+    bushelCount[7] = 1000000;
+    bushelCount[2] = 1000;
+    bushelCount[3] = 1000;
+    bushelCount[4] = 1000;
+    bushelCount[5] = 1000;
+    bushelCount[6] = 1000;
+    logsCount = 100000;
+    boardsCount = 100000;
+    stoneCount = 100000;
+    crystalsCount = 10000;
+    residenceInStockCount[8] = 10000;
+    oreCopperCount = 10000;
+    ingotsCopperCount = 10000;
+    ingotsTinCount = 10000;
+    ingotsBronzeCount = 10000;
+    asCount = 1000000000;
+    residentsCount = residentsMax;
+    horsesCount = 50;
+    beadsCount = 10000;
+    trophiesCount = 100;
+    scrollsCount = 1000;
+    filetCount = 1000;
+    caughtFishLifetime[0] = 50;
+    caughtFishLifetime[2] = 50;
+    totalCatches = 100;
+
+    const divGodMenu = document.createElement('div');
+    divGodMenu.id = 'divGodMenu';
+    let godMenuContents = '';
+    godMenuContents += '<button onclick="StartTime();">CHANGE SPEED</button>';
+    godMenuContents += '<button onclick="PauseTime();">PAUSE TIME</button>';
+    godMenuContents += '<button onclick="player.likesStory = !player.likesStory;">TOGGLE VERBOSE</button>';
+    godMenuContents += '<button onclick="divGodMenu.remove();">DISMISS</button>';
+    divGodMenu.innerHTML = godMenuContents;
+    body.appendChild(divGodMenu);
+}
+
+
+
 function SetWidth(multiplier) {
     resolutionScale = multiplier;
     buttonWindow1x.classList.remove('selectedOption');
