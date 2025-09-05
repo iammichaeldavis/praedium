@@ -1002,6 +1002,7 @@ function SummonGodMenu() {
     let godMenuContents = '';
     godMenuContents += '<button onclick="StartTime();">CHANGE SPEED</button>';
     godMenuContents += '<button onclick="PauseTime();">PAUSE TIME</button>';
+    godMenuContents += '<button onclick="bushelCount[0] = 1000000; asCount = 1000000000;">JUICE COUNTS</button>';
     godMenuContents += '<button onclick="player.likesStory = !player.likesStory;">TOGGLE VERBOSE</button>';
     godMenuContents += '<button onclick="divGodMenu.remove();">DISMISS</button>';
     divGodMenu.innerHTML = godMenuContents;

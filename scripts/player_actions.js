@@ -775,6 +775,7 @@ function BeginGame(language) {
 
 function DismissSystemMessage() {
     player.seesSystemMessage = false;
+    godMenuCounter++;
     UpdateDisplay();
 }
 
@@ -782,8 +783,9 @@ function DismissSystemMessage() {
 
 function GodMenuHold() {
     godHoldToggle = true;
-    setTimeout(() => {
-        if (godHoldToggle) { SummonGodMenu(); }
+    if (godMenuTimer != null) { clearTimeout(godMenuTimer); }
+    godMenuTimer = setTimeout(() => {
+        if (godHoldToggle && godMenuCounter > 2) { SummonGodMenu(); }
     }, 10000);
 }
 

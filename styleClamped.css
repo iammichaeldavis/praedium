@@ -4902,6 +4902,21 @@ body #divCheevo .brilliant {
 
 
 
+/* // ADMIN ///////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divGodMenu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: pink;
+    padding: calc(5px * var(--pixel-scale));
+}
+
+
+
 /* End of Document */
 
 #divWidthClamp {
