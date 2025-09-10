@@ -3424,7 +3424,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divEndingFoil {
     padding: calc(5px * var(--pixel-scale));
     background-color: crimson;
-    margin: calc(30px * var(--pixel-scale));
+    margin: calc(30px * var(--pixel-scale)) auto;
+    width: calc(400px * var(--pixel-scale));
 }
 
 #divEndingSeal {
@@ -3441,6 +3442,15 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 #endingPlate {
     width: 90%;
+}
+
+#divEndingBackdrop #divFinalStory {
+    text-align: justify;
+    font-size: calc(18px * var(--pixel-scale));
+    color: #040412;
+    line-height: calc(26px * var(--pixel-scale));
+    font-family: 'Garamond', serif;
+    padding: 0 calc(10px * var(--pixel-scale));
 }
 
 

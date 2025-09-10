@@ -3514,7 +3514,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divEndingFoil {
     padding: 1vw;
     background-color: crimson;
-    margin: 6vw;
+    margin: 6vw auto;
+    width: 80vw;
 }
 
 #divEndingSeal {
@@ -3531,6 +3532,15 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 #endingPlate {
     width: 90%;
+}
+
+#divEndingBackdrop #divFinalStory {
+    text-align: justify;
+    font-size: 3.6vw;
+    color: #040412;
+    line-height: 5.2vw;
+    font-family: 'Garamond', serif;
+    padding: 0 2vw;
 }
 
 

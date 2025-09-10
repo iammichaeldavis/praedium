@@ -34,9 +34,9 @@ setTimeout(() => {
 // ╠══════════════════╣
 // ║ by Michael Davis ║
 // ╟──────────────────╢
-// ║    v1.20.04-D    ║
+// ║    v1.20.04-E    ║
 // ╟──────────────────╢
-// ║    09/05/2025    ║
+// ║    09/08/2025    ║
 // ╚══════════════════╝
 
 // “The humble semicolon is why spacing and line-ends do not matter

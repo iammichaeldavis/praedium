@@ -706,6 +706,7 @@ let displayLabelShepherdsC = '';
 let displayLabelFarmersA = '';
 let displayLabelFarmersB = '';
 
+let displayLastStory = '';
 let displayToBeContinued = '';
 let displayTheEnd = '';
 let displayThankYouForPlaying = '';
@@ -1839,6 +1840,7 @@ function Translate(language, bark = true) {
         displayLabelFarmersA = 'PREPARE FOR THINE AUDIENCE WITH THE PADISHAH';
         displayLabelFarmersB = 'ATTEND THE FEAST';
 
+        displayLastStory = 'As you prepare to attend the banquet, you see out the window a cadre of soldiers surrounding a terrified-looking young servant approaching your complex of apartments in a hurry. Some of your guard meet them on the road. After a few words are exchanged, one of your men rushes back.<br><br>As you finish dressing, one of your attendants bursts into the room.<br><br>“Your Majesty, a messenger from the royal guard has just arrived, with word from our hosts! Their scouts have just detected a great army approaching from the south! They are soon to be under attack!”<br><br>The messenger is brought before you, the poor boy visibly shaking. He drops to his hands and knees and announces: “O Mighty ' + displayTitles[player.title] + ' of the East, I am tremendously repentant to have to bring this news to all of you, our honoured guests, but... We have been betrayed! Attacked by our enemies! Foreign armies approach the capital! They will be here in a matter of days!”<br><br>Your people look to you for your response. What is to be done? How shall we respond? Do we flee, or pledge our support in this coming battle? Shall we send for our troops?<br><br>You have a big decision to make.';
         displayToBeContinued = 'To be continued in...';
         displayTheEnd = 'The End';
         displayThankYouForPlaying = 'Thank you for playing';
@@ -2980,6 +2982,7 @@ function Translate(language, bark = true) {
         displayLabelFarmersA = 'PREPARAR PARA SU AUDIENCIA CON EL PADISHÁ';
         displayLabelFarmersB = 'ASISTIR LA FIESTA';
 
+        displayLastStory = 'Mientras te preparas para asistir al banquete, ves por la ventana un grupo de soldados rodeando a un joven sirviente que parece estar aterrado y que se acerca rápidamente a tu complejo de apartamentos. Algunos de tus guardias se les acercan. Tras intercambiar unas palabras, uno de sus ellos regresa corriendo.<br><br>Después de que termines de vestirse, uno de sus asistentes irrumpe en la habitación.<br><br>«Su Majestad, ¡acaba de llegar un mensajero de la guardia real con noticias de nuestros anfitriones! ¡Sus exploradores han detectado un gran ejército que se acerca desde el sur! ¡Pronto serán atacados!»<br><br>El mensajero es presentado ante usted; el pobre muchacho temblaba visiblemente. Se arrodilló y exclamó: «¡Oh, Gran ' + displayTitles[player.title] + ' del Este! Siento un profundo pesar al tener que darles esta noticia a ustedes, nuestros distinguidos invitados, pero… ¡Hemos sido traicionados! ¡Atacados por nuestros enemigos! ¡Ejércitos extranjeros se acercan a la capital! ¡Llegarán en cuestión de días!»<br><br>Su pueblo espera su respuesta. ¿Qué debemos hacer? ¿Cómo debemos reaccionar? ¿Debemos huir o brindar nuestro apoyo en la próxima batalla? ¿Debemos llamar a nuestras tropas?<br><br>Tienes una decisión muy importante que tomar.';
         displayToBeContinued = 'Continuará en...';
         displayTheEnd = 'El fin';
         displayThankYouForPlaying = 'Gracias por jugar';

@@ -3192,11 +3192,46 @@ function PurchaseLivestock() {
 
 
 
-//function Win() {
-//    player.hasWon = true;
-//    if (player.likesStory) { GameEvent(displayWinMessage); }
-//    //window.open(winTarget, 'PRAEDIUM_requested_new_tab');
-//}
+function Win() {
+    //if (player.likesStory) { GameEvent(displayWinMessage); }
+    //window.open(winTarget, 'PRAEDIUM_requested_new_tab');
+
+    player.hasWon = true;
+    player.saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
+    if (timeAtWin == null) { timeAtWin = new Date(); }
+    RecordProgress();
+    PauseTime();
+
+    audioTheme.pause();
+    if (player.likesMusic) { audioEnding.play(); }
+
+    divWidthClamp.style.display = 'none';
+
+    const divEndingBackdrop = document.createElement('div');
+    divEndingBackdrop.id = 'divEndingBackdrop';
+    let lastString = '<div id="divEndingFoil"><div id="divEndingSeal"><div id="divEndingSheet">';
+    lastString += '<div id="divFinalStory">' + displayLastStory + '</div>';
+    lastString += '<br><br><br>';
+    lastString += '<i>' + displayToBeContinued + '</i>';
+    lastString += '<br><br>';
+    lastString += '<img id="endingPlate" src="curves/PRÆDIVM2.svg" />';
+    lastString += '<br><br>';
+    lastString += '<button onclick="WriteReportToDisk(true);">' + displayLabelDownload + '</button>';
+    lastString += '<br><br><br><br>';
+    lastString += '<b>' + displayTheEnd + '</b>';
+    lastString += '<br><br><br><br>';
+    lastString += displayThankYouForPlaying;
+    lastString += ' 🙏';
+    lastString += '</div></div></div>';
+    //lastString += '<canvas id="canvasFireworks"></canvas>';
+    divEndingBackdrop.innerHTML = lastString;
+    body.appendChild(divEndingBackdrop);
+    //canvasFireworks = document.getElementById('canvasFireworks');
+    //canvasFireworksContext = canvasFireworks.getContext('2d');
+    //canvasFireworks.width = window.innerWidth;
+    //canvasFireworks.height = window.innerHeight;
+    //AnimateFireworks();
+}
 
 
 
@@ -3549,39 +3584,7 @@ function FarmersEvents() {
         //alert('"sup sup" -King Alavi');
         // 🚨🚨🚨
 
-        // 🚨🚨🚨
-        player.saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
-        player.hasWon = true;
-        if (timeAtWin == null) { timeAtWin = new Date(); }
-        RecordProgress();
-        PauseTime();
-        audioTheme.pause();
-        if (player.likesMusic) { audioEnding.play(); }
-        const divEndingBackdrop = document.createElement('div');
-        divEndingBackdrop.id = 'divEndingBackdrop';
-        let lastString = '<div id="divEndingFoil"><div id="divEndingSeal"><div id="divEndingSheet">';
-        lastString += '<i>' + displayToBeContinued + '</i>';
-        lastString += '<br><br>';
-        lastString += '<img id="endingPlate" src="curves/PRÆDIVM2.svg" />';
-        lastString += '<br><br><br><br>';
-        lastString += '<b>' + displayTheEnd + '</b>';
-        lastString += '<br><br>';
-        lastString += '<br><br>';
-        lastString += displayThankYouForPlaying;
-        lastString += ' 🙏';
-        lastString += '<br><br>';
-        lastString += '<br><br>';
-        lastString += '<button onclick="WriteReportToDisk(true);">' + displayLabelDownload + '</button>';
-        lastString += '</div></div></div>';
-        //lastString += '<canvas id="canvasFireworks"></canvas>';
-        divEndingBackdrop.innerHTML = lastString;
-        body.appendChild(divEndingBackdrop);
-        //canvasFireworks = document.getElementById('canvasFireworks');
-        //canvasFireworksContext = canvasFireworks.getContext('2d');
-        //canvasFireworks.width = window.innerWidth;
-        //canvasFireworks.height = window.innerHeight;
-        //AnimateFireworks();
-        // 🚨🚨🚨
+        Win();
     }
     else {
         alert('third thing');
