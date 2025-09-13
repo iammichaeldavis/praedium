@@ -799,7 +799,8 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     text-align: justify;
 }
 
-#divSystemMessageCorpus #divMusicCredits {
+#divSystemMessageCorpus #divMusicCredits,
+#divSystemMessageCorpus #divHechoEnFlorida {
     font-family: 'Garamond', serif;
     font-size: calc(18px * var(--pixel-scale));
     color: #040412;
