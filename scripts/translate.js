@@ -272,6 +272,9 @@ let displayLabelBuild28 = '';
 let displayLabelBuild100 = '';
 
 let displayLabelTradeRoute = '';
+let displayLabelCruise = '';
+let displayStoryCruise = '';
+let displayStoryPoorCruise = '';
 let displayLabelImportTin = '';
 let displayLabelImportSalt = '';
 let displayLabelSailWest = '';
@@ -1406,6 +1409,9 @@ function Translate(language, bark = true) {
         displayLabelBuild100 = 'ESTABLISH MONUMENT';
 
         displayLabelTradeRoute = 'ESTABLISH NEW TRADE ROUTE';
+        displayLabelCruise = 'CHARTER A CRUISE';
+        displayStoryCruise = 'You summon the harbormaster and beseech him for a sturdy and comfortably equipped trireme for hire that could carry a small group down the coast at a leisurely pace, simply for the enjoyment of the journey.<br><br>“Well, that’s certainly not a normal request...” he begins, looking you up and down, before finally deciding: “But of course, for one such as yourself, sire, I’m sure something can be arranged.”<br><br>You sail down the coast, directing the captain to stop at this or that port, so that you and your friends might shop for souvenirs or enjoy the local delicacies.<br><br>Finally, after a couple of days, the captain directs the ship back the way you’d come.<br><br>The trip back is just as beautiful. Scenic sunrises, breathtaking sunsets. This has been just lovely. Your travel companions all agree. What a novel idea!<br><br>(Appreciation For Surrounding Areas +100%)';
+        displayStoryPoorCruise = 'I am sorry, sire, but the treasury simply cannot afford this!';
         displayLabelImportTin = 'ARRANGE FOR THE IMPORT OF TIN';
         displayLabelImportSalt = 'ARRANGE FOR THE IMPORT OF SALT';
         displayLabelSailWest = 'SAIL WEST TO VALINOR';
@@ -2540,6 +2546,9 @@ function Translate(language, bark = true) {
         displayLabelBuild100 = 'ESTABLECER MONUMENTO';
 
         displayLabelTradeRoute = 'ESTABLECER NUEVA RUTA COMERCIAL';
+        displayLabelCruise = 'ALQUILAR UN CRUCERO';
+        displayStoryCruise = 'Llamas al capitán del puerto y le imploras que te alquile un trirreme robusto y cómodamente equipado que pueda llevar a un pequeño grupo por la costa a un ritmo pausado, simplemente para disfrutar del viaje.<br><br>«Bueno, esa no es una petición normal...» empieza, mirándote de arriba abajo, antes de decidirse finalmente: «Pero, por supuesto, para alguien como usted, señor, estoy seguro de que se puede arreglar algo.»<br><br>Navegas por la costa, indicando al capitán que haga escala en tal o cual puerto, para que sú y sus amigos podáis comprar recuerdos o disfrutar de las delicias locales.<br><br>Finalmente, después de un par de días, el capitán dirige el barco de regreso al camino por el que había venido.<br><br>El viaje de regreso es igual de hermoso. Amaneceres espectaculares, atardeceres impresionantes. Ha sido simplemente encantador. Todos tus compañeros de viaje coinciden. ¡Qué idea tan original!<br><br>(Apreciación De Las Áreas Circundantes +100%)';
+        displayStoryPoorCruise = '¡Lo siento, señor, pero el tesoro simplemente no puede permitirse esto!';
         displayLabelImportTin = 'DISPONER LA IMPORTACIÓN DE ESTAÑO';
         displayLabelImportSalt = 'DISPONER LA IMPORTACIÓN DE SAL';
         displayLabelSailWest = 'NAVEGAR HACIA EL OESTE HACIA VALINOR';

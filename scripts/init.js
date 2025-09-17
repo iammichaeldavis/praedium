@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.21.00-A';
+const version = '1.21.01-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -211,6 +211,7 @@ const player = {
     hasFishRecords: false,
     hasHosted: false,
     hasHiked: false,
+    hasTakenCruise: false,
 };
 
 const tilemap = new Image();
@@ -536,6 +537,7 @@ const buttonEstablishTradeRoute = document.getElementById('buttonEstablishTradeR
 const imgTradeTin = document.getElementById('imgTradeTin');
 const tableImports = document.getElementById('tableImports');
 const buttonImportTin = document.getElementById('buttonImportTin');
+const buttonCruise = document.getElementById('buttonCruise');
 
 const divViewHeirWorkshop = document.getElementById('divViewHeirWorkshop');
 const divHeirWorkshopForeward = document.getElementById('divHeirWorkshopForeward');
@@ -1028,6 +1030,7 @@ const priceBuild27 = [500000, 5000, 5000,]; // Oracle
 const priceBuild28 = [1111111, 2222, 333, 333,]; // Astronomers Guild
 const priceBuild100 = [20000000, 9001, 77, 1000, 100000, 100000, 10000, 333,]; // Monument
 
+const priceCruise = 250000;
 const pricePort0 = 8000;
 const pricePort1 = 16000;
 const pricePort2 = 32000;

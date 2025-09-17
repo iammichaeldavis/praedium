@@ -1715,6 +1715,8 @@ function UpdateText() {
         else if (player.canExport && !player.canExportFigs) { buttonEstablishTradeRoute.innerHTML = displayLabelTradeRoute + '<br>(' + currencySymbol + formatterCurrent.format(pricePort5) + ' + ' + '<span class="icon Basket inlineIcon"></span>' + ')'; }
         else if (player.canExport && !player.canExportTrinkets) { buttonEstablishTradeRoute.innerHTML = displayLabelTradeRoute + '<br>(' + currencySymbol + formatterCurrent.format(pricePort6) + ' + ' + '<span class="icon Trinket inlineIcon"></span>' + ')'; }
 
+        buttonCruise.innerHTML = displayLabelCruise + ' ' + '<span class="icon Ship inlineIcon"></span><br>(' + currencySymbol + formatterCurrent.format(priceCruise) + ')';
+
         if (!player.canImportTin) { buttonImportTin.innerHTML = displayLabelImportTin + '<br>(<span class="icon Decree inlineIcon"></span>' + ' + ' + '<span class="icon MoneyTemple inlineIcon"></span>' + ' + ' + currencySymbol + formatterCurrent.format(importCost[0]) + '<span class="warehouseTotal">/' + displayVoyage + '</span>)'; }
         else { buttonImportTin.innerHTML = displayLabelImportSalt + '<br>(' + currencySymbol + formatterCurrent.format(importCost[1]) + '<span class="warehouseTotal">/' + displayVoyage + '</span>)'; }
 
@@ -4778,6 +4780,7 @@ function UpdateVisibilities() {
         tableImports.style.display = player.canImport ? 'table' : '';
         buttonImportTin.style.display = player.seesImportButton ? '' : 'none';
         buttonSailWest.style.display = (player.hasWon && !player.hasWentToAman) ? 'block' : '';
+        if (player.hasTakenCruise) { buttonCruise.style.display = 'none'; }
     }
 
     else if (player.isAt == 'Residence') {

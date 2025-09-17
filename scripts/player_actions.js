@@ -2966,6 +2966,22 @@ function Build() {
 
 
 
+function TakeCruise() {
+    if (asCount >= priceCruise) {
+        if (player.likesStory) { GameEvent(displayStoryCruise); }
+        player.hasTakenCruise = true;
+        //take cost
+        //record cost as stateCraft?
+    }
+    else {
+        if (player.likesStory) { GameEvent(displayStoryPoorCruise); }
+        //poorCruise;
+    }
+    UpdateDisplay();
+}
+
+
+
 function EstablishTradeRoute() {
     if (!player.canExport && asCount >= pricePort0 && player.hasOliveMill) {
         if (player.likesStory) { GameEvent(displayStoryPort00); }

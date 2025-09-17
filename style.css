@@ -757,6 +757,11 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 
 
+#buttonCruise {
+    display: block;
+    margin: 0 auto 6.4vw auto;
+}
+
 #buttonSailWest {
     margin: 0 auto 6.4vw auto;
 }
