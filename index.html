@@ -38,8 +38,8 @@
     <link rel="apple-touch-icon" sizes="16x16" href="bitmaps/favicon/favicon16x.ico" />
     <link rel="manifest" href="bitmaps/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
-    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.20.04.7" />
-    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.20.04.7" />
+    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.21.00.1" />
+    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.21.00.1" />
     <script>history.scrollRestoration = 'manual';</script>
 </head>
 
@@ -445,8 +445,9 @@
                 <canvas id="canvasVillage" width="384" height="224"></canvas>
                 <div id="divVillageLasTablas"></div>
                 <div id="divVillageButtons">
+                    <button id="buttonVisitTemple" onclick="GoToTemple();" class="buttonVisitTempleConditionA"></button>
                     <button id="buttonVisitArena" onclick="GoToArena();" class="buttonVisitArenaConditionA"></button>
-                    <button id="buttonVisitOracle"></button>
+                    <button id="buttonVisitOracle" onclick="GoToOracle();"></button>
                     <button id="buttonBuild"></button>
                     <button id="buttonPlayGod"></button>
                     <button id="buttonSellWheat"></button>
@@ -579,6 +580,31 @@
 
             <div id="divHikeCushion"></div>
         </div>
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+         <div id="divMinigameTemple">
+            <div id="divTempleRibbon"></div>
+
+            <button id="buttonLeaveTemple" onclick="LeaveTemple();"></button>
+
+            <canvas id="canvasTemple" width="384" height="224"></canvas>
+
+            <button id="buttonPray" onclick="Pray();"></button>
+            <button id="buttonOffer" onclick="Offer();"></button>
+
+            <div id="divTempleCushion"></div>
+         </div>
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+         <div id="divMinigameOracle">
+            <div id="divOracleRibbon"></div>
+
+            <button id="buttonLeaveOracle" onclick="LeaveOracle();"></button>
+
+            <canvas id="canvasOracle" width="384" height="224"></canvas>
+
+            <button id="buttonReceiveWisdom" onclick="ConsultOracle();"></button>
+
+            <div id="divOracleCushion"></div>
+         </div>
         <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->

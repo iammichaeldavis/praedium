@@ -1545,11 +1545,14 @@ function UpdateText() {
             }
         }
 
+        // TEMPLE BUTTON -----------------------
+        buttonVisitTemple.innerHTML = displayLabelTemple + ' <span class="icon Mala inlineIcon"></span>';
+
         // ARENA BUTTON ------------------------
         buttonVisitArena.innerHTML = displayLabelArena + ' <span class="icon Flail inlineIcon"></span>';
 
         // ORACLE BUTTON -----------------------
-        buttonVisitOracle.innerHTML = displayLabelOracle + ' <span class="icon Oracle inlineIcon"></span>';
+        buttonVisitOracle.innerHTML = displayLabelOracle + ' <span class="icon Orb inlineIcon"></span>';
 
         // MARKET BUTTONS ----------------------
         if (player.canSell) {
@@ -3348,6 +3351,21 @@ function UpdateText() {
         buttonRelax.innerHTML = displayLabelRelax[relaxLevel];
     }
 
+    else if (player.isAt == 'Oracle') {
+        buttonLeaveOracle.innerHTML = displayLabelLeaveOracle;
+        buttonReceiveWisdom.innerHTML = displayLabelAskOracle + ' <span class="icon Oracle inlineIcon"></span>';
+    }
+
+    else if (player.isAt == 'Temple') {
+        buttonLeaveTemple.innerHTML = displayLabelLeaveTemple;
+        buttonPray.innerHTML = displayLabelPray + ' <span class="icon PenitentMan inlineIcon"></span>';
+
+        if (templeStage == 0) { buttonOffer.innerHTML = displayLabelOffer + '<br>(' + formatterCurrent.format(priceTemple0) + '<span class="icon Log inlineIcon"></span>)'; }
+        else if (templeStage == 1) { buttonOffer.innerHTML = displayLabelOffer + '<br>(' + formatterCurrent.format(priceTemple1) + '<span class="icon Mutton inlineIcon"></span>)'; }
+        else if (templeStage == 2) { buttonOffer.innerHTML = displayLabelOffer + '<br>(' + priceTemple2 + '<span class="icon IngotGold inlineIcon"></span>' + ' + ' + priceTemple2 + '<span class="icon IngotSilver inlineIcon"></span>' + ' + ' + priceTemple2 + '<span class="icon IngotBronze inlineIcon"></span>)'; }
+        else if (templeStage == 3) { buttonOffer.innerHTML = displayLabelOffer + '<br>(' + priceTemple3 + '<span class="icon Diamonds inlineIcon"></span>' + ' + ' + priceTemple3 + '<span class="icon Zircon inlineIcon"></span>' + ' + ' + priceTemple3 + '<span class="icon Gems inlineIcon"></span>)'; }
+    }
+
     else if (player.isAt == 'Workshop') {
         divHeirWorkshopForewardHeadline.innerHTML = displayHeirHeadlineForeward;
         buttonHeirBegin.innerHTML = displayLabelHeirBegin;
@@ -4435,7 +4453,7 @@ function UpdateText() {
     if (player.isGod) { buttonResumeYes.innerHTML += '<br><span class="icon EspírituSanto inlineIcon"></span>'; }
     buttonResumeNo.innerHTML = displayResumeNo + ' <span class="icon YoMama inlineIcon"></span>';
     if (player.isGod) { buttonResumeNo.innerHTML += '<br><span class="icon EspírituSanto inlineIcon"></span>'; }
-    buttonPlayGod.innerHTML = displayLabelPegasuses + ' <span class="icon Orb inlineIcon"></span><br>(' + pricePegasus + '<span class="icon Relic inlineIcon"></span>)';
+    buttonPlayGod.innerHTML = displayLabelPegasuses + ' <span class="icon Unicorn inlineIcon"></span><br>(' + pricePegasus + '<span class="icon Relic inlineIcon"></span>)';
     buttonReturnToMap.innerHTML = displayReturnToMapView;
     buttonRecords.innerHTML = 'Records: OFF';
     if (player.likesRecords) { buttonRecords.innerHTML = 'Records: ON'; }
@@ -4721,7 +4739,12 @@ function UpdateVisibilities() {
     else if (player.isAt == 'Township') {
         buttonGoToPort.style.display = player.canSell ? 'inline-block' : '';
         buttonBuild.style.display = player.canBuild ? 'block' : '';
+        buttonVisitTemple.style.display = beadsSpawn ? 'block' : '';
         buttonVisitArena.style.display = trophiesSpawn ? 'block' : '';
+        if (trophiesSpawn) {
+            buttonVisitTemple.classList.remove('buttonVisitTempleConditionA');
+            buttonVisitTemple.classList.add('buttonVisitTempleConditionB');
+        }
         if (player.hasOracle) {
             buttonVisitArena.classList.remove('buttonVisitArenaConditionA');
             buttonVisitArena.classList.add('buttonVisitArenaConditionB');
@@ -4741,6 +4764,10 @@ function UpdateVisibilities() {
         buttonBuyHorses.style.display = horsesSpawn ? 'block' : '';
         buttonSellHorses.style.display = horsesSpawn ? 'block' : '';
         buttonPlayGod.style.display = (player.hasWon && !player.hasPegasi) ? 'block' : '';
+    }
+
+    else if (player.isAt == 'Temple') {
+        if (templeStage > 3) { buttonOffer.style.display = 'none'; }
     }
 
     else if (player.isAt == 'Port') {
@@ -9092,6 +9119,22 @@ function RedrawHike() {
 
 
 
+function RedrawTemple() {
+    if (templeStage == 1) { templeImage.src = 'bitmaps/templePlus.png'; }
+    else if (templeStage == 2) { templeImage.src = 'bitmaps/templePlusPlus.png'; }
+    else if (templeStage == 3) { templeImage.src = 'bitmaps/templePlusPlusPlus.png'; }
+    else if (templeStage == 4) { templeImage.src = 'bitmaps/templePlusPlusPlusPlus.png'; }
+    canvasTempleContext.drawImage(templeImage, 0, 0, 384, 224, 0, 0, 384, 224);
+}
+
+
+
+function RedrawOracle() {
+    canvasOracleContext.drawImage(oracleImage, 0, 0, 384, 224, 0, 0, 384, 224);
+}
+
+
+
 function AnimateHeirButton() {
     frameHeirButton++;
     if (frameHeirButton == 4) { frameHeirButton = 0; }
@@ -9279,6 +9322,8 @@ function RedrawCanvases() {
     else if (player.isAt == 'Miners') { RedrawMiners(); }
     else if (player.isAt == 'Farmers') { RedrawFarmers(); }
     else if (player.isAt == 'Hike') { RedrawHike(); }
+    else if (player.isAt == 'Temple') { RedrawTemple(); }
+    else if (player.isAt == 'Oracle') { RedrawOracle(); }
 
     if (player.likesAnimations) {
         animationCycleFrame++;

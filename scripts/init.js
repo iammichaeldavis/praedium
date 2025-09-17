@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.20.04-G';
+const version = '1.21.00-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -172,6 +172,8 @@ const player = {
     hasMonument: false,
     hasSeenResidence: false,
     hasSeenVillage: false,
+    hasSeenOracle: false,
+    hasSeenTemple: false,
     hasSeenArena: false,
     hasSeenPort: false,
     hasSeenMiners: false,
@@ -317,6 +319,10 @@ const neighborsBlinksImage = new Image();
 neighborsBlinksImage.src = 'bitmaps/cell_blinks_3.png';
 const hikeImage = new Image();
 hikeImage.src = 'bitmaps/eranasPeace.png';
+const templeImage = new Image();
+templeImage.src = 'bitmaps/temple.png';
+const oracleImage = new Image();
+oracleImage.src = 'bitmaps/U5_Romani.png';
 
 const stylesheetActive = document.getElementById('stylesheetActive');
 const body = document.getElementsByTagName('body')[0];
@@ -501,6 +507,7 @@ const canvasVillage = document.getElementById('canvasVillage');
 const canvasVillageContext = canvasVillage.getContext('2d');
 const divVillageLasTablas = document.getElementById('divVillageLasTablas');
 const buttonBuild = document.getElementById('buttonBuild');
+const buttonVisitTemple = document.getElementById('buttonVisitTemple');
 const buttonVisitArena = document.getElementById('buttonVisitArena');
 const buttonVisitOracle = document.getElementById('buttonVisitOracle');
 const buttonBuyWheat = document.getElementById('buttonBuyWheat');
@@ -664,6 +671,19 @@ const buttonLeaveHike = document.getElementById('buttonLeaveHike');
 const canvasHike = document.getElementById('canvasHike');
 const canvasHikeContext = canvasHike.getContext('2d');
 const buttonRelax = document.getElementById('buttonRelax');
+
+const divMinigameTemple = document.getElementById('divMinigameTemple');
+const buttonLeaveTemple = document.getElementById('buttonLeaveTemple');
+const canvasTemple = document.getElementById('canvasTemple');
+const canvasTempleContext = canvasTemple.getContext('2d');
+const buttonPray = document.getElementById('buttonPray');
+const buttonOffer = document.getElementById('buttonOffer');
+
+const divMinigameOracle = document.getElementById('divMinigameOracle');
+const buttonLeaveOracle = document.getElementById('buttonLeaveOracle');
+const canvasOracle = document.getElementById('canvasOracle');
+const canvasOracleContext = canvasOracle.getContext('2d');
+const buttonReceiveWisdom = document.getElementById('buttonReceiveWisdom');
 
 const divFooter = document.getElementById('divFooter');
 
@@ -1016,6 +1036,11 @@ const pricePort4 = 128000;
 const pricePort5 = 256000;
 const pricePort6 = 512000;
 
+const priceTemple0 = 50000;
+const priceTemple1 = 500;
+const priceTemple2 = 50;
+const priceTemple3 = 5;
+
 const priceMiners = [10000000, 100000, 50,];
 const priceFarmers = [];
 const priceShepherds = 50;
@@ -1220,6 +1245,10 @@ let caughtFishBounty = [1, 2, 5, 10, 50, 100,];
 let relaxLevel = 0;
 let meditateCount = 0;
 let superMeditatorWizardPowersActivated = false;
+
+let prayersCount = 0;
+let templeStage = 0;
+let templeSpentCount = [0, 0, 0, 0, 0,]; // 0. Mutton, 1. Gold, 2. Silver, 3. Diamonds, 4. Jacinth
 
 
 

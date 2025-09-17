@@ -63,7 +63,6 @@ buttonGoToPraedium.addEventListener('click', function () { GoToPraedium(); });
 buttonGoToPort.addEventListener('click', function () { GoToPort(); });
 buttonGoToTownshipFromPort.addEventListener('click', function () { GoToTownship(); });
 
-buttonVisitOracle.addEventListener('click', function () { ConsultOracle(); });
 buttonBuild.addEventListener('click', function () { Build(); });
 
 buttonEstablishTradeRoute.addEventListener('click', function () { EstablishTradeRoute(); });
@@ -809,7 +808,7 @@ function DismissForeword() {
 
 function DismissGameEvent() {
     if (player.canDismissEvent) {
-        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop') { StartTime(); }
+        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop' && player.isAt != 'Temple' && player.isAt != 'Oracle') { StartTime(); }
         player.seesGameEvent = false;
         UpdateDisplay();
     }
@@ -2172,6 +2171,24 @@ function GoToPort() {
 
 
 
+function GoToOracle() {
+    if (!player.hasSeenOracle) {
+        player.hasSeenOracle = true;
+        if (player.likesStory) { GameEvent(displayStoryOracleFirstVisit); }
+    }
+
+    PauseTime();
+    divGameWindow.style.display = 'none';
+    divViewTownship.style.display = '';
+    divMinigameOracle.style.display = 'block';
+    divMinigameOracle.appendChild(divFooter);
+    player.isAt = 'Oracle';
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
 function ConsultOracle() {
     GameEvent(displayRandomWisdomsDisplay[revealedWisdom]);
     revealedWisdom++;
@@ -2182,6 +2199,98 @@ function ConsultOracle() {
         }
         revealedWisdom = 0;
     }
+}
+
+
+
+function LeaveOracle() {
+    if (gameSpeed == 'paused') { StartTime(); }
+    divGameWindow.style.display = '';
+    divViewTownship.style.display = 'block';
+    divMinigameOracle.style.display = '';
+    divWidthClamp.appendChild(divFooter);
+    player.isAt = 'Township';
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function GoToTemple() {
+    if (!player.hasSeenTemple) {
+        player.hasSeenTemple = true;
+        if (player.likesStory) { GameEvent(displayStoryTempleFirstVisit); }
+    }
+
+    PauseTime();
+    divGameWindow.style.display = 'none';
+    divViewTownship.style.display = '';
+    divMinigameTemple.style.display = 'block';
+    divMinigameTemple.appendChild(divFooter);
+    player.isAt = 'Temple';
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function Pray() {
+    if (player.likesStory) { GameEvent(displayStoryTemplePray); }
+    prayersCount++;
+}
+
+
+
+function Offer() {
+    if (templeStage == 0 && logsCount >= priceTemple0) {
+        if (player.likesStory) { GameEvent(displayStoryTemple0); }
+        logsCount -= priceTemple0;
+        forestSpentCount[0] += priceTemple0;
+        templeStage++;
+    }
+    else if (templeStage == 1 && shepherdsInventory[5] >= priceTemple1) {
+        if (player.likesStory) { GameEvent(displayStoryTemple1); }
+        shepherdsInventory[5] -= priceTemple1;
+        templeSpentCount[0] += priceTemple1;
+        templeStage++;
+    }
+    else if (templeStage == 2 && minersInventory[3] >= priceTemple2 && minersInventory[4] >= priceTemple2 && ingotsBronzeCount >= priceTemple2) {
+        if (player.likesStory) { GameEvent(displayStoryTemple2); }
+        minersInventory[3] -= priceTemple2;
+        templeSpentCount[1] += priceTemple2;
+        minersInventory[4] -= priceTemple2;
+        templeSpentCount[2] += priceTemple2;
+        ingotsBronzeCount -= priceTemple2;
+        mountainSpentCount[4] += priceTemple2;
+        templeStage++;
+    }
+    else if (templeStage == 3 && minersInventory[0] >= priceTemple3 && minersInventory[1] >= priceTemple3 && residenceInStockCount[8] >= priceTemple3) {
+        if (player.likesStory) { GameEvent(displayStoryTemple3); }
+        minersInventory[0] -= priceTemple3;
+        templeSpentCount[3] += priceTemple3;
+        minersInventory[1] -= priceTemple3;
+        templeSpentCount[4] += priceTemple3;
+        residenceInStockCount[8] -= priceTemple3;
+        residenceSpentCount[8] += priceTemple3;
+        templeStage++;
+    }
+    else {
+        if (player.likesStory) { GameEvent(displayStoryPoorTemple); }
+    }
+    UpdateDisplay();
+}
+
+
+
+function LeaveTemple() {
+    if (gameSpeed == 'paused') { StartTime(); }
+    divGameWindow.style.display = '';
+    divViewTownship.style.display = 'block';
+    divMinigameTemple.style.display = '';
+    divWidthClamp.appendChild(divFooter);
+    player.isAt = 'Township';
+    UpdateDisplay();
+    JumpToTopPlease();
 }
 
 
@@ -3718,7 +3827,7 @@ function SummonOptions() {
 
 function DismissOptions() {
     player.seesOptions = false;
-    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop') { StartTime(); }
+    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop' && player.isAt != 'Temple' && player.isAt != 'Oracle') { StartTime(); }
     UpdateDisplay();
 }
 

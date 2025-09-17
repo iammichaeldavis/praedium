@@ -241,6 +241,14 @@ button.disabled s {
     margin: 0 auto 6.4vw auto;
 }
 
+#divViewTownship #divVillageButtons .buttonVisitTempleConditionA {
+    margin: 0 auto 6.4vw auto;
+}
+
+#divViewTownship #divVillageButtons .buttonVisitTempleConditionB {
+    margin: 0 auto 2vw auto;
+}
+
 #divViewTownship #divVillageButtons .buttonVisitArenaConditionA {
     margin: 0 auto 6.4vw auto;
 }
@@ -3616,6 +3624,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divViewMiners,
 #buttonGoOnHike,
 #divMinigameHike,
+#divMinigameOracle,
+#divMinigameTemple,
 #divMinigameArena,
 #divArenaTables,
 #divMinigameFishing,
@@ -3654,6 +3664,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #buttonSellStone,
 #buttonBuyHorses,
 #buttonSellHorses,
+#buttonVisitTemple,
 #buttonVisitArena,
 #buttonVisitOracle,
 #buttonChooseHeir,
@@ -4417,6 +4428,99 @@ body #divCheevo .brilliant {
         opacity: 0;
         transform: scale(1);
     }
+}
+
+
+
+/* // ORACLE //////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divMinigameOracle {
+    width: 100%;
+    position: absolute;
+    border-top: calc(5px * var(--pixel-scale)) solid #006800;
+    top: 0;
+    left: 0;
+    background: #fee;
+    text-align: center;
+}
+
+#divOracleRibbon {
+    width: 100%;
+    height: calc(2px * var(--pixel-scale));
+    background: black;
+}
+
+#divOracleCushion {
+    width: 100%;
+    height: 12.8vw;
+}
+
+#buttonLeaveOracle {
+    display: block;
+    margin: 6.4vw auto;
+}
+
+#canvasOracle {
+    background: black;
+    display: block;
+    width: calc(386px * var(--pixel-scale));
+    height: calc(226px * var(--pixel-scale));
+    margin: 0 auto 6.4vw auto;
+}
+
+#buttonReceiveWisdom {
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+/* // TEMPLE //////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+
+#divMinigameTemple {
+    width: 100%;
+    position: absolute;
+    border-top: calc(5px * var(--pixel-scale)) solid #006800;
+    top: 0;
+    left: 0;
+    background: #efe;
+    text-align: center;
+}
+
+#divTempleRibbon {
+    width: 100%;
+    height: calc(2px * var(--pixel-scale));
+    background: black;
+}
+
+#divTempleCushion {
+    width: 100%;
+    height: 12.8vw;
+}
+
+#buttonLeaveTemple {
+    display: block;
+    margin: 6.4vw auto;
+}
+
+#canvasTemple {
+    background: black;
+    display: block;
+    width: calc(386px * var(--pixel-scale));
+    height: calc(226px * var(--pixel-scale));
+    margin: 0 auto 6.4vw auto;
+}
+
+#buttonPray {
+    display: block;
+    margin: 0 auto;
+}
+
+#buttonOffer {
+    display: block;
+    margin: 2vw auto 0 auto;
 }
 
 

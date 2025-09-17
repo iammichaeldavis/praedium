@@ -214,6 +214,19 @@ let displayLabelBuild24 = '';
 let displayLabelBuild25 = '';
 let displayLabelBuild26 = '';
 let displayLabelBuild27 = '';
+let displayStoryOracleFirstVisit = '';
+let displayLabelLeaveOracle = '';
+let displayLabelAskOracle = '';
+let displayLabelTemple = '';
+let displayLabelLeaveTemple = '';
+let displayLabelPray = '';
+let displayLabelOffer = '';
+let displayStoryTempleFirstVisit = '';
+let displayStoryTemplePray = '';
+let displayStoryTemple0 = '';
+let displayStoryTemple1 = '';
+let displayStoryTemple2 = '';
+let displayStoryTemple3 = '';
 let displayLabelArena = '';
 let displayLabelLeaveArena = '';
 let displayLabelBetBlue = '';
@@ -344,6 +357,7 @@ let displayStoryNotEnoughGeneral = '';
 let displayStoryNotEnoughFish = '';
 let displayStoryPoorWheat = '';
 let displayStoryPoorFarm = '';
+let displayStoryPoorTemple = '';
 let displayStoryPoorHire = '';
 let displayStoryPoorAcct = '';
 let displayStoryPoorFound = '';
@@ -982,9 +996,9 @@ function Translate(language, bark = true) {
         displayEthnicities[30] = 'a Cosmopolitan';
 
         displayTitles = [
+            'Pharaoh',
             'Caesar',
             'Caesarissa',
-            'Pharaoh',
             'Prime Minister',
             'Premier',
             'Autokrator',
@@ -993,6 +1007,7 @@ function Translate(language, bark = true) {
             'Lord Mayor',
             'Supreme Leader',
             'Supreme Commander-in-Chief',
+            'Overlord',
             'Great-Grand-Lord-High-Everything',
             'Imperial Potentate',
             'Imperator',
@@ -1001,6 +1016,8 @@ function Translate(language, bark = true) {
             'Generalissimo',
             'Vizier',
             'Overseer',
+            'Superintendent',
+            'Director',
             'Shah',
             'Muad’Dib',
             'Sultan',
@@ -1331,6 +1348,19 @@ function Translate(language, bark = true) {
         displayLabelBuild25 = 'ERECT THEATER';
         displayLabelBuild26 = 'ZONE FOR PRIVATE DEVELOPMENT';
         displayLabelBuild27 = 'INAUGURATE ORACLE';
+        displayStoryOracleFirstVisit = 'Robed acolytes lead you from the grand entrance of the building, down various dimly-lit hallways, deep into the shrine’s interior. At last you approach a large stone archway that leads into the innermost sanctum of this holy place. The torchlight casts deep shadows across everything.<br><br>As you draw near, a woman’s voice from inside booms: “Welcome, O Seeker! Come, enter in peace.” Your silent guides bow and retreat, leaving you to stand alone there before the mysterious portal.<br><br>Upon entering, you find a very old and very friendly sibyl sitting in a small room surrounded by heavy black curtains and heavy bronze braziers belching thick, sweet-smelling vapors. At the back of the room, a precious consecrated book is bathed in warm light, though from where exactly this light is emanating you can not be certain.<br><br>In front of the woman is a round table upon which sit two ceremonial bowls. The room smells so heavily of incense that you immediately feel dizzy.<br><br>The ancient prophetess smiles as she says in a whisper, “We have been waiting such a long time, but at last you have come.” She nods her head, then casts a powder into the bowls that causes a thick blue smoke to boil upwards from them. Staring into this smoke she beckons, “Sit before me now, and I shall pour the light of Virtue into the shadows of thy future.”';
+        displayLabelLeaveOracle = '↓ EXIT THIS PLACE';
+        displayLabelAskOracle = 'RECEIVE HER WISDOM';
+        displayLabelTemple = 'VISIT THE TEMPLE';
+        displayLabelLeaveTemple = '↓ LEAVE THE TEMPLE';
+        displayLabelPray = 'PRAY';
+        displayLabelOffer = 'MAKE AN OFFERING';
+        displayStoryTempleFirstVisit = '“Why, Lord Mayor, what a pleasant surprise! It is always wonderful to see you. Please, come in, come in,” coos the head priest';
+        displayStoryTemplePray = 'Finding an empty pew, you make yourself comfortable on the hassock, bow your head and clasp your hands together. Taking in a deep breath, you silently murmur a personal prayer.';
+        displayStoryTemple0 = 'The Atash Behram is eternally hungry, my child. This will be put to good use';
+        displayStoryTemple1 = '“With what shall I come before the Lord, and bow myself down before God Most High? Shall I approach Him with burnt-offerings, with yearling calves? Will the Lord be pleased with thousands of rams, or ten thousand rivers of oil? Shall I offer my first-born for my transgressions; the fruit of my body for the sin of my soul?”<br>You, man, have been told what is good and what the Lord requires of you: only to do justice, and to love mercy, and to walk humbly with your God.<br><br>Micah 6:6-8';
+        displayStoryTemple2 = 'Why, look here! Glimmering gold to honour the blinding Father Sun, shimmering silver to honour fickle Mother Moon, and gleaming bronze to honour the noble Earth that sustains us all. Truly, the gods smile upon you this day, my child';
+        displayStoryTemple3 = 'Your offerings have been accepted; the evidence of your devotion is irrefutable. You have surely earned God’s loving attention, there can be no mistaking that.';
         displayLabelArena = 'ATTEND GLADIATOR BATTLE';
         displayLabelLeaveArena = '↓ LEAVE THE ARENA';
         displayLabelBetBlue = 'PLACE BET ON BLUE';
@@ -1463,6 +1493,7 @@ function Translate(language, bark = true) {
         displayStoryNotEnoughFish = 'THE CRUSTY OLD HARBOURMASTER PULLS YOU ASIDE: “NOW LISTEN, YE LANDLUBBER YE, IF YOU SPEND YOUR LAST BUSHEL OF WHEAT YOU WON’T BE ABLE TO CONTINUE FARMING! THINK, FIRST, HUH?”'
         displayStoryPoorWheat = 'YOU NEED MORE WHEAT, EFFENDI';
         displayStoryPoorFarm = 'YOU CAN NOT AFFORD THIS, EFFENDI';
+        displayStoryPoorTemple = 'Please excuse my impertinence, milord, but according to your warehouse inventories, I am afraid you can not afford to make this offering';
         displayStoryPoorHire = 'WE CAN NOT AFFORD TO BRING ON A NEW MAN RIGHT NOW';
         displayStoryPoorAcct = 'I CAN NOT AFFORD TO WORK PRO BONO, EFFENDI, I AM SORRY. PLEASE RETURN WHEN YOU CAN AFFORD MY PRICE';
         displayStoryPoorFound = 'THE CLERK AT THE LAND REGISTRAR’S OFFICE BLINKS, CONFUSED. “MY FRIEND, IF YOU CAN NOT AFFORD THE PRICE, WHY DID YOU COME HERE TODAY?”';
@@ -2097,9 +2128,9 @@ function Translate(language, bark = true) {
         }
 
         displayTitles = [
+            'Faraón',
             'César',
             'Césarisa',
-            'Faraón',
             'Primer Ministro',
             'Premier',
             'Autokrator',
@@ -2108,6 +2139,7 @@ function Translate(language, bark = true) {
             'Señor Alcalde',
             'Líder Supremo',
             'Comandante-en-Jefe Supremo',
+            'Señor Supremo',
             'Gran-Grande-Señor-Sumo-Todo',
             'Potentado Imperial',
             'Imperator',
@@ -2116,6 +2148,8 @@ function Translate(language, bark = true) {
             'Generalísimo',
             'Visir',
             'Supervisor',
+            'Superintendente',
+            'Director',
             'Sha',
             'Muad’Dib',
             'Sultán',
@@ -2448,6 +2482,19 @@ function Translate(language, bark = true) {
         displayLabelBuild25 = 'ERIGIR TEATRO';
         displayLabelBuild26 = 'ZONIFICAR PARA EL DESARROLLO PRIVADO';
         displayLabelBuild27 = 'INAUGURAR ORÁCULO';
+        displayStoryOracleFirstVisit = 'Los acólitos vestidos con túnicas te conducen desde la gran entrada del edificio, a través de varios pasillos poco iluminados, hasta el interior del santuario. Por fin te acercas a un gran arco de piedra que conduce al sanctasanctórum más interior de este lugar sagrado. La luz de la antorcha proyecta sombras profundas sobre todo.<br><br>Al acercarte, una voz de mujer resuena desde dentro: «¡Bienvenido, Oh Buscador! Ven, entra en paz». Tus guías silenciosos se inclinan y se retiran, dejándote parado solo allí frente al portal misterioso.<br><br>Al entrar, te encuentras con una sibila muy anciana y muy amigable sentada en una pequeña habitación rodeada de pesadas cortinas negras y pesados ​​braseros de bronce que eructan vapores espesos y de olor dulce. Al fondo de la sala, un precioso libro consagrado está bañado por una luz cálida, aunque no se puede saber con seguridad de dónde proviene exactamente.<br><br>Frente a la mujer hay una mesa redonda sobre la que hay dos cuencos ceremoniales. La habitación huele tanto a incienso que te sientes mareado.<br><br>La antigua profetisa sonríe mientras dice en un susurro: «Hemos estado esperando tanto tiempo, pero finalmente has llegado». Ella asiente con la cabeza, luego arroja un polvo en los cuencos que hace que un humo azul espeso hierva desde ellos. Mirando fijamente este humo, ella hace una seña: «Siéntate ante mí ahora, y derramaré la luz de la Virtud en las sombras de tu futuro».';
+        displayLabelLeaveOracle = '↓ SALIR DE ESTE LUGAR';
+        displayLabelAskOracle = 'RECIBIR SABIDURÍA DE ELLA';
+        displayLabelTemple = 'VISITAR EL TEMPLO';
+        displayLabelLeaveTemple = '↓ DEJAR EL TEMPLO';
+        displayLabelPray = 'ORAR';
+        displayLabelOffer = 'HACER UNA OFRENDA';
+        displayStoryTempleFirstVisit = '«¡Vaya, Señor Alcalde, qué grata sorpresa! Siempre es un placer verlo. Por favor, pase, pase», arrulla el sumo sacerdote';
+        displayStoryTemplePray = 'Al encontrar un banco vacío, te ponte cómodo en el reclinatorio, inclinas la cabeza y juntas las manos. Respiras hondo y murmuras en silencio una oración personal.';
+        displayStoryTemple0 = 'El Atash Behram tiene hambre eterna, hijo mío. Esto se aprovechará al máximo';
+        displayStoryTemple1 = '«¿Con qué me presentaré ante el Señor, y me inclinaré ante el Dios Altísimo? ¿Me acercaré a Él con holocaustos, con becerros de un año? ¿Se agradará el Señor de millares de carneros, o diez mil arroyos de aceite? ¿Ofreceré a mi primogénito por mis transgresiones; al fruto de mi cuerpo por el pecado de mi alma?»<br>A ti, humano, se te ha dicho lo que es bueno y lo que el Señor exige de ti: solamente hacer justicia, y amar misericordia, y humillarte ante tu Dios.<br><br>Miqueas 6:6-8';
+        displayStoryTemple2 = '¡Bueno, mira aquí! Oro reluciente para honrar al cegador Padre Sol, plata titilante para honrar a la caprichosa Madre Luna, y bronce centelleante para honrar a la noble Tierra que nos sustenta a todos. En verdad, los dioses te sonríen hoy, hijo mío';
+        displayStoryTemple3 = 'Tus ofrendas han sido aceptadas; la evidencia de tu devoción es irrefutable. Sin duda, te has ganado la atención amorosa de Dios, de eso no hay duda.';
         displayLabelArena = 'ASISTIR BATALLA DE GLADIADORES';
         displayLabelLeaveArena = '↓ ABANDONAR LA ARENA';
         displayLabelBetBlue = 'HAZ APUESTA EN AZUL';
@@ -2584,6 +2631,7 @@ function Translate(language, bark = true) {
         displayStoryNotEnoughFish = 'EL VIEJO Y CASCARRABIAS CAPITÁN DEL PUERTO TE LLEVA APARTE: «ESCUCHA, MARINERO DE TIERRA, ¡SI GASTAS TU ÚLTIMO CELEMÍN DE TRIGO NO PODRÁS SEGUIR CULTIVANDO! PIENSA PRIMERO, ¿EH?»'
         displayStoryPoorWheat = 'NECESITAS MÁS TRIGO, EFFENDI';
         displayStoryPoorFarm = 'NO PUEDES PERMITIRTE ESTO, EFFENDI';
+        displayStoryPoorTemple = 'Disculpe mi impertinencia por favor, milord, pero según los inventarios de su almacén, me temo que no puede permitirse hacer esta ofrenda';
         displayStoryPoorHire = 'NO PODEMOS PERMITIRNOS TRAER A UN HOMBRE NUEVO AHORA MISMO';
         displayStoryPoorAcct = 'NO PUEDO PERMITIRME TRABAJAR PRO BONO, EFFENDI, LO SIENTO. POR FAVOR, VUELVE CUANDO PUEDA PAGAR MI PRECIO';
         displayStoryPoorFound = 'EL EMPLEADO DEL REGISTRO DE LA PROPIEDAD PARPADEA CONFUNDIDO: «AMIGO, SI NO PUEDES PAGAR EL PRECIO, ¿POR QUÉ HAS VENIDO HOY AQUÍ?»';
@@ -3195,6 +3243,7 @@ const dedicationList = [
 const gratitudeList = [
     'Grant Abbitt', // youtube.com/watch?v=lLqep5Q4MiI
     'Mohammad Alavi',
+    'Hamza Ansari',
     ['Howard', 'Lynelle Antonoff'],
     'David “Polar” Atkins',
     'Sheila Bailey',
@@ -3242,6 +3291,7 @@ const gratitudeList = [
     'Barbara Lande',
     'Ira Lande',
     'Monica Lande', // 🦆💔
+    'Chris “Binky” Launius',
     'John Lawrie',
     'Erik Lundblad',
     'David Macaulay', // youtu.be/9K7Yds8bWz4

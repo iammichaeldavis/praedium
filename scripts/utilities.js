@@ -202,6 +202,8 @@ function ContinuePreviousGame() {
         player.hasMonument = loadedReport.hero.hasMonument;
         player.hasSeenResidence = loadedReport.hero.hasSeenResidence;
         player.hasSeenVillage = loadedReport.hero.hasSeenVillage;
+        player.hasSeenOracle = loadedReport.hero.hasSeenOracle;
+        player.hasSeenTemple = loadedReport.hero.hasSeenTemple;
         player.hasSeenArena = loadedReport.hero.hasSeenArena;
         player.hasSeenPort = loadedReport.hero.hasSeenPort;
         player.hasSeenMiners = loadedReport.hero.hasSeenMiners;
@@ -214,7 +216,7 @@ function ContinuePreviousGame() {
         player.hasFoundCrystalEvidence = loadedReport.hero.hasFoundCrystalEvidence;
         player.hasHiredGemcutters = loadedReport.hero.hasHiredGemcutters;
         player.hasBeenLevied = loadedReport.hero.hasBeenLevied;
-        //player.hasAllWisdom = loadedReport.hero.hasAllWisdom;
+        player.hasAllWisdom = loadedReport.hero.hasAllWisdom;
         player.hasBecomeHeir = loadedReport.hero.hasBecomeHeir;
         player.hasReturned = loadedReport.hero.hasReturned;
         player.hasTargettedMiners = loadedReport.hero.hasTargettedMiners;
@@ -259,6 +261,9 @@ function ContinuePreviousGame() {
         hintLevel = loadedReport.stages[4];
         relaxLevel = loadedReport.stages[5];
         meditateCount = loadedReport.stages[6];
+        prayersCount = loadedReport.stages[7];
+        templeStage = loadedReport.stages[8];
+        revealedWisdom = loadedReport.stages[9];
         /////////////////////////////////////////////////////////////////////////////////////////
         mapProvinces[1][2] = loadedReport.relations[0];
         mapProvinces[2][2] = loadedReport.relations[1];
@@ -452,6 +457,8 @@ function ContinuePreviousGame() {
         arenaTotalLoss = loadedReport.counts.miniGameArena[2];
         CloneArray(loadedReport.counts.miniGameArena[3], arenaWins);
         CloneArray(loadedReport.counts.miniGameArena[4], arenaLosses);
+
+        templeSpentCount = loadedReport.counts.templeSacrifices;
         /////////////////////////////////////////////////////////////////////////////////////////
         CloneArray(loadedReport.farmland.grain[0], arrayFarmPlots[0]);
         CloneArray(loadedReport.farmland.grain[1], arrayFarmPlots[1]);
@@ -732,6 +739,8 @@ function CollateGameStateReport(loud = false) {
             arenaWins,
             arenaLosses,
         ],
+
+        templeSacrifices: templeSpentCount,
     };
     const farmlandArrays = {
         grain: arrayFarmPlots,
@@ -749,7 +758,7 @@ function CollateGameStateReport(loud = false) {
         counts: integerCounts,
         farmland: farmlandArrays,
         hero: player,
-        stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel, relaxLevel, meditateCount,],
+        stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel, relaxLevel, meditateCount, prayersCount, templeStage, revealedWisdom,],
         relations: [mapProvinces[1][2], mapProvinces[2][2], mapProvinces[3][2],],
         timestamps: [timeAtSave, timeAtStart, timeAtWin,],
         system: [resolutionScale,],
