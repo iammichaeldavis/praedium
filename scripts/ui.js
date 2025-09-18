@@ -735,6 +735,8 @@ function UpdateText() {
             // button
             if (!player.canLog) { buttonForest.innerHTML = displayLabelLogCamp + '<br>(' + priceLoggingCamp + '<span class="icon Wheat inlineIcon"></span>)'; }
             else if (!player.canSaw) { buttonForest.innerHTML = displayLabelSawmill + '<br>(' + priceSawmill + '<span class="icon Wheat inlineIcon"></span>)'; }
+            else if (!player.hasLoggingUpgrade) { buttonForest.innerHTML = displayLabelLogCampUpgrade + '<br>(' + priceLoggingUpgrade[0] + '<span class="icon Board inlineIcon"></span> + ' + priceLoggingUpgrade[1] + '<span class="icon Stone inlineIcon"></span>)'; }
+            else if (!player.hasSawmillUpgrade) { buttonForest.innerHTML = displayLabelSawmillUpgrade + '<br>(' + priceSawmillUpgrade[0] + '<span class="icon Stone inlineIcon"></span> + ' + priceSawmillUpgrade[1] + '<span class="icon IngotCopper inlineIcon"></span>)'; }
         }
 
         // MOUNTAIN ----------------------------
@@ -1012,7 +1014,7 @@ function UpdateText() {
             else if (farmStage == 8) { buttonBuyLand.innerHTML = displayLabelBuyLand8 + ' <span class="icon Rake inlineIcon"></span>'; }
             else if (farmStage == 9) { buttonBuyLand.innerHTML = displayLabelBuyLand9 + ' <span class="icon Sapling inlineIcon"></span>'; }
             else if (farmStage == 10) { buttonBuyLand.innerHTML = displayLabelBuyLand10 + '<br>(' + priceStage11 + '<span class="icon Wheat inlineIcon"></span>)'; }
-            else if (farmStage == 11) { buttonBuyLand.innerHTML = displayLabelBuyLand11 + '<br>(' + priceStage12[0] + '<span class="icon Wheat inlineIcon"></span> + ' + formatterCurrent.format(priceStage12[1]) + '<span class="icon Board inlineIcon"></span>)'; }
+            else if (farmStage == 11) { buttonBuyLand.innerHTML = displayLabelBuyLand11 + '<br>(' + priceStage12[0] + '<span class="icon Wheat inlineIcon"></span> + ' + priceStage12[1] + '<span class="icon Board inlineIcon"></span>)'; }
             else if (farmStage == 12) { buttonBuyLand.innerHTML = displayLabelBuyLand12 + '<br>(' + priceStage13 + '<span class="icon Wheat inlineIcon"></span>)'; }
             else if (farmStage == 13) { buttonBuyLand.innerHTML = displayLabelBuyLand13 + '<br>(' + priceStage14[0] + '<span class="icon Wheat inlineIcon"></span> + ' + formatterCurrent.format(priceStage14[1]) + '<span class="icon Board inlineIcon"></span>)'; }
             else if (farmStage == 14) { buttonBuyLand.innerHTML = displayLabelBuyLand14 + '<br>(' + priceStage15[0] + '<span class="icon Wheat inlineIcon"></span> + ' + formatterCurrent.format(priceStage15[1]) + '<span class="icon Stone inlineIcon"></span>)'; }

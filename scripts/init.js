@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.21.01-A';
+const version = '1.21.02-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -212,6 +212,8 @@ const player = {
     hasHosted: false,
     hasHiked: false,
     hasTakenCruise: false,
+    hasLoggingUpgrade: false,
+    hasSawmillUpgrade: false,
 };
 
 const tilemap = new Image();
@@ -957,6 +959,8 @@ const priceStage11 = 1200;
 const priceForest = 600;
 const priceLoggingCamp = 400;
 const priceSawmill = 800;
+const priceLoggingUpgrade = [1000, 1000,];
+const priceSawmillUpgrade = [1000, 100,];
 const priceStage12 = [400, 8000,];
 const priceStage13 = 2400;
 const priceStage14 = [600, 16000,];

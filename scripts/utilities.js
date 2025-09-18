@@ -242,6 +242,8 @@ function ContinuePreviousGame() {
         player.hasHosted = loadedReport.hero.hasHosted;
         player.hasHiked = loadedReport.hero.hasHiked;
         player.hasTakenCruise = loadedReport.hero.hasTakenCruise;
+        player.hasLoggingUpgrade = loadedReport.hero.hasLoggingUpgrade;
+        player.hasSawmillUpgrade = loadedReport.hero.hasSawmillUpgrade;
         /////////////////////////////////////////////////////////////////////////////////////////
         gameTurn = loadedReport.calendar[0];
         year = loadedReport.calendar[1];

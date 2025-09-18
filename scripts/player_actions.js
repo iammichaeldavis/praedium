@@ -1496,11 +1496,32 @@ function ForestEvents() {
         bushelCount[0] -= priceSawmill;
         spentCount[0] += priceSawmill;
         player.canSaw = true;
+    }
+    else if (!player.hasLoggingUpgrade && boardsCount >= priceLoggingUpgrade[0] && stoneCount >= priceLoggingUpgrade[1]) {
+        if (player.likesStory) { GameEvent(displayStoryLoggingUpgrade); }
+        boardsCount -= priceLoggingUpgrade[0];
+        forestSpentCount[1] += priceLoggingUpgrade[0];
+        stoneCount -= priceLoggingUpgrade[1];
+        mountainSpentCount[0] += priceLoggingUpgrade[1];
+        player.hasLoggingUpgrade = true;
+    }
+    else if (!player.hasSawmillUpgrade && stoneCount >= priceSawmillUpgrade[0] && ingotsCopperCount >= priceSawmillUpgrade[1]) {
+        if (player.likesStory) { GameEvent(displayStorySawmillUpgrade); }
+        stoneCount -= priceSawmillUpgrade[0];
+        mountainSpentCount[0] += priceSawmillUpgrade[0];
+        ingotsCopperCount -= priceSawmillUpgrade[1];
+        mountainSpentCount[2] += priceSawmillUpgrade[1];
+        player.hasSawmillUpgrade = true;
         player.seesForestButton = false;
     }
 
     else {
-        if (player.likesStory) { GameEvent(displayStoryPoorWheat); }
+        if (!player.canSaw) {
+            if (player.likesStory) { GameEvent(displayStoryPoorWheat); }
+        }
+        else {
+            if (player.likesStory) { GameEvent(displayStoryPoorFarm); }
+        }
     }
 
     UpdateDisplay();
@@ -2970,12 +2991,11 @@ function TakeCruise() {
     if (asCount >= priceCruise) {
         if (player.likesStory) { GameEvent(displayStoryCruise); }
         player.hasTakenCruise = true;
-        //take cost
-        //record cost as stateCraft?
+        asCount -= priceCruise;
+        statecraftLifetimeSpend += priceCruise;
     }
     else {
         if (player.likesStory) { GameEvent(displayStoryPoorCruise); }
-        //poorCruise;
     }
     UpdateDisplay();
 }

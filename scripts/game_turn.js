@@ -2,7 +2,7 @@
 // *************************************************************************************************
 
 function GameTurn() {
-    //if (player.likesRecords) { snapshotLastTurn = snapshotThisTurn; }
+    //if (player.likesRecords) { snapshotLastTurn = snapshotThisTurn; } //vestigial, this was for a potential diff check
 
     gameTurn++;
 
@@ -745,6 +745,9 @@ function FellTrees() {
         filetsSpent[2] += loggersHired;
         loggedAmount = loggedAmount * 2;
     }
+    if (player.hasLoggingUpgrade) {
+        loggedAmount = Math.ceil(loggedAmount * 1.5);
+    }
     logsCount += loggedAmount;
     forestProducedCount[0] += loggedAmount;
     PayWorkerGroup(loggersHired, 1);
@@ -759,6 +762,9 @@ function SawLogs() {
         filetCount -= sawyersHired;
         filetsSpent[1] += sawyersHired;
         producedAmount = producedAmount * 2;
+    }
+    if (player.hasSawmillUpgrade) {
+        producedAmount = Math.ceil(producedAmount * 1.5);
     }
     logsCount -= processedAmount;
     forestSpentCount[0] += processedAmount;
