@@ -1481,7 +1481,7 @@ function ForestEvents() {
     if (!player.canLog && bushelCount[0] == priceLoggingCamp) {
         GameEvent(displayStoryNotEnoughGeneral);
     }
-    else if (!player.canSaw && bushelCount[0] == priceSawmill) {
+    else if (player.canLog && !player.canSaw && bushelCount[0] == priceSawmill) {
         GameEvent(displayStoryNotEnoughGeneral);
     }
 
@@ -1505,7 +1505,7 @@ function ForestEvents() {
         mountainSpentCount[0] += priceLoggingUpgrade[1];
         player.hasLoggingUpgrade = true;
     }
-    else if (!player.hasSawmillUpgrade && stoneCount >= priceSawmillUpgrade[0] && ingotsCopperCount >= priceSawmillUpgrade[1]) {
+    else if (player.hasLoggingUpgrade && !player.hasSawmillUpgrade && stoneCount >= priceSawmillUpgrade[0] && ingotsCopperCount >= priceSawmillUpgrade[1]) {
         if (player.likesStory) { GameEvent(displayStorySawmillUpgrade); }
         stoneCount -= priceSawmillUpgrade[0];
         mountainSpentCount[0] += priceSawmillUpgrade[0];
