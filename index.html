@@ -38,8 +38,8 @@
     <link rel="apple-touch-icon" sizes="16x16" href="bitmaps/favicon/favicon16x.ico" />
     <link rel="manifest" href="bitmaps/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya Sans SC" />
-    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.21.02.2" />
-    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.21.02.2" />
+    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.22.00.0" />
+    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.22.00.0" />
     <script>history.scrollRestoration = 'manual';</script>
 </head>
 
@@ -445,6 +445,9 @@
                 <canvas id="canvasVillage" width="384" height="224"></canvas>
                 <div id="divVillageLasTablas"></div>
                 <div id="divVillageButtons">
+                    <button id="buttonReleaseCats" onclick="ReleaseCats();"></button>
+                    <button id="buttonChariot" onclick="BenHur();"></button>
+                    <button id="buttonTakeInAShow" onclick="TakeInAShow();"></button>
                     <button id="buttonVisitTemple" onclick="GoToTemple();" class="buttonVisitTempleConditionA"></button>
                     <button id="buttonVisitArena" onclick="GoToArena();" class="buttonVisitArenaConditionA"></button>
                     <button id="buttonVisitOracle" onclick="GoToOracle();"></button>
@@ -472,6 +475,7 @@
                 <div id="divPortSubtitle"></div>
                 <canvas id="canvasPort" width="384" height="224"></canvas>
                 <div id="divPortActionArea">
+                    <button id="buttonNavy" onclick="SponsorNavy();"></button>
                     <button id="buttonCruise" onclick="TakeCruise();"></button>
                     <button id="buttonSailWest"></button>
                     <img id="imgTradeGoods" src="bitmaps/trade_goods.png" width="130" height="86" />
@@ -508,6 +512,7 @@
 
             <table id="tableFishSession"></table>
             <table id="tableFishRecords"></table>
+            <table id="tableFishStaff"></table>
             <table id="tableFishInventory"></table>
             <table id="tableFishReport"></table>
 
@@ -530,10 +535,8 @@
             <button id="buttonWharfBait" onclick="PurchaseWharfItem(4);"></button>
             <button id="buttonWharfRod" onclick="PurchaseWharfItem(5);"></button>
             <button id="buttonWharfWWF" onclick="PurchaseWharfItem(6);"></button>
+            <button id="buttonWharfFishermen" onclick="HireFishboys();"></button>
             <button id="buttonWharfChewFat" onclick="ChewFat();"></button>
-
-            <!-- next step for fishermen button: upgrade nets for better yield -->
-            <button id="buttonWharfFishermen">HIRE FISHERMEN/CONTRATAR PESCADORES</button>
 
             <div id="divWharfCushion"></div>
         </div>
@@ -607,6 +610,18 @@
             <div id="divOracleCushion"></div>
         </div>
         <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+        <div id="divMinigameStage">
+            <div id="divStageRibbon"></div>
+
+            <div id="divStageCorpus"></div>
+
+            <button id="buttonNextScene" onclick="AdvanceScene();"></button>
+            <button id="buttonLeaveEarly" onclick="LeaveEarly();"></button>
+            <button id="buttonLeaveStage" onclick="LeaveStage();"></button>
+
+            <div id="divStageCushion"></div>
+        </div>
+        <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
     <div id="divOverlayGameEvent" class="overlay">
@@ -622,6 +637,7 @@
             <div id="divForewordSubtitle"><img id="imgLeafL" src="curves/leafL.svg" /> an epic solitaire by Michael David Davis II <img id="imgLeafR"
                     src="curves/leafR.svg" /></div>
             <button id="buttonForewordEnglish">English</button><button id="buttonForewordSpanish">Español</button>
+            <div id="divForewordBoilerplate">&copy; 1995–1999 Davis Laboratory, <span class="pvtLtd">SMC-Pvt. Ltd.</span></div>
             <div id="divForewordCorpus"></div>
             <button id="buttonForewordDismiss"></button>
         </div>

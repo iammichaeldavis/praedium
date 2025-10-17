@@ -567,6 +567,8 @@ document.body.onkeyup = function (e) {
             commoditiesLifetimeSpend = 0;
             rentLifetimeCollected = 0;
             taxesLifetimeCollected = 0;
+            lifetimeSpentOnCats = 0;
+            clowdersOfCatsReleased = 0;
             horsesCount = 0;
             horsesEaten = 0;
             beadsCount = 0;
@@ -576,6 +578,7 @@ document.body.onkeyup = function (e) {
             militaryLifetimeCost = 0;
             medicalLifetimeCost = 0;
             patientsCount = 0;
+            totalPatientsSeen = 0;
             pilgrimsCount = 0;
             pilgrimsLifetimeCount = 0;
             pilgrimLifetimeIncome = 0;
@@ -586,7 +589,7 @@ document.body.onkeyup = function (e) {
             ZeroArray(shipmentProfits);
             ZeroArray(shipmentCosts);
             interestLifetimeCollected = 0;
-            ratsCount = 2;
+            ratsCount = 1;
             ZeroArray(shepherdsInventory);
             ZeroArray(minersInventory);
             filetCount = 0;
@@ -599,6 +602,23 @@ document.body.onkeyup = function (e) {
             fishEscapeCountLifetime = 0;
             fishEscapeCountSession = 0;
             totalCatches = 0;
+            ZeroArray(lifetimeFishermanCaught);
+            lifetimeFishermenEarnings = 0;
+            stockfishCount = 0;
+            lifetimeStockfishProduced = 0;
+            lesArtsLifetimeCollected = 0;
+            patronsCount = 0;
+            totalPatronsHosted = 0;
+            statecraftLifetimeSpend = 0;
+            pegasiCount = 0;
+            messiahCount = 0;
+            meditateCount = 0;
+            prayersCount = 0;
+            arenaTotalBet = 0;
+            arenaTotalWin = 0;
+            arenaTotalLoss = 0;
+            ZeroArray(arenaWins);
+            ZeroArray(arenaLosses);
         }
         if (e.key == 'g') { FinalReset(); }
         function FinalReset() {
@@ -684,6 +704,8 @@ document.body.onkeyup = function (e) {
                 FillArray(shepherdsInventory, amount);
                 FillArray(minersInventory, amount);
                 filetCount = amount;
+                stockfishCount = amount;
+                pegasiCount = amount;
             }
             else if (e.altKey) {
                 GooseArray(bushelCount, -amount);
@@ -707,6 +729,8 @@ document.body.onkeyup = function (e) {
                 GooseArray(shepherdsInventory, -amount);
                 GooseArray(minersInventory, -amount);
                 filetCount -= amount;
+                stockfishCount -= amount;
+                pegasiCount -= amount;
             }
             else {
                 GooseArray(bushelCount, amount);
@@ -730,6 +754,8 @@ document.body.onkeyup = function (e) {
                 GooseArray(shepherdsInventory, amount);
                 GooseArray(minersInventory, amount);
                 filetCount += amount;
+                stockfishCount += amount;
+                pegasiCount += amount;
             }
         }
 
@@ -747,6 +773,7 @@ document.body.onkeyup = function (e) {
 
         UpdateDisplay();
         UpdateFishDisplay();
+        UpdateArenaDisplay();
     }
 }
 
@@ -808,7 +835,7 @@ function DismissForeword() {
 
 function DismissGameEvent() {
     if (player.canDismissEvent) {
-        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop' && player.isAt != 'Temple' && player.isAt != 'Oracle') { StartTime(); }
+        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop' && player.isAt != 'Temple' && player.isAt != 'Oracle' && player.isAt != 'Stage') { StartTime(); }
         player.seesGameEvent = false;
         UpdateDisplay();
     }
@@ -832,6 +859,7 @@ function PlotTill(robota = false) {
         if (plotSearchResult.row != -1) {
             arrayFlaxPlots[plotSearchResult.row][plotSearchResult.col] = 1;
             taskComplete = true;
+            tillCount++;
             if (!robota) { UpdateDisplay(); }
         }
     }
@@ -841,9 +869,12 @@ function PlotTill(robota = false) {
         if (plotSearchResult.row != -1) {
             arrayFarmPlots[plotSearchResult.row][plotSearchResult.col] = 1;
             taskComplete = true;
+            tillCount++;
             if (!robota) { UpdateDisplay(); }
         }
     }
+
+    if (taskComplete && tillCount == 25 && !player.seesForest && player.likesStory) { GameEvent('<span class="icon BrokenHoe inlineIcon quadrupleSize"></span><br><br>' + displayStoryBrokenHoe); }
 
     return taskComplete;
 }
@@ -883,6 +914,7 @@ function PlotPlant(robota = false) {
             foundCol = plotSearchResult.col;
             if (!player.isDegreeless) { bushelCount[0] -= plantCost; }
             seededCount[0] += plantCost;
+            if (seededCount[0] == 5 && !player.seesForest && player.likesStory) { GameEvent(displayStoryRudeJerk); }
         }
     }
 
@@ -2096,6 +2128,7 @@ function ThrowParty() {
     if (asCount >= priceResidenceParty) {
         if (player.likesStory) { GameEvent(displayStoryParty); }
         asCount -= priceResidenceParty;
+        asSpent += priceResidenceParty;
         statecraftLifetimeSpend += priceResidenceParty;
 
         player.hasHosted = true;
@@ -2312,6 +2345,81 @@ function LeaveTemple() {
     player.isAt = 'Township';
     UpdateDisplay();
     JumpToTopPlease();
+}
+
+
+
+function TakeInAShow() {
+    if (player.likesStory) {
+        Translate(player.speaks, false); // this repopulates the bindings in the following string
+        GameEvent(displayStoryStartPlay);
+    }
+    PauseTime();
+    buttonNextScene.style.display = 'block';
+    buttonLeaveEarly.style.display = 'block';
+    buttonLeaveStage.style.display = 'none';
+    divGameWindow.style.display = 'none';
+    divViewTownship.style.display = '';
+    divMinigameStage.style.display = 'block';
+    divMinigameStage.appendChild(divFooter);
+    player.isAt = 'Stage';
+    stageDressing = 'Theater';
+    player.hasGoodTaste = true;
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function AdvanceScene() {
+    stageStage++;
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function LeaveEarly() {
+    if (confirm(displayEndPlayEarlyConfirm)) {
+        buttonLeaveStage.style.display = '';
+        LeaveStage(true);
+    }
+}
+
+
+
+function BenHur() {
+    if (player.likesStory) { GameEvent(displayStoryStartRace); }
+    PauseTime();
+    divGameWindow.style.display = 'none';
+    divViewTownship.style.display = '';
+    divMinigameStage.style.display = 'block';
+    divMinigameStage.appendChild(divFooter);
+    player.isAt = 'Stage';
+    stageDressing = 'Racetrack';
+    player.hasSeenRace = true;
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function LeaveStage(leftEarly = false) {
+    if (gameSpeed == 'paused') { StartTime(); }
+    buttonNextScene.style.display = '';
+    buttonLeaveEarly.style.display = '';
+    divGameWindow.style.display = '';
+    divViewTownship.style.display = 'block';
+    divMinigameStage.style.display = '';
+    divWidthClamp.appendChild(divFooter);
+    player.isAt = 'Township';
+    UpdateDisplay();
+    JumpToTopPlease();
+    if (stageDressing == 'Theater' && player.likesStory) {
+        if (leftEarly) { GameEvent(displayStoryEndPlayEarly); }
+        else { GameEvent(displayStoryEndPlay); }
+    }
+    stageDressing = 'Empty';
 }
 
 
@@ -2992,7 +3100,24 @@ function TakeCruise() {
         if (player.likesStory) { GameEvent(displayStoryCruise); }
         player.hasTakenCruise = true;
         asCount -= priceCruise;
+        asSpent += priceCruise;
         statecraftLifetimeSpend += priceCruise;
+    }
+    else {
+        if (player.likesStory) { GameEvent(displayStoryPoorCruise); }
+    }
+    UpdateDisplay();
+}
+
+
+
+function SponsorNavy() {
+    if (asCount >= priceNavy) {
+        if (player.likesStory) { GameEvent(displayStoryNavy); }
+        asCount -= priceNavy;
+        asSpent += priceNavy;
+        statecraftLifetimeSpend += priceNavy;
+        player.hasNavy = true;
     }
     else {
         if (player.likesStory) { GameEvent(displayStoryPoorCruise); }
@@ -3798,11 +3923,11 @@ function LeaveHike() {
 function Relax() {
     //alert('*******🚨🚨🚨YOU ARE VERY RELAXED NOW!!!!!🚨🚨🚨*******');
     if (player.likesStory) {
-        GameEvent('<div id="divMeetings">' + displayStoryHikeRelax[relaxLevel] + '</div>');
+        GameEvent('<div id="divMeetings">' + displayStoryHikeRelax[relaxStage] + '</div>');
     }
-    relaxLevel++;
-    if (relaxLevel == displayStoryHikeRelax.length) {
-        relaxLevel--;
+    relaxStage++;
+    if (relaxStage == displayStoryHikeRelax.length) {
+        relaxStage--;
         meditateCount++;
         if (meditateCount == 10) { superMeditatorWizardPowersActivated = true; }
     }
@@ -3863,7 +3988,7 @@ function SummonOptions() {
 
 function DismissOptions() {
     player.seesOptions = false;
-    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop' && player.isAt != 'Temple' && player.isAt != 'Oracle') { StartTime(); }
+    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop' && player.isAt != 'Temple' && player.isAt != 'Oracle' && player.isAt != 'Stage') { StartTime(); }
     UpdateDisplay();
 }
 
@@ -3954,6 +4079,28 @@ function PlayGod() {
     }
     else {
         if (player.likesStory) { GameEvent(displayStoryPegasusNo); }
+    }
+}
+
+
+
+function ReleaseCats() {
+    let exterminatorBill = ratsCount;
+    if (exterminatorBill > ratMeterMaxValue) { exterminatorBill = ratMeterMaxValue; }
+    if (asCount >= exterminatorBill) {
+        if (!player.hasReleasedCats) {
+            player.hasReleasedCats = true;
+            if (player.likesStory) { GameEvent(displayStoryReleaseTheCats); }
+        }
+        asCount -= exterminatorBill;
+        asSpent += exterminatorBill;
+        lifetimeSpentOnCats += exterminatorBill;
+        clowdersOfCatsReleased++;
+        ratsCount = 2;
+        UpdateDisplay();
+    }
+    else {
+        if (player.likesStory) { GameEvent(displayStoryPoorCruise); }
     }
 }
 

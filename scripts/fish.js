@@ -246,6 +246,11 @@ function InitNewFishGame() {
     mostRecentCatch = 0;
     fishMissCountSession = 0;
     fishEscapeCountSession = 0;
+    const wormLottery = FindWholeRandom(1, 4);
+    if (wormLottery == 1) { imageFish_SuperwormChoice = imageFish_Superworm1; }
+    else if (wormLottery == 2) { imageFish_SuperwormChoice = imageFish_Superworm2; }
+    else if (wormLottery == 3) { imageFish_SuperwormChoice = imageFish_Superworm3; }
+    else if (wormLottery == 4) { imageFish_SuperwormChoice = imageFish_Superworm4; }
     splashTimer = setTimeout(CycleSplashSprite, Math.ceil(1000 / splashFPS));
     rippleTimer = setTimeout(CycleRippleSprite, Math.ceil(1000 / rippleFPS));
     buttonFish.style.display = 'block';
@@ -362,7 +367,7 @@ function PurchaseWharfItem(item) {
         fishState.hasPosca = true;
         stunnedFishButtonWiggleDurationS = '0.24s';
         stunnedFishButtonCountdownDurationMS = 300;
-        if (player.likesStory) { GameEvent(displayStoryWharfBuyPosca); }
+        if (player.likesStory) { GameEvent('<span class="icon Grog inlineIcon quadrupleSize"></span><br><br>' + displayStoryWharfBuyPosca); }
     }
     if (item == 1 && (caughtFishLifetime[0] + caughtFishLifetime[1] >= 20)) {
         fishState.hasPrey = true;
@@ -372,12 +377,12 @@ function PurchaseWharfItem(item) {
     if (item == 2 && (caughtFishLifetime[2] + caughtFishLifetime[3] >= 10)) {
         fishState.hasChum = true;
         fishAvailableChanceUpperLimit = 8;
-        if (player.likesStory) { GameEvent(displayStoryWharfBuyChum); }
+        if (player.likesStory) { GameEvent('<span class="icon Chumbucket inlineIcon quadrupleSize"></span><br><br>' + displayStoryWharfBuyChum); }
     }
     if (item == 3 && villageStage > 0) {
         fishState.hasKnife = true;
         caughtFishBounty = [2, 4, 10, 20, 100, 200,];
-        if (player.likesStory) { GameEvent(displayStoryWharfBuyKnife); }
+        if (player.likesStory) { GameEvent('<span class="icon BoningKnife inlineIcon sextupleSize"></span><br>' + displayStoryWharfBuyKnife); }
     }
     if (item == 4 && player.canSell) {
         fishState.hasBait = true;
@@ -399,10 +404,34 @@ function PurchaseWharfItem(item) {
 
 
 
+function HireFishboys() {
+    if (residenceStage > 11) {
+        if (player.likesStory) { GameEvent(displayStoryWharfFishboys); }
+        fishState.hasFishermen = true;
+    }
+    UpdateFishDisplay();
+}
+
+
+
 function ChewFat() {
     let gossipTopic = [
         'politics',
         'religion',
+        'the sweetest taboos',
+        'all the many things that are better left unsaid',
+        'all the things she said, all the things she said, running through my head, running through my head, all the things she said',
+        'family secrets you’ve never had the courage to tell anyone else before',
+        'his failed marriages',
+        'his son, who is drowning in debt',
+        'witchcraft and wizardry',
+        'paganism vs. monotheism',
+        'drugs and addiction',
+        'sexuality and gender identity',
+        'sexism, misogyny (which is made up) and misandry (which is all too real!)',
+        'feminism',
+        'ableism and discrimination',
+        'climate change',
         'the weather',
         'immigration',
         'foreigners',
@@ -415,30 +444,56 @@ function ChewFat() {
         'time and space',
         'the Peloponnesian War',
         'pretty girls',
+        'cute boys',
         'local restaurants',
         'childhood obesity',
+        'kids these days',
         'mental health',
         'money',
         'death and dying',
         'the hottest tourist destinations',
+        'gun control',
+        'how to get your whites whiter',
+        'the O.J. Simpson verdict',
         //'the Diddy trial',
     ];
     let gossipDuration = [
+        'a brief moment',
         'a few minutes',
         '15 minutes',
+        '17 minutes',
         'half an hour',
         'the better part of an hour',
+        'almost 45 minutes',
         'an hour',
+        'a couple of hours',
         'a few hours',
         'all morning',
-        'the afternoon',
+        'most of the afternoon',
+        'the entire afternoon',
         'a lovely evening',
         'the whole day',
+        'what feels like ages',
+        'too long',
     ];
     if (player.speaks == 'Spanish') {
         gossipTopic = [
             'política',
             'religión',
+            'los tabúes más dulces',
+            'todas las muchas cosas que es mejor no decir',
+            'todas las cosas que ella dijo, todas las cosas que ella dijo, corren por mi mente, corren por mi mente, todas las cosas que ella dijo',
+            'secretos familiares que nunca has tenido el coraje de contarle a nadie antes',
+            'suyo matrimonios fallidos',
+            'suyo hijo, que se está ahogando en deudas',
+            'brujería y hechicería',
+            'paganismo vs. monoteísmo',
+            'drogas y adicción',
+            'sexualidad e identidad de género',
+            'sexismo, misoginia (que es inventada) y misandria (¡que es demasiado real!)',
+            'feminismo',
+            'capacitismo y discriminación',
+            'cambio climático',
             'el clima',
             'inmigración',
             'extranjeros',
@@ -451,25 +506,37 @@ function ChewFat() {
             'tiempo y espacio',
             'la Guerra del Peloponeso',
             'chicas guapas',
+            'chicos lindos',
             'restaurantes locales',
             'obesidad infantil',
+            'niños en estos días',
             'salud psíquica',
             'moneda',
             'muerte y morir',
             'los destinos turísticos más populares',
+            'control de armas',
+            'cómo hacer que tus blancas sean más blancas',
+            'el veredicto de O.J. Simpson',
             //'el juicio de Diddy',
         ];
         gossipDuration = [
+            'un breve momento',
             'unos minutos',
             '15 minutos',
+            '17 minutos',
             'media hora',
             'la mayor parte de una hora',
+            'casi 45 minutos',
             'una hora',
+            'un par de horas',
             'unas horas',
             'toda la mañana',
-            'la tarde',
+            'la mayor parte de la tarde',
+            'toda la tarde',
             'una velada encantadora',
             'todo el día',
+            'lo que parece una eternidad',
+            'demasiado largo',
         ];
     }
     const chosenTopic = FindWholeRandom(0, gossipTopic.length - 1);
@@ -496,6 +563,14 @@ function LeaveTheStore() {
 
 const imageFish_Backdrop = new Image();
 imageFish_Backdrop.src = 'bitmaps/fish/fish_backdrop.png';
+const imageFish_BackdropInca = new Image();
+imageFish_BackdropInca.src = 'bitmaps/fish/inca.png';
+const imageFish_BackdropBirds = new Image();
+imageFish_BackdropBirds.src = 'bitmaps/fish/fish_birds.png';
+const imageFish_BackdropBoys = new Image();
+imageFish_BackdropBoys.src = 'bitmaps/fish/fish_boys.png';
+const imageFish_BackdropStock = new Image();
+imageFish_BackdropStock.src = 'bitmaps/fish/fish_stock.png';
 const imageFish_Wharf = new Image();
 imageFish_Wharf.src = 'bitmaps/fish/fish_wharf.png';
 const imageWharf_Backdrop = new Image();
@@ -552,6 +627,15 @@ const imageFish_HandFight = new Image();
 imageFish_HandFight.src = 'bitmaps/fish/fish_hand_outFIGHT.png';
 const imageFish_HandWarmup = new Image();
 imageFish_HandWarmup.src = 'bitmaps/fish/fish_hand_warmup.png';
+const imageFish_Superworm1 = new Image();
+imageFish_Superworm1.src = 'bitmaps/fish/fish_superworm1.png';
+const imageFish_Superworm2 = new Image();
+imageFish_Superworm2.src = 'bitmaps/fish/fish_superworm2.png';
+const imageFish_Superworm3 = new Image();
+imageFish_Superworm3.src = 'bitmaps/fish/fish_superworm3.png';
+const imageFish_Superworm4 = new Image();
+imageFish_Superworm4.src = 'bitmaps/fish/fish_superworm4.png';
+let imageFish_SuperwormChoice = null;
 
 
 
@@ -563,7 +647,8 @@ function UpdateFishDisplay() {
 
     buttonGoHome.innerHTML = displayGoHome;
     buttonLeaveWharf.innerHTML = displayLeaveStore;
-    buttonInitFish.innerHTML = displayFishBegin;
+    buttonInitFish.innerHTML = '<span class="icon LineBasic inlineIcon"></span><br>' + displayFishBegin;
+    if (fishState.hasRod) { buttonInitFish.innerHTML = '<span class="icon LineMagic inlineIcon"></span><br>' + displayFishBegin; }
     divFishTimerLabel.innerHTML = displayFishTimeLeft + ':';
 
     let cellHand = imageFish_HandOut;
@@ -671,8 +756,15 @@ function UpdateFishDisplay() {
     }
 
     canvasFishingHoleContext.drawImage(imageFish_Backdrop, 0, 0);
+    if (fishState.hasWWF) { canvasFishingHoleContext.drawImage(imageFish_BackdropBirds, 0, 0); }
+    if (fishState.hasFishermen) { canvasFishingHoleContext.drawImage(imageFish_BackdropBoys, 0, 0); }
+    if (fishState.hasPrey) { canvasFishingHoleContext.drawImage(imageFish_BackdropStock, 0, 0); }
     if (fishState.hasWharf) { canvasFishingHoleContext.drawImage(imageFish_Wharf, 0, 0); }
-    if (cellHand != null) { canvasFishingHoleContext.drawImage(cellHand, 0, 0); }
+    if (player.hasWon) { canvasFishingHoleContext.drawImage(imageFish_BackdropInca, 0, 0); }
+    if (cellHand != null) {
+        canvasFishingHoleContext.drawImage(cellHand, 0, 0);
+        if (fishState.hasBait && cellHand == imageFish_HandWarmup) { canvasFishingHoleContext.drawImage(imageFish_SuperwormChoice, 0, 0); }
+    }
     if (cellWater != null) { canvasFishingHoleContext.drawImage(cellWater, 0, 0); }
     if (cellBillboard != null) { canvasFishingHoleContext.drawImage(cellBillboard, 0, 0); }
 
@@ -779,7 +871,52 @@ function UpdateFishTables() {
 
     fishLetters = '<thead>';
     fishLetters += '<tr>';
-    fishLetters += '<td colspan="2">';
+    fishLetters += '<td colspan="3">' + displayStaff + '</td>';
+    fishLetters += '</tr>';
+    fishLetters += '</thead>';
+    fishLetters += '<tbody>';
+    fishLetters += '<tr>';
+    fishLetters += '<td>';
+    fishLetters += displayFishermen + '&nbsp;<span class="icon Fisherman inlineIcon"></span>:';
+    fishLetters += '</td>';
+    fishLetters += '<td class="noPadColumn">';
+    fishLetters += formatterCurrent.format(fishermenHired);
+    fishLetters += '</td>';
+    fishLetters += '<td>';
+    fishLetters += '(-' + formatterCurrent.format(fishermenHired * fishermenPay) + '<span class="icon FishSteak inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
+    fishLetters += '</td>';
+    fishLetters += '</tr>';
+    fishLetters += '<tr>';
+    fishLetters += '<td>';
+    fishLetters += displayFilleters + '&nbsp;<span class="icon FishCutter inlineIcon"></span>:';
+    fishLetters += '</td>';
+    fishLetters += '<td class="noPadColumn">';
+    fishLetters += formatterCurrent.format(fishcuttersHired);
+    fishLetters += '</td>';
+    fishLetters += '<td>';
+    fishLetters += '(-' + formatterCurrent.format(fishcuttersHired * fishcuttersPay) + '<span class="icon FishSteak inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
+    fishLetters += '</td>';
+    fishLetters += '</tr>';
+    if (lifetimeStockfishProduced > 0) {
+        fishLetters += '<tr>';
+        fishLetters += '<td>';
+        fishLetters += displayTanners + '&nbsp;<span class="icon Tanner inlineIcon"></span>:';
+        fishLetters += '</td>';
+        fishLetters += '<td class="noPadColumn">';
+        fishLetters += formatterCurrent.format(tannersHired);
+        fishLetters += '</td>';
+        fishLetters += '<td>';
+        fishLetters += '(-' + formatterCurrent.format(tannersHired * tannersPay) + '<span class="icon FishSteak inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
+        fishLetters += '</td>';
+        fishLetters += '</tr>';
+    }
+    fishLetters += '</tbody>';
+    tableFishStaff.innerHTML = fishLetters;
+
+    fishLetters = '<thead>';
+    fishLetters += '<tr>';
+    if (stockfishCount > 0) { fishLetters += '<td colspan="3">'; }
+    else { fishLetters += '<td colspan="2">'; }
     fishLetters += displayFishFishery;
     fishLetters += '</td>';
     fishLetters += '</tr>';
@@ -792,29 +929,107 @@ function UpdateFishTables() {
     fishLetters += '<td class="rightPadColumn">';
     fishLetters += formatterCurrent.format(filetCount);
     fishLetters += '</td>';
+    if (stockfishCount > 0) {
+        fishLetters += '<td class="rightPadColumn">';
+        fishLetters += '';
+        fishLetters += '</td>';
+    }
     fishLetters += '</tr>';
+    if (stockfishCount > 0) {
+        fishLetters += '<tr>';
+        fishLetters += '<td>';
+        fishLetters += displayFishStockfish + '&nbsp;' + '<span class="icon DriedFish inlineIcon"></span>' + ':';
+        fishLetters += '</td>';
+        fishLetters += '<td class="rightPadColumn">';
+        fishLetters += formatterCurrent.format(stockfishCount);
+        fishLetters += '</td>';
+        fishLetters += '<td class="rightPadColumn">';
+        fishLetters += '(-1' + '<span class="icon FishSteak inlineIcon"></span>' + '<span class="warehouseTotal">/' + displayUnit + '</span>)';
+        fishLetters += '</td>';
+        fishLetters += '</tr>';
+    }
     fishLetters += '</tbody>';
     tableFishInventory.innerHTML = fishLetters;
 
     fishLetters = '<thead>';
     fishLetters += '<tr>';
     fishLetters += '<td>';
-    fishLetters += displayProduced;
+    if (lifetimeStockfishProduced > 0) { fishLetters += '<br>' + displayProvisionShort; }
+    else { fishLetters += '<br>' + displayProvision; }
     fishLetters += '</td>';
     fishLetters += '<td>';
-    fishLetters += displayDispensed;
+    fishLetters += displayFishSteaks;
+    if (fishState.hasFishermen) {
+        if (lifetimeStockfishProduced > 0) { fishLetters += '<br>' + displayLineCaughtShort; }
+        else { fishLetters += '<br>' + displayLineCaught; }
+    }
+    if (lifetimeStockfishProduced > 0) { fishLetters += '<br>' + displayProducedShort; }
+    else { fishLetters += '<br>' + displayProduced; }
+    fishLetters += '</td>';
+    if (fishState.hasFishermen) {
+        fishLetters += '<td>';
+        fishLetters += displayFishSteaks + '<br>';
+        if (lifetimeStockfishProduced > 0) { fishLetters += displayNetCaughtShort; }
+        else { fishLetters += displayNetCaught; }
+        if (lifetimeStockfishProduced > 0) { fishLetters += '<br>' + displayProducedShort; }
+        else { fishLetters += '<br>' + displayProduced; }
+        fishLetters += '</td>';
+    }
+    if (lifetimeStockfishProduced > 0) {
+        fishLetters += '<td>';
+        fishLetters += displayQuintals + '<br>';
+        fishLetters += displayDried + '<br>';
+        fishLetters += displayProducedShort;
+        fishLetters += '</td>';
+    }
+    fishLetters += '<td>';
+    if (lifetimeStockfishProduced > 0) { fishLetters += displayUnits; }
+    else { fishLetters += displayFishSteaks; }
+    fishLetters += '<br>' + displayDispensed;
     fishLetters += '</td>';
     fishLetters += '</tr>';
     fishLetters += '</thead>';
     fishLetters += '<tbody>';
     fishLetters += '<tr>';
     fishLetters += '<td>';
-    fishLetters += formatterCurrent.format(lifetimeFishEarnings) + '<span class="icon FishSteak inlineIcon"></span>';
+    fishLetters += '<span class="icon FishSteak inlineIcon"></span>';
     fishLetters += '</td>';
-    fishLetters += '<td class="rightPadColumn">';
-    fishLetters += formatterCurrent.format(filetsSpent[0] + filetsSpent[1] + filetsSpent[2]) + '<span class="icon FishSteak inlineIcon"></span>';
+    fishLetters += '<td>';
+    fishLetters += formatterCurrent.format(lifetimeFishEarnings);
+    fishLetters += '</td>';
+    if (fishState.hasFishermen) {
+        fishLetters += '<td>';
+        fishLetters += formatterCurrent.format(lifetimeFishermenEarnings);
+        fishLetters += '</td>';
+    }
+    if (lifetimeStockfishProduced > 0) {
+        fishLetters += '<td class="stripedCellLight">';
+        fishLetters += '';
+        fishLetters += '</td>';
+    }
+    fishLetters += '<td>';
+    fishLetters += formatterCurrent.format(filetsSpent[0] + filetsSpent[1] + filetsSpent[2] + filetsSpent[3] + filetsSpent[4] + filetsSpent[5] + filetsSpent[6] + filetsSpent[7] + filetsSpent[8] + filetsSpent[9] + lifetimeStockfishProduced);
     fishLetters += '</td>';
     fishLetters += '</tr>';
+    if (lifetimeStockfishProduced > 0) {
+        fishLetters += '<tr>';
+        fishLetters += '<td>';
+        fishLetters += '<span class="icon DriedFish inlineIcon"></span>';
+        fishLetters += '</td>';
+        fishLetters += '<td class="stripedCellDark">';
+        fishLetters += '';
+        fishLetters += '</td>';
+        fishLetters += '<td class="stripedCellDark">';
+        fishLetters += '';
+        fishLetters += '</td>';
+        fishLetters += '<td>';
+        fishLetters += formatterCurrent.format(stockfishCount);
+        fishLetters += '</td>';
+        fishLetters += '<td>';
+        fishLetters += '0';
+        fishLetters += '</td>';
+        fishLetters += '</tr>';
+    }
     fishLetters += '</tbody>';
     tableFishReport.innerHTML = fishLetters;
 }
@@ -859,6 +1074,7 @@ function UpdateWharf() {
     buttonWharfBait.innerHTML = displayWharfBait;
     buttonWharfRod.innerHTML = displayWharfRod;
     buttonWharfWWF.innerHTML = displayWharfEnvironment;
+    buttonWharfFishermen.innerHTML = displayWharfFishboys;
     buttonWharfChewFat.innerHTML = displayWharfChewTheFat;
 
     if (player.hasBrewery) {
@@ -903,6 +1119,12 @@ function UpdateWharf() {
     else {
         buttonWharfWWF.classList.add('disabled');
     }
+    if (residenceStage > 11) {
+        buttonWharfFishermen.classList.remove('disabled');
+    }
+    else {
+        buttonWharfFishermen.classList.add('disabled');
+    }
 
     if (fishState.hasPosca) {
         buttonWharfPosca.style.display = 'none';
@@ -925,8 +1147,11 @@ function UpdateWharf() {
     if (fishState.hasWWF) {
         buttonWharfWWF.style.display = 'none';
     }
+    if (fishState.hasFishermen) {
+        buttonWharfFishermen.style.display = 'none';
+    }
 
-    if (fishState.hasPosca && fishState.hasPrey && fishState.hasChum && fishState.hasKnife && fishState.hasBait && fishState.hasRod && fishState.hasWWF) {
+    if (fishState.hasPosca && fishState.hasPrey && fishState.hasChum && fishState.hasKnife && fishState.hasBait && fishState.hasRod && fishState.hasWWF && fishState.hasFishermen) {
         buttonWharfChewFat.style.display = 'block';
     }
 }
@@ -962,7 +1187,10 @@ function UpdateFishVisibilities() {
         tableFishInventory.style.display = 'table';
     }
 
-    if (filetsSpent[0] + filetsSpent[1] + filetsSpent[2] > 0) {
+    if (fishState.hasFishermen) { tableFishStaff.style.display = 'table'; }
+    else { tableFishStaff.style.display = ''; }
+
+    if ((filetsSpent[0] + filetsSpent[1] + filetsSpent[2] + filetsSpent[3] + filetsSpent[4] + filetsSpent[5] + filetsSpent[6] + filetsSpent[7] + filetsSpent[8] + filetsSpent[9]) > 0) {
         tableFishReport.style.display = 'table';
     }
     else {

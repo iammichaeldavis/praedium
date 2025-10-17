@@ -43,6 +43,7 @@ const tilePlinth = [5 * 16, 160,];
 const tileRocks = [6 * 16, 160,];
 const tileShrine = [176, 8 * 16,];
 const tileGraves = [176 + 32, 8 * 16,];
+const tileMysteryHole = [48, 21 * 16,];
 
 const tileBigTreeNW = [8 * 16, 9 * 16,];
 const tileBigTreeNE = [9 * 16, 9 * 16,];
@@ -161,7 +162,9 @@ const tileRiverV = [320, 80,];
 let tileWaterfall = [320, 14 * 16,];
 
 const tileLogCampNW = [320, 160,];
+const tileLogCampNWalt = [10 * 16, 21 * 16,];
 let tileLogCampN = [304, 160,];
+const tileLogCampNalt = [11 * 16, 21 * 16,];
 const tileLogCampNE = [22 * 16, 160,];
 const tileLogCampW = [320, 176,];
 const tileLogCampM = [336, 176,];
@@ -652,8 +655,12 @@ function UpdateText() {
             tbodyForestInventory.innerHTML = tableString;
 
             theadForestStaff.innerHTML = '<tr><td colspan="3">' + displayStaff + '</td></tr>';
-            let loggerCost = '(-' + formatterCurrent.format(loggersHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
-            let sawyerCost = '(-' + formatterCurrent.format(sawyersHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
+            let loggerCost = '(-' + formatterCurrent.format(loggersHired) + '<span class="icon Wheat inlineIcon"></span>';
+            if (lifetimeFishEarnings > 0) { loggerCost += ' -' + formatterCurrent.format(loggersHired) + '<span class="icon FishSteak inlineIcon"></span>'; }
+            loggerCost += '<span class="warehouseTotal">/' + displayWeek + '</span>)';
+            let sawyerCost = '(-' + formatterCurrent.format(sawyersHired) + '<span class="icon Wheat inlineIcon"></span>';
+            if (lifetimeFishEarnings > 0) { sawyerCost += ' -' + formatterCurrent.format(sawyersHired) + '<span class="icon FishSteak inlineIcon"></span>'; }
+            sawyerCost += '<span class="warehouseTotal">/' + displayWeek + '</span>)';
             if (starving[1]) { loggerCost = '<span class="starving">' + displayStarving + '</span>'; }
             if (starving[2]) { sawyerCost = '<span class="starving">' + displayStarving + '</span>'; }
             tableString = '<tr><td>' + displayLumberjacks + '&nbsp;<span class="icon Logger inlineIcon"></span>:</td><td class="noPadColumn">' + formatterCurrent.format(loggersHired) + '</td><td>' + loggerCost + '</td></tr>';
@@ -786,11 +793,21 @@ function UpdateText() {
             tbodyMountainInventory.innerHTML = tableString;
 
             theadMountainStaff.innerHTML = '<tr><td colspan="3">' + displayStaff + '</td></tr>';
-            let masonCost = '(-' + formatterCurrent.format(masonsHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
-            let gemcutterCost = '(-' + formatterCurrent.format(gemcuttersHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
-            let minerCost = '(-' + formatterCurrent.format(minersHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
-            let smelterCost = '(-' + formatterCurrent.format(smeltersHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
-            let metallurgistCost = '(-' + formatterCurrent.format(metallurgistsHired) + '<span class="icon Wheat inlineIcon"></span><span class="warehouseTotal">/' + displayWeek + '</span>)';
+            let masonCost = '(-' + formatterCurrent.format(masonsHired) + '<span class="icon Wheat inlineIcon"></span>';
+            if (lifetimeFishEarnings > 0) { masonCost += ' -' + formatterCurrent.format(masonsHired) + '<span class="icon FishSteak inlineIcon"></span>'; }
+            masonCost += '<span class="warehouseTotal">/' + displayWeek + '</span>)';
+            let gemcutterCost = '(-' + formatterCurrent.format(gemcuttersHired) + '<span class="icon Wheat inlineIcon"></span>';
+            if (lifetimeFishEarnings > 0) { gemcutterCost += ' -' + formatterCurrent.format(gemcuttersHired) + '<span class="icon FishSteak inlineIcon"></span>'; }
+            gemcutterCost += '<span class="warehouseTotal">/' + displayWeek + '</span>)';
+            let minerCost = '(-' + formatterCurrent.format(minersHired) + '<span class="icon Wheat inlineIcon"></span>';
+            if (lifetimeFishEarnings > 0) { minerCost += ' -' + formatterCurrent.format(minersHired) + '<span class="icon FishSteak inlineIcon"></span>'; }
+            minerCost += '<span class="warehouseTotal">/' + displayWeek + '</span>)';
+            let smelterCost = '(-' + formatterCurrent.format(smeltersHired) + '<span class="icon Wheat inlineIcon"></span>';
+            if (lifetimeFishEarnings > 0) { smelterCost += ' -' + formatterCurrent.format(smeltersHired) + '<span class="icon FishSteak inlineIcon"></span>'; }
+            smelterCost += '<span class="warehouseTotal">/' + displayWeek + '</span>)';
+            let metallurgistCost = '(-' + formatterCurrent.format(metallurgistsHired) + '<span class="icon Wheat inlineIcon"></span>';
+            if (lifetimeFishEarnings > 0) { metallurgistCost += ' -' + formatterCurrent.format(metallurgistsHired) + '<span class="icon FishSteak inlineIcon"></span>'; }
+            metallurgistCost += '<span class="warehouseTotal">/' + displayWeek + '</span>)';
             if (starving[3]) { masonCost = '<span class="starving">' + displayStarving + '</span>'; }
             if (starving[10]) { gemcutterCost = '<span class="starving">' + displayStarving + '</span>'; }
             if (starving[4]) { minerCost = '<span class="starving">' + displayStarving + '</span>'; }
@@ -1164,12 +1181,6 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(allShippingProfits) + '</td>';
                 tableString += '</tr>';
             }
-            if (villageStage > 12) {
-                tableString += '<tr>';
-                tableString += '<td>' + displayTourism + ' <span class="icon Chuckles inlineIcon"></span>:' + '</td>';
-                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(tourismLifetimeProfit) + '</td>';
-                tableString += '</tr>';
-            }
             if (villageStage > 13) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayTaxes + ' <span class="icon Chest inlineIcon"></span>:' + '</td>';
@@ -1180,6 +1191,18 @@ function UpdateText() {
                 tableString += '<tr>';
                 tableString += '<td>' + displayInterest + ' <span class="icon Accountant inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(interestLifetimeCollected) + '</td>';
+                tableString += '</tr>';
+            }
+            if (villageStage > 12) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayTourism + ' <span class="icon Chuckles inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(tourismLifetimeProfit) + '</td>';
+                tableString += '</tr>';
+            }
+            if (lesArtsLifetimeCollected > 0) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayTheArts + ' <span class="icon Psalterion inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(lesArtsLifetimeCollected) + '</td>';
                 tableString += '</tr>';
             }
             if (arenaTotalWin > 0) {
@@ -1200,12 +1223,6 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(commercialLifetimeSpend) + '</td>';
                 tableString += '</tr>';
             }
-            if (statecraftLifetimeSpend > 0) {
-                tableString += '<tr>';
-                tableString += '<td>' + displayStatecraft + ' <span class="icon CrownNew inlineIcon"></span>:' + '</td>';
-                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(statecraftLifetimeSpend) + '</td>';
-                tableString += '</tr>';
-            }
             if (player.canSell) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayCommodities + ' <span class="icon Barley inlineIcon"></span>:' + '</td>';
@@ -1219,6 +1236,18 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(allShippingCosts) + '</td>';
                 tableString += '</tr>';
             }
+            if (statecraftLifetimeSpend > 0 || lifetimeSpentOnCats > 0) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayStatecraft + ' <span class="icon CrownNew inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(statecraftLifetimeSpend + lifetimeSpentOnCats) + '</td>';
+                tableString += '</tr>';
+            }
+            if (player.hasBeenLevied) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayTribute + ' <span class="icon LordBritish inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(tributeLifetimePaid) + '</td>';
+                tableString += '</tr>';
+            }
             if (player.hasArmy) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayMilitary + ' <span class="icon TaxCollector inlineIcon"></span>:' + '</td>';
@@ -1229,12 +1258,6 @@ function UpdateText() {
                 tableString += '<tr>';
                 tableString += '<td>' + displayMedical + ' <span class="icon Patient inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(medicalLifetimeCost) + '</td>';
-                tableString += '</tr>';
-            }
-            if (player.hasBeenLevied) {
-                tableString += '<tr>';
-                tableString += '<td>' + displayTribute + ' <span class="icon LordBritish inlineIcon"></span>:' + '</td>';
-                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(tributeLifetimePaid) + '</td>';
                 tableString += '</tr>';
             }
             if (arenaTotalBet > 0) {
@@ -1389,6 +1412,15 @@ function UpdateText() {
                     tableString += '<td>' + cellContent + '</td>';
                     tableString += '</tr>';
                 }
+                if (player.hasGoodTaste) {
+                    tableString += '<tr>';
+                    tableString += '<td>' + displayPatrons + ' <span class="icon SockandBuskin inlineIcon"></span>:' + '</td>';
+                    tableString += '<td class="noPadColumn">' + formatterCurrent.format(patronsCount) + '</td>';
+                    let cellContent = '';
+                    if (patronsCount != 0) { cellContent = '(+' + currencySymbol + formatterCurrent.format(patronsCount * patronCost) + ')'; }
+                    tableString += '<td>' + cellContent + '</td>';
+                    tableString += '</tr>';
+                }
                 if (player.hasGraveyard) {
                     tableString += '<tr>';
                     tableString += '<td>' + displayGhosts + ' <span class="icon Ghost inlineIcon"></span>:' + '</td>';
@@ -1400,7 +1432,7 @@ function UpdateText() {
                     tableString += '<tr>';
                     tableString += '<td>' + displayRats + ' <span class="icon Rattata inlineIcon"></span>:' + '</td>';
                     let ratCountDisplay = '' + formatterCurrent.format(ratsCount);
-                    if (ratsCount > 1000000) { ratCountDisplay = '+1,000,000'; }
+                    if (ratsCount > ratMeterMaxValue) { ratCountDisplay = ((player.speaks == 'English') ? ratMeterMaxDisplayE : ratMeterMaxDisplayS); }
                     if (ratsOutbreak) { ratCountDisplay = '<span class="starving">' + displayRatPlague + '</span>'; }
                     tableString += '<td class="noPadColumn">' + ratCountDisplay + '</td>';
                     tableString += '<td>(-' + ratPenaltyFactor + '%<span class="warehouseTotal">/' + displayHarvest + '</span>)</td>';
@@ -1466,7 +1498,7 @@ function UpdateText() {
                         tableString += '</tr>';
 
                         tableString += '<tr>';
-                        tableString += '<td>' + displaySoldiers + ' <span class="icon TaxCollector inlineIcon"></span>:' + '</td>';
+                        tableString += '<td>' + displayInfantry + ' <span class="icon TaxCollector inlineIcon"></span>:' + '</td>';
                         tableString += '<td class="noPadColumn">' + formatterCurrent.format(militaryInfantry) + '<span class="warehouseTotal">/' + militarySoldiers + '</span>' + '</td>';
                         tableString += '<td>(-' + currencySymbol + formatterCurrent.format(militaryInfantry * militaryUnitCost) + '<span class="warehouseTotal">/' + displayWeek + '</span>)</td>';
                         tableString += '</tr>';
@@ -1537,15 +1569,28 @@ function UpdateText() {
                 stringyStringerson += '+ ';
                 stringyStringerson += formatterCurrent.format(priceBuild100[6]) + '<span class="icon Crystal inlineIcon"></span>';
                 stringyStringerson += ' + ';
-                stringyStringerson += priceBuild100[7] + '<span class="icon Gems inlineIcon"></span>';
+                stringyStringerson += formatterCurrent.format(priceBuild100[1]) + '<span class="icon Mala inlineIcon"></span>';
                 stringyStringerson += ' + ';
-                stringyStringerson += priceBuild100[1] + '<span class="icon Mala inlineIcon"></span>';
+                stringyStringerson += priceBuild100[7] + '<span class="icon Gems inlineIcon"></span>';
                 stringyStringerson += ' + ';
                 stringyStringerson += priceBuild100[2] + '<span class="icon Scroll inlineIcon"></span>';
                 stringyStringerson += ')';
                 stringyStringerson += buttonBuild.innerHTML = stringyStringerson;
             }
         }
+
+        // CAT BUTTON --------------------------
+        let felineThread = '';
+        felineThread += '<span class="icon SewerTubeA inlineIcon"></span><span class="icon SewerTubeB inlineIcon"></span><span class="icon Garfield inlineIcon"></span><br>';
+        felineThread += displayLabelReleaseCats + '<br>';
+        let ratcatcherBill = ratsCount;
+        if (ratcatcherBill > ratMeterMaxValue) { ratcatcherBill = ratMeterMaxValue; }
+        felineThread += '(' + currencySymbol + formatterCurrent.format(ratcatcherBill) + ')';
+        buttonReleaseCats.innerHTML = felineThread;
+
+        // SHOW BUTTONS ------------------------
+        buttonTakeInAShow.innerHTML = displayLabelTakeInAShow + '<br><img src="bitmaps/ThaliaEtMelpo.png" />';
+        buttonChariot.innerHTML = displayLabelChariot + '<br><img src="bitmaps/chariot.png" />';
 
         // TEMPLE BUTTON -----------------------
         buttonVisitTemple.innerHTML = displayLabelTemple + ' <span class="icon Mala inlineIcon"></span>';
@@ -1763,6 +1808,7 @@ function UpdateText() {
                 currentDollarValueOfUnit = valueFactor[0] * (wheatValuePerUnit[0] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[1];
                 if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[1]) + '<span class="icon Amphora inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -1840,6 +1886,7 @@ function UpdateText() {
                 currentDollarValueOfUnit = valueFactor[1] * (wheatValuePerUnit[1] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[2];
                 if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[2]) + '<span class="icon Keg inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -1917,6 +1964,7 @@ function UpdateText() {
                 currentDollarValueOfUnit = valueFactor[2] * (wheatValuePerUnit[2] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[3];
                 if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[3]) + '<span class="icon Cask inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -1994,6 +2042,7 @@ function UpdateText() {
                 currentDollarValueOfUnit = valueFactor[3] * (wheatValuePerUnit[3] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[4];
                 if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[4]) + '<span class="icon Honeypot inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -2071,6 +2120,7 @@ function UpdateText() {
                 currentDollarValueOfUnit = valueFactor[4] * (wheatValuePerUnit[4] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[5];
                 if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[5]) + '<span class="icon Jug inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -2148,6 +2198,7 @@ function UpdateText() {
                 currentDollarValueOfUnit = valueFactor[5] * (wheatValuePerUnit[5] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[6];
                 if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[6]) + '<span class="icon Basket inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -2224,6 +2275,7 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">';
                 bounty = residenceInStockCount[7] * trinketValue;
                 if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
                 tableString += formatterCurrent.format(residenceInStockCount[7]) + '<span class="icon Trinket inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
                 tableString += '</td>';
                 tableString += '</tr>';
@@ -2454,7 +2506,9 @@ function UpdateText() {
             tableImports.innerHTML = tableString;
         }
 
-        buttonSailWest.innerHTML = displayLabelSailWest + ' ' + '<span class="icon Ship inlineIcon"></span>';
+        buttonSailWest.innerHTML = displayLabelSailWest + ' ' + '<span class="icon Ship2 inlineIcon"></span>';
+
+        buttonNavy.innerHTML = displayLabelNavy + ' ' + '<span class="icon Ship3 inlineIcon"></span><br>(' + currencySymbol + formatterCurrent.format(priceNavy) + ')';
     }
 
     else if (player.isAt == 'Residence') {
@@ -2668,7 +2722,7 @@ function UpdateText() {
             tableString = '<thead id="theadResidenceReport">';
             tableString += '<tr>';
             tableString += '<td>';
-            tableString += displayGood;
+            tableString += displayProduct;
             tableString += '</td>';
             tableString += '<td>';
             tableString += displayUnits + '<br>' + displayProduced;
@@ -3352,7 +3406,7 @@ function UpdateText() {
 
     else if (player.isAt == 'Hike') {
         buttonLeaveHike.innerHTML = displayLabelLeaveHike;
-        buttonRelax.innerHTML = displayLabelRelax[relaxLevel];
+        buttonRelax.innerHTML = displayLabelRelax[relaxStage];
     }
 
     else if (player.isAt == 'Oracle') {
@@ -3368,6 +3422,639 @@ function UpdateText() {
         else if (templeStage == 1) { buttonOffer.innerHTML = displayLabelOffer + '<br>(' + formatterCurrent.format(priceTemple1) + '<span class="icon Mutton inlineIcon"></span>)'; }
         else if (templeStage == 2) { buttonOffer.innerHTML = displayLabelOffer + '<br>(' + priceTemple2 + '<span class="icon IngotGold inlineIcon"></span>' + ' + ' + priceTemple2 + '<span class="icon IngotSilver inlineIcon"></span>' + ' + ' + priceTemple2 + '<span class="icon IngotBronze inlineIcon"></span>)'; }
         else if (templeStage == 3) { buttonOffer.innerHTML = displayLabelOffer + '<br>(' + priceTemple3 + '<span class="icon Diamonds inlineIcon"></span>' + ' + ' + priceTemple3 + '<span class="icon Zircon inlineIcon"></span>' + ' + ' + priceTemple3 + '<span class="icon Gems inlineIcon"></span>)'; }
+    }
+
+    else if (player.isAt == 'Stage') {
+        if (stageDressing == 'Theater') {
+            let nextSceneLabels = [
+                'ON WITH THE SHOW!', // title page
+                'WELL, LET’S FIND OUT WHAT THIS IS ALL ABOUT, HUH?', // overture
+                'WAIT AND SEE WHAT HAPPENS NEXT', // a1s1 prologos
+                'KEEP WATCHING', // a2s1 parados
+                'HMM... WHAT’S HAPPENING NOW?', // a2s2 epis. 1 (Bleps. & Penia)
+                'I NEED A BREAK...', // parabasis
+                'RETURN TO YOUR PRIVATE BOX', // intermission
+                'KEEP WATCHING', // a3s1 epis. 2 (Mrs. Chremulos)
+                'KEEP WATCHING', // a3s2 epis. 3 (Plutus' Oscar-bait Speech)
+                'WATCH SOME MORE', // a4s1 epis. 4 (Just Man & Sycophant)
+                'GET THROUGH THIS NEXT BIT', // a4s2 epis. 5 (Old Maid & Young Lover)
+                'FINALLY SEE HOW THIS DAMN THING ENDS', // a5s1 epis. 6 (Hermès)
+                'BOY, THAT TOOK FOREVER', // a5s2 exodos (High Priest of Zeus)
+                'SLIP OUT EARLY',
+            ];
+            if (player.speaks == 'Spanish') {
+                nextSceneLabels = [
+                    '¡QUE SIGA EL ESPECTÁCULO!',
+                    'BUENO, DESCUBRAMOS DE QUÉ SE TRATA ESTA HISTORIA, ¿EH?',
+                    'ESPERAR Y VER LO QUE PASA A CONTINUACIÓN',
+                    'SIGUE VER',
+                    'HMM... ¿QUÉ ESTÁ PASANDO AHORA?',
+                    'NECESITO UN DESCANSO...',
+                    'REGRESAR A TU CAJA PRIVADO',
+                    'SIGUE VER',
+                    'SIGUE VER',
+                    'VER UN POCO MÁS',
+                    'SUPERAR ESTE SIGUIENTE PARTE',
+                    'FINALMENTE VER CÓMO TERMINA ESTA MALDITA COSA',
+                    'GUAU, ESO TOMÓ UNA ETERNIDAD',
+                    'ESCAPAR TEMPRANO',
+                ];
+            }
+            if (stageStage == 13) {
+                buttonNextScene.style.display = '';
+                buttonLeaveEarly.style.display = '';
+                buttonLeaveStage.style.display = '';
+            }
+            else {
+                buttonNextScene.innerHTML = nextSceneLabels[stageStage];
+                buttonLeaveEarly.innerHTML = nextSceneLabels[nextSceneLabels.length - 1];
+            }
+
+            let contentPlay = '';
+            if (stageStage == 0) {
+                contentPlay += '<div id="masthead">';
+                contentPlay += '<i>“W<span class="smallCapsA">EALTH</span>”</i>';
+                contentPlay += '<div class="mastheadSizeB">–or–</div>';
+                contentPlay += 'T<span class="smallCapsA">HE</span> <i>P<span class="smallCapsA">LUTUS</span></i> <span class="smallCapsA">OF</span> A<span class="smallCapsA">RISTOPHANES</span>';
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="mastheadSizeF">❀</div>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="mastheadSizeC">summarized from';
+                contentPlay += '<br>';
+                contentPlay += 'transcriptions and translations by</div>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="mastheadSizeD">W. C. Green, <span class="mastheadSizeD2">M.A.</span></div>';
+                contentPlay += '<div class="mastheadSizeE">George Bell and Sons, 1892</div>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="mastheadSizeD">M. T. Quinn, <span class="mastheadSizeD2">M.A.</span></div>';
+                contentPlay += '<div class="mastheadSizeE">George Bell and Sons, 1896</div>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="mastheadSizeD">Sir William Rann Kennedy</div>';
+                contentPlay += '<div class="mastheadSizeE">London - John Murray, Albemarle Street, W., 1912</div>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="mastheadSizeD">Oscar O’Fflahertie Wilde, <span class="mastheadSizeD2">posth.</span></div>';
+                contentPlay += '<div class="mastheadSizeE">The Athenian Society, 1912</div>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="mastheadSizeD">Daniel C. Stevenson</div>';
+                contentPlay += '<div class="mastheadSizeE">Web Atomics, 1994</div>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="mastheadSizeC">and,<br>~w. special thanks for his unflinching honesty~,<br>by</div>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="mastheadSizeD">George Theodoridis, <span class="mastheadSizeD2">M.A. (Prel.)</span></div>';
+                contentPlay += '<div class="mastheadSizeE">Bacchicstage, 2021</div>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="mastheadSizeF">❀</div>';
+                contentPlay += '</div>';
+            }
+            else if (stageStage == 1) {
+                const overture = [
+                    '<i>Overture</i>',
+                    '<i>As the evening gets underway, you suddenly realize that this play is to be performed in its original language: Koine Greek! As such, you can’t really understand every single word that is spoken... but, from the tone, and context, and what you *do* understand, you can fairly easily follow along with the general idea.</i>',
+                    '<i>The </i>orchestra<i>, that large round concrete courtyard in the center of everything, has been done up to represent an average public square in Old Athens. A large rectangular main stage of polished granite sits just behind and a few feet higher than the orchestral pit, and the enormous plaster wall behind that has been done up as the frontispiece of a humble, run-of-the-mill Old Athenian farmhouse. According to the program, this house in particular belongs to the hero of the play: <b>Chremulos</b>, a simple farmer.</i>',
+                    '<i>The story begins with a <b>blind and filthy old beggar</b> wandering onto the main stage. He is followed closely by <b>Chremulos</b>—an average man in his fifties, balding, plainly dressed—who is in turn followed by <b>Kariôn</b>, his sassy, foul-mouthed slave of about the same age.</i>',
+                ];
+                const overtureMin = '<img class="imgPlayMiniature imgPlayMiniature1" src="bitmaps/stage/play1.png" />';
+                contentPlay += '<div class="redrum">';
+                contentPlay += '<div class="stageHeading">' + overture[0] + '</div>';
+                contentPlay += overture[1];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += '</div>';
+                contentPlay += overtureMin;
+                contentPlay += '<div class="redrum">';
+                contentPlay += '<br>';
+                contentPlay += overture[2];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += overture[3];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+                contentPlay += '</div>';
+            }
+            else if (stageStage == 2) {
+                const aIscI = [
+                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> I, S<span class="stageHeadingStructureDim">CENE</span> I:</div>',
+                    '<div id="stageHeadingDivision">The Prologos</div>',
+                    '<div class="stageHeadingDiminutive">(ll. 1–252)</div>',
+                    'Kariôn starts off the show by loudly complaining to the audience: Ye Gods, how cosmically unfair it is for an intelligent man to be the slave of an idiot! He then tells us that he and his master have just been to the Temple of Apollo seeking a prophecy, and that ever since the moment they left, his master Chremulos has been following this random blind doofus around, for hours now!',
+                    'Finally, Chremulos is ready to give Kariôn some answers about their strange day: the reason he went to the Temple of Apollo was to ask if his beloved and only son, Li’l Chremmy, Jr., a good and virtuous and honest man, should turn instead to a life of sin and crime and avarice, for that seems to be the only way to truly get ahead in this life any more. Here Chremulos gestures to the audience and cries: “I mean, just take a look at all’a *them*, would’ya! Phony priests, crooked politicians, ruthless con-men... thoroughly unscrupulous criminals, who’d sell their own mothers for a profit; a no-good bunch’a ass-kissers and sleazebags, to a man! And they’re all filthy *rich*!” This gets a huge laugh.',
+                    'As an answer to his question, the god had instructed Chremulos in no uncertain terms that he was to follow behind the very first person he should come across upon leaving the temple, and furthermore he was to bring that person home. And of course, this blind beggar was the very first person he saw!',
+                    'Kariôn declares that the oracle’s prophecy couldn’t be simpler to understand: even a blind man can see only crooks and charlatans succeed these days! But Chremulos is certain the message must be more complex than that.',
+                    'Eventually, after some brutal threats, and a bunch of asinine rhyming puns, this ragged beggar is willing to reveal his true identity to Chremulos the farmer and Kariôn the slave: he is in fact none other than <b>Plutus</b>, son of Mighty Demeter; he is in fact the Greek <b>God of Wealth</b>!',
+                    'He explains that long ago, when Zeus first learned that Plutus intended to visit only the just, the wise, “the men of ordered life”, the King of the Gods blinded him to prevent him from being able to tell who was virtuous and who wasn’t. He did this because only the worst sorts of men feel compelled to make so many sacrifices to Zeus, in order to beg for His forgiveness, and the income from these sacrifices is the primary source of Zeus’ power. This earns a big laugh from the audience.',
+                    'Plutus claims that if he were ever to get his sight back, he would only visit the upright and just, and that it had been so very long since he had actually seen a good man. Kariôn looks out into the audience, visoring his eyes with his hand, and scans across the entire crowd of spectators. “Well, that’s no big surprise,” he proclaims, “My eyes work just fine and I can’t see a single one either!” This is met with another riotous bout of laughter and applause from the audience.',
+                    'After some heavy-handed cajoling, and a bunch more awful puns, Chremulos and his slave eventually convince Plutus to come home with them. Chremulos says he knows how to get Plutus’ vision back, and to not fear any repercussions from Zeus, because as soon as Plutus can see—and can choose to only visit good men—he will surely become the new King of the Gods.',
+                    'This all ends with Chremulos welcoming Plutus into his home, both of them leaving the scene through the front door of the house, while Kariôn leaves the main stage off the side, having been instructed to go round up Chremulos’ poor and honest kinsmen and peers so that they might share in this new good fortune.',
+                ];
+                const aIscImin = '<img class="imgPlayMiniature imgPlayMiniature4" src="bitmaps/stage/play4.png" />';
+                contentPlay += '<div class="stageHeadingShortLine">' + aIscI[0] + aIscI[1] + aIscI[2] + '</div>';
+                contentPlay += aIscI[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIscI[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIscI[5];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIscI[6];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIscI[7];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIscImin;
+                contentPlay += '<br>';
+                contentPlay += aIscI[8];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIscI[9];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIscI[10];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIscI[11];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+            }
+            else if (stageStage == 3) {
+                const aIIscI = [
+                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> II, S<span class="stageHeadingStructureDim">CENE</span> I:</div>',
+                    '<div id="stageHeadingDivision">The Parodos</div>',
+                    '<div class="stageHeadingDiminutive">(ll. 253–321)</div>',
+                    'Kariôn has found and brought back with him the <i>Chorus</i>, a rowdy group of twenty-four grown men all duded up in bright wigs and clown makeup and garish lingerie, yet... they’re meant to represent a group of Chremulos’ closest friends and neighbors, who are all salt-of-the-earth farming men? ...this old-timey Greek can be a little hard to follow.',
+                    'At any rate this <b>Chorus of Husbandmen</b> fills the <i>orchestra</i>, waving their farming tools around while singing and a-prancing about in their underwear as Kariôn desperately tries in vain to explain to them about Plutus. Naturally, they don’t believe him.',
+                    'Kariôn, fed up with all the silliness on display, throws up his hands and goes inside the house to fetch his master. Chremulos—now dressed to the nines, and with head held high—struts out from his front door to welcome his suspicious friends and confirms for them what Kariôn had been trying to tell them all along: that the very God of Wealth, Lord Plutus himself, was at this very moment, inside his very home!',
+                ];
+                const aIIscImin = '<img class="imgPlayMiniature imgPlayMiniature6" src="bitmaps/stage/play6.png" />';
+                contentPlay += '<div class="stageHeadingShortLine">' + aIIscI[0] + aIIscI[1] + aIIscI[2] + '</div>';
+                contentPlay += aIIscI[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscI[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscImin;
+                contentPlay += '<br>';
+                contentPlay += aIIscI[5];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+            }
+            else if (stageStage == 4) {
+                const aIIscII = [
+                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> II, S<span class="stageHeadingStructureDim">CENE</span> II:</div>',
+                    '<div id="stageHeadingDivision">The Epeisodion, Pt. I</div>',
+                    '<div class="stageHeadingDiminutive">(ll. 322–626)</div>',
+                    'Now a man named <b>Blepsidemus</b>, Chremulos’ best friend, comes huffing and puffing onto the main stage, desperately trying to catch his breath, as if he has just come running from some great distance. He announces that all the barber shops in town are buzzing with the news: Chremulos is suddenly and mysteriously the richest man in the entire country! And Blepsidemus has come for the explanation he believes he is owed!',
+                    'He is convinced Chremulos must have done something overwhelmingly unscrupulous—and, most likely, extremely illegal—to gain this new incredible wealth. As Chremulos repeatedly tries to explain, Blepsidemus continuously interrupts him with greater and greater promises to happily keep quiet about whatever this heinous new secret must be, and to always remain his sworn partner-in-crime... in exchange for a generous cut of the loot, of course.',
+                    'This goes on for... quite a while. The audience apparently can’t get enough of it, however. It seems as if the more obvious the punchline, the greater the laugh it receives.',
+                    'Finally, Blepsidemus is made to understand the truth: that the God of Wealth himself has come to live with Chremulos and his family, and that they *all* can prosper now, equally, just as soon as they help Plutus regain his vision! Chremulos plans to take Plutus to the Temple of Asclepius, the Great God of Medicine and Healing, and son of Apollo besides.',
+                    'Before they can get going, however, they are attacked by a frightfully ugly old hag, wrapped in tattered rags: she is <b>Penia, the Goddess of Poverty and Need</b>! Blepsidemus and Chremulos warn her that she is about to be kicked out of Greece for good.',
+                    'She tries to explain how they’ve gotten it all backwards: that good men are not made poor, but that by want poor men are made good, and besides, if Plutus makes everyone rich, who’s gonna be doing all the tedious manual labour around here any more, huh? Someone’s gotta sweep the floors and scrub the laundry and make the beds and cook the breakfasts. Who but Penia drives men to fulfill these essential social roles?',
+                    'Blepsidemus and Chremulos exchange a knowing glance, then roll their eyes in a hugely overly-exaggerated manner, as if what she’s just asked is without-a-doubt the stupidest question that either of them has ever heard in all their lives. “Slaves will do it,” says Blepsidemus. This goes over *huge* with the audience.',
+                    '“Boy, you two must be fully paid-up members at the Ultimate Dumbass Society for Morons and Boobs, huh?” Penia croaks, to another huge laugh. “When there are no more poor people, exactly where will all these slaves come from?”',
+                    'All three begin to bicker in rapid-fire Ancient Greek. As best you can tell, Blepsidemus and Chremulos make a deal with Penia; they will all argue over whether it is better to be rich or poor, and whoever makes the losing argument will just have to go jump off a cliff.',
+                    'Now Penia states her case: she is like the boss who keeps his workers focused, that the rich are all fat and gross—she gestures to the audience—yet the bodies of the hard-working poor are well-built and handsome, that rich people are rude and ungrateful, that poor politicians work for the good of all while rich politicians merely further line their own pockets, that she is like a stern father who knows what is best for his disobedient children.',
+                    'All the while she speaks,  Blepsidemus and Chremulos can’t help themselves but to agree with each of her points. After she is done, however, they refuse to allow themselves to be persuaded. “You won’t change my mind, even if you change my mind!” declares Chremulos, before setting his jaw, crossing his arms tight to his chest and stomping his foot. Then Blepsidemus and Chremulos spit and cuss at Penia until she runs off the stage crying, swearing that they would soon be sorry for not listening to her.',
+                ];
+                const aIIscIImin = '<img class="imgPlayMiniature imgPlayMiniature5" src="bitmaps/stage/play5.png" />';
+                contentPlay += '<div class="stageHeadingShortLine">' + aIIscII[0] + aIIscII[1] + aIIscII[2] + '</div>';
+                contentPlay += aIIscII[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscII[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscII[5];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscII[6];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscII[7];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscIImin;
+                contentPlay += '<br>';
+                contentPlay += aIIscII[8];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscII[9];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscII[10];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscII[11];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscII[12];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIscII[13];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+            }
+            else if (stageStage == 5) {
+                const parabasis = [
+                    'The Parabasis',
+                    'It is of course well known to any man of substance that in practically all the great Attic Comedies of the Golden Olden Times, there existed that most sacred of traditions, what the Inimitable Greek Playwrights referred to simply as the <i>parabasis</i>, the ‘coming forward’. This was the part where the action abruptly comes to a grinding halt, and the very author of the play himself would ‘come forward’ and deliver a lecture to the audience directly: either in person, or through the voice of an actor, or by having his thoughts and opinions about the pressing matters of the day sung by the very Chorus itself.',
+                    'Now comes a young man onto the stage, foppishly dressed in all the latest ridiculous fashions most recently embraced by the city’s capricious youth. He strides arrogantly down the stairs from the main stage to the orchestral pit, out to its dead center. He seems to be quite proud of his long, flowing hair.',
+                    'All of the Chorus members and actors take a seat on the ground, or lean a shoulder against the scenery.',
+                    'This new fellow announces that he is The Director of this whole dog-and-pony show. Then he proceeds to bloviate at length about all the terrible decisions made by this city’s leadership: how crime and pollution are completely out of control, how more and more even the most basic of civil rights are being trampled upon by psychotic government thugs, how young people these days have no viable opportunities, how public funding for social programs inevitably ends up embezzled by crooks, how wealth inequality has reached unprecedented levels, and what exactly is going to be done about it, and when exactly, and by whom? All the while hoots of “Damn right!” and “Finally, somebody’s saying it!” cry out from random anonymous corners of the peanut gallery.',
+                    'Boy, this kid sure lays it on thick, huh? This is some real tug-at-your-heartstrings and we’re-not-gonna-take-it-lying-down-anymore kinda stuff.',
+                    'When the little blowhard is finally finished, he takes a grand, sweeping bow to a wild round of applause, then straightens up his spine and stares directly into your eyes, challenging you to respond.',
+                    'The whole theater seems to hold its breath as it waits to see how you’ll react: but you well know any attempt to defend yourself or argue with this little pipsqueak will only add legitimacy to his claims (baseless as they may be!). No, this manner of sedition is best dealt with privately... later you can simply have your spies keep an eye on this precocious, headstrong young lad, to uncover exactly what naughty little misdemeanors and mischief *he* might get up to... sleep with one eye open from now on, pal.',
+                    'And hey, now, wait-a-mini... <i>Wealth</i> famously doesn’t even *contain* a <i>parabasis</i>! This little twerp just decided to add one! The nerve!',
+                    'For that matter, you couldn’t help but notice this entire diatribe has been delivered in the common tongue, not in the Ye Olde Historical Greek of the rest of this whole cockamamie production. Funny, that. And, for the record, nowhere in all that bitching did you ever hear a single *solution* proposed, no... merely a litany of all Pandora’s monsters and how all their mayhem is somehow all your fault. ‘Everyone thinks of changing the world, but no one thinks of changing himself,’ my young friend. Tolstoy said that, y’know!',
+                    'Well, never mind all that... everyone’s watching, to see what you will do.',
+                    'Knowing it is the mob that must be won now—‘hearts and minds’, always with the ‘hearts and minds’—you rise, slowly, from your comfortable seat, making a big show of pushing yourself up from the arm-rests with a groan... all the while holding this young man’s gaze, of course, as you slowly extend your right hand... and lift your bejeweled goblet, in the manner of a toast.',
+                    'The crowd roars!',
+                    //'<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> II, S<span class="stageHeadingStructureDim">CENE</span> II:</div>',
+                    '<div id="stageHeadingDivision">The Parabasis</div>',
+                    '<div class="stageHeadingDiminutive">THE ADDRESS TO THE AUDIENCE</div>',
+                ];
+                const parabasisMin = '<img class="imgPlayMiniature imgPlayMiniature8" src="bitmaps/stage/play8.png" />';
+                //contentPlay += '<div class="stageHeading">' + parabasis[0] + '</div>';
+                contentPlay += '<div class="stageHeadingShortLine">' + parabasis[13] + parabasis[14] + '</div>';
+                contentPlay += parabasis[1];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasis[2];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasis[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasis[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasis[5];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasis[6];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasisMin;
+                contentPlay += '<br>';
+                contentPlay += parabasis[7];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasis[8];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasis[9];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasis[10];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasis[11];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += parabasis[12];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+            }
+            else if (stageStage == 6) {
+                const intermission = [
+                    '<i>Intermission</i>',
+                    '<i>And not a moment too soon... You really do have to pee, man!</i>',
+                    '<i>Your guests—along with everyone else—file out through the gates into the auditoriums, to relieve themselves in the restrooms and to stock back up on refreshments from the concession stands and to gossip about what they all think of the play so far.</i>',
+                    '<i>After a half-hour or so has passed, drums are sounded to summon everyone back to their seats.</i>',
+                ];
+                const intermissionMin = '<img class="imgPlayMiniature3" src="bitmaps/stage/play3.png" />';
+                contentPlay += '<div class="redrum">';
+                contentPlay += '<div class="stageHeading">' + intermission[0] + '</div>';
+                contentPlay += intermission[1];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += '</div>';
+                contentPlay += intermissionMin;
+                contentPlay += '<div class="redrum">';
+                contentPlay += '<br>';
+                contentPlay += intermission[2];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += intermission[3];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+                contentPlay += '</div>';
+            }
+            else if (stageStage == 7) {
+                const aIIIscI = [
+                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> III, S<span class="stageHeadingStructureDim">CENE</span> I:</div>',
+                    '<div id="stageHeadingDivision">The Epeisodion, Pt. II</div>',
+                    '<div class="stageHeadingDiminutive">(ll. 627–770)</div>',
+                    'As the crowd returns from the break, the Chorus fills the orchestra. Kariôn runs onto the main stage to announce the visit to Asclepius has been a success! Plutus can now see, and soon they will all be rich!',
+                    'The boisterous cheering of the Chorus draws <b>Mrs. Chremulos</b> (a handsome, middle-aged farmer’s wife) out from the house, and she wants to know just what all this commotion is about. Kariôn tells her everything: First, they took stinking Plutus to the sea for a bath, then straight on to the <i>Asclepieion</i>, the Temple of Healing. After a *bunch* of jokes about pooping and farting, Kariôn tells everyone that the God of Medicine had whistled for two large snakes, which slithered out from behind the altar like summoned dogs expecting a treat. With their forked tongues they licked the empty eye-sockets of Plutus, thereby restoring his very eyes!',
+                    'Kariôn boasts that all the while this was taking place, he had let out a fart so thick and so vile that Asclepius’ daughters <i>Panacea</i>, the Goddess of Remedies and Cures, and <i>Iaso</i>, Goddess of Recovery from Illness, had been forced to flee the room holding their noses, but that it apparently had had no effect on the Great Lord of Healers himself, for doctors have to routinely endure all manner of disgusting sights and smells in the course of treating all the many sickening and repulsive ills that can befall mankind. “Listen, lady, it ain’t *perfume* that comes outta my ass,” Kariôn brags to Mrs. Chremulos.',
+                    'Boy, the mob loved that one. You hear someone in the crowd off to your right telling a friend: “Ha! <i>‘That ain’t *perfume* comin’ outta my ass!’</i> Man, I gotta *remember* that one!”',
+                    'Animals.',
+                    'Anyways, Kariôn explains the reason he arrived back at the house so much earlier than Plutus and Chremulos and Blepsidemus, who should all be along shortly, was due to the unending crowd of well-wishers and supplicants holding Plutus back and slowing him to a crawl.  Kariôn and  Mrs. Chremulos decide to go inside the house and prepare it for Plutus’ return.',
+                    'Now you can’t help but notice how from the moment Mrs. Chremulos had entered the scene, for the duration of this entire exchange, Kariôn had been making a lot of snide little jokes at her expense: strongly implying she was a profligate spendthrift, an out-of-control lush, and an unfaithful wife. It’s hard to know if the play is suggesting that *all* wives are nagging, joyless, alcoholic shrews, or merely that Chremulos had been stuck with one because he was poor, or if it’s just a simple gag played for laughs and you’re over-thinking it, or what.',
+                    'But you know, come to think of it, a lot of the moral high ground that the supposedly ‘good’ characters have claimed so far... doesn’t really hold up to much scrutiny, upon even a moment’s hindsight. Is the play suggesting that the poor are also, in truth, thoroughly awful people, and that *no one* is truly good? Everything on display has just been too silly to pull any one coherent message out of! You’re beginning to suspect that maybe these Ancient Greeks didn’t have it *all* figured out, after all.',
+                    '<b><i>A </i>stasimon<i>, or ‘interlude’, is now sung by the Chorus: a lively song called “I Just Can’t Wait To Be Rich!”, all about how wonderful it is to have money, and how easy life will surely become from now on, and how nothing could ever possibly go wrong!</i></b>',
+                ];
+                contentPlay += '<div class="stageHeadingShortLine">' + aIIIscI[0] + aIIIscI[1] + aIIIscI[2] + '</div>';
+                const aIIIscImin = '<img class="imgPlayMiniature imgPlayMiniature7" src="bitmaps/stage/play7.png" />';
+                contentPlay += aIIIscI[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscI[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscI[5];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscI[6];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscI[7];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscI[8];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscImin;
+                contentPlay += '<br>';
+                contentPlay += aIIIscI[9];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscI[10];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscI[11];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+            }
+            else if (stageStage == 8) {
+                const aIIIscII = [
+                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> III, S<span class="stageHeadingStructureDim">CENE</span> II:</div>',
+                    '<div id="stageHeadingDivision">The Epeisodion, Pt. III</div>',
+                    '<div class="stageHeadingDiminutive">(ll. 771–801)</div>',
+                    'Plutus and Chremulos drag themselves onto the stage, both of their faces barely visible due to the many dozens of wreaths they’re each completely covered in, and here Plutus delivers a beautiful and moving speech about how ashamed he is of his previous poor decisions, how he “neglected the wrong people and supported the wrong people”, that <i>Heracles</i> had been right all along<span id="stageDagger">†</span>, and that from this point forward he was ‘absolutely resolute’: mark these words, friends, from now on, Plutus of Olympus, Son of Tyche, shall only *ever* reward the truly deserving!',
+                    'At the dramatic conclusion to this rousing, poetic speech, Chremulos cups his hands to his mouth and shouts off-stage, as if to a gathered crowd: “Didja hear *that*, ya lousy bums? Now beat it, would’ya! I mean it, now! Piss off, the lotta ya! Bunch’a no-good misers...” He then aggressively rips the mass of wreaths from his head and tosses them onto the ground in disgust. “Criminy,” he whines, “Every wrinkl’d-up ol’ two-bit bastard in this whole stinkin’ town must’ve slapped one’a these damned things on my achin’ head! I’m gonna develop an allergic rash!” He scratches behind the ears in the manner of  a stray dog as loose bay leaves rain down from his scalp.',
+                    'Mrs. Chremulos comes out now, carrying a broad silver tray laden high with a multitude of brightly coloured, delicious-looking candies, and humbly greets the two men.',
+                    'Chremulos introduces Plutus to his wife, and then the trio make fun of the audience for expecting to enjoy any of these candies on Mrs. Chremulos’ tray, because, of course, it would *surely* be far, far beneath these fine, dedicated theatrical artists to simply toss out fistfuls of sugary treats to the crowd, solely in a shameless attempt to win them all over! Why, could one even imagine?',
+                    'All three run into the house in order to have all the treats for themselves, while the crowd hoots and jeers, crying out phrases such as “Hey, y’all get back here!” and “Now just where do ya think you’re goin’ with those treats, huh?”',
+                    '<b><i>Another Choral Ode now: “Lord Plutus Shall Make Amends”, about how much the God of Wealth is enjoying living with and enriching the family of Chremulos, and generously rewarding all the other previously-neglected ‘good and true’ peoples of Athens.</i></b>',
+                    '<div id="stageFootnote">†<i>Phaedrus’</i> Aesop’s Fables <span class="stageFootnoteSmallCaps">(IV-XII)</span>&thinsp;–&thinsp;‘H<span class="stageFootnoteSmallCaps">ERCULES & </span>P<span class="stageFootnoteSmallCaps">LUTUS</span>’: <i>in heaven, Hercules refuses to salute the Son of Fortune, telling Jupiter that Plutus is ‘friend of the wicked and corrupter of the entire world’.</i></div>',
+                ];
+                const aIIIscIImin = '<img class="imgPlayMiniature imgPlayMiniature2" src="bitmaps/stage/play2.png" />';
+                contentPlay += '<div class="stageHeadingShortLine">' + aIIIscII[0] + aIIIscII[1] + aIIIscII[2] + '</div>';
+                contentPlay += aIIIscII[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscIImin;
+                contentPlay += '<br>';
+                contentPlay += aIIIscII[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscII[5];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscII[6];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscII[7];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscII[8];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIIIscII[9];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+            }
+            else if (stageStage == 9) {
+                const aIVscI = [
+                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> IV, S<span class="stageHeadingStructureDim">CENE</span> I:</div>',
+                    '<div id="stageHeadingDivision">The Epeisodion, Pt. IV</div>',
+                    '<div class="stageHeadingDiminutive">(ll. 802–958)</div>',
+                    'The front door of the house is flung open! Dense white clouds of smoke come pouring out, as if the house were on fire.',
+                    'Kariôn comes stumbling out of the doorway, choking and gagging. He has to slam the door shut and wave the thick smoke away from his face in order to deliver the following soliloquy to the Chorus: why, just how good is it to be Chremulos *now*, huh?, and also Kariôn himself, and also all of their friends! Hell, they’re sacrificing so many pigs and goats and rams in there, you can’t see for all the smoke! There’s so much roasted meat on the grill they can’t give the stuff away!',
+                    'He spends the next few minutes just listing all their new blessings: pantries bulging with flour, oil jugs full of oil, wineskins bursting with wine, spice racks overflowing with spices, coffers full to the brim with finest silver and gold; lanterns of ivory, cook-pots of solid bronze, homely wooden trenchers replaced with shimmering silver plates, <i>et cetera, et cetera, et cetera</i>... Truly, in *every* way, their cups doth runneth over.',
+                    'Into the scene now comes an <b>honest man</b>, followed by his <b>slave</b>, carrying an old threadbare cloak and tattered shoes. They are both dressed quite well.',
+                    'This Honest Man explains to Kariôn that once, long ago, he’d shared his inheritance with all his friends, yet just as soon as the very last coin had been spent, no sooner had all these so-called ‘friends’ disappeared! For years after he’d suffered as a homeless and penniless vagrant, but now, thanks to Plutus, things have all turned around! He’s come to the House of Chremulos today with his old beggar’s cloak and <span class="nobreakStage">shoes—</span>previously his only meager possessions in the entire <span class="nobreakStage">world—</span>to offer them up to the Mighty God of Wealth as a sentimental offering.',
+                    'Now upon the main stage comes a weeping and blubbering <b><i>sykophántēs</i></b> (a Greek <i>‘sycophant’</i> was a professional informant, called a <i>‘delator’</i> by the Romans, what we might think of today as a state-sponsored ‘rat’ or ‘stool-pigeon’; a perennial bootlicker who makes their living by tattling on others, squealing on his closest friends and neighbors—oftentimes without any real proof!—to the government in exchange for taxpayer-funded bounties) to piss and moan about how so very poor he has recently been made. This <i>sycophant</i> is dressed like a wealthy man who has been forced to sleep rough for weeks, his fancy designer toga and sandals (and his baby-cheeked face!) smeared in dirt and grime.',
+                    'He certainly gets no sympathy from Kariôn or the Honest Man, and the scene ends with everyone violently forcing the Sycophant to change into the Honest Man’s filthy old clothes. The Sycophant leaves the stage in tears, while Kariôn invites the Honest Man and his Slave into the house.',
+                    '<b><i>Yet </i>another<i> Choral Ode... these things just never end! This one is called “Shouldn’t’a Been Such’a Bastard!” The ironic, pun-filled lyrics explain how Good Men are loving this new way of things, and Bad Men are left crying in the soup kitchen line.</i></b>',
+                ];
+                const aIVscImin = '<img class="imgPlayMiniature imgPlayMiniature9" src="bitmaps/stage/play9.png" />';
+                contentPlay += '<div class="stageHeadingShortLine">' + aIVscI[0] + aIVscI[1] + aIVscI[2] + '</div>';
+                contentPlay += aIVscI[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscI[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscI[5];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscI[6];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscI[7];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscI[8];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscImin;
+                contentPlay += '<br>';
+                contentPlay += aIVscI[9];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscI[10];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+            }
+            else if (stageStage == 10) {
+                const aIVscII = [
+                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> IV, S<span class="stageHeadingStructureDim">CENE</span> II:</div>',
+                    '<div id="stageHeadingDivision">The Epeisodion, Pt. V</div>',
+                    '<div class="stageHeadingDiminutive">(ll. 959–1096)</div>',
+                    'A meek and coquettish <b>grey-haired old spinster</b> saunters onto the main stage now, making every possible attempt (in vain) to project an aura of youthful sexuality and desirability. Her appearance is what a disapproving mother might describe as ‘all tarted up’, in the fashion of any attention-seeking adolescent on any given Saturday night: she has squeezed herself into an obscenely revealing outfit that she is clearly *way* too heavy and too old for, for starters; her face heavily painted with the garish makeup of a lustful floozy, fast-fashion bangles jangling on every wrist and ankle; it is plainly obvious that all of her sartorial choices have been made to give off the impression of a doe-eyed, popular-with-the-boys teenage girl.',
+                    '“Well, hellooooo there, boys!” she calls out to the Chorus, in a melodious, sing-song voice, aggressively fluttering her comically long eye-lashes. “Why, I hadn’t noticed all you strong, handsome men there! Would you mind coming to the assistance of a helpless little thing such as myself? Could any of you virile and strapping young cowboys point me towards the House of Chremulos?” she coos, plumping her cleavage and wiggling her hips as she speaks. The men of the Chorus fall all over themselves to be the one to let her know she has found the right place.',
+                    'Blowing a kiss to the orchestra, she spins around sensuously, struts over to front porch of the house, clears her throat, then BANGS LIKE HELL on the door! Dropping the sweet-as-candy act, she bellows, in a deep, booming roar: “PLUTUS! GET’CHER WORTHLESS CARCASS OUT HERE, AND I MEAN **NOW**!!!” Holy *Moley*, what an ol’ battle-axe!',
+                    'Chremulos comes to the door, demanding an explanation. The Old Maid explains that before Plutus changed everything around, she’d been a fabulously wealthy widow, with a kept young lover who was quite poor. But now that this young man was suddenly rich, he also just-as-suddenly wanted nothing to do with her any more!',
+                    'As she is complaining, the <b>young lover</b> himself shows up, coming to the house to thank Plutus in person for his new good fortune. He and Chremulos take turns ruthlessly mocking this poor woman for her advanced age, joke after joke coming at her expense. (So, this kid is supposed to be an example of an ‘honest and good’ person? ... I dunno.)<br><br>The Young Stud jokes that the Old Maid had probably already slept with every member of the audience, then Chremulos gets inappropriately handsy with the woman, and it’s played for laughs.',
+                    'At any rate, they all eventually enter the house together, the Old Maid undeterred by all their cruelty and jokes, clearly still infatuated with the aloof and resistant Young Stud.',
+                    '<b><i>Another bawdy interlude from the Chorus here, “It Ain’t All It’s Cracked Up To Be”, an extended limerick about how being filthy rich really ain’t all it’s cracked up to be.</i></b>',
+                ];
+                const aIVscIImin = '<img class="imgPlayMiniature imgPlayMiniature13" src="bitmaps/stage/play13.png" />';
+                contentPlay += '<div class="stageHeadingShortLine">' + aIVscII[0] + aIVscII[1] + aIVscII[2] + '</div>';
+                contentPlay += aIVscII[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscII[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscII[5];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscII[6];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscII[7];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscIImin;
+                contentPlay += '<br>';
+                contentPlay += aIVscII[8];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aIVscII[9];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+            }
+            else if (stageStage == 11) {
+                const aVscI = [
+                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> V, S<span class="stageHeadingStructureDim">CENE</span> I:</div>',
+                    '<div id="stageHeadingDivision">The Epeisodion, Pt. VI</div>',
+                    '<div class="stageHeadingDiminutive">(ll. 1097–1170)</div>',
+                    'Now the fleet-footed god <b>Hermès</b> has shown up, to pound upon Chremulos’ fancy new solid brass door knocker.',
+                    '(Jeeze, man... just how long *is* this flippin’ play, anyways?)',
+                    'Kariôn answers the door. Hermès snaps to attention, stoically unfurls a glittering scroll, and formally delivers this message: Hear Ye, Hear Ye; Lord Zeus is *pissed* about Plutus!, and He plans to mash up Chremulos, along with all his new friends and closest loved ones, into Grade-A dog-food, just as soon as he can get his hands on them!',
+                    'Hermès freely admits, however—just between him and his old friend Kariôn—that in truth Zeus is skint, flat broke, and therefore his blustering threats are hollow and unenforceable. Why, these days, Mighty Greece pays all her tribute to none but <i>“Pater Ploutos”</i>!',
+                    'He goes on to confess that he couldn’t really give two figs for what happens to the rest of those crummy ol’ Gods of Olympus, just so long as he can save his own skin.',
+                    'The God of Messengers and Commerce reveals the actual reason he has come here today: to request sanctuary with Chremulos and his family! When Kariôn asks if he truly means to renounce his Olympian citizenship, Hermès replies: “<i>‘Omne solum forti patria est; Patria est, ubicunque est bene!’:</i> ‘All lands for the brave home can be; One’s motherland is where one lives well!’ Where a man prospers, there his country is!”',
+                    'After a lengthy, pun-filled discussion trying to determine how exactly Hermès might pull his weight as the newest member of the Chremulos household, Kariôn finally offers him a job as Head Janitor, laughing that he should employ his legendary speed to wash all the many stacks of dirty dishes that have been piling up lately.',
+                    '<b><i>Now the final Choral Ode is sung: “Maybe She Had A Point...” These lyrics claim Poverty was probably right all along, and that this whole misadventure has most likely been a huge mistake.</i></b>',
+                ];
+                const aVscImin = '<img class="imgPlayMiniature imgPlayMiniature12" src="bitmaps/stage/play12.png" />';
+                contentPlay += '<div class="stageHeadingShortLine">' + aVscI[0] + aVscI[1] + aVscI[2] + '</div>';
+                contentPlay += aVscI[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscI[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscI[5];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscI[6];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscI[7];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscImin;
+                contentPlay += '<br>';
+                contentPlay += aVscI[8];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscI[9];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscI[10];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+            }
+            else if (stageStage == 12) {
+                const aVscII = [
+                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> V, S<span class="stageHeadingStructureDim">CENE</span> II:</div>',
+                    '<div id="stageHeadingDivision">The Exodos</div>',
+                    '<div class="stageHeadingDiminutive">(ll. 1171–1209)</div>',
+                    'The show concludes with the <b>Chief Priest of Zeus</b> himself coming around to complain to Chremulos.',
+                    'He laments that all of the temples have now been completely abandoned, shutters left rattling in the wind, and so, much like the Great Pantheon of the Gods themselves, all the Hierarchies of their many Clergies, from the Highest Priests to the lowliest Altar Boys, are now all dirt poor, left with nothing!',
+                    'He jumps at the chance to sign on as the very first Grand High Muckety-Muck of the soon-to-be-established Holy Church of Our Gilded Lord & Savior, Glorious Father Plutus.',
+                    'Then he, Plutus, the Old Maid from earlier, and Chremulos all leave the stage, skipping together hand-in-hand, off to enthrone Plutus as their new King of the Gods. The Chorus forms a conga-line and follows closely behind them.',
+                    '<div id="stagePlayEndCaps">T<span class="stagePlayEndSmallCaps">HE</span> E<span class="stagePlayEndSmallCaps">ND</span></div>',
+                ];
+                const aVscIImin = '<img class="imgPlayMiniature imgPlayMiniature11" src="bitmaps/stage/play11.png" />';
+                contentPlay += '<div class="stageHeadingShortLine">' + aVscII[0] + aVscII[1] + aVscII[2] + '</div>';
+                contentPlay += aVscII[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscIImin;
+                contentPlay += '<br>';
+                contentPlay += aVscII[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscII[5];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscII[6];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += aVscII[7];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">※</div>';
+                contentPlay += '<br>';
+            }
+            else if (stageStage == 13) {
+                const epilogue = [
+                    '<i>Epilogue</i>',
+                    '<i>Well, the play is now over.</i>',
+                    '<i>The Director, the Actors and all the Chorus Members take a final bow on stage to thunderous applause.</i>',
+                    '<i>Frankly, you just don’t see what all the fuss is about. I mean, it was basically just a bunch of guys prancing up and down the stage in wigs and masks, singing about farts and farting for almost... hold on, this was over </i>five hours<i> long?? Sheesh.</i>',
+                    '<i>Oh, well. Time to try and manage your way to the exit through this zoo. You gather your belongings, and make your way out with the crowd.</i>',
+                    '<i>As you and your party press through the mass of people leaving, various friends and well-wishers take your arm, shake your hand and cheerfully congratulate you for your stoic composure during, and classy handling of, that preachy, sanctimonious </i>parabasis<i>. You’re an oak, man. Marcus Aurelius himself would be impressed.</i>',
+                ];
+                const epilogueMin = '<img class="imgPlayMiniature imgPlayMiniature10" src="bitmaps/stage/play10.png" />';
+                contentPlay += '<div class="redrum">';
+                contentPlay += '<div class="stageHeading">' + epilogue[0] + '</div>';
+                contentPlay += epilogue[1];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += epilogue[2];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += '</div>';
+                contentPlay += epilogueMin;
+                contentPlay += '<div class="redrum">';
+                contentPlay += '<br>';
+                contentPlay += epilogue[3];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += epilogue[4];
+                contentPlay += '<br>';
+                contentPlay += '<br>';
+                contentPlay += epilogue[5];
+                contentPlay += '<br>';
+                contentPlay += '<div class="centerMePlease">⁂</div>';
+                contentPlay += '<br>';
+                contentPlay += '</div>';
+            }
+            divStageCorpus.innerHTML = contentPlay;
+            buttonLeaveStage.innerHTML = displayLabelLeavePlay;
+        }
+        else if (stageDressing == 'Racetrack') {
+            let contentRace = displayStoryRaceTitle;
+            contentRace += displayStoryRaceA;
+            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceStreet.png" />';
+            contentRace += displayStoryRaceB;
+            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceGates.png" />';
+            contentRace += displayStoryRaceC;
+            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceCaesar.png" />';
+            contentRace += displayStoryRaceD;
+            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceArena.png" />';
+            contentRace += displayStoryRaceE;
+            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceCaesar2.png" />';
+            contentRace += displayStoryRaceF;
+            divStageCorpus.innerHTML = contentRace;
+            buttonLeaveStage.innerHTML = displayLabelLeaveRace;
+        }
     }
 
     else if (player.isAt == 'Workshop') {
@@ -3756,7 +4443,7 @@ function UpdateText() {
                 ScribeContentString(minersInventory[0], 'Diamonds');
             }
             if (player.canImportSalt) { ScribeContentString(residenceIngredientInStockCount[14][1], 'Sal'); }
-            ScribeContentString(filetCount, 'FishSteak');
+            if (lifetimeFishEarnings > 0) { ScribeContentString(filetCount, 'FishSteak'); }
 
             contentString += '<div class="divEconGap"></div>';
             contentString += '<b>' + displayCrops + ':</b><br>';
@@ -3786,6 +4473,7 @@ function UpdateText() {
             ScribeContentString(residenceInStockCount[0], 'Loaves');
             if (player.hasHardtack) { ScribeContentString(residenceInStockCount[14], 'LembasBread'); }
             if (player.hasRations) { ScribeContentString(residenceInStockCount[11], 'Ration'); }
+            if (stockfishCount > 0) { ScribeContentString(stockfishCount, 'DriedFish'); }
             if (player.hasCottage) { ScribeContentString(residenceInStockCount[12], 'Linen'); }
             if (player.hasBandages) { ScribeContentString(residenceInStockCount[13], 'Bandage'); }
             ScribeContentString(residenceInStockCount[1], 'Amphora');
@@ -3864,8 +4552,8 @@ function UpdateText() {
                 contentString += ' <span class="icon TaxCollector inlineIcon"></span><br>';
 
                 contentString += '<b>' + displayDefense + ':</b> ';
-                if (player.speaks == 'English') { contentString += '5,000'; }
-                else { contentString += '5000'; }
+                if (player.speaks == 'English') { contentString += '9,001'; }
+                else { contentString += '9001'; }
                 contentString += ' <span class="icon Shield inlineIcon"></span>';
                 contentString += ' &nbsp;&nbsp;&nbsp; ';
                 contentString += '<span class="inertNumerals">' + MilInertGuys(priceMiners[2].toString().length, 4) + '</span>' + priceMiners[2];
@@ -4064,7 +4752,7 @@ function UpdateText() {
             contentString += displayRelations[mapProvinces[2][2]];
             contentString += '<br>';
             contentString += displayRegionState + ': ';
-            contentString += displayStateType[mapProvinces[2][2]];
+            contentString += displayStateType[4];
             contentString += '<br>';
             contentString += '<br>';
             contentString += '<b>' + mapProvinces[3][0] + ':</b>';
@@ -4133,7 +4821,7 @@ function UpdateText() {
 
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
-            stringyStringerson += displayCheese + ' <span class="icon Cheese inlineIcon"></span>:';
+            stringyStringerson += displayPecorino + ' <span class="icon Cheese inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += formatterCurrent.format(shepherdsInventory[4]);
@@ -4258,8 +4946,703 @@ function UpdateText() {
         divFarmersName.innerHTML = mapProvinces[2][0];
         divFarmersSubtitle.innerHTML = displayFarmersSubtitle;
 
+        if (1 == 1) {
+            let stringyStringerson = '';
+            stringyStringerson += '<table id="tableFarmersReport">';
+            stringyStringerson += '<thead>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td colspan="2">';
+            stringyStringerson += displayStapleCrops;
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '</thead>';
+            stringyStringerson += '<tbody>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayWheat + ' <span class="icon Wheat inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayBarley + ' <span class="icon Barley inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayMillet + ' <span class="icon Millet inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displaySpelt + ' <span class="icon Spelt inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayOlive + ' <span class="icon Olive inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayPomegranate + ' <span class="icon Pom inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayGrape + ' <span class="icon Grape inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayPlantains + ' <span class="icon Bananas inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayFavaBeans + ' <span class="icon BroadBeans inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayChickpeas + ' <span class="icon Chickpeas inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayLentils + ' <span class="icon Lentils inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '</tbody>';
+            stringyStringerson += '</table>';
+
+            ///////////////////////////////////////////////////////////////////////////
+
+            stringyStringerson += '<table id="tableFarmersReportCashCrops">';
+            stringyStringerson += '<thead>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td colspan="2">';
+            stringyStringerson += displayCashCrops;
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '</thead>';
+            stringyStringerson += '<tbody>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displaySaffron + ' <span class="icon Crocus inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayCaraway + ' <span class="icon Caraway inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayCumin + ' <span class="icon Cumin inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '</tbody>';
+            stringyStringerson += '</table>';
+
+            ///////////////////////////////////////////////////////////////////////////
+
+            stringyStringerson += '<table id="tableFarmersReportLivestock">';
+            stringyStringerson += '<thead>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td colspan="2">';
+            stringyStringerson += displayLivestock[0] + displayLivestock.substring(1).toLowerCase();
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '</thead>';
+            stringyStringerson += '<tbody>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayCamels + ' <span class="icon Camel inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displaySheep + ' <span class="icon Dolly inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displaySwine + ' <span class="icon Piggo inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayChicken + ' <span class="icon Chicken inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayPonies + ' <span class="icon Horsey inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayThoroughbreds + ' <span class="icon BeholdAPaleHorse inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            if (player.hasPegasi) {
+                stringyStringerson += '<tr>';
+                stringyStringerson += '<td>';
+                stringyStringerson += displayUnicorns + ' <span class="icon Unicorn inlineIcon"></span>:';
+                stringyStringerson += '</td>';
+                stringyStringerson += '<td class="rightPadColumn">';
+                stringyStringerson += '???';
+                stringyStringerson += '</td>';
+                stringyStringerson += '</tr>';
+            }
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayCattle + ' <span class="icon Cow inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '</tbody>';
+            stringyStringerson += '</table>';
+
+            ///////////////////////////////////////////////////////////////////////////
+
+            stringyStringerson += '<table id="tableFarmersReportDairy">';
+            stringyStringerson += '<thead>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td colspan="2">';
+            stringyStringerson += displayDairy;
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '</thead>';
+            stringyStringerson += '<tbody>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayMilk + ' <span class="icon Milk inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayButter + ' <span class="icon Butter inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayCheese + ' <span class="icon Cheese inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '</tbody>';
+            stringyStringerson += '</table>';
+
+            ///////////////////////////////////////////////////////////////////////////
+
+            stringyStringerson += '<table id="tableFarmersReportPoultry">';
+            stringyStringerson += '<thead>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td colspan="2">';
+            stringyStringerson += displayPoultry;
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '</thead>';
+            stringyStringerson += '<tbody>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayRoasters + ' <span class="icon Poultry inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayDarkMeat + ' <span class="icon Drumstick inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayEggs + ' <span class="icon Eggs inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '</tbody>';
+            stringyStringerson += '</table>';
+
+            ///////////////////////////////////////////////////////////////////////////
+
+            stringyStringerson += '<table id="tableFarmersReportButcher">';
+            stringyStringerson += '<thead>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td colspan="2">';
+            stringyStringerson += displayButcher;
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '</thead>';
+            stringyStringerson += '<tbody>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayBeef + ' <span class="icon Steak inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayPork + ' <span class="icon Bacon inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayJerky + ' <span class="icon Jerky inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '</tbody>';
+            stringyStringerson += '</table>';
+
+            ///////////////////////////////////////////////////////////////////////////
+
+            stringyStringerson += '<table id="tableFarmersReportSundries">';
+            stringyStringerson += '<thead>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td colspan="2">';
+            stringyStringerson += displaySundries;
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '</thead>';
+            stringyStringerson += '<tbody>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayFeathers + ' <span class="icon Feathers inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayGlassware + ' <span class="icon Bottles inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayPottery + ' <span class="icon EmptyJar inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayYarn + ' <span class="icon Bobbin inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayTextiles + ' <span class="icon Cloth inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayGarments + ' <span class="icon Shirt inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayFinery + ' <span class="icon Dress inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayRope + ' <span class="icon Rope inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '</tbody>';
+            stringyStringerson += '</table>';
+
+            ///////////////////////////////////////////////////////////////////////////
+
+            stringyStringerson += '<table id="tableFarmersStaff">';
+            stringyStringerson += '<thead>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td colspan="3">';
+            stringyStringerson += displaySubjects;
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '</thead>';
+            stringyStringerson += '<tbody>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayFarmers + ' <span class="icon Fieldhand inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayShepherds + ' <span class="icon Shepherd inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayMiners + ' <span class="icon Miner inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayRanchers + ' <span class="icon Rancher inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayPotters + ' <span class="icon Potter inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayWeavers + ' <span class="icon Weaver inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayFruiterers + ' <span class="icon Horticulturalist inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayGrocers + ' <span class="icon Vigneron inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayMerchants + ' <span class="icon Shopkeep inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayPriests + ' <span class="icon Priest inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayEntertainers + ' <span class="icon Juggler inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayBums + ' <span class="icon Avatar inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayAristocrats + ' <span class="icon Dignitary inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayPolice + ' <span class="icon Guard inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displaySoldiers + ' <span class="icon Knight inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="noPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td>';
+            stringyStringerson += '';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '</tbody>';
+            stringyStringerson += '</table>';
+
+            ///////////////////////////////////////////////////////////////////////////
+
+            stringyStringerson += '<table id="tableFarmersStatistics">';
+            stringyStringerson += '<thead>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td colspan="2">' + displayStatistics + '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '</thead>';
+            stringyStringerson += '<tbody>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>' + displayOffense + ' <span class="icon Sword inlineIcon"></span>:' + '</td>';
+            stringyStringerson += '<td class="rightPadColumn">' + '???' + '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>' + displayDefense + ' <span class="icon Shield inlineIcon"></span>:' + '</td>';
+            stringyStringerson += '<td class="rightPadColumn">' + formatterCurrent.format(3000) + '</td>';
+            stringyStringerson += '</tr>';
+            stringyStringerson += '</tbody>';
+            stringyStringerson += '</table>';
+
+            ///////////////////////////////////////////////////////////////////////////
+
+            divFarmersReport.innerHTML = stringyStringerson;
+        };
+
         buttonFarmersEvents.innerHTML = displayLabelFarmersA + ' <span class="icon YesMan inlineIcon"></span>';
-        if (player.hasPrepared) { buttonFarmersEvents.innerHTML = displayLabelFarmersB + ' <span class="icon TurkeyLurkeyLeg inlineIcon"></span>'; }
+        if (player.hasPrepared) {
+            let labelString = '';
+            labelString += '<span class="icon TurkeyLurkeyLeg inlineIcon"></span>';
+            labelString += '<span class="icon Wineskin inlineIcon"></span>';
+            labelString += '<span class="icon Panpipes inlineIcon"></span>';
+            labelString += '<span class="icon Lute inlineIcon"></span>';
+            labelString += '<br>';
+            labelString += displayLabelFarmersB;
+            labelString += '<br>';
+            labelString += '<span class="icon HulaLeft inlineIcon"></span>';
+            labelString += '<span class="icon DrumA inlineIcon"></span>';
+            labelString += '<span class="icon DrumB inlineIcon"></span>';
+            labelString += '<span class="icon HulaCenter inlineIcon"></span>';
+            labelString += '<span class="icon DrumA inlineIcon"></span>';
+            labelString += '<span class="icon DrumB inlineIcon"></span>';
+            labelString += '<span class="icon HulaRight inlineIcon"></span>';
+            buttonFarmersEvents.innerHTML = labelString;
+        }
     }
 
     else if (player.isAt == 'Miners') {
@@ -4642,6 +6025,7 @@ function UpdateVisibilities() {
         divForewordSubtitle.style.display = 'none';
         buttonForewordEnglish.style.display = 'none';
         buttonForewordSpanish.style.display = 'none';
+        divForewordBoilerplate.style.display = 'none';
         divForewordCorpus.style.display = 'block';
         buttonForewordDismiss.style.display = 'block';
     }
@@ -4753,6 +6137,11 @@ function UpdateVisibilities() {
             buttonVisitArena.classList.remove('buttonVisitArenaConditionA');
             buttonVisitArena.classList.add('buttonVisitArenaConditionB');
         }
+        if (villageStage > 25) { buttonTakeInAShow.style.display = 'block'; }
+        if (player.hasGoodTaste) { buttonTakeInAShow.style.display = ''; }
+        if (player.hasRacetrack) { buttonChariot.style.display = 'block'; }
+        if (player.hasSeenRace) { buttonChariot.style.display = ''; }
+        if (ratsSpawn) { buttonReleaseCats.style.display = 'block'; }
         buttonVisitOracle.style.display = player.hasOracle ? 'block' : '';
         buttonBuyWheat.style.display = player.canSell ? 'block' : '';
         buttonSellWheat.style.display = player.canSell ? 'block' : '';
@@ -4783,6 +6172,8 @@ function UpdateVisibilities() {
         buttonImportTin.style.display = player.seesImportButton ? '' : 'none';
         buttonSailWest.style.display = (player.hasWon && !player.hasWentToAman) ? 'block' : '';
         if (player.hasTakenCruise) { buttonCruise.style.display = 'none'; }
+        if (player.canExport) { buttonNavy.style.display = 'block'; }
+        if (player.hasNavy) { buttonNavy.style.display = ''; }
     }
 
     else if (player.isAt == 'Residence') {
@@ -7674,6 +9065,7 @@ function RedrawFarm() {
     if (player.hasApiary) { canvasFarmContext.drawImage(beesImage, 0, 0, 256, 128, 79, 52, 256, 128); }
     if (player.hasCottage) { canvasFarmContext.drawImage(cottageAImage, 0, 0, 23, 41, 155, 1032, 23, 41); }
     if (player.hasBandages) { canvasFarmContext.drawImage(cottageBImage, 0, 0, 23, 36, 155 + 47, 1032 + 23, 23, 36); }
+    if (player.hasWon) { canvasFarmContext.drawImage(simCityImage, 0, 0); }
 }
 
 
@@ -8185,6 +9577,11 @@ function RedrawForest() {
         arrayForestGraph[2][5] = tileStumps;
     }
 
+    if (player.hasLoggingUpgrade) {
+        arrayForestGraph[5][4] = tileLogCampNWalt;
+        arrayForestGraph[5][5] = tileLogCampNalt;
+    }
+
     if (farmStage > 16) {
         arrayForestGraph[1][5] = tileStumps;
         arrayForestGraph[2][5] = tilePathV;
@@ -8375,6 +9772,10 @@ function RedrawForest() {
 
         arrayForestGraph[13][6] = tilePathV;
         arrayForestGraph[13][20] = tileLawn;
+    }
+
+    if (player.hasWon) {
+        arrayForestGraph[6][22] = tileMysteryHole;
     }
 
     TileRenderer(arrayForestGraph, canvasForestContext);
@@ -8969,6 +10370,7 @@ function RedrawMountain() {
 
     if (player.hasHiredBronzeworkers) { canvasMountainContext.drawImage(smeltImage, 0 + smeltImageOffset, 0, 8, 8, 79 + 205, 52 + 88, 8, 8); }
     if (player.hasHiredGemcutters) { canvasMountainContext.drawImage(crystalMineImage, 0, 0, 32, 32, 48, 32, 32, 32); }
+    if (player.hasWon) { canvasMountainContext.drawImage(factoryImage, 0, 0); }
 }
 
 
@@ -9034,6 +10436,7 @@ function RedrawVillage() {
     if (villageImageAnimationLayerN.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerN, 0, 0, 384, 224, 0, 0, 384, 224); }
     if (villageImageAnimationLayerO.src != 'bitmaps/blank.png') { canvasVillageContext.drawImage(villageImageAnimationLayerO, 0, 0, 384, 224, 0, 0, 384, 224); }
     if (villageStage > 25) { canvasVillageContext.drawImage(villageTheaterOverlay, 0, 0, 384, 224, 0, 0, 384, 224); }
+    if (player.hasWon) { canvasVillageContext.drawImage(villageKaijuOverlay, 0, 0); }
 }
 
 
@@ -9064,6 +10467,7 @@ function RedrawMap() {
     canvasMapContext.globalAlpha = 1.0;
     canvasMapContext.drawImage(mapImage, 0, 0, 208, 173, 0, 0, 208, 173);
     canvasMapContext.drawImage(mapIconsImage, 0, 0, 208, 173, 0, 0, 208, 173);
+    if (player.hasWon) { canvasMapContext.drawImage(mapImageWin, 0, 0); }
 
     let whoGetsDrawed = mapPlayerImage;
     if (mapTarget == 1) { whoGetsDrawed = mapShepherdsImage; }
@@ -9087,25 +10491,37 @@ function RedrawShepherds() {
     canvasShepherdsContext.drawImage(neighborsSheepFacingImage, 0, 0, 15, 23, 300 - 23, 200 - 23, 15, 23);
     canvasShepherdsContext.drawImage(neighborsSheepHeadImage, 0, 0, 24, 26, 292, 178, 24, 26);
     canvasShepherdsContext.drawImage(neighborsSheepTailImage, 0, 0, 21, 26, 316, 178, 21, 26);
+    if (player.hasWon) {
+        canvasShepherdsContext.drawImage(neighborsSheepDragonImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        canvasShepherdsContext.drawImage(neighborsLemmingImage, 0, 0);
+    }
 }
 
 
 
 function RedrawMiners() {
-    if (player.hasHelpedMiners) { neighborsMinersImage.src = 'bitmaps/neighborsMinersFlourishingMoistInOurLane.png'; }
-    canvasMinersContext.drawImage(neighborsMinersImage, 0, 0, 384, 224, 0, 0, 384, 224);
-    canvasMinersContext.drawImage(neighborsMeeplesImage, 0, 0, 384, 224, 0, 0, 384, 224);
-    if (!player.hasHelpedMiners) {
-        canvasMinersContext.drawImage(neighborsDagsImageA, 0, 0, 384, 224, 0, 0, 384, 224);
-        canvasMinersContext.drawImage(neighborsDagsImageB, 0, 0, 384, 224, 0, 0, 384, 224);
-        canvasMinersContext.drawImage(neighborsBandidoImage, 0, 0, 384, 224, 0, 0, 384, 224);
+    if (player.hasWon) {
+        neighborsMinersImage.src = 'bitmaps/djinni/minerBackdropJafar.png';
+        canvasMinersContext.drawImage(neighborsMinersImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        canvasMinersContext.drawImage(neighborsJafarImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        canvasMinersContext.drawImage(neighborsDinkImage, 0, 0, 384, 224, 0, 0, 384, 224);
     }
     else {
-        canvasMinersContext.drawImage(neighborsCampfireImage, 0, 0, 384, 224, 0, 0, 384, 224);
-        canvasMinersContext.drawImage(neighborsCoalsImage, 0, 0, 384, 224, 0, 0, 384, 224);
-        canvasMinersContext.drawImage(neighborsNeko_tanImage, 0, 0, 384, 224, 0, 0, 384, 224);
-        canvasMinersContext.drawImage(neighborsHerpyImage, 0, 0, 384, 224, 0, 0, 384, 224);
-        canvasMinersContext.drawImage(neighborsBlinksImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        if (player.hasHelpedMiners) { neighborsMinersImage.src = 'bitmaps/neighborsMinersFlourishingMoistInOurLane.png'; }
+        canvasMinersContext.drawImage(neighborsMinersImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        canvasMinersContext.drawImage(neighborsMeeplesImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        if (!player.hasHelpedMiners) {
+            canvasMinersContext.drawImage(neighborsDagsImageA, 0, 0, 384, 224, 0, 0, 384, 224);
+            canvasMinersContext.drawImage(neighborsDagsImageB, 0, 0, 384, 224, 0, 0, 384, 224);
+            canvasMinersContext.drawImage(neighborsBandidoImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        }
+        else {
+            canvasMinersContext.drawImage(neighborsCampfireImage, 0, 0, 384, 224, 0, 0, 384, 224);
+            canvasMinersContext.drawImage(neighborsCoalsImage, 0, 0, 384, 224, 0, 0, 384, 224);
+            canvasMinersContext.drawImage(neighborsNeko_tanImage, 0, 0, 384, 224, 0, 0, 384, 224);
+            canvasMinersContext.drawImage(neighborsHerpyImage, 0, 0, 384, 224, 0, 0, 384, 224);
+            canvasMinersContext.drawImage(neighborsBlinksImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        }
     }
 }
 
@@ -9114,6 +10530,11 @@ function RedrawMiners() {
 function RedrawFarmers() {
     canvasFarmersContext.drawImage(neighborsFarmersImage, 0, 0, 384, 224, 0, 0, 384, 224);
     canvasFarmersContext.drawImage(neighborsDucksImage, 0, 0, 31, 20, 194, 137, 31, 20);
+    if (player.hasWon) {
+        canvasFarmersContext.drawImage(neighborsGullImage, 0, 0, 66, 45, 282, 160, 66, 45);
+        canvasFarmersContext.drawImage(neighborsJillImage, 0, 0);
+    }
+    else { canvasFarmersContext.drawImage(neighborsGullImage, 0, 0, 384, 224, 0, 0, 384, 224); }
 }
 
 
@@ -9125,17 +10546,19 @@ function RedrawHike() {
 
 
 function RedrawTemple() {
-    if (templeStage == 1) { templeImage.src = 'bitmaps/templePlus.png'; }
-    else if (templeStage == 2) { templeImage.src = 'bitmaps/templePlusPlus.png'; }
-    else if (templeStage == 3) { templeImage.src = 'bitmaps/templePlusPlusPlus.png'; }
-    else if (templeStage == 4) { templeImage.src = 'bitmaps/templePlusPlusPlusPlus.png'; }
+    if (templeStage == 1) { templeImage = templeImagePlus; }
+    else if (templeStage == 2) { templeImage = templeImagePlusPlus; }
+    else if (templeStage == 3) { templeImage = templeImagePlusPlusPlus; }
+    else if (templeStage == 4) { templeImage = templeImagePlusPlusPlusPlus; }
     canvasTempleContext.drawImage(templeImage, 0, 0, 384, 224, 0, 0, 384, 224);
+    if (player.hasWon) { canvasTempleContext.drawImage(templeImageGuests, 0, 0); }
 }
 
 
 
 function RedrawOracle() {
     canvasOracleContext.drawImage(oracleImage, 0, 0, 384, 224, 0, 0, 384, 224);
+    if (player.hasWon) { canvasOracleContext.drawImage(yahtzeeImage, 0, 0); }
 }
 
 
@@ -9355,7 +10778,7 @@ function RedrawCanvases() {
             ];
             tileWaterfall = arrayWaterfallFrames[animationCycleFrame];
 
-            const arraySawmillNEFrames = [
+            let arraySawmillNEFrames = [
                 [21 * 16, 8 * 16,],
                 [21 * 16, 8 * 16,],
                 [22 * 16, 8 * 16,],
@@ -9373,6 +10796,26 @@ function RedrawCanvases() {
                 [24 * 16, 8 * 16,],
                 [24 * 16, 8 * 16,],
             ];
+            if (player.hasSawmillUpgrade) {
+                arraySawmillNEFrames = [
+                    [12 * 16, 21 * 16,],
+                    [12 * 16, 21 * 16,],
+                    [13 * 16, 21 * 16,],
+                    [13 * 16, 21 * 16,],
+                    [14 * 16, 21 * 16,],
+                    [14 * 16, 21 * 16,],
+                    [15 * 16, 21 * 16,],
+                    [15 * 16, 21 * 16,],
+                    [12 * 16, 21 * 16,],
+                    [12 * 16, 21 * 16,],
+                    [13 * 16, 21 * 16,],
+                    [13 * 16, 21 * 16,],
+                    [14 * 16, 21 * 16,],
+                    [14 * 16, 21 * 16,],
+                    [15 * 16, 21 * 16,],
+                    [15 * 16, 21 * 16,],
+                ];
+            }
             tileSawmillNE = arraySawmillNEFrames[animationCycleFrame];
 
             const arraySawmillSEFrames = [
@@ -9855,20 +11298,35 @@ function RedrawCanvases() {
                 1,
                 0,
             ];
+            const arraySheepDragonFrames = [
+                0,
+                0,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                1,
+                1,
+            ];
 
             shepherdsAnimationToggle = !shepherdsAnimationToggle;
             if (shepherdsAnimationToggle) {
                 shepherdsAnimationFrameA++;
                 shepherdsAnimationFrameB++;
                 shepherdsAnimationFrameC++;
+                shepherdsAnimationFrameD++;
             }
             if (shepherdsAnimationFrameA == arraySheepFacingFrames.length) { shepherdsAnimationFrameA = 0; }
             if (shepherdsAnimationFrameB == arraySheepHeadFrames.length) { shepherdsAnimationFrameB = 0; }
             if (shepherdsAnimationFrameC == arraySheepTailFrames.length) { shepherdsAnimationFrameC = 0; }
+            if (shepherdsAnimationFrameD == arraySheepDragonFrames.length) { shepherdsAnimationFrameD = 0; }
 
             neighborsSheepFacingImage.src = 'bitmaps/cell_sheepFacingCamera_' + arraySheepFacingFrames[shepherdsAnimationFrameA] + '.png';
             neighborsSheepHeadImage.src = 'bitmaps/cell_sheepHead_' + arraySheepHeadFrames[shepherdsAnimationFrameB] + '.png';
             neighborsSheepTailImage.src = 'bitmaps/cell_sheepTail_' + arraySheepTailFrames[shepherdsAnimationFrameC] + '.png';
+            neighborsSheepDragonImage.src = 'bitmaps/dragon/sheepdragon_' + arraySheepDragonFrames[shepherdsAnimationFrameD] + '.png';
         }
         else if (player.isAt == 'Farmers') {
             const arrayDucksFrames = [
@@ -9898,12 +11356,195 @@ function RedrawCanvases() {
                 3, 3,
                 0, 0, 0, 0, 0,
             ];
+            const arrayGullFrames = [
+                0,
+                1,
+                2,
+                3,
+                4,
+                3,
+                4,
+                '4altA',
+                '4altB',
+                '4altA',
+                4,
+                '4altA',
+                '4altB',
+                '4altA',
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                76,
+                73,
+                72,
+                73,
+                76,
+                73,
+                76,
+                76,
+                76,
+                79,
+                80,
+                81,
+                82,
+                83,
+                82,
+                83,
+                84,
+                85,
+                85,
+                85,
+                86,
+                86,
+                86,
+                86,
+                85,
+                85,
+                85,
+                86,
+                86,
+                86,
+                89,
+                89,
+                89,
+                89,
+                90,
+                90,
+                90,
+                89,
+                89,
+                89,
+                86,
+                86,
+                86,
+                86,
+                85,
+                85,
+                85,
+                85,
+                85,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+            ];
+            const arrayGullWinFrames = [
+                0,
+                1,
+                2,
+                3,
+                4,
+                3,
+                4,
+                5,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+            ];
 
             farmersAnimationToggle = !farmersAnimationToggle;
-            if (farmersAnimationToggle) { farmersAnimationFrame++; }
+            if (farmersAnimationToggle) {
+                farmersAnimationFrame++;
+                farmersGullAnimationFrame++;
+            }
             if (farmersAnimationFrame == arrayDucksFrames.length) { farmersAnimationFrame = 0; }
+            if (player.hasWon && farmersGullAnimationFrame > arrayGullWinFrames.length) { farmersGullAnimationFrame = 0; }
+            if (player.hasWon && farmersGullAnimationFrame == arrayGullWinFrames.length) { farmersGullAnimationFrame = 0; }
+            else if (farmersGullAnimationFrame == 300) { farmersGullAnimationFrame = 0; }
 
             neighborsDucksImage.src = 'bitmaps/cell_ducks_' + arrayDucksFrames[farmersAnimationFrame] + '.png';
+
+            if (player.hasWon) { neighborsGullImage.src = 'bitmaps/gull/win/gull_win_' + arrayGullWinFrames[farmersGullAnimationFrame] + '.png'; }
+            else {
+                neighborsGullImage.src = 'bitmaps/gull/MIgull_' + arrayGullFrames[farmersGullAnimationFrame] + '.png';
+                if (farmersGullAnimationFrame >= arrayGullFrames.length) { neighborsGullImage.src = 'bitmaps/blank.png'; }
+            }
         }
         else if (player.isAt == 'Miners') {
             const arrayDaggoWillyFrames = [
@@ -9992,6 +11633,140 @@ function RedrawCanvases() {
                 3, 3, 3, 0, 3, 1, 2, 3, 3, 3, 3,
                 0, 3, 3, 3, 1, 3, 3, 3, 3, 2, 3,
             ];
+            const arrayJafarFrames = [
+                'faceNodDown',
+                'faceNodDown',
+                'faceLookDownCenter',
+                'faceLookDownCenter',
+                'faceLookDownCameraLeft',
+                'faceLookDownCameraLeft',
+                'faceLookDownCameraLeft',
+                'faceLookDownCameraLeft',
+                'faceLookDownCenter',
+                'faceLookDownCenter',
+                'faceLookDownCameraRight',
+                'faceLookDownCameraRight',
+                'faceLookDownCameraRight',
+                'faceLookDownCameraRight',
+                'faceLookDownCameraRight',
+                'faceLookDownCameraRight',
+                'faceLookDownCenter',
+                'faceLookDownCenter',
+                'faceLookDownCameraLeft',
+                'faceLookDownCameraLeft',
+                'faceLookDownCameraLeft',
+                'faceLookDownCameraLeft',
+                'faceLookDownCameraLeft',
+                'faceLookDownCenter',
+                'faceLookDownCenter',
+                'faceLookDownCameraRight',
+                'faceLookDownCameraRight',
+                'faceLookDownCameraRight',
+                'faceLookDownCameraRight',
+                'faceNodDown',
+                'faceNodDown',
+
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCameraBlink',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+
+                'laughA',
+                'laughB',
+                'laughC',
+                'laughB',
+                'laughC',
+                'laughB',
+                'laughC',
+                'laughB',
+                'laughA',
+                'laughA',
+                'laughA',
+                'laughA',
+                'laughB',
+                'laughC',
+                'laughB',
+                'laughC',
+                'laughB',
+                'laughC',
+                'laughB',
+                'laughB',
+                'laughC',
+                'laughB',
+                'laughC',
+                'laughB',
+                'laughC',
+                'laughB',
+                'laughA',
+                'laughA',
+                'laughA',
+                'laughA',
+                'faceNodDown',
+                'faceNodDown',
+
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCameraBlink',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCameraBlink',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCameraBlink',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+                'faceToCamera',
+            ];
+            const arrayDinkFrames = [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+            ];
 
             minersAnimationToggle = !minersAnimationToggle;
             if (minersAnimationToggle) {
@@ -10004,6 +11779,8 @@ function RedrawCanvases() {
                 minersAnimationFrameG++;
                 minersAnimationFrameH++;
                 minersAnimationFrameI++;
+                minersAnimationFrameJ++;
+                minersAnimationFrameK++;
             }
             if (minersAnimationFrameA == arrayDaggoWillyFrames.length) { minersAnimationFrameA = 0; }
             if (minersAnimationFrameB == arrayMeeplesFrames.length) { minersAnimationFrameB = 0; }
@@ -10014,6 +11791,8 @@ function RedrawCanvases() {
             if (minersAnimationFrameG == arrayCatgirlFrames.length) { minersAnimationFrameG = 0; }
             if (minersAnimationFrameH == arrayCobraFrames.length) { minersAnimationFrameH = 0; }
             if (minersAnimationFrameI == arrayBlinksFrames.length) { minersAnimationFrameI = 0; }
+            if (minersAnimationFrameJ == arrayJafarFrames.length) { minersAnimationFrameJ = 0; }
+            if (minersAnimationFrameK == arrayDinkFrames.length) { minersAnimationFrameK = 0; }
 
             neighborsDagsImageA.src = 'bitmaps/cell_dagsWilly_' + arrayDaggoWillyFrames[minersAnimationFrameA] + '.png';
             neighborsMeeplesImage.src = 'bitmaps/cell_meeples_' + arrayMeeplesFrames[minersAnimationFrameB] + '.png';
@@ -10024,6 +11803,8 @@ function RedrawCanvases() {
             neighborsNeko_tanImage.src = 'bitmaps/cell_猫娘_' + arrayCatgirlFrames[minersAnimationFrameG] + '.png';
             neighborsHerpyImage.src = 'bitmaps/cell_noodle_' + arrayCobraFrames[minersAnimationFrameH] + '.png';
             neighborsBlinksImage.src = 'bitmaps/cell_blinks_' + arrayBlinksFrames[minersAnimationFrameI] + '.png';
+            neighborsJafarImage.src = 'bitmaps/djinni/jafar_' + arrayJafarFrames[minersAnimationFrameJ] + '.png';
+            neighborsDinkImage.src = 'bitmaps/djinni/dink_' + arrayDinkFrames[minersAnimationFrameK] + '.png';
         }
     }
 }

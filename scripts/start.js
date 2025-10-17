@@ -29,15 +29,15 @@ setTimeout(() => {
 
 
 
-// ╔══════════════════╗
-// ║     PRAEDIUM     ║
-// ╠══════════════════╣
-// ║ by Michael Davis ║
-// ╟──────────────────╢
-// ║    v1.21.02-B    ║
-// ╟──────────────────╢
-// ║    09/18/2025    ║
-// ╚══════════════════╝
+// ╔══════════════╗
+// ║ ~ PRAEDIUM ~ ║
+// ╠══════════════╣
+// ║ by Davis Lab ║
+// ╟──────────────╢
+// ║  v1.22.00-A  ║
+// ╟──────────────╢
+// ║  10/17/2025  ║
+// ╚══════════════╝
 
 // “The humble semicolon is why spacing and line-ends do not matter
 // to C and C-like languages.  It means we as programmers can focus

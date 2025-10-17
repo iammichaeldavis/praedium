@@ -7,11 +7,11 @@ let displayGameEdition = '';
 const currencySymbol = '<s>𝐼</s>';
 
 const displayGender = ['', '', '', '', '', '', '', '',];
-const displayNations = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
-const displayEthnicities = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',];
+let displayNations = ['',];
+let displayEthnicities = ['',];
 let displayTitles = ['',];
-let displayRelations = ['', '', '', '',];
-let displayStateType = ['', '', '', '',];
+let displayRelations = ['',];
+let displayStateType = ['',];
 
 let displayDefiniteArticle = '';
 let displayThouArt = '';
@@ -27,8 +27,10 @@ let displayProfanity = '';
 let displayLanguage = '';
 let displayWindowSize = '';
 let displayInStock = '';
+let displayGoods = '';
 let displayStaff = '';
 let displayFieldhands = '';
+let displayFarmers = '';
 let displayLabelHireHand = '';
 let displayCrop = '';
 let displayCropAbbr = '';
@@ -42,11 +44,23 @@ let displayPurchased = '';
 let displaySold = '';
 let displaySoldAbbr = '';
 let displayGood = '';
+let displayProduct = '';
+let displayProvision = '';
+let displayProvisionShort = '';
+let displayFishSteaks = '';
+let displayQuintals = '';
+let displayDried = '';
+let displayLineCaught = '';
+let displayNetCaught = '';
+let displayLineCaughtShort = '';
+let displayNetCaughtShort = '';
 let displayProduced = '';
+let displayProducedShort = '';
 let displayDispensed = '';
 let displayScore = '';
 let displayHomers = '';
 let displayUnits = '';
+let displayUnit = '';
 let displayStarving = '';
 let displayStarvingHorse = '';
 let displayRatPlague = '';
@@ -66,11 +80,17 @@ let displayLabelAvailable = '';
 let displayWheat = '';
 let displayBarley = '';
 let displayFlax = '';
+let displayMillet = '';
+let displaySpelt = '';
 let displayOlive = '';
 let displayDate = '';
 let displayFig = '';
 let displayPomegranate = '';
 let displayGrape = '';
+let displayPlantains = '';
+let displayFavaBeans = '';
+let displayChickpeas = '';
+let displayLentils = '';
 let displayBarterAll = '';
 let displayLogs = '';
 let displayBoards = '';
@@ -88,23 +108,42 @@ let displayArborists = '';
 let displayHorticulturalists = '';
 let displayMasons = '';
 let displayMiners = '';
+let displayAristocrats = '';
+let displayPriests = '';
 let displayCindermen = '';
+let displayFishermen = '';
+let displayFilleters = '';
+let displayTanners = '';
 let displayMetallurgists = '';
 let displayGemcutters = '';
 let displayWool = '';
 let displayMilk = '';
 let displayYoghurt = '';
 let displayButter = '';
+let displayPecorino = '';
 let displayCheese = '';
 let displayMutton = '';
+let displayBeef = '';
+let displayPork = '';
+let displayJerky = '';
 let displayOffal = '';
 let displayHide = '';
 let displayBone = '';
 let displayBlood = '';
 let displayManure = '';
 let displayPeasants = '';
+let displaySubjects = '';
 let displayShepherds = '';
+let displayWeavers = '';
+let displayPotters = '';
+let displayRanchers = '';
+let displayFruiterers = '';
+let displayGrocers = '';
+let displayMerchants = '';
+let displayEntertainers = '';
+let displayBums = '';
 let displayPolice = '';
+let displaySoldiers = '';
 let displayDiamonds = '';
 let displayJacinth = '';
 let displayBismuth = '';
@@ -219,6 +258,24 @@ let displayLabelBuild27 = '';
 let displayStoryOracleFirstVisit = '';
 let displayLabelLeaveOracle = '';
 let displayLabelAskOracle = '';
+let displayLabelChariot = '';
+let displayStoryStartRace = '';
+let displayStoryRaceTitle = '';
+let displayStoryRaceA = '';
+let displayStoryRaceB = '';
+let displayStoryRaceC = '';
+let displayStoryRaceD = '';
+let displayStoryRaceE = '';
+let displayStoryRaceF = '';
+let displayLabelLeaveRace = '';
+let displayLabelReleaseCats = '';
+let displayStoryReleaseTheCats = '';
+let displayLabelTakeInAShow = '';
+let displayStoryStartPlay = '';
+let displayStoryEndPlay = '';
+let displayStoryEndPlayEarly = '';
+let displayEndPlayEarlyConfirm = '';
+let displayLabelLeavePlay = '';
 let displayLabelTemple = '';
 let displayLabelLeaveTemple = '';
 let displayLabelPray = '';
@@ -279,6 +336,7 @@ let displayStoryCruise = '';
 let displayStoryPoorCruise = '';
 let displayLabelImportTin = '';
 let displayLabelImportSalt = '';
+let displayLabelNavy = '';
 let displayLabelSailWest = '';
 let displayLabelPegasuses = '';
 
@@ -301,6 +359,8 @@ let displayHeirSummaryCorrect = '';
 let displayHeirConfirm = '';
 let displayHeirComplete = '';
 
+let displayStoryRudeJerk = '';
+let displayStoryBrokenHoe = '';
 let displayStoryFirstTill = '';
 let displayStoryFirstPlant = '';
 let displayStoryFirstWater = '';
@@ -531,6 +591,7 @@ let displayStoryPort05 = '';
 let displayStoryPort06 = '';
 let displayStoryPort07 = '';
 let displayStoryPort08 = '';
+let displayStoryNavy = '';
 
 let displayStoryHeir = '';
 
@@ -589,6 +650,7 @@ let displayFreight = '';
 let displayHusbandry = '';
 let displayConjunction = '';
 let displayTourism = '';
+let displayTheArts = '';
 let displayWorship = '';
 let displayTribute = '';
 let displayGaming = '';
@@ -601,9 +663,18 @@ let displayInterestRate = '';
 let displayFairRate = '';
 let displayInventory = '';
 let displayMateriel = '';
+let displaySaffron = '';
+let displayCaraway = '';
+let displayCumin = '';
+let displayCamels = '';
+let displaySheep = '';
+let displaySwine = '';
+let displayCattle = '';
+let displayChicken = '';
 let displayPonies = '';
+let displayThoroughbreds = '';
 let displayUnicorns = '';
-let displaySoldiers = '';
+let displayInfantry = '';
 let displayCavalry = '';
 let displayGendarmes = '';
 let displayPrayers = '';
@@ -614,6 +685,7 @@ let displayScripture = '';
 let displayRelic = '';
 let displayGhosts = '';
 let displayPatients = '';
+let displayPatrons = '';
 let displayMessiahs = '';
 let displayRats = '';
 let displayRatHighScore = '';
@@ -689,7 +761,24 @@ let displayMapDetailsTitlePol = '';
 let displayMapDetailsEconLiquidBar = '';
 let displayNaturalResources = '';
 let displayCrops = '';
+let displayStapleCrops = '';
+let displayCashCrops = '';
+let displayDairy = '';
+let displayPoultry = '';
+let displayRoasters = '';
+let displayDarkMeat = '';
+let displayEggs = '';
+let displayButcher = '';
 let displayLivestock = '';
+let displaySundries = '';
+let displayFeathers = '';
+let displayGlassware = '';
+let displayFinery = '';
+let displayYarn = '';
+let displayTextiles = '';
+let displayGarments = '';
+let displayPottery = '';
+let displayRope = '';
 let displayManufacturedProducts = '';
 let displaySacredItems = '';
 let displaySecondaryProducts = '';
@@ -747,6 +836,7 @@ let displayInfoMadeFor = '';
 let displayInfoMadeWith = '';
 let displayInfoDedication = '';
 let displayInfoMusic = '';
+let displayInfoText = '';
 let displayInfoMadeInFlorida = '';
 let displayInfoThanks = '';
 let displayInfoScripture = '';
@@ -804,6 +894,7 @@ let displayFishPreviousSesh = '';
 let displayFishRecords = '';
 let displayFishFishery = '';
 let displayFishFilets = '';
+let displayFishStockfish = '';
 let displayLabelBuildWharf = '';
 let displayLabelVisitWharf = '';
 let displayLabelWharfUnlockA = '';
@@ -833,6 +924,7 @@ let displayWharfKnife = '';
 let displayWharfBait = '';
 let displayWharfRod = '';
 let displayWharfEnvironment = '';
+let displayWharfFishboys = '';
 let displayWharfChewTheFat = '';
 let displayStoryWharfBuyPosca = '';
 let displayStoryWharfBuyPrey = '';
@@ -841,6 +933,7 @@ let displayStoryWharfBuyKnife = '';
 let displayStoryWharfBuyBait = '';
 let displayStoryWharfBuyRod = '';
 let displayStoryWharfBuyWWF = '';
+let displayStoryWharfFishboys = '';
 let displayTrophyEarned = '';
 
 
@@ -938,71 +1031,122 @@ function Translate(language, bark = true) {
         displayGender[6] = 'OMNIGENDER';
         displayGender[7] = 'AGENDER';
 
-        displayNations[0] = 'Assyria'; //
-        displayNations[1] = 'Babylon'; // (Weakness to Hero Unit: Cyrus, Starts Game w/: Lvl. 3 Walls)
-        displayNations[2] = 'Canaan'; //
-        displayNations[3] = 'Carthage'; // (Unique Unit Formation: Horde)
-        displayNations[4] = 'Corinth'; // (+10 Armor Crafting) https://en.wikipedia.org/wiki/Corinthian_helmet
-        displayNations[5] = 'Crete'; // (Unique Unit: Minotaurs)
-        displayNations[6] = 'Egypt'; // (+10 Cosmetics)
-        displayNations[7] = 'Etruria'; // (+10 Gastronomy)
-        displayNations[8] = 'Galatia'; // (Unique Unit: Druids)
-        displayNations[9] = 'Greece'; // (+10 Philosophy)
-        displayNations[10] = 'Hattusa'; // (+10 Cuneiform)
-        displayNations[11] = 'Iberia'; // (Unique Unit: Mountain Antelope)
-        displayNations[12] = 'Israel'; // (Unique Unit: Rabbi)
-        displayNations[13] = 'Judea'; //
-        displayNations[14] = 'Libya'; //
-        displayNations[15] = 'Macedon'; //
-        displayNations[16] = 'Moab'; //
-        displayNations[17] = 'Numidia'; //
-        displayNations[18] = 'Palestine'; //
-        displayNations[19] = 'Persia'; // (Unique Unit: Alchemist)
-        displayNations[20] = 'Phoenicia'; // (Unique Unit: Vintner)
-        displayNations[21] = 'Rome'; // (+10 Diplomacy)
-        displayNations[22] = 'Sahara'; //
-        displayNations[23] = 'Samaria'; // (Special Trait: Charitability)
-        displayNations[24] = 'Scythia'; // (Unique Unit: Mounted Archer)
-        displayNations[25] = 'Sparta'; /// (Unique Unit Formation: Phalanx)
-        displayNations[26] = 'Syria'; //
-        displayNations[27] = 'Tartessia'; //
-        displayNations[28] = 'Thrace'; //
-        displayNations[29] = 'Troy'; // (Hero Unit: Hector)
-        displayNations[30] = 'All over'; // (Special Trait: Disease Resistance)
+        displayNations = [
+            'Ammon',
+            'Anatolia',
+            'Antioch',
+            'Arabia',
+            'Aram-Damascus',
+            'Assyria', //
+            'Babylon', // (Weakness to Hero Unit: Cyrus, Starts Game w/: Lvl. 3 Walls)
+            'Canaan', //
+            'Carthage', // (Unique Unit Formation: Horde)
+            'Chaldea',
+            'Corinth', // (+10 Armor Crafting) https://en.wikipedia.org/wiki/Corinthian_helmet
+            'Crete', // (Unique Unit: Minotaurs)
+            'Cyprus',
+            'The Desert',
+            'Edom',
+            'Egypt', // (+10 Cosmetics)
+            'Eranshahr',
+            'Etruria', // (+10 Gastronomy)
+            'Galatia', // (Unique Unit: Druids)
+            'Gandhara',
+            'Greece', // (+10 Philosophy)
+            'Hattusa', // (+10 Cuneiform)
+            'Helvetia',
+            'The Hindu Kush',
+            'Iberia', // (Unique Unit: Mountain Antelope)
+            'Israel', // (Unique Unit: Rabbi)
+            'Judea', //
+            'Libya', //
+            'Macedon', //
+            'Media',
+            'Moab', //
+            'Naamah',
+            'Nod',
+            'Nubia',
+            'Numidia', //
+            'Palestine', //
+            'Persia', // (Unique Unit: Alchemist)
+            'Phoenicia', // (Unique Unit: Vintner)
+            'Rome', // (+10 Diplomacy)
+            'Saba',
+            'Sahara', //
+            'Samaria', // (Special Trait: Charitability)
+            'Scythia', // (Unique Unit: Mounted Archer)
+            'Shuah',
+            'Sparta', // (Unique Unit Formation: Phalanx)
+            'Sumer', // (Hero Unit: Gilgamesh)
+            'Syria', //
+            'Tartessia', //
+            'Teman',
+            'Thrace', //
+            'Troy', // (Hero Unit: Hector)
+            'Uz', // (Hero Unit: Job)
+            'Vulcan', // (+10 Logic, Hero Unit: Spock)
+            'All over', // (Special Trait: Disease Resistance)
+        ];
 
-        displayEthnicities[0] = 'an Assyrian';
-        displayEthnicities[1] = 'a Babylonian';
-        displayEthnicities[2] = 'a Canaanite';
-        displayEthnicities[3] = 'a Carthaginian';
-        displayEthnicities[4] = 'a Corinthian';
-        displayEthnicities[5] = 'a Cretan';
-        displayEthnicities[6] = 'an Egyptian';
-        displayEthnicities[7] = 'an Etruscan';
-        displayEthnicities[8] = 'a Celt';
-        displayEthnicities[9] = 'a Greek';
-        displayEthnicities[10] = 'a Hittite';
-        displayEthnicities[11] = 'an Iberian';
-        displayEthnicities[12] = 'an Israelite';
-        displayEthnicities[13] = 'a Judean';
-        displayEthnicities[14] = 'a Libyan';
-        displayEthnicities[15] = 'a Macedonian';
-        displayEthnicities[16] = 'a Moabite';
-        displayEthnicities[17] = 'a Numidian';
-        displayEthnicities[18] = 'a Philistine';
-        displayEthnicities[19] = 'a Persian';
-        displayEthnicities[20] = 'a Phoenician';
-        displayEthnicities[21] = 'a Roman';
-        displayEthnicities[22] = 'a Saharan';
-        displayEthnicities[23] = 'a Samaritan';
-        displayEthnicities[24] = 'a Scythian';
-        displayEthnicities[25] = 'a Spartan';
-        displayEthnicities[26] = 'a Syrian';
-        displayEthnicities[27] = 'a Tartessian';
-        displayEthnicities[28] = 'a Thracian';
-        displayEthnicities[29] = 'a Trojan';
-        displayEthnicities[30] = 'a Cosmopolitan';
+        displayEthnicities = [
+            'an Ammonite',
+            'an Anatolian',
+            'an Antiochian',
+            'an Arab',
+            'an Aramean',
+            'an Assyrian',
+            'a Babylonian',
+            'a Canaanite',
+            'a Carthaginian',
+            'a Chaldean',
+            'a Corinthian',
+            'a Cretan',
+            'a Cypriot',
+            'a Bedouin',
+            'an Edomite',
+            'an Egyptian',
+            'a Sasanian',
+            'an Etruscan',
+            'a Celt',
+            'a Gandhari',
+            'a Greek',
+            'a Hittite',
+            'a Helvetian',
+            'a Nuristani',
+            'an Iberian',
+            'an Israelite',
+            'a Judean',
+            'a Libyan',
+            'a Macedonian',
+            'a Midianite',
+            'a Moabite',
+            'a Naamathite',
+            'a Noddite',
+            'a Nubian',
+            'a Numidian',
+            'a Philistine',
+            'a Persian',
+            'a Phoenician',
+            'a Roman',
+            'a Sabean',
+            'a Saharan',
+            'a Samaritan',
+            'a Scythian',
+            'a Shuhite',
+            'a Spartan',
+            'a Sumerian',
+            'a Syrian',
+            'a Tartessian',
+            'a Temanite',
+            'a Thracian',
+            'a Trojan',
+            'an Uzite',
+            'a Vulcanian',
+            'a Cosmopolitan',
+        ];
 
         displayTitles = [
+            'Satrap',
             'Pharaoh',
             'Caesar',
             'Caesarissa',
@@ -1024,7 +1168,11 @@ function Translate(language, bark = true) {
             'Vizier',
             'Overseer',
             'Superintendent',
+            'Super-Nintendo Chalmers',
             'Director',
+            'Commissioner',
+            'Dean',
+            'Warden',
             'Shah',
             'Muad’Dib',
             'Sultan',
@@ -1138,11 +1286,13 @@ function Translate(language, bark = true) {
             'OCCUPIED',
             'SUBJUGATED',
         ];
+
         displayStateType = [
             'UNKNOWN',
             'FREE STATE',
             'PROTECTORATE',
             'COLONY',
+            'SUPERPOWER',
         ];
 
         displayDefiniteArticle = 'THE';
@@ -1159,8 +1309,10 @@ function Translate(language, bark = true) {
         displayLanguage = 'Language:';
         displayWindowSize = 'Window Size:';
         displayInStock = 'In Stock';
+        displayGoods = 'Goods';
         displayStaff = 'Staff';
         displayFieldhands = 'Fieldhands';
+        displayFarmers = 'Farmers';
         displayLabelHireHand = 'HIRE FIELDHAND';
         displayCrop = 'Crop';
         displayCropAbbr = 'Crop';
@@ -1174,11 +1326,23 @@ function Translate(language, bark = true) {
         displaySold = 'Sold';
         displaySoldAbbr = 'Sold';
         displayGood = 'Good';
+        displayProduct = 'Product';
+        displayProvision = 'Provision';
+        displayProvisionShort = 'Prov.';
+        displayFishSteaks = 'Steaks';
+        displayQuintals = 'Quintals';
+        displayDried = '(Dried)';
+        displayLineCaught = '(Line-Caught)';
+        displayNetCaught = '(Net-Caught)';
+        displayLineCaughtShort = '(Line)';
+        displayNetCaughtShort = '(Net)';
         displayProduced = 'Produced';
+        displayProducedShort = 'Prod.';
         displayDispensed = 'Dispensed';
         displayScore = 'Score';
         displayHomers = 'Homers';
         displayUnits = 'Units';
+        displayUnit = 'Unit';
         displayStarving = 'YOUR MEN ARE STARVING!!';
         displayStarvingHorse = 'THESE POOR ANIMALS<br>ARE STARVING!!';
         displayRatPlague = 'RAT PLAGUE!!';
@@ -1198,11 +1362,17 @@ function Translate(language, bark = true) {
         displayWheat = 'Wheat';
         displayBarley = 'Barley';
         displayFlax = 'Flax';
+        displayMillet = 'Millet';
+        displaySpelt = 'Spelt';
         displayOlive = 'Olive';
         displayDate = 'Date';
         displayFig = 'Fig';
         displayPomegranate = 'Pomegranate';
         displayGrape = 'Grape';
+        displayPlantains = 'Plantains';
+        displayFavaBeans = 'Fava Beans';
+        displayChickpeas = 'Punic Chickpeas';
+        displayLentils = 'Lentils';
         displayBarterAll = 'BARTER ALL FRUIT';
         displayLogs = 'Logs';
         displayBoards = 'Boards';
@@ -1220,23 +1390,42 @@ function Translate(language, bark = true) {
         displayHorticulturalists = 'Horticulturalists';
         displayMasons = 'Masons';
         displayMiners = 'Miners';
+        displayAristocrats = 'Aristocrats';
+        displayPriests = 'Clergy';
         displayCindermen = 'Cindermen';
+        displayFishermen = 'Fishermen';
+        displayFilleters = 'Filleters';
+        displayTanners = 'Tanners';
         displayMetallurgists = 'Braziers';
         displayGemcutters = 'Gemcutters';
         displayWool = 'Wool';
         displayMilk = 'Milk';
         displayYoghurt = 'Yoghurt';
         displayButter = 'Butter';
-        displayCheese = 'Cheese';
+        displayPecorino = 'Pecorino';
+        displayCheese = 'Caciocavallo';
         displayMutton = 'Mutton';
+        displayBeef = 'Beef';
+        displayPork = 'Pork';
+        displayJerky = 'Biltong';
         displayOffal = 'Offal';
         displayHide = 'Hide';
         displayBone = 'Bone';
         displayBlood = 'Blood';
         displayManure = 'Manure';
         displayPeasants = 'Peasants';
+        displaySubjects = 'Subjects';
         displayShepherds = 'Shepherds';
+        displayWeavers = 'Weavers';
+        displayPotters = 'Potters';
+        displayRanchers = 'Ranchers';
+        displayFruiterers = 'Fruiterers';
+        displayGrocers = 'Grocers';
+        displayMerchants = 'Merchants';
+        displayEntertainers = 'Entertainers';
+        displayBums = 'Liesure Class';
         displayPolice = 'Constabulary';
+        displaySoldiers = 'Soldiers';
         displayDiamonds = 'Adamant';
         displayJacinth = 'Hyacinth';
         displayBismuth = 'Bismuth';
@@ -1357,9 +1546,31 @@ function Translate(language, bark = true) {
         displayLabelBuild25 = 'ERECT THEATER';
         displayLabelBuild26 = 'ZONE FOR PRIVATE DEVELOPMENT';
         displayLabelBuild27 = 'INAUGURATE ORACLE';
-        displayStoryOracleFirstVisit = 'Robed acolytes lead you from the grand entrance of the building, down various dimly-lit hallways, deep into the shrine’s interior. At last you approach a large stone archway that leads into the innermost sanctum of this holy place. The torchlight casts deep shadows across everything.<br><br>As you draw near, a woman’s voice from inside booms: “Welcome, O Seeker! Come, enter in peace.” Your silent guides bow and retreat, leaving you to stand alone there before the mysterious portal.<br><br>Upon entering, you find a very old and very friendly sibyl sitting in a small room surrounded by heavy black curtains and heavy bronze braziers belching thick, sweet-smelling vapors. At the back of the room, a precious consecrated book is bathed in warm light, though from where exactly this light is emanating you can not be certain.<br><br>In front of the woman is a round table upon which sit two ceremonial bowls. The room smells so heavily of incense that you immediately feel dizzy.<br><br>The ancient prophetess smiles as she says in a whisper, “We have been waiting such a long time, but at last you have come.” She nods her head, then casts a powder into the bowls that causes a thick blue smoke to boil upwards from them. Staring into this smoke she beckons, “Sit before me now, and I shall pour the light of Virtue into the shadows of thy future.”';
+        displayStoryOracleFirstVisit = 'Robed acolytes lead you from the grand entrance of the building, down various dimly-lit hallways, deep into the shrine’s interior. At last you approach a large stone archway that leads into the innermost sanctum of this holy place. The torchlight casts deep shadows across everything.<br><br>As you draw near, a woman’s voice from inside booms: “Welcome, O Seeker! Come, enter in peace.” Your silent guides bow and retreat, leaving you to stand alone there before the mysterious portal.<br><br>Upon entering, you find a very old and very friendly sibyl sitting in a small room surrounded by heavy black curtains and heavy bronze braziers belching thick, sweet-smelling vapors. At the back of the room, a precious consecrated book is bathed in warm light, though from where exactly this light is emanating you can not be certain.<br><br>In front of the woman is a round table upon which sit two ceremonial bowls. The room smells so heavily of incense that you immediately feel dizzy.<br><br>The ancient prophetess smiles as she says in a whisper, “We have been waiting such a long time, but at last you have come.” She nods her head, then casts a powder into the bowls that causes a thick blue smoke to boil upwards from them. Staring into this smoke she beckons, “Sit before me now, and I shall pour the light of Virtue into the shadows of thy future. Ask, and through me Apollo shall answer!”';
         displayLabelLeaveOracle = '↓ EXIT THIS PLACE';
         displayLabelAskOracle = 'RECEIVE HER WISDOM';
+        displayLabelChariot = 'ATTEND A CHARIOT RACE';
+        displayStoryStartRace = '<div id="divMeetings">You have been anticipating this day for weeks, and now it is finally here.<br><br>On your way in you pass by and shake hands with Magister Varro, the regional official assigned to your fief by Rome all those many years ago, back when your petition for legitimate <i>municipium</i> was finally legally recognised. You’ve always found him to be a fair and trustworthy man, for a Roman. At any rate he allows you to feel like you’re in control, is easy to talk to, and has never overstepped his welcome; the ratio of dues and fees he collects on behalf of Rome has never felt overmuch like extortion.<br><br>After your party has collected their snacks and beverages, your group is led to your private box. The opening ceremony is now underway... the preliminary games are just about to begin! Why, this should make for a fine day!</div>';
+        displayStoryRaceTitle = '<div class="stageHeading">“The Dust and the Laurel”</div>';
+        displayStoryRaceA = 'The sun hung low in the late morning sky, casting long golden fingers across the smooth white stone of <i>Circus ' + nameState + '</i>, the pride of the city. Already the roar of the crowd rippled through the colonnades, a sea of voices stirred by anticipation.';
+        displayStoryRaceB = 'Lucius Calventius Varro, <i>magistratus municipalis</i> of ' + nameVillage + ', stood atop the steps leading into the circus, the hem of his dark crimson <i>toga praetexta</i> flicking in the warm September breeze. He squinted against the sunlight, the worn lines at the corners of his eyes deepening as he smiled—genuinely, for once.<br><br>“This,” he muttered to himself, “I have earned.”';
+        displayStoryRaceC = 'For twenty-three years, Lucius Calventius had served his city. First as an <i>aedile</i>, then <i>duumvir</i>, and finally as chief magistrate—a role not unlike a modern-day mayor, though cloaked in far more ceremony and less rest. He had mediated property disputes between patricians, organized grain shipments from the coast, commissioned repairs to the aqueduct, and overseen the construction of three temples. He had spoken before governors, written to the Senate in Rome, and buried two wives along the way. He had missed the birth of his second grandson just last spring because of a food riot in the southern quarter. His duties never truly ended, only paused long enough to take on new urgency.<br><br>But today… today was different.';
+        displayStoryRaceD = 'He stepped into his <i>pulvinar</i>, the honorary box reserved for the city’s high officials and visiting dignitaries. A slave brought him wine cooled with snow from Mount Amanus. Another adjusted the awning above his seat to shade him. A third boy, no older than thirteen, fanned him with a panel of dyed ostrich feathers. For a moment, Lucius closed his eyes and listened—not to the shouting, but to the life beneath it: the scrape of hooves in the stables, the rhythmic chant of vendors hawking roasted chickpeas and honey cakes and <i>focaccia</i>, the creak of wooden wheels rolling across sand. It was the sound of a city alive, not crying out for judgment, decree, or discipline—but for sport.<br><br>The <i>spina</i>—that long central barrier down the middle of the track—stood adorned with statues of Mars and Neptune, twisting bronze dolphins, and lap counters shaped like golden eggs. It gleamed under the sun, casting short, flickering shadows across the sand. At each end, the <i>metae</i>, or turning posts, awaited the skill and daring of the charioteers. Already, the teams had assembled: the Blues, the Greens, the Reds, and the Whites, their liveries brilliant and proud.<br><br>Lucius’ eye caught one charioteer in particular—the young man driving for the Green faction, his tunic clinging to his lean frame, arms like knotted rope, eyes fixed ahead. <i>So young</i>, Lucius thought, <i>and yet he drives with the weight of ten victories in his posture</i>. He remembered being young. He remembered what it felt like to grip a future like reins.<br><br>The trumpets blared! The gates flew open.';
+        displayStoryRaceE = 'Sixteen horses—four for each chariot—exploded from their pens, kicking up a whirlwind of dust. The crowd erupted. Lucius surged to his feet before he realized it, wine sloshing from his cup. The thunder of hooves was immediate and overwhelming, reverberating through his chest like a second heartbeat.<br><br>“Go on!” he shouted, startling the young attendant fanning him. “Hold your line, boy! Hold your—yes, <i>yes!</i>”<br><br>The Green charioteer—<i>that impetuous boy!</i>—took the lead early, hugging the <i>spina</i> so close that Lucius feared he’d crack a wheel on the stone. Red pressed him hard, coming in wide at the <i>metae</i>, but Green held fast, flicking the reins with perfect precision. Another lap. Then another.<br><br>Lucius was yelling now, louder than decorum allowed, but his voice lost in the tumult. For a moment, he was not magistrate or judge or public servant. He was simply a man, standing in the sunlight, cheering for youth and danger and glory.<br><br>By the final lap, only Green and Red remained in contention. A cruel whip snapped through the air. The crowd gasped as the Red chariot veered too sharply, skidding, nearly flipping. Green surged ahead... and crossed the line to a wall of sound like a breaking wave.';
+        displayStoryRaceF = 'The Green chariot had won.<br><br>Lucius dropped back into his seat, chest heaving not from exertion, but from a feeling he hadn’t known in years: exhilaration.<br><br>The boy—no, the champion—was hoisted up by his team, wreathed in laurel. He raised his fist to the crowd, and their cheer became a chant: <i>“Vic-tor Vir-i-dis! Vic-tor Vir-i-dis!”</i><br><br>Lucius took it all in, a genuine smile again softening his stern features. He thought not of edicts or grain shortages or tax assessments. Not today.<br><br>Today, he was simply Lucius.<br><br>And for right now, that was enough.';
+        displayLabelLeaveRace = 'LEAVE THE CIRCUS';
+        displayLabelReleaseCats = 'RELEASE CATS INTO THE SEWERS';
+        displayStoryReleaseTheCats = 'Man, just don’t let any Egyptians see what you’re doing or we’ll never hear the end of it';
+        displayLabelTakeInAShow = 'ATTEND GRAND OPENING OF THE THEATER<br>AS THE GUEST OF HONOUR';
+        const currentYear = yearAtStartProlepticGregorian + year;
+        let yearDelta = yearOfPlayDebut + currentYear;
+        displayStoryStartPlay = '<div id="divMeetings">The resident acting company’s courier arrived with the scroll early on a weekday morning, and upon it had been printed thus:<div id="nasirMessage">❂ – ❂ – ❂ – ❂ – ❂ – ❂ – ❂<br><br>• • • ✾ • • •<br>☞LET IT BE KNOWN☜<br>to All & Sundry:<br>that <b>upon the Evening</b><br>of this coming 𐡷 <b>Saturni</b> 𐡸,<br>the venerable<br><b>' + nameState + ' Players</b><br>shall perform<br>(with great Skill & Aplomb)<br>the celebrated tale<br>of Wise Aristophanes:<div id="productionMasthead">🙤<i><b>WEALTH</b></i> 🙧</div>the yet-still-popular<br>🙟 <b>Ancient Grecian Play</b> 🙜<br>which first debuted<br>nearly ' + yearDelta + ' Years Ago!<br>❦<br><br>';
+        displayStoryStartPlay += '• • • ✾ • • •<br>--starring, in the title role--<br>the Celebrated + Award-Winning<br>Germani Thespian,<br>Known Far and Wide,<div id="starBilling">🙐 <b>LEIF</b> 🙖</div>🙕 the Magnanimous! 🙓<br><br>--directed by--<br><b>David of Britannia</b><br><br>--costumes, props & set-design--<br><b>Master HAMZA</b><br>of the celebrated<br>𐫱 House of Ansari 𐫱<br>❦<br><br>';
+        displayStoryStartPlay += '❁<br>(P.S. Attendance is on a first-come, first-served basis and is <b>not</b> guaranteed.)<br>❦<br><br>❁<br>(P.P.S. Of course, because <i>Wealth</i> is a comedy, <b>Gentlemen Only</b> may be admitted into the audience!)<br>❦<br><br>❂ – ❂ – ❂ – ❂ – ❂ – ❂ – ❂</div><br>Affixed to the scroll with a tiny bit of pitch was a much smaller piece of papyrus, upon which had been written, in a deliberate hand: <i>The bearer of this ticket is entitled to *Full* Senior V.I.P. Status</i>, and below this was a wax emblem embossed with a very official-looking signet seal.<br><br><div class="centerMePlease">——— ⦿ ———</div><br>The weather this evening is perfect for a show: there’s a mild, cooling breeze and the makings of a clear, starry night sky. Your private guard presses through the unwashed throng of lollygaggers milling about the entrance of the theatre, past swirling crowds of delinquent children trying to steal glances inside and boisterous ticket scalpers shouting “Two here, I have two!” and makeshift food stalls with overly-friendly merchants offering free samples of every meat on a stick imaginable.<br><br>Once inside, you are obligated to make the customary greetings and salutations to all those of (or very near) your station, but eventually, finally, you and your evening companions are led to the ritziest private viewing box in the house, and make yourselves comfortable as the pre-show orations are just coming to an end.</div>';
+        displayStoryEndPlay = 'Boy... that was <i>raunchy</i>. You’d heard that Greek comedies were practically nothing but penis and flatulence jokes and were chock full of foul-mouthed obscenities, crass vulgarity and low-class swearing, but Holy Smokes, son... that was <i>ribald</i>.<br><br>Well, it was certainly an event you won’t soon forget. The theater is fun!';
+        displayStoryEndPlayEarly = 'Well, that is just about enough of *that*, thank you very much. Different strokes for different folks, Buster... the theater just ain’t for me!';
+        displayEndPlayEarlyConfirm = 'But, sirrah! Art thou *quite* certain thou doth wisheth to leave, before the play hath concluded, milord!? (These were *expensive* seats, y’know! 😮‍💨)';
+        displayLabelLeavePlay = 'EXIT THROUGH THE GIFT SHOP';
         displayLabelTemple = 'VISIT THE TEMPLE';
         displayLabelLeaveTemple = '↓ LEAVE THE TEMPLE';
         displayLabelPray = 'PRAY';
@@ -1420,6 +1631,7 @@ function Translate(language, bark = true) {
         displayStoryPoorCruise = 'I am sorry, sire, but the treasury simply cannot afford this!';
         displayLabelImportTin = 'ARRANGE FOR THE IMPORT OF TIN';
         displayLabelImportSalt = 'ARRANGE FOR THE IMPORT OF SALT';
+        displayLabelNavy = 'SPONSOR A NAVAL FLEET OF PIRATE HUNTERS';
         displayLabelSailWest = 'SAIL WEST TO VALINOR';
         displayLabelPegasuses = 'BREED PEGASUSES';
 
@@ -1442,6 +1654,8 @@ function Translate(language, bark = true) {
         displayHeirConfirm = 'Art thou certain about thine answers?';
         displayHeirComplete = 'IT’S ALL ON YOUR SHOULDERS NOW, CHUM';
 
+        displayStoryRudeJerk = 'A corpulent rival farmer riding atop a clearly-exhausted donkey wanders past the edge of your plot, trotting along the property line.<br><br>He looks you up and down, then bellows: “Why, hello there, neighbor! Nice patch ’a land you got there... not! You might as well face it: you’ll never make it in <i>this</i> world, ya runt! You should probably just give up now!” Then he kicks a cruel heel deep into the belly of his mount, causing the poor thing to empty its bowels. “There’s some fresh manure for ya! You’re gonna need it! Ahh, haw haw haw,” he guffaws, and leads the donkey off back the way he came.<br><br>Boy, what a jerk!';
+        displayStoryBrokenHoe = 'AWW, NUTS! THE SHAFT OF YOUR HOE JUST BROKE; THAT’S SUCH A SHAME, YOU’D HAD THAT THING FOR AGES. AH, WELL. YOU SPEND THE REST OF THE AFTERNOON IN THE FOREST LOOKING FOR A REPLACEMENT';
         displayStoryFirstTill = 'BEFORE ONE CAN SOW,<br>THE EARTH MUST BE TILLED<br><br><span class="icon Weeds inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Soil inlineIcon tripleSize"></span><br><br>With considerable effort,<br>weeds give way to soil';
         displayStoryFirstPlant = 'CAST THY SEED<br>UPON THE TILLAGE<br><br><span class="icon Soil inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilSeeded inlineIcon tripleSize"></span><br><br>Spend one bushel of wheat (' + plantCost + '<span class="icon Wheat inlineIcon"></span>)<br>to seed one acre of soil';
         displayStoryFirstWater = 'ALL LIFE REQUIRES<br>WATER TO SURVIVE<br><br><span class="icon SoilSeeded inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilWatered inlineIcon tripleSize"></span><br><br>“Well, it’s a dirty job,<br>but someone’s gotta do it”<br>—Chuck Mosley';
@@ -1676,6 +1890,7 @@ function Translate(language, bark = true) {
         displayStoryPort06 = 'HOUSEWIVES DO SO LOVE THEIR DOODADS AND GEWGAWS';
         displayStoryPort07 = 'WITH THIS TIN, ARTISANS CAN CHURN OUT THOSE LUDICROUS, GAUDY BAUBLES THAT COMMAND SUCH A HIGH PRICE IN ROME<br><br>(Bronzeworkers Now Available For Hire)';
         displayStoryPort08 = 'YOU SHALL SEASON YOUR EVERY OFFERING OF MEAL WITH SALT; YOU SHALL NOT OMIT FROM YOUR MEAL OFFERING THE SALT OF YOUR COVENANT WITH GOD; WITH ALL YOUR OFFERINGS YOU MUST OFFER SALT<br><br>LEVITICUS 2:13';
+        displayStoryNavy = 'Why, this oughta show those grimy bastards, who prey upon our transport ships, and bleed us dry!<br><br>(Export Profits Increased 25%)';
 
         if (player.names.length > 1) {
             let nameToShow = player.names[1].toUpperCase();
@@ -1739,6 +1954,7 @@ function Translate(language, bark = true) {
         displayHusbandry = 'Husbandry';
         displayConjunction = 'Conjunction';
         displayTourism = 'Tourism';
+        displayTheArts = 'The Arts';
         displayWorship = 'Worship';
         displayTribute = 'Tribute';
         displayGaming = 'Gaming';
@@ -1751,9 +1967,18 @@ function Translate(language, bark = true) {
         displayFairRate = 'Fair Market Value';
         displayInventory = 'Inventory';
         displayMateriel = 'Materiel';
+        displaySaffron = 'Saffron';
+        displayCaraway = 'Caraway';
+        displayCumin = 'Cumin';
+        displayCamels = 'Camels';
+        displaySheep = 'Goats';
+        displaySwine = 'Swine';
+        displayCattle = 'Cattle';
+        displayChicken = 'Fowl';
         displayPonies = 'Ponies';
+        displayThoroughbreds = 'Thoroughbreds';
         displayUnicorns = 'Winged Unicorns';
-        displaySoldiers = 'Infantry';
+        displayInfantry = 'Infantry';
         displayCavalry = 'Cavalry';
         displayGendarmes = 'Gendarmerie';
         displayPrayers = 'Prayers';
@@ -1764,6 +1989,7 @@ function Translate(language, bark = true) {
         displayRelic = 'Artifacts';
         displayGhosts = 'Ghosts';
         displayPatients = 'Patients';
+        displayPatrons = 'Patrons';
         displayMessiahs = 'Messiahs';
         displayRats = 'Rats';
         displayRatHighScore = 'RAT HIGH SCORE';
@@ -1842,7 +2068,24 @@ function Translate(language, bark = true) {
         displayMapDetailsEconLiquidBar = 'LIQUID CAPITAL';
         displayNaturalResources = 'NATURAL<br>RESOURCES';
         displayCrops = 'CROPS';
+        displayStapleCrops = 'Staple Crops';
+        displayCashCrops = 'Cash Crops';
+        displayDairy = 'Dairy';
+        displayPoultry = 'Poultry';
+        displayRoasters = 'Roasters';
+        displayDarkMeat = 'Dark Meat';
+        displayEggs = 'Eggs';
+        displayButcher = 'Butcher';
         displayLivestock = 'LIVESTOCK';
+        displaySundries = 'Sundries';
+        displayFeathers = 'Feathers';
+        displayGlassware = 'Glassware';
+        displayFinery = 'Finery';
+        displayYarn = 'Mohair';
+        displayTextiles = 'Cashmere';
+        displayGarments = 'Garments';
+        displayPottery = 'Pottery';
+        displayRope = 'Rope';
         displayManufacturedProducts = 'MANUFACTURED<br>PRODUCTS';
         displaySacredItems = 'SACRED OBJECTS';
         displaySecondaryProducts = 'BYPRODUCTS';
@@ -1856,7 +2099,7 @@ function Translate(language, bark = true) {
         displayStoryFarmersFirstVisit = 'Thy retinue is met at the border and escorted to the capital with all the pomp and circumstance traditionally reserved for a prince’s return home from abroad. Thou art humbled and honoured in equal measure.';
         displayStoryFarmersFirstImpression = '<div id="divMeetings">Thou art given the run of a sizable complex of cottages adjacent a dense patch of farmland just outside the royal tower, the entire area safely ensconced within the castle grounds’ enormous main bailey. In the far distance is a breathtaking view of the ' + mapProvinces[3][0] + ' mountains.<br><br>Thou art told this farm produces foodstuffs served exclusively at the royal table, and to helpest thyself to anything you see.<br><br>Thine accommodations art modest but exceedingly comfortable: the soaps perfumed with exotic flowers and spices; the linens are plainly embroidered but the finest money can buy. There are more than enough cottages to accommodate thine entire entourage.<br><br>Thy host hast clearly gone to great lengths—and spared no expense—to ensure thy comfort during thy visit to his fair lands.</div>';
         let moOrigin = '“Whilst but a child he came to these lands from Persia, a nation far to the East.';
-        if (player.ethnicity == 19) { moOrigin = '“He is of your fine countrymen: a Persian.'; }
+        if (player.ethnicity == 36) { moOrigin = '“He is of your fine countrymen: a Persian.'; }
         displayStoryFarmersPrepare = '<div id="divMeetings">Thou dost summon thy royal retinue to a meeting to interrogate thine advisors regarding what they make of the situation so far. One of thine eldest diplomats speaks up first:<br><br>“' + displayTitles[player.title] + ', even amongst our most-learned scholars little is certain about this enigmatic ‘Lord of the West’: Alavi al-Habib, Mighty Padishah of ' + mapProvinces[2][0] + '.<br><br>' + moOrigin + '<br><br>“He is said to possess the wisdom of Solomon, the patience of Job, and the courage of Samson.<br><br>“He is said to be known to his people by seven names:<br><br><div id="AlaviNames">علوی فرد<br>Alavi the Individual,<br><br>علوی ولخرجی<br>Alavi the Extravagant,<br><br>علوی کوشا<br>Alavi the Diligent,<br><br>علوی آراسته<br>Alavi the Well-Bedecked,<br><br>علوی که تسلیم نمی شود<br>Alavi Who Does Not Yield,<br><br>علوی، برادر در میان برادران<br>Alavi, Brother Among Brothers,<br><br>علوی محبوب خدا<br>Alavi, Beloved of God.</div><br>“He is said to be addressed by his wives by a different set of seven names, but, *ahem*... forgive me, it would not be polite to repeat them aloud here, amongst mixed company.”<br><br>A young nobleman’s son begins to chant at a sing-song pace: <span id="AlaviSong">“Alawi Shamshir, Alawi Risheh, Alawi Keh Cpehmeh Zanan Ra Khshnod Mi <span style="white-space: nowrap;">Kand—*!*”</span></span> before his mother snatches him from the room by the ear, swatting his rear end and cursing. The rest of the women in the room blush and giggle, hiding their faces behind hand-fans.<br><br>Thy diplomat smooths his robes, and continues: “He is said to be as handsome as his hair is black, and his hair is said to be as black as the night is dark.<br><br>“He would make a formidable opponent, and an invaluable ally. I am excited to learn what this man has to say.”</div>';
         displayStoryFarmersRejection = '<div id="divToadies">Thine imperial caravan is met by a company of well-equipped and humourless guards at the territorial border. The po-faced captain bows curtly, then recites in a heavily-accented regional vernacular: “No offense is intended, effendi; but we do not allow travel across our borders nor o’er our lands.”<br><br>Thou art further informed that they mean no disrespect but that their leaders have no interest in foreign diplomacy and are not interested in any meeting.<br><br>Thick bundles of adamantine muscle tense and flex underneath the flesh of their sword arms. Their gleaming and well-oiled weapons are obviously finest Thorbardin steel. Thou art outnumbered; they are heavily armed, with the means to enforce what they claim. Thou decidest to return from whence ye came. The better part of valour *is* discretion, after all.</div>';
         displayStoryFarmersSummon = 'Thy porter requests thine attention to inform thee of this message that has just arrived amongst the most recent mail shipment from the western hinterlands:<div id="nasirMessage">Tales of thy deeds in the East have not escaped the ears of my people, nor mine own. I shall accept thee at my supper table at thine convenience, shouldst thou be amenable to an invitation such as this.<br><br>پادیشاه علوی الحبیب —<br>Padishah Alavi al-Habib,<br>Lord of ' + mapProvinces[2][0] + '</div>';
@@ -1909,11 +2152,13 @@ function Translate(language, bark = true) {
         displayInfoDedication += ScribeList(dedicationList);
         displayInfoDedication += ', and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez and Philip J Reed, VSc. I really, really wish y’all were here.'; // ۩
         displayInfoMusic = '<div id="divMusicCredits">“Moraff’s Aria”<br>Composed by Steve Moraff<br>&copy; 1989 MoraffWare<br><br>“Slider”<br>Composed by Koji Kondo<br>&copy; 1996 Nintendo Co., Ltd.<br><br>“The Temporal Corps Goes Rolling Along”<br>Composed by Arfing Dog, Glen R. Dahlgren & Michael Lindner<br>&copy; 1991 Legend Entertainment</div>';
+        displayInfoText = 'Portions of <i>Dune</i> &copy; 1965 by Frank Herbert. Segments of text from <i>Ultima IV</i> &copy; 1985 by Lord British and <i>Ultima V</i> &copy; 1988 by Lord British. Segments of text from <i>Quest for Glory</i> by Lori Ann Cole &copy; 1989 Sierra On-Line, Inc. All copyright material used without permission.<br><br>“The Dust and the Laurel” by ChatGPT, hereby released into the public domain.';
         displayInfoMadeInFlorida = '<div id="divHechoEnFlorida">Made in Florida 🍊</div>';
         displayInfoThanks = 'Special thanks to ';
         displayInfoThanks += ScribeList(gratitudeList);
         displayInfoThanks += '.<br><br>Very special thanks to my parents for a lifetime of support.<br><br>';
         displayInfoThanks += displayInfoMusic + '<br>';
+        displayInfoThanks += '<div id="divTextCredits">' + displayInfoText + '</div><br>';
         displayInfoThanks += 'Seagulls appear courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. ';
         displayInfoThanks += 'Seagull training by “Wild Bill” Stealey and the Northwest Florida Panhandle Seagull Wranglers Association of America: Mediterranean Chapter.<br><br>';
         displayInfoThanks += 'Argos, Bailey, Boxcar Willie and Spike appear courtesy of The Ken & Roberta Williams Virtual Canine Rescue Center of Oakhurst, California.<br><br>';
@@ -1952,10 +2197,10 @@ function Translate(language, bark = true) {
         displayHintsOff = 'Hints off';
         displayHintsEnd = 'End of hints';
 
-        displayStoryHikeGo = '<div id="divMeetings">You can’t remember the last time you allowed yourself even a moment of leisure time.<br><br>Deciding to make a day of it in your nearby foothills, you clear your schedule, pack a light lunch and set out at first light.<br><br>After a few hours tramping through the woods, you finally arrive at the craggy base of the formidable Al-Janūbīyah mountain range. Here at the treeline you are surrounded by shrubbery and light vegetation, but less and less seems to grow the higher you look, until the spartan, bare, wind-swept peaks stretch off into the horizon in either direction. The ruthless sun hangs high in the cloudless firmament.<br><br>Here where the forest ends a jumble of bright red, pink and orange rocks and sand and boulders begins, the pile progressively sloping higher and higher until it meets the sheer face of the mountain, which seems to touch the very sky. It’s hard going for a few minutes, scrambling over these stones—some of them covered in torturously sharp edges or agonizingly rough surfaces, catching on any bit of exposed flesh or scrap of loose fabric!—until suddenly you arrive at a lovely glade seemingly cut directly into the hills.<br><br>Wiping the sweat from your brow with a handkerchief, you decide that this seems like a wonderful place to stop and rest.</div>';
+        displayStoryHikeGo = '<div id="divMeetings">You can’t remember the last time you allowed yourself even a moment of leisure time.<br><br>Deciding to make a day of it in your nearby foothills, you clear your schedule, pack a light lunch and set out at first light.<br><br>After a few hours tramping through the woods, you finally arrive at the craggy base of the formidable ' + nameState + ' mountain range. Here at the treeline you are surrounded by shrubbery and light vegetation, but less and less seems to grow the higher you look, until the spartan, bare, wind-swept peaks stretch off into the horizon in either direction. The ruthless sun hangs high in the cloudless firmament.<br><br>Here where the forest ends a jumble of bright red, pink and orange rocks and sand and boulders begins, the pile progressively sloping higher and higher until it meets the sheer face of the mountain, which seems to touch the very sky. It’s hard going for a few minutes, scrambling over these stones—some of them covered in torturously sharp edges or agonizingly rough surfaces, catching on any bit of exposed flesh or scrap of loose fabric!—until suddenly you arrive at a lovely glade seemingly cut directly into the hills.<br><br>Wiping the sweat from your brow with a handkerchief, you decide that this seems like a wonderful place to stop and rest.</div>';
         displayStoryHikeLeave = '<div id="divMeetings">Well, you realize, it will certainly be quite late by the time you finally make it all the way back. And boy will your legs be sore tomorrow!<br><br>But today has definitely been worth it.<br><br>Gathering yourself, you take one last long look across the entire meadow.<br><br>What a beautiful place.<br><br>Setting off for home, you make a mental note of the area, picking out a few landmarks you can use later to find your way back here, vowing to return soon.</div>';
         displayStoryHikeRelax = [
-            'You take a moment to catch your breath and appreciate your surroundings.<br><br>In the center of this clearing stands a majestic, flourishing ilex, its thick, twisting limbs flush with vibrant green leaves. You make your way underneath it, seeking relief from the oppressive heat of the midday sun. Countless acorns litter this shaded area directly beneath the great boughs of the ancient oak. Everywhere else, the ground is barely visible due to a thick blanket of tiny gay flowers. A cool breeze from the forest brings with it the crisp smells of cedar and pine.<br><br>The day is warm, the sun directly overhead, and the sky is a clear, piercing blue. To your west, the high, barren peaks and steep cliffs of the Al-Janūbīyah Mountains tower above all else, and far beyond them lies the Great Sea. Back east, the deep forest through which you came to this meadow, and home.<br><br>The perimeter of the glade is ringed by rocky escarpments on all sides. The air that gathers here in this bowl-shaped valley is sweet, fragrant from the flowers, and cool from the surrounding stone. The atmosphere in this place is peaceful and calm.',
+            'You take a moment to catch your breath and appreciate your surroundings.<br><br>In the center of this clearing stands a majestic, flourishing ilex, its thick, twisting limbs flush with vibrant green leaves. You make your way underneath it, seeking relief from the oppressive heat of the midday sun. Countless acorns litter this shaded area directly beneath the great boughs of the ancient oak. Everywhere else, the ground is barely visible due to a thick blanket of tiny gay flowers. A cool breeze from the forest brings with it the crisp smells of cedar and pine.<br><br>The day is warm, the sun directly overhead, and the sky is a clear, piercing blue. To your west, the high, barren peaks and steep cliffs of the ' + nameState + ' Mountains tower above all else, and far beyond them lies the Great Sea. Back east, the deep forest through which you came to this meadow, and home.<br><br>The perimeter of the glade is ringed by rocky escarpments on all sides. The air that gathers here in this bowl-shaped valley is sweet, fragrant from the flowers, and cool from the surrounding stone. The atmosphere in this place is peaceful and calm.',
             'Flapping out the woven blanket you brought along for just such a purpose, you make yourself comfortable at the base of the tree and enjoy your lunch in her shade.',
             'The day is quite warm, so every cooling breeze is appreciated. You stretch out your limbs, roll your neck, and lean back on your elbows.<br><br>Slowly, you draw in a very deep breath. The air has the fresh, clean scent of the mountains, accompanied by numerous perfume-like fragrances. There is almost an aura of magic throughout this meadow. It seems to be benevolent and restorative.<br><br>After staring absentmindedly for a while, you happen to notice that into the trunk of the tree, in large block letters, someone has carved the name ‘ERANA’. From the deeply weathered appearance of the cuts, this must have taken place long, long ago.',
             'Free from any focused direction, your mind begins to wander:<br><br>Why are any of us here? From whence have we come? To what goal are any of us destined? Do the gods love us? What is the meaning or purpose of life? What happens when we die? Are the universe and time infinite, or did they have a start and will they have an end? What is the smallest unit of matter? Why must bad things happen to good people? Why do the gods even allow evil in the first place? Will <span class="hikeTilt">I</span> ever be good enough? Have I ever been?<br><br>The questions that demand answers in your mind feel endless! Sometimes you feel as if you are being pulled apart in all directions.',
@@ -1980,6 +2225,7 @@ function Translate(language, bark = true) {
         displayFishRecords = 'Lifetime Records';
         displayFishFishery = 'Fishery';
         displayFishFilets = 'Filets';
+        displayFishStockfish = 'Stockfish';
         displayLabelBuildWharf = 'BUILD A WHARF';
         displayLabelVisitWharf = 'VISIT THE WHARFINGER’S OFFICE';
         displayLabelWharfUnlockA = 'unlocks: after';
@@ -2009,6 +2255,7 @@ function Translate(language, bark = true) {
         displayWharfBait = 'IMPORT LEGENDARY BAIT<br>(req. marketplace)';
         displayWharfRod = 'ENCHANT THY ROD<br>(req. temple)';
         displayWharfEnvironment = 'REJUVENATE ENVIRONMENT<br>(req. university)';
+        displayWharfFishboys = 'HIRE FISHERMEN<br>(req. estate)';
         displayWharfChewTheFat = 'CHEW THE FAT';
         displayStoryWharfBuyPosca = 'PHEW! NOW *THAT* WILL PUT HAIR ON YOUR CHEST<br><br>(Recast Duration Decreased)';
         displayStoryWharfBuyPrey = 'THE BIG FISH EAT THE LITTLE ONES<br>—RADIOHEAD<br><br>(Tilapia Count Improved)';
@@ -2017,6 +2264,7 @@ function Translate(language, bark = true) {
         displayStoryWharfBuyBait = 'SUPPOSEDLY THIS STUFF CAN’T MISS<br><br>(Critical Success Chance Increased)';
         displayStoryWharfBuyRod = 'NOW THEY’LL ALL SEE YOUR ROD IS BEST<br><br>(Fish Take Longer To Escape)';
         displayStoryWharfBuyWWF = '“One of the penalties of an ecological education is that one lives alone in a world of wounds. Much of the damage inflicted on land is quite invisible to laymen. An ecologist must either harden his shell and make believe that the consequences of science are none of his business, or he must be the doctor who sees the marks of death in a community that believes itself well and does not want to be told otherwise.”<br>—Aldo Leopold<br><br>“Try and leave this world a little better than you found it.”<br>—Robert Baden-Powell<br><br>(Goliath Bream Count Improved)';
+        displayStoryWharfFishboys = '“‘These shall ye eat of all that are in the waters, in the seas, and in the rivers: whatsoever hath fins and scales, them shall ye eat.’”<br><br>Leviticus 11:9<br><br><br>And the One saith unto them: “Cast thy net starboard and ye shall find.” They cast therefore, and now they were not strong enough to draw in the net for the multitude of fish.<br><br>Gospel of John 21:6<br><br><br>To catch and eat the fish of the sea is made lawful for thee, as a provision for thee and for travellers; but to hunt on land is forbidden to thee so long as thou art in the state of iḥrām. Be mindful of thy duty to Allâh, unto Whom ye shall be gathered back.<br><br>Al-Māʾidah 96';
         displayTrophyEarned = 'Trophy earned!';
 
 
@@ -2043,105 +2291,181 @@ function Translate(language, bark = true) {
         displayGender[6] = 'OMNIGÉNERO';
         displayGender[7] = 'AGÉNERO';
 
-        displayNations[0] = 'Asiria';
-        displayNations[1] = 'Babilonia';
-        displayNations[2] = 'Canaán';
-        displayNations[3] = 'Cartago';
-        displayNations[4] = 'Corinto';
-        displayNations[5] = 'Creta';
-        displayNations[6] = 'Egipto';
-        displayNations[7] = 'Etruria';
-        displayNations[8] = 'Galacia';
-        displayNations[9] = 'Grecia';
-        displayNations[10] = 'Hattusa';
-        displayNations[11] = 'Iberia';
-        displayNations[12] = 'Israel';
-        displayNations[13] = 'Judea';
-        displayNations[14] = 'Libia';
-        displayNations[15] = 'Macedonia';
-        displayNations[16] = 'Moab';
-        displayNations[17] = 'Numidia';
-        displayNations[18] = 'Palestina';
-        displayNations[19] = 'Persia';
-        displayNations[20] = 'Fenicia';
-        displayNations[21] = 'Roma';
-        displayNations[22] = 'Sahara';
-        displayNations[23] = 'Samaria';
-        displayNations[24] = 'Escitia';
-        displayNations[25] = 'Esparta';
-        displayNations[26] = 'Siria';
-        displayNations[27] = 'Tartesia';
-        displayNations[28] = 'Tracia';
-        displayNations[29] = 'Troya';
-        displayNations[30] = 'Todas partes';
+        displayNations = [
+            'Amón',
+            'Anatolia',
+            'Antioquía',
+            'Arabia',
+            'Aram-Damasco',
+            'Asiria',
+            'Babilonia',
+            'Canaán',
+            'Cartago',
+            'Caldea',
+            'Corinto',
+            'Creta',
+            'Chipre',
+            'El Desierto',
+            'Edom',
+            'Egipto',
+            'Eranshahr',
+            'Etruria',
+            'Galacia',
+            'Gandhara',
+            'Grecia',
+            'Hattusa',
+            'Helvecia',
+            'El Hindu Kush',
+            'Iberia',
+            'Israel',
+            'Judea',
+            'Libia',
+            'Macedonia',
+            'Media',
+            'Moab',
+            'Naamah',
+            'Nod',
+            'Nubia',
+            'Numidia',
+            'Palestina',
+            'Persia',
+            'Fenicia',
+            'Roma',
+            'Saba',
+            'Sahara',
+            'Samaria',
+            'Escitia',
+            'Shuah',
+            'Esparta',
+            'Sumer',
+            'Siria',
+            'Tartesia',
+            'Temán',
+            'Tracia',
+            'Troya',
+            'Uz',
+            'Vulcano',
+            'Todas partes',
+        ];
 
-        displayEthnicities[0] = 'Un asirio';
-        displayEthnicities[1] = 'Un babilónico';
-        displayEthnicities[2] = 'Un cananeo';
-        displayEthnicities[3] = 'Un cartaginés';
-        displayEthnicities[4] = 'Un corintio';
-        displayEthnicities[5] = 'Un cretense';
-        displayEthnicities[6] = 'Un egipcio';
-        displayEthnicities[7] = 'Un etrusco';
-        displayEthnicities[8] = 'Un celta';
-        displayEthnicities[9] = 'Un griego';
-        displayEthnicities[10] = 'Un hitita';
-        displayEthnicities[11] = 'Un ibérico';
-        displayEthnicities[12] = 'Un israelita';
-        displayEthnicities[13] = 'Un judío';
-        displayEthnicities[14] = 'Un libio';
-        displayEthnicities[15] = 'Un macedonio';
-        displayEthnicities[16] = 'Un moabita';
-        displayEthnicities[17] = 'Un númida';
-        displayEthnicities[18] = 'Un filisteo';
-        displayEthnicities[19] = 'Un persa';
-        displayEthnicities[20] = 'Un fenicio';
-        displayEthnicities[21] = 'Un romano';
-        displayEthnicities[22] = 'Un sahariano';
-        displayEthnicities[23] = 'Un samaritano';
-        displayEthnicities[24] = 'Un escita';
-        displayEthnicities[25] = 'Un espartano';
-        displayEthnicities[26] = 'Un sirio';
-        displayEthnicities[27] = 'Un tartésico';
-        displayEthnicities[28] = 'Un tracio';
-        displayEthnicities[29] = 'Un troyano';
-        displayEthnicities[30] = 'Un cosmopolitán';
+        displayEthnicities = [
+            'un amonita',
+            'un anatoliano',
+            'un antioqueño',
+            'un árabe',
+            'un arameo',
+            'un asirio',
+            'un babilónico',
+            'un cananeo',
+            'un cartaginés',
+            'un caldeo',
+            'un corintio',
+            'un cretense',
+            'un chipriota',
+            'un beduino',
+            'un edomita',
+            'un egipcio',
+            'un sasánida',
+            'un etrusco',
+            'un celta',
+            'un gandhari',
+            'un griego',
+            'un hitita',
+            'un helvético',
+            'un nuristaní',
+            'un ibérico',
+            'un israelita',
+            'un judío',
+            'un libio',
+            'un macedonio',
+            'un madianita',
+            'un moabita',
+            'un naamatita',
+            'un nodita',
+            'un nubio',
+            'un númida',
+            'un filisteo',
+            'un persa',
+            'un fenicio',
+            'un romano',
+            'un sabeo',
+            'un sahariano',
+            'un samaritano',
+            'un escita',
+            'un suhita',
+            'un espartano',
+            'un sumerio',
+            'un sirio',
+            'un tartésico',
+            'un temanita',
+            'un tracio',
+            'un troyano',
+            'un uzita',
+            'un vulcaniano',
+            'un cosmopolitán',
+        ];
 
         if (player.gender == 1 || player.gender == 3) {
-            displayEthnicities[0] = 'Una asiria';
-            displayEthnicities[1] = 'Una babilónica';
-            displayEthnicities[2] = 'Una cananea';
-            displayEthnicities[3] = 'Una cartaginesa';
-            displayEthnicities[4] = 'Una corintia';
-            displayEthnicities[5] = 'Una cretense';
-            displayEthnicities[6] = 'Una egipcia';
-            displayEthnicities[7] = 'Una etrusca';
-            displayEthnicities[8] = 'Una celta';
-            displayEthnicities[9] = 'Una griega';
-            displayEthnicities[10] = 'Una hitita';
-            displayEthnicities[11] = 'Una ibérica';
-            displayEthnicities[12] = 'Una israelita';
-            displayEthnicities[13] = 'Una judía';
-            displayEthnicities[14] = 'Una libia';
-            displayEthnicities[15] = 'Una macedonio';
-            displayEthnicities[16] = 'Una moabita';
-            displayEthnicities[17] = 'Una númida';
-            displayEthnicities[18] = 'Una filistea';
-            displayEthnicities[19] = 'Una persa';
-            displayEthnicities[20] = 'Una fenicia';
-            displayEthnicities[21] = 'Una romana';
-            displayEthnicities[22] = 'Una sahariana';
-            displayEthnicities[23] = 'Una samaritana';
-            displayEthnicities[24] = 'Una escita';
-            displayEthnicities[25] = 'Una espartana';
-            displayEthnicities[26] = 'Una siria';
-            displayEthnicities[27] = 'Una tartésica';
-            displayEthnicities[28] = 'Una tracia';
-            displayEthnicities[29] = 'Una troyana';
-            displayEthnicities[30] = 'Una cosmopolitaña';
+            displayEthnicities = [
+                'una amonita',
+                'una anatoliana',
+                'una antioqueña',
+                'una árabe',
+                'una aramea',
+                'una asiria',
+                'una babilónica',
+                'una cananea',
+                'una cartaginesa',
+                'una caldeo',
+                'una corintia',
+                'una cretense',
+                'una chipriota',
+                'una beduina',
+                'una edomita',
+                'una egipcia',
+                'una sasánida',
+                'una etrusca',
+                'una celta',
+                'una gandhari',
+                'una griega',
+                'una hitita',
+                'una helvética',
+                'una nuristaní',
+                'una ibérica',
+                'una israelita',
+                'una judía',
+                'una libia',
+                'una macedonio',
+                'una madianita',
+                'una moabita',
+                'una naamatita',
+                'una nodita',
+                'una nubia',
+                'una númida',
+                'una filistea',
+                'una persa',
+                'una fenicia',
+                'una romana',
+                'una sabea',
+                'una sahariana',
+                'una samaritana',
+                'una escita',
+                'una suhita',
+                'una espartana',
+                'una sumeria',
+                'una siria',
+                'una tartésica',
+                'una temanita',
+                'una tracia',
+                'una troyana',
+                'una uzita',
+                'una vulcaniana',
+                'una cosmopolitaña',
+            ];
         }
 
         displayTitles = [
+            'Sátrapa',
             'Faraón',
             'César',
             'Césarisa',
@@ -2163,7 +2487,11 @@ function Translate(language, bark = true) {
             'Visir',
             'Supervisor',
             'Superintendente',
+            'Super-Nintendo Chalmers',
             'Director',
+            'Comisario',
+            'Decano',
+            'Guardián',
             'Sha',
             'Muad’Dib',
             'Sultán',
@@ -2282,6 +2610,7 @@ function Translate(language, bark = true) {
             'ESTADO LIBRE',
             'PROTECTORADO',
             'COLONIA',
+            'SUPERPOTENCIA',
         ];
 
         displayDefiniteArticle = 'EL';
@@ -2300,8 +2629,10 @@ function Translate(language, bark = true) {
         displayLanguage = 'Idioma:';
         displayWindowSize = 'Tamaño de la Ventana:';
         displayInStock = 'En Stock';
+        displayGoods = 'Bienes';
         displayStaff = 'Personal';
         displayFieldhands = 'Labriegos';
+        displayFarmers = 'Agricultores';
         displayLabelHireHand = 'CONTRATAR LABRIEGO';
         displayCrop = 'Cultivo';
         displayCropAbbr = 'Cult.';
@@ -2315,11 +2646,23 @@ function Translate(language, bark = true) {
         displaySold = 'Vendidos';
         displaySoldAbbr = 'Vend.';
         displayGood = 'Bien';
+        displayProduct = 'Producto';
+        displayProvision = 'Provisión';
+        displayProvisionShort = 'Prov.';
+        displayFishSteaks = 'Filetes';
+        displayQuintals = 'Quintales';
+        displayDried = '(Seco)';
+        displayLineCaught = '(Pesca-con-Caña)';
+        displayNetCaught = '(Pesca-con-Red)';
+        displayLineCaughtShort = '(Caña)';
+        displayNetCaughtShort = '(Red)';
         displayProduced = 'Producidas';
+        displayProducedShort = 'Prod.';
         displayDispensed = 'Dispensados';
         displayScore = 'Veintenas';
         displayHomers = 'Homeres';
         displayUnits = 'Unidades';
+        displayUnit = 'Unidad';
         displayStarving = '¡¡TUS HOMBRES SE<br>MUEREN DE HAMBRE!!';
         displayStarvingHorse = '¡¡ESTOS POBRES<br>ANIMALES SE<br>ESTÁN MURIENDO<br>DE HAMBRE!!';
         displayRatPlague = '¡¡PESTE RATA!!';
@@ -2339,11 +2682,17 @@ function Translate(language, bark = true) {
         displayWheat = 'Trigo';
         displayBarley = 'Cebada';
         displayFlax = 'Linaza';
+        displayMillet = 'Mijo';
+        displaySpelt = 'Espelta';
         displayOlive = 'Oliva';
         displayDate = 'Dátil';
         displayFig = 'Higo';
         displayPomegranate = 'Granada';
         displayGrape = 'Uva';
+        displayPlantains = 'Plátanos';
+        displayFavaBeans = 'Habas';
+        displayChickpeas = 'Garbanzos Púnicos';
+        displayLentils = 'Lentejas';
         displayBarterAll = 'INTERCAMBIAR TODA FRUTA';
         displayLogs = 'Troncos';
         displayBoards = 'Tablas';
@@ -2361,23 +2710,42 @@ function Translate(language, bark = true) {
         displayHorticulturalists = 'Horticultores';
         displayMasons = 'Masones';
         displayMiners = 'Mineros';
+        displayAristocrats = 'Aristócratas';
+        displayPriests = 'Clero';
         displayCindermen = 'Forjadores';
+        displayFishermen = 'Pescadores';
+        displayFilleters = 'Fileteadores';
+        displayTanners = 'Curtidores';
         displayMetallurgists = 'Broncistas'; // Metalúrgicos
         displayGemcutters = 'Tallador de Gemas';
         displayWool = 'Lana';
         displayMilk = 'Leche';
         displayYoghurt = 'Yogur';
         displayButter = 'Mantequilla';
-        displayCheese = 'Queso';
+        displayPecorino = 'Pecorino';
+        displayCheese = 'Caciocavallo';
         displayMutton = 'Cordero';
+        displayBeef = 'Res';
+        displayPork = 'Chancho';
+        displayJerky = 'Biltong';
         displayOffal = 'Vísceras';
         displayHide = 'Piel';
         displayBone = 'Hueso';
         displayBlood = 'Sangre';
         displayManure = 'Estiércol';
         displayPeasants = 'Campesinos';
+        displaySubjects = 'Súbditos';
         displayShepherds = 'Pastores';
+        displayWeavers = 'Tejedores';
+        displayPotters = 'Alfareros';
+        displayRanchers = 'Ganaderos';
+        displayFruiterers = 'Fruteros';
+        displayGrocers = 'Tenderos';
+        displayMerchants = 'Comerciantes';
+        displayEntertainers = 'Ejecutantes';
+        displayBums = 'Clase Ociosa';
         displayPolice = 'Policías';
+        displaySoldiers = 'Soldados';
         displayDiamonds = 'Adamanto';//'Diamantes';
         displayJacinth = 'Jacinto';
         displayBismuth = 'Bismuto';
@@ -2498,9 +2866,31 @@ function Translate(language, bark = true) {
         displayLabelBuild25 = 'ERIGIR TEATRO';
         displayLabelBuild26 = 'ZONIFICAR PARA EL DESARROLLO PRIVADO';
         displayLabelBuild27 = 'INAUGURAR ORÁCULO';
-        displayStoryOracleFirstVisit = 'Los acólitos vestidos con túnicas te conducen desde la gran entrada del edificio, a través de varios pasillos poco iluminados, hasta el interior del santuario. Por fin te acercas a un gran arco de piedra que conduce al sanctasanctórum más interior de este lugar sagrado. La luz de la antorcha proyecta sombras profundas sobre todo.<br><br>Al acercarte, una voz de mujer resuena desde dentro: «¡Bienvenido, Oh Buscador! Ven, entra en paz». Tus guías silenciosos se inclinan y se retiran, dejándote parado solo allí frente al portal misterioso.<br><br>Al entrar, te encuentras con una sibila muy anciana y muy amigable sentada en una pequeña habitación rodeada de pesadas cortinas negras y pesados ​​braseros de bronce que eructan vapores espesos y de olor dulce. Al fondo de la sala, un precioso libro consagrado está bañado por una luz cálida, aunque no se puede saber con seguridad de dónde proviene exactamente.<br><br>Frente a la mujer hay una mesa redonda sobre la que hay dos cuencos ceremoniales. La habitación huele tanto a incienso que te sientes mareado.<br><br>La antigua profetisa sonríe mientras dice en un susurro: «Hemos estado esperando tanto tiempo, pero finalmente has llegado». Ella asiente con la cabeza, luego arroja un polvo en los cuencos que hace que un humo azul espeso hierva desde ellos. Mirando fijamente este humo, ella hace una seña: «Siéntate ante mí ahora, y derramaré la luz de la Virtud en las sombras de tu futuro».';
+        displayStoryOracleFirstVisit = 'Los acólitos vestidos con túnicas te conducen desde la gran entrada del edificio, a través de varios pasillos poco iluminados, hasta el interior del santuario. Por fin te acercas a un gran arco de piedra que conduce al sanctasanctórum más interior de este lugar sagrado. La luz de la antorcha proyecta sombras profundas sobre todo.<br><br>Al acercarte, una voz de mujer resuena desde dentro: «¡Bienvenido, Oh Buscador! Ven, entra en paz». Tus guías silenciosos se inclinan y se retiran, dejándote parado solo allí frente al portal misterioso.<br><br>Al entrar, te encuentras con una sibila muy anciana y muy amigable sentada en una pequeña habitación rodeada de pesadas cortinas negras y pesados braseros de bronce que eructan vapores espesos y de olor dulce. Al fondo de la sala, un precioso libro consagrado está bañado por una luz cálida, aunque no se puede saber con seguridad de dónde proviene exactamente.<br><br>Frente a la mujer hay una mesa redonda sobre la que hay dos cuencos ceremoniales. La habitación huele tanto a incienso que te sientes mareado.<br><br>La antigua profetisa sonríe mientras dice en un susurro: «Hemos estado esperando tanto tiempo, pero finalmente has llegado». Ella asiente con la cabeza, luego arroja un polvo en los cuencos que hace que un humo azul espeso hierva desde ellos. Mirando fijamente este humo, ella hace una seña: «Siéntate ante mí ahora, y derramaré la luz de la Virtud en las sombras de tu futuro. ¡Pregunta, y a través de mí Apolo responderá!»';
         displayLabelLeaveOracle = '↓ SALIR DE ESTE LUGAR';
         displayLabelAskOracle = 'RECIBIR SABIDURÍA DE ELLA';
+        displayLabelChariot = 'ASISTIR UNA CARRERA DE CARROS';
+        displayStoryStartRace = '<div id="divMeetings">Has estado esperando este día durante semanas y ahora finalmente ha llegado.<br><br>Al entrar, te cruzas con el Magister Varrón y le das la mano, el funcionario regional asignado a tu feudo por Roma hace tantos años, cuando tu solicitud de <i>municipium</i> legítimo finalmente fue reconocida legalmente. Siempre lo has considerado un hombre justo y confiable, para ser romano. En cualquier caso, te hace sentir que tienes el control, es fácil hablar con él y nunca ha abusado de su hospitalidad; la proporción de derechos y tasas que recauda en nombre de Roma nunca te ha parecido una extorsión.<br><br>Después de que su grupo haya recogido sus bocadillos y bebidas, será conducido a su palco privado. La ceremonia de apertura ya está en marcha... ¡los juegos preliminares están a punto de comenzar! ¡Vaya, éste sí que será un día estupendo!</div>';
+        displayStoryRaceTitle = '<div class="stageHeading">“El Polvo y el Laurel”</div>';
+        displayStoryRaceA = 'El sol se cernía bajo en el cielo matutino, proyectando largos dedos dorados sobre la lisa piedra blanca del <i>Circo ' + nameState + '</i>, orgullo de la ciudad. El rugido de la multitud ya resonaba por las columnatas, un mar de voces agitadas por la expectación.';
+        displayStoryRaceB = 'Lucio Calventio Varrón, <i>magistrado municipal</i> de ' + nameVillage + ', se encontraba en lo alto de la escalinata que conducía al circo; el dobladillo de su <i>toga pretexta</i> carmesí oscura ondeaba con la cálida brisa de septiembre. Entrecerró los ojos para protegerse del sol; las arrugas en las comisuras de sus ojos se intensificaron al sonreír—genuinamente, por una vez.<br><br>«Esto», murmuró para sí, «me lo he ganado».';
+        displayStoryRaceC = 'Durante veintitrés años, Lucio Calventio sirvió a su ciudad. Primero como <i>edil</i>, luego como <i>duunviro</i> y finalmente como magistrado jefe—un cargo similar al de un alcalde moderno, aunque con más ceremonia y menos descanso. Mediaba en disputas de propiedad entre patricios, organizaba los envíos de grano desde la costa, encargaba reparaciones del acueducto y supervisaba la construcción de tres templos. Habló ante gobernadores, escribió al Senado en Roma y enterró a dos esposas en el proceso. Se perdió el nacimiento de su segundo nieto la primavera anterior debido a un motín por comida en el barrio sur. Sus deberes nunca terminaron del todo, solo se detuvieron el tiempo suficiente para cobrar una nueva urgencia.<br><br>Pero hoy… hoy fue diferente.';
+        displayStoryRaceD = 'Subió a su <i>pulvinar</i>, el palco honorario reservado para los altos funcionarios de la ciudad y los dignatarios visitantes. Un esclavo le trajo vino enfriado con nieve del Monte Amanus. Otro ajustó el toldo sobre su asiento para protegerlo del sol. Un tercer niño, de no más de trece años, lo abanicaba con un panel de plumas de avestruz teñidas. Por un instante, Lucio cerró los ojos y escuchó, no los gritos, sino la vida que se desarrollaba bajo ellos: el roce de los cascos en los establos, el canto rítmico de los vendedores ambulantes de garbanzos asados, pasteles de miel y <i>focaccia</i>, el crujido de las ruedas de madera rodando sobre la arena. Era el sonido de una ciudad viva, que no clamaba por juicio, decreto o disciplina—sino por deporte.<br><br>La <i>spina</i> —esa larga barrera central en el centro de la pista— estaba adornada con estatuas de Marte y Neptuno, delfines de bronce que giraban y contadores de vueltas con forma de huevos de oro. Brillaba bajo el sol, proyectando sombras cortas y parpadeantes sobre la arena. En cada extremo, los <i>metae</i>, o postes de giro, aguardaban la habilidad y la osadía de los aurigas. Los equipos ya se habían reunido: los Azules, los Verdes, los Rojos y los Blancos, con sus libreas brillantes y orgullosas.<br><br>La mirada de Lucio se fijó en un auriga en particular: el joven que conducía para la Facción Verde, con la túnica ceñida a su esbelta figura, los brazos como cuerdas anudadas y la mirada fija al frente. <i>Tan joven</i>, pensó Lucio, <i>y aun así conduce con el peso de diez victorias en su postura</i>. Recordó su juventud. Recordó la sensación de sujetar el futuro como si fueran riendas.<br><br>¡Las trompetas sonaron! Las puertas se abrieron de golpe.';
+        displayStoryRaceE = 'Dieciséis caballos, cuatro por cada carro, salieron disparados de sus corrales, levantando una nube de polvo. La multitud estalló. Lucio se puso de pie de golpe, con el vino derramándose de su copa. El estruendo de los cascos fue inmediato y abrumador, resonando en su pecho como un segundo latido.<br><br>«¡Adelante!», gritó, sobresaltando al joven asistente que lo abanicaba. «¡Mantén la línea, chico! ¡Mantén la... sí, <i>sí!</i>»<br><br>El auriga Verde —<i>ese muchacho impetuoso</i>— tomó la delantera desde el principio, tan cerca de la <i>spina</i> que Lucio temió que se estrellara con una rueda contra la piedra. Rojo lo presionó con fuerza, abriéndose paso en la <i>metae</i>, pero Verde se mantuvo firme, moviendo las riendas con perfecta precisión. Otra vuelta. Y otra.<br><br>Lucio gritaba ahora, más fuerte de lo que permitía el decoro, pero su voz se perdió en el tumulto. Por un instante, dejó de ser magistrado, juez o funcionario. Era simplemente un hombre, de pie bajo la luz del sol, vitoreando la juventud, el peligro y la gloria.<br><br>En la última vuelta, solo Verde y Rojo seguían en la contienda. Un látigo cruel atravesó el aire. La multitud se quedó sin aliento cuando el carro Rojo viró bruscamente, derrapando y casi volcando. Verde se adelantó... y cruzó la meta hacia un muro de sonido como una ola rompiente.';
+        displayStoryRaceF = 'El carro Verde había ganado.<br><br>Lucio se dejó caer en su asiento, con el pecho agitado, no por el esfuerzo, sino por una sensación que no había conocido en años: euforia.<br><br>El niño —no, el campeón— fue alzado por su equipo, coronado de laurel. Levantó el puño hacia la multitud, y la aclamación se convirtió en un cántico: <i>«¡Vic-tor Vir-i-dis! ¡Vic-tor Vir-i-dis!»</i><br><br>Lucio lo asimiló todo, y una sonrisa sincera suavizó de nuevo sus rasgos severos. No pensó en edictos, ni en escasez de grano, ni en impuestos. Hoy no.<br><br>Hoy, simplemente era Lucio.<br><br>Y por ahora mismo, eso era suficiente.';
+        displayLabelLeaveRace = 'ABANDONAR EL CIRCO';
+        displayLabelReleaseCats = 'LIBERAR GATOS EN LAS ALCANTARILLAS';
+        displayStoryReleaseTheCats = '¡Caramba!, no dejes que ningún egipcios vea lo que estás haciendo o nunca dejaremos de oírlo';
+        displayLabelTakeInAShow = 'ASISTIR LA GRAN INAUGURACIÓN DEL TEATRO<br>COMO EL INVITADO DE HONOR';
+        const currentYear = yearAtStartProlepticGregorian + year;
+        let yearDelta = yearOfPlayDebut + currentYear;
+        displayStoryStartPlay = '<div id="divMeetings">El mensajero de la compañía de teatro residente llegó con el pergamino temprano en la mañana de un día laborable, y en él estaba impreso lo siguiente:<div id="nasirMessage">❂ – ❂ – ❂ – ❂ – ❂ – ❂ – ❂<br><br>• • • ✾ • • •<br>☞¡QUE SEA SABIDO☜<br>por Uno y Todos:<br>que <b>en la Tarde</b><br>de este próximo 𐡷 <b>Saturni</b> 𐡸,<br>los venerables<br><b>Actores ' + nameState + '</b><br>representarán<br>(con gran Habilidad y Aplomo)<br>el célebre cuento<br>del Sabio Aristófanes:<div id="productionMasthead">🙤<i><b>RIQUEZA</b></i> 🙧</div>la todavía-popular<br>🙟 <b>Obra de Antigua Grecia</b> 🙜<br>que se estrenó por primera vez<br>hace casi ' + yearDelta + ' Años!<br>❦<br><br>';
+        displayStoryStartPlay += '• • • ✾ • • •<br>--protagonizando,<br>en el papel principal--<br>el Célebre + Galardonado<br>Actor del Teatro de Germania,<br>Conocido en Todo el Mundo,<div id="starBilling">🙐 <b>LEIF</b> 🙖</div>🙕 ¡el Magnánimo! 🙓<br><br>--dirigida por--<br><b>Dabíd de Britania</b><br><br>--vestuario, utilería, escenografía--<br><b>Maestro HAMZA</b><br>de la célebre<br>𐫱 Casa de Ansari 𐫱<br>❦<br><br>';
+        displayStoryStartPlay += '❁<br>(P.D. La asistencia se realiza por orden de llegada y <b>no</b> está garantizada.)<br>❦<br><br>❁<br>(P.P.D. Por supuesto, dado que <i>Riqueza</i> es una comedia, ¡<b>Solo</b> Se Permitirá la entrada a <b>Caballeros</b> en la audiencia!)<br>❦<br><br>❂ – ❂ – ❂ – ❂ – ❂ – ❂ – ❂</div><br>Fijado al pergamino con un poco de brea había un trozo de papiro mucho más pequeño, sobre el cual se había escrito, con letra deliberada: <i>El portador de este boleto tiene derecho al Estatus VIP Senior *Completo*</i>, y debajo de esto había un emblema de cera grabado con un sello sellado de aspecto muy oficial.<br><br><div class="centerMePlease">——— ⦿ ———</div><br>El clima esta noche es perfecto para un espectáculo: hay una brisa suave y refrescante y todo el potencial para un cielo nocturno claro y estrellado. Su guardia privada se abre paso entre la multitud sucia de holgazanes que se arremolinan en la entrada del teatro, pasando por enjambres de niños delincuentes que intentan robar miradas adentro y revendedores de entradas ruidosos que gritan «¡Dos aquí, tengo dos!» y puestos de comida improvisados con comerciantes excesivamente amigables que ofrecen muestras gratis de toda la carne en un palito imaginable.<br><br>Una vez dentro, estás obligado a hacer los saludos y salutaciones habituales a todos aquellos de (o muy cercanos a) tu posición, pero eventualmente, finalmente, sú y sus compañeros de la noche son conducidos al palco privado más elegante del lugar, y se ponen cómodos ya que los discursos previos al espectáculo están llegando a su fin.</div>';
+        displayStoryEndPlay = 'Vaya... eso fue <i>lascivo</i>. Habías oído que las comedias griegas no eran más que chistes sobre penes y flatulencias, y que estaban llenas de obscenidades malhablado, vulgaridad grosero y palabrotas de clase-baja, pero ¡Madre mía!, hermano... eso fue <i>obsceno</i>.<br><br>Bueno, sin duda fue un evento inolvidable. ¡El teatro es divertido!';
+        displayStoryEndPlayEarly = 'Bueno, ya es *suficiente*, muchas gracias. Cada persona tiene sus gustos, muchacho... ¡el teatro no es para mí!';
+        displayEndPlayEarlyConfirm = '¡Pero, señor de señores! ¡¿Está usted completamente seguro de que desea irse antes de que termine la obra, milord!? (¡Esos asientos eran *caros*, ya sabes! 😮‍💨)';
+        displayLabelLeavePlay = 'SALIR POR LA TIENDA DE REGALOS';
         displayLabelTemple = 'VISITAR EL TEMPLO';
         displayLabelLeaveTemple = '↓ DEJAR EL TEMPLO';
         displayLabelPray = 'ORAR';
@@ -2561,6 +2951,7 @@ function Translate(language, bark = true) {
         displayStoryPoorCruise = '¡Lo siento, señor, pero el tesoro simplemente no puede permitirse esto!';
         displayLabelImportTin = 'DISPONER LA IMPORTACIÓN DE ESTAÑO';
         displayLabelImportSalt = 'DISPONER LA IMPORTACIÓN DE SAL';
+        displayLabelNavy = 'PATROCINAR UNA FLOTA NAVAL DE CAZADORES DE PIRATAS';
         displayLabelSailWest = 'NAVEGAR HACIA EL OESTE HACIA VALINOR';
         displayLabelPegasuses = 'CRIAR UNICORNIOS';
 
@@ -2587,6 +2978,8 @@ function Translate(language, bark = true) {
         displayHeirComplete = 'TODO ESTÁ SOBRE TUS HOMBROS AHORA, COMPAÑERO';
         if (player.gender == 1 || player.gender == 3) { displayHeirComplete = 'TODO ESTÁ SOBRE TUS HOMBROS AHORA, COMPAÑERA'; }
 
+        displayStoryRudeJerk = 'Un granjero rival corpulento, montado en un burro visiblemente exhausto, deambula por el borde de tu parcela, trotando a lo largo del límite de la propiedad.<br><br>Te mira de arriba abajo y luego grita: «¡Buenas días, vecino! Bonito parche de tierra el que tienes ahí... ¡es broma! Mejor asúmelo: ¡nunca lo lograrás en <i>este</i> mundo, ti redrojo! ¡Deberías rendirte ya!» Luego le da una cruel patada en el vientre a su montura, lo que hace que la pobre criatura vacíe sus intestinos. «¡Aquí tienes estiércol fresco para ti! ¡Lo vas a necesitar! Ah, ja ja ja», se ríe a carcajadas, y lleva al burro por donde vino.<br><br>¡Dios mío, qué pendejo!';
+        displayStoryBrokenHoe = '¡AY, QUÉ LOCURA! SE TE ROMPIÓ EL MANGO DE LA AZADA; QUÉ LÁSTIMA, HACÍA SIGLOS QUE LA TENÍAS. AH, BUENO. TE PASAS EL RESTO DE LA TARDE EN EL BOSQUE BUSCANDO UN REPUESTO';
         displayStoryFirstTill = 'ANTES DE PODER SEMBRAR,<br>HAY QUE LABRAR LA TIERRA<br><br><span class="icon Weeds inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Soil inlineIcon tripleSize"></span><br><br>Con esfuerzo considerable,<br>malas hierbas dan paso al suelo';
         displayStoryFirstPlant = 'ECHA SU SEMILLA<br>SOBRE LA LABRANZA<br><br><span class="icon Soil inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilSeeded inlineIcon tripleSize"></span><br><br>Gaste un fanega de trigo (' + plantCost + '<span class="icon Wheat inlineIcon"></span>)<br>para sembrar una aranzada de tierra';
         displayStoryFirstWater = 'TODA VIDA NECESITA<br>AGUA PARA SOBREVIVIR<br><br><span class="icon SoilSeeded inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilWatered inlineIcon tripleSize"></span><br><br>«Bueno, es un trabajo sucio,<br>pero alguien tiene que hacerlo»<br>—Chuck Mosley';
@@ -2821,6 +3214,7 @@ function Translate(language, bark = true) {
         displayStoryPort06 = 'A LAS AMAS DE CASA LES ENCANTAN SUS ADORNOS Y CHUCHERÍAS';
         displayStoryPort07 = 'CON ESTA ESTAÑO, LOS ARTESANOS PUEDEN FABRICAR EN MASA ESA ÑAQUE RIDÍCULA Y LLAMATIVA QUE TIENEN UN PRECIO TAN ALTO EN ROMA<br><br>(Broncistas Ahora Disponibles Para Contratar)';
         displayStoryPort08 = 'SAZONARÁS CON SAL TODA OFRENDA DE HARINA QUE HAGAS; NO OMITIRÁS DE TU OFRENDA LA SAL DE TU PACTO CON DIOS; EN TODA TU OFRENDA OFRECERÁS SAL<br><br>LEVÍTICO 2:13';
+        displayStoryNavy = '¡Esto debería mostrarles a esos malditos bastardos, que se aprovechan de nuestros barcos de transporte, y nos desangran!<br><br>(Ganancias de Exportación<br>Aumentaron 25%)';
 
         if (player.names.length > 1) {
             let nameToShow = player.names[1].toUpperCase();
@@ -2883,6 +3277,7 @@ function Translate(language, bark = true) {
         displayHusbandry = 'Ganadería';
         displayConjunction = 'Conjunción';
         displayTourism = 'Turismo';
+        displayTheArts = 'Las Artes';
         displayWorship = 'Adoración';
         displayTribute = 'Homenaje';
         displayGaming = 'Juego de Azar';
@@ -2895,9 +3290,18 @@ function Translate(language, bark = true) {
         displayFairRate = 'Valor Justo de Mercado';
         displayInventory = 'Inventario';
         displayMateriel = 'Material';
+        displaySaffron = 'Azafrán';
+        displayCaraway = 'Alcaravea';
+        displayCumin = 'Comino';
+        displayCamels = 'Camellos';
+        displaySheep = 'Cabros';
+        displaySwine = 'Cerdos';
+        displayCattle = 'Ganado Vacuno';
+        displayChicken = 'Gallinas';
         displayPonies = 'Ponis';
+        displayThoroughbreds = 'Purasangres';
         displayUnicorns = 'Unicornios Alados';
-        displaySoldiers = 'Infantería';
+        displayInfantry = 'Infantería';
         displayCavalry = 'Caballería';
         displayGendarmes = 'Gendarmería';
         displayPrayers = 'Oraciones';
@@ -2908,6 +3312,7 @@ function Translate(language, bark = true) {
         displayRelic = 'Artefactos';
         displayGhosts = 'Fantasmas';
         displayPatients = 'Pacientes';
+        displayPatrons = 'Mecenas';
         displayMessiahs = 'Mesías';
         displayRats = 'Ratas';
         displayRatHighScore = 'PUNTUACIÓN ALTA DE LAS RATAS';
@@ -2986,7 +3391,24 @@ function Translate(language, bark = true) {
         displayMapDetailsEconLiquidBar = 'CAPITAL LÍQUIDO';
         displayNaturalResources = 'RECURSOS<br>NATURALES';
         displayCrops = 'CULTIVOS';
+        displayStapleCrops = 'Cultivos Básicos';
+        displayCashCrops = 'Cultivos Comerciales';
+        displayDairy = 'Lácteos';
+        displayPoultry = 'Aves de Corral';
+        displayRoasters = 'Asadores';
+        displayDarkMeat = 'Carne Oscura';
+        displayEggs = 'Huevos';
+        displayButcher = 'Carnicería';
         displayLivestock = 'GANADO';
+        displaySundries = 'Miscelánea';
+        displayFeathers = 'Plumas';
+        displayGlassware = 'Cristalería';
+        displayFinery = 'Galas';
+        displayYarn = 'Mohair';
+        displayTextiles = 'Cachemira';
+        displayGarments = 'Vestidos';
+        displayPottery = 'Cerámica';
+        displayRope = 'Soga';
         displayManufacturedProducts = 'PRODUCTOS<br>FABRICADOS';
         displaySacredItems = 'OBJETOS SAGRADOS';
         displaySecondaryProducts = 'SUBPRODUCTOS';
@@ -3008,7 +3430,7 @@ function Translate(language, bark = true) {
         displayStoryFarmersFirstVisit = 'Su séquito es recibido en la frontera y escoltado hasta la capital con toda la pompa y circunstancia tradicionalmente reservadas para el regreso de un príncipe a casa desde el extranjero. Te sientes humilde y ' + displayHonrado + ' en igual medida.';
         displayStoryFarmersFirstImpression = '<div id="divMeetings">Se le otorga el control sobre un complejo considerable de cabañas adyacentes a una densa franja de tierras de cultivo justo afuera de la torre real, toda el área se encuentra segura dentro del enorme patio principal de los terrenos del castillo. A lo lejos hay una vista impresionante de las montañas de ' + mapProvinces[3][0] + '.<br><br>Te dicen que esta granja produce alimentos que se sirven exclusivamente en la mesa real y que puedes servirte todo lo que veas.<br><br>Sus alojamientos son modestos pero sumamente cómodos: los jabones están perfumados con flores exóticas y especias; las sábanas están bordadas de forma sencilla, pero el mejor material que se puede comprar con dinero. Hay cabañas más que suficientes para acomodar a todo su séquito.<br><br>Es evidente que su anfitrión ha hecho todo lo posible (y no ha escatimado en gastos) para garantizar su comodidad durante su visita a sus bellas tierras.</div>';
         let moOrigin = '»Siendo apenas un niño llegó a estas tierras procedente de Persia, una nación muy lejana al Oriente.';
-        if (player.ethnicity == 19) { moOrigin = '»Es uno de tus buenos compatriotas: un persa.'; }
+        if (player.ethnicity == 36) { moOrigin = '»Es uno de tus buenos compatriotas: un persa.'; }
         displayStoryFarmersPrepare = '<div id="divMeetings">Convocas a tu séquito real a una reunión para interrogar a tus asesores sobre su opinión de la situación hasta el momento. Uno de sus mayores diplomáticos habla primero:<br><br>«' + displayTitles[player.title] + ', incluso para nuestros eruditos más eruditos, hay poco seguro acerca de este enigmático “Señor de Occidente”: Alavi al-Habeeb, Poderoso Padishá de ' + mapProvinces[2][0] + '.<br><br>' + moOrigin + '<br><br>»Se dice que posee la sabiduría de Salomón, la paciencia de Job y el coraje de Sansón.<br><br>»Se dice que su pueblo lo conoce por siete nombres:<br><br><div id="AlaviNames">علوی فرد<br>Alavi el Individual,<br><br>علوی ولخرجی<br>Alavi el Extravagante,<br><br>علوی کوشا<br>Alavi el Diligente,<br><br>علوی آراسته<br>Alavi el Bien-Engalanado,<br><br>علوی که تسلیم نمی شود<br>Alavi Que No Se Rinde,<br><br>علوی، برادر در میان برادران<br>Alavi, Hermano Entre Hermanos,<br><br>علوی محبوب خدا<br>Alavi, Amado de Dios.</div><br>»Se dice que sus esposas se dirigen a él por un conjunto diferente de siete nombres, pero, *ejem*... perdóneme, no sería de buena educación repetirlas aquí en voz alta, entre tanta gente.»<br><br>El hijo pequeño de un noble comienza a cantar a un ritmo cantarín: <span id="AlaviSong">«Alawi Shamshir, Alawi Risheh, Alawi Keh Cpehmeh Zanan Ra Khshnod Mi Kand—*!*»</span> antes de que su madre lo saque de la habitación por la oreja, dándole una palmada en el trasero y maldiciendo. El resto de mujeres en la sala se sonrojan y ríen, escondiendo sus rostros detrás de abanicos.<br><br>Su diplomático se alisa la túnica y continúa: «Se dice que es tan guapo como negro es su cabello, y se dice que su cabello es tan negro como oscura es la noche.<br><br>»Sería un oponente formidable, y un aliado invaluable. Estoy entusiasmado por saber lo que este hombre tiene que decir.»</div>';
         displayStoryFarmersRejection = '<div id="divToadies">Su caravana imperial se encuentra con una compañía de guardias bien equipados y sin sentido del humor en la frontera territorial. El capitán, de rostro serio, hace una breve reverencia y luego recita en un dialecto regional con un fuerte acento: «No es mi intención ofender a nadie, effendi; pero no permitimos viajes a través de nuestras fronteras ni sobre nuestras tierras.»<br><br>Se le informa además que no tienen intención de faltarle el respeto, pero que sus líderes no tienen ningún interés en la diplomacia extranjera y no están interesados ​​en ninguna reunión.<br><br>Gruesos haces de músculo adamantino se tensan y flexionan debajo de la piel de sus brazos que sostienen las espadas. Sus armas brillantes y bien engrasadas son obviamente del mejor acero Thorbardin. Ustedes están en inferioridad numérica; ellos están fuertemente armados y tienen los medios para hacer cumplir lo que afirman. Decides regresar al lugar de donde viniste. La mejor parte del valor *es* la discreción, después de todo.</div>';
         displayStoryFarmersSummon = 'Su portero solicita su atención para informarle de este mensaje que acaba de llegar entre el envío de correo más reciente desde el interior del oeste:<div id="nasirMessage">Los relatos de tus hazañas en Oriente no han escapado a los oídos de mi pueblo, ni a los míos propios. Te aceptaré en mi mesa cuando te resulte conveniente, si estás dispuesto a aceptar una invitación como ésta.<br><br>پادیشاه علوی الحبیب —<br>Padishá Alavi al-Habeeb,<br>Señor de ' + mapProvinces[2][0] + '</div>';
@@ -3075,12 +3497,14 @@ function Translate(language, bark = true) {
         displayInfoDedication = 'Dedicado a ';
         displayInfoDedication += ScribeList(dedicationList);
         displayInfoDedication += ', y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.'; // ۩
-        displayInfoMusic = '<div id="divMusicCredits">«Moraff’s Aria»<br>Compuesta por Steve Moraff<br>&copy; 1989 MoraffWare<br><br>«Deslizador»<br>Compuesta por Koji Kondo<br>&copy; 1996 Nintendo Co., Ltd.<br><br>«El Cuerpo Temporal Va Sigue Adelante»<br>Compuesta por Arfing Dog, Glen R. Dahlgren y Michael Lindner<br>&copy; 1991 Legend Entertainment</div>';
+        displayInfoMusic = '<div id="divMusicCredits">“Aria de Moraff”<br>Compuesta por Steve Moraff<br>&copy; 1989 MoraffWare<br><br>“Deslizador”<br>Compuesta por Koji Kondo<br>&copy; 1996 Nintendo Co., Ltd.<br><br>“El Cuerpo Temporal Va Sigue Adelante”<br>Compuesta por Arfing Dog, Glen R. Dahlgren y Michael Lindner<br>&copy; 1991 Legend Entertainment</div>';
+        displayInfoText = 'Porciones de <i>Dune</i> &copy; 1965 por Frank Herbert. Segmentos de texto de <i>Ultima IV</i> &copy; 1985 por Lord British y <i>Ultima V</i> &copy; 1988 por Lord British. Segmentos de texto de <i>Quest for Glory</i> de Lori Ann Cole &copy; 1989 Sierra On-Line, Inc. Todo material con derechos de autor utilizado sin permiso.<br><br>“El Polvo y el Laurel” de ChatGPT, por la presente liberado al dominio público.';
         displayInfoMadeInFlorida = '<div id="divHechoEnFlorida">Hecho en Florida 🍊</div>';
         displayInfoThanks = 'Agradecimientos especiales a ';
         displayInfoThanks += ScribeList(gratitudeList);
         displayInfoThanks += '.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br>';
         displayInfoThanks += displayInfoMusic + '<br>';
+        displayInfoThanks += '<div id="divTextCredits">' + displayInfoText + '</div><br>';
         displayInfoThanks += 'Gaviotas aparecen por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. ';
         displayInfoThanks += 'Entrenamiento de gaviotas por “Loco Bill” Stealey y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Mediterráneo.<br><br>';
         displayInfoThanks += 'Argos, Bailey, Boxcar Willie y Spike aparecen cortesía de El Ken y Roberta Williams Centro Virtual de Rescate Canino de Oakhurst, California.<br><br>';
@@ -3119,10 +3543,10 @@ function Translate(language, bark = true) {
         displayHintsOff = 'Pistas desactivadas';
         displayHintsEnd = 'Fin de las pistas';
 
-        displayStoryHikeGo = '<div id="divMeetings">No puedes recordar la última vez que te permitiste siquiera un momento de tiempo libre.<br><br>Decides pasar el día en tus colinas cercanas, despejas tu agenda, preparas un almuerzo ligero y sales al amanecer.<br><br>Tras unas horas de caminata por el bosque, se llega a la escarpada base de la imponente cordillera de Al-Janūbīyah. Aquí, en el límite arbóreo, uno se encuentra rodeado de arbustos y vegetación ligera, pero a medida que miras más y más alto, la vegetación parece disminuir, hasta que los espartanos picos desnudos, azotados por el viento, se extienden en el horizonte en ambas direcciones. El implacable sol se cierne en lo alto del firmamento sin nubes.<br><br>Aquí donde termina el bosque, comienza una revoltijo de rocas, arena y cantos rodados de un rojo, rosa y naranja brillante. El montón se va elevando progresivamente hasta tocar la escarpada cara de la montaña, que parece tocar el cielo mismo. Es difícil avanzar durante unos minutos, trepando por estas piedras —algunas cubiertas de bordes tortuosamente afilados o superficies ásperamente ásperas, ¡que se enganchan con cualquier trozo de carne expuesta o retazo de tela suelta!— hasta que, de repente, se llega a un hermoso claro que parece excavado directamente en las colinas.<br><br>Secándose el sudor de la frente con un pañuelo, decides que éste parece un lugar maravilloso para detenerte y descansar.</div>';
+        displayStoryHikeGo = '<div id="divMeetings">No puedes recordar la última vez que te permitiste siquiera un momento de tiempo libre.<br><br>Decides pasar el día en tus colinas cercanas, despejas tu agenda, preparas un almuerzo ligero y sales al amanecer.<br><br>Tras unas horas de caminata por el bosque, se llega a la escarpada base de la imponente cordillera de ' + nameState + '. Aquí, en el límite arbóreo, uno se encuentra rodeado de arbustos y vegetación ligera, pero a medida que miras más y más alto, la vegetación parece disminuir, hasta que los espartanos picos desnudos, azotados por el viento, se extienden en el horizonte en ambas direcciones. El implacable sol se cierne en lo alto del firmamento sin nubes.<br><br>Aquí donde termina el bosque, comienza una revoltijo de rocas, arena y cantos rodados de un rojo, rosa y naranja brillante. El montón se va elevando progresivamente hasta tocar la escarpada cara de la montaña, que parece tocar el cielo mismo. Es difícil avanzar durante unos minutos, trepando por estas piedras —algunas cubiertas de bordes tortuosamente afilados o superficies ásperamente ásperas, ¡que se enganchan con cualquier trozo de carne expuesta o retazo de tela suelta!— hasta que, de repente, se llega a un hermoso claro que parece excavado directamente en las colinas.<br><br>Secándose el sudor de la frente con un pañuelo, decides que éste parece un lugar maravilloso para detenerte y descansar.</div>';
         displayStoryHikeLeave = '<div id="divMeetings">Bueno, te das cuenta de que será ciertamente bastante tarde cuando finalmente regreses a tu casa. ¡Y vaya si te dolerán las piernas mañana!<br><br>Pero hoy definitivamente ha valido la pena.<br><br>Reuniéndose, echas una última mirada larga a todo el prado.<br><br>Qué lugar tan hermoso.<br><br>Al partir hacia casa, tomas nota mental del área, y escoges algunos puntos de referencia que puedes usar más tarde para encontrar el camino de regreso; prometes regresar pronto.</div>';
         displayStoryHikeRelax = [
-            'Tómate un momento para recuperar el aliento y apreciar tu entorno.<br><br>En el centro de este claro se alza un majestuoso y floreciente encino, con sus gruesas y retorcidas ramas cubiertas de vibrantes hojas verdes. Te abres paso bajo él, buscando alivio del calor opresivo del sol del mediodía. Innumerables bellotas cubren esta zona sombreada, justo debajo de las grandes ramas del antiguo roble. En el resto del prado, el suelo apenas es visible debido a un denso manto de diminutas y alegres flores. Una brisa fresca del bosque trae consigo los aromas frescos del cedro y el pino.<br><br>El día es cálido, el sol brilla con fuerza y el cielo es de un azul claro y penetrante. Al oeste, los altos y áridos picos y los escarpados acantilados de las montañas Al-Janūbīyah se alzan por encima de todo, y mucho más allá se extiende el Gran Mar. Al este, el denso bosque por el que llegaste a esta pradera, y tu hogar.<br><br>El perímetro del claro está rodeado por escarpes rocosos. El aire que se respira en este valle con forma de cuenco es dulce, fragante gracias a las flores, y fresco gracias a la piedra circundante. El ambiente en este lugar es tranquilo y apacible.',
+            'Tómate un momento para recuperar el aliento y apreciar tu entorno.<br><br>En el centro de este claro se alza un majestuoso y floreciente encino, con sus gruesas y retorcidas ramas cubiertas de vibrantes hojas verdes. Te abres paso bajo él, buscando alivio del calor opresivo del sol del mediodía. Innumerables bellotas cubren esta zona sombreada, justo debajo de las grandes ramas del antiguo roble. En el resto del prado, el suelo apenas es visible debido a un denso manto de diminutas y alegres flores. Una brisa fresca del bosque trae consigo los aromas frescos del cedro y el pino.<br><br>El día es cálido, el sol brilla con fuerza y el cielo es de un azul claro y penetrante. Al oeste, los altos y áridos picos y los escarpados acantilados de las montañas ' + nameState + ' se alzan por encima de todo, y mucho más allá se extiende el Gran Mar. Al este, el denso bosque por el que llegaste a esta pradera, y tu hogar.<br><br>El perímetro del claro está rodeado por escarpes rocosos. El aire que se respira en este valle con forma de cuenco es dulce, fragante gracias a las flores, y fresco gracias a la piedra circundante. El ambiente en este lugar es tranquilo y apacible.',
             'Extiendes la manta tejida que trajiste para tal propósito, te pones cómodo en la base del árbol y disfrutas tu almuerzo a su sombra.',
             'El día es bastante cálido, así que cualquier brisa refrescante se agradece. Estiras las extremidades, giras el cuello y te apoyas en los codos.<br><br>Lentamente, respiras profundamente. El aire desprende el aroma fresco y limpio de las montañas, acompañado de numerosas fragancias perfumadas. Hay casi un aura mágica en esta pradera. Parece benévola y restauradora.<br><br>Tras observar distraídamente un rato, te das cuenta de que en el tronco del árbol, en grandes letras mayúsculas, alguien ha grabado el nombre ‹ERANA›. Por el aspecto erosionado de los cortes, esto debió de ocurrir hace muchísimo, muchísimo tiempo.',
             'Libre de cualquier dirección enfocada, tu mente comienza a divagar:<br><br>¿Por qué estamos aquí? ¿De dónde venimos? ¿A qué meta estamos destinados? ¿Nos aman los dioses? ¿Cuál es el sentido o propósito de la vida? ¿Qué sucede al morir? ¿Son infinitos el universo y el tiempo, o tuvieron un principio y tendrán un fin? ¿Cuál es la unidad más pequeña de materia? ¿Por qué deben pasarle cosas malas a la gente buena? ¿Por qué los dioses aún permiten el mal? ¿<span class="hikeTilt">Yo</span> seré alguna vez lo suficientemente bueno? ¿Lo he sido alguna vez?<br><br>¡Las preguntas que exigen respuestas en tu mente parecen interminables! A veces sientes como si te estuvieran desgarrando en todas direcciones.',
@@ -3147,6 +3571,7 @@ function Translate(language, bark = true) {
         displayFishRecords = 'Récords de Por Vida';
         displayFishFishery = 'Pesquería';
         displayFishFilets = 'Filetes';
+        displayFishStockfish = 'Bacalao';
         displayLabelBuildWharf = 'CONSTRUIR UN MUELLE';
         displayLabelVisitWharf = 'VISITE LA OFICINA DEL ESTIBADOR PRINCIPAL';
         displayLabelWharfUnlockA = 'desbloquea: después';
@@ -3176,6 +3601,7 @@ function Translate(language, bark = true) {
         displayWharfBait = 'IMPORTAR CEBO LEGENDARIO<br>(req. mercado)';
         displayWharfRod = 'ENCANTAR TU CAÑA<br>(req. templo)';
         displayWharfEnvironment = 'REJUVENECER EL MEDIO AMBIENTE<br>(req. universidad)';
+        displayWharfFishboys = 'CONTRATAR PESCADORES<br>(req. casa de la finca)';
         displayWharfChewTheFat = 'MASTICAR LA GRASA';
         displayStoryWharfBuyPosca = '¡UFF! *ESO* SÍ QUE TE VA A SALIR PELO EN EL PECHO<br><br>(Duración De Re-Lanzado Es Reducida)';
         displayStoryWharfBuyPrey = 'LOS PECES GRANDES SE COMEN A LOS PEQUEÑOS<br>—RADIOHEAD<br><br>(Recuento De Tilapias Mejoró)';
@@ -3184,6 +3610,7 @@ function Translate(language, bark = true) {
         displayStoryWharfBuyBait = 'SUPUESTAMENTE ESTO NO PUEDE FALTAR<br><br>(Mayor Probabilidad De Éxito Crítico)';
         displayStoryWharfBuyRod = 'AHORA TODOS VERÁN QUE TU CAÑA ES LA MEJOR<br><br>(Peces Tardan Más En Escapar)';
         displayStoryWharfBuyWWF = '«Una de las desventajas de la educación ecológica es que uno vive solo en un mundo de heridas. Gran parte del daño infligido a la tierra es prácticamente invisible para el público general. Un ecologista debe endurecer su caparazón y hacer creer que las consecuencias de la ciencia no son asunto suyo, o bien debe ser el médico que ve las marcas de la muerte en una comunidad que cree estar bien y no quiere que le digan lo contrario.»<br>—Aldo Leopold<br><br>«Intentar y dejar este mundo un poco mejor de como lo encontraste.»<br>—Robert Baden-Powell<br><br>(Recuento De Besugos Goliat Mejoró)';
+        displayStoryWharfFishboys = '«‹Estos comeréis de todos los animales que están en las aguas, en el mar y en los ríos: todos los que tienen aletas y escamas, éstos comeréis›».<br><br>Levítico 11:9<br><br><br>Y Él les dijo: «Echad la red a estribor y hallaréis». Así que la echaron, pero ya no tenían fuerzas suficientes para sacar la red por la multitud de peces.<br><br>Evangelio de Juan 21:6<br><br><br>Se te permite pescar y comer peces del mar, como sustento para ti y para los viajeros; pero te está prohibido cazar en tierra mientras estés en estado de iḥrām. Recuerda tu deber hacia Alá, ante Quien seréis reunidos.<br><br>Al-Māʾida 96';
         displayTrophyEarned = '¡Trofeo ganado!';
 
 
@@ -3197,7 +3624,7 @@ function Translate(language, bark = true) {
     divPsxSubtitle.innerHTML = displayTrophyEarned;
 
     const divider = '<div class="divider">♦♦♦ ♦ ♦♦♦</div>';
-    displayInfoFinal = '<div id="divInfoTitle">' + displayGameTitle + '<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) MMXXV</span></div>';
+    displayInfoFinal = '<div id="divInfoTitle">' + displayGameTitle + '<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) MMXXV Davis Laboratory, SMC-Pvt. Ltd.</span></div>';
     displayInfoFinal += displayInfoMadeFor + '<br><br>' + displayInfoMadeWith + '<br><br>' + displayInfoDedication + '<br><br>' + displayInfoThanks + '<br><br>' + displayInfoMadeInFlorida;
     displayInfoFinal += divider + displayInfoScripture;
     displayLegalFinal = displayBoilerplate + divider + displayLegalQuote;
@@ -3226,6 +3653,7 @@ const appsList = [
     ],
     'Google Chrome',
     'Inkscape',
+    'LucasRipper',
     'Mesen',
     'SCI Companion',
     'ScummVM',
@@ -3234,6 +3662,7 @@ const appsList = [
 ];
 
 const dedicationList = [
+    'Timothy Cain', // en.wikipedia.org/wiki/Fallout_(video_game)
     'Éric Chahi', // en.wikipedia.org/wiki/Another_World_(video_game)
     'Sean Clark', // en.wikipedia.org/wiki/The_Dig_(video_game)
     ['Lori', 'Corey Cole',], // en.wikipedia.org/wiki/Quest_for_Glory
@@ -3289,8 +3718,10 @@ const gratitudeList = [
     'Dr. Bart D. Ehrman', // bartehrman.com
     'Derek Evans',
     'Howard Feldman', // mocagh.org
+    'Tobias “Tobybear” Fleischer', // archive.org/details/lucas-ripper
     'Eric Fredricksen', // grumdrig.com/u6map
     'Kenneth Garagnon',
+    'Obi Wan Ginobili', // spriters-resource.com/ms_dos/gabrielknightsinsofthefathers/asset/56478/
     'Sean Glavin',
     'GOG', // gog.com
     'Hayley Hackett',
@@ -3347,6 +3778,7 @@ const gratitudeList = [
     'Stack Overflow', // stackoverflow.com
     'Grant Sutherland',
     'Benjamin A. Taylor',
+    'George Theodoridis', // bacchicstage.wpcomstaging.com/aristophanes/wealth-ploutos
     'The Ultima Codex', // ultimacodex.com
     [
         '*',

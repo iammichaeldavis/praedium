@@ -47,6 +47,7 @@ function PlaceBet(side) {
     // 0 - 🟦 Blue, 1 - 🟥 Red
     if (asCount >= arenaBet) {
         asCount -= arenaBet;
+        asSpent += arenaBet;
         arenaTotalBet += arenaBet;
         const payout = arenaBet + ((arenaBet / 10) * 9);
 
@@ -227,6 +228,9 @@ function UpdateArenaDisplay() {
         arenaStandings += '</table>';
         divArenaTables.innerHTML = arenaStandings;
         divArenaTables.style.display = 'block';
+    }
+    else {
+        divArenaTables.style.display = '';
     }
 }
 

@@ -244,6 +244,10 @@ function ContinuePreviousGame() {
         player.hasTakenCruise = loadedReport.hero.hasTakenCruise;
         player.hasLoggingUpgrade = loadedReport.hero.hasLoggingUpgrade;
         player.hasSawmillUpgrade = loadedReport.hero.hasSawmillUpgrade;
+        player.hasGoodTaste = loadedReport.hero.hasGoodTaste;
+        player.hasSeenRace = loadedReport.hero.hasSeenRace;
+        player.hasNavy = loadedReport.hero.hasNavy;
+        player.hasReleasedCats = loadedReport.hero.hasReleasedCats;
         /////////////////////////////////////////////////////////////////////////////////////////
         gameTurn = loadedReport.calendar[0];
         year = loadedReport.calendar[1];
@@ -262,11 +266,12 @@ function ContinuePreviousGame() {
         residenceStage = loadedReport.stages[2];
         villageStage = loadedReport.stages[3];
         hintLevel = loadedReport.stages[4];
-        relaxLevel = loadedReport.stages[5];
+        relaxStage = loadedReport.stages[5];
         meditateCount = loadedReport.stages[6];
         prayersCount = loadedReport.stages[7];
         templeStage = loadedReport.stages[8];
         revealedWisdom = loadedReport.stages[9];
+        stageStage = loadedReport.stages[10];
         /////////////////////////////////////////////////////////////////////////////////////////
         mapProvinces[1][2] = loadedReport.relations[0];
         mapProvinces[2][2] = loadedReport.relations[1];
@@ -274,6 +279,7 @@ function ContinuePreviousGame() {
         /////////////////////////////////////////////////////////////////////////////////////////
         CloneArray(loadedReport.counts.farmInventory, bushelCount);
         CloneArray(loadedReport.counts.farmMax, bushelMax);
+        tillCount = loadedReport.counts.farmTilled;
         CloneArray(loadedReport.counts.farmSeeded, seededCount);
         CloneArray(loadedReport.counts.farmFarmed, farmedCount);
         CloneArray(loadedReport.counts.farmHarvested, harvestedCount);
@@ -367,6 +373,8 @@ function ContinuePreviousGame() {
         pilgrimsCount = loadedReport.counts.villageDemographics[2];
         pilgrimsMax = loadedReport.counts.villageDemographics[3];
         pilgrimsLifetimeCount = loadedReport.counts.villageDemographics[4];
+        totalPatientsSeen = loadedReport.counts.villageDemographics[5];
+        totalPatronsHosted = loadedReport.counts.villageDemographics[6];
         asCount = loadedReport.counts.villageFiat[0];
         asSpent = loadedReport.counts.villageFiat[1];
         rentPrice = loadedReport.counts.villageFiat[2];
@@ -386,12 +394,14 @@ function ContinuePreviousGame() {
         tourismLifetimeProfit = loadedReport.counts.villageEarn[3];
         pilgrimLifetimeIncome = loadedReport.counts.villageEarn[4];
         marketLifetimeRevenue = loadedReport.counts.villageEarn[5];
+        lesArtsLifetimeCollected = loadedReport.counts.villageEarn[6];
         commercialLifetimeSpend = loadedReport.counts.villageSpend[0];
         commoditiesLifetimeSpend = loadedReport.counts.villageSpend[1];
         militaryLifetimeCost = loadedReport.counts.villageSpend[2];
         medicalLifetimeCost = loadedReport.counts.villageSpend[3];
         tributeLifetimePaid = loadedReport.counts.villageSpend[4];
         statecraftLifetimeSpend = loadedReport.counts.villageSpend[5];
+        lifetimeSpentOnCats = loadedReport.counts.villageSpend[6];
         horsesCount = loadedReport.counts.villageInventory[0];
         beadsCount = loadedReport.counts.villageInventory[1];
         trophiesCount = loadedReport.counts.villageInventory[2];
@@ -401,6 +411,7 @@ function ContinuePreviousGame() {
         patientsCount = loadedReport.counts.villageInventory[6];
         relicCount = loadedReport.counts.villageInventory[7];
         messiahCount = loadedReport.counts.villageInventory[8];
+        patronsCount = loadedReport.counts.villageInventory[9];
         horsesSpawn = loadedReport.counts.villageState[0];
         horsesStarving = loadedReport.counts.villageState[1];
         beadsSpawn = loadedReport.counts.villageState[2];
@@ -419,6 +430,7 @@ function ContinuePreviousGame() {
         horsesBought = loadedReport.counts.villageDetritus[7];
         horsesSold = loadedReport.counts.villageDetritus[8];
         messiahSpawnCount = loadedReport.counts.villageDetritus[9];
+        clowdersOfCatsReleased = loadedReport.counts.villageDetritus[10];
 
         CloneArray(loadedReport.counts.portDuration, shipmentDuration);
         CloneArray(loadedReport.counts.portYields[0], wheatValuePerUnit);
@@ -454,6 +466,10 @@ function ContinuePreviousGame() {
         filetsSpent = loadedReport.counts.miniGameFish[16];
         fishState = loadedReport.counts.miniGameFish[17];
         totalCatches = loadedReport.counts.miniGameFish[18];
+        CloneArray(loadedReport.counts.miniGameFish[19], lifetimeFishermanCaught);
+        lifetimeFishermenEarnings = loadedReport.counts.miniGameFish[20];
+        stockfishCount = loadedReport.counts.miniGameFish[21];
+        lifetimeStockfishProduced = loadedReport.counts.miniGameFish[22];
 
         arenaTotalBet = loadedReport.counts.miniGameArena[0];
         arenaTotalWin = loadedReport.counts.miniGameArena[1];
@@ -651,6 +667,7 @@ function CollateGameStateReport(loud = false) {
     const integerCounts = {
         farmInventory: bushelCount,
         farmMax: bushelMax,
+        farmTilled: tillCount,
         farmSeeded: seededCount,
         farmFarmed: farmedCount,
         farmHarvested: harvestedCount,
@@ -693,14 +710,14 @@ function CollateGameStateReport(loud = false) {
         residenceOutputShipped: residenceShippedCount,
         residenceSaltShipped: saltShipped,
 
-        villageDemographics: [residentsCount, residentsMax, pilgrimsCount, pilgrimsMax, pilgrimsLifetimeCount,],
+        villageDemographics: [residentsCount, residentsMax, pilgrimsCount, pilgrimsMax, pilgrimsLifetimeCount, totalPatientsSeen, totalPatronsHosted,],
         villageFiat: [asCount, asSpent, rentPrice, taxesValue, interestRate, tourismValue, actualBushelPrice, currentBushelPrice, actualBarleyAdjustment, currentBarleyAdjustment, valueInWheat1Log, valueInWheat1Board, valueInWheat1Stone,],
-        villageEarn: [rentLifetimeCollected, taxesLifetimeCollected, interestLifetimeCollected, tourismLifetimeProfit, pilgrimLifetimeIncome, marketLifetimeRevenue,],
-        villageSpend: [commercialLifetimeSpend, commoditiesLifetimeSpend, militaryLifetimeCost, medicalLifetimeCost, tributeLifetimePaid, statecraftLifetimeSpend,],
-        villageInventory: [horsesCount, beadsCount, trophiesCount, scrollsCount, ratsCount, ghostsCount, patientsCount, relicCount, messiahCount,],
+        villageEarn: [rentLifetimeCollected, taxesLifetimeCollected, interestLifetimeCollected, tourismLifetimeProfit, pilgrimLifetimeIncome, marketLifetimeRevenue, lesArtsLifetimeCollected,],
+        villageSpend: [commercialLifetimeSpend, commoditiesLifetimeSpend, militaryLifetimeCost, medicalLifetimeCost, tributeLifetimePaid, statecraftLifetimeSpend, lifetimeSpentOnCats,],
+        villageInventory: [horsesCount, beadsCount, trophiesCount, scrollsCount, ratsCount, ghostsCount, patientsCount, relicCount, messiahCount, patronsCount,],
         villageState: [horsesSpawn, horsesStarving, beadsSpawn, trophiesSpawn, scrollsSpawn, ratsSpawn,],
         villageCounters: [horseClock, tributeTimer,],
-        villageDetritus: [horsesIncAmount, horsesEaten, trophyChance, ratsHighScore, patientCost, pilgrimPrayerValue, relicSpawnCount, horsesBought, horsesSold, messiahSpawnCount,],
+        villageDetritus: [horsesIncAmount, horsesEaten, trophyChance, ratsHighScore, patientCost, pilgrimPrayerValue, relicSpawnCount, horsesBought, horsesSold, messiahSpawnCount, clowdersOfCatsReleased,],
 
         portDuration: shipmentDuration,
         portYields: [wheatValuePerUnit, valueFactor, importCost, importAmount,],
@@ -733,6 +750,10 @@ function CollateGameStateReport(loud = false) {
             filetsSpent,
             fishState,
             totalCatches,
+            lifetimeFishermanCaught,
+            lifetimeFishermenEarnings,
+            stockfishCount,
+            lifetimeStockfishProduced,
         ],
 
         miniGameArena: [
@@ -761,7 +782,7 @@ function CollateGameStateReport(loud = false) {
         counts: integerCounts,
         farmland: farmlandArrays,
         hero: player,
-        stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel, relaxLevel, meditateCount, prayersCount, templeStage, revealedWisdom,],
+        stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel, relaxStage, meditateCount, prayersCount, templeStage, revealedWisdom, stageStage,],
         relations: [mapProvinces[1][2], mapProvinces[2][2], mapProvinces[3][2],],
         timestamps: [timeAtSave, timeAtStart, timeAtWin,],
         system: [resolutionScale,],

@@ -92,6 +92,14 @@ function GameTurn() {
 
     if (ratsSpawn) { BreedRats(); }
 
+    if (player.hasGoodTaste) {
+        patronsCount = FindWholeRandom(patronsMin, patronsMax);
+        totalPatronsHosted += patronsCount;
+        const thisTurnRevenue = patronsCount * patronCost;
+        asCount += thisTurnRevenue;
+        lesArtsLifetimeCollected += thisTurnRevenue;
+    }
+
     if (player.hasCityWalls) {
         if (tributeTimer < tributeTimerLimit) {
             tributeTimer++;
@@ -179,6 +187,34 @@ function GameTurn() {
         player.hasBeenReceived = true;
         gameEventTrigger = true;
         gameEventContainer = displayStoryFarmersFirstImpression;
+    }
+
+    if (fishState.hasFishermen) {
+        let outputThisWeek = 0;
+        if (!fishState.hasNets) {
+            lifetimeFishermanCaught[0] += fishermenBounty;
+            outputThisWeek = fishermenBounty * filetsPerFish[0];
+        }
+        else {
+            lifetimeFishermanCaught[1] += fishermenBounty;
+            outputThisWeek = fishermenBounty * filetsPerFish[1];
+        }
+        filetCount += outputThisWeek;
+        lifetimeFishermenEarnings += outputThisWeek;
+        filetCount -= fishermenHired * fishermenPay;
+        filetsSpent[7] += fishermenHired * fishermenPay;
+        filetCount -= fishcuttersHired * fishcuttersPay;
+        filetsSpent[8] += fishcuttersHired * fishcuttersPay;
+        if (lifetimeStockfishProduced > 0) {
+            filetCount -= tannersHired * tannersPay;
+            filetsSpent[9] += tannersHired * tannersPay;
+        }
+        if (filetCount > freshFiletCapacity) {
+            filetsAgedOut = filetCount - freshFiletCapacity;
+            filetCount -= filetsAgedOut;
+            stockfishCount += filetsAgedOut;
+            lifetimeStockfishProduced += filetsAgedOut;
+        }
     }
 
     if (year == 12 && week == 12) {
@@ -468,6 +504,7 @@ function VassalProduction(whom) {
         residenceInStockCount[13] -= minersCost[1];
         residenceSpentCount[13] += minersCost[1];
         asCount -= minersCost[2];
+        asSpent += minersCost[2];
         militaryLifetimeCost += minersCost[2];
 
         minersInventory[0] += minersProduction[0];
@@ -500,6 +537,13 @@ function VassalProduction(whom) {
 
 
 function ForgeBronze() {
+    let ateFish = false;
+    if (filetCount >= metallurgistsHired) {
+        filetCount -= metallurgistsHired;
+        filetsSpent[6] += metallurgistsHired;
+        // ⚠️ should they process 2x also?
+        ateFish = true;
+    }
     bronzeworkCountdownTimer--;
     if (bronzeworkCountdownTimer == 0) {
         bronzeworkCountdownTimer = bronzeworkCountdownTimerMax;
@@ -508,7 +552,8 @@ function ForgeBronze() {
             mountainSpentCount[2] += bronzeCopperNeed;
             ingotsTinCount -= bronzeTinNeed;
             mountainSpentCount[3] += bronzeTinNeed;
-            const bounty = bronzeCopperNeed + bronzeTinNeed;
+            let bounty = bronzeCopperNeed + bronzeTinNeed;
+            if (ateFish) { bounty = bounty * 2; }
             ingotsBronzeCount += bounty;
             mountainProducedCount[4] += bounty;
         }
@@ -520,6 +565,11 @@ function ForgeBronze() {
 
 function CutCrystals() {
     let bounty = crystalHarvest;
+    if (filetCount >= gemcuttersHired) {
+        filetCount -= gemcuttersHired;
+        filetsSpent[5] += gemcuttersHired;
+        bounty = bounty * 2;
+    }
     mountainProducedCount[5] += bounty;
     const workshopShare = Math.floor(crystalHarvest * residenceIngredientWorkshopPortion[8]);
     residenceIngredientInStockCount[8] += workshopShare;
@@ -533,7 +583,8 @@ function CutCrystals() {
 
 
 function TreatPatients() {
-    patientsCount = FindWholeRandom(0, 10);
+    patientsCount = FindWholeRandom(patientsMin, patientsMax);
+    totalPatientsSeen += patientsCount;
     const thisTurnCost = patientsCount * patientCost;
     asCount -= thisTurnCost;
     asSpent += thisTurnCost;
@@ -571,6 +622,7 @@ function Shipping() {
             residenceShippedCount[1] += residenceInStockCount[1];
             residenceInStockCount[1] = 0;
             if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+            if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[0] += bounty;
         }
@@ -584,6 +636,7 @@ function Shipping() {
             residenceShippedCount[2] += residenceInStockCount[2];
             residenceInStockCount[2] = 0;
             if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+            if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[1] += bounty;
         }
@@ -597,6 +650,7 @@ function Shipping() {
             residenceShippedCount[3] += residenceInStockCount[3];
             residenceInStockCount[3] = 0;
             if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+            if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[2] += bounty;
         }
@@ -610,6 +664,7 @@ function Shipping() {
             residenceShippedCount[4] += residenceInStockCount[4];
             residenceInStockCount[4] = 0;
             if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+            if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[3] += bounty;
         }
@@ -623,6 +678,7 @@ function Shipping() {
             residenceShippedCount[5] += residenceInStockCount[5];
             residenceInStockCount[5] = 0;
             if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+            if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[4] += bounty;
         }
@@ -636,6 +692,7 @@ function Shipping() {
             residenceShippedCount[6] += residenceInStockCount[6];
             residenceInStockCount[6] = 0;
             if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+            if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[5] += bounty;
         }
@@ -648,6 +705,7 @@ function Shipping() {
             residenceShippedCount[7] += residenceInStockCount[7];
             residenceInStockCount[7] = 0;
             if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+            if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[6] += bounty;
         }
@@ -761,6 +819,7 @@ function SawLogs() {
     if (filetCount >= sawyersHired) {
         filetCount -= sawyersHired;
         filetsSpent[1] += sawyersHired;
+        // ⚠️ should they process 2x also?
         producedAmount = producedAmount * 2;
     }
     if (player.hasSawmillUpgrade) {
@@ -790,7 +849,12 @@ function QuarryStone() {
 
 
 function MineCopper() {
-    const producedAmount = minersHired * FindWholeRandom(oreCopperMin, oreCopperMax);
+    let producedAmount = minersHired * FindWholeRandom(oreCopperMin, oreCopperMax);
+    if (filetCount >= minersHired) {
+        filetCount -= minersHired;
+        filetsSpent[3] += minersHired;
+        producedAmount = producedAmount * 2;
+    }
     oreCopperCount += producedAmount;
     mountainProducedCount[1] += producedAmount;
     PayWorkerGroup(minersHired, 4);
@@ -799,8 +863,14 @@ function MineCopper() {
 
 
 function SmeltCopper() {
-    const producedAmount = smeltersHired * ingotsCopperYieldPerTurn;
+    let producedAmount = smeltersHired * ingotsCopperYieldPerTurn;
     const processedAmount = producedAmount * ingotsOreCostPerIngot;
+    if (filetCount >= smeltersHired) {
+        filetCount -= smeltersHired;
+        filetsSpent[4] += smeltersHired;
+        // ⚠️ should they process 2x also?
+        producedAmount = producedAmount * 2;
+    }
     ingotsCopperCount += producedAmount;
     mountainProducedCount[2] += producedAmount;
     oreCopperCount -= processedAmount;

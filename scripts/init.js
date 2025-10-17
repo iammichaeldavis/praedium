@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.21.02-B';
+const version = '1.22.00-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -214,6 +214,10 @@ const player = {
     hasTakenCruise: false,
     hasLoggingUpgrade: false,
     hasSawmillUpgrade: false,
+    hasGoodTaste: false,
+    hasSeenRace: false,
+    hasNavy: false,
+    hasReleasedCats: false,
 };
 
 const tilemap = new Image();
@@ -258,6 +262,8 @@ const villageImageAnimationLayerO = new Image();
 villageImageAnimationLayerO.src = 'bitmaps/blank.png';
 const villageTheaterOverlay = new Image();
 villageTheaterOverlay.src = 'bitmaps/theater.png';
+const villageKaijuOverlay = new Image();
+villageKaijuOverlay.src = 'bitmaps/omf2097.png';
 const portImage = new Image();
 portImage.src = 'bitmaps/docks.png';
 const portGullImage = new Image();
@@ -266,6 +272,8 @@ const portFrodoImage = new Image();
 portFrodoImage.src = 'bitmaps/port_frodo1.png';
 const mansionImage = new Image();
 mansionImage.src = 'bitmaps/mansion.png';
+const simCityImage = new Image();
+simCityImage.src = 'bitmaps/simCity.png';
 const beesImage = new Image();
 beesImage.src = 'bitmaps/mansion_abejas.png';
 const cottageAImage = new Image();
@@ -276,8 +284,12 @@ const smeltImage = new Image();
 smeltImage.src = 'bitmaps/spritesheetSmelt.png';
 const crystalMineImage = new Image();
 crystalMineImage.src = 'bitmaps/crystalmine.png';
+const factoryImage = new Image();
+factoryImage.src = 'bitmaps/mountainFactory.png';
 const mapImage = new Image();
 mapImage.src = 'bitmaps/map.png';
+const mapImageWin = new Image();
+mapImageWin.src = 'bitmaps/mapPostwin.png';
 const mapPlayerImage = new Image();
 mapPlayerImage.src = 'bitmaps/map_player.png';
 const mapShepherdsImage = new Image();
@@ -296,12 +308,20 @@ const neighborsSheepHeadImage = new Image();
 neighborsSheepHeadImage.src = 'bitmaps/cell_sheepHead_0.png';
 const neighborsSheepTailImage = new Image();
 neighborsSheepTailImage.src = 'bitmaps/cell_sheepTail_0.png';
+const neighborsSheepDragonImage = new Image();
+neighborsSheepDragonImage.src = 'bitmaps/dragon/sheepdragon_0.png';
+const neighborsLemmingImage = new Image();
+neighborsLemmingImage.src = 'bitmaps/lemming.png';
 const neighborsMinersImage = new Image();
 neighborsMinersImage.src = 'bitmaps/neighborsMiners.png';
 const neighborsFarmersImage = new Image();
 neighborsFarmersImage.src = 'bitmaps/neighborsFarmers.png';
 const neighborsDucksImage = new Image();
 neighborsDucksImage.src = 'bitmaps/cell_ducks_0.png';
+const neighborsGullImage = new Image();
+neighborsGullImage.src = 'bitmaps/gull/MIgull_0.png';
+const neighborsJillImage = new Image();
+neighborsJillImage.src = 'bitmaps/jotj.png';
 const neighborsDagsImageA = new Image();
 neighborsDagsImageA.src = 'bitmaps/cell_dagsWilly_0.png';
 const neighborsDagsImageB = new Image();
@@ -320,12 +340,28 @@ const neighborsHerpyImage = new Image();
 neighborsHerpyImage.src = 'bitmaps/cell_noodle_0.png';
 const neighborsBlinksImage = new Image();
 neighborsBlinksImage.src = 'bitmaps/cell_blinks_3.png';
+const neighborsJafarImage = new Image();
+neighborsJafarImage.src = 'bitmaps/djinni/jafar_faceToCamera.png';
+const neighborsDinkImage = new Image();
+neighborsDinkImage.src = 'bitmaps/djinni/dink_0.png';
 const hikeImage = new Image();
 hikeImage.src = 'bitmaps/eranasPeace.png';
-const templeImage = new Image();
+let templeImage = new Image();
 templeImage.src = 'bitmaps/temple.png';
+const templeImagePlus = new Image();
+templeImagePlus.src = 'bitmaps/templePlus.png';
+const templeImagePlusPlus = new Image();
+templeImagePlusPlus.src = 'bitmaps/templePlusPlus.png';
+const templeImagePlusPlusPlus = new Image();
+templeImagePlusPlusPlus.src = 'bitmaps/templePlusPlusPlus.png';
+const templeImagePlusPlusPlusPlus = new Image();
+templeImagePlusPlusPlusPlus.src = 'bitmaps/templePlusPlusPlusPlus.png';
+const templeImageGuests = new Image();
+templeImageGuests.src = 'bitmaps/templeGuests.png';
 const oracleImage = new Image();
 oracleImage.src = 'bitmaps/U5_Romani.png';
+const yahtzeeImage = new Image();
+yahtzeeImage.src = 'bitmaps/robBlanc.png';
 
 const stylesheetActive = document.getElementById('stylesheetActive');
 const body = document.getElementsByTagName('body')[0];
@@ -344,6 +380,7 @@ const divForewordTitle = document.getElementById('divForewordTitle');
 const divForewordSubtitle = document.getElementById('divForewordSubtitle');
 const buttonForewordEnglish = document.getElementById('buttonForewordEnglish');
 const buttonForewordSpanish = document.getElementById('buttonForewordSpanish');
+const divForewordBoilerplate = document.getElementById('divForewordBoilerplate');
 const divForewordCorpus = document.getElementById('divForewordCorpus');
 const buttonForewordDismiss = document.getElementById('buttonForewordDismiss');
 
@@ -510,6 +547,9 @@ const canvasVillage = document.getElementById('canvasVillage');
 const canvasVillageContext = canvasVillage.getContext('2d');
 const divVillageLasTablas = document.getElementById('divVillageLasTablas');
 const buttonBuild = document.getElementById('buttonBuild');
+const buttonReleaseCats = document.getElementById('buttonReleaseCats');
+const buttonChariot = document.getElementById('buttonChariot');
+const buttonTakeInAShow = document.getElementById('buttonTakeInAShow');
 const buttonVisitTemple = document.getElementById('buttonVisitTemple');
 const buttonVisitArena = document.getElementById('buttonVisitArena');
 const buttonVisitOracle = document.getElementById('buttonVisitOracle');
@@ -627,6 +667,7 @@ const buttonRecords = document.getElementById('buttonRecords');
 
 const buttonChooseHeir = document.getElementById('buttonChooseHeir');
 const imgNirvana = document.getElementById('imgNirvana');
+const buttonNavy = document.getElementById('buttonNavy');
 const buttonSailWest = document.getElementById('buttonSailWest');
 const buttonPlayGod = document.getElementById('buttonPlayGod');
 
@@ -652,6 +693,7 @@ const buttonFish = document.getElementById('buttonFish');
 const buttonInitFish = document.getElementById('buttonInitFish');
 const tableFishSession = document.getElementById('tableFishSession');
 const tableFishRecords = document.getElementById('tableFishRecords');
+const tableFishStaff = document.getElementById('tableFishStaff');
 const tableFishInventory = document.getElementById('tableFishInventory');
 const tableFishReport = document.getElementById('tableFishReport');
 const buttonFishWharf = document.getElementById('buttonFishWharf');
@@ -666,6 +708,7 @@ const buttonWharfKnife = document.getElementById('buttonWharfKnife');
 const buttonWharfBait = document.getElementById('buttonWharfBait');
 const buttonWharfRod = document.getElementById('buttonWharfRod');
 const buttonWharfWWF = document.getElementById('buttonWharfWWF');
+const buttonWharfFishermen = document.getElementById('buttonWharfFishermen');
 const buttonWharfChewFat = document.getElementById('buttonWharfChewFat');
 const divPsxSubtitle = document.getElementById('divPsxSubtitle');
 
@@ -688,6 +731,12 @@ const buttonLeaveOracle = document.getElementById('buttonLeaveOracle');
 const canvasOracle = document.getElementById('canvasOracle');
 const canvasOracleContext = canvasOracle.getContext('2d');
 const buttonReceiveWisdom = document.getElementById('buttonReceiveWisdom');
+
+const divMinigameStage = document.getElementById('divMinigameStage');
+const divStageCorpus = document.getElementById('divStageCorpus');
+const buttonNextScene = document.getElementById('buttonNextScene');
+const buttonLeaveEarly = document.getElementById('buttonLeaveEarly');
+const buttonLeaveStage = document.getElementById('buttonLeaveStage');
 
 const divFooter = document.getElementById('divFooter');
 
@@ -715,6 +764,7 @@ let timeAtWin = null;
 // 0. Wheat 🌾, 1. Barley 🌾, 2. Olive 🫒, 3. Date 🫐, 4. Fig 🍅, 5. Pomegranate 🍎, 6. Grape 🍇, 7. Flax 🌾
 const bushelCount = [10, 0, 0, 0, 0, 0, 0, 0,];
 const bushelMax = [30, 3000000, 300, 30000, 30000, 30000, 30000, 3000000,];
+let tillCount = 0;
 const seededCount = [0, 0, 0,];
 const farmedCount = [0, 0, 0, 0, 0, 0, 0, 0,];
 const harvestedCount = [0, 0, 0, 0, 0, 0, 0, 0,];
@@ -831,6 +881,7 @@ const residenceShippedCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 let saltShipped = 0;
 
 const nameVillage = 'Alʿard al-Janubia'; // الأرض الجنوبية == Terra Australis. HBD, Grant! 🎂🫂
+const nameState = 'Al-Janūbīyah';
 const estDate = [0, 0,];
 let villageStage = -5;
 
@@ -842,6 +893,16 @@ let asSpent = 0;
 let commercialLifetimeSpend = 0;
 let commoditiesLifetimeSpend = 0;
 let statecraftLifetimeSpend = 0;
+
+const yearOfPlayDebut = 408; // B.C.
+const patronsMin = 800;
+const patronsMax = 4200;
+let patronsCount = 0;
+let patronCost = 2;
+let totalPatronsHosted = 0;
+let lesArtsLifetimeCollected = 0;
+let stageDressing = 'Empty';
+let stageStage = 0;
 
 let rentPrice = 10;
 let rentLifetimeCollected = 0;
@@ -881,6 +942,11 @@ let ratsOutbreak = false;
 let ratsCount = 1;
 let ratsHighScore = 1;
 let ratPenaltyFactor = 0;
+const ratMeterMaxValue = 1000000;
+const ratMeterMaxDisplayE = '+1,000,000';
+const ratMeterMaxDisplayS = '+1.000.000';
+let lifetimeSpentOnCats = 0;
+let clowdersOfCatsReleased = 0;
 
 let militaryLifetimeCost = 0;
 let militaryUnitCost = 30;
@@ -895,8 +961,11 @@ let militaryCavalryCombatValue = 20;
 
 let ghostsCount = 0;
 
+let patientsMin = 0;
+let patientsMax = 200;
 let patientsCount = 0;
-let patientCost = 100;
+let patientCost = 10;
+let totalPatientsSeen = 0;
 let medicalLifetimeCost = 0;
 
 let pilgrimsCount = 0;
@@ -959,9 +1028,9 @@ const priceStage11 = 1200;
 const priceForest = 600;
 const priceLoggingCamp = 400;
 const priceSawmill = 800;
-const priceLoggingUpgrade = [1000, 1000,];
+const priceLoggingUpgrade = [2000, 1000,];
 const priceSawmillUpgrade = [1000, 100,];
-const priceStage12 = [400, 8000,];
+const priceStage12 = [400, 6000,];
 const priceStage13 = 2400;
 const priceStage14 = [600, 16000,];
 const priceQuarry = 1600;
@@ -1032,9 +1101,10 @@ const priceBuild25 = [1750000, 16000,]; // Theater
 const priceBuild26 = 100000; // Private Development
 const priceBuild27 = [500000, 5000, 5000,]; // Oracle
 const priceBuild28 = [1111111, 2222, 333, 333,]; // Astronomers Guild
-const priceBuild100 = [20000000, 9001, 77, 1000, 100000, 100000, 10000, 333,]; // Monument
+const priceBuild100 = [20000000, 10000, 77, 1000, 100000, 100000, 10000, 333,]; // Monument
 
 const priceCruise = 250000;
+const priceNavy = 1000000;
 const pricePort0 = 8000;
 const pricePort1 = 16000;
 const pricePort2 = 32000;
@@ -1145,8 +1215,10 @@ let smeltImageToggle = false;
 let shepherdsAnimationFrameA = 0;
 let shepherdsAnimationFrameB = 0;
 let shepherdsAnimationFrameC = 0;
+let shepherdsAnimationFrameD = 0;
 let shepherdsAnimationToggle = false;
 let farmersAnimationFrame = 0;
+let farmersGullAnimationFrame = 290;
 let farmersAnimationToggle = false;
 let minersAnimationFrameA = 0;
 let minersAnimationFrameB = 0;
@@ -1157,6 +1229,8 @@ let minersAnimationFrameF = 0;
 let minersAnimationFrameG = 0;
 let minersAnimationFrameH = 0;
 let minersAnimationFrameI = 0;
+let minersAnimationFrameJ = 0;
+let minersAnimationFrameK = 0;
 let minersAnimationToggle = false;
 
 let mapOutlineOpacity = 0;
@@ -1218,7 +1292,7 @@ let fishEscapeCountSession = 0;
 let fishWarmup = false;
 let lifetimeFishEarnings = 0;
 let filetCount = 0;
-let filetsSpent = [0, 0, 0,]; // 0. masons, 1. sawyers, 2. loggers
+let filetsSpent = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]; // 0. masons, 1. sawyers, 2. loggers, 3. miners, 4. smelters, 5. gemcutters, 6. bronzeworkers, 7. fishermen, 8. fish cutters, 9. tanners
 let fishState = {
     hasVisited: false,
     hasWharf: false,
@@ -1235,6 +1309,19 @@ let fishState = {
 };
 let totalCatches = 0;
 const priceWharf = [12, 400, 600, 800, 200,];
+const fishermenBounty = 153; // 📖 John 21:11 ✝️🙏🕊️
+const filetsPerFish = [1, 5];
+const lifetimeFishermanCaught = [0, 0,];
+let lifetimeFishermenEarnings = 0;
+let fishermenHired = 24;
+let fishermenPay = 3;
+let fishcuttersHired = 8;
+let fishcuttersPay = 2;
+let tannersHired = 4;
+let tannersPay = 2;
+let freshFiletCapacity = 500;
+let stockfishCount = 0;
+let lifetimeStockfishProduced = 0;
 
 let splashTimer = null;
 const splashFPS = 10;
@@ -1249,7 +1336,7 @@ const caughtFishSession = [0, 0, 0, 0, 0, 0,];
 const caughtFishLifetime = [0, 0, 0, 0, 0, 0,];
 let caughtFishBounty = [1, 2, 5, 10, 50, 100,];
 
-let relaxLevel = 0;
+let relaxStage = 0;
 let meditateCount = 0;
 let superMeditatorWizardPowersActivated = false;
 
