@@ -814,6 +814,26 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     height: calc(8px * var(--pixel-scale));
 }
 
+#imgFleuron_HEAVY_NW_BUD,
+#imgFleuron_HEAVY_SE_BUD {
+    width: calc(45px * var(--pixel-scale));
+}
+
+#imgFleuron_HEAVY_NW_VINE,
+#imgFleuron_HEAVY_SE_VINE {
+    width: calc(19px * var(--pixel-scale));
+}
+
+#imgFleuron_NW_LEAF,
+#imgFleuron_NE_turned_LEAF {
+    width: calc(30px * var(--pixel-scale));
+}
+
+#imgFleuron_SW_turned_LEAF,
+#imgFleuron_SE_LEAF {
+    width: calc(18px * var(--pixel-scale));
+}
+
 #divForewordScripture {
     font-family: 'EB Garamond', serif;
     font-size: calc(20px * var(--pixel-scale));
