@@ -98,7 +98,7 @@
 }
 
 * {
-    font-family: 'Typewriter', 'Courier New', monospace;
+    font-family: 'Typewriter', monospace;
     font-size: 2.4vw;
     color: black;
     box-sizing: border-box;
@@ -850,7 +850,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divForewordCorpus {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #120404;
     line-height: 5.2vw;
@@ -858,7 +858,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divForewordTitle {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 14vw;
     line-height: 8vw;
     color: crimson;
@@ -872,7 +872,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divForewordSubtitle {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 2.8vw;
     font-style: italic;
     color: crimson;
@@ -882,7 +882,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divForewordBoilerplate {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 1.8vw;
     font-style: normal;
     color: crimson;
@@ -892,7 +892,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divForewordBoilerplate .pvtLtd {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 1.6vw;
     font-style: normal;
     color: crimson;
@@ -905,7 +905,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divForewordScripture {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 4vw;
     font-style: italic;
     color: crimson;
@@ -916,7 +916,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divForewordSource {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.4vw;
     font-style: italic;
     color: crimson;
@@ -940,7 +940,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divSystemMessageCorpus,
 #divSystemMessageCorpus .nobreak {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #040412;
     line-height: 5.2vw;
@@ -949,7 +949,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divSystemMessageCorpus #divMusicCredits,
 #divSystemMessageCorpus #divHechoEnFlorida {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #040412;
     line-height: 5.2vw;
@@ -957,14 +957,14 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divSystemMessageCorpus #divTextCredits {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #040412;
     line-height: 5.2vw;
 }
 
 #divSystemMessageCorpus #divTextCredits i {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #040412;
     line-height: 5.2vw;
@@ -991,7 +991,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divSystemMessageScripture {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #040412;
     font-style: italic;
@@ -1000,7 +1000,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divInfoTitle {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-weight: bold;
     color: #040412;
     font-size: 4.4vw;
@@ -1010,21 +1010,21 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #spanInfoVersion {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-weight: bold;
     color: #040412;
     font-size: 2vw;
 }
 
 #spanInfoCC0 {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-weight: bold;
     color: #040412;
     font-size: 1.6vw;
 }
 
 #divSystemMessageSource {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3vw;
     font-style: italic;
     color: #040412;
@@ -1059,7 +1059,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1104,7 +1104,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divGameEventCorpus #Dumas,
 #divGameEventCorpus .hikeTilt {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1118,7 +1118,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus #fin {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 2.8vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1126,21 +1126,21 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus #writ {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: crimson;
     line-height: 4.3vw;
 }
 
 #divGameEventCorpus .redTeam {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: red;
     line-height: 4.3vw;
 }
 
 #divGameEventCorpus .blueTeam {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: blue;
     line-height: 4.3vw;
@@ -1182,14 +1182,14 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus #there {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     font-style: italic;
     color: #041204;
 }
 
 #divGameEventCorpus #bookQuote {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.8vw;
@@ -1197,7 +1197,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus #bookCite {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1205,14 +1205,14 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus #bookTitle {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     font-style: italic;
 }
 
 #divGameEventCorpus #divMeetings {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1220,7 +1220,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus i {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1228,7 +1228,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus .centerMePlease {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1236,7 +1236,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus .tiltMePlease {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1245,7 +1245,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus #AlaviNames {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1254,7 +1254,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divGameEventCorpus #AlaviSong,
 #divGameEventCorpus #AlaviSong span {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1263,7 +1263,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divGameEventCorpus #divToadies {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 4.3vw;
@@ -1287,7 +1287,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divModsCorpus {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #120412;
     line-height: 5.2vw;
@@ -1316,7 +1316,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divResumeCorpus {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #121212;
     line-height: 5.2vw;
@@ -1343,7 +1343,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #divModalOptions label {
     cursor: pointer;
     user-select: none;
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #b6b600;
 }
@@ -1368,7 +1368,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divModalOptions #spanOptionLanguage,
 #divModalOptions #spanOptionWindowSize {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #b6b600;
     display: block;
@@ -1380,7 +1380,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divOptionsFlavour {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3.6vw;
     color: #121204;
     font-style: italic;
@@ -1398,7 +1398,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divOptionsSource {
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     font-size: 3vw;
     font-style: italic;
     color: #121204;
@@ -3988,7 +3988,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divEndingBackdrop div b,
 #divEndingBackdrop div i {
     text-align: center;
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
 }
 
 #divEndingFoil {
@@ -4019,7 +4019,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     font-size: 3.6vw;
     color: #040412;
     line-height: 5.2vw;
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
     padding: 0 2vw;
 }
 
@@ -4715,7 +4715,7 @@ body #divCheevo .gamerscore input {
     border: none;
     color: white;
     overflow: visible;
-    font-family: 'open sans', sans-serif;
+    font-family: sans-serif;
     font-weight: bold;
     font-size: 13pt;
 }
@@ -4788,14 +4788,14 @@ body #divCheevo .brilliant {
 .psxTitle {
     color: #edeef0;
     font-size: 24px;
-    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Arial Narrow', Arial, Helvetica, sans-serif;
 
 }
 
 .psxSubtitle {
     color: #b2b4b6;
     font-size: 16px;
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .psxGlyph {
@@ -4931,7 +4931,7 @@ body #divCheevo .brilliant {
 }
 
 #divStageCorpus {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 3.6vw;
     line-height: 5.2vw;
     text-align: justify;
@@ -4941,7 +4941,7 @@ body #divCheevo .brilliant {
 
 #divStageCorpus .redrum {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 3.6vw;
     line-height: 5.2vw;
     width: 70vw;
@@ -4950,7 +4950,7 @@ body #divCheevo .brilliant {
 }
 
 #divStageCorpus .centerMePlease {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 3.6vw;
     color: #041204;
     line-height: 5.2vw;
@@ -4959,7 +4959,7 @@ body #divCheevo .brilliant {
 }
 
 #divStageCorpus .redrum .centerMePlease {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 3.6vw;
     color: Maroon;
     line-height: 5.2vw;
@@ -4967,13 +4967,13 @@ body #divCheevo .brilliant {
 }
 
 #divStageCorpus i {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 3.6vw;
     line-height: 5.2vw;
 }
 
 #divStageCorpus .stageHeading i {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 5.2vw;
     line-height: 7.5vw;
@@ -4981,7 +4981,7 @@ body #divCheevo .brilliant {
 
 #divStageCorpus .redrum .stageHeading i {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 5.2vw;
     line-height: 7.5vw;
@@ -4990,13 +4990,13 @@ body #divCheevo .brilliant {
 #divStageCorpus .redrum i,
 #divStageCorpus .redrum b {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 3.6vw;
     line-height: 5.2vw;
 }
 
 #divStageCorpus b {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 3.6vw;
     line-height: 5.2vw;
 }
@@ -5063,7 +5063,7 @@ body #divCheevo .brilliant {
 }
 
 #divStageCorpus .stageHeading {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     text-align: center;
     font-size: 5.2vw;
@@ -5072,7 +5072,7 @@ body #divCheevo .brilliant {
 }
 
 #divStageCorpus #stageDagger {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 3.6vw;
     color: Maroon;
 }
@@ -5084,20 +5084,20 @@ body #divCheevo .brilliant {
 
 #divStageCorpus #stageFootnote,
 #divStageCorpus #stageFootnote i {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 3.2vw;
     line-height: 4vw;
     color: Maroon;
 }
 
 #divStageCorpus #stageFootnote .stageFootnoteSmallCaps {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 2.6vw;
     color: Maroon;
 }
 
 body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     text-align: center;
     font-size: 5.2vw;
@@ -5106,7 +5106,7 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
 }
 
 #divStageCorpus .stageHeadingShortLine #stageHeadingStructure {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 3.6vw;
     line-height: 4vw;
@@ -5114,20 +5114,20 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
 }
 
 #divStageCorpus .stageHeadingShortLine #stageHeadingStructure .stageHeadingStructureDim {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 3vw;
 }
 
 #divStageCorpus .stageHeadingShortLine #stageHeadingDivision {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 6vw;
     line-height: 4vw;
 }
 
 #divStageCorpus .stageHeadingShortLine .stageHeadingDiminutive {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 2.4vw;
     line-height: 4vw;
@@ -5136,28 +5136,28 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
 #divStageCorpus #stagePlayEndCaps {
     margin: 0 auto;
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 3.6vw;
     line-height: 5.2vw;
 }
 
 #divStageCorpus #stagePlayEndCaps .stagePlayEndSmallCaps {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 3vw;
 }
 
 #divStageCorpus .nobreakStage {
     white-space: nowrap;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-size: 3.6vw;
     line-height: 5.2vw;
 }
 
 #divStageCorpus #masthead {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     text-align: center;
     font-size: 6vw;
@@ -5166,21 +5166,21 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
 
 #divStageCorpus #masthead i {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 6vw;
 }
 
 #divStageCorpus #masthead .smallCapsA {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 5vw;
 }
 
 #divStageCorpus #masthead .mastheadSizeB {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-style: italic;
     font-size: 5.2vw;
@@ -5188,7 +5188,7 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
 
 #divStageCorpus #masthead .mastheadSizeC {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-style: italic;
     font-size: 4vw;
@@ -5197,7 +5197,7 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
 
 #divStageCorpus #masthead .mastheadSizeD {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 4.9vw;
     line-height: 4.4vw;
@@ -5205,14 +5205,14 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
 
 #divStageCorpus #masthead .mastheadSizeD .mastheadSizeD2 {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-size: 4.2vw;
 }
 
 #divStageCorpus #masthead .mastheadSizeE {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: bold;
     font-style: italic;
     font-size: 2.2vw;
@@ -5221,7 +5221,7 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
 
 #divStageCorpus #masthead .mastheadSizeF {
     color: Maroon;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Libertinus Serif', serif;
     font-weight: normal;
     font-size: 6vw;
     line-height: 6vw;
@@ -5511,7 +5511,7 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
     top: 50%;
     transform: translateY(-50%);
 
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 20vw;
     background-image: linear-gradient(white, pink);
@@ -5924,7 +5924,7 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
     font-size: 1.4vw;
     line-height: 1.6vw;
     text-align: left;
-    font-family: 'Garamond', serif;
+    font-family: 'EB Garamond', serif;
 }
 
 
