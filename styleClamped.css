@@ -676,7 +676,8 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
-#buttonSailWest {
+#buttonSailWest,
+#buttonTrueEnding {
     margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
@@ -1525,7 +1526,6 @@ body #divWidthClamp .divCalendarWidthClamped {
     width: calc(386px * var(--pixel-scale));
     height: calc(226px * var(--pixel-scale));
     border: calc(1px * var(--pixel-scale)) solid black;
-    display: none;
     margin: 0 auto calc(32px * var(--pixel-scale)) auto;
 }
 
@@ -2695,6 +2695,21 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     --j: 20;
 }
 
+.Zebra {
+    --i: 2;
+    --j: 21;
+}
+
+.Iago {
+    --i: 1;
+    --j: 21;
+}
+
+.Pikachu {
+    --i: 0;
+    --j: 21;
+}
+
 .Camel {
     --i: 7;
     --j: 19;
@@ -3066,6 +3081,11 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 .Scepter {
     --i: 29;
     --j: 19;
+}
+
+.Wand {
+    --i: 31;
+    --j: 20;
 }
 
 .SphinxSecondQuest {
@@ -4075,6 +4095,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #buttonVisitArena,
 #buttonVisitOracle,
 #buttonChooseHeir,
+#buttonTrueEnding,
 #buttonReturnToMap,
 #buttonHeirGoBack,
 #buttonPlayGod,

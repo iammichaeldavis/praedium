@@ -5141,9 +5141,29 @@ function UpdateText() {
             stringyStringerson += '</td>';
             stringyStringerson += '</tr>';
 
+            if (player.hasWon) {
+                stringyStringerson += '<tr>';
+                stringyStringerson += '<td>';
+                stringyStringerson += displayPikachus + ' <span class="icon Pikachu inlineIcon"></span>:';
+                stringyStringerson += '</td>';
+                stringyStringerson += '<td class="rightPadColumn">';
+                stringyStringerson += '???';
+                stringyStringerson += '</td>';
+                stringyStringerson += '</tr>';
+            }
+
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
             stringyStringerson += displayChicken + ' <span class="icon Chicken inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayExoticBirds + ' <span class="icon Iago inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += '???';
@@ -5162,6 +5182,15 @@ function UpdateText() {
             stringyStringerson += '<tr>';
             stringyStringerson += '<td>';
             stringyStringerson += displayThoroughbreds + ' <span class="icon BeholdAPaleHorse inlineIcon"></span>:';
+            stringyStringerson += '</td>';
+            stringyStringerson += '<td class="rightPadColumn">';
+            stringyStringerson += '???';
+            stringyStringerson += '</td>';
+            stringyStringerson += '</tr>';
+
+            stringyStringerson += '<tr>';
+            stringyStringerson += '<td>';
+            stringyStringerson += displayZebras + ' <span class="icon Zebra inlineIcon"></span>:';
             stringyStringerson += '</td>';
             stringyStringerson += '<td class="rightPadColumn">';
             stringyStringerson += '???';
@@ -5844,6 +5873,7 @@ function UpdateText() {
     buttonReturnToMap.innerHTML = displayReturnToMapView;
     buttonRecords.innerHTML = 'Records: OFF';
     if (player.likesRecords) { buttonRecords.innerHTML = 'Records: ON'; }
+    buttonTrueEnding.innerHTML = displayLabelTrueEnding + '<br><span class="icon Wand inlineIcon"></span> <span class="icon EspírituSanto inlineIcon"></span> <span class="icon Orb inlineIcon"></span>';
 }
 
 
@@ -6018,7 +6048,8 @@ function UpdateVisibilities() {
     buttonStar.style.display = player.isGod ? 'inline-block' : '';
     buttonRecords.style.display = player.isGod ? 'inline-block' : '';
 
-    //imgNirvana.style.display = player.hasWon ? 'block' : '';
+    imgNirvana.style.display = trueEnding ? 'block' : 'none';
+    buttonTrueEnding.style.display = trueEnding ? 'block' : '';
 
     if (player.seesForeword && player.hasBegun) {
         divForewordTitle.style.display = 'none';
@@ -9774,11 +9805,13 @@ function RedrawForest() {
         arrayForestGraph[13][20] = tileLawn;
     }
 
-    if (player.hasWon) {
+    if (trueEnding) {
         arrayForestGraph[6][22] = tileMysteryHole;
     }
 
     TileRenderer(arrayForestGraph, canvasForestContext);
+    if (player.hasWon && !trueEnding) { canvasForestContext.drawImage(πέοςΤέραςImage, 0, 0); }
+    if (trueEnding) { canvasForestContext.drawImage(forestClearImage, 0, 0); }
 }
 
 

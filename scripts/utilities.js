@@ -56,7 +56,10 @@ function AskToResume() {
     if (loadedReport.hero.hasHelpedShepherds) { loadedIcon = 'Dolly'; }
     if (loadedReport.hero.hasHelpedMiners) { loadedIcon = 'IngotGold'; }
     if (loadedReport.hero.hasWon) { loadedIcon = 'Sphinx'; }
-    if (loadedReport.hero.hasWon && loadedReport.hero.hasWentToAman && loadedReport.hero.hasPegasi) { loadedIcon = 'SphinxSecondQuest'; }
+    if (loadedReport.hero.hasWon && loadedReport.hero.hasWentToAman && loadedReport.hero.hasPegasi) {
+        loadedIcon = 'SphinxSecondQuest';
+        trueEnding = true;
+    }
     if (loadedReport.hero.isGod) {
         player.isGod = true;
         player.likesDelay = false;
@@ -538,7 +541,7 @@ function ContinuePreviousGame() {
         if (player.hasBecomeHeir) { buttonReturnToMap.style.display = 'inline-block'; }
         if (villageStage > 10) { buttonBuyStone.classList.add('BuyStoneMarginOverrideClass'); }
         if (hintLevel == 13) { buttonQ.style.display = 'none'; }
-        if (meditateCount > 9) { superMeditatorWizardPowersActivated = true; }
+        if (meditateCount > meditateLimit) { superMeditatorWizardPowersActivated = true; }
         Translate(player.speaks, false); // populates the map details header correctly
         StartTime(); // ...and everything *should* just work 🤞😬
     }
@@ -549,7 +552,9 @@ function ContinuePreviousGame() {
 function StartNewGame() {
     if (confirm(displayRestartConfirm)) {
         localStorage.removeItem(save_key);
+        trueEnding = false;
         divOverlayResume.style.display = '';
+        UpdateDisplay();
     }
 }
 

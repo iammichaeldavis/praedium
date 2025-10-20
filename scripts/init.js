@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.22.01-B';
+const version = '1.22.02-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -286,6 +286,10 @@ const crystalMineImage = new Image();
 crystalMineImage.src = 'bitmaps/crystalmine.png';
 const factoryImage = new Image();
 factoryImage.src = 'bitmaps/mountainFactory.png';
+const πέοςΤέραςImage = new Image();
+πέοςΤέραςImage.src = 'bitmaps/forestWin.png';
+const forestClearImage = new Image();
+forestClearImage.src = 'bitmaps/forestWinReal.png';
 const mapImage = new Image();
 mapImage.src = 'bitmaps/map.png';
 const mapImageWin = new Image();
@@ -665,8 +669,10 @@ const buttonI = document.getElementById('buttonI');
 const buttonCC0 = document.getElementById('buttonCC0');
 const buttonRecords = document.getElementById('buttonRecords');
 
-const buttonChooseHeir = document.getElementById('buttonChooseHeir');
 const imgNirvana = document.getElementById('imgNirvana');
+const buttonTrueEnding = document.getElementById('buttonTrueEnding');
+
+const buttonChooseHeir = document.getElementById('buttonChooseHeir');
 const buttonNavy = document.getElementById('buttonNavy');
 const buttonSailWest = document.getElementById('buttonSailWest');
 const buttonPlayGod = document.getElementById('buttonPlayGod');
@@ -760,6 +766,7 @@ let year = 1;
 let week = 1;
 let timeAtStart = null;
 let timeAtWin = null;
+let trueEnding = false;
 
 // 0. Wheat 🌾, 1. Barley 🌾, 2. Olive 🫒, 3. Date 🫐, 4. Fig 🍅, 5. Pomegranate 🍎, 6. Grape 🍇, 7. Flax 🌾
 const bushelCount = [10, 0, 0, 0, 0, 0, 0, 0,];
@@ -1139,6 +1146,7 @@ const audioPeasant = new Audio('waveforms/warcraft.mp3');
 const audioFish = new Audio('waveforms/SM64_Slider.mp3');
 const audioWhistle = new Audio('waveforms/whistle.mp3');
 const audioChime = new Audio('waveforms/SMK_ChristmasTreeChime.mp3');
+const audioMuppets = new Audio('waveforms/muppets.mp3');
 
 const heirDate = [0, 0,];
 let heirStage = 0;
@@ -1338,6 +1346,7 @@ let caughtFishBounty = [1, 2, 5, 10, 50, 100,];
 
 let relaxStage = 0;
 let meditateCount = 0;
+const meditateLimit = 9;
 let superMeditatorWizardPowersActivated = false;
 
 let prayersCount = 0;

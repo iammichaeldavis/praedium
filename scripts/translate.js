@@ -669,10 +669,13 @@ let displayCumin = '';
 let displayCamels = '';
 let displaySheep = '';
 let displaySwine = '';
+let displayPikachus = '';
 let displayCattle = '';
 let displayChicken = '';
+let displayExoticBirds = '';
 let displayPonies = '';
 let displayThoroughbreds = '';
+let displayZebras = '';
 let displayUnicorns = '';
 let displayInfantry = '';
 let displayCavalry = '';
@@ -853,6 +856,7 @@ let displayBoxCopy = '';
 let displayHeir = '';
 let displayWinMessage = '— Mon ami, dit Valentine,<br>le comte ne vient-il pas de nous<br>dire que l’humaine sagesse était<br>tout entière dans ces deux mots :<br><br>— <span id="Dumas">Attendre et espérer !</span><br><br><br><br><br><span id="fin">FIN DU PRAEDIUM</span><br><br><br><br>';
 let displayEndButton = '';
+let displayLabelTrueEnding = '';
 
 let displayModCodeLabel = '';
 let displayModCodeTextArea = '';
@@ -878,6 +882,7 @@ let displayHintsEnd = '';
 let displayStoryHikeGo = '';
 let displayStoryHikeLeave = '';
 let displayStoryHikeRelax = [];
+let displayStoryHikeEnough = '';
 
 let displayStoryFishFirstVisit = '';
 let displayFishFish = '';
@@ -1974,10 +1979,13 @@ function Translate(language, bark = true) {
         displayCamels = 'Camels';
         displaySheep = 'Goats';
         displaySwine = 'Swine';
+        displayPikachus = 'Pikachu';
         displayCattle = 'Cattle';
         displayChicken = 'Fowl';
+        displayExoticBirds = 'Exotic Birds';
         displayPonies = 'Ponies';
         displayThoroughbreds = 'Thoroughbreds';
+        displayZebras = 'Zebras';
         displayUnicorns = 'Winged Unicorns';
         displayInfantry = 'Infantry';
         displayCavalry = 'Cavalry';
@@ -2152,7 +2160,10 @@ function Translate(language, bark = true) {
         displayInfoDedication = 'Dedicated to ';
         displayInfoDedication += ScribeList(dedicationList);
         displayInfoDedication += ', and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez and Philip J Reed, VSc. I really, really wish y’all were here.'; // ۩
-        displayInfoMusic = '<div id="divMusicCredits">“Moraff’s Aria”<br>Composed by Steve Moraff<br>&copy; 1989 MoraffWare<br><br>“Slider”<br>Composed by Koji Kondo<br>&copy; 1996 Nintendo Co., Ltd.<br><br>“The Temporal Corps Goes Rolling Along”<br>Composed by Arfing Dog, Glen R. Dahlgren & Michael Lindner<br>&copy; 1991 Legend Entertainment</div>';
+        displayInfoMusic = '<div id="divMusicCredits">“Moraff’s Aria”<br>Composed by Steve Moraff<br>&copy; 1989 MoraffWare<br><br>';
+        displayInfoMusic += '“Slider”<br>Composed by Koji Kondo<br>&copy; 1996 Nintendo Co., Ltd.<br><br>';
+        displayInfoMusic += '“The Temporal Corps Goes Rolling Along”<br>Composed by Arfing Dog, Glen R. Dahlgren & Michael Lindner<br>&copy; 1991 Legend Entertainment<br><br>';
+        displayInfoMusic += '“Finale: The Magic Store”<br>Performed by The Muppets (Jim Henson, Frank Oz, Jerry Nelson, Richard Hunt, Dave Goelz, Steve Whitmire & Kathryn Mullen)<br>Composed by Paul Williams & Kenneth Ascher<br>&copysr; 1979 Henson Associates, Inc.</div>';
         displayInfoText = 'Portions of <i>Dune</i> &copy; 1965 by Frank Herbert. Segments of text from <i>Ultima IV</i> &copy; 1985 by Lord British and <i>Ultima V</i> &copy; 1988 by Lord British. Segments of text from <i>Quest for Glory</i> by Lori Ann Cole &copy; 1989 Sierra On-Line, Inc. All copyright material used without permission.<br><br>“The Dust and the Laurel” by ChatGPT, hereby released into the public domain.';
         displayInfoMadeInFlorida = '<div id="divHechoEnFlorida">Made in Florida 🍊</div>';
         displayInfoThanks = 'Special thanks to ';
@@ -2176,6 +2187,7 @@ function Translate(language, bark = true) {
 
         displayHeir = 'CHOOSE AN HEIR';
         displayEndButton = 'THE END';
+        displayLabelTrueEnding = 'FINALLY, SEE THE *TRUE* ENDING NOW';
 
         displayModCodeLabel = '<i>USER DISCRETION IS STRONGLY ADVISED!</i><br>Do not copy any code into this window that you do not absolutely understand and/or trust!';
         displayModCodeTextArea = 'Paste your modCode here';
@@ -2210,6 +2222,7 @@ function Translate(language, bark = true) {
             'Finally, you reach a conclusion in your mind:<br><br>I suppose all that we can really do is to just try our best and be grateful.<br><br>Grateful for what we have, grateful for what we do not. Grateful for everything we have ever enjoyed and for everything we have ever suffered or endured, because either way we learned priceless lessons along the way.<br><br>And there is always tomorrow to look forward to. The ending to our story has not yet been written.',
             'Adjusting your weight, you stretch out your legs, re-cross them, make yourself again comfortable, place your palms in your lap and close your eyes, searching inward for tranquility.<br><br>You take a deep breath in through your nose, filling your lungs to capacity with cool, salubrious mountain air, then clear your mind of all thought as you gently exhale out of your mouth.',
         ];
+        displayStoryHikeEnough = 'Ahh... I think that’s probably enough zen for one day.';
 
         displayStoryFishFirstVisit = 'AH, THE SIMPLE PLEASURE OF A DAY SPENT AT THE CREEK... ONE OF THE LAST THINGS YOUR FATHER TAUGHT YOU BEFORE HIS UNTIMELY DEMISE<br><br>(Employees Who Receive Fish With Their Pay Work Twice As Hard)';
         displayFishFish = 'FISH';
@@ -3298,10 +3311,13 @@ function Translate(language, bark = true) {
         displayCamels = 'Camellos';
         displaySheep = 'Cabros';
         displaySwine = 'Cerdos';
+        displayPikachus = 'Pikachu';
         displayCattle = 'Ganado Vacuno';
         displayChicken = 'Gallinas';
+        displayExoticBirds = 'Aves Exóticas';
         displayPonies = 'Ponis';
         displayThoroughbreds = 'Purasangres';
+        displayZebras = 'Cebras';
         displayUnicorns = 'Unicornios Alados';
         displayInfantry = 'Infantería';
         displayCavalry = 'Caballería';
@@ -3499,7 +3515,10 @@ function Translate(language, bark = true) {
         displayInfoDedication = 'Dedicado a ';
         displayInfoDedication += ScribeList(dedicationList);
         displayInfoDedication += ', y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.'; // ۩
-        displayInfoMusic = '<div id="divMusicCredits">“Aria de Moraff”<br>Compuesta por Steve Moraff<br>&copy; 1989 MoraffWare<br><br>“Deslizador”<br>Compuesta por Koji Kondo<br>&copy; 1996 Nintendo Co., Ltd.<br><br>“El Cuerpo Temporal Va Sigue Adelante”<br>Compuesta por Arfing Dog, Glen R. Dahlgren y Michael Lindner<br>&copy; 1991 Legend Entertainment</div>';
+        displayInfoMusic = '<div id="divMusicCredits">“Aria de Moraff”<br>Compuesta por Steve Moraff<br>&copy; 1989 MoraffWare<br><br>';
+        displayInfoMusic += '“Deslizador”<br>Compuesta por Koji Kondo<br>&copy; 1996 Nintendo Co., Ltd.<br><br>';
+        displayInfoMusic += '“El Cuerpo Temporal Va Sigue Adelante”<br>Compuesta por Arfing Dog, Glen R. Dahlgren y Michael Lindner<br>&copy; 1991 Legend Entertainment<br><br>';
+        displayInfoMusic += '“Final: La Tienda Mágica”<br>Interpretado por Los Muppets (Jim Henson, Frank Oz, Jerry Nelson, Richard Hunt, Dave Goelz, Steve Whitmire y Kathryn Mullen)<br>Compuesta por Paul Williams y Kenneth Ascher<br>&copysr; 1979 Henson Associates, Inc.</div>';
         displayInfoText = 'Porciones de <i>Dune</i> &copy; 1965 por Frank Herbert. Segmentos de texto de <i>Ultima IV</i> &copy; 1985 por Lord British y <i>Ultima V</i> &copy; 1988 por Lord British. Segmentos de texto de <i>Quest for Glory</i> de Lori Ann Cole &copy; 1989 Sierra On-Line, Inc. Todo material con derechos de autor utilizado sin permiso.<br><br>“El Polvo y el Laurel” de ChatGPT, por la presente liberado al dominio público.';
         displayInfoMadeInFlorida = '<div id="divHechoEnFlorida">Hecho en Florida 🍊</div>';
         displayInfoThanks = 'Agradecimientos especiales a ';
@@ -3523,6 +3542,7 @@ function Translate(language, bark = true) {
 
         displayHeir = 'ELEGIR UN HEREDERO';
         displayEndButton = 'CONCLUIR';
+        displayLabelTrueEnding = 'FINALMENTE, VER EL *VERDADERO* QUE TERMINA AHORA';
 
         displayModCodeLabel = '<i>¡LA DISCRECIÓN DEL USUARIO ES FUERTEMENTE ACONSEJADO!</i><br>¡No copie en esta ventana ningún código que no comprenda completamente y/o en el que no confíe!';
         displayModCodeTextArea = 'Pegue su modCode aquí';
@@ -3557,6 +3577,7 @@ function Translate(language, bark = true) {
             'Finalmente, llegas a una conclusión en tu mente:<br><br>Supongo que lo único que podemos hacer es dar lo mejor de nosotros y estar agradecidos.<br><br>Agradecidos por lo que tenemos, agradecidos por lo que no. Agradecidos por todo lo que hemos disfrutado y por todo lo que hemos sufrido o soportado, porque, de cualquier manera, aprendimos lecciones invaluables en el camino.<br><br>Y siempre hay un mañana que esperar con ilusión. El final de nuestra historia aún no se ha escrito.',
             'Ajustando tu peso, estiras las piernas, las vuelves a cruzar, te pones nuevamente cómodo, colocas las palmas de las manos en el regazo y cierras los ojos, buscando en tu interior la tranquilidad.<br><br>Tu respira profundamente por la nariz, llenando tus pulmones con el aire fresco y saludable de la montaña, luego despejas tu mente de todo pensamiento mientras exhalas suavemente por la boca.',
         ];
+        displayStoryHikeEnough = 'Ahhh... Creo que probablemente sea suficiente zen por un día.';
 
         displayStoryFishFirstVisit = 'A, EL SIMPLE PLACER DE PASAR UN DÍA EN EL ARROYO... UNA DE LAS ÚLTIMAS COSAS QUE TE ENSEÑÓ TU PADRE ANTES DE SU PREMATURA MUERTE<br><br>(Empleados Que Reciben Pescado Con Su Salario Trabajan El Doble De Duro)';
         displayFishFish = 'FISH';

@@ -3923,13 +3923,13 @@ function LeaveHike() {
 function Relax() {
     //alert('*******🚨🚨🚨YOU ARE VERY RELAXED NOW!!!!!🚨🚨🚨*******');
     if (player.likesStory) {
-        GameEvent('<div id="divMeetings">' + displayStoryHikeRelax[relaxStage] + '</div>');
+        GameEvent('<div id="divMeetings">' + (superMeditatorWizardPowersActivated ? displayStoryHikeEnough : displayStoryHikeRelax[relaxStage]) + '</div>');
     }
     relaxStage++;
     if (relaxStage == displayStoryHikeRelax.length) {
         relaxStage--;
         meditateCount++;
-        if (meditateCount == 10) { superMeditatorWizardPowersActivated = true; }
+        if (meditateCount > meditateLimit) { superMeditatorWizardPowersActivated = true; }
     }
     UpdateDisplay();
 }
@@ -4004,6 +4004,7 @@ function ToggleMusic() {
         audioTheme.pause();
         audioFish.pause();
         audioEnding.pause(); // this is meaningless lol
+        audioMuppets.pause();
     }
 }
 
@@ -4102,6 +4103,25 @@ function ReleaseCats() {
     else {
         if (player.likesStory) { GameEvent(displayStoryPoorCruise); }
     }
+}
+
+
+
+function TrueEnding() {
+    if (superMeditatorWizardPowersActivated && prayersCount > 0) {
+        imgNirvana.src = 'bitmaps/godEnding.png';
+        if (player.likesMusic) {
+            audioTheme.pause();
+            audioMuppets.play();
+        }
+        if (player.likesStory) { GameEvent('ヽ༼ຈل͜ຈ༽ﾉ Raise Ur Dongersヽ༼ຈل͜ຈ༽ﾉ<br><br>#420dongsquad (◕‿◕✿)'); }
+    }
+    else {
+        imgNirvana.src = 'bitmaps/dogEnding.png';
+        if (player.speaks == 'English') { alert('jk jk there is no “true” ending lol  (凸ಠ益ಠ)凸   what even 𝘪𝘴 truth anyway amirite??? ʕ •ᴥ•ʔ\n just give up and quit forever okay  ( ͡° ͜ʖ ͡°)\n\n(=ʘᆽʘ=)∫ *meow*'); }
+        else { alert('yo broma no hay un final “verdadero” jajaja  (凸ಠ益ಠ)凸   ¿¿¿qué es la verdad de todas formas, yo correcto??? ʕ •ᴥ•ʔ\n simplemente ríndete y renuncia para siempre, ¿de acuerdo?  ( ͡° ͜ʖ ͡°)\n\n(=ʘᆽʘ=)∫ *maullido*'); }
+    }
+    UpdateDisplay();
 }
 
 
