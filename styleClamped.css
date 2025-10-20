@@ -3088,6 +3088,16 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     --j: 20;
 }
 
+.Dawg {
+    --i: 6;
+    --j: 20;
+}
+
+.Crux {
+    --i: 25;
+    --j: 19;
+}
+
 .SphinxSecondQuest {
     --i: 25;
     --j: 18;
