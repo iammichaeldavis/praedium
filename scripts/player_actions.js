@@ -4118,8 +4118,9 @@ function TrueEnding() {
     }
     else {
         imgNirvana.src = 'bitmaps/dogEnding.png';
-        if (player.speaks == 'English') { alert('jk jk there is no “true” ending lol  (凸ಠ益ಠ)凸   what even 𝘪𝘴 truth anyway amirite??? ʕ •ᴥ•ʔ\n just give up and quit forever okay  ( ͡° ͜ʖ ͡°)\n\n(=ʘᆽʘ=)∫ *meow*'); }
-        else { alert('yo broma no hay un final “verdadero” jajaja  (凸ಠ益ಠ)凸   ¿¿¿qué es la verdad de todas formas, yo correcto??? ʕ •ᴥ•ʔ\n simplemente ríndete y renuncia para siempre, ¿de acuerdo?  ( ͡° ͜ʖ ͡°)\n\n(=ʘᆽʘ=)∫ *maullido*'); }
+        let denial = 'yo broma (凸ಠ益ಠ)凸<br><br>no hay un final “verdadero” jajaja<br><br>¿¿¿qué es la verdad de todas formas,<br>yo correcto??? ʕ •ᴥ•ʔ<br><br>simplemente ríndete<br>y renuncia para siempre,<br>¿de acuerdo?  ( ͡° ͜ʖ ͡°)<br><br>(=ʘᆽʘ=)∫ *maullido*';
+        if (player.speaks == 'English') { denial = 'jk jk (凸ಠ益ಠ)凸<br><br>there is no “true” ending lol<br><br>what even <i>is</i> truth anyway<br>amirite??? ʕ •ᴥ•ʔ<br><br>just give up<br>and quit forever,<br>okay? ( ͡° ͜ʖ ͡°)<br><br>(=ʘᆽʘ=)∫ *meow*'; }
+        if (player.likesStory) { GameEvent(denial); }
     }
     UpdateDisplay();
 }
