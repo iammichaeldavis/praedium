@@ -5874,7 +5874,7 @@ function UpdateText() {
     buttonRecords.innerHTML = 'Records: OFF';
     if (player.likesRecords) { buttonRecords.innerHTML = 'Records: ON'; }
     let endingButtonLabel = displayLabelTrueEnding + '<br><span class="icon Crux inlineIcon"></span> <span class="icon Dawg inlineIcon"></span>';
-    if (superMeditatorWizardPowersActivated && prayersCount > 0) { endingButtonLabel = displayLabelTrueEnding + '<br><span class="icon Wand inlineIcon"></span> <span class="icon EspírituSanto inlineIcon"></span> <span class="icon Orb inlineIcon"></span>'; }
+    if (superMeditatorWizardPowersActivated && prayersCount > 0) { endingButtonLabel = displayLabelTrueEnding + '<br><span class="icon EspírituSanto inlineIcon"></span> <span class="icon Wand inlineIcon"></span>'; }
     buttonTrueEnding.innerHTML = endingButtonLabel;
 }
 
