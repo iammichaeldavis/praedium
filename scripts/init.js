@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.22.02-H';
+const version = '1.22.02-I';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -801,6 +801,11 @@ const farmSize = [1, 1,];
 const flaxSize = [6, 9,];
 let farmStage = 0;
 let warehouseStage = 0;
+const warehouseCapacityUpgrades = [
+    300,
+    3000,
+    [3000000, 30000,],
+];
 const olivePlantDate = [0, 0,];
 
 let handsAvailable = 2;

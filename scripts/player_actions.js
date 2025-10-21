@@ -1435,7 +1435,7 @@ function RentWarehouse() {
         spentCount[0] += priceWarehouse0;
         player.canRentWarehouse = false;
         warehouseStage++;
-        bushelMax[0] = 300;
+        bushelMax[0] = warehouseCapacityUpgrades[0];
     }
     else if (warehouseStage == 1 && bushelCount[0] > priceWarehouse1) {
         if (player.likesStory) { GameEvent(displayStoryWarehouse1, 'warehouse_stage_1'); }
@@ -1443,7 +1443,7 @@ function RentWarehouse() {
         spentCount[0] += priceWarehouse1;
         player.canRentWarehouse = false;
         warehouseStage++;
-        bushelMax[0] = 3000;
+        bushelMax[0] = warehouseCapacityUpgrades[1];
     }
     else if (warehouseStage == 2 && bushelCount[0] > priceWarehouse2) {
         if (player.likesStory) { GameEvent(displayStoryWarehouse2, 'warehouse_stage_2'); }
@@ -1451,8 +1451,8 @@ function RentWarehouse() {
         spentCount[0] += priceWarehouse2;
         player.canRentWarehouse = false;
         warehouseStage++;
-        bushelMax[0] = 3000000;
-        bushelMax[2] = 30000;
+        bushelMax[0] = warehouseCapacityUpgrades[2][0];
+        bushelMax[2] = warehouseCapacityUpgrades[2][1];
     }
 
     else {

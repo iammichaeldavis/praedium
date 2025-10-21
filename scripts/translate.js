@@ -1758,9 +1758,9 @@ function Translate(language, bark = true) {
         displayStoryDelegateTwice = 'YOUR WORKERS ARE NOW ON HOLIDAY, YOU SOFT-HEARTED FOOL';
         displayStoryDelegateThrice = 'YOUR WORKERS WILL ONCE AGAIN PRIORITIZE THE HARVEST';
 
-        displayStoryWarehouse0 = 'THIS PLACE COMES HIGHLY RECOMMENDED';
-        displayStoryWarehouse1 = '“WHAT IS COMMON TO THE GREATEST NUMBER RECEIVES THE LEAST AMOUNT OF CARE”<br>—ARISTOTLE';
-        displayStoryWarehouse2 = '“WHILST, IN THE MAJORITY OF MEN, THERE IS SUCH A LOVE OF TRIED ARRANGEMENTS, AND SO GREAT A DREAD OF EXPERIMENTS, THAT THEY WILL PROBABLY NOT ACT UPON THIS RIGHT UNTIL LONG AFTER IT IS SAFE TO DO SO”<br>—HERBERT SPENCER';
+        displayStoryWarehouse0 = 'THIS PLACE COMES HIGHLY RECOMMENDED<br><br>(New Storage Capacity: ' + warehouseCapacityUpgrades[0] + '<span class="icon Wheat inlineIcon"></span>)';
+        displayStoryWarehouse1 = '“WHAT IS COMMON TO THE GREATEST NUMBER RECEIVES THE LEAST AMOUNT OF CARE”<br>—ARISTOTLE<br><br>(New Storage Capacity: ' + formatterCurrent.format(warehouseCapacityUpgrades[1]) + '<span class="icon Wheat inlineIcon"></span>)';
+        displayStoryWarehouse2 = '“WHILST, IN THE MAJORITY OF MEN, THERE IS SUCH A LOVE OF TRIED ARRANGEMENTS, AND SO GREAT A DREAD OF EXPERIMENTS, THAT THEY WILL PROBABLY NOT ACT UPON THIS RIGHT UNTIL LONG AFTER IT IS SAFE TO DO SO”<br>—HERBERT SPENCER<br><br>(New Storage Capacity:<br>' + formatterCurrent.format(warehouseCapacityUpgrades[2][0]) + '<span class="icon Wheat inlineIcon"></span> + ' + formatterCurrent.format(warehouseCapacityUpgrades[2][1]) + '<span class="icon Olive inlineIcon"></span>)';
 
         displayStoryHands0 = 'YOU HAVE BROUGHT ON YOUR FIRST MAN. HIS NAME IS JOHN<br><br>(Each Fieldhand Will Perform<br>One Farming Task Per Week)';
         displayStoryHands1 = 'JOHN HAS A BROTHER LOOKING FOR WORK. YOU COULD USE ANOTHER GOOD MAN';
@@ -3091,9 +3091,9 @@ function Translate(language, bark = true) {
         displayStoryDelegateTwice = 'TUS TRABAJADORES ESTÁN AHORA DE VACACIONES, TU TONTO DE CORAZÓN-BLANDO';
         displayStoryDelegateThrice = 'TUS TRABAJADORES UNA VEZ MÁS PRIORIZARÁN LA COSECHA';
 
-        displayStoryWarehouse0 = 'ESTE LUGAR ES ALTAMENTE RECOMENDABLE';
-        displayStoryWarehouse1 = '«LO QUE ES COMÚN PARA LA MAYORÍA RECIBE LA MENOR CANTIDAD DE ATENCIÓN»<br>—ARISTÓTELES';
-        displayStoryWarehouse2 = '«EN LA MAYORÍA DE LOS HOMBRES HAY TAL AMOR POR LOS MÉTODOS PROBADOS Y TAL TEMOR A LOS EXPERIMENTOS, QUE PROBABLEMENTE NO ACTUARÁN EN CONSECUENCIA HASTA MUCHO DESPUÉS DE QUE SEA SEGURO HACERLO»<br>—HERBERT SPENCER';
+        displayStoryWarehouse0 = 'ESTE LUGAR ES ALTAMENTE RECOMENDABLE<br><br>(Nueva Capacidad de<br>Almacenamiento: ' + warehouseCapacityUpgrades[0] + '<span class="icon Wheat inlineIcon"></span>)';
+        displayStoryWarehouse1 = '«LO QUE ES COMÚN PARA LA MAYORÍA RECIBE LA MENOR CANTIDAD DE ATENCIÓN»<br>—ARISTÓTELES<br><br>(Nueva Capacidad de<br>Almacenamiento: ' + formatterCurrent.format(warehouseCapacityUpgrades[1]) + '<span class="icon Wheat inlineIcon"></span>)';
+        displayStoryWarehouse2 = '«EN LA MAYORÍA DE LOS HOMBRES HAY TAL AMOR POR LOS MÉTODOS PROBADOS Y TAL TEMOR A LOS EXPERIMENTOS, QUE PROBABLEMENTE NO ACTUARÁN EN CONSECUENCIA HASTA MUCHO DESPUÉS DE QUE SEA SEGURO HACERLO»<br>—HERBERT SPENCER<br><br>(Nueva Capacidad<br>de Almacenamiento:<br>' + formatterCurrent.format(warehouseCapacityUpgrades[2][0]) + '<span class="icon Wheat inlineIcon"></span> + ' + formatterCurrent.format(warehouseCapacityUpgrades[2][1]) + '<span class="icon Olive inlineIcon"></span>)';
 
         displayStoryHands0 = 'HAS EMPLEADO A TU PRIMER HOMBRE. SU NOMBRE ES JUAN<br><br>(Cada Labriego Realizará<br>Una Tarea Agrícola Por Semana)';
         displayStoryHands1 = 'JUAN TIENE UN HERMANO QUE BUSCA TRABAJO. PODRÍAS UTILIZAR OTRO BUEN HOMBRE';
