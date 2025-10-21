@@ -2153,7 +2153,7 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'The current language is now set to English.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">“There is no true knowledge without right faith, no virtuous conduct is possible without knowledge, without virtue there is no liberation, and without liberation, no nirvana.”</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeFor = 'For Dylan, DJ, Simone, Carlos, and Gustavo. I love y’all so much.';
+        displayInfoMadeFor = 'For D., D., S., Carlos, and Gustavo. I love y’all so much.';
         displayInfoMadeWith = 'Made with ';
         displayInfoMadeWith += ScribeList(appsList);
         displayInfoMadeWith += '.';
@@ -3508,7 +3508,7 @@ function Translate(language, bark = true) {
         displayNewLanguage = 'El idioma actual ahora está configurado en español.';
         displayLanguageQuote = '<div id="divSystemMessageScripture">«No hay conocimiento verdadero sin fe recta, ninguna conducta virtuosa es posible sin conocimiento, sin virtud no hay liberación, y sin liberación, no nirvana.»</div><div id="divSystemMessageSource">Uttaradhyayana 28:30</div>';
 
-        displayInfoMadeFor = 'Para Dylan, DJ, Simone, Carlos, y Gustavo. Los amo a todos mucho.';
+        displayInfoMadeFor = 'Para D., D., S., Carlos, y Gustavo. Los amo a todos mucho.';
         displayInfoMadeWith = 'Hecho con ';
         displayInfoMadeWith += ScribeList(appsList);
         displayInfoMadeWith += '.';
