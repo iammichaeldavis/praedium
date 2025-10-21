@@ -1024,9 +1024,9 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     font-family: 'EB Garamond', serif;
     font-weight: bold;
     color: #040412;
-    font-size: 4.4vw;
+    font-size: 5.4vw;
     text-align: center;
-    line-height: 3vw;
+    line-height: 2.4vw;
     margin: 2.8vw auto 6.4vw auto;
 }
 
@@ -1034,14 +1034,14 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     font-family: 'EB Garamond', serif;
     font-weight: bold;
     color: #040412;
-    font-size: 2vw;
+    font-size: 1.6vw;
 }
 
 #spanInfoCC0 {
     font-family: 'EB Garamond', serif;
     font-weight: bold;
     color: #040412;
-    font-size: 1.6vw;
+    font-size: 1.4vw;
 }
 
 #divSystemMessageSource {
