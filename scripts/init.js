@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.22.02-J';
+const version = '1.22.02-K';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -268,6 +268,8 @@ const portImage = new Image();
 portImage.src = 'bitmaps/docks.png';
 const portGullImage = new Image();
 portGullImage.src = 'bitmaps/port_gull1.png';
+const portMetalGearImage = new Image();
+portMetalGearImage.src = 'bitmaps/metalGear.png';
 const portFrodoImage = new Image();
 portFrodoImage.src = 'bitmaps/port_frodo1.png';
 const mansionImage = new Image();

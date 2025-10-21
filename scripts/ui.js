@@ -10486,7 +10486,8 @@ function RedrawResidence() {
 function RedrawPort() {
     if (!player.hasWentToAman) {
         canvasPortContext.drawImage(portImage, 0, 0, 384, 224, 0, 0, 384, 224);
-        canvasPortContext.drawImage(portGullImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        if (player.hasWon) { canvasPortContext.drawImage(portMetalGearImage, 0, 0); }
+        else { canvasPortContext.drawImage(portGullImage, 0, 0, 384, 224, 0, 0, 384, 224); }
     }
     else {
         canvasPortContext.drawImage(portFrodoImage, 0, 0, 384, 224, 0, 0, 384, 224);

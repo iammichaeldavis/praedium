@@ -934,7 +934,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     font-family: 'EB Garamond', serif;
     font-weight: bold;
     color: #040412;
-    font-size: calc(27px * var(--pixel-scale));
+    font-size: calc(35px * var(--pixel-scale));
     text-align: center;
     line-height: calc(12px * var(--pixel-scale));
     margin: calc(14px * var(--pixel-scale)) auto calc(32px * var(--pixel-scale)) auto;
