@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.22.02-N';
+const version = '1.22.02-O';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -325,7 +325,6 @@ neighborsFarmersImage.src = 'bitmaps/neighborsFarmers.png';
 const neighborsDucksImage = new Image();
 neighborsDucksImage.src = 'bitmaps/cell_ducks_0.png';
 const neighborsGullImage = new Image();
-neighborsGullImage.src = 'bitmaps/gull/MIgull_0.png';
 const neighborsJillImage = new Image();
 neighborsJillImage.src = 'bitmaps/jotj.png';
 const neighborsDagsImageA = new Image();
