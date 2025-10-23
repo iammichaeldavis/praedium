@@ -12,10 +12,6 @@ DetermineDevice(false);
 
 CheckForPreviousGame();
 
-//PreloadFishImages();
-//PreloadArenaImages();
-PreloadImages();
-
 RebuildFacesArray();
 
 UpdateFishDisplay();
@@ -34,9 +30,9 @@ setTimeout(() => {
 // ╠══════════════╣
 // ║ by Davis Lab ║
 // ╟──────────────╢
-// ║  v1.22.02-O  ║
+// ║  v1.22.02-P  ║
 // ╟──────────────╢
-// ║  10/22/2025  ║
+// ║  10/23/2025  ║
 // ╚══════════════╝
 
 // “The humble semicolon is why spacing and line-ends do not matter
