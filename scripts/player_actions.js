@@ -2468,7 +2468,7 @@ function Build() {
     }
     else if (villageStage == -4 && bushelCount[0] > priceBuildNEG4[0] && residenceInStockCount[1] >= priceBuildNEG4[1] && bushelCount[5] >= priceBuildNEG4[2] && boardsCount >= priceBuildNEG4[3] && stoneCount >= priceBuildNEG4[4]) {
         if (player.likesStory) { GameEvent(displayStoryVillageNEG4); }
-        villageImageActual.src = 'bitmaps/villageNEG03_af1.png';
+        villageImageActual.src = arrayVillageNEG03[0];
         villageStage++;
         bushelCount[0] -= priceBuildNEG4[0];
         spentCount[0] += priceBuildNEG4[0];

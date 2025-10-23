@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.22.02-P';
+const version = '1.22.03-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -1064,16 +1064,16 @@ let residenceAnimationFrame = 1;
 let residenceAnimationToggle = false;
 let portAnimationFrame = 0;
 let portAnimationToggle = false;
-let villagePlateFrame = 1;
-let villageAnimationFrameA = 1;
-let villageAnimationFrameB = 1;
-let villageAnimationFrameC = 1;
-let villageAnimationFrameD = 1;
-let villageAnimationFrameE = 1;
-let villageAnimationFrameF = 1;
-let villageAnimationFrameG = 1;
-let villageAnimationFrameH = 1;
-let villageAnimationFrameI = 1;
+let villagePlateFrame = 0;
+let villageAnimationFrameA = 0;
+let villageAnimationFrameB = 0;
+let villageAnimationFrameC = 0;
+let villageAnimationFrameD = 0;
+let villageAnimationFrameE = 0;
+let villageAnimationFrameF = 0;
+let villageAnimationFrameG = 0;
+let villageAnimationFrameH = 0;
+let villageAnimationFrameI = 0;
 let villageAnimationToggle = false;
 let animationCycleFrame = 0;
 let smeltImageOffset = 0;
