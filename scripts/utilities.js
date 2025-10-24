@@ -864,7 +864,7 @@ function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true) {
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     if (eventFaçade != null) {
-        divGameEventFaçade.innerHTML = '<img src="bitmaps/' + eventFaçade + '.gif" />';
+        divGameEventFaçade.innerHTML = '<img src="bitmaps/' + eventFaçade + '.gif">';
         divGameEventFaçade.style.display = 'block';
     }
     else {

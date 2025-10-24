@@ -3484,7 +3484,7 @@ function Win() {
     lastString += '<br><br><br>';
     lastString += '<i>' + displayToBeContinued + '</i>';
     lastString += '<br><br>';
-    lastString += '<img id="endingPlate" src="curves/PRÆDIVM2.svg" />';
+    lastString += '<img id="endingPlate" src="curves/PRÆDIVM2.svg">';
     lastString += '<br><br>';
     lastString += '<button onclick="WriteReportToDisk(true);">' + displayLabelDownload + '</button>';
     lastString += '<br><br><br><br>';

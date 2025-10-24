@@ -2828,8 +2828,8 @@ function UpdateText() {
         buttonReleaseCats.innerHTML = felineThread;
 
         // SHOW BUTTONS ------------------------
-        buttonTakeInAShow.innerHTML = displayLabelTakeInAShow + '<br><img src="bitmaps/ThaliaEtMelpo.png" />';
-        buttonChariot.innerHTML = displayLabelChariot + '<br><img src="bitmaps/chariot.png" />';
+        buttonTakeInAShow.innerHTML = displayLabelTakeInAShow + '<br><img src="bitmaps/ThaliaEtMelpo.png">';
+        buttonChariot.innerHTML = displayLabelChariot + '<br><img src="bitmaps/chariot.png">';
 
         // TEMPLE BUTTON -----------------------
         buttonVisitTemple.innerHTML = displayLabelTemple + ' <span class="icon Mala inlineIcon"></span>';
@@ -3086,7 +3086,7 @@ function UpdateText() {
                 tableString += '</tbody>';
                 tableString += '</table>';
                 tableString += '<div class="divDeliveryColumnWrapper">';
-                tableString += '<img src="bitmaps/route_athens.png" width="66" height="66" />';
+                tableString += '<img src="bitmaps/route_athens.png" width="66" height="66">';
                 colourIncrement = Math.floor(99 / shipmentTimersDefault[0]);
                 greenValue = 99 - (colourIncrement * shipmentTimersCurrent[0]);
                 greenString = '' + greenValue;
@@ -3164,7 +3164,7 @@ function UpdateText() {
                 tableString += '</tbody>';
                 tableString += '</table>';
                 tableString += '<div class="divDeliveryColumnWrapper">';
-                tableString += '<img src="bitmaps/route_damascus.png" width="66" height="66" />';
+                tableString += '<img src="bitmaps/route_damascus.png" width="66" height="66">';
                 colourIncrement = Math.floor(99 / shipmentTimersDefault[1]);
                 greenValue = 99 - (colourIncrement * shipmentTimersCurrent[1]);
                 greenString = '' + greenValue;
@@ -3242,7 +3242,7 @@ function UpdateText() {
                 tableString += '</tbody>';
                 tableString += '</table>';
                 tableString += '<div class="divDeliveryColumnWrapper">';
-                tableString += '<img src="bitmaps/route_rhodes.png" width="66" height="66" />';
+                tableString += '<img src="bitmaps/route_rhodes.png" width="66" height="66">';
                 colourIncrement = Math.floor(99 / shipmentTimersDefault[2]);
                 greenValue = 99 - (colourIncrement * shipmentTimersCurrent[2]);
                 greenString = '' + greenValue;
@@ -3320,7 +3320,7 @@ function UpdateText() {
                 tableString += '</tbody>';
                 tableString += '</table>';
                 tableString += '<div class="divDeliveryColumnWrapper">';
-                tableString += '<img src="bitmaps/route_alexandria.png" width="66" height="66" />';
+                tableString += '<img src="bitmaps/route_alexandria.png" width="66" height="66">';
                 colourIncrement = Math.floor(99 / shipmentTimersDefault[3]);
                 greenValue = 99 - (colourIncrement * shipmentTimersCurrent[3]);
                 greenString = '' + greenValue;
@@ -3398,7 +3398,7 @@ function UpdateText() {
                 tableString += '</tbody>';
                 tableString += '</table>';
                 tableString += '<div class="divDeliveryColumnWrapper">';
-                tableString += '<img src="bitmaps/route_jerusalem.png" width="66" height="66" />';
+                tableString += '<img src="bitmaps/route_jerusalem.png" width="66" height="66">';
                 colourIncrement = Math.floor(99 / shipmentTimersDefault[4]);
                 greenValue = 99 - (colourIncrement * shipmentTimersCurrent[4]);
                 greenString = '' + greenValue;
@@ -3476,7 +3476,7 @@ function UpdateText() {
                 tableString += '</tbody>';
                 tableString += '</table>';
                 tableString += '<div class="divDeliveryColumnWrapper">';
-                tableString += '<img src="bitmaps/route_memphis.png" width="66" height="66" />';
+                tableString += '<img src="bitmaps/route_memphis.png" width="66" height="66">';
                 colourIncrement = Math.floor(99 / shipmentTimersDefault[5]);
                 greenValue = 99 - (colourIncrement * shipmentTimersCurrent[5]);
                 greenString = '' + greenValue;
@@ -3553,7 +3553,7 @@ function UpdateText() {
                 tableString += '</tbody>';
                 tableString += '</table>';
                 tableString += '<div class="divDeliveryColumnWrapper">';
-                tableString += '<img src="bitmaps/route_rome.png" width="66" height="66" />';
+                tableString += '<img src="bitmaps/route_rome.png" width="66" height="66">';
                 colourIncrement = Math.floor(99 / shipmentTimersDefault[6]);
                 greenValue = 99 - (colourIncrement * shipmentTimersCurrent[6]);
                 greenString = '' + greenValue;
@@ -3645,7 +3645,7 @@ function UpdateText() {
                 tableString += '</tbody>';
                 tableString += '</table>';
                 tableString += '<div class="divDeliveryColumnWrapper">';
-                tableString += '<img src="bitmaps/route_tartessos.png" width="66" height="66" />';
+                tableString += '<img src="bitmaps/route_tartessos.png" width="66" height="66">';
                 let colourIncrement = Math.floor(99 / shipmentTimersDefault[7]);
                 let greenValue = 99 - (colourIncrement * shipmentTimersCurrent[7]);
                 let greenString = '' + greenValue;
@@ -3719,7 +3719,7 @@ function UpdateText() {
                 tableString += '</tbody>';
                 tableString += '</table>';
                 tableString += '<div class="divDeliveryColumnWrapper">';
-                tableString += '<img src="bitmaps/route_cyprus.png" width="66" height="66" />';
+                tableString += '<img src="bitmaps/route_cyprus.png" width="66" height="66">';
                 let colourIncrement = Math.floor(99 / shipmentTimersDefault[8]);
                 let greenValue = 99 - (colourIncrement * shipmentTimersCurrent[8]);
                 let greenString = '' + greenValue;
@@ -4753,7 +4753,7 @@ function UpdateText() {
                     '<i>The </i>orchestra<i>, that large round concrete courtyard in the center of everything, has been done up to represent an average public square in Old Athens. A large rectangular main stage of polished granite sits just behind and a few feet higher than the orchestral pit, and the enormous plaster wall behind that has been done up as the frontispiece of a humble, run-of-the-mill Old Athenian farmhouse. According to the program, this house in particular belongs to the hero of the play: <b>Chremulos</b>, a simple farmer.</i>',
                     '<i>The story begins with a <b>blind and filthy old beggar</b> wandering onto the main stage. He is followed closely by <b>Chremulos</b>—an average man in his fifties, balding, plainly dressed—who is in turn followed by <b>Kariôn</b>, his sassy, foul-mouthed slave of about the same age.</i>',
                 ];
-                const overtureMin = '<img class="imgPlayMiniature imgPlayMiniature1" src="bitmaps/stage/play1.png" />';
+                const overtureMin = '<img class="imgPlayMiniature imgPlayMiniature1" src="bitmaps/stage/play1.png">';
                 contentPlay += '<div class="redrum">';
                 contentPlay += '<div class="stageHeading">' + overture[0] + '</div>';
                 contentPlay += overture[1];
@@ -4787,7 +4787,7 @@ function UpdateText() {
                     'After some heavy-handed cajoling, and a bunch more awful puns, Chremulos and his slave eventually convince Plutus to come home with them. Chremulos says he knows how to get Plutus’ vision back, and to not fear any repercussions from Zeus, because as soon as Plutus can see—and can choose to only visit good men—he will surely become the new King of the Gods.',
                     'This all ends with Chremulos welcoming Plutus into his home, both of them leaving the scene through the front door of the house, while Kariôn leaves the main stage off the side, having been instructed to go round up Chremulos’ poor and honest kinsmen and peers so that they might share in this new good fortune.',
                 ];
-                const aIscImin = '<img class="imgPlayMiniature imgPlayMiniature4" src="bitmaps/stage/play4.png" />';
+                const aIscImin = '<img class="imgPlayMiniature imgPlayMiniature4" src="bitmaps/stage/play4.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIscI[0] + aIscI[1] + aIscI[2] + '</div>';
                 contentPlay += aIscI[3];
                 contentPlay += '<br>';
@@ -4829,7 +4829,7 @@ function UpdateText() {
                     'At any rate this <b>Chorus of Husbandmen</b> fills the <i>orchestra</i>, waving their farming tools around while singing and a-prancing about in their underwear as Kariôn desperately tries in vain to explain to them about Plutus. Naturally, they don’t believe him.',
                     'Kariôn, fed up with all the silliness on display, throws up his hands and goes inside the house to fetch his master. Chremulos—now dressed to the nines, and with head held high—struts out from his front door to welcome his suspicious friends and confirms for them what Kariôn had been trying to tell them all along: that the very God of Wealth, Lord Plutus himself, was at this very moment, inside his very home!',
                 ];
-                const aIIscImin = '<img class="imgPlayMiniature imgPlayMiniature6" src="bitmaps/stage/play6.png" />';
+                const aIIscImin = '<img class="imgPlayMiniature imgPlayMiniature6" src="bitmaps/stage/play6.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIIscI[0] + aIIscI[1] + aIIscI[2] + '</div>';
                 contentPlay += aIIscI[3];
                 contentPlay += '<br>';
@@ -4861,7 +4861,7 @@ function UpdateText() {
                     'Now Penia states her case: she is like the boss who keeps his workers focused, that the rich are all fat and gross—she gestures to the audience—yet the bodies of the hard-working poor are well-built and handsome, that rich people are rude and ungrateful, that poor politicians work for the good of all while rich politicians merely further line their own pockets, that she is like a stern father who knows what is best for his disobedient children.',
                     'All the while she speaks,  Blepsidemus and Chremulos can’t help themselves but to agree with each of her points. After she is done, however, they refuse to allow themselves to be persuaded. “You won’t change my mind, even if you change my mind!” declares Chremulos, before setting his jaw, crossing his arms tight to his chest and stomping his foot. Then Blepsidemus and Chremulos spit and cuss at Penia until she runs off the stage crying, swearing that they would soon be sorry for not listening to her.',
                 ];
-                const aIIscIImin = '<img class="imgPlayMiniature imgPlayMiniature5" src="bitmaps/stage/play5.png" />';
+                const aIIscIImin = '<img class="imgPlayMiniature imgPlayMiniature5" src="bitmaps/stage/play5.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIIscII[0] + aIIscII[1] + aIIscII[2] + '</div>';
                 contentPlay += aIIscII[3];
                 contentPlay += '<br>';
@@ -4919,7 +4919,7 @@ function UpdateText() {
                     '<div id="stageHeadingDivision">The Parabasis</div>',
                     '<div class="stageHeadingDiminutive">THE ADDRESS TO THE AUDIENCE</div>',
                 ];
-                const parabasisMin = '<img class="imgPlayMiniature imgPlayMiniature8" src="bitmaps/stage/play8.png" />';
+                const parabasisMin = '<img class="imgPlayMiniature imgPlayMiniature8" src="bitmaps/stage/play8.png">';
                 //contentPlay += '<div class="stageHeading">' + parabasis[0] + '</div>';
                 contentPlay += '<div class="stageHeadingShortLine">' + parabasis[13] + parabasis[14] + '</div>';
                 contentPlay += parabasis[1];
@@ -4969,7 +4969,7 @@ function UpdateText() {
                     '<i>Your guests—along with everyone else—file out through the gates into the auditoriums, to relieve themselves in the restrooms and to stock back up on refreshments from the concession stands and to gossip about what they all think of the play so far.</i>',
                     '<i>After a half-hour or so has passed, drums are sounded to summon everyone back to their seats.</i>',
                 ];
-                const intermissionMin = '<img class="imgPlayMiniature3" src="bitmaps/stage/play3.png" />';
+                const intermissionMin = '<img class="imgPlayMiniature3" src="bitmaps/stage/play3.png">';
                 contentPlay += '<div class="redrum">';
                 contentPlay += '<div class="stageHeading">' + intermission[0] + '</div>';
                 contentPlay += intermission[1];
@@ -5004,7 +5004,7 @@ function UpdateText() {
                     '<b><i>A </i>stasimon<i>, or ‘interlude’, is now sung by the Chorus: a lively song called “I Just Can’t Wait To Be Rich!”, all about how wonderful it is to have money, and how easy life will surely become from now on, and how nothing could ever possibly go wrong!</i></b>',
                 ];
                 contentPlay += '<div class="stageHeadingShortLine">' + aIIIscI[0] + aIIIscI[1] + aIIIscI[2] + '</div>';
-                const aIIIscImin = '<img class="imgPlayMiniature imgPlayMiniature7" src="bitmaps/stage/play7.png" />';
+                const aIIIscImin = '<img class="imgPlayMiniature imgPlayMiniature7" src="bitmaps/stage/play7.png">';
                 contentPlay += aIIIscI[3];
                 contentPlay += '<br>';
                 contentPlay += '<br>';
@@ -5049,7 +5049,7 @@ function UpdateText() {
                     '<b><i>Another Choral Ode now: “Lord Plutus Shall Make Amends”, about how much the God of Wealth is enjoying living with and enriching the family of Chremulos, and generously rewarding all the other previously-neglected ‘good and true’ peoples of Athens.</i></b>',
                     '<div id="stageFootnote">†<i>Phaedrus’</i> Aesop’s Fables <span class="stageFootnoteSmallCaps">(IV-XII)</span>&thinsp;–&thinsp;‘H<span class="stageFootnoteSmallCaps">ERCULES & </span>P<span class="stageFootnoteSmallCaps">LUTUS</span>’: <i>in heaven, Hercules refuses to salute the Son of Fortune, telling Jupiter that Plutus is ‘friend of the wicked and corrupter of the entire world’.</i></div>',
                 ];
-                const aIIIscIImin = '<img class="imgPlayMiniature imgPlayMiniature2" src="bitmaps/stage/play2.png" />';
+                const aIIIscIImin = '<img class="imgPlayMiniature imgPlayMiniature2" src="bitmaps/stage/play2.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIIIscII[0] + aIIIscII[1] + aIIIscII[2] + '</div>';
                 contentPlay += aIIIscII[3];
                 contentPlay += '<br>';
@@ -5090,7 +5090,7 @@ function UpdateText() {
                     'He certainly gets no sympathy from Kariôn or the Honest Man, and the scene ends with everyone violently forcing the Sycophant to change into the Honest Man’s filthy old clothes. The Sycophant leaves the stage in tears, while Kariôn invites the Honest Man and his Slave into the house.',
                     '<b><i>Yet </i>another<i> Choral Ode... these things just never end! This one is called “Shouldn’t’a Been Such’a Bastard!” The ironic, pun-filled lyrics explain how Good Men are loving this new way of things, and Bad Men are left crying in the soup kitchen line.</i></b>',
                 ];
-                const aIVscImin = '<img class="imgPlayMiniature imgPlayMiniature9" src="bitmaps/stage/play9.png" />';
+                const aIVscImin = '<img class="imgPlayMiniature imgPlayMiniature9" src="bitmaps/stage/play9.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIVscI[0] + aIVscI[1] + aIVscI[2] + '</div>';
                 contentPlay += aIVscI[3];
                 contentPlay += '<br>';
@@ -5133,7 +5133,7 @@ function UpdateText() {
                     'At any rate, they all eventually enter the house together, the Old Maid undeterred by all their cruelty and jokes, clearly still infatuated with the aloof and resistant Young Stud.',
                     '<b><i>Another bawdy interlude from the Chorus here, “It Ain’t All It’s Cracked Up To Be”, an extended limerick about how being filthy rich really ain’t all it’s cracked up to be.</i></b>',
                 ];
-                const aIVscIImin = '<img class="imgPlayMiniature imgPlayMiniature13" src="bitmaps/stage/play13.png" />';
+                const aIVscIImin = '<img class="imgPlayMiniature imgPlayMiniature13" src="bitmaps/stage/play13.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIVscII[0] + aIVscII[1] + aIVscII[2] + '</div>';
                 contentPlay += aIVscII[3];
                 contentPlay += '<br>';
@@ -5174,7 +5174,7 @@ function UpdateText() {
                     'After a lengthy, pun-filled discussion trying to determine how exactly Hermès might pull his weight as the newest member of the Chremulos household, Kariôn finally offers him a job as Head Janitor, laughing that he should employ his legendary speed to wash all the many stacks of dirty dishes that have been piling up lately.',
                     '<b><i>Now the final Choral Ode is sung: “Maybe She Had A Point...” These lyrics claim Poverty was probably right all along, and that this whole misadventure has most likely been a huge mistake.</i></b>',
                 ];
-                const aVscImin = '<img class="imgPlayMiniature imgPlayMiniature12" src="bitmaps/stage/play12.png" />';
+                const aVscImin = '<img class="imgPlayMiniature imgPlayMiniature12" src="bitmaps/stage/play12.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aVscI[0] + aVscI[1] + aVscI[2] + '</div>';
                 contentPlay += aVscI[3];
                 contentPlay += '<br>';
@@ -5215,7 +5215,7 @@ function UpdateText() {
                     'Then he, Plutus, the Old Maid from earlier, and Chremulos all leave the stage, skipping together hand-in-hand, off to enthrone Plutus as their new King of the Gods. The Chorus forms a conga-line and follows closely behind them.',
                     '<div id="stagePlayEndCaps">T<span class="stagePlayEndSmallCaps">HE</span> E<span class="stagePlayEndSmallCaps">ND</span></div>',
                 ];
-                const aVscIImin = '<img class="imgPlayMiniature imgPlayMiniature11" src="bitmaps/stage/play11.png" />';
+                const aVscIImin = '<img class="imgPlayMiniature imgPlayMiniature11" src="bitmaps/stage/play11.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aVscII[0] + aVscII[1] + aVscII[2] + '</div>';
                 contentPlay += aVscII[3];
                 contentPlay += '<br>';
@@ -5250,7 +5250,7 @@ function UpdateText() {
                     '<i>Oh, well. Time to try and manage your way to the exit through this zoo. You gather your belongings, and make your way out with the crowd.</i>',
                     '<i>As you and your party press through the mass of people leaving, various friends and well-wishers take your arm, shake your hand and cheerfully congratulate you for your stoic composure during, and classy handling of, that preachy, sanctimonious </i>parabasis<i>. You’re an oak, man. Marcus Aurelius himself would be impressed.</i>',
                 ];
-                const epilogueMin = '<img class="imgPlayMiniature imgPlayMiniature10" src="bitmaps/stage/play10.png" />';
+                const epilogueMin = '<img class="imgPlayMiniature imgPlayMiniature10" src="bitmaps/stage/play10.png">';
                 contentPlay += '<div class="redrum">';
                 contentPlay += '<div class="stageHeading">' + epilogue[0] + '</div>';
                 contentPlay += epilogue[1];
@@ -5281,15 +5281,15 @@ function UpdateText() {
         else if (stageDressing == 'Racetrack') {
             let contentRace = displayStoryRaceTitle;
             contentRace += displayStoryRaceA;
-            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceStreet.png" />';
+            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceStreet.png">';
             contentRace += displayStoryRaceB;
-            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceGates.png" />';
+            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceGates.png">';
             contentRace += displayStoryRaceC;
-            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceCaesar.png" />';
+            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceCaesar.png">';
             contentRace += displayStoryRaceD;
-            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceArena.png" />';
+            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceArena.png">';
             contentRace += displayStoryRaceE;
-            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceCaesar2.png" />';
+            contentRace += '<img class="raceGraphic" src="bitmaps/stage/raceCaesar2.png">';
             contentRace += displayStoryRaceF;
             divStageCorpus.innerHTML = contentRace;
             buttonLeaveStage.innerHTML = displayLabelLeaveRace;
