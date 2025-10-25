@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.22.03-C';
+const version = '1.23.00-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -218,6 +218,8 @@ const player = {
     hasSeenRace: false,
     hasNavy: false,
     hasReleasedCats: false,
+    hasExportedFish: false,
+    hasBoughtArt: false,
 };
 
 const stylesheetActive = document.getElementById('stylesheetActive');
@@ -295,6 +297,8 @@ const canvasResidenceContext = canvasResidence.getContext('2d');
 const buttonHostParty = document.getElementById('buttonHostParty');
 const buttonWasteTime = document.getElementById('buttonWasteTime');
 const buttonImproveResidence = document.getElementById('buttonImproveResidence');
+const buttonBuyTreasure = document.getElementById('buttonBuyTreasure');
+const tableResidenceCatalogue = document.getElementById('tableResidenceCatalogue');
 const tableResidenceInventory = document.getElementById('tableResidenceInventory');
 const tableResidenceReport = document.getElementById('tableResidenceReport');
 
@@ -432,6 +436,7 @@ const canvasPort = document.getElementById('canvasPort');
 const canvasPortContext = canvasPort.getContext('2d');
 const imgTradeGoods = document.getElementById('imgTradeGoods');
 const tableExports = document.getElementById('tableExports');
+const buttonExportFish = document.getElementById('buttonExportFish');
 const buttonEstablishTradeRoute = document.getElementById('buttonEstablishTradeRoute');
 const imgTradeTin = document.getElementById('imgTradeTin');
 const tableImports = document.getElementById('tableImports');
@@ -856,11 +861,11 @@ let valueInWheat1Log = 2;
 let valueInWheat1Board = 4;
 let valueInWheat1Stone = 8;
 
-// 0. Oil 🪔, 1. Beer 🍺, 2. Wine 🍷, 3. Syrup 🍯, 4. Juice 🧃, 5. Fruit Leather (Sun-Dried Fig) 🫐, 6. Trinkets 💎, 7. Tin 🧱, 8. Salt 🧂
+// 0. Oil 🪔, 1. Beer 🍺, 2. Wine 🍷, 3. Syrup 🍯, 4. Juice 🧃, 5. Fruit Leather (Sun-Dried Fig) 🫐, 6. Trinkets 💎, 7. Tin 🧱, 8. Salt 🧂, 9. Stockfish 🐟
 const wheatValuePerUnit = [null, null, null, null, null, null,];
-const shipmentTimersCurrent = [24, 4, 16, 8, 2, 12, 48, 12, 24,];
-const shipmentTimersDefault = [24, 4, 16, 8, 2, 12, 48, 12, 24,];
-const shipmentDuration = [6, 1, 4, 2, 2, 3, 1, 3, 6,];
+const shipmentTimersCurrent = [24, 4, 16, 8, 2, 12, 48, 12, 24, 24,];
+const shipmentTimersDefault = [24, 4, 16, 8, 2, 12, 48, 12, 24, 24,];
+const shipmentDuration = [6, 1, 4, 2, 2, 3, 1, 3, 6, 6,];
 const shipmentProfits = [0, 0, 0, 0, 0, 0, 0,];
 const valueFactor = [12, 42, 24, 16, 9, 6, 10,];
 const shipmentCosts = [0, 0,];
@@ -927,6 +932,7 @@ const priceResidence13 = [2500000, 12000, 16000, 500, 2000, 100,]; // Mansion �
 const priceResidenceParty = 1000000; // State Dinner 🎉
 const priceResidence14 = [1000000,]; // Apiary 🐝
 const priceResidence18 = [1000000, 100,]; // Weavers Cottage 🧵
+const priceWorkOfArt = 10000000; // 🖼️
 
 const priceVillage = 64000;
 const priceBuildNEG5 = 500; // Survey
@@ -1060,7 +1066,7 @@ let arrayHourglassInUse = null;
 const animationFPS = 20;
 const animationInterval = 1000 / animationFPS;
 let globalAnimationFrame = 1;
-let residenceAnimationFrame = 1;
+let residenceAnimationFrame = 0;
 let residenceAnimationToggle = false;
 let portAnimationFrame = 0;
 let portAnimationToggle = false;
@@ -1098,6 +1104,7 @@ let minersAnimationFrameI = 0;
 let minersAnimationFrameJ = 0;
 let minersAnimationFrameK = 0;
 let minersAnimationToggle = false;
+let crownFrame = 1;
 
 let mapOutlineOpacity = 0;
 let mapOutlineValueClimb = true;
@@ -1188,6 +1195,11 @@ let tannersPay = 2;
 let freshFiletCapacity = 500;
 let stockfishCount = 0;
 let lifetimeStockfishProduced = 0;
+const shippedFishUnits = 1;
+const shippedFishPricePerUnit = 100;
+let lifetimeStockfishShipped = 0;
+let lifetimeStockfishProfit = 0;
+
 
 let splashTimer = null;
 const splashFPS = 10;
@@ -1210,6 +1222,8 @@ let superMeditatorWizardPowersActivated = false;
 let prayersCount = 0;
 let templeStage = 0;
 let templeSpentCount = [0, 0, 0, 0, 0,]; // 0. Mutton, 1. Gold, 2. Silver, 3. Diamonds, 4. Jacinth
+
+let treasuresCount = 0;
 
 
 

@@ -155,7 +155,7 @@ function GameTurn() {
         if (week == 1 && year % 10 == 0) { relicCount++; }
     }
 
-    if (player.canExport) { Shipping(); }
+    if (player.canExport || player.hasExportedFish) { Shipping(); }
 
     if (player.hasHiredBronzeworkers) {
         ForgeBronze();
@@ -210,6 +210,10 @@ function GameTurn() {
             filetsSpent[9] += tannersHired * tannersPay;
         }
         if (filetCount > freshFiletCapacity) {
+            if (lifetimeStockfishProduced == 0) {
+                gameEventTrigger = true;
+                gameEventContainer = displayStoryCanShipFish;
+            }
             filetsAgedOut = filetCount - freshFiletCapacity;
             filetCount -= filetsAgedOut;
             stockfishCount += filetsAgedOut;
@@ -613,6 +617,7 @@ function Shipping() {
     shipmentTimersCurrent[6]--;
     shipmentTimersCurrent[7]--;
     shipmentTimersCurrent[8]--;
+    shipmentTimersCurrent[9]--;
 
     if (shipmentTimersCurrent[0] == 0) {
         shipmentTimersCurrent[0] = shipmentTimersDefault[0];
@@ -738,6 +743,19 @@ function Shipping() {
             let bounty = importAmount[1];
             residenceIngredientInStockCount[14][1] += bounty;
             residenceIngredientConsumedCount[14][1] += bounty;
+        }
+    }
+
+    if (shipmentTimersCurrent[9] == 0) {
+        shipmentTimersCurrent[9] = shipmentTimersDefault[9];
+        if (player.hasExportedFish) {
+            let bounty = shippedFishPricePerUnit * stockfishCount;
+            lifetimeStockfishShipped += stockfishCount;
+            stockfishCount = 0;
+            if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
+            if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
+            asCount += bounty;
+            lifetimeStockfishProfit += bounty;
         }
     }
 }

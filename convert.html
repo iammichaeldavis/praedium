@@ -15,7 +15,7 @@
 
 <body>
     <textarea id="textareaInput" name="textareaInput" autofocus autocorrect="off" autocomplete="off"></textarea>
-    <textarea id="textareaOutput" name="textareaOutput" readonly></textarea>
+    <textarea id="textareaOutput" name="textareaOutput" readonly onclick="copyOutputToClipboard();"></textarea>
     <button id="buttonGo" onclick="Go();">GO</button>
 </body>
 
@@ -94,6 +94,11 @@
             }
         }
         textareaOutput.value = finalOutput;
+    }
+
+    function copyOutputToClipboard() {
+        textareaOutput.select();
+        navigator.clipboard.writeText(textareaOutput.value);
     }
 </script>
 

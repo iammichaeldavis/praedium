@@ -750,7 +750,8 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     margin: 0 auto 2vw auto;
 }
 
-#buttonImproveResidence {
+#buttonImproveResidence,
+#buttonBuyTreasure {
     display: block;
     margin: 2vw auto 0 auto;
 }
@@ -816,6 +817,11 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #buttonTakeInAShow img {
     width: calc(100px * var(--pixel-scale));
     height: calc(60px * var(--pixel-scale));
+}
+
+#buttonBuyTreasure img {
+    width: calc(100px * var(--pixel-scale));
+    height: calc(38px * var(--pixel-scale));
 }
 
 
@@ -1902,6 +1908,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 
 
+#tableResidenceCatalogue,
 #tableResidenceInventory {
     margin-top: 6.4vw;
 }
@@ -1910,17 +1917,20 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     margin-top: 2vw;
 }
 
+#tableResidenceCatalogue,
 #tableResidenceInventory,
 #tableResidenceReport {
     border: calc(1px * var(--pixel-scale)) solid black;
     user-select: none;
 }
 
+#tableResidenceCatalogue tr:nth-of-type(even) td,
 #tableResidenceInventory tr:nth-of-type(even) td,
 #tableResidenceReport tr:nth-of-type(even) td {
     background: #e9e9e9;
 }
 
+#tableResidenceCatalogue td,
 #tableResidenceInventory td,
 #tableResidenceReport td {
     padding: 1vw 2vw;
@@ -1933,6 +1943,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     border-right: calc(1px * var(--pixel-scale)) solid #d8d8d8;
 }
 
+#tableResidenceCatalogue thead td,
 #tableResidenceInventory thead td,
 #theadResidenceReport tr td {
     background: #c28947;
@@ -1946,6 +1957,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     border-right: calc(1px * var(--pixel-scale)) solid #9e6b30;
 }
 
+
+
 #tableWorkshopsContainer #tdOliveMill,
 #tableWorkshopsContainer #tdPress,
 #tableWorkshopsContainer #tdGreenhouse,
@@ -1953,8 +1966,6 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #tableWorkshopsContainer #tdCottage {
     vertical-align: top;
 }
-
-
 
 #tableWorkshopsContainer {
     width: 95vw;
@@ -3666,6 +3677,11 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     margin: 6.4vw auto 3.2vw auto;
 }
 
+#buttonExportFish {
+    display: block;
+    margin: 0 auto 2vw auto;
+}
+
 .divTradeRouteWrapper,
 .divImportsWrapper {
     display: flex;
@@ -4112,6 +4128,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divViewResidence,
 #buttonHostParty,
 #buttonImproveResidence,
+#buttonBuyTreasure,
+#tableResidenceCatalogue,
 #tableResidenceInventory,
 #tableResidenceReport,
 #divWorkshopBakery,
@@ -4201,6 +4219,7 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #buttonPlayGod,
 #buttonNavy,
 #buttonSailWest,
+#buttonExportFish,
 #buttonRecords,
 #buttonFish,
 #tableFishSession,

@@ -41,8 +41,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap">
-    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.22.03.3">
-    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.22.03.3">
+    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.23.00.0">
+    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.23.00.0">
     <script>history.scrollRestoration = 'manual';</script>
 </head>
 
@@ -280,7 +280,9 @@
                     <button id="buttonGoOnHike" onclick="SetOutOnSojourn();"></button>
                     <button id="buttonHostParty" onclick="ThrowParty();"></button>
                     <button id="buttonWasteTime"></button>
+                    <button id="buttonBuyTreasure" onclick="BuyTreasure();"></button>
                     <button id="buttonImproveResidence"></button>
+                    <table id="tableResidenceCatalogue"></table>
                     <table id="tableResidenceInventory"></table>
                     <table id="tableResidenceReport"></table>
                     <table id="tableWorkshopsContainer">
@@ -485,6 +487,7 @@
                     <button id="buttonSailWest"></button>
                     <img id="imgTradeGoods" src="bitmaps/trade_goods.png" width="130" height="86">
                     <table id="tableExports"></table>
+                    <button id="buttonExportFish" onclick="ExportFish();"></button>
                     <button id="buttonEstablishTradeRoute"></button>
                     <img id="imgTradeTin" src="bitmaps/trade_tin.png" width="130" height="86">
                     <table id="tableImports"></table>
@@ -738,6 +741,7 @@
     <script src="scripts/init.js"></script>
     <script src="scripts/utilities.js"></script>
     <script src="scripts/translate.js"></script>
+    <script src="scripts/image_data.js"></script>
     <script src="scripts/ui.js"></script>
     <script src="scripts/player_actions.js"></script>
     <script src="scripts/game_turn.js"></script>

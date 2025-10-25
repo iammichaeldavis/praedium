@@ -251,6 +251,8 @@ function ContinuePreviousGame() {
         player.hasSeenRace = loadedReport.hero.hasSeenRace;
         player.hasNavy = loadedReport.hero.hasNavy;
         player.hasReleasedCats = loadedReport.hero.hasReleasedCats;
+        player.hasExportedFish = loadedReport.hero.hasExportedFish;
+        player.hasBoughtArt = loadedReport.hero.hasBoughtArt;
         /////////////////////////////////////////////////////////////////////////////////////////
         gameTurn = loadedReport.calendar[0];
         year = loadedReport.calendar[1];
@@ -370,6 +372,7 @@ function ContinuePreviousGame() {
         saltSpent = loadedReport.counts.residenceSaltSpent;
         CloneArray(loadedReport.counts.residenceOutputShipped, residenceShippedCount);
         saltShipped = loadedReport.counts.residenceSaltShipped;
+        treasuresCount = loadedReport.counts.residenceTreasures;
 
         residentsCount = loadedReport.counts.villageDemographics[0];
         residentsMax = loadedReport.counts.villageDemographics[1];
@@ -473,6 +476,8 @@ function ContinuePreviousGame() {
         lifetimeFishermenEarnings = loadedReport.counts.miniGameFish[20];
         stockfishCount = loadedReport.counts.miniGameFish[21];
         lifetimeStockfishProduced = loadedReport.counts.miniGameFish[22];
+        lifetimeStockfishShipped = loadedReport.counts.miniGameFish[23];
+        lifetimeStockfishProfit = loadedReport.counts.miniGameFish[24];
 
         arenaTotalBet = loadedReport.counts.miniGameArena[0];
         arenaTotalWin = loadedReport.counts.miniGameArena[1];
@@ -513,9 +518,8 @@ function ContinuePreviousGame() {
         CloneArray(loadedReport.farmland.poms, arrayPomOrchard);
         CloneArray(loadedReport.farmland.grapes, arrayVineyard);
         /////////////////////////////////////////////////////////////////////////////////////////
-        residenceImage.src = loadedReport.bitmaps[0];
-        villageImageActual.src = loadedReport.bitmaps[1];
-        tileGrowingOlive = loadedReport.bitmaps[2];
+        villageImageActual.src = loadedReport.bitmaps[0];
+        tileGrowingOlive = loadedReport.bitmaps[1];
         /////////////////////////////////////////////////////////////////////////////////////////
         CalculatePortValues();
 
@@ -714,6 +718,7 @@ function CollateGameStateReport(loud = false) {
         residenceSaltSpent: saltSpent,
         residenceOutputShipped: residenceShippedCount,
         residenceSaltShipped: saltShipped,
+        residenceTreasures: treasuresCount,
 
         villageDemographics: [residentsCount, residentsMax, pilgrimsCount, pilgrimsMax, pilgrimsLifetimeCount, totalPatientsSeen, totalPatronsHosted,],
         villageFiat: [asCount, asSpent, rentPrice, taxesValue, interestRate, tourismValue, actualBushelPrice, currentBushelPrice, actualBarleyAdjustment, currentBarleyAdjustment, valueInWheat1Log, valueInWheat1Board, valueInWheat1Stone,],
@@ -759,6 +764,8 @@ function CollateGameStateReport(loud = false) {
             lifetimeFishermenEarnings,
             stockfishCount,
             lifetimeStockfishProduced,
+            lifetimeStockfishShipped,
+            lifetimeStockfishProfit,
         ],
 
         miniGameArena: [
@@ -782,7 +789,7 @@ function CollateGameStateReport(loud = false) {
     };
     const timeAtSave = new Date();
     const report = {
-        bitmaps: [residenceImage.src, villageImageActual.src, tileGrowingOlive,],
+        bitmaps: [villageImageActual.src, tileGrowingOlive,],
         calendar: [gameTurn, year, week, olivePlantDate, estDate, heirDate,],
         counts: integerCounts,
         farmland: farmlandArrays,
@@ -998,7 +1005,7 @@ function CloneArray(source, destination) {
     if (source.length == destination.length) {
         for (let i = 0; i < source.length; i++) { destination[i] = source[i]; }
     }
-    else { alert('Can not clone arrays of different lengths!'); }
+    else { alert('Can not clone arrays of different lengths!\n\nSource: ' + source + '\nDestination: ' + destination); }
 }
 
 

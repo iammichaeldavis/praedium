@@ -606,10 +606,13 @@ document.body.onkeyup = function (e) {
             lifetimeFishermenEarnings = 0;
             stockfishCount = 0;
             lifetimeStockfishProduced = 0;
+            lifetimeStockfishProfit = 0;
+            lifetimeStockfishShipped = 0;
             lesArtsLifetimeCollected = 0;
             patronsCount = 0;
             totalPatronsHosted = 0;
             statecraftLifetimeSpend = 0;
+            treasuresCount = 0;
             pegasiCount = 0;
             messiahCount = 0;
             meditateCount = 0;
@@ -1888,7 +1891,6 @@ function ImproveResidence() {
         if (player.likesStory) { GameEvent(displayStoryResidence00); }
         bushelCount[0] -= priceResidence00;
         spentCount[0] += priceResidence00;
-        residenceImage.src = 'bitmaps/res01.png';
         residenceStage += 1;
     }
     else if (residenceStage == 1 && bushelCount[0] > priceResidence01[0] && logsCount >= priceResidence01[1]) {
@@ -1897,7 +1899,6 @@ function ImproveResidence() {
         spentCount[0] += priceResidence01[0];
         logsCount -= priceResidence01[1];
         forestSpentCount[0] += priceResidence01[1];
-        residenceImage.src = 'bitmaps/res02.png';
         residenceStage += 1;
     }
     else if (residenceStage == 2 && bushelCount[0] > priceResidence02[0] && boardsCount >= priceResidence02[1]) {
@@ -1906,7 +1907,6 @@ function ImproveResidence() {
         spentCount[0] += priceResidence02[0];
         boardsCount -= priceResidence02[1];
         forestSpentCount[1] += priceResidence02[1];
-        residenceImage.src = 'bitmaps/res03.png';
         residenceStage += 1;
     }
     else if (residenceStage == 3 && bushelCount[0] > priceResidence03[0] && stoneCount >= priceResidence03[1] && boardsCount >= priceResidence03[2]) {
@@ -1917,7 +1917,6 @@ function ImproveResidence() {
         mountainSpentCount[0] += priceResidence03[1];
         boardsCount -= priceResidence03[2];
         forestSpentCount[1] += priceResidence03[2];
-        residenceImage.src = 'bitmaps/res04.png';
         residenceStage += 1;
         player.hasBakery = true;
         JumpToBottom();
@@ -1932,7 +1931,6 @@ function ImproveResidence() {
         forestSpentCount[1] += priceResidence04[2];
         bushelCount[2] -= priceResidence04[3];
         spentCount[2] += priceResidence04[3];
-        residenceImage.src = 'bitmaps/res05.png';
         residenceStage += 1;
         player.hasOliveMill = true;
         JumpToBottom();
@@ -1947,7 +1945,6 @@ function ImproveResidence() {
         forestSpentCount[1] += priceResidence05[2];
         ingotsCopperCount -= priceResidence05[3];
         mountainSpentCount[2] += priceResidence05[3];
-        residenceImage.src = 'bitmaps/res06.png';
         residenceStage += 1;
     }
     else if (residenceStage == 6 && bushelCount[0] > priceResidence06[0] && stoneCount >= priceResidence06[1] && boardsCount >= priceResidence06[2] && bushelCount[1] > priceResidence06[3]) {
@@ -2030,7 +2027,6 @@ function ImproveResidence() {
         forestSpentCount[1] += priceResidence11[2];
         ingotsCopperCount -= priceResidence11[3];
         mountainSpentCount[2] += priceResidence11[3];
-        residenceImage.src = 'bitmaps/res07.png';
         residenceStage += 1;
         player.seesHikeButton = true;
     }
@@ -2063,7 +2059,6 @@ function ImproveResidence() {
         mountainSpentCount[5] += priceResidence13[4];
         residenceInStockCount[8] -= priceResidence13[5];
         residenceSpentCount[8] += priceResidence13[5];
-        residenceImage.src = 'bitmaps/res08.png';
         residenceStage += 1;
         player.hasMansion = true;
     }
@@ -3234,6 +3229,14 @@ function EstablishTradeRoute() {
 
 
 
+function ExportFish() {
+    player.hasExportedFish = true;
+    if (player.likesStory) { GameEvent(displayStoryExportFish); }
+    UpdateDisplay();
+}
+
+
+
 function EstablishShippingLanes() {
     if (player.hasMerchantGuildWrit && player.hasBank && !player.canImportTin) {
         if (player.likesStory) { GameEvent(displayStoryPort07); }
@@ -4123,6 +4126,28 @@ function TrueEnding() {
         if (player.likesStory) { GameEvent(denial); }
     }
     UpdateDisplay();
+}
+
+
+
+function BuyTreasure() {
+    if (asCount >= priceWorkOfArt) {
+        if (!player.hasBoughtArt) {
+            player.hasBoughtArt = true;
+            if (player.likesStory) { GameEvent(displayStoryBuyArt); }
+        }
+        asCount -= priceWorkOfArt;
+        asSpent += priceWorkOfArt;
+        statecraftLifetimeSpend += priceWorkOfArt;
+        treasuresCount++;
+        UpdateDisplay();
+    }
+    else {
+        if (player.likesStory) {
+            Translate(player.speaks, false); // populates the following string correctly
+            GameEvent(displayStoryPoorTreasure);
+        }
+    }
 }
 
 

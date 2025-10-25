@@ -913,7 +913,7 @@ function UpdateFishTables() {
 
     fishLetters = '<thead>';
     fishLetters += '<tr>';
-    if (stockfishCount > 0) { fishLetters += '<td colspan="3">'; }
+    if (lifetimeStockfishProduced > 0) { fishLetters += '<td colspan="3">'; }
     else { fishLetters += '<td colspan="2">'; }
     fishLetters += displayFishFishery;
     fishLetters += '</td>';
@@ -927,13 +927,13 @@ function UpdateFishTables() {
     fishLetters += '<td class="rightPadColumn">';
     fishLetters += formatterCurrent.format(filetCount);
     fishLetters += '</td>';
-    if (stockfishCount > 0) {
+    if (lifetimeStockfishProduced > 0) {
         fishLetters += '<td class="rightPadColumn">';
         fishLetters += '';
         fishLetters += '</td>';
     }
     fishLetters += '</tr>';
-    if (stockfishCount > 0) {
+    if (lifetimeStockfishProduced > 0) {
         fishLetters += '<tr>';
         fishLetters += '<td>';
         fishLetters += displayFishStockfish + '&nbsp;' + '<span class="icon DriedFish inlineIcon"></span>' + ':';
@@ -1021,10 +1021,10 @@ function UpdateFishTables() {
         fishLetters += '';
         fishLetters += '</td>';
         fishLetters += '<td>';
-        fishLetters += formatterCurrent.format(stockfishCount);
+        fishLetters += formatterCurrent.format(lifetimeStockfishProduced);
         fishLetters += '</td>';
         fishLetters += '<td>';
-        fishLetters += '0';
+        fishLetters += formatterCurrent.format(lifetimeStockfishShipped);
         fishLetters += '</td>';
         fishLetters += '</tr>';
     }
