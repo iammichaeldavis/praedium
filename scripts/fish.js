@@ -399,6 +399,10 @@ function PurchaseWharfItem(item) {
         fishRareChanceUpperLimit = 80;
         if (player.likesStory) { GameEvent(displayStoryWharfBuyWWF); }
     }
+    if (item == 7 && player.hasCottage && fishState.hasFishermen) {
+        fishState.hasNets = true;
+        if (player.likesStory) { GameEvent(displayStoryWharfBuyNets); }
+    }
     UpdateFishDisplay();
 }
 
@@ -1073,6 +1077,7 @@ function UpdateWharf() {
     buttonWharfRod.innerHTML = displayWharfRod;
     buttonWharfWWF.innerHTML = displayWharfEnvironment;
     buttonWharfFishermen.innerHTML = displayWharfFishboys;
+    buttonWharfNets.innerHTML = displayWharfNets;
     buttonWharfChewFat.innerHTML = displayWharfChewTheFat;
 
     if (player.hasBrewery) {
@@ -1123,6 +1128,12 @@ function UpdateWharf() {
     else {
         buttonWharfFishermen.classList.add('disabled');
     }
+    if (player.hasCottage && fishState.hasFishermen) {
+        buttonWharfNets.classList.remove('disabled');
+    }
+    else {
+        buttonWharfNets.classList.add('disabled');
+    }
 
     if (fishState.hasPosca) {
         buttonWharfPosca.style.display = 'none';
@@ -1148,8 +1159,11 @@ function UpdateWharf() {
     if (fishState.hasFishermen) {
         buttonWharfFishermen.style.display = 'none';
     }
+    if (fishState.hasNets) {
+        buttonWharfNets.style.display = 'none';
+    }
 
-    if (fishState.hasPosca && fishState.hasPrey && fishState.hasChum && fishState.hasKnife && fishState.hasBait && fishState.hasRod && fishState.hasWWF && fishState.hasFishermen) {
+    if (fishState.hasPosca && fishState.hasPrey && fishState.hasChum && fishState.hasKnife && fishState.hasBait && fishState.hasRod && fishState.hasWWF && fishState.hasFishermen && fishState.hasNets) {
         buttonWharfChewFat.style.display = 'block';
     }
 }

@@ -508,6 +508,11 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #buttonWharfFishermen {
     display: block;
+    margin: 0 auto calc(10px * var(--pixel-scale)) auto;
+}
+
+#buttonWharfNets {
+    display: block;
     margin: 0 auto 0 auto;
 }
 

@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.23.00-A';
+const version = '1.23.01-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -573,6 +573,7 @@ const buttonWharfBait = document.getElementById('buttonWharfBait');
 const buttonWharfRod = document.getElementById('buttonWharfRod');
 const buttonWharfWWF = document.getElementById('buttonWharfWWF');
 const buttonWharfFishermen = document.getElementById('buttonWharfFishermen');
+const buttonWharfNets = document.getElementById('buttonWharfNets');
 const buttonWharfChewFat = document.getElementById('buttonWharfChewFat');
 const divPsxSubtitle = document.getElementById('divPsxSubtitle');
 
@@ -1183,7 +1184,7 @@ let fishState = {
 let totalCatches = 0;
 const priceWharf = [12, 400, 600, 800, 200,];
 const fishermenBounty = 153; // 📖 John 21:11 ✝️🙏🕊️
-const filetsPerFish = [1, 5];
+const filetsPerFish = [1, 3];
 const lifetimeFishermanCaught = [0, 0,];
 let lifetimeFishermenEarnings = 0;
 let fishermenHired = 24;

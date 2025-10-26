@@ -939,6 +939,7 @@ let displayWharfBait = '';
 let displayWharfRod = '';
 let displayWharfEnvironment = '';
 let displayWharfFishboys = '';
+let displayWharfNets = '';
 let displayWharfChewTheFat = '';
 let displayStoryWharfBuyPosca = '';
 let displayStoryWharfBuyPrey = '';
@@ -948,6 +949,7 @@ let displayStoryWharfBuyBait = '';
 let displayStoryWharfBuyRod = '';
 let displayStoryWharfBuyWWF = '';
 let displayStoryWharfFishboys = '';
+let displayStoryWharfBuyNets = '';
 let displayTrophyEarned = '';
 
 
@@ -2288,6 +2290,7 @@ function Translate(language, bark = true) {
         displayWharfRod = 'ENCHANT THY ROD<br>(req. temple)';
         displayWharfEnvironment = 'REJUVENATE ENVIRONMENT<br>(req. university)';
         displayWharfFishboys = 'HIRE FISHERMEN<br>(req. estate)';
+        displayWharfNets = 'MANUFACTURE COMMERCIAL-GRADE NETS<br>(req. weavers + fishermen)';
         displayWharfChewTheFat = 'CHEW THE FAT';
         displayStoryWharfBuyPosca = 'PHEW! NOW *THAT* WILL PUT HAIR ON YOUR CHEST<br><br>(Recast Duration Decreased)';
         displayStoryWharfBuyPrey = 'THE BIG FISH EAT THE LITTLE ONES<br>—RADIOHEAD<br><br>(Tilapia Count Improved)';
@@ -2297,6 +2300,7 @@ function Translate(language, bark = true) {
         displayStoryWharfBuyRod = 'NOW THEY’LL ALL SEE YOUR ROD IS BEST<br><br>(Fish Take Longer To Escape)';
         displayStoryWharfBuyWWF = '“One of the penalties of an ecological education is that one lives alone in a world of wounds. Much of the damage inflicted on land is quite invisible to laymen. An ecologist must either harden his shell and make believe that the consequences of science are none of his business, or he must be the doctor who sees the marks of death in a community that believes itself well and does not want to be told otherwise.”<br>—Aldo Leopold<br><br>“Try and leave this world a little better than you found it.”<br>—Robert Baden-Powell<br><br>(Goliath Bream Count Improved)';
         displayStoryWharfFishboys = '“‘These shall ye eat of all that are in the waters, in the seas, and in the rivers: whatsoever hath fins and scales, them shall ye eat.’”<br><br>Leviticus 11:9<br><br><br>And the One saith unto them: “Cast thy net starboard and ye shall find.” They cast therefore, and now they were not strong enough to draw in the net for the multitude of fish.<br><br>Gospel of John 21:6<br><br><br>To catch and eat the fish of the sea is made lawful for thee, as a provision for thee and for travellers; but to hunt on land is forbidden to thee so long as thou art in the state of iḥrām. Be mindful of thy duty to Allâh, unto Whom ye shall be gathered back.<br><br>Al-Māʾidah 96';
+        displayStoryWharfBuyNets = 'It’s a miracle they were catching anything with those moldy old things.<br><br>(Fishermen’s Yield Increased 200%)';
         displayTrophyEarned = 'Trophy earned!';
 
 
@@ -3652,6 +3656,7 @@ function Translate(language, bark = true) {
         displayWharfRod = 'ENCANTAR TU CAÑA<br>(req. templo)';
         displayWharfEnvironment = 'REJUVENECER EL MEDIO AMBIENTE<br>(req. universidad)';
         displayWharfFishboys = 'CONTRATAR PESCADORES<br>(req. casa de la finca)';
+        displayWharfNets = 'FABRICAR REDES CALIDAD-COMERCIALES<br>(req. tejedoras + pescadores)';
         displayWharfChewTheFat = 'MASTICAR LA GRASA';
         displayStoryWharfBuyPosca = '¡UFF! *ESO* SÍ QUE TE VA A SALIR PELO EN EL PECHO<br><br>(Duración De Re-Lanzado Es Reducida)';
         displayStoryWharfBuyPrey = 'LOS PECES GRANDES SE COMEN A LOS PEQUEÑOS<br>—RADIOHEAD<br><br>(Recuento De Tilapias Mejoró)';
@@ -3661,6 +3666,7 @@ function Translate(language, bark = true) {
         displayStoryWharfBuyRod = 'AHORA TODOS VERÁN QUE TU CAÑA ES LA MEJOR<br><br>(Peces Tardan Más En Escapar)';
         displayStoryWharfBuyWWF = '«Una de las desventajas de la educación ecológica es que uno vive solo en un mundo de heridas. Gran parte del daño infligido a la tierra es prácticamente invisible para el público general. Un ecologista debe endurecer su caparazón y hacer creer que las consecuencias de la ciencia no son asunto suyo, o bien debe ser el médico que ve las marcas de la muerte en una comunidad que cree estar bien y no quiere que le digan lo contrario.»<br>—Aldo Leopold<br><br>«Intentar y dejar este mundo un poco mejor de como lo encontraste.»<br>—Robert Baden-Powell<br><br>(Recuento De Besugos Goliat Mejoró)';
         displayStoryWharfFishboys = '«‹Estos comeréis de todos los animales que están en las aguas, en el mar y en los ríos: todos los que tienen aletas y escamas, éstos comeréis›».<br><br>Levítico 11:9<br><br><br>Y Él les dijo: «Echad la red a estribor y hallaréis». Así que la echaron, pero ya no tenían fuerzas suficientes para sacar la red por la multitud de peces.<br><br>Evangelio de Juan 21:6<br><br><br>Se te permite pescar y comer peces del mar, como sustento para ti y para los viajeros; pero te está prohibido cazar en tierra mientras estés en estado de iḥrām. Recuerda tu deber hacia Alá, ante Quien seréis reunidos.<br><br>Al-Māʾida 96';
+        displayStoryWharfBuyNets = 'Era un milagro que atraparan algo con esas cosas viejas mohosas.<br><br>(Rendimiento de Pescadores Aumentó 200%)';
         displayTrophyEarned = '¡Trofeo ganado!';
 
 

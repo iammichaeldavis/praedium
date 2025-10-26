@@ -192,12 +192,12 @@ function GameTurn() {
     if (fishState.hasFishermen) {
         let outputThisWeek = 0;
         if (!fishState.hasNets) {
-            lifetimeFishermanCaught[0] += fishermenBounty;
             outputThisWeek = fishermenBounty * filetsPerFish[0];
+            lifetimeFishermanCaught[0] += outputThisWeek;
         }
         else {
-            lifetimeFishermanCaught[1] += fishermenBounty;
             outputThisWeek = fishermenBounty * filetsPerFish[1];
+            lifetimeFishermanCaught[1] += outputThisWeek;
         }
         filetCount += outputThisWeek;
         lifetimeFishermenEarnings += outputThisWeek;
