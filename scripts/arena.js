@@ -1,18 +1,6 @@
 // ۞ ARENA *****************************************************************************************
 // *************************************************************************************************
 
-// --- INIT ----------------------------------------------------------------------------------------
-
-let arenaBet = 100000;
-
-let arenaTotalBet = 0;
-let arenaTotalWin = 0;
-let arenaTotalLoss = 0;
-const arenaWins = [0, 0,];
-const arenaLosses = [0, 0,];
-
-
-
 // --- PLAYER ACTIONS ------------------------------------------------------------------------------
 
 function GoToArena() {
@@ -120,13 +108,6 @@ function PlaceBet(side) {
 
 
 // --- UI ------------------------------------------------------------------------------------------
-
-const imageArena_Backdrop1 = new Image();
-imageArena_Backdrop1.src = 'bitmaps/arena/arenaBG1.png';
-const imageArena_Backdrop2 = new Image();
-imageArena_Backdrop2.src = 'bitmaps/arena/arenaBG2.png';
-const imageArena_Backdrop3 = new Image();
-imageArena_Backdrop3.src = 'bitmaps/arena/arenaBG3.png';
 
 function UpdateArenaDisplay() {
     buttonLeaveArena.innerHTML = displayLabelLeaveArena;

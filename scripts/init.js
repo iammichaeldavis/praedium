@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.23.01-A';
+const version = '1.23.01-B';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -1225,6 +1225,13 @@ let templeStage = 0;
 let templeSpentCount = [0, 0, 0, 0, 0,]; // 0. Mutton, 1. Gold, 2. Silver, 3. Diamonds, 4. Jacinth
 
 let treasuresCount = 0;
+
+let arenaBet = 100000;
+let arenaTotalBet = 0;
+let arenaTotalWin = 0;
+let arenaTotalLoss = 0;
+const arenaWins = [0, 0,];
+const arenaLosses = [0, 0,];
 
 
 
