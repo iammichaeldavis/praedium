@@ -13,6 +13,26 @@ let displayTitles = ['',];
 let displayRelations = ['',];
 let displayStateType = ['',];
 
+let displayMonthPortions = ['',];
+let displaySeasons = ['',];
+let displayEras = ['',];
+let displayWeekOf = '';
+let displayMonthNames = [
+    ['January', 'Enero', 'Ianuarius',],
+    ['February', 'Febrero', 'Februarius',],
+    ['March', 'Marzo', 'Martius',],
+    ['April', 'Abril', 'Aprilis',],
+    ['May', 'Mayo', 'Maius',],
+    ['June', 'Junio', 'Iunius',],
+    ['July', 'Julio', 'Quintilis',],
+    ['August', 'Agosto', 'Sextilis',],
+    ['September', 'Septiembre', 'September',],
+    ['October', 'Octubre', 'October',],
+    ['November', 'Noviembre', 'November',],
+    ['Undecimber', 'Undiciembre', 'Intercalaris',],
+    ['December', 'Diciembre', 'December',],
+];
+
 let displayDefiniteArticle = '';
 let displayThouArt = '';
 let displayItIsI = '';
@@ -1311,6 +1331,23 @@ function Translate(language, bark = true) {
             'SUPERPOWER',
         ];
 
+        displayMonthPortions = [
+            'Mid-',
+            'Late ',
+            'Early ',
+        ];
+        displaySeasons = [
+            'Spring',
+            'Summer',
+            'Autumn',
+            'Winter',
+        ];
+        displayEras = [
+            'B.C.',
+            'A.D.',
+        ];
+        displayWeekOf = ' Week of ';
+
         displayDefiniteArticle = 'THE';
         displayThouArt = 'THOU ART';
         displayItIsI = 'IT IS I, ';
@@ -1675,7 +1712,7 @@ function Translate(language, bark = true) {
         displayHeirConfirm = 'Art thou certain about thine answers?';
         displayHeirComplete = 'IT’S ALL ON YOUR SHOULDERS NOW, CHUM';
 
-        displayStoryRudeJerk = 'A corpulent rival farmer riding atop a clearly-exhausted donkey wanders past the edge of your plot, trotting along the property line.<br><br>He looks you up and down, then bellows: “Why, hello there, neighbor! Nice patch ’a land you got there... not! You might as well face it: you’ll never make it in <i>this</i> world, ya runt! You should probably just give up now!” Then he kicks a cruel heel deep into the belly of his mount, causing the poor thing to empty its bowels. “There’s some fresh manure for ya! You’re gonna need it! Ahh, haw haw haw,” he guffaws, and leads the donkey off back the way he came.<br><br>Boy, what a jerk!';
+        displayStoryRudeJerk = 'A corpulent rival farmer riding atop a clearly-exhausted donkey wanders past the edge of your plot, trotting along the property line.<br><br>He looks you up and down, then bellows: “Why, hello there, neighbor! Nice patch ’a land you got there... not! You might as well face it: you’ll never make it in <i>this</i> world, ya runt! You should probably just give up now!” Then he kicks a cruel heel deep into the belly of his mount, causing the poor thing to empty its bowels. “There’s some fresh manure for ya! You’re gonna need it! Ahh, haw haw haw,” he guffaws, and leads the donkey off, back from whence he came.<br><br>Boy, what a jerk!';
         displayStoryBrokenHoe = 'AWW, NUTS! THE SHAFT OF YOUR HOE JUST BROKE; THAT’S SUCH A SHAME, YOU’D HAD THAT THING FOR AGES. AH, WELL. YOU SPEND THE REST OF THE AFTERNOON IN THE FOREST LOOKING FOR A REPLACEMENT';
         displayStoryFirstTill = 'BEFORE ONE CAN SOW,<br>THE EARTH MUST BE TILLED<br><br><span class="icon Weeds inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon Soil inlineIcon tripleSize"></span><br><br>With considerable effort,<br>weeds give way to soil';
         displayStoryFirstPlant = 'CAST THY SEED<br>UPON THE TILLAGE<br><br><span class="icon Soil inlineIcon tripleSize"></span><span class="icon Sell inlineIcon doubleSize tutorialSell"></span><span class="icon SoilSeeded inlineIcon tripleSize"></span><br><br>Spend one bushel of wheat (' + plantCost + '<span class="icon Wheat inlineIcon"></span>)<br>to seed one acre of soil';
@@ -2641,6 +2678,7 @@ function Translate(language, bark = true) {
             'OCUPADO',
             'SUBYUGADO',
         ];
+
         displayStateType = [
             'DESCONOCIDO',
             'ESTADO LIBRE',
@@ -2648,6 +2686,23 @@ function Translate(language, bark = true) {
             'COLONIA',
             'SUPERPOTENCIA',
         ];
+
+        displayMonthPortions = [
+            'Media ',
+            'Finales ',
+            'Principio ',
+        ];
+        displaySeasons = [
+            'Primavera',
+            'Verano',
+            'Otoño',
+            'Invierno',
+        ];
+        displayEras = [
+            'a.C.',
+            'd.C.',
+        ];
+        displayWeekOf = ' Semana de ';
 
         displayDefiniteArticle = 'EL';
         if (player.gender == 1 || player.gender == 3) { displayDefiniteArticle = 'LA'; }

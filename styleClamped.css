@@ -1008,6 +1008,35 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     text-align: center;
 }
 
+#divGameEventCorpus #divDateline {
+    text-align: center;
+    border-bottom: calc(1px * var(--pixel-scale)) solid black;
+    margin-bottom: calc(16px * var(--pixel-scale));
+    width: 100%;
+    position: relative;
+}
+
+#divGameEventCorpus #divDateline #divDatelineYear {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+}
+
+#divGameEventCorpus #divDateline #divDatelineMonth {
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+}
+
+#divGameEventCorpus #divDateline,
+#divGameEventCorpus #divDateline #divDatelineYear,
+#divGameEventCorpus #divDateline #divDatelineMonth {
+    font-family: 'EB Garamond', serif;
+    font-size: calc(11px * var(--pixel-scale));
+    color: #041204;
+    line-height: calc(13px * var(--pixel-scale));
+}
+
 #divGameEventCorpus #nasirMessage {
     font-family: 'Alegreya Sans SC', serif;
     font-size: calc(18px * var(--pixel-scale));

@@ -864,7 +864,7 @@ function SystemMessage(messageCorpus) {
 
 
 
-function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true) {
+function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true, showDateline = true) {
     if (stopThePresses) { PauseTime(); }
     ///////////////////////////////////////////////////////////////////////////////////////////
     eventFaçade = null; // !!!!!!!!!!!!! 🚨🚨🚨 blank out ALL event art 🚨🚨🚨 !!!!!!!!!!!!!
@@ -877,7 +877,69 @@ function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true) {
     else {
         divGameEventFaçade.style.display = 'none';
     }
-    divGameEventCorpus.innerHTML = eventCorpus;
+    let finalContent = '';
+    if (showDateline) {
+        let stringMonthPortion = displayMonthPortions[0];
+        if (week % 4 == 0) { stringMonthPortion = displayMonthPortions[1]; }
+        else if (week % 4 == 1) { stringMonthPortion = displayMonthPortions[2]; }
+        const monthSet = 2;
+        let stringMonthName = displayMonthNames[0][monthSet];
+        if (week > 48) { stringMonthName = displayMonthNames[12][monthSet]; }
+        else if (week > 44) { stringMonthName = displayMonthNames[11][monthSet]; }
+        else if (week > 40) { stringMonthName = displayMonthNames[10][monthSet]; }
+        else if (week > 36) { stringMonthName = displayMonthNames[9][monthSet]; }
+        else if (week > 32) { stringMonthName = displayMonthNames[8][monthSet]; }
+        else if (week > 28) { stringMonthName = displayMonthNames[7][monthSet]; }
+        else if (week > 24) { stringMonthName = displayMonthNames[6][monthSet]; }
+        else if (week > 20) { stringMonthName = displayMonthNames[5][monthSet]; }
+        else if (week > 16) { stringMonthName = displayMonthNames[4][monthSet]; }
+        else if (week > 12) { stringMonthName = displayMonthNames[3][monthSet]; }
+        else if (week > 8) { stringMonthName = displayMonthNames[2][monthSet]; }
+        else if (week > 4) { stringMonthName = displayMonthNames[1][monthSet]; }
+        let stringDatelineMonth = stringMonthPortion + stringMonthName;
+
+        let seasonalWeek = 1;
+        if (week < 14) { seasonalWeek = week; }
+        else if (week % 13 == 0) { seasonalWeek = 13; }
+        else { seasonalWeek = (week % 13); }
+        let ordinalAbbrev = 'th';
+        if (seasonalWeek == 1) { ordinalAbbrev = 'st'; }
+        else if (seasonalWeek == 2) { ordinalAbbrev = 'nd'; }
+        else if (seasonalWeek == 3) { ordinalAbbrev = 'rd'; }
+        if (player.speaks == 'Spanish') {
+            if (seasonalWeek == 1) { ordinalAbbrev = 'er'; }
+            else if (seasonalWeek == 2) { ordinalAbbrev = 'do'; }
+            else if (seasonalWeek == 3) { ordinalAbbrev = 'er'; }
+            else if (seasonalWeek == 4) { ordinalAbbrev = 'to'; }
+            else if (seasonalWeek == 5) { ordinalAbbrev = 'to'; }
+            else if (seasonalWeek == 6) { ordinalAbbrev = 'to'; }
+            else if (seasonalWeek == 7) { ordinalAbbrev = 'mo'; }
+            else if (seasonalWeek == 8) { ordinalAbbrev = 'vo'; }
+            else if (seasonalWeek == 9) { ordinalAbbrev = 'no'; }
+            else if (seasonalWeek == 10) { ordinalAbbrev = 'mo'; }
+            else if (seasonalWeek == 11) { ordinalAbbrev = 'mo'; }
+            else if (seasonalWeek == 12) { ordinalAbbrev = 'mo'; }
+            else if (seasonalWeek == 13) { ordinalAbbrev = 'er'; }
+        }
+        let currentSeason = 0;
+        if (week > 39) { currentSeason = 3; }
+        else if (week > 26) { currentSeason = 2; }
+        else if (week > 13) { currentSeason = 1; }
+        let stringDatelineSeason = seasonalWeek + ordinalAbbrev + displayWeekOf + displaySeasons[currentSeason];
+
+        let formattedYear = 0;
+        let currentEra = displayEras[0];
+        if (year < 201) { formattedYear = 201 - year; }
+        else {
+            formattedYear = year - 200;
+            currentEra = displayEras[1];
+        }
+        let stringDatelineYear = formattedYear + '&nbsp;' + currentEra;
+
+        finalContent += '<div id="divDateline"><div id="divDatelineMonth">' + stringDatelineMonth + '</div>' + stringDatelineSeason + '<div id="divDatelineYear">' + stringDatelineYear + '</div></div>';
+    }
+    finalContent += eventCorpus;
+    divGameEventCorpus.innerHTML = finalContent;
     player.seesGameEvent = true;
     UpdateDisplay();
     buttonGameEventDismiss.focus({ focusVisible: false });

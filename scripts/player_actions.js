@@ -852,7 +852,7 @@ function PlotTill(robota = false) {
     if (farmStage == 0 && !player.canPlant) {
         player.canPlant = true;
         player.seesInventory = true;
-        if (player.likesStory) { GameEvent(displayStoryFirstTill); }
+        if (player.likesStory) { GameEvent(displayStoryFirstTill, null, true, false); }
     }
 
     let taskComplete = false;
@@ -889,7 +889,7 @@ function PlotPlant(robota = false) {
 
     if (farmStage == 0 && !player.canWater) {
         player.canWater = true;
-        if (player.likesStory) { GameEvent(displayStoryFirstPlant); }
+        if (player.likesStory) { GameEvent(displayStoryFirstPlant, null, true, false); }
     }
 
     let taskComplete = false;
@@ -947,7 +947,7 @@ function PlotWater(robota = false) {
 
     if (farmStage == 0 && !player.canHarvest) {
         player.canHarvest = true;
-        if (player.likesStory) { GameEvent(displayStoryFirstWater); }
+        if (player.likesStory) { GameEvent(displayStoryFirstWater, null, true, false); }
     }
 
     let taskComplete = false;
@@ -1148,7 +1148,7 @@ function PlotHarvest(robota = false) {
         if (farmStage == 0 && !player.hasFarmedOnce) {
             player.hasFarmedOnce = true;
             player.canBuyLand = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstHarvest); }
+            if (player.likesStory) { GameEvent(displayStoryFirstHarvest, null, true, false); }
         }
         if (hintLevel == 3 || hintLevel == 7) { hintLevel++; }
         UpdateDisplay();
