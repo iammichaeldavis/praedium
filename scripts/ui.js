@@ -5959,6 +5959,11 @@ function UpdateText() {
     labelToggleProfanity.innerHTML = displayProfanity;
     spanOptionLanguage.innerHTML = displayLanguage;
     spanOptionWindowSize.innerHTML = displayWindowSize;
+    spanOptionYearFormat.innerHTML = displayYearFormat;
+    buttonYearModern.innerHTML = displayModern;
+    buttonYearRoman.innerHTML = displayRoman;
+    buttonYearHebrew.innerHTML = displayHebrew;
+    buttonYearHan.innerHTML = displayHan;
     divOptionsFlavour.innerHTML = displayOptionsFlavourFinal;
     buttonOptions.innerHTML = displayOptions;
     spanCheevoText.innerHTML = displayCheevo;

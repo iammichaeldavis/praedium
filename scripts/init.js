@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.23.01-D';
+const version = '1.23.02-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -276,6 +276,11 @@ const spanOptionWindowSize = document.getElementById('spanOptionWindowSize');
 const buttonWindow1x = document.getElementById('buttonWindow1x');
 const buttonWindow2x = document.getElementById('buttonWindow2x');
 const buttonWindowAuto = document.getElementById('buttonWindowAuto');
+const spanOptionYearFormat = document.getElementById('spanOptionYearFormat');
+const buttonYearModern = document.getElementById('buttonYearModern');
+const buttonYearRoman = document.getElementById('buttonYearRoman');
+const buttonYearHebrew = document.getElementById('buttonYearHebrew');
+const buttonYearHan = document.getElementById('buttonYearHan');
 
 const divCalendar = document.getElementById('divCalendar');
 const divYear = document.getElementById('divYear');
@@ -609,6 +614,7 @@ let canvasFireworks = null;
 let canvasFireworksContext = null;
 
 let resolutionScale = 0;
+let yearFormat = 0;
 
 const formatterEnglish = new Intl.NumberFormat('en-US');
 const formatterSpanish = new Intl.NumberFormat('es');
@@ -619,6 +625,7 @@ let gameTurn = 1; // 📅
 const yearAtStartProlepticGregorian = -200; // 200 B.C. ✝️
 const yearAtStartHebrew = 3560; // according to https://sacred-texts.com/time/cal/jdate.htm ✡️
 const yearAtStartRoman = 554; // according to https://en.wikipedia.org/wiki/Ab_urbe_condita 🔥🐂🔥
+const yearAtStartHanDynasty = 2498; // counting from the start of the reign of Huangdi https://en.wikipedia.org/wiki/Yellow_Emperor 🐉⛩️🐼
 const playerBirthYear = yearAtStartHebrew - player.age;
 const playerBirthWeek = 21;
 let year = 1;

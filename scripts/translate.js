@@ -46,6 +46,11 @@ let displayAnimations = '';
 let displayProfanity = '';
 let displayLanguage = '';
 let displayWindowSize = '';
+let displayYearFormat = '';
+let displayModern = '';
+let displayRoman = '';
+let displayHebrew = '';
+let displayHan = '';
 let displayInStock = '';
 let displayOnDisplay = '';
 let displayGoods = '';
@@ -1361,6 +1366,11 @@ function Translate(language, bark = true) {
         displayProfanity = 'Profanity?';
         displayLanguage = 'Language:';
         displayWindowSize = 'Window Size:';
+        displayYearFormat = 'Year Format:';
+        displayModern = 'Modern';
+        displayRoman = 'Roman';
+        displayHebrew = 'Hebrew';
+        displayHan = 'Han';
         displayInStock = 'In Stock';
         displayOnDisplay = 'On Display';
         displayGoods = 'Goods';
@@ -2719,6 +2729,11 @@ function Translate(language, bark = true) {
         displayProfanity = '¿Blasfemia?';
         displayLanguage = 'Idioma:';
         displayWindowSize = 'Tamaño de la Ventana:';
+        displayYearFormat = 'Formato Año:';
+        displayModern = 'Moderna';
+        displayRoman = 'Romana';
+        displayHebrew = 'Hebreo';
+        displayHan = 'Han';
         displayInStock = 'En Stock';
         displayOnDisplay = 'En Exhibición';
         displayGoods = 'Bienes';
@@ -3735,7 +3750,11 @@ function Translate(language, bark = true) {
     divPsxSubtitle.innerHTML = displayTrophyEarned;
 
     const divider = '<div class="divider">♦♦♦ ♦ ♦♦♦</div>';
-    displayInfoFinal = '<div id="divInfoTitle">' + displayGameTitle + '<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) MMXXV Davis Laboratory, SMC-Pvt. Ltd.</span></div>';
+    let publicationYear = 2025;
+    if (yearFormat == 1) { publicationYear = RomanceNumber(publicationYear); }
+    else if (yearFormat == 2) { publicationYear = CircumciseNumber(publicationYear); }
+    else if (yearFormat == 3) { publicationYear = SteepNumberInGreenTea(publicationYear); }
+    displayInfoFinal = '<div id="divInfoTitle">' + displayGameTitle + '<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) ' + publicationYear + ' Davis Laboratory</span></div>';
     displayInfoFinal += displayInfoMadeFor + '<br><br>' + displayInfoMadeWith + '<br><br>' + displayInfoDedication + '<br><br>' + displayInfoThanks + '<br><br>' + displayInfoMadeInFlorida;
     displayInfoFinal += divider + displayInfoScripture;
     displayLegalFinal = displayBoilerplate + divider + displayLegalQuote;
@@ -3832,6 +3851,7 @@ const gratitudeList = [
     'Tobias “Tobybear” Fleischer', // archive.org/details/lucas-ripper
     'Eric Fredricksen', // grumdrig.com/u6map
     'Kenneth Garagnon',
+    'Gemini AI',
     'Obi Wan Ginobili', // spriters-resource.com/ms_dos/gabrielknightsinsofthefathers/asset/56478/
     'Sean Glavin',
     'GOG', // gog.com

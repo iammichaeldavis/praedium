@@ -265,6 +265,7 @@ function ContinuePreviousGame() {
         heirDate[1] = loadedReport.calendar[5][1];
         timeAtStart = loadedReport.timestamps[1];
         timeAtWin = loadedReport.timestamps[2];
+        yearFormat = loadedReport.system[1];
         /////////////////////////////////////////////////////////////////////////////////////////
         farmStage = loadedReport.stages[0];
         warehouseStage = loadedReport.stages[1];
@@ -547,6 +548,7 @@ function ContinuePreviousGame() {
         if (hintLevel == 13) { buttonQ.style.display = 'none'; }
         if (meditateCount > meditateLimit) { superMeditatorWizardPowersActivated = true; }
         Translate(player.speaks, false); // populates the map details header correctly
+        SetYearFormat(yearFormat);
         StartTime(); // ...and everything *should* just work 🤞😬
     }
 }
@@ -797,7 +799,7 @@ function CollateGameStateReport(loud = false) {
         stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel, relaxStage, meditateCount, prayersCount, templeStage, revealedWisdom, stageStage,],
         relations: [mapProvinces[1][2], mapProvinces[2][2], mapProvinces[3][2],],
         timestamps: [timeAtSave, timeAtStart, timeAtWin,],
-        system: [resolutionScale,],
+        system: [resolutionScale, yearFormat,],
         v: version,
     };
     if (loud) {
@@ -896,7 +898,7 @@ function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true, show
         else if (week > 12) { stringMonthName = displayMonthNames[3][monthSet]; }
         else if (week > 8) { stringMonthName = displayMonthNames[2][monthSet]; }
         else if (week > 4) { stringMonthName = displayMonthNames[1][monthSet]; }
-        let stringDatelineMonth = stringMonthPortion + stringMonthName;
+        const stringDatelineMonth = stringMonthPortion + stringMonthName;
 
         let seasonalWeek = 1;
         if (week < 14) { seasonalWeek = week; }
@@ -925,16 +927,31 @@ function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true, show
         if (week > 39) { currentSeason = 3; }
         else if (week > 26) { currentSeason = 2; }
         else if (week > 13) { currentSeason = 1; }
-        let stringDatelineSeason = seasonalWeek + ordinalAbbrev + displayWeekOf + displaySeasons[currentSeason];
+        const stringDatelineSeason = seasonalWeek + ordinalAbbrev + displayWeekOf + displaySeasons[currentSeason];
 
-        let formattedYear = 0;
-        let currentEra = displayEras[0];
-        if (year < 201) { formattedYear = 201 - year; }
-        else {
-            formattedYear = year - 200;
-            currentEra = displayEras[1];
+        let stringDatelineYear = '';
+        if (yearFormat == 0) {
+            let formattedYear = 0;
+            let currentEra = displayEras[0];
+            if (year < 201) { formattedYear = 201 - year; }
+            else {
+                formattedYear = year - 200;
+                currentEra = displayEras[1];
+            }
+            stringDatelineYear = formattedYear + '&nbsp;' + currentEra;
         }
-        let stringDatelineYear = formattedYear + '&nbsp;' + currentEra;
+        else if (yearFormat == 1) {
+            let formattedYear = yearAtStartRoman + (year - 1);
+            stringDatelineYear = displayYear + ' ' + RomanceNumber(formattedYear);
+        }
+        else if (yearFormat == 2) {
+            let formattedYear = yearAtStartHebrew + (year - 1);
+            stringDatelineYear = 'שָׁנָה' + ' ' + CircumciseNumber(formattedYear);
+        }
+        else if (yearFormat == 3) {
+            let formattedYear = yearAtStartHanDynasty + (year - 1);
+            stringDatelineYear = '<div id="chineseNumerals">年' + SteepNumberInGreenTea(formattedYear) + '</div>';
+        }
 
         finalContent += '<div id="divDateline"><div id="divDatelineMonth">' + stringDatelineMonth + '</div>' + stringDatelineSeason + '<div id="divDatelineYear">' + stringDatelineYear + '</div></div>';
     }
@@ -1045,6 +1062,166 @@ function RomanceNumber(originalNumber) {
 
 
 
+function CircumciseNumber(originalNumber) {
+    if (originalNumber <= 0) {
+        return ''; // Hebrew numerals typically don't represent zero or negative numbers
+    }
+    const hebrewThousands = [
+        '',
+        'א׳',
+        'ב׳',
+        'ג׳',
+        'ד׳',
+        'ה׳',
+        'ו׳',
+        'ז׳',
+        'ח׳',
+        'ט׳',
+    ];
+    const hebrewHundreds = [
+        '',
+        'ק',
+        'ר',
+        'ש',
+        'ת',
+        'תק',
+        'תר',
+        'תש',
+        'תת',
+        'תתק',
+    ];
+    const hebrewTens = [
+        '',
+        'י',
+        'כ',
+        'ל',
+        'מ',
+        'נ',
+        'ס',
+        'ע',
+        'פ',
+        'צ',
+    ];
+    const hebrewOnes = [
+        '',
+        'א',
+        'ב',
+        'ג',
+        'ד',
+        'ה',
+        'ו',
+        'ז',
+        'ח',
+        'ט',
+    ];
+    let result = '';
+
+    const digitThousands = Math.floor(originalNumber / 1000);
+    if (digitThousands > 0) {
+        result += hebrewThousands[digitThousands] + ' '; // Add space for separation
+        originalNumber %= 1000;
+    }
+    const digitHundreds = Math.floor(originalNumber / 100);
+    if (digitHundreds > 0) {
+        result += hebrewHundreds[digitHundreds];
+        originalNumber %= 100;
+    }
+    if (originalNumber === 15) {
+        result += 'טו'; // Tet-Vav
+    }
+    else if (originalNumber === 16) {
+        result += 'טז'; // Tet-Zayin
+    }
+    else {
+        const digitTens = Math.floor(originalNumber / 10);
+        const digitOnes = originalNumber % 10;
+        result += hebrewTens[digitTens];
+        result += hebrewOnes[digitOnes];
+    }
+    return result;
+}
+
+
+
+function SteepNumberInGreenTea(originalNumber) {
+    if (!Number.isInteger(originalNumber) || originalNumber < 0) {
+        return ''; // Input must be a non-negative integer
+    }
+    if (originalNumber === 0) {
+        return '零';
+    }
+    const digits = [
+        '零',
+        '一',
+        '二',
+        '三',
+        '四',
+        '五',
+        '六',
+        '七',
+        '八',
+        '九',
+    ];
+    const units = [
+        '',
+        '十',
+        '百',
+        '千',
+    ];
+    const bigUnits = [
+        '',
+        '万',
+        '亿',
+        '兆',
+    ];
+    let result = '';
+    let numStr = String(originalNumber);
+    let len = numStr.length;
+    // Process in groups of four (万, 亿, etc.)
+    for (let i = 0; i < len; i += 4) {
+        let chunk = numStr.substring(Math.max(0, len - i - 4), len - i);
+        let chunkResult = '';
+        let zeroCount = 0;
+        for (let j = 0; j < chunk.length; j++) {
+            let digit = parseInt(chunk[j]);
+            let unitIndex = chunk.length - 1 - j;
+            if (digit === 0) {
+                zeroCount++;
+            } else {
+                if (zeroCount > 0) {
+                    chunkResult += '零';
+                    zeroCount = 0;
+                }
+                chunkResult += digits[digit] + units[unitIndex];
+            }
+        }
+        // Handle trailing zeros in a chunk
+        if (zeroCount > 0 && chunkResult.length > 0 && !chunkResult.endsWith('零')) {
+            chunkResult += '零';
+        }
+        // Add big unit if applicable
+        if (chunkResult.length > 0 && i / 4 < bigUnits.length) {
+            chunkResult += bigUnits[i / 4];
+        }
+        result = chunkResult + result;
+    }
+    // Special handling for numbers less than 20 (e.g., '十一' instead of '一十')
+    if (originalNumber < 20 && originalNumber % 10 !== 0) {
+        result = result.replace('一十', '十');
+    }
+    // Clean up leading '零' if not just '零'
+    if (result.startsWith('零') && result.length > 1) {
+        result = result.substring(1);
+    }
+    // Clean up trailing '零' if not just '零'
+    if (result.endsWith('零') && result.length > 1) {
+        result = result.substring(0, result.length - 1);
+    }
+    return result;
+}
+
+
+
 function ZeroArray(targetArray) {
     FillArray(targetArray, 0);
 }
@@ -1146,6 +1323,21 @@ function SetWidth(multiplier) {
         const rootElement = document.documentElement;
         rootElement.style.setProperty('--pixel-scale', '');
     }
+}
+
+
+
+function SetYearFormat(desiredFormat) {
+    yearFormat = desiredFormat;
+    buttonYearModern.classList.remove('selectedOption');
+    buttonYearRoman.classList.remove('selectedOption');
+    buttonYearHebrew.classList.remove('selectedOption');
+    buttonYearHan.classList.remove('selectedOption');
+    if (desiredFormat == 0) { buttonYearModern.classList.add('selectedOption'); }
+    else if (desiredFormat == 1) { buttonYearRoman.classList.add('selectedOption'); }
+    else if (desiredFormat == 2) { buttonYearHebrew.classList.add('selectedOption'); }
+    else if (desiredFormat == 3) { buttonYearHan.classList.add('selectedOption'); }
+    Translate(player.speaks, false); // this repopulates the binding of the year format in the info window
 }
 
 

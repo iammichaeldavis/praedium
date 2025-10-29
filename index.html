@@ -41,8 +41,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap">
-    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.23.01.3">
-    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.23.01.3">
+    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.23.02.0">
+    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.23.02.0">
     <script>history.scrollRestoration = 'manual';</script>
 </head>
 
@@ -689,8 +689,14 @@
             <button id="buttonEnglish">English</button><button id="buttonSpanish">Español</button>
             <div id="divOptionWindowSize">
                 <span id="spanOptionWindowSize"></span>
-                <button id="buttonWindow1x" onclick="SetWidth(1)">1x</button><button id="buttonWindow2x" onclick="SetWidth(2)">2x</button><button id="buttonWindowAuto"
-                    onclick="SetWidth(0)" class="selectedOption">auto</button>
+                <button id="buttonWindow1x" onclick="SetWidth(1);">1x</button><button id="buttonWindow2x" onclick="SetWidth(2);">2x</button><button id="buttonWindowAuto"
+                    onclick="SetWidth(0);" class="selectedOption">auto</button>
+            </div>
+            <div id="divOptionYearFormat">
+                <span id="spanOptionYearFormat"></span>
+                <button id="buttonYearModern" onclick="SetYearFormat(0);" class="selectedOption">Modern</button><button id="buttonYearRoman"
+                    onclick="SetYearFormat(1);">Roman</button><button id="buttonYearHebrew" onclick="SetYearFormat(2);">Hebrew</button><button id="buttonYearHan"
+                    onclick="SetYearFormat(3);">Han</button>
             </div>
             <div id="divOptionsFlavour"></div>
             <button id="buttonOptionsDismiss"></button>

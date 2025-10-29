@@ -105,6 +105,9 @@ button.disabled s {
 #buttonEnglish,
 #buttonWindow1x,
 #buttonWindow2x,
+#buttonYearModern,
+#buttonYearRoman,
+#buttonYearHebrew,
 #buttonOptions,
 #buttonI,
 #buttonQ,
@@ -218,7 +221,11 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #buttonSpanish,
 #buttonWindow1x,
 #buttonWindow2x,
-#buttonWindowAuto {
+#buttonWindowAuto,
+#buttonYearModern,
+#buttonYearRoman,
+#buttonYearHebrew,
+#buttonYearHan {
     font-size: calc(12px * var(--pixel-scale));
 }
 
@@ -336,7 +343,11 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #buttonSpanish,
 #buttonWindow1x,
 #buttonWindow2x,
-#buttonWindowAuto {
+#buttonWindowAuto,
+#buttonYearModern,
+#buttonYearRoman,
+#buttonYearHebrew,
+#buttonYearHan {
     color: #b6b600;
     border: calc(1px * var(--pixel-scale)) solid #b6b600;
     background: #fcfce5;
@@ -347,7 +358,11 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #buttonSpanish:hover,
 #buttonWindow1x:hover,
 #buttonWindow2x:hover,
-#buttonWindowAuto:hover {
+#buttonWindowAuto:hover,
+#buttonYearModern:hover,
+#buttonYearRoman:hover,
+#buttonYearHebrew:hover,
+#buttonYearHan:hover {
     color: #c2c200;
     border: calc(1px * var(--pixel-scale)) solid #c2c200;
     background: #ffffc4;
@@ -358,7 +373,11 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #buttonSpanish:active,
 #buttonWindow1x:active,
 #buttonWindow2x:active,
-#buttonWindowAuto:active {
+#buttonWindowAuto:active,
+#buttonYearModern:active,
+#buttonYearRoman:active,
+#buttonYearHebrew:active,
+#buttonYearHan:active {
     color: #808000;
     border: calc(1px * var(--pixel-scale)) solid #808000;
     background: #dede87;
@@ -1037,6 +1056,12 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     line-height: calc(13px * var(--pixel-scale));
 }
 
+#divGameEventCorpus #divDateline #divDatelineYear #chineseNumerals {
+    font-family: 'EB Garamond', serif;
+    font-size: calc(9px * var(--pixel-scale));
+    color: #041204;
+}
+
 #divGameEventCorpus #nasirMessage {
     font-family: 'Alegreya Sans SC', serif;
     font-size: calc(18px * var(--pixel-scale));
@@ -1338,7 +1363,8 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divModalOptions #spanOptionLanguage,
-#divModalOptions #spanOptionWindowSize {
+#divModalOptions #spanOptionWindowSize,
+#divModalOptions #spanOptionYearFormat {
     font-family: 'EB Garamond', serif;
     font-size: calc(18px * var(--pixel-scale));
     color: #b6b600;
@@ -1347,6 +1373,10 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divModalOptions #divOptionWindowSize {
+    margin-top: calc(16px * var(--pixel-scale));
+}
+
+#divModalOptions #divOptionYearFormat {
     margin-top: calc(16px * var(--pixel-scale));
 }
 
