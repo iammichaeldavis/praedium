@@ -1118,7 +1118,7 @@ function CircumciseNumber(originalNumber) {
 
     const digitThousands = Math.floor(originalNumber / 1000);
     if (digitThousands > 0) {
-        result += hebrewThousands[digitThousands] + ' '; // Add space for separation
+        result += hebrewThousands[digitThousands];
         originalNumber %= 1000;
     }
     const digitHundreds = Math.floor(originalNumber / 100);
