@@ -176,19 +176,6 @@ function GameTurn() {
 
     if (player.hasBakery) { WorkshopProduction(); }
 
-    if (player.isAt == 'Map' && player.hasHelpedMiners && player.hasHelpedShepherds && !player.hasBeenSummoned) {
-        player.hasBeenSummoned = true;
-        gameEventTrigger = true;
-        mapProvinces[2][2] = 1;
-        gameEventContainer = displayStoryFarmersSummon;
-    }
-
-    if (player.isAt == 'Farmers' && !player.hasBeenReceived) {
-        player.hasBeenReceived = true;
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryFarmersFirstImpression;
-    }
-
     if (fishState.hasFishermen) {
         let outputThisWeek = 0;
         if (!fishState.hasNets) {
@@ -221,72 +208,74 @@ function GameTurn() {
         }
     }
 
-    if (year == 12 && week == 12) {
+    // -- FLAVOUR TEXT EVENTS --------------------------------------------------------------------------------------
+    if (year == 13 && week == 12) {
+        // en.wikipedia.org/wiki/Treaty_of_Apamea (week unknown, chosen at random)
         gameEventTrigger = true;
         gameEventContainer = displayStorySeleucids;
     }
-
-    if (year == 33 && week == 25) {
+    if (year == 34 && week == 25) {
+        // en.wikipedia.org/wiki/Maccabean_Revolt (week unknown, chosen at random)
         gameEventTrigger = true;
         gameEventContainer = displayStoryMaccabees;
     }
-
-    if (year == 55 && week == 10) {
+    if (year == 55 && week == 20) {
+        // en.wikipedia.org/wiki/Battle_of_Corinth_(146_BC) (battle occurred in summertime)
         gameEventTrigger = true;
         gameEventContainer = displayStoryRomanConquestofGreece;
     }
-
-    if (year == 79 && week == 20) {
+    if (year == 79 && week == 30) {
+        // en.wikipedia.org/wiki/Roman%E2%80%93Gallic_wars (years long conflict, week chosen at random)
         gameEventTrigger = true;
         gameEventContainer = displayStoryGaul;
     }
-
-    if (year == 109 && week == 45) {
+    if (year == 110 && week == 45) {
+        // en.wikipedia.org/wiki/Social_War_(91%E2%80%9387_BC) ('The war started in late 91 BC', according to Wiki)
         gameEventTrigger = true;
         gameEventContainer = displayStorySocialWar;
     }
-
     if (year == 125 && week == 33) {
+        // (⚠️⚠️⚠️ for the life of me I can not find/remember the source where I originally found this information! 🤬 ⚠️⚠️⚠️)
         gameEventTrigger = true;
         gameEventContainer = displayStoryRomanBreadRiot;
     }
-
-    if (year == 129 && week == 45) {
+    if (year == 130 && week == 14) {
+        // en.wikipedia.org/wiki/Battle_of_the_Silarius_River (battle occurred in April)
         gameEventTrigger = true;
         gameEventContainer = displayStorySpartacus;
     }
-
-    if (year == 137 && week == 18) {
+    if (year == 138 && week == 24) {
+        // en.wikipedia.org/wiki/Siege_of_Jerusalem_(63_BC) (supposedly took place in June or July)
         gameEventTrigger = true;
         gameEventContainer = displayStoryJerusalem;
     }
-
-    if (year == 150 && week == 20) {
+    if (year == 151 && week == 37) {
+        // en.wikipedia.org/wiki/Gallic_Wars ('There is no precise end date to the war', according to Wiki; week chosen at random)
         gameEventTrigger = true;
         gameEventContainer = displayStoryRomanConquestofFrance;
     }
-
-    if (year == 155 && week == 2) {
+    if (year == 156 && week == 2) {
+        // en.wikipedia.org/wiki/Julian_calendar ('It took effect on 1 January 45 BC', according to Wiki)
         gameEventTrigger = true;
         gameEventContainer = displayStoryJulian;
     }
-
-    if (year == 156 && week == 11) {
+    if (year == 157 && week == 11) {
+        // en.wikipedia.org/wiki/Assassination_of_Julius_Caesar (Beware the Ides of March)
         gameEventTrigger = true;
         gameEventContainer = displayStoryIdesOfMarch;
     }
-
-    if (year == 158 && week == 42) {
+    if (year == 159 && week == 40) {
+        // en.wikipedia.org/wiki/Battle_of_Philippi (October 23rd)
         gameEventTrigger = true;
         gameEventContainer = displayStoryRevenge;
     }
-
-    if (year == 170 && week == 35) {
+    if (year == 171 && week == 30) {
+        // en.wikipedia.org/wiki/Death_of_Cleopatra (either August 10th or 12th)
         gameEventTrigger = true;
         gameEventContainer = displayStoryCleopatra;
     }
-
-    if (year == 173 && week == 3) {
+    if (year == 174 && week == 4) {
+        // en.wikipedia.org/wiki/Principate (January 27th)
         gameEventTrigger = true;
         gameEventContainer = displayStoryRomanEmpire;
     }
@@ -295,17 +284,44 @@ function GameTurn() {
         gameEventTrigger = true;
         gameEventContainer = displayStory450Years;
     }
-
     if (year == 970 && week == 2) {
         gameEventTrigger = true;
         gameEventContainer = displayStory900Years;
     }
-
     if (year == 970 && week == 6) {
         gameEventTrigger = true;
         gameEventContainer = displayStory901Years;
     }
 
+    if (player.hasBecomeHeir && week == heirDate[0] && !player.hasCelebratedAnniversary) {
+        player.hasCelebratedAnniversary = true;
+        gameEventTrigger = true;
+        Translate(player.speaks, false); // not sure if this is necessary or not (we're probably covered from when gender is set, for example, but why risk it?)
+        gameEventContainer = displayStoryFirstAnniversary;
+    }
+
+    if (player.hasBecomeHeir && week == heirAttributes.birthday[3]) { heirAttributes.age[1]++; }
+    if (player.hasBecomeHeir && week == heirAttributes.birthday[3] && !player.hasCelebratedBirthday) {
+        player.hasCelebratedBirthday = true;
+        gameEventTrigger = true;
+        Translate(player.speaks, false); // this repopulates the correct year for the string used in the following method call
+        gameEventContainer = displayStoryFirstBirthday;
+    }
+
+    // -- CRITICAL PATH EVENTS -------------------------------------------------------------------------------------
+    if (player.isAt == 'Map' && player.hasHelpedMiners && player.hasHelpedShepherds && !player.hasBeenSummoned) {
+        player.hasBeenSummoned = true;
+        gameEventTrigger = true;
+        mapProvinces[2][2] = 1;
+        gameEventContainer = displayStoryFarmersSummon;
+    }
+    if (player.isAt == 'Farmers' && !player.hasBeenReceived) {
+        player.hasBeenReceived = true;
+        gameEventTrigger = true;
+        gameEventContainer = displayStoryFarmersFirstImpression;
+    }
+
+    // -- WRAP UP --------------------------------------------------------------------------------------------------
     if (player.likesRecords) {
         //snapshotThisTurn = CollateGameStateReport();
         //reportOutputToWriteToDiskForDataAnalysis = snapshotThisTurn - snapshotLastTurn;

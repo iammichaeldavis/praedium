@@ -397,7 +397,8 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #buttonPriorityColon,
 #buttonPriorityOption {
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 #buttonTillDecal {
@@ -900,7 +901,8 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divSystemMessageCorpus,
-#divSystemMessageCorpus .nobreak {
+#divSystemMessageCorpus .nobreak,
+#divSystemMessageCorpus i {
     font-family: 'EB Garamond', serif;
     font-size: calc(18px * var(--pixel-scale));
     color: #040412;
@@ -1029,7 +1031,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 
 #divGameEventCorpus #divDateline {
     text-align: center;
-    border-bottom: calc(1px * var(--pixel-scale)) solid black;
+    border-bottom: calc(1px * var(--pixel-scale)) solid #24b600;
     margin-bottom: calc(16px * var(--pixel-scale));
     width: 100%;
     position: relative;
@@ -1052,7 +1054,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #divGameEventCorpus #divDateline #divDatelineMonth {
     font-family: 'EB Garamond', serif;
     font-size: calc(11px * var(--pixel-scale));
-    color: #041204;
+    color: #24b600;
     line-height: calc(13px * var(--pixel-scale));
 }
 
@@ -1065,27 +1067,32 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #divGameEventCorpus #nasirMessage {
     font-family: 'Alegreya Sans SC', serif;
     font-size: calc(18px * var(--pixel-scale));
-    color: #041204;
+    color: Maroon;
     line-height: calc(21px * var(--pixel-scale));
     margin-top: calc(16px * var(--pixel-scale));
-    border: calc(1px * var(--pixel-scale)) solid black;
+    border: calc(1px * var(--pixel-scale)) solid Maroon;
     padding: calc(5px * var(--pixel-scale)) calc(15px * var(--pixel-scale));
     text-align: center;
+    background: rgb(255, 245, 247);
 }
 
 #divGameEventCorpus #nasirMessage i,
 #divGameEventCorpus #nasirMessage b {
     font-family: 'Alegreya Sans SC', serif;
     font-size: calc(18px * var(--pixel-scale));
-    color: #041204;
+    color: Maroon;
     line-height: calc(21px * var(--pixel-scale));
+}
+
+#divGameEventCorpus #nasirMessage s {
+    color: Maroon;
 }
 
 #divGameEventCorpus #nasirMessage #starBilling,
 #divGameEventCorpus #nasirMessage #starBilling b {
     font-family: 'Alegreya Sans SC', serif;
     font-size: calc(30px * var(--pixel-scale));
-    color: #041204;
+    color: Maroon;
     line-height: calc(35px * var(--pixel-scale));
 }
 
@@ -1094,7 +1101,7 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 #divGameEventCorpus #nasirMessage #productionMasthead b i {
     font-family: 'Alegreya Sans SC', serif;
     font-size: calc(40px * var(--pixel-scale));
-    color: #041204;
+    color: Maroon;
     line-height: calc(46px * var(--pixel-scale));
 }
 
@@ -1192,6 +1199,11 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     text-align: justify;
 }
 
+#divGameEventCorpus #spanYearNobreak {
+    color: #041204;
+    white-space: nowrap;
+}
+
 #divGameEventCorpus #bookCite {
     font-family: 'EB Garamond', serif;
     font-size: calc(18px * var(--pixel-scale));
@@ -1265,6 +1277,49 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     line-height: calc(21px * var(--pixel-scale));
     text-align: justify;
     font-style: italic;
+}
+
+#divGameEventCorpus #imgTentIcon {
+    width: calc(44px * var(--pixel-scale));
+    height: calc(54px * var(--pixel-scale));
+}
+
+#divGameEventCorpus #imgTributeTreasure {
+    width: calc(104px * var(--pixel-scale));
+    height: calc(104px * var(--pixel-scale));
+}
+
+#divGameEventCorpus #imgPicnicBasket {
+    display: block;
+    margin: 0 auto;
+    width: calc(21px * var(--pixel-scale) * 3);
+    height: calc(18px * var(--pixel-scale) * 3);
+}
+
+#divGameEventCorpus .imgNationalEmblem {
+    width: calc(40px * var(--pixel-scale) * 4);
+    height: calc(40px * var(--pixel-scale) * 4);
+}
+
+#divGameEventCorpus #EmblemMiners {
+    border: calc(4px * var(--pixel-scale) * 4) solid #ff0000;
+}
+
+#divGameEventCorpus #EmblemFarmers {
+    border: calc(4px * var(--pixel-scale) * 4) solid #000395;
+}
+
+#divGameEventCorpus #EmblemShepherds {
+    border: calc(4px * var(--pixel-scale) * 4) solid #b000a2;
+}
+
+#divGameEventCorpus #EmblemHero {
+    border: calc(4px * var(--pixel-scale) * 4) solid #ffcb24;
+}
+
+#divGameEventCorpus #imgShipPainting {
+    width: calc(312px * var(--pixel-scale));
+    height: calc(380px * var(--pixel-scale));
 }
 
 
@@ -1507,27 +1562,31 @@ body #divWidthClamp .divCalendarWidthClamped {
     color: #fad15a;
     text-shadow: calc(1px * var(--pixel-scale)) 0 0 #004203, calc(1px * var(--pixel-scale)) calc(-1px * var(--pixel-scale)) 0 #004203, 0 calc(-1px * var(--pixel-scale)) 0 #004203, calc(-1px * var(--pixel-scale)) 0 0 #009000, calc(-1px * var(--pixel-scale)) calc(1px * var(--pixel-scale)) 0 #009000, 0 calc(1px * var(--pixel-scale)) 0 #009000, calc(1px * var(--pixel-scale)) calc(1px * var(--pixel-scale)) 0 #004203, calc(-1px * var(--pixel-scale)) calc(-1px * var(--pixel-scale)) 0 #004203;
     user-select: none;
+    white-space: nowrap;
 }
 
 #divRuneSeason {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 #divStonesSeason {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 #divEmbossZodiacChinese {
     width: calc(32px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 #divHourglass {
@@ -1535,35 +1594,40 @@ body #divWidthClamp .divCalendarWidthClamped {
     height: calc(16px * var(--pixel-scale));
     margin: 0 calc(6px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 #divEmbossSeason {
     width: calc(32px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 #divStonesWeek {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 #divRuneMonth {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 #divRuneElement {
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 
@@ -1791,6 +1855,57 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 
+
+#tableManHired,
+#tableManLost {
+    border: calc(1px * var(--pixel-scale)) solid black;
+    user-select: none;
+}
+
+#tableManLost {
+    margin-top: calc(10px * var(--pixel-scale));
+}
+
+#tableManHired td,
+#tableManLost td {
+    padding: calc(5px * var(--pixel-scale)) calc(10px * var(--pixel-scale));
+    line-height: calc(12px * var(--pixel-scale));
+    text-align: center;
+}
+
+#tableManHired.multipleHires tbody td {
+    text-align: left;
+}
+
+#tableManHired thead td,
+#tableManLost thead td {
+    color: white;
+    font-weight: bold;
+    border-bottom: calc(1px * var(--pixel-scale)) solid black;
+}
+
+#tableManHired thead td {
+    background: #429665;
+}
+
+#tableManLost thead td {
+    background: #be6c62;
+}
+
+#tableManHired tbody td,
+#tableManLost tbody td {
+    background: white;
+    vertical-align: bottom;
+    border-bottom: calc(1px * var(--pixel-scale)) solid #d8d8d8;
+}
+
+#tableManHired tr:nth-of-type(even) td,
+#tableManLost tr:nth-of-type(even) td {
+    background: #e9e9e9;
+}
+
+
+
 #tableVillageDemographics,
 #tableVillageFiat,
 #tableVillageIncome,
@@ -1976,12 +2091,13 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 .workshopHarvestFruitDecal,
 .workshopHarvestMetalDecal,
 .workshopHarvestDigDecal {
-    background: var(--tilemap);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
     width: calc(16px * var(--pixel-scale));
     height: calc(16px * var(--pixel-scale));
     margin-right: calc(2px * var(--pixel-scale));
     display: inline-block;
+    background: var(--tilemap);
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 .workshopHarvestGrainDecal {
@@ -2316,7 +2432,8 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     display: block;
     background: var(--tilemap);
     background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1) calc(var(--j) * var(--pixel-scale) * 16px * -1);
-    background-size: calc(512px * var(--pixel-scale)) calc(352px * var(--pixel-scale));
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale)) calc(416px * var(--pixel-scale));
 }
 
 .inlineIcon {
@@ -2327,35 +2444,40 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     width: calc(16px * var(--pixel-scale) * 2);
     height: calc(16px * var(--pixel-scale) * 2);
     background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1 * 2) calc(var(--j) * var(--pixel-scale) * 16px * -1 * 2);
-    background-size: calc(512px * var(--pixel-scale) * 2) calc(352px * var(--pixel-scale) * 2);
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale) * 2) calc(416px * var(--pixel-scale) * 2);
 }
 
 .tripleSize {
     width: calc(16px * var(--pixel-scale) * 3);
     height: calc(16px * var(--pixel-scale) * 3);
     background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1 * 3) calc(var(--j) * var(--pixel-scale) * 16px * -1 * 3);
-    background-size: calc(512px * var(--pixel-scale) * 3) calc(352px * var(--pixel-scale) * 3);
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale) * 3) calc(416px * var(--pixel-scale) * 3);
 }
 
 .quadrupleSize {
     width: calc(16px * var(--pixel-scale) * 4);
     height: calc(16px * var(--pixel-scale) * 4);
     background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1 * 4) calc(var(--j) * var(--pixel-scale) * 16px * -1 * 4);
-    background-size: calc(512px * var(--pixel-scale) * 4) calc(352px * var(--pixel-scale) * 4);
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale) * 4) calc(416px * var(--pixel-scale) * 4);
 }
 
 .quintupleSize {
     width: calc(16px * var(--pixel-scale) * 5);
     height: calc(16px * var(--pixel-scale) * 5);
     background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1 * 5) calc(var(--j) * var(--pixel-scale) * 16px * -1 * 5);
-    background-size: calc(512px * var(--pixel-scale) * 5) calc(352px * var(--pixel-scale) * 5);
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale) * 5) calc(416px * var(--pixel-scale) * 5);
 }
 
 .sextupleSize {
     width: calc(16px * var(--pixel-scale) * 6);
     height: calc(16px * var(--pixel-scale) * 6);
     background-position: calc(var(--i) * var(--pixel-scale) * 16px * -1 * 6) calc(var(--j) * var(--pixel-scale) * 16px * -1 * 6);
-    background-size: calc(512px * var(--pixel-scale) * 6) calc(352px * var(--pixel-scale) * 6);
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(512px * var(--pixel-scale) * 6) calc(416px * var(--pixel-scale) * 6);
 }
 
 .tutorialSell {
@@ -2432,6 +2554,16 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 .Crystal {
     --i: 30;
     --j: 5;
+}
+
+.CrystalFound {
+    --i: 1;
+    --j: 22;
+}
+
+.NewGem {
+    --i: 2;
+    --j: 22;
 }
 
 .OreCopper {
@@ -2834,6 +2966,11 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     --j: 13;
 }
 
+.TheBoy {
+    --i: 0;
+    --j: 22;
+}
+
 .Vigneron {
     --i: 10;
     --j: 13;
@@ -2867,6 +3004,11 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 .Gemcutter {
     --i: 22;
     --j: 7;
+}
+
+.StephenMiningcrafter {
+    --i: 3;
+    --j: 22;
 }
 
 .Miner {
@@ -2954,9 +3096,68 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     --j: 21;
 }
 
+.Wharfinger {
+    --i: 7;
+    --j: 21;
+}
+
 .Tanner {
     --i: 25;
     --j: 21;
+}
+
+
+
+/* farming icons */
+
+.farmIconA {
+    --i: 13;
+    --j: 2;
+}
+
+.farmIconB {
+    --i: 14;
+    --j: 2;
+}
+
+.farmIconC {
+    --i: 15;
+    --j: 2;
+}
+
+.farmIconD {
+    --i: 16;
+    --j: 2;
+}
+
+.farmIconE {
+    --i: 17;
+    --j: 2;
+}
+
+.farmIconF {
+    --i: 18;
+    --j: 2;
+}
+
+.farmIconG {
+    --i: 19;
+    --j: 2;
+}
+
+.farmIconH {
+    --i: 20;
+    --j: 2;
+}
+
+.farmIconI {
+    --i: 15;
+    --j: 1;
+}
+
+.farmIconJ {
+    --i: 16;
+    --j: 1;
 }
 
 
@@ -3170,6 +3371,31 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 .Crux {
     --i: 25;
+    --j: 19;
+}
+
+.Grave {
+    --i: 26;
+    --j: 19;
+}
+
+.Tingle {
+    --i: 6;
+    --j: 21;
+}
+
+.Leo {
+    --i: 29;
+    --j: 15;
+}
+
+.TheLocnar {
+    --i: 27;
+    --j: 14;
+}
+
+.TheSmiter {
+    --i: 27;
     --j: 19;
 }
 
@@ -3548,24 +3774,9 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 
 /* unused */
 
-.Leo {
-    --i: 29;
-    --j: 15;
-}
-
 .BowAndArrow {
     --i: 10;
     --j: 15;
-}
-
-.TheLocnar {
-    --i: 27;
-    --j: 14;
-}
-
-.Medjed {
-    --i: 27;
-    --j: 19;
 }
 
 
@@ -3751,8 +3962,9 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     background-image: url(bitmaps/tilemap.png);
     width: calc(6 * 16px * var(--pixel-scale));
     height: calc(6 * 16px * var(--pixel-scale));
-    background-size: calc(6 * 512px * var(--pixel-scale)) calc(6 * 352px * var(--pixel-scale));
     margin: calc(32px * var(--pixel-scale)) auto;
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(6 * 512px * var(--pixel-scale)) calc(6 * 416px * var(--pixel-scale));
 }
 
 #buttonHeirChooseGender {
@@ -3870,9 +4082,40 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #divViewHeirWorkshop #divHeirWorkshopSummary #divHeirSelectedGender {
     width: calc(1 * 16px * var(--pixel-scale));
     height: calc(1 * 16px * var(--pixel-scale));
-    background-size: calc(1 * 512px * var(--pixel-scale)) calc(1 * 352px * var(--pixel-scale));
     margin: 0;
     display: inline-block;
+    /* ⚠️ TILEMAP HEIGHT ⚠️ */
+    background-size: calc(1 * 512px * var(--pixel-scale)) calc(1 * 416px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirMasthead,
+#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirMasthead b,
+#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirMasthead span {
+    font-size: calc(21px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirBoxOptions {
+    border: 1px solid black;
+    width: 80%;
+    padding: calc(10px * var(--pixel-scale));
+    margin: 0 auto;
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirBoxFears {
+    border: 1px solid black;
+    padding: calc(10px * var(--pixel-scale));
+    margin-top: calc(32px * var(--pixel-scale));
+    margin-right: calc(32px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirBoxPeccadilloes {
+    border: 1px solid black;
+    padding: calc(10px * var(--pixel-scale));
+    margin-top: calc(32px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary label {
+    cursor: pointer;
 }
 
 #spanHeirFacesPagination {

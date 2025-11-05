@@ -270,7 +270,11 @@ function UpdateDisplay() {
 
 
 function UpdateCalendar() {
-    divYear.innerHTML = displayYear + '&nbsp;' + year;
+    let formattedYear = year;
+    if (yearFormat == 1) { formattedYear = RomanceNumber(formattedYear); }
+    else if (yearFormat == 2) { formattedYear = CircumciseNumber(formattedYear); }
+    else if (yearFormat == 3) { formattedYear = SteepNumberInGreenTea(formattedYear); }
+    divYear.innerHTML = displayYear + '&nbsp;' + formattedYear;
     divWeek.innerHTML = displayWeek + '&nbsp;' + week;
 
     const pixelScale = window.getComputedStyle(divRuneSeason).getPropertyValue('--pixel-scale');
@@ -1589,8 +1593,8 @@ function UpdateText() {
         buttonReleaseCats.innerHTML = felineThread;
 
         // SHOW BUTTONS ------------------------
-        buttonTakeInAShow.innerHTML = displayLabelTakeInAShow + '<br><img src="bitmaps/ThaliaEtMelpo.png">';
-        buttonChariot.innerHTML = displayLabelChariot + '<br><img src="bitmaps/chariot.png">';
+        buttonTakeInAShow.innerHTML = displayLabelTakeInAShow + '<br><img src="' + imageLabelThaliaEtMelpo.src + '">';
+        buttonChariot.innerHTML = displayLabelChariot + '<br><img src="' + imageLabelChariot.src + '">';
 
         // TEMPLE BUTTON -----------------------
         buttonVisitTemple.innerHTML = displayLabelTemple + ' <span class="icon Mala inlineIcon"></span>';
@@ -1782,6 +1786,8 @@ function UpdateText() {
             const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / commodityBulkCount);
             let currentDollarValueOfUnit = null;
             let bounty = null;
+            let bountyBonusA = null;
+            let bountyBonusB = null;
             let colourIncrement = null;
             let greenValue = null;
             let greenString = null;
@@ -1802,14 +1808,23 @@ function UpdateText() {
                 tableString += '<tbody>';
                 tableString += '<tr>';
                 tableString += '<td>';
-                tableString += displayContract;
+                tableString += '<div>' + displayContract + '</div>';
+                if (player.hasHosted) { tableString += '<br>'; }
+                if (player.hasNavy) { tableString += '<br>'; }
                 tableString += '</td>';
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[0] * (wheatValuePerUnit[0] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[1];
-                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
-                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
-                tableString += formatterCurrent.format(residenceInStockCount[1]) + '<span class="icon Amphora inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
+                if (player.hasHosted) { bountyBonusA = Math.ceil(bounty / 4); }
+                if (player.hasNavy) {
+                    let adjustedBounty = bounty;
+                    if (bountyBonusA != null) { adjustedBounty = adjustedBounty + bountyBonusA; }
+                    bountyBonusB = Math.ceil(adjustedBounty / 4);
+                }
+                tableString += formatterCurrent.format(residenceInStockCount[1]);
+                tableString += '<span class="icon Amphora inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
+                if (bountyBonusA != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusA); }
+                if (bountyBonusB != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusB); }
                 tableString += '</td>';
                 tableString += '</tr>';
                 tableString += '<tr>';
@@ -1880,14 +1895,23 @@ function UpdateText() {
                 tableString += '<tbody>';
                 tableString += '<tr>';
                 tableString += '<td>';
-                tableString += displayContract;
+                tableString += '<div>' + displayContract + '</div>';
+                if (player.hasHosted) { tableString += '<br>'; }
+                if (player.hasNavy) { tableString += '<br>'; }
                 tableString += '</td>';
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[1] * (wheatValuePerUnit[1] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[2];
-                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
-                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
-                tableString += formatterCurrent.format(residenceInStockCount[2]) + '<span class="icon Keg inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
+                if (player.hasHosted) { bountyBonusA = Math.ceil(bounty / 4); }
+                if (player.hasNavy) {
+                    let adjustedBounty = bounty;
+                    if (bountyBonusA != null) { adjustedBounty = adjustedBounty + bountyBonusA; }
+                    bountyBonusB = Math.ceil(adjustedBounty / 4);
+                }
+                tableString += formatterCurrent.format(residenceInStockCount[2]);
+                tableString += '<span class="icon Keg inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
+                if (bountyBonusA != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusA); }
+                if (bountyBonusB != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusB); }
                 tableString += '</td>';
                 tableString += '</tr>';
                 tableString += '<tr>';
@@ -1958,14 +1982,22 @@ function UpdateText() {
                 tableString += '<tbody>';
                 tableString += '<tr>';
                 tableString += '<td>';
-                tableString += displayContract;
+                tableString += '<div>' + displayContract + '</div>';
+                if (player.hasHosted) { tableString += '<br>'; }
+                if (player.hasNavy) { tableString += '<br>'; }
                 tableString += '</td>';
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[2] * (wheatValuePerUnit[2] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[3];
-                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
-                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasHosted) { bountyBonusA = Math.ceil(bounty / 4); }
+                if (player.hasNavy) {
+                    let adjustedBounty = bounty;
+                    if (bountyBonusA != null) { adjustedBounty = adjustedBounty + bountyBonusA; }
+                    bountyBonusB = Math.ceil(adjustedBounty / 4);
+                }
                 tableString += formatterCurrent.format(residenceInStockCount[3]) + '<span class="icon Cask inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
+                if (bountyBonusA != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusA); }
+                if (bountyBonusB != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusB); }
                 tableString += '</td>';
                 tableString += '</tr>';
                 tableString += '<tr>';
@@ -2036,14 +2068,22 @@ function UpdateText() {
                 tableString += '<tbody>';
                 tableString += '<tr>';
                 tableString += '<td>';
-                tableString += displayContract;
+                tableString += '<div>' + displayContract + '</div>';
+                if (player.hasHosted) { tableString += '<br>'; }
+                if (player.hasNavy) { tableString += '<br>'; }
                 tableString += '</td>';
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[3] * (wheatValuePerUnit[3] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[4];
-                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
-                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasHosted) { bountyBonusA = Math.ceil(bounty / 4); }
+                if (player.hasNavy) {
+                    let adjustedBounty = bounty;
+                    if (bountyBonusA != null) { adjustedBounty = adjustedBounty + bountyBonusA; }
+                    bountyBonusB = Math.ceil(adjustedBounty / 4);
+                }
                 tableString += formatterCurrent.format(residenceInStockCount[4]) + '<span class="icon Honeypot inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
+                if (bountyBonusA != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusA); }
+                if (bountyBonusB != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusB); }
                 tableString += '</td>';
                 tableString += '</tr>';
                 tableString += '<tr>';
@@ -2114,14 +2154,22 @@ function UpdateText() {
                 tableString += '<tbody>';
                 tableString += '<tr>';
                 tableString += '<td>';
-                tableString += displayContract;
+                tableString += '<div>' + displayContract + '</div>';
+                if (player.hasHosted) { tableString += '<br>'; }
+                if (player.hasNavy) { tableString += '<br>'; }
                 tableString += '</td>';
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[4] * (wheatValuePerUnit[4] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[5];
-                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
-                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasHosted) { bountyBonusA = Math.ceil(bounty / 4); }
+                if (player.hasNavy) {
+                    let adjustedBounty = bounty;
+                    if (bountyBonusA != null) { adjustedBounty = adjustedBounty + bountyBonusA; }
+                    bountyBonusB = Math.ceil(adjustedBounty / 4);
+                }
                 tableString += formatterCurrent.format(residenceInStockCount[5]) + '<span class="icon Jug inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
+                if (bountyBonusA != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusA); }
+                if (bountyBonusB != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusB); }
                 tableString += '</td>';
                 tableString += '</tr>';
                 tableString += '<tr>';
@@ -2192,14 +2240,22 @@ function UpdateText() {
                 tableString += '<tbody>';
                 tableString += '<tr>';
                 tableString += '<td>';
-                tableString += displayContract;
+                tableString += '<div>' + displayContract + '</div>';
+                if (player.hasHosted) { tableString += '<br>'; }
+                if (player.hasNavy) { tableString += '<br>'; }
                 tableString += '</td>';
                 tableString += '<td class="rightPadColumn">';
                 currentDollarValueOfUnit = valueFactor[5] * (wheatValuePerUnit[5] * currentDollarPriceOfOneWheat);
                 bounty = currentDollarValueOfUnit * residenceInStockCount[6];
-                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
-                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasHosted) { bountyBonusA = Math.ceil(bounty / 4); }
+                if (player.hasNavy) {
+                    let adjustedBounty = bounty;
+                    if (bountyBonusA != null) { adjustedBounty = adjustedBounty + bountyBonusA; }
+                    bountyBonusB = Math.ceil(adjustedBounty / 4);
+                }
                 tableString += formatterCurrent.format(residenceInStockCount[6]) + '<span class="icon Basket inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
+                if (bountyBonusA != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusA); }
+                if (bountyBonusB != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusB); }
                 tableString += '</td>';
                 tableString += '</tr>';
                 tableString += '<tr>';
@@ -2270,13 +2326,21 @@ function UpdateText() {
                 tableString += '<tbody>';
                 tableString += '<tr>';
                 tableString += '<td>';
-                tableString += displayContract;
+                tableString += '<div>' + displayContract + '</div>';
+                if (player.hasHosted) { tableString += '<br>'; }
+                if (player.hasNavy) { tableString += '<br>'; }
                 tableString += '</td>';
                 tableString += '<td class="rightPadColumn">';
                 bounty = shippedFishPricePerUnit * stockfishCount;
-                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
-                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasHosted) { bountyBonusA = Math.ceil(bounty / 4); }
+                if (player.hasNavy) {
+                    let adjustedBounty = bounty;
+                    if (bountyBonusA != null) { adjustedBounty = adjustedBounty + bountyBonusA; }
+                    bountyBonusB = Math.ceil(adjustedBounty / 4);
+                }
                 tableString += formatterCurrent.format(stockfishCount) + '<span class="icon DriedFish inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
+                if (bountyBonusA != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusA); }
+                if (bountyBonusB != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusB); }
                 tableString += '</td>';
                 tableString += '</tr>';
                 tableString += '<tr>';
@@ -2347,13 +2411,21 @@ function UpdateText() {
                 tableString += '<tbody>';
                 tableString += '<tr>';
                 tableString += '<td>';
-                tableString += displayContract;
+                tableString += '<div>' + displayContract + '</div>';
+                if (player.hasHosted) { tableString += '<br>'; }
+                if (player.hasNavy) { tableString += '<br>'; }
                 tableString += '</td>';
                 tableString += '<td class="rightPadColumn">';
                 bounty = residenceInStockCount[7] * trinketValue;
-                if (player.hasHosted) { bounty += Math.ceil(bounty / 4); }
-                if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
+                if (player.hasHosted) { bountyBonusA = Math.ceil(bounty / 4); }
+                if (player.hasNavy) {
+                    let adjustedBounty = bounty;
+                    if (bountyBonusA != null) { adjustedBounty = adjustedBounty + bountyBonusA; }
+                    bountyBonusB = Math.ceil(adjustedBounty / 4);
+                }
                 tableString += formatterCurrent.format(residenceInStockCount[7]) + '<span class="icon Trinket inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(bounty);
+                if (bountyBonusA != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusA); }
+                if (bountyBonusB != null) { tableString += '<br>+' + currencySymbol + formatterCurrent.format(bountyBonusB); }
                 tableString += '</td>';
                 tableString += '</tr>';
                 tableString += '<tr>';
@@ -2596,7 +2668,7 @@ function UpdateText() {
         buttonWasteTime.innerHTML = displayLabelWasteTime;
         buttonHostParty.innerHTML = displayLabelThrowParty + '<br>(' + currencySymbol + formatterCurrent.format(priceResidenceParty) + ')';
         buttonGoOnHike.innerHTML = displayLabelGoHike;
-        buttonBuyTreasure.innerHTML = displayLabelBuyArt + '<br><img src="bitmaps/statue.png"><br>(' + currencySymbol + formatterCurrent.format(priceWorkOfArt) + ')';
+        buttonBuyTreasure.innerHTML = displayLabelBuyArt + '<br><img src="' + imageLabelStatue.src + '"><br>(' + currencySymbol + formatterCurrent.format(priceWorkOfArt) + ')';
 
         if (residenceStage == 0) { buttonImproveResidence.innerHTML = displayLabelResidence00 + '<br>' + '(' + priceResidence00 + '<span class="icon Wheat inlineIcon"></span>' + ')'; }
         else if (residenceStage == 1) { buttonImproveResidence.innerHTML = displayLabelResidence01 + '<br>' + '(' + priceResidence01[0] + '<span class="icon Wheat inlineIcon"></span>' + ' + ' + priceResidence01[1] + '<span class="icon Log inlineIcon"></span>' + ')'; }
@@ -3524,40 +3596,6 @@ function UpdateText() {
 
     else if (player.isAt == 'Stage') {
         if (stageDressing == 'Theater') {
-            let nextSceneLabels = [
-                'ON WITH THE SHOW!', // title page
-                'WELL, LET’S FIND OUT WHAT THIS IS ALL ABOUT, HUH?', // overture
-                'WAIT AND SEE WHAT HAPPENS NEXT', // a1s1 prologos
-                'KEEP WATCHING', // a2s1 parados
-                'HMM... WHAT’S HAPPENING NOW?', // a2s2 epis. 1 (Bleps. & Penia)
-                'I NEED A BREAK...', // parabasis
-                'RETURN TO YOUR PRIVATE BOX', // intermission
-                'KEEP WATCHING', // a3s1 epis. 2 (Mrs. Chremulos)
-                'KEEP WATCHING', // a3s2 epis. 3 (Plutus' Oscar-bait Speech)
-                'WATCH SOME MORE', // a4s1 epis. 4 (Just Man & Sycophant)
-                'GET THROUGH THIS NEXT BIT', // a4s2 epis. 5 (Old Maid & Young Lover)
-                'FINALLY SEE HOW THIS DAMN THING ENDS', // a5s1 epis. 6 (Hermès)
-                'BOY, THAT TOOK FOREVER', // a5s2 exodos (High Priest of Zeus)
-                'SLIP OUT EARLY',
-            ];
-            if (player.speaks == 'Spanish') {
-                nextSceneLabels = [
-                    '¡QUE SIGA EL ESPECTÁCULO!',
-                    'BUENO, DESCUBRAMOS DE QUÉ SE TRATA ESTA HISTORIA, ¿EH?',
-                    'ESPERAR Y VER LO QUE PASA A CONTINUACIÓN',
-                    'SIGUE VER',
-                    'HMM... ¿QUÉ ESTÁ PASANDO AHORA?',
-                    'NECESITO UN DESCANSO...',
-                    'REGRESAR A TU CAJA PRIVADO',
-                    'SIGUE VER',
-                    'SIGUE VER',
-                    'VER UN POCO MÁS',
-                    'SUPERAR ESTE SIGUIENTE PARTE',
-                    'FINALMENTE VER CÓMO TERMINA ESTA MALDITA COSA',
-                    'GUAU, ESO TOMÓ UNA ETERNIDAD',
-                    'ESCAPAR TEMPRANO',
-                ];
-            }
             if (stageStage == 13) {
                 buttonNextScene.style.display = '';
                 buttonLeaveEarly.style.display = '';
@@ -3571,47 +3609,60 @@ function UpdateText() {
             let contentPlay = '';
             if (stageStage == 0) {
                 contentPlay += '<div id="masthead">';
-                contentPlay += '<i>“W<span class="smallCapsA">EALTH</span>”</i>';
-                contentPlay += '<div class="mastheadSizeB">–or–</div>';
-                contentPlay += 'T<span class="smallCapsA">HE</span> <i>P<span class="smallCapsA">LUTUS</span></i> <span class="smallCapsA">OF</span> A<span class="smallCapsA">RISTOPHANES</span>';
+                contentPlay += '<i>“' + programMasthead[0] + '<span class="smallCapsA">' + programMasthead[1] + '</span>”</i>';
+                contentPlay += '<div class="mastheadSizeB">–' + programMasthead[2] + '–</div>';
+                contentPlay += programMasthead[3] + '<span class="smallCapsA">' + programMasthead[4] + '</span> <i>' + programMasthead[5] + '<span class="smallCapsA">' + programMasthead[6] + '</span></i>';
+                contentPlay += ' <span class="smallCapsA">' + programMasthead[7] + '</span> ' + programMasthead[8] + '<span class="smallCapsA">' + programMasthead[9] + '</span>';
                 contentPlay += '<br>';
                 contentPlay += '<br>';
                 contentPlay += '<div class="mastheadSizeF">❀</div>';
                 contentPlay += '<br>';
-                contentPlay += '<div class="mastheadSizeC">summarized from';
+                contentPlay += '<div class="mastheadSizeC">' + programMasthead[10];
                 contentPlay += '<br>';
-                contentPlay += 'transcriptions and translations by</div>';
+                contentPlay += programMasthead[11] + '</div>';
                 contentPlay += '<br>';
                 contentPlay += '<div class="mastheadSizeD">W. C. Green, <span class="mastheadSizeD2">M.A.</span></div>';
-                contentPlay += '<div class="mastheadSizeE">George Bell and Sons, 1892</div>';
+                contentPlay += '<div class="mastheadSizeE">' + programMasthead[12] + ', ';
+                function TransmogrifyYear(inputYear) {
+                    if (yearFormat == 1) { return RomanceNumber(inputYear + yearAtStartRoman - yearAtStartProlepticGregorian); }
+                    else if (yearFormat == 2) { return CircumciseNumber(inputYear + yearAtStartHebrew - yearAtStartProlepticGregorian); }
+                    else if (yearFormat == 3) { return SteepNumberInGreenTea(inputYear + yearAtStartHanDynasty - yearAtStartProlepticGregorian); }
+                    return inputYear;
+                }
+                contentPlay += TransmogrifyYear(1892);
+                contentPlay += '</div>';
                 contentPlay += '<br>';
                 contentPlay += '<div class="mastheadSizeD">M. T. Quinn, <span class="mastheadSizeD2">M.A.</span></div>';
-                contentPlay += '<div class="mastheadSizeE">George Bell and Sons, 1896</div>';
+                contentPlay += '<div class="mastheadSizeE">' + programMasthead[12] + ', ';
+                contentPlay += TransmogrifyYear(1896);
+                contentPlay += '</div>';
                 contentPlay += '<br>';
-                contentPlay += '<div class="mastheadSizeD">Sir William Rann Kennedy</div>';
-                contentPlay += '<div class="mastheadSizeE">London - John Murray, Albemarle Street, W., 1912</div>';
+                contentPlay += '<div class="mastheadSizeD">' + programMasthead[13] + ' William Rann Kennedy</div>';
+                contentPlay += '<div class="mastheadSizeE">' + programMasthead[14] + ', ';
+                contentPlay += TransmogrifyYear(1912);
+                contentPlay += '</div>';
                 contentPlay += '<br>';
-                contentPlay += '<div class="mastheadSizeD">Oscar O’Fflahertie Wilde, <span class="mastheadSizeD2">posth.</span></div>';
-                contentPlay += '<div class="mastheadSizeE">The Athenian Society, 1912</div>';
+                contentPlay += '<div class="mastheadSizeD">Oscar O’Fflahertie Wilde, <span class="mastheadSizeD2">' + programMasthead[15] + '.</span></div>';
+                contentPlay += '<div class="mastheadSizeE">' + programMasthead[16] + ', ';
+                contentPlay += TransmogrifyYear(1912);
+                contentPlay += '</div>';
                 contentPlay += '<br>';
                 contentPlay += '<div class="mastheadSizeD">Daniel C. Stevenson</div>';
-                contentPlay += '<div class="mastheadSizeE">Web Atomics, 1994</div>';
+                contentPlay += '<div class="mastheadSizeE">Web Atomics, ';
+                contentPlay += TransmogrifyYear(1994);
+                contentPlay += '</div>';
                 contentPlay += '<br>';
-                contentPlay += '<div class="mastheadSizeC">and,<br>~w. special thanks for his unflinching honesty~,<br>by</div>';
+                contentPlay += '<div class="mastheadSizeC">' + programMasthead[17] + '</div>';
                 contentPlay += '<br>';
                 contentPlay += '<div class="mastheadSizeD">George Theodoridis, <span class="mastheadSizeD2">M.A. (Prel.)</span></div>';
-                contentPlay += '<div class="mastheadSizeE">Bacchicstage, 2021</div>';
+                contentPlay += '<div class="mastheadSizeE">Bacchicstage, ';
+                contentPlay += TransmogrifyYear(2021);
+                contentPlay += '</div>';
                 contentPlay += '<br>';
                 contentPlay += '<div class="mastheadSizeF">❀</div>';
                 contentPlay += '</div>';
             }
             else if (stageStage == 1) {
-                const overture = [
-                    '<i>Overture</i>',
-                    '<i>As the evening gets underway, you suddenly realize that this play is to be performed in its original language: Koine Greek! As such, you can’t really understand every single word that is spoken... but, from the tone, and context, and what you *do* understand, you can fairly easily follow along with the general idea.</i>',
-                    '<i>The </i>orchestra<i>, that large round concrete courtyard in the center of everything, has been done up to represent an average public square in Old Athens. A large rectangular main stage of polished granite sits just behind and a few feet higher than the orchestral pit, and the enormous plaster wall behind that has been done up as the frontispiece of a humble, run-of-the-mill Old Athenian farmhouse. According to the program, this house in particular belongs to the hero of the play: <b>Chremulos</b>, a simple farmer.</i>',
-                    '<i>The story begins with a <b>blind and filthy old beggar</b> wandering onto the main stage. He is followed closely by <b>Chremulos</b>—an average man in his fifties, balding, plainly dressed—who is in turn followed by <b>Kariôn</b>, his sassy, foul-mouthed slave of about the same age.</i>',
-                ];
                 const overtureMin = '<img class="imgPlayMiniature imgPlayMiniature1" src="bitmaps/stage/play1.png">';
                 contentPlay += '<div class="redrum">';
                 contentPlay += '<div class="stageHeading">' + overture[0] + '</div>';
@@ -3632,20 +3683,6 @@ function UpdateText() {
                 contentPlay += '</div>';
             }
             else if (stageStage == 2) {
-                const aIscI = [
-                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> I, S<span class="stageHeadingStructureDim">CENE</span> I:</div>',
-                    '<div id="stageHeadingDivision">The Prologos</div>',
-                    '<div class="stageHeadingDiminutive">(ll. 1–252)</div>',
-                    'Kariôn starts off the show by loudly complaining to the audience: Ye Gods, how cosmically unfair it is for an intelligent man to be the slave of an idiot! He then tells us that he and his master have just been to the Temple of Apollo seeking a prophecy, and that ever since the moment they left, his master Chremulos has been following this random blind doofus around, for hours now!',
-                    'Finally, Chremulos is ready to give Kariôn some answers about their strange day: the reason he went to the Temple of Apollo was to ask if his beloved and only son, Li’l Chremmy, Jr., a good and virtuous and honest man, should turn instead to a life of sin and crime and avarice, for that seems to be the only way to truly get ahead in this life any more. Here Chremulos gestures to the audience and cries: “I mean, just take a look at all’a *them*, would’ya! Phony priests, crooked politicians, ruthless con-men... thoroughly unscrupulous criminals, who’d sell their own mothers for a profit; a no-good bunch’a ass-kissers and sleazebags, to a man! And they’re all filthy *rich*!” This gets a huge laugh.',
-                    'As an answer to his question, the god had instructed Chremulos in no uncertain terms that he was to follow behind the very first person he should come across upon leaving the temple, and furthermore he was to bring that person home. And of course, this blind beggar was the very first person he saw!',
-                    'Kariôn declares that the oracle’s prophecy couldn’t be simpler to understand: even a blind man can see only crooks and charlatans succeed these days! But Chremulos is certain the message must be more complex than that.',
-                    'Eventually, after some brutal threats, and a bunch of asinine rhyming puns, this ragged beggar is willing to reveal his true identity to Chremulos the farmer and Kariôn the slave: he is in fact none other than <b>Plutus</b>, son of Mighty Demeter; he is in fact the Greek <b>God of Wealth</b>!',
-                    'He explains that long ago, when Zeus first learned that Plutus intended to visit only the just, the wise, “the men of ordered life”, the King of the Gods blinded him to prevent him from being able to tell who was virtuous and who wasn’t. He did this because only the worst sorts of men feel compelled to make so many sacrifices to Zeus, in order to beg for His forgiveness, and the income from these sacrifices is the primary source of Zeus’ power. This earns a big laugh from the audience.',
-                    'Plutus claims that if he were ever to get his sight back, he would only visit the upright and just, and that it had been so very long since he had actually seen a good man. Kariôn looks out into the audience, visoring his eyes with his hand, and scans across the entire crowd of spectators. “Well, that’s no big surprise,” he proclaims, “My eyes work just fine and I can’t see a single one either!” This is met with another riotous bout of laughter and applause from the audience.',
-                    'After some heavy-handed cajoling, and a bunch more awful puns, Chremulos and his slave eventually convince Plutus to come home with them. Chremulos says he knows how to get Plutus’ vision back, and to not fear any repercussions from Zeus, because as soon as Plutus can see—and can choose to only visit good men—he will surely become the new King of the Gods.',
-                    'This all ends with Chremulos welcoming Plutus into his home, both of them leaving the scene through the front door of the house, while Kariôn leaves the main stage off the side, having been instructed to go round up Chremulos’ poor and honest kinsmen and peers so that they might share in this new good fortune.',
-                ];
                 const aIscImin = '<img class="imgPlayMiniature imgPlayMiniature4" src="bitmaps/stage/play4.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIscI[0] + aIscI[1] + aIscI[2] + '</div>';
                 contentPlay += aIscI[3];
@@ -3680,14 +3717,6 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 3) {
-                const aIIscI = [
-                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> II, S<span class="stageHeadingStructureDim">CENE</span> I:</div>',
-                    '<div id="stageHeadingDivision">The Parodos</div>',
-                    '<div class="stageHeadingDiminutive">(ll. 253–321)</div>',
-                    'Kariôn has found and brought back with him the <i>Chorus</i>, a rowdy group of twenty-four grown men all duded up in bright wigs and clown makeup and garish lingerie, yet... they’re meant to represent a group of Chremulos’ closest friends and neighbors, who are all salt-of-the-earth farming men? ...this old-timey Greek can be a little hard to follow.',
-                    'At any rate this <b>Chorus of Husbandmen</b> fills the <i>orchestra</i>, waving their farming tools around while singing and a-prancing about in their underwear as Kariôn desperately tries in vain to explain to them about Plutus. Naturally, they don’t believe him.',
-                    'Kariôn, fed up with all the silliness on display, throws up his hands and goes inside the house to fetch his master. Chremulos—now dressed to the nines, and with head held high—struts out from his front door to welcome his suspicious friends and confirms for them what Kariôn had been trying to tell them all along: that the very God of Wealth, Lord Plutus himself, was at this very moment, inside his very home!',
-                ];
                 const aIIscImin = '<img class="imgPlayMiniature imgPlayMiniature6" src="bitmaps/stage/play6.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIIscI[0] + aIIscI[1] + aIIscI[2] + '</div>';
                 contentPlay += aIIscI[3];
@@ -3704,22 +3733,6 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 4) {
-                const aIIscII = [
-                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> II, S<span class="stageHeadingStructureDim">CENE</span> II:</div>',
-                    '<div id="stageHeadingDivision">The Epeisodion, Pt. I</div>',
-                    '<div class="stageHeadingDiminutive">(ll. 322–626)</div>',
-                    'Now a man named <b>Blepsidemus</b>, Chremulos’ best friend, comes huffing and puffing onto the main stage, desperately trying to catch his breath, as if he has just come running from some great distance. He announces that all the barber shops in town are buzzing with the news: Chremulos is suddenly and mysteriously the richest man in the entire country! And Blepsidemus has come for the explanation he believes he is owed!',
-                    'He is convinced Chremulos must have done something overwhelmingly unscrupulous—and, most likely, extremely illegal—to gain this new incredible wealth. As Chremulos repeatedly tries to explain, Blepsidemus continuously interrupts him with greater and greater promises to happily keep quiet about whatever this heinous new secret must be, and to always remain his sworn partner-in-crime... in exchange for a generous cut of the loot, of course.',
-                    'This goes on for... quite a while. The audience apparently can’t get enough of it, however. It seems as if the more obvious the punchline, the greater the laugh it receives.',
-                    'Finally, Blepsidemus is made to understand the truth: that the God of Wealth himself has come to live with Chremulos and his family, and that they *all* can prosper now, equally, just as soon as they help Plutus regain his vision! Chremulos plans to take Plutus to the Temple of Asclepius, the Great God of Medicine and Healing, and son of Apollo besides.',
-                    'Before they can get going, however, they are attacked by a frightfully ugly old hag, wrapped in tattered rags: she is <b>Penia, the Goddess of Poverty and Need</b>! Blepsidemus and Chremulos warn her that she is about to be kicked out of Greece for good.',
-                    'She tries to explain how they’ve gotten it all backwards: that good men are not made poor, but that by want poor men are made good, and besides, if Plutus makes everyone rich, who’s gonna be doing all the tedious manual labour around here any more, huh? Someone’s gotta sweep the floors and scrub the laundry and make the beds and cook the breakfasts. Who but Penia drives men to fulfill these essential social roles?',
-                    'Blepsidemus and Chremulos exchange a knowing glance, then roll their eyes in a hugely overly-exaggerated manner, as if what she’s just asked is without-a-doubt the stupidest question that either of them has ever heard in all their lives. “Slaves will do it,” says Blepsidemus. This goes over *huge* with the audience.',
-                    '“Boy, you two must be fully paid-up members at the Ultimate Dumbass Society for Morons and Boobs, huh?” Penia croaks, to another huge laugh. “When there are no more poor people, exactly where will all these slaves come from?”',
-                    'All three begin to bicker in rapid-fire Ancient Greek. As best you can tell, Blepsidemus and Chremulos make a deal with Penia; they will all argue over whether it is better to be rich or poor, and whoever makes the losing argument will just have to go jump off a cliff.',
-                    'Now Penia states her case: she is like the boss who keeps his workers focused, that the rich are all fat and gross—she gestures to the audience—yet the bodies of the hard-working poor are well-built and handsome, that rich people are rude and ungrateful, that poor politicians work for the good of all while rich politicians merely further line their own pockets, that she is like a stern father who knows what is best for his disobedient children.',
-                    'All the while she speaks,  Blepsidemus and Chremulos can’t help themselves but to agree with each of her points. After she is done, however, they refuse to allow themselves to be persuaded. “You won’t change my mind, even if you change my mind!” declares Chremulos, before setting his jaw, crossing his arms tight to his chest and stomping his foot. Then Blepsidemus and Chremulos spit and cuss at Penia until she runs off the stage crying, swearing that they would soon be sorry for not listening to her.',
-                ];
                 const aIIscIImin = '<img class="imgPlayMiniature imgPlayMiniature5" src="bitmaps/stage/play5.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIIscII[0] + aIIscII[1] + aIIscII[2] + '</div>';
                 contentPlay += aIIscII[3];
@@ -3760,24 +3773,6 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 5) {
-                const parabasis = [
-                    'The Parabasis',
-                    'It is of course well known to any man of substance that in practically all the great Attic Comedies of the Golden Olden Times, there existed that most sacred of traditions, what the Inimitable Greek Playwrights referred to simply as the <i>parabasis</i>, the ‘coming forward’. This was the part where the action abruptly comes to a grinding halt, and the very author of the play himself would ‘come forward’ and deliver a lecture to the audience directly: either in person, or through the voice of an actor, or by having his thoughts and opinions about the pressing matters of the day sung by the very Chorus itself.',
-                    'Now comes a young man onto the stage, foppishly dressed in all the latest ridiculous fashions most recently embraced by the city’s capricious youth. He strides arrogantly down the stairs from the main stage to the orchestral pit, out to its dead center. He seems to be quite proud of his long, flowing hair.',
-                    'All of the Chorus members and actors take a seat on the ground, or lean a shoulder against the scenery.',
-                    'This new fellow announces that he is The Director of this whole dog-and-pony show. Then he proceeds to bloviate at length about all the terrible decisions made by this city’s leadership: how crime and pollution are completely out of control, how more and more even the most basic of civil rights are being trampled upon by psychotic government thugs, how young people these days have no viable opportunities, how public funding for social programs inevitably ends up embezzled by crooks, how wealth inequality has reached unprecedented levels, and what exactly is going to be done about it, and when exactly, and by whom? All the while hoots of “Damn right!” and “Finally, somebody’s saying it!” cry out from random anonymous corners of the peanut gallery.',
-                    'Boy, this kid sure lays it on thick, huh? This is some real tug-at-your-heartstrings and we’re-not-gonna-take-it-lying-down-anymore kinda stuff.',
-                    'When the little blowhard is finally finished, he takes a grand, sweeping bow to a wild round of applause, then straightens up his spine and stares directly into your eyes, challenging you to respond.',
-                    'The whole theater seems to hold its breath as it waits to see how you’ll react: but you well know any attempt to defend yourself or argue with this little pipsqueak will only add legitimacy to his claims (baseless as they may be!). No, this manner of sedition is best dealt with privately... later you can simply have your spies keep an eye on this precocious, headstrong young lad, to uncover exactly what naughty little misdemeanors and mischief *he* might get up to... sleep with one eye open from now on, pal.',
-                    'And hey, now, wait-a-mini... <i>Wealth</i> famously doesn’t even *contain* a <i>parabasis</i>! This little twerp just decided to add one! The nerve!',
-                    'For that matter, you couldn’t help but notice this entire diatribe has been delivered in the common tongue, not in the Ye Olde Historical Greek of the rest of this whole cockamamie production. Funny, that. And, for the record, nowhere in all that bitching did you ever hear a single *solution* proposed, no... merely a litany of all Pandora’s monsters and how all their mayhem is somehow all your fault. ‘Everyone thinks of changing the world, but no one thinks of changing himself,’ my young friend. Tolstoy said that, y’know!',
-                    'Well, never mind all that... everyone’s watching, to see what you will do.',
-                    'Knowing it is the mob that must be won now—‘hearts and minds’, always with the ‘hearts and minds’—you rise, slowly, from your comfortable seat, making a big show of pushing yourself up from the arm-rests with a groan... all the while holding this young man’s gaze, of course, as you slowly extend your right hand... and lift your bejeweled goblet, in the manner of a toast.',
-                    'The crowd roars!',
-                    //'<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> II, S<span class="stageHeadingStructureDim">CENE</span> II:</div>',
-                    '<div id="stageHeadingDivision">The Parabasis</div>',
-                    '<div class="stageHeadingDiminutive">THE ADDRESS TO THE AUDIENCE</div>',
-                ];
                 const parabasisMin = '<img class="imgPlayMiniature imgPlayMiniature8" src="bitmaps/stage/play8.png">';
                 //contentPlay += '<div class="stageHeading">' + parabasis[0] + '</div>';
                 contentPlay += '<div class="stageHeadingShortLine">' + parabasis[13] + parabasis[14] + '</div>';
@@ -3822,12 +3817,6 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 6) {
-                const intermission = [
-                    '<i>Intermission</i>',
-                    '<i>And not a moment too soon... You really do have to pee, man!</i>',
-                    '<i>Your guests—along with everyone else—file out through the gates into the auditoriums, to relieve themselves in the restrooms and to stock back up on refreshments from the concession stands and to gossip about what they all think of the play so far.</i>',
-                    '<i>After a half-hour or so has passed, drums are sounded to summon everyone back to their seats.</i>',
-                ];
                 const intermissionMin = '<img class="imgPlayMiniature3" src="bitmaps/stage/play3.png">';
                 contentPlay += '<div class="redrum">';
                 contentPlay += '<div class="stageHeading">' + intermission[0] + '</div>';
@@ -3848,20 +3837,6 @@ function UpdateText() {
                 contentPlay += '</div>';
             }
             else if (stageStage == 7) {
-                const aIIIscI = [
-                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> III, S<span class="stageHeadingStructureDim">CENE</span> I:</div>',
-                    '<div id="stageHeadingDivision">The Epeisodion, Pt. II</div>',
-                    '<div class="stageHeadingDiminutive">(ll. 627–770)</div>',
-                    'As the crowd returns from the break, the Chorus fills the orchestra. Kariôn runs onto the main stage to announce the visit to Asclepius has been a success! Plutus can now see, and soon they will all be rich!',
-                    'The boisterous cheering of the Chorus draws <b>Mrs. Chremulos</b> (a handsome, middle-aged farmer’s wife) out from the house, and she wants to know just what all this commotion is about. Kariôn tells her everything: First, they took stinking Plutus to the sea for a bath, then straight on to the <i>Asclepieion</i>, the Temple of Healing. After a *bunch* of jokes about pooping and farting, Kariôn tells everyone that the God of Medicine had whistled for two large snakes, which slithered out from behind the altar like summoned dogs expecting a treat. With their forked tongues they licked the empty eye-sockets of Plutus, thereby restoring his very eyes!',
-                    'Kariôn boasts that all the while this was taking place, he had let out a fart so thick and so vile that Asclepius’ daughters <i>Panacea</i>, the Goddess of Remedies and Cures, and <i>Iaso</i>, Goddess of Recovery from Illness, had been forced to flee the room holding their noses, but that it apparently had had no effect on the Great Lord of Healers himself, for doctors have to routinely endure all manner of disgusting sights and smells in the course of treating all the many sickening and repulsive ills that can befall mankind. “Listen, lady, it ain’t *perfume* that comes outta my ass,” Kariôn brags to Mrs. Chremulos.',
-                    'Boy, the mob loved that one. You hear someone in the crowd off to your right telling a friend: “Ha! <i>‘That ain’t *perfume* comin’ outta my ass!’</i> Man, I gotta *remember* that one!”',
-                    'Animals.',
-                    'Anyways, Kariôn explains the reason he arrived back at the house so much earlier than Plutus and Chremulos and Blepsidemus, who should all be along shortly, was due to the unending crowd of well-wishers and supplicants holding Plutus back and slowing him to a crawl.  Kariôn and  Mrs. Chremulos decide to go inside the house and prepare it for Plutus’ return.',
-                    'Now you can’t help but notice how from the moment Mrs. Chremulos had entered the scene, for the duration of this entire exchange, Kariôn had been making a lot of snide little jokes at her expense: strongly implying she was a profligate spendthrift, an out-of-control lush, and an unfaithful wife. It’s hard to know if the play is suggesting that *all* wives are nagging, joyless, alcoholic shrews, or merely that Chremulos had been stuck with one because he was poor, or if it’s just a simple gag played for laughs and you’re over-thinking it, or what.',
-                    'But you know, come to think of it, a lot of the moral high ground that the supposedly ‘good’ characters have claimed so far... doesn’t really hold up to much scrutiny, upon even a moment’s hindsight. Is the play suggesting that the poor are also, in truth, thoroughly awful people, and that *no one* is truly good? Everything on display has just been too silly to pull any one coherent message out of! You’re beginning to suspect that maybe these Ancient Greeks didn’t have it *all* figured out, after all.',
-                    '<b><i>A </i>stasimon<i>, or ‘interlude’, is now sung by the Chorus: a lively song called “I Just Can’t Wait To Be Rich!”, all about how wonderful it is to have money, and how easy life will surely become from now on, and how nothing could ever possibly go wrong!</i></b>',
-                ];
                 contentPlay += '<div class="stageHeadingShortLine">' + aIIIscI[0] + aIIIscI[1] + aIIIscI[2] + '</div>';
                 const aIIIscImin = '<img class="imgPlayMiniature imgPlayMiniature7" src="bitmaps/stage/play7.png">';
                 contentPlay += aIIIscI[3];
@@ -3896,18 +3871,6 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 8) {
-                const aIIIscII = [
-                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> III, S<span class="stageHeadingStructureDim">CENE</span> II:</div>',
-                    '<div id="stageHeadingDivision">The Epeisodion, Pt. III</div>',
-                    '<div class="stageHeadingDiminutive">(ll. 771–801)</div>',
-                    'Plutus and Chremulos drag themselves onto the stage, both of their faces barely visible due to the many dozens of wreaths they’re each completely covered in, and here Plutus delivers a beautiful and moving speech about how ashamed he is of his previous poor decisions, how he “neglected the wrong people and supported the wrong people”, that <i>Heracles</i> had been right all along<span id="stageDagger">†</span>, and that from this point forward he was ‘absolutely resolute’: mark these words, friends, from now on, Plutus of Olympus, Son of Tyche, shall only *ever* reward the truly deserving!',
-                    'At the dramatic conclusion to this rousing, poetic speech, Chremulos cups his hands to his mouth and shouts off-stage, as if to a gathered crowd: “Didja hear *that*, ya lousy bums? Now beat it, would’ya! I mean it, now! Piss off, the lotta ya! Bunch’a no-good misers...” He then aggressively rips the mass of wreaths from his head and tosses them onto the ground in disgust. “Criminy,” he whines, “Every wrinkl’d-up ol’ two-bit bastard in this whole stinkin’ town must’ve slapped one’a these damned things on my achin’ head! I’m gonna develop an allergic rash!” He scratches behind the ears in the manner of  a stray dog as loose bay leaves rain down from his scalp.',
-                    'Mrs. Chremulos comes out now, carrying a broad silver tray laden high with a multitude of brightly coloured, delicious-looking candies, and humbly greets the two men.',
-                    'Chremulos introduces Plutus to his wife, and then the trio make fun of the audience for expecting to enjoy any of these candies on Mrs. Chremulos’ tray, because, of course, it would *surely* be far, far beneath these fine, dedicated theatrical artists to simply toss out fistfuls of sugary treats to the crowd, solely in a shameless attempt to win them all over! Why, could one even imagine?',
-                    'All three run into the house in order to have all the treats for themselves, while the crowd hoots and jeers, crying out phrases such as “Hey, y’all get back here!” and “Now just where do ya think you’re goin’ with those treats, huh?”',
-                    '<b><i>Another Choral Ode now: “Lord Plutus Shall Make Amends”, about how much the God of Wealth is enjoying living with and enriching the family of Chremulos, and generously rewarding all the other previously-neglected ‘good and true’ peoples of Athens.</i></b>',
-                    '<div id="stageFootnote">†<i>Phaedrus’</i> Aesop’s Fables <span class="stageFootnoteSmallCaps">(IV-XII)</span>&thinsp;–&thinsp;‘H<span class="stageFootnoteSmallCaps">ERCULES & </span>P<span class="stageFootnoteSmallCaps">LUTUS</span>’: <i>in heaven, Hercules refuses to salute the Son of Fortune, telling Jupiter that Plutus is ‘friend of the wicked and corrupter of the entire world’.</i></div>',
-                ];
                 const aIIIscIImin = '<img class="imgPlayMiniature imgPlayMiniature2" src="bitmaps/stage/play2.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIIIscII[0] + aIIIscII[1] + aIIIscII[2] + '</div>';
                 contentPlay += aIIIscII[3];
@@ -3936,19 +3899,6 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 9) {
-                const aIVscI = [
-                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> IV, S<span class="stageHeadingStructureDim">CENE</span> I:</div>',
-                    '<div id="stageHeadingDivision">The Epeisodion, Pt. IV</div>',
-                    '<div class="stageHeadingDiminutive">(ll. 802–958)</div>',
-                    'The front door of the house is flung open! Dense white clouds of smoke come pouring out, as if the house were on fire.',
-                    'Kariôn comes stumbling out of the doorway, choking and gagging. He has to slam the door shut and wave the thick smoke away from his face in order to deliver the following soliloquy to the Chorus: why, just how good is it to be Chremulos *now*, huh?, and also Kariôn himself, and also all of their friends! Hell, they’re sacrificing so many pigs and goats and rams in there, you can’t see for all the smoke! There’s so much roasted meat on the grill they can’t give the stuff away!',
-                    'He spends the next few minutes just listing all their new blessings: pantries bulging with flour, oil jugs full of oil, wineskins bursting with wine, spice racks overflowing with spices, coffers full to the brim with finest silver and gold; lanterns of ivory, cook-pots of solid bronze, homely wooden trenchers replaced with shimmering silver plates, <i>et cetera, et cetera, et cetera</i>... Truly, in *every* way, their cups doth runneth over.',
-                    'Into the scene now comes an <b>honest man</b>, followed by his <b>slave</b>, carrying an old threadbare cloak and tattered shoes. They are both dressed quite well.',
-                    'This Honest Man explains to Kariôn that once, long ago, he’d shared his inheritance with all his friends, yet just as soon as the very last coin had been spent, no sooner had all these so-called ‘friends’ disappeared! For years after he’d suffered as a homeless and penniless vagrant, but now, thanks to Plutus, things have all turned around! He’s come to the House of Chremulos today with his old beggar’s cloak and <span class="nobreakStage">shoes—</span>previously his only meager possessions in the entire <span class="nobreakStage">world—</span>to offer them up to the Mighty God of Wealth as a sentimental offering.',
-                    'Now upon the main stage comes a weeping and blubbering <b><i>sykophántēs</i></b> (a Greek <i>‘sycophant’</i> was a professional informant, called a <i>‘delator’</i> by the Romans, what we might think of today as a state-sponsored ‘rat’ or ‘stool-pigeon’; a perennial bootlicker who makes their living by tattling on others, squealing on his closest friends and neighbors—oftentimes without any real proof!—to the government in exchange for taxpayer-funded bounties) to piss and moan about how so very poor he has recently been made. This <i>sycophant</i> is dressed like a wealthy man who has been forced to sleep rough for weeks, his fancy designer toga and sandals (and his baby-cheeked face!) smeared in dirt and grime.',
-                    'He certainly gets no sympathy from Kariôn or the Honest Man, and the scene ends with everyone violently forcing the Sycophant to change into the Honest Man’s filthy old clothes. The Sycophant leaves the stage in tears, while Kariôn invites the Honest Man and his Slave into the house.',
-                    '<b><i>Yet </i>another<i> Choral Ode... these things just never end! This one is called “Shouldn’t’a Been Such’a Bastard!” The ironic, pun-filled lyrics explain how Good Men are loving this new way of things, and Bad Men are left crying in the soup kitchen line.</i></b>',
-                ];
                 const aIVscImin = '<img class="imgPlayMiniature imgPlayMiniature9" src="bitmaps/stage/play9.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIVscI[0] + aIVscI[1] + aIVscI[2] + '</div>';
                 contentPlay += aIVscI[3];
@@ -3980,18 +3930,6 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 10) {
-                const aIVscII = [
-                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> IV, S<span class="stageHeadingStructureDim">CENE</span> II:</div>',
-                    '<div id="stageHeadingDivision">The Epeisodion, Pt. V</div>',
-                    '<div class="stageHeadingDiminutive">(ll. 959–1096)</div>',
-                    'A meek and coquettish <b>grey-haired old spinster</b> saunters onto the main stage now, making every possible attempt (in vain) to project an aura of youthful sexuality and desirability. Her appearance is what a disapproving mother might describe as ‘all tarted up’, in the fashion of any attention-seeking adolescent on any given Saturday night: she has squeezed herself into an obscenely revealing outfit that she is clearly *way* too heavy and too old for, for starters; her face heavily painted with the garish makeup of a lustful floozy, fast-fashion bangles jangling on every wrist and ankle; it is plainly obvious that all of her sartorial choices have been made to give off the impression of a doe-eyed, popular-with-the-boys teenage girl.',
-                    '“Well, hellooooo there, boys!” she calls out to the Chorus, in a melodious, sing-song voice, aggressively fluttering her comically long eye-lashes. “Why, I hadn’t noticed all you strong, handsome men there! Would you mind coming to the assistance of a helpless little thing such as myself? Could any of you virile and strapping young cowboys point me towards the House of Chremulos?” she coos, plumping her cleavage and wiggling her hips as she speaks. The men of the Chorus fall all over themselves to be the one to let her know she has found the right place.',
-                    'Blowing a kiss to the orchestra, she spins around sensuously, struts over to front porch of the house, clears her throat, then BANGS LIKE HELL on the door! Dropping the sweet-as-candy act, she bellows, in a deep, booming roar: “PLUTUS! GET’CHER WORTHLESS CARCASS OUT HERE, AND I MEAN **NOW**!!!” Holy *Moley*, what an ol’ battle-axe!',
-                    'Chremulos comes to the door, demanding an explanation. The Old Maid explains that before Plutus changed everything around, she’d been a fabulously wealthy widow, with a kept young lover who was quite poor. But now that this young man was suddenly rich, he also just-as-suddenly wanted nothing to do with her any more!',
-                    'As she is complaining, the <b>young lover</b> himself shows up, coming to the house to thank Plutus in person for his new good fortune. He and Chremulos take turns ruthlessly mocking this poor woman for her advanced age, joke after joke coming at her expense. (So, this kid is supposed to be an example of an ‘honest and good’ person? ... I dunno.)<br><br>The Young Stud jokes that the Old Maid had probably already slept with every member of the audience, then Chremulos gets inappropriately handsy with the woman, and it’s played for laughs.',
-                    'At any rate, they all eventually enter the house together, the Old Maid undeterred by all their cruelty and jokes, clearly still infatuated with the aloof and resistant Young Stud.',
-                    '<b><i>Another bawdy interlude from the Chorus here, “It Ain’t All It’s Cracked Up To Be”, an extended limerick about how being filthy rich really ain’t all it’s cracked up to be.</i></b>',
-                ];
                 const aIVscIImin = '<img class="imgPlayMiniature imgPlayMiniature13" src="bitmaps/stage/play13.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aIVscII[0] + aIVscII[1] + aIVscII[2] + '</div>';
                 contentPlay += aIVscII[3];
@@ -4020,19 +3958,6 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 11) {
-                const aVscI = [
-                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> V, S<span class="stageHeadingStructureDim">CENE</span> I:</div>',
-                    '<div id="stageHeadingDivision">The Epeisodion, Pt. VI</div>',
-                    '<div class="stageHeadingDiminutive">(ll. 1097–1170)</div>',
-                    'Now the fleet-footed god <b>Hermès</b> has shown up, to pound upon Chremulos’ fancy new solid brass door knocker.',
-                    '(Jeeze, man... just how long *is* this flippin’ play, anyways?)',
-                    'Kariôn answers the door. Hermès snaps to attention, stoically unfurls a glittering scroll, and formally delivers this message: Hear Ye, Hear Ye; Lord Zeus is *pissed* about Plutus!, and He plans to mash up Chremulos, along with all his new friends and closest loved ones, into Grade-A dog-food, just as soon as he can get his hands on them!',
-                    'Hermès freely admits, however—just between him and his old friend Kariôn—that in truth Zeus is skint, flat broke, and therefore his blustering threats are hollow and unenforceable. Why, these days, Mighty Greece pays all her tribute to none but <i>“Pater Ploutos”</i>!',
-                    'He goes on to confess that he couldn’t really give two figs for what happens to the rest of those crummy ol’ Gods of Olympus, just so long as he can save his own skin.',
-                    'The God of Messengers and Commerce reveals the actual reason he has come here today: to request sanctuary with Chremulos and his family! When Kariôn asks if he truly means to renounce his Olympian citizenship, Hermès replies: “<i>‘Omne solum forti patria est; Patria est, ubicunque est bene!’:</i> ‘All lands for the brave home can be; One’s motherland is where one lives well!’ Where a man prospers, there his country is!”',
-                    'After a lengthy, pun-filled discussion trying to determine how exactly Hermès might pull his weight as the newest member of the Chremulos household, Kariôn finally offers him a job as Head Janitor, laughing that he should employ his legendary speed to wash all the many stacks of dirty dishes that have been piling up lately.',
-                    '<b><i>Now the final Choral Ode is sung: “Maybe She Had A Point...” These lyrics claim Poverty was probably right all along, and that this whole misadventure has most likely been a huge mistake.</i></b>',
-                ];
                 const aVscImin = '<img class="imgPlayMiniature imgPlayMiniature12" src="bitmaps/stage/play12.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aVscI[0] + aVscI[1] + aVscI[2] + '</div>';
                 contentPlay += aVscI[3];
@@ -4064,16 +3989,6 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 12) {
-                const aVscII = [
-                    '<div id="stageHeadingStructure">A<span class="stageHeadingStructureDim">CT</span> V, S<span class="stageHeadingStructureDim">CENE</span> II:</div>',
-                    '<div id="stageHeadingDivision">The Exodos</div>',
-                    '<div class="stageHeadingDiminutive">(ll. 1171–1209)</div>',
-                    'The show concludes with the <b>Chief Priest of Zeus</b> himself coming around to complain to Chremulos.',
-                    'He laments that all of the temples have now been completely abandoned, shutters left rattling in the wind, and so, much like the Great Pantheon of the Gods themselves, all the Hierarchies of their many Clergies, from the Highest Priests to the lowliest Altar Boys, are now all dirt poor, left with nothing!',
-                    'He jumps at the chance to sign on as the very first Grand High Muckety-Muck of the soon-to-be-established Holy Church of Our Gilded Lord & Savior, Glorious Father Plutus.',
-                    'Then he, Plutus, the Old Maid from earlier, and Chremulos all leave the stage, skipping together hand-in-hand, off to enthrone Plutus as their new King of the Gods. The Chorus forms a conga-line and follows closely behind them.',
-                    '<div id="stagePlayEndCaps">T<span class="stagePlayEndSmallCaps">HE</span> E<span class="stagePlayEndSmallCaps">ND</span></div>',
-                ];
                 const aVscIImin = '<img class="imgPlayMiniature imgPlayMiniature11" src="bitmaps/stage/play11.png">';
                 contentPlay += '<div class="stageHeadingShortLine">' + aVscII[0] + aVscII[1] + aVscII[2] + '</div>';
                 contentPlay += aVscII[3];
@@ -4101,14 +4016,6 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 13) {
-                const epilogue = [
-                    '<i>Epilogue</i>',
-                    '<i>Well, the play is now over.</i>',
-                    '<i>The Director, the Actors and all the Chorus Members take a final bow on stage to thunderous applause.</i>',
-                    '<i>Frankly, you just don’t see what all the fuss is about. I mean, it was basically just a bunch of guys prancing up and down the stage in wigs and masks, singing about farts and farting for almost... hold on, this was over </i>five hours<i> long?? Sheesh.</i>',
-                    '<i>Oh, well. Time to try and manage your way to the exit through this zoo. You gather your belongings, and make your way out with the crowd.</i>',
-                    '<i>As you and your party press through the mass of people leaving, various friends and well-wishers take your arm, shake your hand and cheerfully congratulate you for your stoic composure during, and classy handling of, that preachy, sanctimonious </i>parabasis<i>. You’re an oak, man. Marcus Aurelius himself would be impressed.</i>',
-                ];
                 const epilogueMin = '<img class="imgPlayMiniature imgPlayMiniature10" src="bitmaps/stage/play10.png">';
                 contentPlay += '<div class="redrum">';
                 contentPlay += '<div class="stageHeading">' + epilogue[0] + '</div>';
@@ -4408,7 +4315,7 @@ function UpdateText() {
         spanHeirFacesPagination.innerHTML = displayHeirPage + ' ' + heirFacesPageCurrent + ' ' + displayHeirOf + ' ' + heirFacesPageTotal;
 
         if (heirStage == 6) {
-            let summaryString = displayThouArt + ':';
+            let summaryString = '<div style="user-select: none;">' + displayThouArt + ':';
 
             summaryString += '<br>';
             summaryString += '<br>';
@@ -4427,23 +4334,275 @@ function UpdateText() {
             else if (player.gender == 6) { genderIcon = '<div id="divHeirSelectedGender" class="HeirGenderIconOmnigenderSm"></div>'; }
             else if (player.gender == 7) { genderIcon = '<div id="divHeirSelectedGender" class="HeirGenderIconAgenderSm"></div>'; }
             const ethnicitySansArticle = displayEthnicities[player.ethnicity].toUpperCase().split(" ")[1];
-            summaryString += ' ' + displayTitles[player.title].toUpperCase() + ' ' + player.names[2].toUpperCase() + ' ' + displayDefiniteArticle + ' ' + ethnicitySansArticle.toUpperCase();
+            summaryString += '<div id="divHeirMasthead">';
+            summaryString += '<span style="white-space: nowrap;">' + displayTitles[player.title].toUpperCase() + '</span> ';
+            summaryString += '<span style="white-space: nowrap;"><b>' + player.names[2].toUpperCase() + '</b></span> ';
+            summaryString += '<span style="white-space: nowrap;">' + displayDefiniteArticle + ' ' + ethnicitySansArticle.toUpperCase() + '</span>';
+            summaryString += '</div>';
 
-            summaryString += '<br>';
-            summaryString += '<br>';
-            summaryString += '<br>';
-            summaryString += '<br>';
+            summaryString += '<br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[0] + ':</b></i><br>' + displayNations[player.ethnicity];
+
+            summaryString += '<br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[1] + ':</b></i><br>' + genderIcon;
+
+            summaryString += '<br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[2] + ':</b></i><br>';
+            summaryString += '<label for="inputEyeColourA">' + heirReportDictionary[3] + '</label><br>';
+            summaryString += '<input type="color" id="inputEyeColourA" name="inputEyeColourA" value="' + heirAttributes.eyes[0] + '" onchange="heirAttributes.eyes[0] = this.value;"><br>';
+            summaryString += '<label for="inputEyeColourB">' + heirReportDictionary[4] + ' </label><input type="color" id="inputEyeColourB" name="inputEyeColourB" value="' + heirAttributes.eyes[1] + '" onchange="heirAttributes.eyes[1] = this.value;"> ';
+            summaryString += '<input type="color" id="inputEyeColourC" name="inputEyeColourC" value="' + heirAttributes.eyes[2] + '" onchange="heirAttributes.eyes[2] = this.value;"><label for="inputEyeColourC"> ' + heirReportDictionary[5] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[90] + ':</b></i><br>';
+            summaryString += '<label for="selectHeirBirthDay">' + heirReportDictionary[91] + ':</label> ';
+            summaryString += '<select name="selectHeirBirthDay" id="selectHeirBirthDay" style="border: 1px solid black;" onchange="heirAttributes.birthday[0] = this.value;">';
+            summaryString += '<option value="1" ' + ((heirAttributes.birthday[0] == '1') ? 'selected' : '') + '>1</option>';
+            summaryString += '<option value="2" ' + ((heirAttributes.birthday[0] == '2') ? 'selected' : '') + '>2</option>';
+            summaryString += '<option value="3" ' + ((heirAttributes.birthday[0] == '3') ? 'selected' : '') + '>3</option>';
+            summaryString += '<option value="4" ' + ((heirAttributes.birthday[0] == '4') ? 'selected' : '') + '>4</option>';
+            summaryString += '<option value="5" ' + ((heirAttributes.birthday[0] == '5') ? 'selected' : '') + '>5</option>';
+            summaryString += '<option value="6" ' + ((heirAttributes.birthday[0] == '6') ? 'selected' : '') + '>6</option>';
+            summaryString += '<option value="7" ' + ((heirAttributes.birthday[0] == '7') ? 'selected' : '') + '>7</option>';
+            summaryString += '<option value="8" ' + ((heirAttributes.birthday[0] == '8') ? 'selected' : '') + '>8</option>';
+            summaryString += '<option value="9" ' + ((heirAttributes.birthday[0] == '9') ? 'selected' : '') + '>9</option>';
+            summaryString += '<option value="10" ' + ((heirAttributes.birthday[0] == '10') ? 'selected' : '') + '>10</option>';
+            summaryString += '<option value="11" ' + ((heirAttributes.birthday[0] == '11') ? 'selected' : '') + '>11</option>';
+            summaryString += '<option value="12" ' + ((heirAttributes.birthday[0] == '12') ? 'selected' : '') + '>12</option>';
+            summaryString += '<option value="13" ' + ((heirAttributes.birthday[0] == '13') ? 'selected' : '') + '>13</option>';
+            summaryString += '<option value="14" ' + ((heirAttributes.birthday[0] == '14') ? 'selected' : '') + '>14</option>';
+            summaryString += '<option value="15" ' + ((heirAttributes.birthday[0] == '15') ? 'selected' : '') + '>15</option>';
+            summaryString += '<option value="16" ' + ((heirAttributes.birthday[0] == '16') ? 'selected' : '') + '>16</option>';
+            summaryString += '<option value="17" ' + ((heirAttributes.birthday[0] == '17') ? 'selected' : '') + '>17</option>';
+            summaryString += '<option value="18" ' + ((heirAttributes.birthday[0] == '18') ? 'selected' : '') + '>18</option>';
+            summaryString += '<option value="19" ' + ((heirAttributes.birthday[0] == '19') ? 'selected' : '') + '>19</option>';
+            summaryString += '<option value="20" ' + ((heirAttributes.birthday[0] == '20') ? 'selected' : '') + '>20</option>';
+            summaryString += '<option value="21" ' + ((heirAttributes.birthday[0] == '21') ? 'selected' : '') + '>21</option>';
+            summaryString += '<option value="22" ' + ((heirAttributes.birthday[0] == '22') ? 'selected' : '') + '>22</option>';
+            summaryString += '<option value="23" ' + ((heirAttributes.birthday[0] == '23') ? 'selected' : '') + '>23</option>';
+            summaryString += '<option value="24" ' + ((heirAttributes.birthday[0] == '24') ? 'selected' : '') + '>24</option>';
+            summaryString += '<option value="25" ' + ((heirAttributes.birthday[0] == '25') ? 'selected' : '') + '>25</option>';
+            summaryString += '<option value="26" ' + ((heirAttributes.birthday[0] == '26') ? 'selected' : '') + '>26</option>';
+            summaryString += '<option value="27" ' + ((heirAttributes.birthday[0] == '27') ? 'selected' : '') + '>27</option>';
+            summaryString += '<option value="28" ' + ((heirAttributes.birthday[0] == '28') ? 'selected' : '') + '>28</option>';
+            summaryString += '<option value="29" ' + ((heirAttributes.birthday[0] == '29') ? 'selected' : '') + '>29</option>';
+            summaryString += '<option value="30" ' + ((heirAttributes.birthday[0] == '30') ? 'selected' : '') + '>30</option>';
+            summaryString += '<option value="31" ' + ((heirAttributes.birthday[0] == '31') ? 'selected' : '') + '>31</option>';
+            summaryString += '</select>';
+            summaryString += ' &nbsp; ';
+            summaryString += '<label for="selectHeirBirthMonth">' + heirReportDictionary[92] + ':</label> ';
+            summaryString += '<select name="selectHeirBirthMonth" id="selectHeirBirthMonth" style="border: 1px solid black;" onchange="heirAttributes.birthday[1] = this.value;">';
+            summaryString += '<option value="January" ' + ((heirAttributes.birthday[1] == 'January') ? 'selected' : '') + '>' + heirReportDictionary[93] + '</option>';
+            summaryString += '<option value="February" ' + ((heirAttributes.birthday[1] == 'February') ? 'selected' : '') + '>' + heirReportDictionary[94] + '</option>';
+            summaryString += '<option value="March" ' + ((heirAttributes.birthday[1] == 'March') ? 'selected' : '') + '>' + heirReportDictionary[95] + '</option>';
+            summaryString += '<option value="April" ' + ((heirAttributes.birthday[1] == 'April') ? 'selected' : '') + '>' + heirReportDictionary[96] + '</option>';
+            summaryString += '<option value="May" ' + ((heirAttributes.birthday[1] == 'May') ? 'selected' : '') + '>' + heirReportDictionary[97] + '</option>';
+            summaryString += '<option value="June" ' + ((heirAttributes.birthday[1] == 'June') ? 'selected' : '') + '>' + heirReportDictionary[98] + '</option>';
+            summaryString += '<option value="July" ' + ((heirAttributes.birthday[1] == 'July') ? 'selected' : '') + '>' + heirReportDictionary[99] + '</option>';
+            summaryString += '<option value="August" ' + ((heirAttributes.birthday[1] == 'August') ? 'selected' : '') + '>' + heirReportDictionary[100] + '</option>';
+            summaryString += '<option value="September" ' + ((heirAttributes.birthday[1] == 'September') ? 'selected' : '') + '>' + heirReportDictionary[101] + '</option>';
+            summaryString += '<option value="October" ' + ((heirAttributes.birthday[1] == 'October') ? 'selected' : '') + '>' + heirReportDictionary[102] + '</option>';
+            summaryString += '<option value="November" ' + ((heirAttributes.birthday[1] == 'November') ? 'selected' : '') + '>' + heirReportDictionary[103] + '</option>';
+            summaryString += '<option value="December" ' + ((heirAttributes.birthday[1] == 'December') ? 'selected' : '') + '>' + heirReportDictionary[104] + '</option>';
+            summaryString += '</select>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[6] + ':</b></i><br><label for="inputHeirRange">';
+            let ageOutput = heirAttributes.age[0];
+            if (yearFormat == 1) { ageOutput = RomanceNumber(ageOutput); }
+            else if (yearFormat == 2) { ageOutput = CircumciseNumber(ageOutput); }
+            else if (yearFormat == 3) { ageOutput = SteepNumberInGreenTea(ageOutput); }
+            summaryString += '<span id="spanAgeDisplay">' + ageOutput + '</span> ' + heirReportDictionary[7];
+            summaryString += '</label><br>- <input type="range" id="inputHeirRange" name="inputHeirRange" min="' + heirAgeMin + '" value="' + heirAttributes.age[0] + '" max="' + heirAgeMax + '" style="width: 60%;"> +';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[9] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroHeightShort" name="inputHeroHeight" value="0" ' + ((heirAttributes.height == '0') ? 'checked' : '') + ' onclick="heirAttributes.height = this.value;"> <label for="inputHeroHeightShort">' + heirReportDictionary[10] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroHeightAverage" name="inputHeroHeight" value="1" ' + ((heirAttributes.height == '1') ? 'checked' : '') + ' onclick="heirAttributes.height = this.value;"> <label for="inputHeroHeightAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroHeightTall" name="inputHeroHeight" value="2" ' + ((heirAttributes.height == '2') ? 'checked' : '') + ' onclick="heirAttributes.height = this.value;"> <label for="inputHeroHeightTall">' + heirReportDictionary[11] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[12] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroWeightThin" name="inputHeroWeight" value="0" ' + ((heirAttributes.weight == '0') ? 'checked' : '') + ' onclick="heirAttributes.weight = this.value;"> <label for="inputHeroWeightThin">' + heirReportDictionary[13] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroWeightAverage" name="inputHeroWeight" value="1" ' + ((heirAttributes.weight == '1') ? 'checked' : '') + ' onclick="heirAttributes.weight = this.value;"> <label for="inputHeroWeightAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroWeightHeavy" name="inputHeroWeight" value="2" ' + ((heirAttributes.weight == '2') ? 'checked' : '') + ' onclick="heirAttributes.weight = this.value;"> <label for="inputHeroWeightHeavy">' + heirReportDictionary[14] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[15] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroBuildBookish" name="inputHeroBuild" value="0" ' + ((heirAttributes.STR == '0') ? 'checked' : '') + ' onclick="heirAttributes.STR = this.value;"> <label for="inputHeroBuildBookish">' + heirReportDictionary[16] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroBuildAverage" name="inputHeroBuild" value="1" ' + ((heirAttributes.STR == '1') ? 'checked' : '') + ' onclick="heirAttributes.STR = this.value;"> <label for="inputHeroBuildAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroBuildMuscular" name="inputHeroBuild" value="2" ' + ((heirAttributes.STR == '2') ? 'checked' : '') + ' onclick="heirAttributes.STR = this.value;"> <label for="inputHeroBuildMuscular">' + heirReportDictionary[17] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[18] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroEnduranceFrail" name="inputHeroEndurance" value="0" ' + ((heirAttributes.END == '0') ? 'checked' : '') + ' onclick="heirAttributes.END = this.value;"> <label for="inputHeroEnduranceFrail">' + heirReportDictionary[19] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroEnduranceAverage" name="inputHeroEndurance" value="1" ' + ((heirAttributes.END == '1') ? 'checked' : '') + ' onclick="heirAttributes.END = this.value;"> <label for="inputHeroEnduranceAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroEnduranceTough" name="inputHeroEndurance" value="2" ' + ((heirAttributes.END == '2') ? 'checked' : '') + ' onclick="heirAttributes.END = this.value;"> <label for="inputHeroEnduranceTough">' + heirReportDictionary[20] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[21] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroAgilityClumsy" name="inputHeroAgility" value="0" ' + ((heirAttributes.AGI == '0') ? 'checked' : '') + ' onclick="heirAttributes.AGI = this.value;"> <label for="inputHeroAgilityClumsy">' + heirReportDictionary[22] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAgilityAverage" name="inputHeroAgility" value="1" ' + ((heirAttributes.AGI == '1') ? 'checked' : '') + ' onclick="heirAttributes.AGI = this.value;"> <label for="inputHeroAgilityAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAgilitySpry" name="inputHeroAgility" value="2" ' + ((heirAttributes.AGI == '2') ? 'checked' : '') + ' onclick="heirAttributes.AGI = this.value;"> <label for="inputHeroAgilitySpry">' + heirReportDictionary[23] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[24] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroDexterityUncoordinated" name="inputHeroDexterity" value="0" ' + ((heirAttributes.DEX == '0') ? 'checked' : '') + ' onclick="heirAttributes.DEX = this.value;"> <label for="inputHeroDexterityUncoordinated">' + heirReportDictionary[25] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDexterityAverage" name="inputHeroDexterity" value="1" ' + ((heirAttributes.DEX == '1') ? 'checked' : '') + ' onclick="heirAttributes.DEX = this.value;"> <label for="inputHeroDexterityAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDexterityNimble" name="inputHeroDexterity" value="2" ' + ((heirAttributes.DEX == '2') ? 'checked' : '') + ' onclick="heirAttributes.DEX = this.value;"> <label for="inputHeroDexterityNimble">' + heirReportDictionary[26] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[27] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroMentalDim" name="inputHeroMental" value="0"' + ((heirAttributes.INT == '0') ? 'checked' : '') + ' onclick="heirAttributes.INT = this.value;"> <label for="inputHeroMentalDim">' + heirReportDictionary[28] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroMentalAverage" name="inputHeroMental" value="1" ' + ((heirAttributes.INT == '1') ? 'checked' : '') + ' onclick="heirAttributes.INT = this.value;"> <label for="inputHeroMentalAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroMentalSharp" name="inputHeroMental" value="2" ' + ((heirAttributes.INT == '2') ? 'checked' : '') + ' onclick="heirAttributes.INT = this.value;"> <label for="inputHeroMentalSharp">' + heirReportDictionary[29] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[30] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroJudgmentNaïve" name="inputHeroJudgment" value="0"' + ((heirAttributes.WIS == '0') ? 'checked' : '') + ' onclick="heirAttributes.WIS = this.value;"> <label for="inputHeroJudgmentNaïve">' + heirReportDictionary[31] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroJudgmentAverage" name="inputHeroJudgment" value="1" ' + ((heirAttributes.WIS == '1') ? 'checked' : '') + ' onclick="heirAttributes.WIS = this.value;"> <label for="inputHeroJudgmentAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroJudgmentWise" name="inputHeroJudgment" value="2" ' + ((heirAttributes.WIS == '2') ? 'checked' : '') + ' onclick="heirAttributes.WIS = this.value;"> <label for="inputHeroJudgmentWise">' + heirReportDictionary[32] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[33] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroCharismaAwkward" name="inputHeroCharisma" value="0"' + ((heirAttributes.CHA == '0') ? 'checked' : '') + ' onclick="heirAttributes.CHA = this.value;"> <label for="inputHeroCharismaAwkward">' + heirReportDictionary[34] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroCharismaAverage" name="inputHeroCharisma" value="1" ' + ((heirAttributes.CHA == '1') ? 'checked' : '') + ' onclick="heirAttributes.CHA = this.value;"> <label for="inputHeroCharismaAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroCharismaCharming" name="inputHeroCharisma" value="2" ' + ((heirAttributes.CHA == '2') ? 'checked' : '') + ' onclick="heirAttributes.CHA = this.value;"> <label for="inputHeroCharismaCharming">' + heirReportDictionary[35] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[36] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroLooksUnprepossessing" name="inputHeroLooks" value="0"' + ((heirAttributes.ATT == '0') ? 'checked' : '') + ' onclick="heirAttributes.ATT = this.value;"> <label for="inputHeroLooksUnprepossessing">' + heirReportDictionary[37] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroLooksAverage" name="inputHeroLooks" value="1" ' + ((heirAttributes.ATT == '1') ? 'checked' : '') + ' onclick="heirAttributes.ATT = this.value;"> <label for="inputHeroLooksAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroLooksFetching" name="inputHeroLooks" value="2" ' + ((heirAttributes.ATT == '2') ? 'checked' : '') + ' onclick="heirAttributes.ATT = this.value;"> <label for="inputHeroLooksFetching">' + heirReportDictionary[38] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[39] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroTemperamentTimid" name="inputHeroTemperament" value="0"' + ((heirAttributes.TMP == '0') ? 'checked' : '') + ' onclick="heirAttributes.TMP = this.value;"> <label for="inputHeroTemperamentTimid">' + heirReportDictionary[40] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroTemperamentAverage" name="inputHeroTemperament" value="1" ' + ((heirAttributes.TMP == '1') ? 'checked' : '') + ' onclick="heirAttributes.TMP = this.value;"> <label for="inputHeroTemperamentAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroTemperamentAggressive" name="inputHeroTemperament" value="2" ' + ((heirAttributes.TMP == '2') ? 'checked' : '') + ' onclick="heirAttributes.TMP = this.value;"> <label for="inputHeroTemperamentAggressive">' + heirReportDictionary[41] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[42] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroDispositionImpatient" name="inputHeroDisposition" value="0"' + ((heirAttributes.DSP == '0') ? 'checked' : '') + ' onclick="heirAttributes.DSP = this.value;"> <label for="inputHeroDispositionImpatient">' + heirReportDictionary[43] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDispositionAverage" name="inputHeroDisposition" value="1" ' + ((heirAttributes.DSP == '1') ? 'checked' : '') + ' onclick="heirAttributes.DSP = this.value;"> <label for="inputHeroDispositionAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDispositionDisciplined" name="inputHeroDisposition" value="2" ' + ((heirAttributes.DSP == '2') ? 'checked' : '') + ' onclick="heirAttributes.DSP = this.value;"> <label for="inputHeroDispositionDisciplined">' + heirReportDictionary[44] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[45] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroAdventurousnessMeek" name="inputHeroAdventurousness" value="0"' + ((heirAttributes.ADV == '0') ? 'checked' : '') + ' onclick="heirAttributes.ADV = this.value;"> <label for="inputHeroAdventurousnessMeek">' + heirReportDictionary[46] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAdventurousnessAverage" name="inputHeroAdventurousness" value="1" ' + ((heirAttributes.ADV == '1') ? 'checked' : '') + ' onclick="heirAttributes.ADV = this.value;"> <label for="inputHeroAdventurousnessAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAdventurousnessBold" name="inputHeroAdventurousness" value="2" ' + ((heirAttributes.ADV == '2') ? 'checked' : '') + ' onclick="heirAttributes.ADV = this.value;"> <label for="inputHeroAdventurousnessBold">' + heirReportDictionary[47] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[48] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroDriveLazy" name="inputHeroDrive" value="0"' + ((heirAttributes.DRV == '0') ? 'checked' : '') + ' onclick="heirAttributes.DRV = this.value;"> <label for="inputHeroDriveLazy">' + heirReportDictionary[49] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDriveAverage" name="inputHeroDrive" value="1" ' + ((heirAttributes.DRV == '1') ? 'checked' : '') + ' onclick="heirAttributes.DRV = this.value;"> <label for="inputHeroDriveAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDriveDiligent" name="inputHeroDrive" value="2" ' + ((heirAttributes.DRV == '2') ? 'checked' : '') + ' onclick="heirAttributes.DRV = this.value;"> <label for="inputHeroDriveDiligent">' + heirReportDictionary[50] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[51] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroAspirationsPractical" name="inputHeroAspirations" value="0"' + ((heirAttributes.ASP == '0') ? 'checked' : '') + ' onclick="heirAttributes.ASP = this.value;"> <label for="inputHeroAspirationsPractical">' + heirReportDictionary[52] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAspirationsAverage" name="inputHeroAspirations" value="1" ' + ((heirAttributes.ASP == '1') ? 'checked' : '') + ' onclick="heirAttributes.ASP = this.value;"> <label for="inputHeroAspirationsAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAspirationsAmbitious" name="inputHeroAspirations" value="2" ' + ((heirAttributes.ASP == '2') ? 'checked' : '') + ' onclick="heirAttributes.ASP = this.value;"> <label for="inputHeroAspirationsAmbitious">' + heirReportDictionary[53] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[54] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroDietRich" name="inputHeroDiet" value="0"' + ((heirAttributes.DIE == '0') ? 'checked' : '') + ' onclick="heirAttributes.DIE = this.value;"> <label for="inputHeroDietRich">' + heirReportDictionary[55] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDietAverage" name="inputHeroDiet" value="1" ' + ((heirAttributes.DIE == '1') ? 'checked' : '') + ' onclick="heirAttributes.DIE = this.value;"> <label for="inputHeroDietAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDietHealthy" name="inputHeroDiet" value="2" ' + ((heirAttributes.DIE == '2') ? 'checked' : '') + ' onclick="heirAttributes.DIE = this.value;"> <label for="inputHeroDietHealthy">' + heirReportDictionary[56] + '</label>';
+
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[57] + ':</b></i><br>';
+            summaryString += '<input type="radio" id="inputHeroMêléeInept" name="inputHeroMêlée" value="0" ' + ((heirAttributes.COM == '0') ? 'checked' : '') + ' onclick="heirAttributes.COM = this.value;"> <label for="inputHeroMêléeInept">' + heirReportDictionary[58] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroMêléeAverage" name="inputHeroMêlée" value="1" ' + ((heirAttributes.COM == '1') ? 'checked' : '') + ' onclick="heirAttributes.COM = this.value;"> <label for="inputHeroMêléeAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroMêléeCompetent" name="inputHeroMêlée" value="2" ' + ((heirAttributes.COM == '2') ? 'checked' : '') + ' onclick="heirAttributes.COM = this.value;"> <label for="inputHeroMêléeCompetent">' + heirReportDictionary[59] + '</label>';
+
+            summaryString += '<br><br>';
+            summaryString += '<br><br>';
+
+            summaryString += '<div id="divHeirBoxOptions">';
+            summaryString += '<i><b>' + heirReportDictionary[60] + ':</b></i>';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputScars">' + heirReportDictionary[61] + '</label> <input type="checkbox" id="inputScars" name="inputScars" ' + (heirAttributes.options[0] ? 'checked' : '') + ' onchange="heirAttributes.options[0] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputLikesCats">' + heirReportDictionary[62] + '</label> <input type="checkbox" id="inputLikesCats" name="inputLikesCats" ' + (heirAttributes.options[1] ? 'checked' : '') + ' onchange="heirAttributes.options[1] = this.checked;">';
+            summaryString += ' &nbsp; &nbsp; ';
+            summaryString += '<label for="inputLikesDogs">' + heirReportDictionary[63] + '</label> <input type="checkbox" id="inputLikesDogs" name="inputLikesDogs" ' + (heirAttributes.options[2] ? 'checked' : '') + ' onchange="heirAttributes.options[2] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputTroublemaker">' + heirReportDictionary[64] + '</label> <input type="checkbox" id="inputTroublemaker" name="inputTroublemaker" ' + (heirAttributes.options[3] ? 'checked' : '') + ' onchange="heirAttributes.options[3] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputInquisitive">' + heirReportDictionary[65] + '</label> <input type="checkbox" id="inputInquisitive" name="inputInquisitive" ' + (heirAttributes.options[4] ? 'checked' : '') + ' onchange="heirAttributes.options[4] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputArrogant">' + heirReportDictionary[66] + '</label> <input type="checkbox" id="inputArrogant" name="inputArrogant" ' + (heirAttributes.options[5] ? 'checked' : '') + ' onchange="heirAttributes.options[5] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputAccidentProne">' + heirReportDictionary[67] + '</label> <input type="checkbox" id="inputAccidentProne" name="inputAccidentProne" ' + (heirAttributes.options[6] ? 'checked' : '') + ' onchange="heirAttributes.options[6] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputRomantic">' + heirReportDictionary[68] + '</label> <input type="checkbox" id="inputRomantic" name="inputRomantic" ' + (heirAttributes.options[7] ? 'checked' : '') + ' onchange="heirAttributes.options[7] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputTooSmart">' + heirReportDictionary[69] + '</label> <input type="checkbox" id="inputTooSmart" name="inputTooSmart" ' + (heirAttributes.options[8] ? 'checked' : '') + ' onchange="heirAttributes.options[8] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputLikesGuys">' + heirReportDictionary[70] + '</label> <input type="checkbox" id="inputLikesGuys" name="inputLikesGuys" ' + (heirAttributes.options[9] ? 'checked' : '') + ' onchange="heirAttributes.options[9] = this.checked;">';
+            summaryString += ' &nbsp; &nbsp; ';
+            summaryString += '<label for="inputLikesGals">' + heirReportDictionary[71] + '</label> <input type="checkbox" id="inputLikesGals" name="inputLikesGals" ' + (heirAttributes.options[10] ? 'checked' : '') + ' onchange="heirAttributes.options[10] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputLotToLearn">' + heirReportDictionary[72] + '</label> <input type="checkbox" id="inputLotToLearn" name="inputLotToLearn" ' + (heirAttributes.options[11] ? 'checked' : '') + ' onchange="heirAttributes.options[11] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputLate">' + heirReportDictionary[73] + '</label> <input type="checkbox" id="inputLate" name="inputLate" ' + (heirAttributes.options[12] ? 'checked' : '') + ' onchange="heirAttributes.options[12] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputVain">' + heirReportDictionary[74] + '</label> <input type="checkbox" id="inputVain" name="inputVain" ' + (heirAttributes.options[13] ? 'checked' : '') + ' onchange="heirAttributes.options[13] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputIdealist">' + heirReportDictionary[75] + '</label> <input type="checkbox" id="inputIdealist" name="inputIdealist" ' + (heirAttributes.options[14] ? 'checked' : '') + ' onchange="heirAttributes.options[14] = this.checked;">';
+            summaryString += '</div>';
+
+            summaryString += '<div style="display: flex; justify-content: center;">';
+
+            summaryString += '<div id="divHeirBoxFears">';
+            summaryString += '<i><b>' + heirReportDictionary[76] + ':</b></i>';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputPhobiasWater">' + heirReportDictionary[77] + '</label> <input type="checkbox" id="inputPhobiasWater" name="inputPhobiasWater" ' + (heirAttributes.phobias[0] ? 'checked' : '') + ' onchange="heirAttributes.phobias[0] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputPhobiasSnakes">' + heirReportDictionary[78] + '</label> <input type="checkbox" id="inputPhobiasSnakes" name="inputPhobiasSnakes" ' + (heirAttributes.phobias[1] ? 'checked' : '') + ' onchange="heirAttributes.phobias[1] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputPhobiasHeights">' + heirReportDictionary[79] + '</label> <input type="checkbox" id="inputPhobiasHeights" name="inputPhobiasHeights" ' + (heirAttributes.phobias[2] ? 'checked' : '') + ' onchange="heirAttributes.phobias[2] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputPhobiasDark">' + heirReportDictionary[80] + '</label> <input type="checkbox" id="inputPhobiasDark" name="inputPhobiasDark" ' + (heirAttributes.phobias[3] ? 'checked' : '') + ' onchange="heirAttributes.phobias[3] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputPhobiasElbowGrease">' + heirReportDictionary[81] + '</label> <input type="checkbox" id="inputPhobiasElbowGrease" name="inputPhobiasElbowGrease" ' + (heirAttributes.phobias[4] ? 'checked' : '') + ' onchange="heirAttributes.phobias[4] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputPhobiasVampires">' + heirReportDictionary[82] + '</label> <input type="checkbox" id="inputPhobiasVampires" name="inputPhobiasVampires" ' + (heirAttributes.phobias[5] ? 'checked' : '') + ' onchange="heirAttributes.phobias[5] = this.checked;">';
+            summaryString += '</div>';
+
+            summaryString += '<div id="divHeirBoxPeccadilloes">';
+            summaryString += '<i><b>' + heirReportDictionary[83] + ':</b></i>';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputNeurosesADHD">' + heirReportDictionary[84] + '</label> <input type="checkbox" id="inputNeurosesADHD" name="inputNeurosesADHD" ' + (heirAttributes.neuroses[4] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[4] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputNeurosesBipolar">' + heirReportDictionary[85] + '</label> <input type="checkbox" id="inputNeurosesBipolar" name="inputNeurosesBipolar" ' + (heirAttributes.neuroses[2] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[2] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputNeurosesSchizophrenic">' + heirReportDictionary[86] + '</label> <input type="checkbox" id="inputNeurosesSchizophrenic" name="inputNeurosesSchizophrenic" ' + (heirAttributes.neuroses[0] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[0] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputNeurosesOCD">' + heirReportDictionary[87] + '</label> <input type="checkbox" id="inputNeurosesOCD" name="inputNeurosesOCD" ' + (heirAttributes.neuroses[1] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[1] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputNeurosesOnychophagia">' + heirReportDictionary[88] + '</label> <input type="checkbox" id="inputNeurosesOnychophagia" name="inputNeurosesOnychophagia" ' + (heirAttributes.neuroses[3] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[3] = this.checked;">';
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputNeurosesMisunderstood">' + heirReportDictionary[89] + '</label> <input type="checkbox" id="inputNeurosesMisunderstood" name="inputNeurosesMisunderstood" ' + (heirAttributes.neuroses[5] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[5] = this.checked;">';
+            summaryString += '</div>';
+
+            summaryString += '</div>';
+
+            summaryString += '<br><br><br>';
 
             summaryString += displayHeirSummaryCorrect;
 
-            summaryString += '<br>';
-            summaryString += '<br>';
+            summaryString += '<br><br>';
 
-            summaryString += '<button id="buttonHeirConfirmAll" onclick="HeirConfirmAll();">';
-            summaryString += displayItIsI + displayTitles[player.title].toUpperCase() + ' ' + player.names[2].toUpperCase() + ' ' + displayDefiniteArticle + ' ' + displayFirst;
+            summaryString += '<button id="buttonHeirConfirmAll" onclick="HeirConfirmAll();" style="max-width: 80%;">';
+            summaryString += displayItIsI + '<span style="white-space: nowrap;">' + displayTitles[player.title].toUpperCase() + ' ' + player.names[2].toUpperCase() + '</span> <span style="white-space: nowrap;">' + displayDefiniteArticle + ' ' + displayFirst + '</span>';
             summaryString += '</button>';
+            summaryString += '</div>';
 
             divHeirWorkshopSummary.innerHTML = summaryString;
+            ListenToAge();
         }
 
         buttonHeirGoBack.innerHTML = displayLabelReturnToPrevDecision;
@@ -5976,9 +6135,42 @@ function UpdateText() {
     buttonReturnToMap.innerHTML = displayReturnToMapView;
     buttonRecords.innerHTML = 'Records: OFF';
     if (player.likesRecords) { buttonRecords.innerHTML = 'Records: ON'; }
+
     let endingButtonLabel = displayLabelTrueEnding + '<br><span class="icon Crux inlineIcon"></span> <span class="icon Dawg inlineIcon"></span>';
-    if (superMeditatorWizardPowersActivated && prayersCount > 0) { endingButtonLabel = displayLabelTrueEnding + '<br><span class="icon Scepter inlineIcon"></span> <span class="icon EspírituSanto inlineIcon"></span> <span class="icon Wand inlineIcon"></span>'; }
+    if (player.hasSeenDog) {
+        endingButtonLabel = displayLabelTrueEnding + '<br><span class="icon Tingle inlineIcon"></span>';
+        if (player.hasHiked && !superMeditatorWizardPowersActivated) { endingButtonLabel = displayLabelTrueEnding + '<br><span class="icon Grave inlineIcon"></span>'; }
+    }
+    if (superMeditatorWizardPowersActivated && prayersCount > 0) {
+        endingButtonLabel = displayLabelTrueEnding + '<br><span class="icon Scepter inlineIcon"></span> <span class="icon EspírituSanto inlineIcon"></span> <span class="icon Wand inlineIcon"></span>';
+        if (!player.hasDoneEverything) { imgNirvana.src = 'bitmaps/nirvana.png'; }
+    }
+    if (player.hasDoneEverything) {
+        endingButtonLabel = displayLabelTrueEnding + '<br><span class="icon TheSmiter inlineIcon"></span> <span class="icon TheLocnar inlineIcon"></span> <span class="icon Leo inlineIcon"></span>';
+        if (player.hasNotRaisedDongers) { endingButtonLabel = displayLabelTrueEnding + '<br><span class="icon Scepter inlineIcon"></span> <span class="icon EspírituSanto inlineIcon"></span> <span class="icon Wand inlineIcon"></span>'; }
+    }
     buttonTrueEnding.innerHTML = endingButtonLabel;
+}
+
+
+
+function UpdateHeirAgeDisplay(inputWithListener, targetElement) {
+    const parsedValue = parseInt(inputWithListener.value, 10);
+    heirAttributes.age[0] = parsedValue;
+    heirAttributes.age[1] = parsedValue;
+    let ageOutput = heirAttributes.age[0];
+    if (yearFormat == 1) { ageOutput = RomanceNumber(ageOutput); }
+    else if (yearFormat == 2) { ageOutput = CircumciseNumber(ageOutput); }
+    else if (yearFormat == 3) { ageOutput = SteepNumberInGreenTea(ageOutput); }
+    targetElement.innerHTML = ageOutput;
+}
+
+
+
+function ListenToAge() {
+    const grabbedInput = document.getElementById('inputHeirRange');
+    const grabbedSpan = document.getElementById('spanAgeDisplay');
+    grabbedInput.addEventListener('input', function () { UpdateHeirAgeDisplay(grabbedInput, grabbedSpan); });
 }
 
 
@@ -6398,7 +6590,7 @@ function UpdateHint() {
 
         if (hintLevel == 12) {
             hintedElementFound.classList.remove('hinted');
-            //if (player.seesHint) { alert(displayHintsEnd); }
+            if (player.seesHint) { alert(displayHintsEnd); }
             player.seesHint = false;
             buttonQ.style.display = 'none';
             hintLevel++;
@@ -10552,7 +10744,32 @@ function TileRenderer(sourceArray, destinationContext) {
 
 function RedrawVillage() {
     let tempString = '&nbsp;';
-    if (estDate[1] != 0) { tempString = 'Est. ' + RomanceNumber(estDate[1]); }
+    if (estDate[1] != 0) {
+        let formattedNumber = '';
+        if (yearFormat == 0) {
+            let formattedYear = 0;
+            let currentEra = displayEras[0];
+            if (estDate[1] < 201) { formattedYear = 201 - estDate[1]; }
+            else {
+                formattedYear = estDate[1] - 200;
+                currentEra = displayEras[1];
+            }
+            formattedNumber = formattedYear + '&nbsp;' + currentEra;
+        }
+        else if (yearFormat == 1) {
+            let formattedYear = yearAtStartRoman + (estDate[1] - 1);
+            formattedNumber = RomanceNumber(formattedYear);
+        }
+        else if (yearFormat == 2) {
+            let formattedYear = yearAtStartHebrew + (estDate[1] - 1);
+            formattedNumber = CircumciseNumber(formattedYear);
+        }
+        else if (yearFormat == 3) {
+            let formattedYear = yearAtStartHanDynasty + (estDate[1] - 1);
+            formattedNumber = SteepNumberInGreenTea(formattedYear);
+        }
+        tempString = 'Est. ' + formattedNumber;
+    }
     divVillageEstDate.innerHTML = tempString;
 
     tempString = displayVillageTitleNEG1;

@@ -1,9 +1,6 @@
 // ۞ PLAYER INPUT **********************************************************************************
 // *************************************************************************************************
 
-buttonResumeYes.addEventListener('click', function () { ContinuePreviousGame(); });
-buttonResumeNo.addEventListener('click', function () { StartNewGame(); });
-
 buttonSystemMessageDismiss.addEventListener('click', function () { DismissSystemMessage(); });
 buttonSystemMessageDismiss.addEventListener('touchstart', function () { GodMenuHold(); }, { passive: true });
 buttonSystemMessageDismiss.addEventListener('touchend', function () { GodMenuLift(); }, { passive: true });
@@ -14,23 +11,6 @@ buttonGameEventDismiss.addEventListener('click', function () { DismissGameEvent(
 buttonSubmitModCode.addEventListener('click', function () { SubmitModCode(); });
 buttonModsDismiss.addEventListener('click', function () { DismissModsWindow(); });
 buttonOptionsDismiss.addEventListener('click', function () { DismissOptions(); });
-
-buttonTill.addEventListener('click', function () { PlotTill(); });
-buttonPlant.addEventListener('click', function () { PlotPlant(); });
-buttonWater.addEventListener('click', function () { PlotWater(); });
-buttonHarvest.addEventListener('click', function () { PlotHarvest(); });
-
-buttonBuyLand.addEventListener('click', function () { BuyLand(); });
-buttonRentWarehouse.addEventListener('click', function () { RentWarehouse(); });
-buttonBuyForest.addEventListener('click', function () { BuyForest(); });
-buttonBuyMountain.addEventListener('click', function () { BuyMountain(); });
-
-buttonForest.addEventListener('click', function () { ForestEvents(); });
-buttonMountain.addEventListener('click', function () { MountainEvents(); });
-
-buttonHire.addEventListener('click', function () { HireHand(); });
-buttonAudit.addEventListener('click', function () { HireAccountant(); });
-buttonPriority.addEventListener('click', function () { TogglePriority(); });
 
 buttonBarterOlive.addEventListener('click', function () { BarterFruit(2); });
 buttonBarterDate.addEventListener('click', function () { BarterFruit(3); });
@@ -49,11 +29,6 @@ buttonBuyLogs.addEventListener('click', function () { PurchaseCommodities(2); })
 buttonBuyBoards.addEventListener('click', function () { PurchaseCommodities(3); });
 buttonBuyStone.addEventListener('click', function () { PurchaseCommodities(4); });
 
-buttonFound.addEventListener('click', function () { Found(); });
-buttonNewFarm.addEventListener('click', function () { BuyNewFarm(); });
-
-buttonImproveResidence.addEventListener('click', function () { ImproveResidence(); });
-
 buttonGoHome.addEventListener('click', function () { GoHerm(); });
 buttonGoFishing.addEventListener('click', function () { GoFishing(); });
 buttonGoToPraediumFromRes.addEventListener('click', function () { GoToPraedium(); });
@@ -62,13 +37,6 @@ buttonGoToTownship.addEventListener('click', function () { GoToTownship(); });
 buttonGoToPraedium.addEventListener('click', function () { GoToPraedium(); });
 buttonGoToPort.addEventListener('click', function () { GoToPort(); });
 buttonGoToTownshipFromPort.addEventListener('click', function () { GoToTownship(); });
-
-buttonBuild.addEventListener('click', function () { Build(); });
-
-buttonEstablishTradeRoute.addEventListener('click', function () { EstablishTradeRoute(); });
-buttonImportTin.addEventListener('click', function () { EstablishShippingLanes(); });
-
-buttonChooseHeir.addEventListener('click', function () { ChooseHeir(); });
 
 buttonOptions.addEventListener('click', function () { SummonOptions(); });
 buttonEnglish.addEventListener('click', function () { Translate('English'); });
@@ -95,9 +63,6 @@ buttonHeirChooseFace7.addEventListener('click', function () { HeirChooseFace(6);
 buttonHeirChooseFace8.addEventListener('click', function () { HeirChooseFace(7); });
 buttonHeirChooseFace9.addEventListener('click', function () { HeirChooseFace(8); });
 buttonHeirGoBack.addEventListener('click', function () { HeirGoBack(); });
-
-buttonSailWest.addEventListener('click', function () { SailWest(); });
-buttonPlayGod.addEventListener('click', function () { PlayGod(); });
 
 
 
@@ -351,7 +316,6 @@ document.body.onkeyup = function (e) {
                 player.likesStory = false;
                 setValues(1000000000);
                 for (let i = 0; i < 25; i++) { AdvanceGame(); } // completely upgrade praedium
-                player.names.push('Pee-Pee Boy');
                 HireAccountant();
                 for (let i = 0; i < 36; i++) { HireHand(); }
                 AdvanceGame(); // buy town
@@ -1225,6 +1189,7 @@ function BuyLand() {
             GetNewPlayerName();
             GameEvent(displayStoryFarm2, 'farm_stage_2');
         }
+        else { player.names.push('Pee-Pee Boy'); }
         farmStage++;
         hintLevel++;
         bushelCount[0] -= priceStage3;
@@ -1322,6 +1287,7 @@ function BuyLand() {
         arrayFarmPlots[2][4] = 0;
         arrayFarmPlots[2][5] = 0;
         arrayFarmPlots[2][6] = 0;
+        JumpToTopPlease();
     }
     else if (farmStage == 11 && bushelCount[0] > priceStage12[0] && boardsCount >= priceStage12[1]) {
         if (player.likesStory) { GameEvent(displayStoryFarm11, 'farm_stage_11'); }
@@ -1417,7 +1383,8 @@ function BuyLand() {
     else {
         let message = displayStoryPoorFarm;
         if (farmStage < 11 || farmStage == 12) { message = displayStoryPoorWheat; }
-
+        if (farmStage == 0) { message = displayStoryPoorWheatTutorialA + (priceStage1 - bushelCount[0]) + displayStoryPoorWheatTutorialB; }
+        if (farmStage == 0 && (priceStage1 - bushelCount[0] == 1)) { message = displayStoryPoorWheatTutorialC; }
         if (player.likesStory) { GameEvent(message); }
     }
 
@@ -1459,7 +1426,10 @@ function RentWarehouse() {
     }
 
     else {
-        if (player.likesStory) { GameEvent(displayStoryPoorWheat); }
+        let message = displayStoryPoorWheat;
+        if (warehouseStage == 0) { message = displayStoryPoorWheatTutorialA + (priceWarehouse0 - bushelCount[0]) + displayStoryPoorWheatTutorialB; }
+        if (warehouseStage == 0 && (priceWarehouse0 - bushelCount[0] == 1)) { message = displayStoryPoorWheatTutorialC; }
+        if (player.likesStory) { GameEvent(message); }
     }
 
     UpdateDisplay();
@@ -1823,8 +1793,8 @@ function BuyNewFarm() {
         commercialLifetimeSpend += priceNewFarm;
         player.hasNewFarm = true;
         farmSize[1] = 15;
-        handsHired += 28;
-        handsMax += 28;
+        handsHired += newFarmHandsCount;
+        handsMax += newFarmHandsCount;
         UpdateDisplay();
     }
     else if (asCount >= priceFlaxFarm) {
@@ -1834,8 +1804,8 @@ function BuyNewFarm() {
         commercialLifetimeSpend += priceFlaxFarm;
         player.canBuyNewFarm = false;
         player.hasFlaxFarm = true;
-        handsHired += 16;
-        handsMax += 16;
+        handsHired += flaxFarmHandsCount;
+        handsMax += flaxFarmHandsCount;
         UpdateDisplay();
     }
 
@@ -2476,7 +2446,7 @@ function Build() {
         stoneCount -= priceBuildNEG4[4];
         mountainSpentCount[0] += priceBuildNEG4[4];
         estDate[0] = week;
-        estDate[1] = year + yearAtStartHebrew;
+        estDate[1] = year;
     }
     else if (villageStage == -3 && bushelCount[0] > priceBuildNEG3) {
         if (player.likesStory) { GameEvent(displayStoryVillageNEG3); }
@@ -3513,7 +3483,7 @@ function ChooseHeir() {
     if (player.likesStory) { GameEvent(displayStoryHeir); }
 
     heirDate[0] = week;
-    heirDate[1] = year + yearAtStartHebrew;
+    heirDate[1] = year;
 
     player.canChooseHeir = false;
     player.isAt = 'Workshop';
@@ -3651,19 +3621,93 @@ function HeirChooseFace(chosenChoice) {
 
 
 function HeirConfirmAll(ask = true) {
-    let doTheThing = false;
+    let nopeDate = false;
+    if (heirAttributes.birthday[1] == 'February' && (heirAttributes.birthday[0] == '30' || heirAttributes.birthday[0] == '31')) { nopeDate = true; }
+    else if (heirAttributes.birthday[1] == 'April' && heirAttributes.birthday[0] == '31') { nopeDate = true; }
+    else if (heirAttributes.birthday[1] == 'June' && heirAttributes.birthday[0] == '31') { nopeDate = true; }
+    else if (heirAttributes.birthday[1] == 'September' && heirAttributes.birthday[0] == '31') { nopeDate = true; }
+    else if (heirAttributes.birthday[1] == 'November' && heirAttributes.birthday[0] == '31') { nopeDate = true; }
+    if (nopeDate) {
+        let ordinal = 'th';
+        if (heirAttributes.birthday[0] == '31') { ordinal = 'st'; }
+        if (player.speaks == 'Spanish') { ordinal = '.º'; }
+        //Translate() is not necessary here for the following string; it already happened at time of gender selection
+        SystemMessage(displayNoSuchThing[0] + heirAttributes.birthday[0] + ordinal + displayNoSuchThing[1] + heirAttributes.birthday[1] + displayNoSuchThing[2]);
+    }
+    else if (heirAttributes.neuroses[5]) {
+        //Translate() is not necessary here for the following string; it already happened at time of gender selection
+        SystemMessage(displayHeirAnthropophagy);
+    }
+    else {
+        let doTheThing = false;
 
-    if (!ask) { doTheThing = true; }
-    else { if (confirm(displayHeirConfirm)) { doTheThing = true; } }
+        if (!ask) { doTheThing = true; }
+        else { if (confirm(displayHeirConfirm)) { doTheThing = true; } }
 
-    if (doTheThing) {
-        player.hasBecomeHeir = true;
-        player.isAt = 'Map';
-        divViewMap.style.display = 'block';
-        divViewHeirWorkshop.style.display = '';
-        UpdateDisplay();
-        JumpToTopPlease();
-        if (player.likesStory) { GameEvent(displayHeirComplete); }
+        if (doTheThing) {
+            player.hasBecomeHeir = true;
+            function CalcBirthDOY() {
+                let dayCounter = 0;
+                if (heirAttributes.birthday[1] == 'January') { dayCounter += parseInt(heirAttributes.birthday[0], 10); }
+                else {
+                    dayCounter += 31;
+                    if (heirAttributes.birthday[1] == 'February') {
+                        let tempCalcValue = parseInt(heirAttributes.birthday[0], 10);
+                        if (tempCalcValue == 29) { tempCalcValue = 28; }
+                        dayCounter += tempCalcValue;
+                    }
+                    else {
+                        dayCounter += 28;
+                        if (heirAttributes.birthday[1] == 'March') { dayCounter += parseInt(heirAttributes.birthday[0], 10); }
+                        else {
+                            dayCounter += 31;
+                            if (heirAttributes.birthday[1] == 'April') { dayCounter += parseInt(heirAttributes.birthday[0], 10); }
+                            else {
+                                dayCounter += 30;
+                                if (heirAttributes.birthday[1] == 'May') { dayCounter += parseInt(heirAttributes.birthday[0], 10); }
+                                else {
+                                    dayCounter += 31;
+                                    if (heirAttributes.birthday[1] == 'June') { dayCounter += parseInt(heirAttributes.birthday[0], 10); }
+                                    else {
+                                        dayCounter += 30;
+                                        if (heirAttributes.birthday[1] == 'July') { dayCounter += parseInt(heirAttributes.birthday[0], 10); }
+                                        else {
+                                            dayCounter += 31;
+                                            if (heirAttributes.birthday[1] == 'August') { dayCounter += parseInt(heirAttributes.birthday[0], 10); }
+                                            else {
+                                                dayCounter += 31;
+                                                if (heirAttributes.birthday[1] == 'September') { dayCounter += parseInt(heirAttributes.birthday[0], 10); }
+                                                else {
+                                                    dayCounter += 30;
+                                                    if (heirAttributes.birthday[1] == 'October') { dayCounter += parseInt(heirAttributes.birthday[0], 10); }
+                                                    else {
+                                                        dayCounter += 31;
+                                                        if (heirAttributes.birthday[1] == 'November') { dayCounter += parseInt(heirAttributes.birthday[0], 10); }
+                                                        else {
+                                                            dayCounter += 30;
+                                                            dayCounter += parseInt(heirAttributes.birthday[0], 10);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return dayCounter;
+            }
+            heirAttributes.birthday[2] = CalcBirthDOY();
+            heirAttributes.birthday[3] = Math.ceil(heirAttributes.birthday[2] / 7);
+            player.isAt = 'Map';
+            divViewMap.style.display = 'block';
+            divViewHeirWorkshop.style.display = '';
+            UpdateDisplay();
+            JumpToTopPlease();
+            if (player.likesStory) { GameEvent(displayHeirComplete); }
+        }
     }
 }
 
@@ -3787,6 +3831,10 @@ function MapChangeTarget(direction) {
     else if (mapTarget == 2 && !player.hasTargettedFarmers) {
         player.hasTargettedFarmers = true;
         if (player.likesStory) { GameEvent(displayStoryFarmersFirstTarget); }
+    }
+    else if (mapTarget == 0 && !player.hasTargettedSelf) {
+        player.hasTargettedSelf = true;
+        if (player.likesStory) { GameEvent(displayStoryHeroFirstTarget); }
     }
 
     mapOutlineOpacity = 0;
@@ -3947,8 +3995,8 @@ function Info() {
 
 function Help() {
     player.seesHint = !player.seesHint;
-    //if (player.seesHint) { alert(displayHintsOn); }
-    //else { alert(displayHintsOff); }
+    if (player.seesHint) { GameEvent(displayHintsOn, null, true, false); }
+    else { SystemMessage(displayHintsOff); }
     UpdateDisplay();
 }
 
@@ -4112,18 +4160,40 @@ function ReleaseCats() {
 
 function TrueEnding() {
     if (superMeditatorWizardPowersActivated && prayersCount > 0) {
-        imgNirvana.src = 'bitmaps/godEnding.png';
+        player.hasDoneEverything = true;
         if (player.likesMusic) {
             audioTheme.pause();
             audioMuppets.play();
         }
-        if (player.likesStory) { GameEvent('ヽ༼ຈل͜ຈ༽ﾉ Raise Ur Dongersヽ༼ຈل͜ຈ༽ﾉ<br><br>#420dongsquad (◕‿◕✿)'); }
+        if (player.hasNotRaisedDongers) {
+            player.hasNotRaisedDongers = false;
+            if (player.likesStory) { GameEvent(displayWinMessage); }
+            imgNirvana.src = 'bitmaps/godEnding.png';
+        }
+        else {
+            player.hasNotRaisedDongers = true;
+            if (player.likesStory) { GameEvent(displayMsgDongers); }
+            imgNirvana.src = 'bitmaps/nimoy.png';
+        }
     }
     else {
-        imgNirvana.src = 'bitmaps/dogEnding.png';
-        let denial = 'yo broma (凸ಠ益ಠ)凸<br><br>no hay un final “verdadero” jajaja<br><br>¿¿¿qué es la verdad de todas formas,<br>yo correcto??? ʕ •ᴥ•ʔ<br><br>simplemente ríndete<br>y renuncia para siempre,<br>¿de acuerdo?  ( ͡° ͜ʖ ͡°)<br><br>(=ʘᆽʘ=)∫ *maullido*';
-        if (player.speaks == 'English') { denial = 'jk jk (凸ಠ益ಠ)凸<br><br>there is no “true” ending lol<br><br>what even <i>is</i> truth anyway<br>amirite??? ʕ •ᴥ•ʔ<br><br>just give up<br>and quit forever,<br>okay? ( ͡° ͜ʖ ͡°)<br><br>(=ʘᆽʘ=)∫ *meow*'; }
-        if (player.likesStory) { GameEvent(denial); }
+        if (!player.hasSeenDog) {
+            player.hasSeenDog = true;
+            imgNirvana.src = 'bitmaps/dogEnding.png';
+            if (player.likesStory) { GameEvent(displayMsgDenial); }
+        }
+        else {
+            if (player.hasHiked && !superMeditatorWizardPowersActivated) {
+                imgNirvana.src = 'bitmaps/大コスモの王様.png';
+                if (player.likesStory) { GameEvent(displayMsgTooLate); }
+            }
+            else {
+                imgNirvana.src = 'bitmaps/kururinpa.png';
+                let msgHint = displayMsgNotYetPray;
+                if (!player.hasHiked) { msgHint = displayMsgNotYetHike; }
+                if (player.likesStory) { GameEvent(displayMsgNotYetA + msgHint + displayMsgNotYetB); }
+            }
+        }
     }
     UpdateDisplay();
 }
@@ -4135,6 +4205,9 @@ function BuyTreasure() {
         if (!player.hasBoughtArt) {
             player.hasBoughtArt = true;
             if (player.likesStory) { GameEvent(displayStoryBuyArt); }
+        }
+        else {
+            if (player.likesStory) { GameEvent(displayStoryBuyArtAgain); }
         }
         asCount -= priceWorkOfArt;
         asSpent += priceWorkOfArt;

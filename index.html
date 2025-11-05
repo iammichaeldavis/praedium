@@ -41,8 +41,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap">
-    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.23.02.1">
-    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.23.02.1">
+    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.24.00.0000">
+    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.24.00.0000">
     <script>history.scrollRestoration = 'manual';</script>
 </head>
 
@@ -97,13 +97,13 @@
         -->
         <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
         <div id="divGameWindow">
-            <img id="imgNirvana" src="bitmaps/nirvana.png" style="display: none;">
+            <img id="imgNirvana" src="bitmaps/red_gate.png" style="display: none;">
 
             <button id="buttonTrueEnding" onclick="TrueEnding();"></button>
 
             <button id="buttonReturnToMap" onclick="ReturnToMapView();"></button>
 
-            <button id="buttonChooseHeir">👑</button>
+            <button id="buttonChooseHeir" onclick="ChooseHeir();">👑</button>
 
             <div id="divViewMiners">
                 <div id="divMinersName"></div>
@@ -281,7 +281,7 @@
                     <button id="buttonHostParty" onclick="ThrowParty();"></button>
                     <button id="buttonWasteTime"></button>
                     <button id="buttonBuyTreasure" onclick="BuyTreasure();"></button>
-                    <button id="buttonImproveResidence"></button>
+                    <button id="buttonImproveResidence" onclick="ImproveResidence();"></button>
                     <table id="tableResidenceCatalogue"></table>
                     <table id="tableResidenceInventory"></table>
                     <table id="tableResidenceReport"></table>
@@ -376,7 +376,7 @@
                         <thead id="theadMountainReport"></thead>
                         <tbody id="tbodyMountainReport"></tbody>
                     </table>
-                    <button id="buttonMountain"></button>
+                    <button id="buttonMountain" onclick="MountainEvents();"></button>
                 </div>
                 <div id="divViewForest">
                     <canvas id="canvasForest" width="384" height="224"></canvas>
@@ -392,22 +392,22 @@
                         <thead id="theadForestReport"></thead>
                         <tbody id="tbodyForestReport"></tbody>
                     </table>
-                    <button id="buttonForest"></button>
+                    <button id="buttonForest" onclick="ForestEvents();"></button>
                 </div>
                 <div id="divViewFarm">
                     <canvas id="canvasFarm" width="16" height="16"></canvas>
                     <div id="divFarmingGameplayControls">
-                        <button id="buttonTill">
+                        <button id="buttonTill" onclick="PlotTill();">
                             <span id="buttonTillDecal"></span>
-                        </button><button id="buttonPlant">
+                        </button><button id="buttonPlant" onclick="PlotPlant();">
                             <span id="buttonPlantDecal"></span>
-                        </button><button id="buttonWater">
+                        </button><button id="buttonWater" onclick="PlotWater();">
                             <span id="buttonWaterDecal"></span>
-                        </button><button id="buttonHarvest">
+                        </button><button id="buttonHarvest" onclick="PlotHarvest();">
                             <span id="buttonHarvestDecal"></span>
                         </button>
                     </div>
-                    <button id="buttonPriority">
+                    <button id="buttonPriority" onclick="TogglePriority();">
                         <span id="buttonPriorityDecal"></span>
                         <span id="buttonPriorityColon"></span>
                         <span id="buttonPriorityOption"></span>
@@ -425,14 +425,14 @@
                         <tbody id="tbodyFarmReport"></tbody>
                     </table>
                     <div id="divFarmButtons">
-                        <button id="buttonBuyLand"></button>
-                        <button id="buttonBuyForest"></button>
-                        <button id="buttonBuyMountain"></button>
-                        <button id="buttonRentWarehouse"></button>
-                        <button id="buttonFound"></button>
-                        <button id="buttonHire"></button>
-                        <button id="buttonAudit"></button>
-                        <button id="buttonNewFarm"></button>
+                        <button id="buttonBuyLand" onclick="BuyLand();"></button>
+                        <button id="buttonBuyForest" onclick="BuyForest();"></button>
+                        <button id="buttonBuyMountain" onclick="BuyMountain();"></button>
+                        <button id="buttonRentWarehouse" onclick="RentWarehouse();"></button>
+                        <button id="buttonFound" onclick="Found();"></button>
+                        <button id="buttonHire" onclick="HireHand();"></button>
+                        <button id="buttonAudit" onclick="HireAccountant();"></button>
+                        <button id="buttonNewFarm" onclick="BuyNewFarm();"></button>
                     </div>
                     <div id="divBarterButtons">
                         <button id="buttonBarterAll" onclick="BarterAll();"></button>
@@ -458,8 +458,8 @@
                     <button id="buttonVisitTemple" onclick="GoToTemple();" class="buttonVisitTempleConditionA"></button>
                     <button id="buttonVisitArena" onclick="GoToArena();" class="buttonVisitArenaConditionA"></button>
                     <button id="buttonVisitOracle" onclick="GoToOracle();"></button>
-                    <button id="buttonBuild"></button>
-                    <button id="buttonPlayGod"></button>
+                    <button id="buttonBuild" onclick="Build();"></button>
+                    <button id="buttonPlayGod" onclick="PlayGod();"></button>
                     <button id="buttonSellWheat"></button>
                     <button id="buttonSellBarley"></button>
                     <button id="buttonSellFlax"></button>
@@ -484,14 +484,14 @@
                 <div id="divPortActionArea">
                     <button id="buttonNavy" onclick="SponsorNavy();"></button>
                     <button id="buttonCruise" onclick="TakeCruise();"></button>
-                    <button id="buttonSailWest"></button>
+                    <button id="buttonSailWest" onclick="SailWest();"></button>
                     <img id="imgTradeGoods" src="bitmaps/trade_goods.png" width="130" height="86">
                     <table id="tableExports"></table>
                     <button id="buttonExportFish" onclick="ExportFish();"></button>
-                    <button id="buttonEstablishTradeRoute"></button>
+                    <button id="buttonEstablishTradeRoute" onclick="EstablishTradeRoute();"></button>
                     <img id="imgTradeTin" src="bitmaps/trade_tin.png" width="130" height="86">
                     <table id="tableImports"></table>
-                    <button id="buttonImportTin"></button>
+                    <button id="buttonImportTin" onclick="EstablishShippingLanes();"></button>
                 </div>
             </div>
         </div>
@@ -705,8 +705,8 @@
     <div id="divOverlayResume" class="overlay">
         <div id="divModalResume">
             <div id="divResumeCorpus"></div>
-            <button id="buttonResumeYes"></button>
-            <button id="buttonResumeNo"></button>
+            <button id="buttonResumeYes" onclick="ContinuePreviousGame();"></button>
+            <button id="buttonResumeNo" onclick="StartNewGame();"></button>
         </div>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
@@ -745,10 +745,10 @@
         </div>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
+    <script src="scripts/image_data.js"></script>
     <script src="scripts/init.js"></script>
     <script src="scripts/utilities.js"></script>
     <script src="scripts/translate.js"></script>
-    <script src="scripts/image_data.js"></script>
     <script src="scripts/ui.js"></script>
     <script src="scripts/player_actions.js"></script>
     <script src="scripts/game_turn.js"></script>

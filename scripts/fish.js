@@ -220,7 +220,7 @@ function EndFishGame() {
     finalString += '</div>'
 
     //pop up final window==================
-    GameEvent(finalString);
+    GameEvent(finalString, null, true, false);
 
     RecordProgress();
 }

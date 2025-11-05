@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.23.02-B';
+const version = '1.24.00-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -200,6 +200,7 @@ const player = {
     hasBeenSummoned: false,
     hasBeenReceived: false,
     hasPrepared: false,
+    hasTargettedSelf: false,
     hasTargettedFarmers: false,
     hasMetFarmers: false,
     hasConsultedFarmers: false,
@@ -220,6 +221,11 @@ const player = {
     hasReleasedCats: false,
     hasExportedFish: false,
     hasBoughtArt: false,
+    hasNotRaisedDongers: true,
+    hasCelebratedBirthday: false,
+    hasCelebratedAnniversary: false,
+    hasSeenDog: false,
+    hasDoneEverything: false,
 };
 
 const stylesheetActive = document.getElementById('stylesheetActive');
@@ -626,7 +632,12 @@ const yearAtStartProlepticGregorian = -200; // 200 B.C. ✝️
 const yearAtStartHebrew = 3560; // according to https://sacred-texts.com/time/cal/jdate.htm ✡️
 const yearAtStartRoman = 554; // according to https://en.wikipedia.org/wiki/Ab_urbe_condita 🔥🐂🔥
 const yearAtStartHanDynasty = 2498; // counting from the start of the reign of Huangdi https://en.wikipedia.org/wiki/Yellow_Emperor 🐉⛩️🐼
-const playerBirthYear = yearAtStartHebrew - player.age;
+const playerBirthYear = [
+    yearAtStartProlepticGregorian - player.age,
+    yearAtStartHebrew - player.age,
+    yearAtStartRoman - player.age,
+    yearAtStartHanDynasty - player.age,
+];
 const playerBirthWeek = 21;
 let year = 1;
 let week = 1;
@@ -676,6 +687,8 @@ const olivePlantDate = [0, 0,];
 
 let handsAvailable = 2;
 let handsMax = 36;
+const newFarmHandsCount = 28;
+const flaxFarmHandsCount = 16;
 let priority = 'Reap';
 let weeksOfHoliday = 0;
 let manweeksLost = 0;
@@ -1023,10 +1036,73 @@ const audioMuppets = new Audio('waveforms/muppets.mp3');
 const heirDate = [0, 0,];
 let heirStage = 0;
 
+const heirAgeMin = 13;
+const heirAgeMax = 88;
+
 const arrayFacesSorted = [];
 let heirFacesPageCurrent = 1;
 let heirFacesPageTotal = 13;
 let heirFaceChoice = 0;
+
+let heirAttributes = {
+    age: [33, 33,],
+    birthday: ['1', 'January', 1, 1,],
+    height: '1',
+    weight: '1',
+    eyes: [
+        '#1a9424',
+        '#1448f0',
+        '#ffba24',
+    ],
+    STR: '1',
+    END: '1',
+    AGI: '1',
+    DEX: '1',
+    INT: '1',
+    WIS: '1',
+    CHA: '1',
+    ATT: '1',
+    TMP: '1',
+    DSP: '1',
+    ADV: '1',
+    DRV: '1',
+    ASP: '1',
+    DIE: '1',
+    COM: '1',
+    options: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    ],
+    phobias: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    ],
+    neuroses: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    ],
+};
 
 // 0. Wool 🧶, 1. Milk 🥛, 2. Yoghurt 🍦, 3. Butter 🧈, 4. Cheese 🧀, 5. Mutton 🥩, 6. Offal 🍖, 7. Hide 🏈, 8. Bone 🦴, 9. Blood 🩸, 10. Manure 💩
 const shepherdsInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
@@ -1194,10 +1270,10 @@ const fishermenBounty = 153; // 📖 John 21:11 ✝️🙏🕊️
 const filetsPerFish = [1, 3];
 const lifetimeFishermanCaught = [0, 0,];
 let lifetimeFishermenEarnings = 0;
-let fishermenHired = 24;
-let fishermenPay = 3;
-let fishcuttersHired = 8;
-let fishcuttersPay = 2;
+let fishermenHired = 12;
+let fishermenPay = 6;
+let fishcuttersHired = 4;
+let fishcuttersPay = 4;
 let tannersHired = 4;
 let tannersPay = 2;
 let freshFiletCapacity = 500;
