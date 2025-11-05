@@ -2113,7 +2113,14 @@ function Translate(language, bark = true) {
         displayStoryFarmMildew = 'YOU HAVE JUST RECEIVED A MESSAGE FROM THE MAN WHO RUNS THE WAREHOUSE WHERE YOU KEEP YOUR WHEAT:<div id="nasirMessage">Roof damage has let water in; mildew has claimed 90% of all grain in storage; my sincerest apologies<br>—Ea-nāṣir</div>';
         displayStoryFarm1 = 'WITH TWICE THE LAND I CAN DOUBLE MY PROFITS';
         displayStoryFarm2 = 'THERE ARE MEN IN NEED OF WORK';
-        displayStoryAccountant = 'I HAVE NO HEAD FOR FIGURES AT ALL';
+        const newHire = [
+            '<br><br><table id="tableManHired"><thead><tr><td>New Hire!</td></tr></thead><tbody><tr><td><span class="icon ',
+            ' inlineIcon"></span> ',
+            '</td></tr><tr><td><span class="icon ',
+            '<br><br><table id="tableManHired" class="multipleHires"><thead><tr><td>New Hires!</td></tr></thead><tbody><tr><td><span class="icon ',
+            '</td></tr></tbody></table>',
+        ];
+        displayStoryAccountant = 'I HAVE NO HEAD FOR FIGURES AT ALL' + newHire[0] + 'MrTopHat' + newHire[1] + 'Eukleídes Pythagóras Q.<br>Poindexter IV, CPA' + '</td></tr></tbody></table>';
         displayStoryFarm3 = 'REINVESTING OUR PROFIT MEANS WE CAN GROW';
         displayStoryFarm4 = '“THE ONLY FENCE AGAINST THE WORLD IS A THOROUGH KNOWLEDGE OF IT”<br>—JOHN LOCKE';
         displayStoryFarm5 = 'PLENTY OF ROOM FOR SOME TREES';
@@ -2123,13 +2130,6 @@ function Translate(language, bark = true) {
         displayStoryFarm9 = '“HE PLANTS HIS TREES TO SERVE A RACE TO COME”<br>—STATIUS';
         displayStoryFarm10 = 'IF IT WASN’T HIM IT WOULD BE ME<br><br><img id="imgTentIcon" src="' + imageTent.src + '"><br>(Your Tent is Now Accessible)';
         displayStoryForest = '“HEAVEN IS UNDER OUR FEET AS WELL AS OVER OUR HEADS”<br>—HENRY DAVID THOREAU';
-        const newHire = [
-            '<br><br><table id="tableManHired"><thead><tr><td>New Hire!</td></tr></thead><tbody><tr><td><span class="icon ',
-            ' inlineIcon"></span> ',
-            '</td></tr><tr><td><span class="icon ',
-            '<br><br><table id="tableManHired" class="multipleHires"><thead><tr><td>New Hires!</td></tr></thead><tbody><tr><td><span class="icon ',
-            '</td></tr></tbody></table>',
-        ];
         const logCampBoys = [
             newHire[3] + 'Logger' + newHire[1],
             newHire[2] + 'Logger' + newHire[1],
@@ -4022,7 +4022,14 @@ function Translate(language, bark = true) {
         displayStoryFarmMildew = 'ACABAS DE RECIBIR UN MENSAJE DEL HOMBRE QUE DIRIGIE EL ALMACÉN DONDE GUARDAS TU TRIGO:<div id="nasirMessage">Los daños en el techo ha dejado entrar agua; el moho ha reclamado el 90% de todo el grano almacenado; mis más sinceras disculpas<br>—Ea-nāṣir</div>';
         displayStoryFarm1 = 'CON EL DOBLE DE TERRENO PUEDO DUPLICAR MIS GANANCIAS';
         displayStoryFarm2 = 'HAY HOMBRES QUE NECESITAN TRABAJO';
-        displayStoryAccountant = 'NO TENGO CABEZA PARA LAS CIFRAS EN ABSOLUTO';
+        const newHire = [
+            '<br><br><table id="tableManHired"><thead><tr><td>¡Nuevo Empleado!</td></tr></thead><tbody><tr><td><span class="icon ',
+            ' inlineIcon"></span> ',
+            '</td></tr><tr><td><span class="icon ',
+            '<br><br><table id="tableManHired" class="multipleHires"><thead><tr><td>¡Nuevos Empleados!</td></tr></thead><tbody><tr><td><span class="icon ',
+            '</td></tr></tbody></table>',
+        ];
+        displayStoryAccountant = 'NO TENGO CABEZA PARA LAS CIFRAS EN ABSOLUTO' + newHire[0] + 'MrTopHat' + newHire[1] + 'Eukleídes Pitágoras Q.<br>Poindexter IV, CPA' + '</td></tr></tbody></table>';
         displayStoryFarm3 = 'REINVESTIR NUESTROS GANANCIAS SIGNIFICA QUE PODEMOS CRECER';
         displayStoryFarm4 = '«LA ÚNICA VALLA CONTRA EL MUNDO ES UN CONOCIMIENTO PROFUNDO DE ÉL»<br>—JOHN LOCKE';
         displayStoryFarm5 = 'MUCHO ESPACIO PARA ALGUNOS ÁRBOLES';
@@ -4032,13 +4039,6 @@ function Translate(language, bark = true) {
         displayStoryFarm9 = '«EL PLANTA SUS ÁRBOLES PARA SERVIR A UNA RAZA POR VENIR»<br>—ESTACIO';
         displayStoryFarm10 = 'SI NO FUERA ÉL SERÍA YO<br><br><img id="imgTentIcon" src="' + imageTent.src + '"><br>(Tu Tienda de Campaña Ya Está Accesible)';
         displayStoryForest = '«CIELO ESTÁ BAJO NUESTROS PIES ADEMÁS SOBRE NUESTRAS CABEZAS»<br>—HENRY DAVID THOREAU';
-        const newHire = [
-            '<br><br><table id="tableManHired"><thead><tr><td>¡Nuevo Empleado!</td></tr></thead><tbody><tr><td><span class="icon ',
-            ' inlineIcon"></span> ',
-            '</td></tr><tr><td><span class="icon ',
-            '<br><br><table id="tableManHired" class="multipleHires"><thead><tr><td>¡Nuevos Empleados!</td></tr></thead><tbody><tr><td><span class="icon ',
-            '</td></tr></tbody></table>',
-        ];
         const logCampBoys = [
             newHire[3] + 'Logger' + newHire[1],
             newHire[2] + 'Logger' + newHire[1],

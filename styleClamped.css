@@ -3101,6 +3101,11 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     --j: 21;
 }
 
+.MrTopHat {
+    --i: 30;
+    --j: 23;
+}
+
 .Tanner {
     --i: 25;
     --j: 21;
