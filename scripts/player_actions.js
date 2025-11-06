@@ -761,7 +761,7 @@ function BeginGame(language) {
     player.hasBegun = true;
     JumpToTopPlease();
     UpdateDisplay();
-    PlayMusic(audioTheme);
+    PlayMusic(audioTheme, false);
 }
 
 
