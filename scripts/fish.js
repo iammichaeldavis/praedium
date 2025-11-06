@@ -6,24 +6,9 @@
 function FishTimerBehaviour() {
     fishTimeLeft -= fishTimerIntervalSeconds;
 
-    if (fishTimeLeft > 2.95 && fishTimeLeft < 3.05) {
-        if (player.likesSounds) {
-            audioChime.currentTime = 0;
-            audioChime.play();
-        }
-    }
-    if (fishTimeLeft > 1.95 && fishTimeLeft < 2.05) {
-        if (player.likesSounds) {
-            audioChime.currentTime = 0;
-            audioChime.play();
-        }
-    }
-    if (fishTimeLeft > 0.95 && fishTimeLeft < 1.05) {
-        if (player.likesSounds) {
-            audioChime.currentTime = 0;
-            audioChime.play();
-        }
-    }
+    if (fishTimeLeft > 2.95 && fishTimeLeft < 3.05) { PlaySound(audioChime); }
+    if (fishTimeLeft > 1.95 && fishTimeLeft < 2.05) { PlaySound(audioChime); }
+    if (fishTimeLeft > 0.95 && fishTimeLeft < 1.05) { PlaySound(audioChime); }
 
     if (fishTimeLeft > 0) {
         if (!fishAvailable) {
@@ -61,11 +46,8 @@ function FishTimerBehaviour() {
 
 
 function EndFishGame() {
-    audioFish.pause();
-    if (player.likesSounds) {
-        audioWhistle.currentTime = 0;
-        audioWhistle.play();
-    }
+    StopMusic();
+    PlaySound(audioWhistle);
 
     fishGameOver = true;
     fishGameStarted = false;
@@ -230,9 +212,7 @@ function EndFishGame() {
 // --- PLAYER ACTIONS ------------------------------------------------------------------------------
 
 function InitNewFishGame() {
-    audioTheme.pause();
-    audioFish.currentTime = 0;
-    if (player.likesMusic) { audioFish.play(); }
+    PlayMusic(audioFish);
     player.hasFished = true;
     fishWarmup = false;
     fishGameOver = false;

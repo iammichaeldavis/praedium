@@ -761,7 +761,7 @@ function BeginGame(language) {
     player.hasBegun = true;
     JumpToTopPlease();
     UpdateDisplay();
-    if (player.likesMusic) { audioTheme.play(); }
+    PlayMusic(audioTheme);
 }
 
 
@@ -3444,10 +3444,7 @@ function Win() {
     if (timeAtWin == null) { timeAtWin = new Date(); }
     RecordProgress();
     PauseTime();
-
-    audioTheme.pause();
-    if (player.likesMusic) { audioEnding.play(); }
-
+    PlayMusic(audioEnding);
     divWidthClamp.style.display = 'none';
 
     const divEndingBackdrop = document.createElement('div');
@@ -4055,12 +4052,12 @@ function ToggleAudio() {
     if (player.likesMusic) {
         buttonForewardToggleAudio.innerHTML = '🔊';
         labelToggleAudio.innerHTML = 'Audio is enabled&nbsp;';
-        audioTheme.play();
+        PlayMusic(audioTheme, false);
     }
     else {
         buttonForewardToggleAudio.innerHTML = '🔇';
         labelToggleAudio.innerHTML = 'Audio is disabled';
-        audioTheme.pause();
+        StopMusic();
     }
 }
 
@@ -4069,14 +4066,11 @@ function ToggleAudio() {
 function ToggleMusic() {
     if (toggleMusic.checked) {
         player.likesMusic = true;
-        audioTheme.play();
+        PlayMusic(audioTheme, false);
     }
     else {
         player.likesMusic = false;
-        audioTheme.pause();
-        audioFish.pause();
-        audioEnding.pause(); // this is meaningless lol
-        audioMuppets.pause();
+        StopMusic();
     }
 }
 
@@ -4085,15 +4079,11 @@ function ToggleMusic() {
 function ToggleSound() {
     if (toggleSounds.checked) {
         player.likesSounds = true;
-        audioPeasant.currentTime = 0;
-        audioPeasant.play();
+        PlaySound(audioPeasant);
     }
     else {
-        audioTrophy.pause();
-        achievementSoundRare.pause();
-        audioPeasant.pause();
-        audioWhistle.pause();
         player.likesSounds = false;
+        KillAllSounds();
     }
 }
 
@@ -4182,10 +4172,7 @@ function ReleaseCats() {
 function TrueEnding() {
     if (superMeditatorWizardPowersActivated && prayersCount > 0) {
         player.hasDoneEverything = true;
-        if (player.likesMusic) {
-            audioTheme.pause();
-            audioMuppets.play();
-        }
+        PlayMusic(audioMuppets, false);
         if (player.hasNotRaisedDongers) {
             player.hasNotRaisedDongers = false;
             if (player.likesStory) { GameEvent(displayWinMessage); }

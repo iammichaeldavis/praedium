@@ -549,10 +549,10 @@ function ContinuePreviousGame() {
         loadedReport = null;
         divOverlayResume.style.display = '';
         UpdateDisplay();
-        if (player.likesMusic) { audioTheme.play(); }
-        else { toggleMusic.checked = false; }
-        if (!player.likesSounds) { toggleSounds.checked = false; }
-        if (!player.likesProfanity) { toggleProfanity.checked = false; }
+        if (player.likesMusic) { toggleMusic.checked = true; }
+        if (player.likesSounds) { toggleSounds.checked = true; }
+        PlayMusic(audioTheme);
+        //if (!player.likesProfanity) { toggleProfanity.checked = false; } * DEPRECATED *
         if (player.hasBecomeHeir) { buttonReturnToMap.style.display = 'inline-block'; }
         if (villageStage > 10) { buttonBuyStone.classList.add('BuyStoneMarginOverrideClass'); }
         if (hintLevel == 13) { buttonQ.style.display = 'none'; }
@@ -594,10 +594,7 @@ function JumpToBottom() {
 
 
 function Achievement() {
-    if (player.likesSounds) {
-        achievementSoundRare.currentTime = 0;
-        achievementSoundRare.play();
-    }
+    PlaySound(achievementSoundRare);
     document.querySelector('.achievement').classList.add('rare');
     document.querySelector('.circle').classList.add('circle_animate');
     document.querySelector('.banner').classList.add('banner-animate');
@@ -613,17 +610,12 @@ function Achievement() {
 
 
 function ShowToast() {
-    if (player.likesSounds) {
-        audioTrophy.currentTime = 0;
-        audioTrophy.play();
-    }
-
+    PlaySound(audioTrophy);
     const container = document.getElementById('toast-container');
     const urToast = document.getElementById('urToast');
     const toast = document.createElement('div');
     toast.className = 'psxToast';
     toast.innerHTML = urToast.innerHTML;
-
     container.appendChild(toast);
 
     toast.style.animationName = 'slide_in';
@@ -1453,6 +1445,47 @@ const keyHandlerId = function (event) {
     }
 };
 document.addEventListener('keydown', keyHandlerId, false);
+
+
+
+function PlaySound(audioSelection) {
+    if (player.likesSounds) { FireAudio(audioSelection, true); }
+}
+
+
+
+function KillAllSounds() {
+    achievementSoundRare.pause();
+    audioTrophy.pause();
+    audioPeasant.pause();
+    audioChime.pause();
+    audioWhistle.pause();
+}
+
+
+
+function PlayMusic(audioSelection, fromTheTop = true) {
+    if (player.likesMusic) {
+        StopMusic();
+        FireAudio(audioSelection, fromTheTop);
+    }
+}
+
+
+
+function StopMusic() {
+    audioTheme.pause();
+    audioFish.pause();
+    audioEnding.pause();
+    audioMuppets.pause();
+}
+
+
+
+function FireAudio(audioSelection, fromTheTop) {
+    if (fromTheTop) { audioSelection.currentTime = 0; }
+    audioSelection.play();
+}
 
 
 
