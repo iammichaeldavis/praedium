@@ -345,6 +345,19 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     background: burlywood;
 }
 
+#divForewardToggleAudio {
+    user-select: none;
+    margin: 9.5vw auto 0 auto;
+}
+
+#buttonForewardToggleAudio {
+    padding: 0.8vw;
+}
+
+#labelToggleAudio {
+    cursor: pointer;
+}
+
 
 
 #buttonSystemMessageDismiss {
@@ -1552,7 +1565,8 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     user-select: text;
 }
 
-input {
+input,
+select {
     cursor: pointer;
 }
 

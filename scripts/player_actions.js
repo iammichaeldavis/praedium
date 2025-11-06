@@ -4045,6 +4045,27 @@ function DismissOptions() {
 
 
 
+function ToggleAudio() {
+    player.likesMusic = !player.likesMusic;
+    player.likesSounds = player.likesMusic;
+
+    toggleMusic.checked = player.likesMusic;
+    toggleSounds.checked = player.likesSounds;
+
+    if (player.likesMusic) {
+        buttonForewardToggleAudio.innerHTML = '🔊';
+        labelToggleAudio.innerHTML = 'Audio is enabled&nbsp;';
+        audioTheme.play();
+    }
+    else {
+        buttonForewardToggleAudio.innerHTML = '🔇';
+        labelToggleAudio.innerHTML = 'Audio is disabled';
+        audioTheme.pause();
+    }
+}
+
+
+
 function ToggleMusic() {
     if (toggleMusic.checked) {
         player.likesMusic = true;

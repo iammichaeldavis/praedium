@@ -6353,6 +6353,7 @@ function UpdateVisibilities() {
         divForewordSubtitle.style.display = 'none';
         buttonForewordEnglish.style.display = 'none';
         buttonForewordSpanish.style.display = 'none';
+        divForewardToggleAudio.style.display = 'none';
         divForewordBoilerplate.style.display = 'none';
         divForewordCorpus.style.display = 'block';
         buttonForewordDismiss.style.display = 'block';

@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.24.00-D';
+const version = '1.24.01-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -49,8 +49,8 @@ const player = {
 
     speaks: null,
 
-    likesMusic: true, // 🚨🚨🚨
-    likesSounds: true,
+    likesMusic: false, // 🚨🚨🚨
+    likesSounds: false,
     likesAnimations: true,
     likesStory: true,
     likesRecords: false,
@@ -245,6 +245,9 @@ const divForewordTitle = document.getElementById('divForewordTitle');
 const divForewordSubtitle = document.getElementById('divForewordSubtitle');
 const buttonForewordEnglish = document.getElementById('buttonForewordEnglish');
 const buttonForewordSpanish = document.getElementById('buttonForewordSpanish');
+const divForewardToggleAudio = document.getElementById('divForewardToggleAudio');
+const buttonForewardToggleAudio = document.getElementById('buttonForewardToggleAudio');
+const labelToggleAudio = document.getElementById('labelToggleAudio');
 const divForewordBoilerplate = document.getElementById('divForewordBoilerplate');
 const divForewordCorpus = document.getElementById('divForewordCorpus');
 const buttonForewordDismiss = document.getElementById('buttonForewordDismiss');
