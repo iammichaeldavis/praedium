@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Image Encoder/Collator Daemon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+
+    <style>
+        #inputFile {
+            outline: 1px solid black;
+            margin-bottom: 6px;
+            padding: 3px;
+        }
+        #textareaOutput {
+            display: block;
+            width: 100%;
+        }
+        /* ۝ */
+    </style>
+</head>
+
+<body>
+    <input type="file" id="inputFile" name="inputFile" onchange="encodeFilesAsDataURLs(this);" multiple>
+    <input type="checkbox" id="inputCheckbox" name="inputCheckbox" onclick="toggleDataOnly();" checked>
+    <label for="inputCheckbox" id="labelInputCheckbox">Data Only</label>
+    <input type="text" id="inputText" name="inputText" onchange="updateArrayID();">
+    <textarea id="textareaOutput" name="textareaOutput" onclick="copyOutputToClipboard();" readonly></textarea>
+    <!-- ۝ -->
+</body>
+
+<script type="text/javascript">
+    // INIT ---------------------------------------------------------
+    let outputArrayID = "";
+    const outputNewline = "\n";
+    function outputHeader() { return "const array" + outputArrayID + " = [" + outputNewline; }
+    function outputComment(uniqueElementID) { return "    // " + uniqueElementID + outputNewline; }
+    const outputDataLead = "    '";
+    const outputDataTail = "',";
+    const outputFooter = "];" + outputNewline;
+    //textareaOutput.cols = 102;
+    textareaOutput.rows = 32;
+    textareaOutput.placeholder = "Choose some files, tough guy!\n\n(*REMEMBER* when using ‘Data Only’ and choosing multiple files: output is not guaranteed to be in the correct order! In fact it probably will not be!!! ‘Data Only’ is best used with only one file at a time!)";
+    inputText.placeholder = "Array ID";
+    let dataOnly = inputCheckbox.checked;
+    toggleDataOnly();
+
+    // METHODS ------------------------------------------------------
+    function toggleDataOnly() {
+        dataOnly = inputCheckbox.checked;
+        if (dataOnly) inputText.style.display = "none";
+        else inputText.style.display = "";
+        if (inputFile.files.length > 0) encodeFilesAsDataURLs(inputFile);
+    }
+
+    function updateArrayID() {
+        outputArrayID = inputText.value;
+        if (inputFile.files.length > 0) encodeFilesAsDataURLs(inputFile);
+    }
+
+    function encodeFilesAsDataURLs(element) {
+        textareaOutput.value = "";
+        if (!dataOnly) textareaOutput.value += outputHeader();
+        for (let i = 0; i < element.files.length; i++) {
+            const file = element.files[i];
+            const fileReader = new FileReader();
+            fileReader.onloadend = function () {
+                if (!dataOnly) {
+                    textareaOutput.value += outputComment(file.name);
+                    textareaOutput.value += outputDataLead;
+                }
+                textareaOutput.value += fileReader.result;
+                if (!dataOnly) textareaOutput.value += outputDataTail + outputNewline;
+                else if (element.files.length > 1) textareaOutput.value += outputNewline;
+            };
+            fileReader.readAsDataURL(file);
+        }
+        if (!dataOnly) {
+            setTimeout(() => {
+                textareaOutput.value += outputFooter;
+            }, 666); // 🤘😈🤘
+        }
+    }
+
+    function copyOutputToClipboard() {
+        textareaOutput.select();
+        navigator.clipboard.writeText(textareaOutput.value);
+    }
+    // ۝ //
+</script>
+
+</html>
+
+
+
+<!-- End of Document -->

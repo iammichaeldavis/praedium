@@ -12,23 +12,6 @@ buttonSubmitModCode.addEventListener('click', function () { SubmitModCode(); });
 buttonModsDismiss.addEventListener('click', function () { DismissModsWindow(); });
 buttonOptionsDismiss.addEventListener('click', function () { DismissOptions(); });
 
-buttonBarterOlive.addEventListener('click', function () { BarterFruit(2); });
-buttonBarterDate.addEventListener('click', function () { BarterFruit(3); });
-buttonBarterFig.addEventListener('click', function () { BarterFruit(4); });
-buttonBarterPom.addEventListener('click', function () { BarterFruit(5); });
-buttonBarterGrape.addEventListener('click', function () { BarterFruit(6); });
-buttonSellWheat.addEventListener('click', function () { SellCommodities(0); });
-buttonSellBarley.addEventListener('click', function () { SellCommodities(1); });
-buttonSellFlax.addEventListener('click', function () { SellCommodities(5); });
-buttonSellLogs.addEventListener('click', function () { SellCommodities(2); });
-buttonSellBoards.addEventListener('click', function () { SellCommodities(3); });
-buttonSellStone.addEventListener('click', function () { SellCommodities(4); });
-buttonBuyWheat.addEventListener('click', function () { PurchaseCommodities(0); });
-buttonBuyBarley.addEventListener('click', function () { PurchaseCommodities(1); });
-buttonBuyLogs.addEventListener('click', function () { PurchaseCommodities(2); });
-buttonBuyBoards.addEventListener('click', function () { PurchaseCommodities(3); });
-buttonBuyStone.addEventListener('click', function () { PurchaseCommodities(4); });
-
 buttonGoHome.addEventListener('click', function () { GoHerm(); });
 buttonGoFishing.addEventListener('click', function () { GoFishing(); });
 buttonGoToPraediumFromRes.addEventListener('click', function () { GoToPraedium(); });
@@ -64,14 +47,50 @@ buttonHeirChooseFace8.addEventListener('click', function () { HeirChooseFace(7);
 buttonHeirChooseFace9.addEventListener('click', function () { HeirChooseFace(8); });
 buttonHeirGoBack.addEventListener('click', function () { HeirGoBack(); });
 
+rangeVolumeMusic.addEventListener('pointerdown', function () { PlaySound(audioClack); });
+rangeVolumeMusic.addEventListener('pointerup', function () { PlaySound(audioClick); });
+
+let meowCheck = 0;
+rangeVolumeSounds.addEventListener('pointerdown', function () {
+    PlaySound(audioClack);
+    meowCheck = rangeVolumeSounds.value;
+});
+rangeVolumeSounds.addEventListener('pointerup', function () {
+    if (rangeVolumeSounds.value == meowCheck) { PlaySound(audioThirdMeow); }
+    else { PlaySound(audioMeowAlt); }
+    PlaySound(audioClick);
+});
+
 
 
 document.body.onkeyup = function (e) {
     if (e.key == '~') {
+        safetyEngaged = !safetyEngaged;
+        if (safetyEngaged) {
+            PlaySound(audioClack);
+            console.log('Safety Engaged');
+        }
+        else {
+            PlaySound(audioClick);
+            console.log('Safety Off');
+        }
+    }
+    if (e.key == '`' && (!safetyEngaged || player.isGod)) {
+        KillSound(audioChant);
+        KillSound(audioKingdomToRun);
         player.isGod = !player.isGod;
         player.likesDelay = !player.isGod;
         let theVoice = '<div id="divSoyMessage">☞ I Ain’t No Soy ☜</div>But don’t you think for one second any bets are suddenly now back *on*, Buster Brown';
-        if (player.isGod) { theVoice = '<div id="divSoyMessage">☛ I Am Soy ☚</div>And that means all bets are *off*, partner'; }
+        if (player.isGod) {
+            theVoice = '<div id="divSoyMessage">☛ I Am Soy ☚</div>And that means all bets are *off*, partner';
+            PlaySound(audioChant);
+            console.log('God On');
+        }
+        else {
+            safetyEngaged = true;
+            PlaySound(audioKingdomToRun);
+            console.log('God Off');
+        }
         SystemMessage(theVoice);
     }
 
@@ -105,7 +124,12 @@ document.body.onkeyup = function (e) {
 
     if (player.isGod) {
         if (e.key == ' ' && localStorage.getItem(save_key) && !player.hasBegun) { StartNewGame(); }
-        else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && !player.hasBegun)) { BeginGame('English'); }
+        else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && !player.hasBegun)) {
+            toggleSounds.checked = true;
+            player.likesSounds = true;
+            PlaySound(audioClack);
+            BeginGame('English');
+        }
         else if (e.key == ' ' && (player.seesForeword && !player.seesSystemMessage && player.hasBegun)) { DismissForeword(); }
 
         if (e.key == '1' && !e.altKey && player.canTill) { PlotTill(); }
@@ -130,7 +154,8 @@ document.body.onkeyup = function (e) {
             else if (player.canMine && !player.canSmelt) { MountainEvents(); }
             else if (player.canHireBronzeworkers) { MountainEvents(); }
             else if (player.hasFoundCrystalEvidence && !player.hasHiredGemcutters) { MountainEvents(); }
-            else { ImproveResidence(); }
+            else if (residenceStage < 20) { ImproveResidence(); }
+            else { alert('🚨 Nothing to advance!'); }
         }
 
         if (e.key == '6' && !e.altKey && player.canHire) {
@@ -138,12 +163,27 @@ document.body.onkeyup = function (e) {
             else { HireHand(); }
         }
         if (e.code == 'KeyW') {
+            PlaySound(audioClick);
             if (e.shiftKey) {
-                if (handsHired != 1000) { handsHired = 1000; }
-                else { handsHired = 0; }
+                KillSound(audioJasper);
+                KillSound(audioGunshot);
+                if (handsHired != 1000) {
+                    handsHired = 1000;
+                    PlaySound(audioJasper);
+                }
+                else {
+                    handsHired = 0;
+                    PlaySound(audioGunshot);
+                }
             }
-            else if (e.altKey) { handsHired -= 1; }
-            else { handsHired += 1; }
+            else if (e.altKey) {
+                PlaySound(audioSquish);
+                handsHired -= 1;
+            }
+            else {
+                PlaySound(audioReadyToWork);
+                handsHired += 1;
+            }
         }
         if (e.key == 'd' && player.canDelegate) { TogglePriority(); }
 
@@ -164,13 +204,27 @@ document.body.onkeyup = function (e) {
         if (e.key == '%' && player.canBarter) { BarterFruit(6); }
         if (e.key == '^' && player.canBarter) { BarterAll(); }
 
-        // & AVAILABLE
-        // * AVAILABLE
-        // ( AVAILABLE
-        // ) AVAILABLE
-        // _ AVAILABLE
+        if (e.key == '&') { SetWidth(1, false); }
+        if (e.key == '*') { SetWidth(2, false); }
+        if (e.key == '(') { SetWidth(0, false); }
 
-        if (e.key == '+') { DetermineDevice(true); }
+        if (e.key == ')') {
+            player.isGod = false;
+            player.likesSounds = true;
+            player.likesMusic = true;
+            saveAfterCrash = false;
+            GetHyphy();
+        }
+        if (e.key == '_') {
+            PlaySound(audioQuack);
+            saveAfterCrash = false;
+            LoadDosFont();
+        }
+
+        if (e.key == '+') {
+            PlaySound(audioGavel);
+            DetermineDevice(true);
+        }
 
         if (e.key == '1' && e.altKey && player.canSell) { SellCommodities(0); }
         if (e.key == '2' && e.altKey && player.canSell) { SellCommodities(1); }
@@ -205,6 +259,7 @@ document.body.onkeyup = function (e) {
 
         if (e.key == 'G') { // 🚨🚨🚨 USE WITH CAUTION!!! ONLY WORKS AT START OF GAME, AND IN *EXACT* SEQUENCE 🚨🚨🚨
             if (e.altKey) {
+                PlaySound(audioKoolAidMan);
                 console.log('==================================================');
                 console.log('🚨 COMMENCING AUTOMATIC WALKTHROUGH SEQUENCE! 🚨');
                 console.log('⚠️ (Please do not touch anything until complete!)');
@@ -216,7 +271,10 @@ document.body.onkeyup = function (e) {
                 console.log('🕰️ Real time at start: ' + stepBegin);
                 AutoWalkthrough();
             }
-            else { WalkthroughSteps(); }
+            else {
+                PlaySound(audioHeirFanfare);
+                WalkthroughSteps();
+            }
         }
         function AutoWalkthrough() {
             if (debugCounter > 0) {
@@ -246,7 +304,6 @@ document.body.onkeyup = function (e) {
                     console.log('-----------------------------------');
                     console.log('🛎️ STEP ' + (debugCounter - 1) + ' Complete!');
                     console.log('-----------------------------------');
-                    //alert('🚨 AUTOMATIC WALKTHROUGH SEQUENCE COMPLETE! 🚨');
                     console.log('🚨 AUTOMATIC WALKTHROUGH SEQUENCE COMPLETE! 🚨');
                     console.log('⚠️ (You are now free to move about the cabin)');
                     console.log('🛎️ debugCounter Current Value: ' + debugCounter);
@@ -477,13 +534,22 @@ document.body.onkeyup = function (e) {
                 RecordProgress();
                 console.log('🆗 save game;');
                 console.log('🆗 start time; (⚠️ regular gameplay can resume from here)');
+                KillAllSounds();
+                PlaySound(audioWorkComplete);
+                PlaySound(audioGunshot);
+                PlaySound(audioChimes);
             }
             else if (debugCounter == 18) {
+                PlaySound(audioWorkComplete);
                 console.log('🚨 SEQUENCE COMPLETE!');
                 alert('🚨 SEQUENCE COMPLETE!');
             }
         }
-        if (e.key == 'F') { BurnItDown(); }
+        if (e.key == 'F') {
+            PlaySound(audioClick);
+            PlaySound(audioWompWomp);
+            BurnItDown();
+        }
         function BurnItDown() {
             console.log('🚨 ZERO ALL VALUES!');
             ZeroArray(bushelCount);
@@ -493,8 +559,9 @@ document.body.onkeyup = function (e) {
             ZeroArray(spentCount);
             ZeroArray(purchasedCount);
             ZeroArray(soldCount);
+            ZeroArray(lifetimeLostToRats);
             weeksOfHoliday = 0;
-            manweeksLost = 0;
+            manweeksShamefullyLost = 0;
             ZeroArray(paidOutWheat);
             logsCount = 0;
             boardsCount = 0;
@@ -539,8 +606,10 @@ document.body.onkeyup = function (e) {
             trophiesCount = 0;
             tourismLifetimeProfit = 0;
             scrollsCount = 0;
+            lawsCount = 0;
             militaryLifetimeCost = 0;
             medicalLifetimeCost = 0;
+            medicalLifetimeProfit = 0;
             patientsCount = 0;
             totalPatientsSeen = 0;
             pilgrimsCount = 0;
@@ -587,7 +656,11 @@ document.body.onkeyup = function (e) {
             ZeroArray(arenaWins);
             ZeroArray(arenaLosses);
         }
-        if (e.key == 'g') { FinalReset(); }
+        if (e.key == 'g') {
+            PlaySound(audioClick);
+            PlaySound(audioOkieDokie);
+            FinalReset();
+        }
         function FinalReset() {
             console.log('🚨 FORCE CONSERVATIVE VALUES!');
             bushelCount[0] = 1000000;
@@ -619,22 +692,62 @@ document.body.onkeyup = function (e) {
             totalCatches = 100;
         }
 
-        if (e.key == 'e') { Translate('English'); }
-        if (e.key == 'E') { Translate('English', false); }
-        if (e.key == 'r') { Translate('Spanish'); }
-        if (e.key == 'R') { Translate('Spanish', false); }
+        if (e.key == 'e') {
+            PlaySound(audioClick);
+            PlaySound(audioTutorialChime);
+            Translate('English');
+        }
+        if (e.key == 'E') {
+            PlaySound(audioClick);
+            PlaySound(audioTutorialChime);
+            Translate('English', false);
+        }
+        if (e.key == 'r') {
+            PlaySound(audioClick);
+            PlaySound(audioTutorialChime);
+            Translate('Spanish');
+        }
+        if (e.key == 'R') {
+            PlaySound(audioClick);
+            PlaySound(audioTutorialChime);
+            Translate('Spanish', false);
+        }
 
         if (e.code == 'KeyA') {
+            PlaySound(audioClick);
             if (e.shiftKey) {
-                if (residentsCount != 1000) { residentsCount = 1000; }
-                else { residentsCount = 0; }
+                KillSound(audioHarpUp);
+                KillSound(audioGunshot);
+                if (residentsCount != 1000) {
+                    residentsCount = 1000;
+                    PlaySound(audioHarpUp);
+                }
+                else {
+                    residentsCount = 0;
+                    PlaySound(audioGunshot);
+                }
             }
-            else if (e.altKey) { residentsCount -= 1; }
-            else { residentsCount += 1; }
+            else if (e.altKey) {
+                residentsCount -= 1;
+                PlaySound(audioSquish);
+            }
+            else {
+                residentsCount += 1;
+                PlaySound(audioHello);
+            }
         }
         if (e.key == 'D') {
-            if (ratsCount != 100000000) { ratsCount = 100000000; }
-            else { ratsCount = 0; }
+            PlaySound(audioClick);
+            KillSound(audioZeldaItem);
+            KillSound(audioGunshot);
+            if (ratsCount != 100000000) {
+                PlaySound(audioZeldaItem);
+                ratsCount = 100000000;
+            }
+            else {
+                PlaySound(audioGunshot);
+                ratsCount = 0;
+            }
         }
 
         if (e.code == 'KeyY') { setValues(1000000000); }
@@ -650,6 +763,7 @@ document.body.onkeyup = function (e) {
         if (e.code == 'KeyM') { setValues(0); }
         function setValues(amount) {
             if (e.shiftKey) {
+                PlaySound(audioKnob);
                 FillArray(bushelCount, amount);
                 logsCount = amount;
                 boardsCount = amount;
@@ -675,6 +789,7 @@ document.body.onkeyup = function (e) {
                 pegasiCount = amount;
             }
             else if (e.altKey) {
+                PlaySound(audioChime);
                 GooseArray(bushelCount, -amount);
                 logsCount -= amount;
                 boardsCount -= amount;
@@ -700,6 +815,7 @@ document.body.onkeyup = function (e) {
                 pegasiCount -= amount;
             }
             else {
+                PlaySound(audioChaChing);
                 GooseArray(bushelCount, amount);
                 logsCount += amount;
                 boardsCount += amount;
@@ -726,17 +842,65 @@ document.body.onkeyup = function (e) {
             }
         }
 
-        if (e.key == 's') { player.likesStory = false; }
-        if (e.key == 'S') { player.likesStory = true; }
-
-        if (e.key == 'q') { PauseTime(); }
-        if (e.code == 'KeyT') {
-            if (e.shiftKey) { StartTime(true); }
-            else { StartTime(); }
+        if (e.key == 's') {
+            PlaySound(audioClick);
+            PlaySound(audioBully);
+            player.likesStory = false;
+        }
+        if (e.key == 'S') {
+            PlaySound(audioClick);
+            PlaySound(audioNoWork);
+            player.likesStory = true;
         }
 
-        if (e.key == '/') { CollateGameStateReport(true); }
+        if (e.key == 'q') {
+            PlaySound(audioClick);
+            PlaySound(audioHeirCrystal);
+            PauseTime();
+        }
+        if (e.code == 'KeyT') {
+            PlaySound(audioClick);
+            if (e.shiftKey) {
+                PlaySound(audioHeirGender0);
+                PlaySound(audioHeirGender1);
+                PlaySound(audioHeirGender2);
+                PlaySound(audioHeirGender3);
+                PlaySound(audioHeirGender4);
+                PlaySound(audioHeirGender5);
+                PlaySound(audioHeirGender6);
+                PlaySound(audioHeirGender7);
+                StartTime(true);
+            }
+            else {
+                StartTime();
+                if (gameSpeed == 'standard') {
+                    PlaySound(audioHeirGender0);
+                }
+                if (gameSpeed == 'fast') {
+                    PlaySound(audioHeirGender4);
+                }
+                if (gameSpeed == 'high') {
+                    PlaySound(audioHeirGender7);
+                }
+            }
+        }
+
+        if (e.key == '/') {
+            PlaySound(audioClick);
+            PlaySound(audioWorkComplete);
+            CollateGameStateReport(true);
+        }
         if (e.key == '?') { ToggleRecords(); }
+
+        // ; AVAILABLE
+        // : AVAILABLE
+        // ' AVAILABLE
+        // " AVAILABLE
+
+        // , AVAILABLE
+        // < AVAILABLE
+        // . AVAILABLE
+        // > AVAILABLE
 
         UpdateDisplay();
         UpdateFishDisplay();
@@ -749,9 +913,26 @@ document.body.onkeyup = function (e) {
 // ۞ PLAYER ACTIONS ********************************************************************************
 // *************************************************************************************************
 
-function ToggleRecords() {
-    player.likesRecords = !player.likesRecords;
-    UpdateDisplay();
+// System ------------------------------------------------------------------
+
+function ToggleAudio() {
+    player.likesMusic = !player.likesMusic;
+    player.likesSounds = player.likesMusic;
+
+    toggleMusic.checked = player.likesMusic;
+    toggleSounds.checked = player.likesSounds;
+
+    if (player.likesMusic) {
+        buttonForewardToggleAudio.innerHTML = '🔊';
+        labelToggleAudio.innerHTML = 'Audio is enabled&nbsp;';
+        PlayMusic(audioTheme, false);
+        PlaySound(audioClick);
+    }
+    else {
+        buttonForewardToggleAudio.innerHTML = '🔇';
+        labelToggleAudio.innerHTML = 'Audio is disabled';
+        StopMusic();
+    }
 }
 
 
@@ -762,13 +943,293 @@ function BeginGame(language) {
     JumpToTopPlease();
     UpdateDisplay();
     PlayMusic(audioTheme, false);
+    PlaySound(audioForeward);
+    PlaySound(audioClack);
+}
+
+
+
+function DismissForeword() {
+    PlaySound(audioClack);
+    PlaySound(audioStart);
+    player.seesForeword = false;
+    player.canTill = true;
+    StartTime();
+    JumpToTopPlease();
+    UpdateDisplay();
 }
 
 
 
 function DismissSystemMessage() {
+    PlaySound(audioClack);
     player.seesSystemMessage = false;
     godMenuCounter++;
+    UpdateDisplay();
+}
+
+
+
+function DismissGameEvent() {
+    if (player.canDismissEvent) {
+        PlaySound(audioClack);
+        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop' && player.isAt != 'Temple' && player.isAt != 'Oracle' && player.isAt != 'Stage') { StartTime(); }
+        player.seesGameEvent = false;
+        UpdateDisplay();
+    }
+}
+
+
+
+function SummonOptions() {
+    PlaySound(audioClick);
+    player.seesOptions = true;
+    PauseTime();
+    UpdateDisplay();
+    buttonOptionsDismiss.focus({ focusVisible: false });
+    divOverlayOptions.scrollTo(0, 0);
+}
+
+
+
+function ToggleMusic() {
+    if (toggleMusic.checked) {
+        player.likesMusic = true;
+        PlayMusic(audioTheme, false);
+        KillSound(audioHarpDown);
+        PlaySound(audioHarpUp);
+        PlaySound(audioClick);
+    }
+    else {
+        player.likesMusic = false;
+        StopMusic();
+        KillSound(audioHarpUp);
+        PlaySound(audioHarpDown);
+        PlaySound(audioClack);
+    }
+    UpdateDisplay();
+}
+
+
+
+function ToggleSound() {
+    if (toggleSounds.checked) {
+        player.likesSounds = true;
+        PlaySound(audioPeasant);
+        PlaySound(audioClick);
+    }
+    else {
+        player.likesSounds = false;
+        KillAllSounds();
+    }
+    UpdateDisplay();
+}
+
+
+
+function ToggleTickTock() {
+    player.likesTickTock = toggleTickTock.checked;
+    if (player.likesTickTock) {
+        PlaySound(audioClick);
+        KillSound(audioHortaCrash);
+        PlaySound(audioCuckoo);
+    }
+    else {
+        PlaySound(audioClack);
+        KillSound(audioCuckoo);
+        PlaySound(audioHortaCrash);
+    }
+}
+
+
+
+function ToggleAnimation() {
+    if (toggleAnimation.checked) {
+        player.likesAnimations = true;
+        DisplayAnimatedImages();
+    }
+    else {
+        player.likesAnimations = false;
+        DisplayStaticImages();
+    }
+}
+
+
+
+function ToggleProfanity() {
+    if (toggleProfanity.checked) {
+        player.likesProfanity = true;
+        //play sfx: Bart Simpson saying 'damn'
+    }
+    else {
+        player.likesProfanity = false;
+        //play sfx: Church Lady saying 'isnt that special'
+    }
+}
+
+
+
+function DismissOptions() {
+    PlaySound(audioClack);
+    player.seesOptions = false;
+    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop' && player.isAt != 'Temple' && player.isAt != 'Oracle' && player.isAt != 'Stage') { StartTime(); }
+    UpdateDisplay();
+}
+
+
+
+function Help() {
+    player.seesHint = !player.seesHint;
+    if (player.seesHint) {
+        PlaySound(audioTutorialChime);
+        GameEvent(displayHintsOn, null, true, false);
+    }
+    else {
+        PlaySound(audioTutorialChime);
+        SystemMessage(displayHintsOff);
+    }
+    UpdateDisplay();
+}
+
+
+
+function SummonModsWindow() {
+    PlaySound(audioClick);
+    PlaySound(audioThirdMeow);
+    player.seesModsWindow = true;
+    player.isGod = false; // so one can type in the text box without keypresses triggering debug functions, and you have to be God to even see this window, so it will be turned back on in DismissModsWindow();
+    UpdateDisplay();
+    textareaModCode.focus({ focusVisible: true });
+    divOverlayMods.scrollTo(0, 0);
+}
+
+
+
+function SubmitModCode() {
+    PlaySound(audioClack);
+    PlaySound(audioMeow);
+    const grabbedModCode = textareaModCode.value;
+    RecordModCode(grabbedModCode);
+}
+
+
+
+function DismissModsWindow() {
+    PlaySound(audioClack);
+    PlaySound(audioMeowAlt);
+    player.seesModsWindow = false;
+    player.isGod = true;
+    UpdateDisplay();
+}
+
+
+
+function Info() {
+    SystemMessage(displayInfoFinal);
+}
+
+
+
+function Legal() {
+    SystemMessage(displayLegalFinal);
+    //window.open(legalTarget, 'PraediumRequestedWindow');
+}
+
+
+
+function ToggleRecords() {
+    PlaySound(audioClack);
+    player.likesRecords = !player.likesRecords;
+    UpdateDisplay();
+}
+
+
+
+function Win() {
+    KillAllSounds();
+    PlayMusic(audioEnding);
+    PlaySound(audioClack);
+    PlaySound(audioForeward);
+    setTimeout(() => {
+        PlaySound(audioUnderAttack);
+    }, 3210);
+
+    lawsCount += 400000;
+    scrollsCount += 40000;
+    beadsCount += 1111111111111;
+    player.hasWon = true;
+    player.saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
+    if (timeAtWin == null) { timeAtWin = new Date(); }
+    RecordProgress();
+    PauseTime();
+    divWidthClamp.style.display = 'none';
+
+    const divEndingBackdrop = document.createElement('div');
+    divEndingBackdrop.id = 'divEndingBackdrop';
+    let lastString = '<div id="divEndingFoil"><div id="divEndingSeal"><div id="divEndingSheet">';
+    lastString += '<div id="divFinalStory">' + displayLastStory + '</div>';
+    lastString += '<br><br><br>';
+    lastString += '<i>' + displayToBeContinued + '</i>';
+    lastString += '<br><br>';
+    lastString += '<img id="endingPlate" src="curves/PRÆDIVM2.svg">';
+    lastString += '<br><br>';
+    lastString += '<button onclick="WriteReportToDisk(true);">' + displayLabelDownload + '</button>';
+    lastString += '<br><br><br><br>';
+    lastString += '<b>' + displayTheEnd + '</b>';
+    lastString += '<br><br><br><br>';
+    lastString += displayThankYouForPlaying;
+    lastString += ' 🙏';
+    lastString += '</div></div></div>';
+    //lastString += '<canvas id="canvasFireworks"></canvas>';
+    divEndingBackdrop.innerHTML = lastString;
+    body.appendChild(divEndingBackdrop);
+    //canvasFireworks = document.getElementById('canvasFireworks');
+    //canvasFireworksContext = canvasFireworks.getContext('2d');
+    //canvasFireworks.width = window.innerWidth;
+    //canvasFireworks.height = window.innerHeight;
+    //AnimateFireworks();
+}
+
+
+
+function TrueEnding() {
+    if (superMeditatorWizardPowersActivated && prayersCount > 0) {
+        player.hasDoneEverything = true;
+        if (player.hasNotRaisedDongers) {
+            PlayMusic(audioMuppets);
+            player.hasNotRaisedDongers = false;
+            GameEvent(displayWinMessage);
+            imgNirvana.src = 'bitmaps/godEnding.png';
+        }
+        else {
+            PlayMusic(audioRocketman);
+            player.hasNotRaisedDongers = true;
+            GameEvent(displayMsgDongers);
+            imgNirvana.src = 'bitmaps/nimoy.png';
+        }
+    }
+    else {
+        if (!player.hasSeenDog) {
+            PlayMusic(audioSecretDog);
+            player.hasSeenDog = true;
+            imgNirvana.src = 'bitmaps/dogEnding.png';
+            GameEvent(displayMsgDenial);
+        }
+        else {
+            if (player.hasHiked && !superMeditatorWizardPowersActivated) {
+                PlayMusic(audioBadEnd);
+                imgNirvana.src = 'bitmaps/大コスモの王様.png';
+                GameEvent(displayMsgTooLate);
+            }
+            else {
+                PlaySound(audioMxyzptlk);
+                imgNirvana.src = 'bitmaps/kururinpa.png';
+                let msgHint = displayMsgNotYetPray;
+                if (!player.hasHiked) { msgHint = displayMsgNotYetHike; }
+                GameEvent(displayMsgNotYetA + msgHint + displayMsgNotYetB);
+            }
+        }
+    }
     UpdateDisplay();
 }
 
@@ -790,25 +1251,7 @@ function GodMenuLift() {
 
 
 
-function DismissForeword() {
-    player.seesForeword = false;
-    player.canTill = true;
-    StartTime();
-    JumpToTopPlease();
-    UpdateDisplay();
-}
-
-
-
-function DismissGameEvent() {
-    if (player.canDismissEvent) {
-        if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop' && player.isAt != 'Temple' && player.isAt != 'Oracle' && player.isAt != 'Stage') { StartTime(); }
-        player.seesGameEvent = false;
-        UpdateDisplay();
-    }
-}
-
-
+// Praedium tab ------------------------------------------------------------
 
 function PlotTill(robota = false) {
     if (hintLevel == 0 || hintLevel == 4) { hintLevel++; }
@@ -816,7 +1259,8 @@ function PlotTill(robota = false) {
     if (farmStage == 0 && !player.canPlant) {
         player.canPlant = true;
         player.seesInventory = true;
-        if (player.likesStory) { GameEvent(displayStoryFirstTill, null, true, false); }
+        PlaySound(audioTutorialChime);
+        GameEvent(displayStoryFirstTill, null, true, false);
     }
 
     let taskComplete = false;
@@ -841,7 +1285,41 @@ function PlotTill(robota = false) {
         }
     }
 
-    if (taskComplete && tillCount == 25 && !player.seesForest && player.likesStory) { GameEvent('<span class="icon BrokenHoe inlineIcon quadrupleSize"></span><br><br>' + displayStoryBrokenHoe); }
+    if (taskComplete && tillCount == 25 && !robota) {
+        PlaySound(audioWompWomp);
+        GameEvent('<span class="icon BrokenHoe inlineIcon quadrupleSize"></span><br><br>' + displayStoryBrokenHoe);
+    }
+    if (taskComplete && !robota) {
+        //PlaySound(audioClack);
+        KillSound(audioDigA);
+        KillSound(audioDigB);
+        KillSound(audioDigC);
+        const die3sides = FindWholeRandom(1, 3);
+        if (die3sides == 1) {
+            const anotherDie3sides = FindWholeRandom(1, 3);
+            let sumbitchPlaybackRate = 1.0;
+            if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+            else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+            audioDigA.playbackRate = sumbitchPlaybackRate;
+            PlaySound(audioDigA);
+        }
+        else if (die3sides == 2) {
+            const anotherDie3sides = FindWholeRandom(1, 3);
+            let sumbitchPlaybackRate = 1.0;
+            if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+            else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+            audioDigB.playbackRate = sumbitchPlaybackRate;
+            PlaySound(audioDigB);
+        }
+        else {
+            const anotherDie3sides = FindWholeRandom(1, 3);
+            let sumbitchPlaybackRate = 1.0;
+            if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+            else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+            audioDigC.playbackRate = sumbitchPlaybackRate;
+            PlaySound(audioDigC);
+        }
+    }
 
     return taskComplete;
 }
@@ -853,7 +1331,8 @@ function PlotPlant(robota = false) {
 
     if (farmStage == 0 && !player.canWater) {
         player.canWater = true;
-        if (player.likesStory) { GameEvent(displayStoryFirstPlant, null, true, false); }
+        PlaySound(audioTutorialChime);
+        GameEvent(displayStoryFirstPlant, null, true, false);
     }
 
     let taskComplete = false;
@@ -881,7 +1360,10 @@ function PlotPlant(robota = false) {
             foundCol = plotSearchResult.col;
             if (!player.isDegreeless) { bushelCount[0] -= plantCost; }
             seededCount[0] += plantCost;
-            if (seededCount[0] == 5 && !player.seesForest && player.likesStory) { GameEvent(displayStoryRudeJerk); }
+            if (seededCount[0] == 5 && !robota) {
+                PlaySound(audioBully);
+                GameEvent(displayStoryRudeJerk);
+            }
         }
     }
 
@@ -898,7 +1380,38 @@ function PlotPlant(robota = false) {
 
     if (taskComplete) {
         targetArray[foundRow][foundCol] = 2;
-        if (!robota) { UpdateDisplay(); }
+        if (!robota) {
+            UpdateDisplay();
+            //PlaySound(audioClack);
+            KillSound(audioSeedA);
+            KillSound(audioSeedB);
+            KillSound(audioSeedC);
+            const die3sides = FindWholeRandom(1, 3);
+            if (die3sides == 1) {
+                const anotherDie3sides = FindWholeRandom(1, 3);
+                let sumbitchPlaybackRate = 1.0;
+                if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+                else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+                audioSeedA.playbackRate = sumbitchPlaybackRate;
+                PlaySound(audioSeedA);
+            }
+            else if (die3sides == 2) {
+                const anotherDie3sides = FindWholeRandom(1, 3);
+                let sumbitchPlaybackRate = 1.0;
+                if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+                else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+                audioSeedB.playbackRate = sumbitchPlaybackRate;
+                PlaySound(audioSeedB);
+            }
+            else if (die3sides == 3) {
+                const anotherDie3sides = FindWholeRandom(1, 3);
+                let sumbitchPlaybackRate = 1.0;
+                if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+                else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+                audioSeedC.playbackRate = sumbitchPlaybackRate;
+                PlaySound(audioSeedC);
+            }
+        }
     }
 
     return taskComplete;
@@ -911,7 +1424,8 @@ function PlotWater(robota = false) {
 
     if (farmStage == 0 && !player.canHarvest) {
         player.canHarvest = true;
-        if (player.likesStory) { GameEvent(displayStoryFirstWater, null, true, false); }
+        PlaySound(audioTutorialChime);
+        GameEvent(displayStoryFirstWater, null, true, false);
     }
 
     let taskComplete = false;
@@ -933,6 +1447,37 @@ function PlotWater(robota = false) {
             if (!robota) { UpdateDisplay(); }
         }
     }
+    if (taskComplete && !robota) {
+        //PlaySound(audioClack);
+        KillSound(audioWaterA);
+        KillSound(audioWaterB);
+        KillSound(audioWaterC);
+        const die3sides = FindWholeRandom(1, 3);
+        if (die3sides == 1) {
+            const anotherDie3sides = FindWholeRandom(1, 3);
+            let sumbitchPlaybackRate = 1.0;
+            if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+            else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+            audioWaterA.playbackRate = sumbitchPlaybackRate;
+            PlaySound(audioWaterA);
+        }
+        else if (die3sides == 2) {
+            const anotherDie3sides = FindWholeRandom(1, 3);
+            let sumbitchPlaybackRate = 1.0;
+            if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+            else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+            audioWaterB.playbackRate = sumbitchPlaybackRate;
+            PlaySound(audioWaterB);
+        }
+        else if (die3sides == 3) {
+            const anotherDie3sides = FindWholeRandom(1, 3);
+            let sumbitchPlaybackRate = 1.0;
+            if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+            else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+            audioWaterC.playbackRate = sumbitchPlaybackRate;
+            PlaySound(audioWaterC);
+        }
+    }
 
     return taskComplete;
 }
@@ -946,8 +1491,13 @@ function PlotHarvest(robota = false) {
         arrayVineyard[arrayVineyard.findIndex((element) => element == 1)] = 0;
 
         let bounty = FindWholeRandom(grapesMin, grapesMax);
+        if (player.hasWon) { bounty = bounty * 20; }
         harvestedCount[6] += bounty;
-        if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+        if (ratsSpawn) {
+            const preRatBounty = bounty;
+            bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100)));
+            lifetimeLostToRats[6] += (preRatBounty - bounty);
+        }
         const originalBounty = bounty;
         if (player.hasWinery) {
             const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[3]);
@@ -971,8 +1521,13 @@ function PlotHarvest(robota = false) {
         arrayPomOrchard[arrayPomOrchard.findIndex((element) => element == 1)] = 0;
 
         let bounty = FindWholeRandom(pomegranateMin, pomegranateMax);
+        if (player.hasWon) { bounty = bounty * 20; }
         harvestedCount[5] += bounty;
-        if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+        if (ratsSpawn) {
+            const preRatBounty = bounty;
+            bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100)));
+            lifetimeLostToRats[5] += (preRatBounty - bounty);
+        }
         if (player.hasPress) {
             const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[5]);
             residenceIngredientInStockCount[5] += workshopShare;
@@ -989,8 +1544,13 @@ function PlotHarvest(robota = false) {
         arrayOlivar[arrayOlivar.findIndex((element) => element == 1)] = 0;
 
         let bounty = FindWholeRandom(olivesMin, olivesMax);
+        if (player.hasWon) { bounty = bounty * 20; }
         harvestedCount[2] += bounty;
-        if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+        if (ratsSpawn) {
+            const preRatBounty = bounty;
+            bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100)));
+            lifetimeLostToRats[2] += (preRatBounty - bounty);
+        }
         if (player.hasOliveMill) {
             const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[1]);
             residenceIngredientInStockCount[1] += workshopShare;
@@ -1007,8 +1567,13 @@ function PlotHarvest(robota = false) {
         arrayDatePalmGrove[arrayDatePalmGrove.findIndex((element) => element == 1)] = 0;
 
         let bounty = FindWholeRandom(datesMin, datesMax);
+        if (player.hasWon) { bounty = bounty * 20; }
         harvestedCount[3] += bounty;
-        if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+        if (ratsSpawn) {
+            const preRatBounty = bounty;
+            bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100)));
+            lifetimeLostToRats[3] += (preRatBounty - bounty);
+        }
         if (player.hasKitchen) {
             const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[4]);
             residenceIngredientInStockCount[4] += workshopShare;
@@ -1025,8 +1590,13 @@ function PlotHarvest(robota = false) {
         arrayFigOrchard[arrayFigOrchard.findIndex((element) => element == 1)] = 0;
 
         let bounty = FindWholeRandom(figsMin, figsMax);
+        if (player.hasWon) { bounty = bounty * 20; }
         harvestedCount[4] += bounty;
-        if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+        if (ratsSpawn) {
+            const preRatBounty = bounty;
+            bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100)));
+            lifetimeLostToRats[4] += (preRatBounty - bounty);
+        }
         if (player.hasGreenhouse) {
             const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[6]);
             residenceIngredientInStockCount[6] += workshopShare;
@@ -1044,8 +1614,13 @@ function PlotHarvest(robota = false) {
         if (plotSearchResult.row != -1) {
             arrayFlaxPlots[plotSearchResult.row][plotSearchResult.col] = 0;
             let bounty = FindWholeRandom(yieldMin, yieldMax) * flaxFactor;
+            if (player.hasWon) { bounty = bounty * 20; }
             harvestedCount[7] += bounty;
-            if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+            if (ratsSpawn) {
+                const preRatBounty = bounty;
+                bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100)));
+                lifetimeLostToRats[7] += (preRatBounty - bounty);
+            }
             if (player.hasCottage) {
                 const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[12]);
                 residenceIngredientInStockCount[12] += workshopShare;
@@ -1065,9 +1640,14 @@ function PlotHarvest(robota = false) {
 
             arrayFarmPlots[plotSearchResult.row][plotSearchResult.col] = 0;
             let bounty = FindWholeRandom(yieldMin, yieldMax);
+            if (player.hasWon) { bounty = bounty * 20; }
             if (plotSearchResult.row > 5 && plotSearchResult.row < 9) {
                 harvestedCount[1] += bounty;
-                if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+                if (ratsSpawn) {
+                    const preRatBounty = bounty;
+                    bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100)));
+                    lifetimeLostToRats[1] += (preRatBounty - bounty);
+                }
                 if (player.hasBrewery) {
                     const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[2]);
                     residenceIngredientInStockCount[2] += workshopShare;
@@ -1080,7 +1660,11 @@ function PlotHarvest(robota = false) {
             }
             else {
                 harvestedCount[0] += bounty;
-                if (ratsSpawn) { bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100))); }
+                if (ratsSpawn) {
+                    const preRatBounty = bounty;
+                    bounty = Math.floor(bounty - (bounty * (ratPenaltyFactor / 100)));
+                    lifetimeLostToRats[0] += (preRatBounty - bounty);
+                }
                 const originalBounty = bounty;
                 if (player.hasBakery) {
                     const workshopShare = Math.floor(bounty * residenceIngredientWorkshopPortion[0]);
@@ -1106,16 +1690,47 @@ function PlotHarvest(robota = false) {
         if (farmStage == 0 && warehouseStage == 0 && player.canBuyLand && !player.canRentWarehouse) {
             player.canRentWarehouse = true;
             player.seesWarehouse = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstStorage); }
+            PlaySound(audioTutorialChime);
+            GameEvent(displayStoryFirstStorage);
             JumpToBottom();
         }
         if (farmStage == 0 && !player.hasFarmedOnce) {
             player.hasFarmedOnce = true;
             player.canBuyLand = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstHarvest, null, true, false); }
+            PlaySound(audioTutorialChime);
+            GameEvent(displayStoryFirstHarvest, null, true, false);
         }
         if (hintLevel == 3 || hintLevel == 7) { hintLevel++; }
         UpdateDisplay();
+        //PlaySound(audioClack);
+        KillSound(audioGatherA);
+        KillSound(audioGatherB);
+        KillSound(audioGatherC);
+        const die3sides = FindWholeRandom(1, 3);
+        if (die3sides == 1) {
+            const anotherDie3sides = FindWholeRandom(1, 3);
+            let sumbitchPlaybackRate = 1.0;
+            if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+            else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+            audioGatherA.playbackRate = sumbitchPlaybackRate;
+            PlaySound(audioGatherA);
+        }
+        else if (die3sides == 2) {
+            const anotherDie3sides = FindWholeRandom(1, 3);
+            let sumbitchPlaybackRate = 1.0;
+            if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+            else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+            audioGatherB.playbackRate = sumbitchPlaybackRate;
+            PlaySound(audioGatherB);
+        }
+        else if (die3sides == 3) {
+            const anotherDie3sides = FindWholeRandom(1, 3);
+            let sumbitchPlaybackRate = 1.0;
+            if (anotherDie3sides == 2) { sumbitchPlaybackRate = 0.7; }
+            else if (anotherDie3sides == 3) { sumbitchPlaybackRate = 1.3; }
+            audioGatherC.playbackRate = sumbitchPlaybackRate;
+            PlaySound(audioGatherC);
+        }
     }
     return taskComplete;
 }
@@ -1123,51 +1738,68 @@ function PlotHarvest(robota = false) {
 
 
 function BuyLand() {
+    let lastGrainCondition = false;
+    let lastGrainMessage = null;
     if (farmStage == 0 && bushelCount[0] == priceStage1) {
-        GameEvent(displayStoryNotEnoughWheat);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughWheat;
     }
     else if (farmStage == 1 && bushelCount[0] == priceStage2) {
-        GameEvent(displayStoryNotEnoughWheat);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughWheat;
     }
     else if (farmStage == 2 && bushelCount[0] == priceStage3) {
-        GameEvent(displayStoryNotEnoughWheat);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughWheat;
     }
     else if (farmStage == 3 && bushelCount[0] == priceStage4) {
-        GameEvent(displayStoryNotEnoughWheat);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughWheat;
     }
     else if (farmStage == 4 && bushelCount[0] == priceStage5) {
-        GameEvent(displayStoryNotEnoughWheat);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughWheat;
     }
     else if (farmStage == 5 && bushelCount[0] == priceStage6) {
-        GameEvent(displayStoryNotEnoughWheat);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughWheat;
     }
     else if (farmStage == 10 && bushelCount[0] == priceStage11) {
-        GameEvent(displayStoryNotEnoughWheat);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughWheat;
     }
     else if (farmStage == 11 && bushelCount[0] == priceStage12[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughGeneral;
     }
     else if (farmStage == 12 && bushelCount[0] == priceStage13) {
-        GameEvent(displayStoryNotEnoughWheat);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughWheat;
     }
     else if (farmStage == 13 && bushelCount[0] == priceStage14[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughGeneral;
     }
     else if (farmStage == 14 && bushelCount[0] == priceStage15[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughGeneral;
     }
     else if (farmStage == 15 && bushelCount[0] == priceStage16[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughGeneral;
     }
     else if (farmStage == 16 && bushelCount[0] == priceStage17[0]) {
-        GameEvent(displayStoryNotEnoughWheat);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughWheat;
     }
     else if (farmStage == 17 && (bushelCount[0] == priceStage18[0] || bushelCount[1] == priceStage18[1])) {
-        GameEvent(displayStoryNotEnoughWheat);
+        lastGrainCondition = true;
+        lastGrainMessage = displayStoryNotEnoughWheat;
     }
 
     else if (farmStage == 0 && bushelCount[0] > priceStage1) {
-        if (player.likesStory) { GameEvent(displayStoryFarm0, 'farm_stage_0'); }
+        PlaySound(audioFarm);
+        GameEvent(displayStoryFarm0, 'farm_stage_0');
         farmStage++;
         hintLevel++;
         bushelCount[0] -= priceStage1;
@@ -1176,7 +1808,8 @@ function BuyLand() {
         farmSize[0] = 2;
     }
     else if (farmStage == 1 && bushelCount[0] > priceStage2) {
-        if (player.likesStory) { GameEvent(displayStoryFarm1, 'farm_stage_1'); }
+        PlaySound(audioFarm);
+        GameEvent(displayStoryFarm1, 'farm_stage_1');
         farmStage++;
         hintLevel++;
         bushelCount[0] -= priceStage2;
@@ -1190,6 +1823,7 @@ function BuyLand() {
             GameEvent(displayStoryFarm2, 'farm_stage_2');
         }
         else { player.names.push('Pee-Pee Boy'); }
+        PlaySound(audioFarm);
         farmStage++;
         hintLevel++;
         bushelCount[0] -= priceStage3;
@@ -1202,7 +1836,8 @@ function BuyLand() {
         player.canRentWarehouse = true;
     }
     else if (farmStage == 3 && bushelCount[0] > priceStage4) {
-        if (player.likesStory) { GameEvent(displayStoryFarm3, 'farm_stage_3'); }
+        PlaySound(audioFarm);
+        GameEvent(displayStoryFarm3, 'farm_stage_3');
         farmStage++;
         bushelCount[0] -= priceStage4;
         spentCount[0] += priceStage4;
@@ -1212,7 +1847,8 @@ function BuyLand() {
         handsAvailable += 2;
     }
     else if (farmStage == 4 && bushelCount[0] > priceStage5) {
-        if (player.likesStory) { GameEvent(displayStoryFarm4, 'farm_stage_4'); }
+        PlaySound(audioSaws);
+        GameEvent(displayStoryFarm4, 'farm_stage_4');
         farmStage++;
         bushelCount[0] -= priceStage5;
         spentCount[0] += priceStage5;
@@ -1220,31 +1856,40 @@ function BuyLand() {
         handsAvailable += 2;
     }
     else if (farmStage == 5 && bushelCount[0] > priceStage6) {
-        if (player.likesStory) { GameEvent(displayStoryFarm5, 'farm_stage_5'); }
+        PlaySound(audioFarm);
+        GameEvent(displayStoryFarm5, 'farm_stage_5');
         farmStage++;
         bushelCount[0] -= priceStage6;
         spentCount[0] += priceStage6;
     }
     else if (farmStage == 6 && bushelCount[0] > priceStage7) {
-        if (player.likesStory) { GameEvent(displayStoryFarm6, 'farm_stage_6'); }
+        audioDigA.playbackRate = 1.0;
+        PlaySound(audioDigA);
+        GameEvent(displayStoryFarm6, 'farm_stage_6');
         farmStage++;
         bushelCount[0] -= priceStage7;
         spentCount[0] += priceStage7;
     }
     else if (farmStage == 7 && bushelCount[0] > priceStage8) {
-        if (player.likesStory) { GameEvent(displayStoryFarm7, 'farm_stage_7'); }
+        audioDigB.playbackRate = 1.0;
+        PlaySound(audioDigB);
+        GameEvent(displayStoryFarm7, 'farm_stage_7');
         farmStage++;
         bushelCount[0] -= priceStage8;
         spentCount[0] += priceStage8;
     }
     else if (farmStage == 8 && bushelCount[0] > priceStage9) {
-        if (player.likesStory) { GameEvent(displayStoryFarm8, 'farm_stage_8'); }
+        audioGatherA.playbackRate = 1.0;
+        PlaySound(audioGatherA);
+        GameEvent(displayStoryFarm8, 'farm_stage_8');
         farmStage++;
         bushelCount[0] -= priceStage9;
         spentCount[0] += priceStage9;
     }
     else if (farmStage == 9 && bushelCount[0] > priceStage10) {
-        if (player.likesStory) { GameEvent(displayStoryFarm9, 'farm_stage_9'); }
+        audioDigC.playbackRate = 1.0;
+        PlaySound(audioDigC);
+        GameEvent(displayStoryFarm9, 'farm_stage_9');
         farmStage++;
         bushelCount[0] -= priceStage10;
         spentCount[0] += priceStage10;
@@ -1254,7 +1899,9 @@ function BuyLand() {
         player.seesOlives = true;
     }
     else if (farmStage == 10 && bushelCount[0] > priceStage11) {
-        if (player.likesStory) { GameEvent(displayStoryFarm10, 'farm_stage_10'); }
+        PlaySound(audioFarm);
+        PlaySound(audioHuzzah);
+        GameEvent(displayStoryFarm10, 'farm_stage_10');
         farmStage++;
         bushelCount[0] -= priceStage11;
         spentCount[0] += priceStage11;
@@ -1290,7 +1937,8 @@ function BuyLand() {
         JumpToTopPlease();
     }
     else if (farmStage == 11 && bushelCount[0] > priceStage12[0] && boardsCount >= priceStage12[1]) {
-        if (player.likesStory) { GameEvent(displayStoryFarm11, 'farm_stage_11'); }
+        PlaySound(audioSaws);
+        GameEvent(displayStoryFarm11, 'farm_stage_11');
         farmStage++;
         bushelCount[0] -= priceStage12[0];
         spentCount[0] += priceStage12[0];
@@ -1301,7 +1949,8 @@ function BuyLand() {
         player.canRentWarehouse = true;
     }
     else if (farmStage == 12 && bushelCount[0] > priceStage13) {
-        if (player.likesStory) { GameEvent(displayStoryFarm12, 'farm_stage_12'); }
+        PlaySound(audioFarm);
+        GameEvent(displayStoryFarm12, 'farm_stage_12');
         farmStage++;
         bushelCount[0] -= priceStage13;
         spentCount[0] += priceStage13;
@@ -1310,7 +1959,8 @@ function BuyLand() {
         handsAvailable += 8;
     }
     else if (farmStage == 13 && bushelCount[0] > priceStage14[0] && boardsCount >= priceStage14[1]) {
-        if (player.likesStory) { GameEvent(displayStoryFarm13, 'farm_stage_13'); }
+        PlaySound(audioSaws);
+        GameEvent(displayStoryFarm13, 'farm_stage_13');
         farmStage++;
         bushelCount[0] -= priceStage14[0];
         spentCount[0] += priceStage14[0];
@@ -1321,7 +1971,8 @@ function BuyLand() {
         player.canBuyMountain = true;
     }
     else if (farmStage == 14 && bushelCount[0] > priceStage15[0] && stoneCount >= priceStage15[1]) {
-        if (player.likesStory) { GameEvent(displayStoryFarm14, 'farm_stage_14'); }
+        PlaySound(audioBricks);
+        GameEvent(displayStoryFarm14, 'farm_stage_14');
         farmStage++;
         bushelCount[0] -= priceStage15[0];
         spentCount[0] += priceStage15[0];
@@ -1331,7 +1982,8 @@ function BuyLand() {
         handsAvailable += 2;
     }
     else if (farmStage == 15 && bushelCount[0] > priceStage16[0] && stoneCount >= priceStage16[1]) {
-        if (player.likesStory) { GameEvent(displayStoryFarm15, 'farm_stage_15'); }
+        PlaySound(audioMine);
+        GameEvent(displayStoryFarm15, 'farm_stage_15');
         farmStage++;
         bushelCount[0] -= priceStage16[0];
         spentCount[0] += priceStage16[0];
@@ -1347,6 +1999,7 @@ function BuyLand() {
         grapesMin += 10;
     }
     else if (farmStage == 16 && bushelCount[0] > priceStage17[0] && boardsCount >= priceStage17[1]) {
+        PlaySound(audioFarm);
         if (player.likesStory) {
             Translate(player.speaks, false); // this repopulates the 'year' binding in the following string
             GameEvent(displayStoryFarm16, 'farm_stage_16');
@@ -1364,7 +2017,9 @@ function BuyLand() {
         arrayFarmPlots[8] = [5, 4, 5, 4, 4, 4, 2, 2, 1, 0, 0, 1, 0, 1,];
     }
     else if (farmStage == 17 && bushelCount[0] > priceStage18[0] && bushelCount[1] > priceStage18[1]) {
-        if (player.likesStory) { GameEvent(displayStoryFarm17, 'farm_stage_17'); }
+        PlaySound(audioFarm);
+        PlaySound(audioReadyToWork);
+        GameEvent(displayStoryFarm17, 'farm_stage_17');
         farmStage++;
         bushelCount[0] -= priceStage18[0];
         bushelCount[1] -= priceStage18[1];
@@ -1381,13 +2036,18 @@ function BuyLand() {
     }
 
     else {
+        PlaySound(audioWasteTime);
         let message = displayStoryPoorFarm;
         if (farmStage < 11 || farmStage == 12) { message = displayStoryPoorWheat; }
         if (farmStage == 0) { message = displayStoryPoorWheatTutorialA + (priceStage1 - bushelCount[0]) + displayStoryPoorWheatTutorialB; }
         if (farmStage == 0 && (priceStage1 - bushelCount[0] == 1)) { message = displayStoryPoorWheatTutorialC; }
-        if (player.likesStory) { GameEvent(message); }
+        GameEvent(message);
     }
 
+    if (lastGrainCondition) {
+        PlaySound(audioNoWork);
+        GameEvent(lastGrainMessage);
+    }
     UpdateDisplay();
 }
 
@@ -1395,12 +2055,14 @@ function BuyLand() {
 
 function RentWarehouse() {
     if ((warehouseStage == 0 && bushelCount[0] == priceWarehouse0) || (warehouseStage == 1 && bushelCount[0] == priceWarehouse1) || (warehouseStage == 2 && bushelCount[0] == priceWarehouse2)) {
+        PlaySound(audioNoWork);
         GameEvent(displayStoryNotEnoughWarehouse);
     }
 
     else if (warehouseStage == 0 && bushelCount[0] > priceWarehouse0) {
+        PlaySound(audioBeans);
         hintLevel++;
-        if (player.likesStory) { GameEvent(displayStoryWarehouse0, 'warehouse_stage_0'); }
+        GameEvent(displayStoryWarehouse0, 'warehouse_stage_0');
         bushelCount[0] -= priceWarehouse0;
         spentCount[0] += priceWarehouse0;
         player.canRentWarehouse = false;
@@ -1408,7 +2070,8 @@ function RentWarehouse() {
         bushelMax[0] = warehouseCapacityUpgrades[0];
     }
     else if (warehouseStage == 1 && bushelCount[0] > priceWarehouse1) {
-        if (player.likesStory) { GameEvent(displayStoryWarehouse1, 'warehouse_stage_1'); }
+        PlaySound(audioBeans);
+        GameEvent(displayStoryWarehouse1, 'warehouse_stage_1');
         bushelCount[0] -= priceWarehouse1;
         spentCount[0] += priceWarehouse1;
         player.canRentWarehouse = false;
@@ -1416,7 +2079,8 @@ function RentWarehouse() {
         bushelMax[0] = warehouseCapacityUpgrades[1];
     }
     else if (warehouseStage == 2 && bushelCount[0] > priceWarehouse2) {
-        if (player.likesStory) { GameEvent(displayStoryWarehouse2, 'warehouse_stage_2'); }
+        PlaySound(audioBeans);
+        GameEvent(displayStoryWarehouse2, 'warehouse_stage_2');
         bushelCount[0] -= priceWarehouse2;
         spentCount[0] += priceWarehouse2;
         player.canRentWarehouse = false;
@@ -1426,10 +2090,11 @@ function RentWarehouse() {
     }
 
     else {
+        PlaySound(audioWasteTime);
         let message = displayStoryPoorWheat;
         if (warehouseStage == 0) { message = displayStoryPoorWheatTutorialA + (priceWarehouse0 - bushelCount[0]) + displayStoryPoorWheatTutorialB; }
         if (warehouseStage == 0 && (priceWarehouse0 - bushelCount[0] == 1)) { message = displayStoryPoorWheatTutorialC; }
-        if (player.likesStory) { GameEvent(message); }
+        GameEvent(message);
     }
 
     UpdateDisplay();
@@ -1437,199 +2102,74 @@ function RentWarehouse() {
 
 
 
-function BuyForest() {
-    if (bushelCount[0] == priceForest) {
-        GameEvent(displayStoryNotEnoughWheat);
+function HireAccountant() {
+    if (bushelCount[0] == priceAccountant) {
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryNotEnoughAbacus);
     }
-
-    else if (bushelCount[0] > priceForest) {
-        if (player.likesStory) { GameEvent(displayStoryForest, 'buy_forest'); }
-        bushelCount[0] -= priceForest;
-        spentCount[0] += priceForest;
-        player.canBuyForest = false;
-        player.seesForest = true;
-        player.seesForestButton = true;
-        JumpToTopPlease();
+    else if (bushelCount[0] > priceAccountant) {
+        PlaySound(audioServe);
+        GameEvent(displayStoryAccountant, 'hire_accountant');
+        bushelCount[0] -= priceAccountant;
+        spentCount[0] += priceAccountant;
+        player.canAudit = false;
+        player.seesReport = true;
         UpdateDisplay();
     }
-
     else {
-        if (player.likesStory) { GameEvent(displayStoryPoorWheat); }
+        PlaySound(audioWasteTime);
+        GameEvent(displayStoryPoorAcct);
     }
-}
-
-
-
-function BuyMountain() {
-    if (bushelCount[0] == priceQuarry) {
-        GameEvent(displayStoryNotEnoughWheat);
-    }
-
-    else if (bushelCount[0] > priceQuarry) {
-        if (player.likesStory) { GameEvent(displayStoryQuarry, 'buy_mountain'); }
-        bushelCount[0] -= priceQuarry;
-        spentCount[0] += priceQuarry;
-        player.canBuyMountain = false;
-        player.seesMountain = true;
-        JumpToTopPlease();
-        UpdateDisplay();
-    }
-
-    else {
-        if (player.likesStory) { GameEvent(displayStoryPoorWheat); }
-    }
-}
-
-
-
-function ForestEvents() {
-    if (!player.canLog && bushelCount[0] == priceLoggingCamp) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (player.canLog && !player.canSaw && bushelCount[0] == priceSawmill) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-
-    else if (!player.canLog && bushelCount[0] > priceLoggingCamp) {
-        if (player.likesStory) { GameEvent(displayStoryLoggingCamp, 'buy_loggingcamp'); }
-        bushelCount[0] -= priceLoggingCamp;
-        spentCount[0] += priceLoggingCamp;
-        player.canLog = true;
-    }
-    else if (!player.canSaw && bushelCount[0] > priceSawmill) {
-        if (player.likesStory) { GameEvent(displayStorySawmill, 'buy_sawmill'); }
-        bushelCount[0] -= priceSawmill;
-        spentCount[0] += priceSawmill;
-        player.canSaw = true;
-    }
-    else if (!player.hasLoggingUpgrade && boardsCount >= priceLoggingUpgrade[0] && stoneCount >= priceLoggingUpgrade[1]) {
-        if (player.likesStory) { GameEvent(displayStoryLoggingUpgrade); }
-        boardsCount -= priceLoggingUpgrade[0];
-        forestSpentCount[1] += priceLoggingUpgrade[0];
-        stoneCount -= priceLoggingUpgrade[1];
-        mountainSpentCount[0] += priceLoggingUpgrade[1];
-        player.hasLoggingUpgrade = true;
-    }
-    else if (player.hasLoggingUpgrade && !player.hasSawmillUpgrade && stoneCount >= priceSawmillUpgrade[0] && ingotsCopperCount >= priceSawmillUpgrade[1]) {
-        if (player.likesStory) { GameEvent(displayStorySawmillUpgrade); }
-        stoneCount -= priceSawmillUpgrade[0];
-        mountainSpentCount[0] += priceSawmillUpgrade[0];
-        ingotsCopperCount -= priceSawmillUpgrade[1];
-        mountainSpentCount[2] += priceSawmillUpgrade[1];
-        player.hasSawmillUpgrade = true;
-        player.seesForestButton = false;
-    }
-
-    else {
-        if (!player.canSaw) {
-            if (player.likesStory) { GameEvent(displayStoryPoorWheat); }
-        }
-        else {
-            if (player.likesStory) { GameEvent(displayStoryPoorFarm); }
-        }
-    }
-
-    UpdateDisplay();
-}
-
-
-
-function MountainEvents() {
-    if (!player.hasFoundMine && bushelCount[0] == priceMineScout) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-
-    else if (!player.hasFoundMine && bushelCount[0] > priceMineScout) {
-        if (player.likesStory) { GameEvent(displayStoryMineScout); }
-        bushelCount[0] -= priceMineScout;
-        spentCount[0] += priceMineScout;
-        player.hasFoundMine = true;
-    }
-    else if (!player.canMine && asCount >= priceMineDig[0] && logsCount >= priceMineDig[1]) {
-        if (player.likesStory) { GameEvent(displayStoryMineDig); }
-        asCount -= priceMineDig[0];
-        asSpent += priceMineDig[0];
-        commercialLifetimeSpend += priceMineDig[0];
-        logsCount -= priceMineDig[1];
-        forestSpentCount[0] += priceMineDig[1];
-        player.canMine = true;
-    }
-    else if (!player.canSmelt && asCount >= priceFoundry[0] && logsCount >= priceFoundry[1] && stoneCount >= priceFoundry[2]) {
-        if (player.likesStory) { GameEvent(displayStoryFoundry); }
-        asCount -= priceFoundry[0];
-        asSpent += priceFoundry[0];
-        commercialLifetimeSpend += priceFoundry[0];
-        logsCount -= priceFoundry[1];
-        forestSpentCount[0] += priceFoundry[1];
-        stoneCount -= priceFoundry[2];
-        mountainSpentCount[0] += priceFoundry[2];
-        player.canSmelt = true;
-        player.seesMountainButton = false;
-    }
-    else if (player.canSmelt && player.canHireBronzeworkers) {
-        if (player.likesStory) { GameEvent(displayStoryBronzeworkers); }
-        metallurgistsHired += 4;
-        player.seesMountainButton = false;
-        player.canHireBronzeworkers = false;
-        player.hasHiredBronzeworkers = true;
-    }
-    else if (player.hasFoundCrystalEvidence && !player.hasHiredGemcutters) {
-        if (player.likesStory) { GameEvent(displayStoryCrystal); }
-        player.seesMountainButton = false;
-        player.hasHiredGemcutters = true;
-    }
-
-    else {
-        if (player.likesStory) { GameEvent(displayStoryPoorFarm); }
-    }
-
-    UpdateDisplay();
 }
 
 
 
 function HireHand() {
     if (handsAvailable > 0) {
+        const die2sides = FindWholeRandom(1, 2);
+        if (die2sides == 1) { PlaySound(audioWorkWork); }
+        else { PlaySound(audioReadyToWork); }
         player.canDelegate = true;
         handsAvailable -= 1;
         handsHired += 1;
-        if (player.likesStory) {
-            if (handsHired == 1) { GameEvent(displayStoryHands0, 'hire_fieldhand_0'); }
-            else if (handsHired == 2) { GameEvent(displayStoryHands1, 'hire_fieldhand_1'); }
-            else if (handsHired == 3) { GameEvent(displayStoryHands2, 'hire_fieldhand_2'); }
-            else if (handsHired == 4) { GameEvent(displayStoryHands3, 'hire_fieldhand_3'); }
-            else if (handsHired == 5) { GameEvent(displayStoryHands4, 'hire_fieldhand_4'); }
-            else if (handsHired == 6) { GameEvent(displayStoryHands5, 'hire_fieldhand_5'); }
-            else if (handsHired == 7) { GameEvent(displayStoryHands6, 'hire_fieldhand_6'); }
-            else if (handsHired == 8) { GameEvent(displayStoryHands7, 'hire_fieldhand_7'); }
-            else if (handsHired == 9) { GameEvent(displayStoryHands8, 'hire_fieldhand_8'); }
-            else if (handsHired == 10) { GameEvent(displayStoryHands9, 'hire_fieldhand_9'); }
-            else if (handsHired == 11) { GameEvent(displayStoryHands10, 'hire_fieldhand_10'); }
-            else if (handsHired == 12) { GameEvent(displayStoryHands11, 'hire_fieldhand_11'); }
-            else if (handsHired == 13) { GameEvent(displayStoryHands12, 'hire_fieldhand_12'); }
-            else if (handsHired == 14) { GameEvent(displayStoryHands13, 'hire_fieldhand_13'); }
-            else if (handsHired == 15) { GameEvent(displayStoryHands14, 'hire_fieldhand_14'); }
-            else if (handsHired == 16) { GameEvent(displayStoryHands15, 'hire_fieldhand_15'); }
-            else if (handsHired == 17) { GameEvent(displayStoryHands16, 'hire_fieldhand_16'); }
-            else if (handsHired == 18) { GameEvent(displayStoryHands17, 'hire_fieldhand_17'); }
-            else if (handsHired == 19) { GameEvent(displayStoryHands18, 'hire_fieldhand_18'); }
-            else if (handsHired == 20) { GameEvent(displayStoryHands19, 'hire_fieldhand_19'); }
-            else if (handsHired == 21) { GameEvent(displayStoryHands20, 'hire_fieldhand_20'); }
-            else if (handsHired == 22) { GameEvent(displayStoryHands21, 'hire_fieldhand_21'); }
-            else if (handsHired == 23) { GameEvent(displayStoryHands22, 'hire_fieldhand_22'); }
-            else if (handsHired == 24) { GameEvent(displayStoryHands23, 'hire_fieldhand_23'); }
-            else if (handsHired == 25) { GameEvent(displayStoryHands24, 'hire_fieldhand_24'); }
-            else if (handsHired == 26) { GameEvent(displayStoryHands25, 'hire_fieldhand_25'); }
-            else if (handsHired == 27) { GameEvent(displayStoryHands26, 'hire_fieldhand_26'); }
-            else if (handsHired == 28) { GameEvent(displayStoryHands27, 'hire_fieldhand_27'); }
-            else if (handsHired == 29) { GameEvent(displayStoryHands28, 'hire_fieldhand_28'); }
-            else if (handsHired == 30) { GameEvent(displayStoryHands29, 'hire_fieldhand_29'); }
-            else if (handsHired == 31) { GameEvent(displayStoryHands30, 'hire_fieldhand_30'); }
-            else if (handsHired == 32) { GameEvent(displayStoryHands31, 'hire_fieldhand_31'); }
-            else if (handsHired == 33) { GameEvent(displayStoryHands32, 'hire_fieldhand_32'); }
-            else if (handsHired == 34) { GameEvent(displayStoryHands33, 'hire_fieldhand_33'); }
-            else if (handsHired == 35) { GameEvent(displayStoryHands34, 'hire_fieldhand_34'); }
-            else if (handsHired == 36) { GameEvent(displayStoryHands35, 'hire_fieldhand_35'); }
+        if (handsHired == 1) { GameEvent(displayStoryHands0, 'hire_fieldhand_0'); }
+        else if (handsHired == 2) { GameEvent(displayStoryHands1, 'hire_fieldhand_1'); }
+        else if (handsHired == 3) { GameEvent(displayStoryHands2, 'hire_fieldhand_2'); }
+        else if (handsHired == 4) { GameEvent(displayStoryHands3, 'hire_fieldhand_3'); }
+        else if (handsHired == 5) { GameEvent(displayStoryHands4, 'hire_fieldhand_4'); }
+        else if (handsHired == 6) { GameEvent(displayStoryHands5, 'hire_fieldhand_5'); }
+        else if (handsHired == 7) { GameEvent(displayStoryHands6, 'hire_fieldhand_6'); }
+        else if (handsHired == 8) { GameEvent(displayStoryHands7, 'hire_fieldhand_7'); }
+        else if (handsHired == 9) { GameEvent(displayStoryHands8, 'hire_fieldhand_8'); }
+        else if (handsHired == 10) { GameEvent(displayStoryHands9, 'hire_fieldhand_9'); }
+        else if (handsHired == 11) { GameEvent(displayStoryHands10, 'hire_fieldhand_10'); }
+        else if (handsHired == 12) { GameEvent(displayStoryHands11, 'hire_fieldhand_11'); }
+        else if (handsHired == 13) { GameEvent(displayStoryHands12, 'hire_fieldhand_12'); }
+        else if (handsHired == 14) { GameEvent(displayStoryHands13, 'hire_fieldhand_13'); }
+        else if (handsHired == 15) { GameEvent(displayStoryHands14, 'hire_fieldhand_14'); }
+        else if (handsHired == 16) { GameEvent(displayStoryHands15, 'hire_fieldhand_15'); }
+        else if (handsHired == 17) { GameEvent(displayStoryHands16, 'hire_fieldhand_16'); }
+        else if (handsHired == 18) { GameEvent(displayStoryHands17, 'hire_fieldhand_17'); }
+        else if (handsHired == 19) { GameEvent(displayStoryHands18, 'hire_fieldhand_18'); }
+        else if (handsHired == 20) { GameEvent(displayStoryHands19, 'hire_fieldhand_19'); }
+        else if (handsHired == 21) { GameEvent(displayStoryHands20, 'hire_fieldhand_20'); }
+        else if (handsHired == 22) { GameEvent(displayStoryHands21, 'hire_fieldhand_21'); }
+        else if (handsHired == 23) { GameEvent(displayStoryHands22, 'hire_fieldhand_22'); }
+        else if (handsHired == 24) { GameEvent(displayStoryHands23, 'hire_fieldhand_23'); }
+        else if (handsHired == 25) { GameEvent(displayStoryHands24, 'hire_fieldhand_24'); }
+        else if (handsHired == 26) { GameEvent(displayStoryHands25, 'hire_fieldhand_25'); }
+        else if (handsHired == 27) { GameEvent(displayStoryHands26, 'hire_fieldhand_26'); }
+        else if (handsHired == 28) { GameEvent(displayStoryHands27, 'hire_fieldhand_27'); }
+        else if (handsHired == 29) { GameEvent(displayStoryHands28, 'hire_fieldhand_28'); }
+        else if (handsHired == 30) { GameEvent(displayStoryHands29, 'hire_fieldhand_29'); }
+        else if (handsHired == 31) { GameEvent(displayStoryHands30, 'hire_fieldhand_30'); }
+        else if (handsHired == 32) { GameEvent(displayStoryHands31, 'hire_fieldhand_31'); }
+        else if (handsHired == 33) { GameEvent(displayStoryHands32, 'hire_fieldhand_32'); }
+        else if (handsHired == 34) { GameEvent(displayStoryHands33, 'hire_fieldhand_33'); }
+        else if (handsHired == 35) { GameEvent(displayStoryHands34, 'hire_fieldhand_34'); }
+        else if (handsHired == 36) {
+            PlaySound(audioBurden);
+            GameEvent(displayStoryHands35, 'hire_fieldhand_35');
         }
         if (handsHired == handsMax) {
             player.canHire = false;
@@ -1637,55 +2177,41 @@ function HireHand() {
         }
         UpdateDisplay();
     }
-
     else {
-        if (player.likesStory) { GameEvent(displayStoryPoorHire); }
-    }
-}
-
-
-
-function HireAccountant() {
-    if (bushelCount[0] == priceAccountant) {
-        GameEvent(displayStoryNotEnoughAbacus);
-    }
-
-    else if (bushelCount[0] > priceAccountant) {
-        if (player.likesStory) { GameEvent(displayStoryAccountant, 'hire_accountant'); }
-        bushelCount[0] -= priceAccountant;
-        spentCount[0] += priceAccountant;
-        player.canAudit = false;
-        player.seesReport = true;
-        UpdateDisplay();
-    }
-
-    else {
-        if (player.likesStory) { GameEvent(displayStoryPoorAcct); }
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryPoorHire);
     }
 }
 
 
 
 function TogglePriority() {
+    PlaySound(audioClack);
+    KillSound(audioOkieDokie);
+    KillSound(audioKazoo);
+    KillSound(audioCanDo);
     if (priority == 'Reap') {
         priority = 'Sow';
+        PlaySound(audioOkieDokie);
         if (!player.hasDelegatedOnce) {
             player.hasDelegatedOnce = true;
-            if (player.likesStory) { GameEvent(displayStoryDelegateOnce); }
+            GameEvent(displayStoryDelegateOnce);
         }
     }
     else if (priority == 'Sow') {
         priority = '🤪';
+        PlaySound(audioKazoo);
         if (!player.hasDelegatedTwice) {
             player.hasDelegatedTwice = true;
-            if (player.likesStory) { GameEvent(displayStoryDelegateTwice); }
+            GameEvent(displayStoryDelegateTwice);
         }
     }
     else {
         priority = 'Reap';
+        PlaySound(audioCanDo);
         if (!player.hasDelegatedThrice) {
             player.hasDelegatedThrice = true;
-            if (player.likesStory) { GameEvent(displayStoryDelegateThrice); }
+            GameEvent(displayStoryDelegateThrice);
         }
     }
     UpdateDisplay();
@@ -1694,16 +2220,19 @@ function TogglePriority() {
 
 
 function BarterAll() {
+    PlaySound(audioClack);
     if (bushelCount[2] > bushelMax[2] || bushelCount[3] > bushelMax[3] || bushelCount[4] > bushelMax[4] || bushelCount[5] > bushelMax[5] || bushelCount[6] > bushelMax[6]) {
+        PlaySound(audioKazoo);
         alert('⚠ TOO MUCH FRUITS! THIS WILL CRASH YOUR BROWSER, HOMIE!');
     }
     else if (bushelCount[2] == 0 && bushelCount[3] == 0 && bushelCount[4] == 0 && bushelCount[5] == 0 && bushelCount[6] == 0) {
-        if (player.likesStory) { GameEvent(displayStoryPoorBarter); }
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryPoorBarter);
     }
     else {
         if (!player.hasSoldTheFarm) {
             player.hasSoldTheFarm = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstTradeAll); }
+            GameEvent(displayStoryFirstTradeAll);
         }
         while (bushelCount[2] > 0) { BarterFruit(2, false); }
         while (bushelCount[3] > 0) { BarterFruit(3, false); }
@@ -1717,43 +2246,50 @@ function BarterAll() {
 
 
 function BarterFruit(crop, refresh = true) {
+    PlaySound(audioClack);
     let barterAmount = bushelCount[crop];
 
     if (barterAmount == 0) {
-        if (player.likesStory) { GameEvent(displayStoryPoorBarter); }
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryPoorBarter);
+    }
+    else {
+        PlaySound(audioAuction);
     }
 
     if (crop == '2' && barterAmount != 0 && !player.hasBarteredOlive) {
         player.hasBarteredOlive = true;
-        Translate(player.speaks, false); // this repopulates the bindings in the following string
-        if (player.likesStory) { GameEvent(displayStoryFirstTradeOlive); }
+        if (player.likesStory) {
+            Translate(player.speaks, false); // this repopulates the bindings in the following string
+            GameEvent(displayStoryFirstTradeOlive);
+        }
     }
 
     if (crop == '3' && barterAmount != 0 && !player.hasBarteredDate) {
         player.hasBarteredDate = true;
-        if (player.likesStory) { GameEvent(displayStoryFirstTradeDate); }
+        GameEvent(displayStoryFirstTradeDate);
     }
 
     if (crop == '4' && barterAmount != 0 && !player.hasBarteredFig) {
         player.hasBarteredFig = true;
-        if (player.likesStory) { GameEvent(displayStoryFirstTradeFig); }
+        GameEvent(displayStoryFirstTradeFig);
     }
 
     if (crop == '5' && barterAmount != 0 && !player.hasBarteredPom) {
         player.hasBarteredPom = true;
-        if (player.likesStory) { GameEvent(displayStoryFirstTradePom); }
+        GameEvent(displayStoryFirstTradePom);
     }
 
     if (crop == '6' && barterAmount != 0 && !player.hasBarteredGrape) {
         player.hasBarteredGrape = true;
-        if (player.likesStory) { GameEvent(displayStoryFirstTradeGrape); }
+        GameEvent(displayStoryFirstTradeGrape);
     }
 
     if (bushelCount[crop] > barterMaxBulkCount) { barterAmount = barterMaxBulkCount; }
     bushelCount[crop] -= barterAmount;
     soldCount[crop] += barterAmount;
-    bushelCount[0] += barterAmount * barterExchangeRate[crop];
-    purchasedCount[0] += barterAmount * barterExchangeRate[crop];
+    bushelCount[0] += barterAmount * barterExchangeRate[crop] * ((player.hasWon) ? 10 : 1);
+    purchasedCount[0] += barterAmount * barterExchangeRate[crop] * ((player.hasWon) ? 10 : 1);
     if (bushelCount[0] > bushelMax[0]) { bushelCount[0] = bushelMax[0]; }
 
     if (refresh) UpdateDisplay();
@@ -1761,25 +2297,196 @@ function BarterFruit(crop, refresh = true) {
 
 
 
-function Found() {
-    if (bushelCount[0] == priceVillage) {
+function BuyForest() {
+    if (bushelCount[0] == priceForest) {
+        PlaySound(audioNoWork);
         GameEvent(displayStoryNotEnoughWheat);
     }
+    else if (bushelCount[0] > priceForest) {
+        PlaySound(audioBirds);
+        GameEvent(displayStoryForest, 'buy_forest');
+        bushelCount[0] -= priceForest;
+        spentCount[0] += priceForest;
+        player.canBuyForest = false;
+        player.seesForest = true;
+        player.seesForestButton = true;
+        JumpToTopPlease();
+        UpdateDisplay();
+    }
+    else {
+        PlaySound(audioWasteTime);
+        GameEvent(displayStoryPoorWheat);
+    }
+}
 
+
+
+function ForestEvents() {
+    if (!player.canLog && bushelCount[0] == priceLoggingCamp) {
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+    else if (player.canLog && !player.canSaw && bushelCount[0] == priceSawmill) {
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+
+    else if (!player.canLog && bushelCount[0] > priceLoggingCamp) {
+        PlaySound(audioWoodChop);
+        PlaySound(audioReadyToWork);
+        GameEvent(displayStoryLoggingCamp, 'buy_loggingcamp');
+        bushelCount[0] -= priceLoggingCamp;
+        spentCount[0] += priceLoggingCamp;
+        player.canLog = true;
+    }
+    else if (!player.canSaw && bushelCount[0] > priceSawmill) {
+        PlaySound(audioSaws);
+        PlaySound(audioReadyToWork);
+        GameEvent(displayStorySawmill, 'buy_sawmill');
+        bushelCount[0] -= priceSawmill;
+        spentCount[0] += priceSawmill;
+        player.canSaw = true;
+    }
+    else if (!player.hasLoggingUpgrade && boardsCount >= priceLoggingUpgrade[0] && stoneCount >= priceLoggingUpgrade[1]) {
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryLoggingUpgrade);
+        boardsCount -= priceLoggingUpgrade[0];
+        forestSpentCount[1] += priceLoggingUpgrade[0];
+        stoneCount -= priceLoggingUpgrade[1];
+        mountainSpentCount[0] += priceLoggingUpgrade[1];
+        player.hasLoggingUpgrade = true;
+    }
+    else if (player.hasLoggingUpgrade && !player.hasSawmillUpgrade && stoneCount >= priceSawmillUpgrade[0] && ingotsCopperCount >= priceSawmillUpgrade[1]) {
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStorySawmillUpgrade);
+        stoneCount -= priceSawmillUpgrade[0];
+        mountainSpentCount[0] += priceSawmillUpgrade[0];
+        ingotsCopperCount -= priceSawmillUpgrade[1];
+        mountainSpentCount[2] += priceSawmillUpgrade[1];
+        player.hasSawmillUpgrade = true;
+        player.seesForestButton = false;
+    }
+
+    else {
+        PlaySound(audioWasteTime);
+        if (!player.canSaw) { GameEvent(displayStoryPoorWheat); }
+        else { GameEvent(displayStoryPoorFarm); }
+    }
+    UpdateDisplay();
+}
+
+
+
+function BuyMountain() {
+    if (bushelCount[0] == priceQuarry) {
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryNotEnoughWheat);
+    }
+    else if (bushelCount[0] > priceQuarry) {
+        PlaySound(audioReadyToWork);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryQuarry, 'buy_mountain');
+        bushelCount[0] -= priceQuarry;
+        spentCount[0] += priceQuarry;
+        player.canBuyMountain = false;
+        player.seesMountain = true;
+        JumpToTopPlease();
+        UpdateDisplay();
+    }
+    else {
+        PlaySound(audioWasteTime);
+        GameEvent(displayStoryPoorWheat);
+    }
+}
+
+
+
+function MountainEvents() {
+    if (!player.hasFoundMine && bushelCount[0] == priceMineScout) {
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
+
+    else if (!player.hasFoundMine && bushelCount[0] > priceMineScout) {
+        PlaySound(audioZeldaItem);
+        GameEvent(displayStoryMineScout);
+        bushelCount[0] -= priceMineScout;
+        spentCount[0] += priceMineScout;
+        player.hasFoundMine = true;
+    }
+    else if (!player.canMine && asCount >= priceMineDig[0] && logsCount >= priceMineDig[1]) {
+        PlaySound(audioMine);
+        PlaySound(audioReadyToWork);
+        GameEvent(displayStoryMineDig);
+        asCount -= priceMineDig[0];
+        asSpent += priceMineDig[0];
+        commercialLifetimeSpend += priceMineDig[0];
+        logsCount -= priceMineDig[1];
+        forestSpentCount[0] += priceMineDig[1];
+        player.canMine = true;
+    }
+    else if (!player.canSmelt && asCount >= priceFoundry[0] && logsCount >= priceFoundry[1] && stoneCount >= priceFoundry[2]) {
+        PlaySound(audioSmelt);
+        PlaySound(audioReadyToWork);
+        GameEvent(displayStoryFoundry);
+        asCount -= priceFoundry[0];
+        asSpent += priceFoundry[0];
+        commercialLifetimeSpend += priceFoundry[0];
+        logsCount -= priceFoundry[1];
+        forestSpentCount[0] += priceFoundry[1];
+        stoneCount -= priceFoundry[2];
+        mountainSpentCount[0] += priceFoundry[2];
+        player.canSmelt = true;
+        player.seesMountainButton = false;
+    }
+    else if (player.canSmelt && player.canHireBronzeworkers) {
+        PlaySound(audioSmith);
+        PlaySound(audioReadyToWork);
+        GameEvent(displayStoryBronzeworkers);
+        metallurgistsHired += 4;
+        player.seesMountainButton = false;
+        player.canHireBronzeworkers = false;
+        player.hasHiredBronzeworkers = true;
+    }
+    else if (player.hasFoundCrystalEvidence && !player.hasHiredGemcutters) {
+        PlaySound(audioChimes);
+        PlaySound(audioReadyToWork);
+        GameEvent(displayStoryCrystal);
+        player.seesMountainButton = false;
+        player.hasHiredGemcutters = true;
+    }
+
+    else {
+        PlaySound(audioWasteTime);
+        GameEvent(displayStoryPoorFarm);
+    }
+    UpdateDisplay();
+}
+
+
+
+function Found() {
+    if (bushelCount[0] == priceVillage) {
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryNotEnoughWheat);
+    }
     else if (bushelCount[0] > priceVillage) {
-        if (player.likesStory) { GameEvent(displayStoryFound, 'buy_village'); }
+        PlaySound(audioHuzzah);
+        GameEvent(displayStoryFound, 'buy_village');
         bushelCount[0] -= priceVillage;
         spentCount[0] += priceVillage;
         player.canFound = false;
         player.canBuild = true;
         player.seesVillage = true;
-        Translate(player.speaks, false); // this repopulates the 'Go Fishin(’/g)' label
+        Translate(player.speaks, false); // this repopulates the [Go Fishin(’/g)] label
         JumpToTopPlease();
         UpdateDisplay();
     }
-
     else {
-        if (player.likesStory) { GameEvent(displayStoryPoorFound); }
+        PlaySound(audioWasteTime);
+        GameEvent(displayStoryPoorFound);
     }
 }
 
@@ -1787,7 +2494,9 @@ function Found() {
 
 function BuyNewFarm() {
     if (asCount >= priceNewFarm && !player.hasNewFarm) {
-        if (player.likesStory) { GameEvent(displayStoryNewFarm); }
+        PlaySound(audioReadyToWork);
+        PlaySound(audioFarm);
+        GameEvent(displayStoryNewFarm);
         asCount -= priceNewFarm;
         asSpent += priceNewFarm;
         commercialLifetimeSpend += priceNewFarm;
@@ -1798,7 +2507,9 @@ function BuyNewFarm() {
         UpdateDisplay();
     }
     else if (asCount >= priceFlaxFarm) {
-        if (player.likesStory) { GameEvent(displayStoryFlaxFarm); }
+        PlaySound(audioReadyToWork);
+        PlaySound(audioFarm);
+        GameEvent(displayStoryFlaxFarm);
         asCount -= priceFlaxFarm;
         asSpent += priceFlaxFarm;
         commercialLifetimeSpend += priceFlaxFarm;
@@ -1808,63 +2519,43 @@ function BuyNewFarm() {
         handsMax += flaxFarmHandsCount;
         UpdateDisplay();
     }
-
     else {
-        if (player.likesStory) { GameEvent(displayStoryPoorFound); }
+        PlaySound(audioWasteTime);
+        GameEvent(displayStoryPoorFound);
     }
 }
 
 
 
+// Residence tab -----------------------------------------------------------
+
 function ImproveResidence() {
-    if (residenceStage == 0 && bushelCount[0] == priceResidence00) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 1 && bushelCount[0] == priceResidence01[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 2 && bushelCount[0] == priceResidence02[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 3 && bushelCount[0] == priceResidence03[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 4 && bushelCount[0] == priceResidence04[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 5 && bushelCount[0] == priceResidence05[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 6 && bushelCount[0] == priceResidence06[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 7 && bushelCount[0] == priceResidence07[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 8 && bushelCount[0] == priceResidence08[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 9 && bushelCount[0] == priceResidence09[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 10 && bushelCount[0] == priceResidence10[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 11 && bushelCount[0] == priceResidence11[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
-    else if (residenceStage == 12 && bushelCount[0] == priceResidence12[0]) {
-        GameEvent(displayStoryNotEnoughGeneral);
-    }
+    let lastGrainCondition = false;
+    if (residenceStage == 0 && bushelCount[0] == priceResidence00) { lastGrainCondition = true; }
+    else if (residenceStage == 1 && bushelCount[0] == priceResidence01[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 2 && bushelCount[0] == priceResidence02[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 3 && bushelCount[0] == priceResidence03[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 4 && bushelCount[0] == priceResidence04[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 5 && bushelCount[0] == priceResidence05[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 6 && bushelCount[0] == priceResidence06[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 7 && bushelCount[0] == priceResidence07[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 8 && bushelCount[0] == priceResidence08[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 9 && bushelCount[0] == priceResidence09[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 10 && bushelCount[0] == priceResidence10[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 11 && bushelCount[0] == priceResidence11[0]) { lastGrainCondition = true; }
+    else if (residenceStage == 12 && bushelCount[0] == priceResidence12[0]) { lastGrainCondition = true; }
 
     else if (residenceStage == 0 && bushelCount[0] > priceResidence00) {
-        if (player.likesStory) { GameEvent(displayStoryResidence00); }
+        residenceAmbience = ambienceCrickets;
+        PlaySound(audioMine);
+        GameEvent(displayStoryResidence00);
         bushelCount[0] -= priceResidence00;
         spentCount[0] += priceResidence00;
         residenceStage += 1;
     }
     else if (residenceStage == 1 && bushelCount[0] > priceResidence01[0] && logsCount >= priceResidence01[1]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence01); }
+        PlaySound(audioWoodChop);
+        GameEvent(displayStoryResidence01);
         bushelCount[0] -= priceResidence01[0];
         spentCount[0] += priceResidence01[0];
         logsCount -= priceResidence01[1];
@@ -1872,7 +2563,9 @@ function ImproveResidence() {
         residenceStage += 1;
     }
     else if (residenceStage == 2 && bushelCount[0] > priceResidence02[0] && boardsCount >= priceResidence02[1]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence02); }
+        residenceAmbience = ambienceCracklingFire;
+        PlaySound(audioSaws);
+        GameEvent(displayStoryResidence02);
         bushelCount[0] -= priceResidence02[0];
         spentCount[0] += priceResidence02[0];
         boardsCount -= priceResidence02[1];
@@ -1880,7 +2573,9 @@ function ImproveResidence() {
         residenceStage += 1;
     }
     else if (residenceStage == 3 && bushelCount[0] > priceResidence03[0] && stoneCount >= priceResidence03[1] && boardsCount >= priceResidence03[2]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence03); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryResidence03);
         bushelCount[0] -= priceResidence03[0];
         spentCount[0] += priceResidence03[0];
         stoneCount -= priceResidence03[1];
@@ -1892,7 +2587,9 @@ function ImproveResidence() {
         JumpToBottom();
     }
     else if (residenceStage == 4 && bushelCount[0] > priceResidence04[0] && stoneCount >= priceResidence04[1] && boardsCount >= priceResidence04[2] && bushelCount[2] >= priceResidence04[3]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence04); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryResidence04);
         bushelCount[0] -= priceResidence04[0];
         spentCount[0] += priceResidence04[0];
         stoneCount -= priceResidence04[1];
@@ -1906,7 +2603,9 @@ function ImproveResidence() {
         JumpToBottom();
     }
     else if (residenceStage == 5 && bushelCount[0] > priceResidence05[0] && stoneCount >= priceResidence05[1] && boardsCount >= priceResidence05[2] && ingotsCopperCount >= priceResidence05[3]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence05); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryResidence05);
         bushelCount[0] -= priceResidence05[0];
         spentCount[0] += priceResidence05[0];
         stoneCount -= priceResidence05[1];
@@ -1918,7 +2617,9 @@ function ImproveResidence() {
         residenceStage += 1;
     }
     else if (residenceStage == 6 && bushelCount[0] > priceResidence06[0] && stoneCount >= priceResidence06[1] && boardsCount >= priceResidence06[2] && bushelCount[1] > priceResidence06[3]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence06); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryResidence06);
         bushelCount[0] -= priceResidence06[0];
         spentCount[0] += priceResidence06[0];
         stoneCount -= priceResidence06[1];
@@ -1932,7 +2633,9 @@ function ImproveResidence() {
         JumpToBottom();
     }
     else if (residenceStage == 7 && bushelCount[0] > priceResidence07[0] && stoneCount >= priceResidence07[1] && boardsCount >= priceResidence07[2] && bushelCount[6] >= priceResidence07[3]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence07); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryResidence07);
         bushelCount[0] -= priceResidence07[0];
         spentCount[0] += priceResidence07[0];
         stoneCount -= priceResidence07[1];
@@ -1946,7 +2649,9 @@ function ImproveResidence() {
         JumpToBottom();
     }
     else if (residenceStage == 8 && bushelCount[0] > priceResidence08[0] && stoneCount >= priceResidence08[1] && boardsCount >= priceResidence08[2] && bushelCount[3] >= priceResidence08[3]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence08); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryResidence08);
         bushelCount[0] -= priceResidence08[0];
         spentCount[0] += priceResidence08[0];
         stoneCount -= priceResidence08[1];
@@ -1960,7 +2665,9 @@ function ImproveResidence() {
         JumpToBottom();
     }
     else if (residenceStage == 9 && bushelCount[0] > priceResidence09[0] && stoneCount >= priceResidence09[1] && boardsCount >= priceResidence09[2] && bushelCount[5] >= priceResidence09[3]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence09); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryResidence09);
         bushelCount[0] -= priceResidence09[0];
         spentCount[0] += priceResidence09[0];
         stoneCount -= priceResidence09[1];
@@ -1974,7 +2681,9 @@ function ImproveResidence() {
         JumpToBottom();
     }
     else if (residenceStage == 10 && bushelCount[0] > priceResidence10[0] && stoneCount >= priceResidence10[1] && boardsCount >= priceResidence10[2] && bushelCount[4] >= priceResidence10[3]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence10); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryResidence10);
         bushelCount[0] -= priceResidence10[0];
         spentCount[0] += priceResidence10[0];
         stoneCount -= priceResidence10[1];
@@ -1988,7 +2697,9 @@ function ImproveResidence() {
         JumpToBottom();
     }
     else if (residenceStage == 11 && bushelCount[0] > priceResidence11[0] && stoneCount >= priceResidence11[1] && boardsCount >= priceResidence11[2] && ingotsCopperCount >= priceResidence11[3]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence11); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryResidence11);
         bushelCount[0] -= priceResidence11[0];
         spentCount[0] += priceResidence11[0];
         stoneCount -= priceResidence11[1];
@@ -2001,7 +2712,9 @@ function ImproveResidence() {
         player.seesHikeButton = true;
     }
     else if (residenceStage == 12 && bushelCount[0] > priceResidence12[0] && stoneCount >= priceResidence12[1] && boardsCount >= priceResidence12[2] && ingotsTinCount >= priceResidence12[3]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence12); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryResidence12);
         bushelCount[0] -= priceResidence12[0];
         spentCount[0] += priceResidence12[0];
         stoneCount -= priceResidence12[1];
@@ -2015,7 +2728,9 @@ function ImproveResidence() {
         JumpToBottom();
     }
     else if (residenceStage == 13 && asCount >= priceResidence13[0] && stoneCount >= priceResidence13[1] && boardsCount >= priceResidence13[2] && ingotsBronzeCount >= priceResidence13[3] && crystalsCount >= priceResidence13[4] && residenceInStockCount[8] >= priceResidence13[5]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence13); }
+        residenceAmbience = ambienceBells;
+        PlaySound(audioSaws2);
+        GameEvent(displayStoryResidence13);
         asCount -= priceResidence13[0];
         asSpent += priceResidence13[0];
         commercialLifetimeSpend += priceResidence13[0];
@@ -2033,7 +2748,8 @@ function ImproveResidence() {
         player.hasMansion = true;
     }
     else if (residenceStage == 14 && asCount >= priceResidence14[0]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence14); }
+        PlaySound(audioBees);
+        GameEvent(displayStoryResidence14);
         asCount -= priceResidence14[0];
         asSpent += priceResidence14[0];
         commercialLifetimeSpend += priceResidence14[0];
@@ -2042,26 +2758,31 @@ function ImproveResidence() {
         JumpToBottom();
     }
     else if (residenceStage == 15) {
-        if (player.likesStory) { GameEvent(displayStoryResidence15); }
+        PlaySound(audioSquish);
+        GameEvent(displayStoryResidence15);
         residenceStage++;
         player.hasRaisins = true;
         player.seesImportButton = true;
     }
     else if (residenceStage == 16 && player.canImportSalt) {
-        if (player.likesStory) { GameEvent(displayStoryResidence16); }
+        PlaySound(audioSquish);
+        GameEvent(displayStoryResidence16);
         residenceStage++;
         player.hasHardtack = true;
     }
     else if (residenceStage == 16 && !player.canImportSalt) {
-        if (player.likesStory) { GameEvent(displayStoryPoorSalt); }
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorSalt);
     }
     else if (residenceStage == 17) {
-        if (player.likesStory) { GameEvent(displayStoryResidence17); }
+        PlaySound(audioSquish);
+        GameEvent(displayStoryResidence17);
         residenceStage++;
         player.hasRations = true;
     }
     else if (residenceStage == 18 && asCount >= priceResidence18[0] && bushelCount[7] >= priceResidence18[1]) {
-        if (player.likesStory) { GameEvent(displayStoryResidence18); }
+        PlaySound(audioSaws2);
+        GameEvent(displayStoryResidence18);
         asCount -= priceResidence18[0];
         asSpent += priceResidence18[0];
         commercialLifetimeSpend += priceResidence18[0];
@@ -2072,59 +2793,143 @@ function ImproveResidence() {
         JumpToBottom();
     }
     else if (residenceStage == 19 && player.hasHospital) {
-        if (player.likesStory) { GameEvent(displayStoryResidence19); }
+        PlaySound(audioTear);
+        GameEvent(displayStoryResidence19);
         residenceStage++;
         player.hasBandages = true;
     }
     else if (residenceStage == 19 && !player.hasHospital) {
-        if (player.likesStory) { GameEvent(displayStoryPoorMedicine); }
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorMedicine);
     }
 
     else {
-        if (player.likesStory) { GameEvent(displayStoryPoorFarm); }
+        if (residenceStage < 14) { PlaySound(audioWorkToDo); }
+        else { PlaySound(audioKingdomToRun); }
+        GameEvent(displayStoryPoorFarm);
     }
 
+    if (lastGrainCondition) {
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryNotEnoughGeneral);
+    }
     UpdateDisplay();
+}
+
+
+
+function SetOutOnSojourn() {
+    KillAmbience();
+    PlaySound(audioBirds);
+    GameEvent(displayStoryHikeGo);
+    PauseTime();
+    divGameWindow.style.display = 'none';
+    divViewResidence.style.display = '';
+    divMinigameHike.style.display = 'block';
+    divMinigameHike.appendChild(divFooter);
+    player.isAt = 'Hike';
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function Relax() {
+    //alert('*******🚨🚨🚨YOU ARE VERY RELAXED NOW!!!!!🚨🚨🚨*******');
+    let chosenMessage = (superMeditatorWizardPowersActivated ? displayStoryHikeEnough : displayStoryHikeRelax[relaxStage]);
+    if (meditateCount == meditateLimit + 1) { PlaySound(audioBirds); }
+    if (meditateCount == meditateLimit + 2) { chosenMessage = displayStoryHikeFine; }
+    if (meditateCount > meditateLimit + 2) { chosenMessage = displayStoryHikeRelax[relaxStage]; }
+    GameEvent('<div id="divMeetings">' + chosenMessage + '</div>');
+    relaxStage++;
+    if (relaxStage == displayStoryHikeRelax.length) {
+        relaxStage--;
+        meditateCount++;
+        if (meditateCount > meditateLimit) { superMeditatorWizardPowersActivated = true; }
+        if (meditateCount != meditateLimit + 2) { PlaySound(audioMantra); }
+    }
+    else { PlaySound(audioBirds); }
+    UpdateDisplay();
+}
+
+
+
+function LeaveHike() {
+    KillAmbience();
+    PlaySound(audioBirds);
+    PlaySound(residenceAmbience);
+    if (player.hasWon) { PlaySound(audioHarpUp); }
+    player.seesHikeButton = false;
+    player.hasHiked = true;
+    if (gameSpeed == 'paused') { StartTime(); }
+    divGameWindow.style.display = '';
+    divViewResidence.style.display = 'block';
+    divMinigameHike.style.display = '';
+    divWidthClamp.appendChild(divFooter);
+    player.isAt = 'Residence';
+    UpdateDisplay();
+    JumpToTopPlease();
+    GameEvent(displayStoryHikeLeave);
 }
 
 
 
 function ThrowParty() {
     if (asCount >= priceResidenceParty) {
-        if (player.likesStory) { GameEvent(displayStoryParty); }
+        PlaySound(audioDinner);
+        GameEvent(displayStoryParty);
         asCount -= priceResidenceParty;
         asSpent += priceResidenceParty;
         statecraftLifetimeSpend += priceResidenceParty;
-
         player.hasHosted = true;
         UpdateDisplay();
     }
     else {
-        if (player.likesStory) { GameEvent(displayStoryPoorVillage); }
+        PlaySound(audioKingdomToRun);
+        GameEvent(displayStoryPoorVillage);
     }
 }
 
 
 
-function GoHerm() {
-    if (!fishGameStarted && !fishWarmup) {
-        if (gameSpeed == 'paused') { StartTime(); }
-        divGameWindow.style.display = '';
-        divViewResidence.style.display = 'block';
-        divMinigameFishing.style.display = '';
-        divWidthClamp.appendChild(divFooter);
-        player.isAt = 'Residence';
+function BuyTreasure() {
+    if (asCount >= priceWorkOfArt) {
+        PlaySound(audioChimes);
+        if (!player.hasBoughtArt) {
+            player.hasBoughtArt = true;
+            GameEvent(displayStoryBuyArt);
+        }
+        else { GameEvent(displayStoryBuyArtAgain); }
+        asCount -= priceWorkOfArt;
+        asSpent += priceWorkOfArt;
+        statecraftLifetimeSpend += priceWorkOfArt;
+        treasuresCount++;
         UpdateDisplay();
-        JumpToTopPlease();
+    }
+    else {
+        PlaySound(audioKingdomToRun);
+        if (player.likesStory) {
+            Translate(player.speaks, false); // populates the following string correctly
+            GameEvent(displayStoryPoorTreasure);
+        }
     }
 }
 
 
+
+// Location Changes --------------------------------------------------------
 
 function GoFishing() {
+    KillAmbience();
+    PlaySound(audioClack);
+    if (player.hasWon) { PlaySound(ambienceHarbor); }
+    else {
+        PlaySound(ambienceStream);
+        PlaySound(audioBanjo);
+    }
     if (!fishState.hasVisited) {
         fishState.hasVisited = true;
-        if (player.likesStory) { GameEvent(displayStoryFishFirstVisit); }
+        GameEvent(displayStoryFishFirstVisit);
     }
     PauseTime();
     divGameWindow.style.display = 'none';
@@ -2140,27 +2945,40 @@ function GoFishing() {
 
 
 
+function GoHerm() {
+    if (!fishGameStarted && !fishWarmup) {
+        KillAmbience();
+        KillSound(audioBanjo);
+        PlaySound(audioClack);
+        PlaySound(residenceAmbience);
+        if (player.hasWon) { PlaySound(audioHarpUp); }
+        if (gameSpeed == 'paused') { StartTime(); }
+        divGameWindow.style.display = '';
+        divViewResidence.style.display = 'block';
+        divMinigameFishing.style.display = '';
+        divWidthClamp.appendChild(divFooter);
+        player.isAt = 'Residence';
+        UpdateDisplay();
+        JumpToTopPlease();
+    }
+}
+
+
+
 function GoToResidence() {
+    KillSound(audioTravel);
+    KillSound(audioTravelAlt);
+    KillAmbience();
+    StopMusic();
+    PlaySound(audioClack);
+    PlaySound(residenceAmbience);
+    if (player.hasWon) { PlaySound(audioHarpUp); }
     divViewPraedium.style.display = 'none';
     divViewResidence.style.display = 'block';
     player.isAt = 'Residence';
     if (!player.hasSeenResidence) {
         player.hasSeenResidence = true;
-        if (player.likesStory) { GameEvent(displayStoryResidenceFirstVisit); }
-    }
-    UpdateDisplay();
-}
-
-
-
-function GoToTownship() {
-    divViewPraedium.style.display = 'none';
-    divViewTownship.style.display = 'block';
-    divViewPort.style.display = '';
-    player.isAt = 'Township';
-    if (!player.hasSeenVillage) {
-        player.hasSeenVillage = true;
-        if (player.likesStory) { GameEvent(displayStoryVillageFirstVisit); }
+        GameEvent(displayStoryResidenceFirstVisit);
     }
     UpdateDisplay();
 }
@@ -2168,271 +2986,89 @@ function GoToTownship() {
 
 
 function GoToPraedium() {
+    KillAmbience();
+    PlaySound(audioClack);
+    FirePRÆDIVM_TM_ExtendedAmbience();
     divViewPraedium.style.display = '';
     divViewResidence.style.display = '';
     divViewTownship.style.display = '';
     player.isAt = 'Praedium';
+    if (!player.hasBeenBackToPraedium) {
+        player.hasBeenBackToPraedium = true;
+        GameEvent(displayStoryVillageReturnToPraedium);
+    }
+    UpdateDisplay();
+}
+
+
+
+function GoToTownship() {
+    KillSound(audioPortTimer);
+    KillSound(audioTravel);
+    KillSound(audioTravelAlt);
+    KillAmbience();
+    StopMusic();
+    PlaySound(audioClack);
+    FireTownshipExtendedAmbience();
+    divViewPraedium.style.display = 'none';
+    divViewTownship.style.display = 'block';
+    divViewPort.style.display = '';
+    player.isAt = 'Township';
+    if (!player.hasSeenVillage) {
+        player.hasSeenVillage = true;
+        GameEvent(displayStoryVillageFirstVisit);
+    }
     UpdateDisplay();
 }
 
 
 
 function GoToPort() {
+    KillAmbience();
+    PlaySound(audioClack);
+    PlaySound(audioPort);
+    PlaySound(ambienceSeagull);
     divViewTownship.style.display = '';
     divViewPort.style.display = 'block';
     player.isAt = 'Port';
     if (!player.hasSeenPort) {
         player.hasSeenPort = true;
-        if (player.likesStory) { GameEvent(displayStoryPortFirstVisit); }
+        GameEvent(displayStoryPortFirstVisit);
     }
     UpdateDisplay();
 }
 
 
 
-function GoToOracle() {
-    if (!player.hasSeenOracle) {
-        player.hasSeenOracle = true;
-        if (player.likesStory) { GameEvent(displayStoryOracleFirstVisit); }
-    }
-
-    PauseTime();
-    divGameWindow.style.display = 'none';
-    divViewTownship.style.display = '';
-    divMinigameOracle.style.display = 'block';
-    divMinigameOracle.appendChild(divFooter);
-    player.isAt = 'Oracle';
-    UpdateDisplay();
-    JumpToTopPlease();
-}
-
-
-
-function ConsultOracle() {
-    GameEvent(displayRandomWisdomsDisplay[revealedWisdom]);
-    revealedWisdom++;
-    if (revealedWisdom == displayRandomWisdomsDisplay.length) {
-        if (!player.hasAllWisdom) {
-            player.hasAllWisdom = true;
-            Achievement();
-        }
-        revealedWisdom = 0;
-    }
-}
-
-
-
-function LeaveOracle() {
-    if (gameSpeed == 'paused') { StartTime(); }
-    divGameWindow.style.display = '';
-    divViewTownship.style.display = 'block';
-    divMinigameOracle.style.display = '';
-    divWidthClamp.appendChild(divFooter);
-    player.isAt = 'Township';
-    UpdateDisplay();
-    JumpToTopPlease();
-}
-
-
-
-function GoToTemple() {
-    if (!player.hasSeenTemple) {
-        player.hasSeenTemple = true;
-        if (player.likesStory) { GameEvent(displayStoryTempleFirstVisit); }
-    }
-
-    PauseTime();
-    divGameWindow.style.display = 'none';
-    divViewTownship.style.display = '';
-    divMinigameTemple.style.display = 'block';
-    divMinigameTemple.appendChild(divFooter);
-    player.isAt = 'Temple';
-    UpdateDisplay();
-    JumpToTopPlease();
-}
-
-
-
-function Pray() {
-    if (player.likesStory) { GameEvent(displayStoryTemplePray); }
-    prayersCount++;
-}
-
-
-
-function Offer() {
-    if (templeStage == 0 && logsCount >= priceTemple0) {
-        if (player.likesStory) { GameEvent(displayStoryTemple0); }
-        logsCount -= priceTemple0;
-        forestSpentCount[0] += priceTemple0;
-        templeStage++;
-    }
-    else if (templeStage == 1 && shepherdsInventory[5] >= priceTemple1) {
-        if (player.likesStory) { GameEvent(displayStoryTemple1); }
-        shepherdsInventory[5] -= priceTemple1;
-        templeSpentCount[0] += priceTemple1;
-        templeStage++;
-    }
-    else if (templeStage == 2 && minersInventory[3] >= priceTemple2 && minersInventory[4] >= priceTemple2 && ingotsBronzeCount >= priceTemple2) {
-        if (player.likesStory) { GameEvent(displayStoryTemple2); }
-        minersInventory[3] -= priceTemple2;
-        templeSpentCount[1] += priceTemple2;
-        minersInventory[4] -= priceTemple2;
-        templeSpentCount[2] += priceTemple2;
-        ingotsBronzeCount -= priceTemple2;
-        mountainSpentCount[4] += priceTemple2;
-        templeStage++;
-    }
-    else if (templeStage == 3 && minersInventory[0] >= priceTemple3 && minersInventory[1] >= priceTemple3 && residenceInStockCount[8] >= priceTemple3) {
-        if (player.likesStory) { GameEvent(displayStoryTemple3); }
-        minersInventory[0] -= priceTemple3;
-        templeSpentCount[3] += priceTemple3;
-        minersInventory[1] -= priceTemple3;
-        templeSpentCount[4] += priceTemple3;
-        residenceInStockCount[8] -= priceTemple3;
-        residenceSpentCount[8] += priceTemple3;
-        templeStage++;
-    }
-    else {
-        if (player.likesStory) { GameEvent(displayStoryPoorTemple); }
-    }
-    UpdateDisplay();
-}
-
-
-
-function LeaveTemple() {
-    if (gameSpeed == 'paused') { StartTime(); }
-    divGameWindow.style.display = '';
-    divViewTownship.style.display = 'block';
-    divMinigameTemple.style.display = '';
-    divWidthClamp.appendChild(divFooter);
-    player.isAt = 'Township';
-    UpdateDisplay();
-    JumpToTopPlease();
-}
-
-
-
-function TakeInAShow() {
-    if (player.likesStory) {
-        Translate(player.speaks, false); // this repopulates the bindings in the following string
-        GameEvent(displayStoryStartPlay);
-    }
-    PauseTime();
-    buttonNextScene.style.display = 'block';
-    buttonLeaveEarly.style.display = 'block';
-    buttonLeaveStage.style.display = 'none';
-    divGameWindow.style.display = 'none';
-    divViewTownship.style.display = '';
-    divMinigameStage.style.display = 'block';
-    divMinigameStage.appendChild(divFooter);
-    player.isAt = 'Stage';
-    stageDressing = 'Theater';
-    player.hasGoodTaste = true;
-    UpdateDisplay();
-    JumpToTopPlease();
-}
-
-
-
-function AdvanceScene() {
-    stageStage++;
-    UpdateDisplay();
-    JumpToTopPlease();
-}
-
-
-
-function LeaveEarly() {
-    if (confirm(displayEndPlayEarlyConfirm)) {
-        buttonLeaveStage.style.display = '';
-        LeaveStage(true);
-    }
-}
-
-
-
-function BenHur() {
-    if (player.likesStory) { GameEvent(displayStoryStartRace); }
-    PauseTime();
-    divGameWindow.style.display = 'none';
-    divViewTownship.style.display = '';
-    divMinigameStage.style.display = 'block';
-    divMinigameStage.appendChild(divFooter);
-    player.isAt = 'Stage';
-    stageDressing = 'Racetrack';
-    player.hasSeenRace = true;
-    UpdateDisplay();
-    JumpToTopPlease();
-}
-
-
-
-function LeaveStage(leftEarly = false) {
-    if (gameSpeed == 'paused') { StartTime(); }
-    buttonNextScene.style.display = '';
-    buttonLeaveEarly.style.display = '';
-    divGameWindow.style.display = '';
-    divViewTownship.style.display = 'block';
-    divMinigameStage.style.display = '';
-    divWidthClamp.appendChild(divFooter);
-    player.isAt = 'Township';
-    UpdateDisplay();
-    JumpToTopPlease();
-    if (stageDressing == 'Theater' && player.likesStory) {
-        if (leftEarly) { GameEvent(displayStoryEndPlayEarly); }
-        else { GameEvent(displayStoryEndPlay); }
-    }
-    stageDressing = 'Empty';
-}
-
-
+// Township tab ------------------------------------------------------------
 
 function Build() {
-    if (villageStage == -5 && bushelCount[0] == priceBuildNEG5) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
-    else if (villageStage == -4 && bushelCount[0] == priceBuildNEG4[0]) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
-    else if (villageStage == -3 && bushelCount[0] == priceBuildNEG3) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
-    else if (villageStage == -2 && bushelCount[0] == priceBuildNEG2) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
-    else if (villageStage == -1 && bushelCount[0] == priceBuildNEG1[0]) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
-    else if (villageStage == 0 && bushelCount[0] == priceBuild0[0]) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
-    else if (villageStage == 1 && bushelCount[0] == priceBuild1[0]) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
-    else if (villageStage == 2 && bushelCount[0] == priceBuild2[0]) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
-    else if (villageStage == 3 && bushelCount[0] == priceBuild3[0]) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
-    else if (villageStage == 4 && bushelCount[0] == priceBuild4[1]) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
-    else if (villageStage == 5 && bushelCount[0] == priceBuild5[1]) {
-        GameEvent(displayStoryNotEnoughTown);
-    }
+    let lastGrainCondition = false;
+    if (villageStage == -5 && bushelCount[0] == priceBuildNEG5) { lastGrainCondition = true; }
+    else if (villageStage == -4 && bushelCount[0] == priceBuildNEG4[0]) { lastGrainCondition = true; }
+    else if (villageStage == -3 && bushelCount[0] == priceBuildNEG3) { lastGrainCondition = true; }
+    else if (villageStage == -2 && bushelCount[0] == priceBuildNEG2) { lastGrainCondition = true; }
+    else if (villageStage == -1 && bushelCount[0] == priceBuildNEG1[0]) { lastGrainCondition = true; }
+    else if (villageStage == 0 && bushelCount[0] == priceBuild0[0]) { lastGrainCondition = true; }
+    else if (villageStage == 1 && bushelCount[0] == priceBuild1[0]) { lastGrainCondition = true; }
+    else if (villageStage == 2 && bushelCount[0] == priceBuild2[0]) { lastGrainCondition = true; }
+    else if (villageStage == 3 && bushelCount[0] == priceBuild3[0]) { lastGrainCondition = true; }
+    else if (villageStage == 4 && bushelCount[0] == priceBuild4[1]) { lastGrainCondition = true; }
+    else if (villageStage == 5 && bushelCount[0] == priceBuild5[1]) { lastGrainCondition = true; }
 
     else if (villageStage == -5 && bushelCount[0] > priceBuildNEG5) {
-        if (player.likesStory) { GameEvent(displayStoryVillageNEG5); }
+        PlaySound(audioWorkComplete);
+        GameEvent(displayStoryVillageNEG5);
         villageImageActual.src = 'bitmaps/villageNEG04.png';
         villageStage++;
         bushelCount[0] -= priceBuildNEG5;
         spentCount[0] += priceBuildNEG5;
     }
     else if (villageStage == -4 && bushelCount[0] > priceBuildNEG4[0] && residenceInStockCount[1] >= priceBuildNEG4[1] && bushelCount[5] >= priceBuildNEG4[2] && boardsCount >= priceBuildNEG4[3] && stoneCount >= priceBuildNEG4[4]) {
-        if (player.likesStory) { GameEvent(displayStoryVillageNEG4); }
+        townshipAmbience = ambienceCeremony;
+        KillAmbience();
+        PlaySound(ambienceCeremony);
+        GameEvent(displayStoryVillageNEG4);
         villageImageActual.src = arrayVillageNEG03[0];
         villageStage++;
         bushelCount[0] -= priceBuildNEG4[0];
@@ -2449,21 +3085,28 @@ function Build() {
         estDate[1] = year;
     }
     else if (villageStage == -3 && bushelCount[0] > priceBuildNEG3) {
-        if (player.likesStory) { GameEvent(displayStoryVillageNEG3); }
+        PlaySound(audioWorkComplete);
+        townshipAmbience = ambienceCrickets;
+        KillAmbience();
+        GameEvent(displayStoryVillageNEG3);
         villageImageActual.src = 'bitmaps/villageNEG02.png';
         villageStage++;
         bushelCount[0] -= priceBuildNEG3;
         spentCount[0] += priceBuildNEG3;
     }
     else if (villageStage == -2 && bushelCount[0] > priceBuildNEG2) {
-        if (player.likesStory) { GameEvent(displayStoryVillageNEG2); }
+        audioDigA.playbackRate = 1.0;
+        PlaySound(audioDigA);
+        GameEvent(displayStoryVillageNEG2);
         villageImageActual.src = 'bitmaps/villageNEG01.png';
         villageStage++;
         bushelCount[0] -= priceBuildNEG2;
         spentCount[0] += priceBuildNEG2;
     }
     else if (villageStage == -1 && bushelCount[0] > priceBuildNEG1[0] && stoneCount >= priceBuildNEG1[1]) {
-        if (player.likesStory) { GameEvent(displayStoryVillageNEG1); }
+        PlaySound(audioBricks);
+        PlaySound(ambienceStream);
+        GameEvent(displayStoryVillageNEG1);
         villageImageActual.src = 'bitmaps/village00.png';
         villageStage++;
         bushelCount[0] -= priceBuildNEG1[0];
@@ -2472,7 +3115,9 @@ function Build() {
         mountainSpentCount[0] += priceBuildNEG1[1];
     }
     else if (villageStage == 0 && bushelCount[0] > priceBuild0[0] && logsCount >= priceBuild0[1] && boardsCount >= priceBuild0[2] && stoneCount >= priceBuild0[3]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage0); }
+        PlaySound(audioWoodChop);
+        PlaySound(audioSmith);
+        GameEvent(displayStoryVillage0);
         villageImageActual.src = 'bitmaps/village01.png';
         villageStage += 1;
         bushelCount[0] -= priceBuild0[0];
@@ -2485,7 +3130,9 @@ function Build() {
         mountainSpentCount[0] += priceBuild0[3];
     }
     else if (villageStage == 1 && bushelCount[0] > priceBuild1[0] && boardsCount >= priceBuild1[1] && stoneCount >= priceBuild1[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage1); }
+        PlaySound(audioWoodChop);
+        PlaySound(audioSaws);
+        GameEvent(displayStoryVillage1);
         villageImageActual.src = 'bitmaps/village02.png';
         villageStage += 1;
         bushelCount[0] -= priceBuild1[0];
@@ -2496,7 +3143,9 @@ function Build() {
         mountainSpentCount[0] += priceBuild1[2];
     }
     else if (villageStage == 2 && bushelCount[0] > priceBuild2[0] && stoneCount >= priceBuild2[1]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage2); }
+        PlaySound(audioBricks);
+        PlaySound(audioGavel);
+        GameEvent(displayStoryVillage2);
         villageImageActual.src = 'bitmaps/village03.png';
         villageStage += 1;
         bushelCount[0] -= priceBuild2[0];
@@ -2505,7 +3154,10 @@ function Build() {
         mountainSpentCount[0] += priceBuild2[1];
     }
     else if (villageStage == 3 && bushelCount[0] > priceBuild3[0] && boardsCount >= priceBuild3[1] && stoneCount >= priceBuild3[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage3); }
+        PlaySound(audioHello);
+        PlaySound(audioWoodChop);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage3);
         villageImageActual.src = 'bitmaps/village04.png';
         villageStage += 1;
         bushelCount[0] -= priceBuild3[0];
@@ -2515,10 +3167,13 @@ function Build() {
         stoneCount -= priceBuild3[2];
         mountainSpentCount[0] += priceBuild3[2];
 
-        residentsMax += 14;
+        residentsMax += arrayResidentCapacities[0];
     }
     else if (villageStage == 4 && asCount >= priceBuild4[0] && bushelCount[0] > priceBuild4[1] && boardsCount >= priceBuild4[2] && stoneCount >= priceBuild4[3]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage4); }
+        PlaySound(audioHello);
+        PlaySound(audioWoodChop);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage4);
         villageImageActual.src = 'bitmaps/village05.png';
         villageStage += 1;
         asCount -= priceBuild4[0];
@@ -2531,11 +3186,14 @@ function Build() {
         stoneCount -= priceBuild4[3];
         mountainSpentCount[0] += priceBuild4[3];
 
-        residentsMax += 14;
+        residentsMax += arrayResidentCapacities[0];
         rentPrice += 2;
     }
     else if (villageStage == 5 && asCount >= priceBuild5[0] && bushelCount[0] > priceBuild5[1] && boardsCount >= priceBuild5[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage5); }
+        PlaySound(audioChaChing);
+        PlaySound(audioWoodChop);
+        PlaySound(audioHuzzah);
+        GameEvent(displayStoryVillage5);
         villageImageActual.src = 'bitmaps/village06.png';
         villageStage += 1;
         asCount -= priceBuild5[0];
@@ -2551,7 +3209,10 @@ function Build() {
         JumpToTopPlease();
     }
     else if (villageStage == 6 && asCount >= priceBuild6[0] && bushelCount[0] >= priceBuild6[1] && boardsCount >= priceBuild6[2] && stoneCount >= priceBuild6[3]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage6); }
+        PlaySound(audioHello);
+        PlaySound(audioWoodChop);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage6);
         villageImageActual.src = 'bitmaps/village07.png';
         villageStage += 1;
         asCount -= priceBuild6[0];
@@ -2564,13 +3225,16 @@ function Build() {
         stoneCount -= priceBuild6[3];
         mountainSpentCount[0] += priceBuild6[3];
 
-        residentsMax += 14;
+        residentsMax += arrayResidentCapacities[0];
         rentPrice += 1;
         actualBushelPrice -= 500;
         SetMarketPrice();
     }
     else if (villageStage == 7 && asCount >= priceBuild7[0] && bushelCount[0] >= priceBuild7[1] && boardsCount >= priceBuild7[2] && stoneCount >= priceBuild7[3]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage7); }
+        PlaySound(audioHello);
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage7);
         villageImageActual.src = 'bitmaps/village08.png';
         villageStage += 1;
         asCount -= priceBuild7[0];
@@ -2584,13 +3248,15 @@ function Build() {
         mountainSpentCount[0] += priceBuild7[3];
 
         loggersHired += loggersHired;
-        residentsMax += 42;
+        residentsMax += arrayResidentCapacities[1];
         rentPrice += 3;
         actualBushelPrice -= 500;
         SetMarketPrice();
     }
     else if (villageStage == 8 && asCount >= priceBuild8[0] && bushelCount[0] >= priceBuild8[1] && boardsCount >= priceBuild8[2] && stoneCount >= priceBuild8[3]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage8); }
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage8);
         villageImageActual.src = 'bitmaps/village09.png';
         villageStage += 1;
         asCount -= priceBuild8[0];
@@ -2614,7 +3280,10 @@ function Build() {
         grapesMax += 18;
     }
     else if (villageStage == 9 && asCount >= priceBuild9[0] && bushelCount[0] >= priceBuild9[1] && boardsCount >= priceBuild9[2] && stoneCount >= priceBuild9[3]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage9); }
+        PlaySound(audioHello);
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage9);
         villageImageActual.src = 'bitmaps/village10.png';
         villageStage += 1;
         asCount -= priceBuild9[0];
@@ -2628,13 +3297,15 @@ function Build() {
         mountainSpentCount[0] += priceBuild9[3];
 
         masonsHired += masonsHired;
-        residentsMax += 42;
+        residentsMax += arrayResidentCapacities[1];
         rentPrice += 5;
         actualBushelPrice -= 500;
         SetMarketPrice();
     }
     else if (villageStage == 10 && asCount >= priceBuild10[0] && bushelCount[1] >= priceBuild10[1] && boardsCount >= priceBuild10[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage10); }
+        PlaySound(audioSaws);
+        PlaySound(audioHorse);
+        GameEvent(displayStoryVillage10);
         villageImageActual.src = 'bitmaps/village11.png';
         villageStage += 1;
         asCount -= priceBuild10[0];
@@ -2652,7 +3323,9 @@ function Build() {
         SetMarketPrice();
     }
     else if (villageStage == 11 && asCount >= priceBuild11[0] && ingotsCopperCount >= priceBuild11[1] && bushelCount[0] > priceBuild11[2] && bushelCount[1] > priceBuild11[3] && bushelCount[2] >= priceBuild11[4] && bushelCount[3] >= priceBuild11[5] && bushelCount[4] >= priceBuild11[6] && bushelCount[5] >= priceBuild11[7] && bushelCount[6] >= priceBuild11[8] && stoneCount >= priceBuild11[9] && horsesCount >= priceBuild11[10]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage11); }
+        PlaySound(audioChant);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage11);
         villageImageActual.src = 'bitmaps/village12.png';
         villageStage += 1;
         asCount -= priceBuild11[0];
@@ -2684,7 +3357,9 @@ function Build() {
         SetMarketPrice();
     }
     else if (villageStage == 12 && asCount >= priceBuild12[0] && bushelCount[1] >= priceBuild12[1] && stoneCount >= priceBuild12[2] && horsesCount >= priceBuild12[3]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage12); }
+        PlaySound(audioHorse);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage12);
         villageImageActual.src = 'bitmaps/village13.png';
         villageStage += 1;
         asCount -= priceBuild12[0];
@@ -2702,7 +3377,9 @@ function Build() {
         trophiesSpawn = true;
     }
     else if (villageStage == 13 && asCount >= priceBuild13[0] && ingotsCopperCount >= priceBuild13[1] && stoneCount >= priceBuild13[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage13); }
+        PlaySound(audioChaChing);
+        PlaySound(audioSaws2);
+        GameEvent(displayStoryVillage13);
         villageImageActual.src = 'bitmaps/village14.png';
         villageStage += 1;
         asCount -= priceBuild13[0];
@@ -2720,7 +3397,9 @@ function Build() {
         SetMarketPrice();
     }
     else if (villageStage == 14 && asCount >= priceBuild14[0] && beadsCount >= priceBuild14[1] && stoneCount >= priceBuild14[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage14); }
+        PlaySound(audioChant);
+        PlaySound(audioSaws2);
+        GameEvent(displayStoryVillage14);
         villageImageActual.src = 'bitmaps/village15.png';
         villageStage += 1;
         asCount -= priceBuild14[0];
@@ -2737,7 +3416,8 @@ function Build() {
         scrollsSpawn = true;
     }
     else if (villageStage == 15 && asCount >= priceBuild15[0] && stoneCount >= priceBuild15[1]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage15); }
+        PlaySound(audioMine);
+        GameEvent(displayStoryVillage15);
         villageImageActual.src = 'bitmaps/village16.png';
         villageStage += 1;
         asCount -= priceBuild15[0];
@@ -2755,7 +3435,9 @@ function Build() {
         ratsSpawn = true;
     }
     else if (villageStage == 16 && asCount >= priceBuild16[0] && bushelCount[1] >= priceBuild16[1] && boardsCount >= priceBuild16[2] && stoneCount >= priceBuild16[3]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage16); }
+        PlaySound(audioMine);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage16);
         villageImageActual.src = 'bitmaps/village17.png';
         villageStage++;
         asCount -= priceBuild16[0];
@@ -2777,7 +3459,9 @@ function Build() {
         player.hasCityWalls = true;
     }
     else if (villageStage == 17 && asCount >= priceBuild17[0] && stoneCount >= priceBuild17[1] && ingotsBronzeCount >= priceBuild17[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage17); }
+        PlaySound(audioArmy);
+        PlaySound(audioSaws);
+        GameEvent(displayStoryVillage17);
         villageImageActual.src = 'bitmaps/village18.png';
         villageStage++;
         asCount -= priceBuild17[0];
@@ -2797,7 +3481,10 @@ function Build() {
         player.hasArmy = true;
     }
     else if (villageStage == 18 && asCount >= priceBuild18[0] && boardsCount >= priceBuild18[1] && stoneCount >= priceBuild18[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage18); }
+        PlaySound(audioHello);
+        PlaySound(audioSaws);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage18);
         villageImageActual.src = 'bitmaps/village19.png';
         villageStage++;
         asCount -= priceBuild18[0];
@@ -2811,13 +3498,15 @@ function Build() {
         rentPrice += 2;
         tourismValue += 1;
         taxesValue += 6;
-        residentsMax += 168;
+        residentsMax += arrayResidentCapacities[2];
         actualBushelPrice -= 500;
         SetMarketPrice();
         interestRate += 0.0033;
     }
     else if (villageStage == 19 && asCount >= priceBuild19[0] && stoneCount >= priceBuild19[1] && oreCopperCount >= priceBuild19[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage19); }
+        PlaySound(audioMine);
+        PlaySound(audioSquish);
+        GameEvent(displayStoryVillage19);
         villageImageActual.src = 'bitmaps/village20.png';
         villageStage++;
         asCount -= priceBuild19[0];
@@ -2835,7 +3524,8 @@ function Build() {
         player.hasGraveyard = true;
     }
     else if (villageStage == 20 && asCount >= priceBuild20[0] && bushelCount[0] >= priceBuild20[1] && boardsCount >= priceBuild20[2] && stoneCount >= priceBuild20[3]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage20); }
+        PlaySound(audioSaws2);
+        GameEvent(displayStoryVillage20);
         villageImageActual.src = 'bitmaps/village21.png';
         villageStage++;
         asCount -= priceBuild20[0];
@@ -2872,7 +3562,8 @@ function Build() {
         CalculatePortValues();
     }
     else if (villageStage == 21 && asCount >= priceBuild21[0] && stoneCount >= priceBuild21[1] && ingotsCopperCount >= priceBuild21[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage21); }
+        PlaySound(audioSaws2);
+        GameEvent(displayStoryVillage21);
         villageImageActual.src = 'bitmaps/village22.png';
         villageStage++;
         asCount -= priceBuild21[0];
@@ -2892,7 +3583,9 @@ function Build() {
         player.hasHospital = true;
     }
     else if (villageStage == 22 && asCount >= priceBuild22[0] && stoneCount >= priceBuild22[1] && ingotsCopperCount >= priceBuild22[2] && ingotsTinCount >= priceBuild22[3] && ingotsBronzeCount >= priceBuild22[4]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage22); }
+        PlaySound(audioGavel);
+        PlaySound(audioSaws2);
+        GameEvent(displayStoryVillage22);
         villageImageActual.src = 'bitmaps/village23.png';
         villageStage++;
         asCount -= priceBuild22[0];
@@ -2916,7 +3609,9 @@ function Build() {
         player.hasCourthouse = true;
     }
     else if (villageStage == 23 && asCount >= priceBuild23[0] && stoneCount >= priceBuild23[1] && oreCopperCount >= priceBuild23[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage23); }
+        PlaySound(audioHorse);
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage23);
         villageImageActual.src = 'bitmaps/village24.png';
         villageStage++;
         asCount -= priceBuild23[0];
@@ -2935,9 +3630,11 @@ function Build() {
         interestRate += 0.005;
         horsesIncAmount++;
         player.hasRacetrack = true;
+        lawsCount += 40;
     }
     else if (villageStage == 24 && asCount >= priceBuild24[0] && stoneCount >= priceBuild24[1] && oreCopperCount >= priceBuild24[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage24); }
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage24);
         villageImageActual.src = 'bitmaps/village25.png';
         villageStage++;
         asCount -= priceBuild24[0];
@@ -2955,10 +3652,12 @@ function Build() {
         SetMarketPrice();
         interestRate += 0.004;
         trophyChance = 20;
-        arenaBet = 1000000;
+        arenaBet = arenaHighBet;
+        lawsCount += 80;
     }
     else if (villageStage == 25 && asCount >= priceBuild25[0] && stoneCount >= priceBuild25[1]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage25); }
+        PlaySound(audioBricks);
+        GameEvent(displayStoryVillage25);
         villageImageActual.src = 'bitmaps/village26.png';
         villageStage++;
         asCount -= priceBuild25[0];
@@ -2973,9 +3672,12 @@ function Build() {
         actualBushelPrice -= 500;
         SetMarketPrice();
         interestRate += 0.001;
+        lawsCount += 120;
     }
     else if (villageStage == 26 && asCount >= priceBuild26) {
-        if (player.likesStory) { GameEvent(displayStoryVillage26); }
+        PlaySound(audioHello);
+        PlaySound(audioConstruction);
+        GameEvent(displayStoryVillage26);
         villageImageActual.src = 'bitmaps/village27.png';
         villageStage++;
         asCount -= priceBuild26;
@@ -2986,10 +3688,14 @@ function Build() {
         actualBushelPrice -= 2500;
         SetMarketPrice();
         interestRate -= 0.025;
-        residentsMax += 333;
+        residentsMax += arrayResidentCapacities[3];
+        lawsCount += 33;
     }
     else if (villageStage == 27 && asCount >= priceBuild27[0] && stoneCount >= priceBuild27[1] && crystalsCount >= priceBuild27[2]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage27); }
+        PlaySound(audioHello);
+        PlaySound(audioChant);
+        PlaySound(audioSaws2);
+        GameEvent(displayStoryVillage27);
         villageImageActual.src = 'bitmaps/village28.png';
         villageStage++;
         asCount -= priceBuild27[0];
@@ -3001,10 +3707,14 @@ function Build() {
         mountainSpentCount[5] += priceBuild27[2];
 
         player.hasOracle = true;
-        residentsMax += 111;
+        residentsMax += arrayResidentCapacities[4];
+        lawsCount += 66;
     }
     else if (villageStage == 28 && asCount >= priceBuild28[0] && stoneCount >= priceBuild28[1] && ingotsBronzeCount >= priceBuild28[2] && residenceInStockCount[8] >= priceBuild28[3]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage28); }
+        PlaySound(audioHello);
+        PlaySound(audioChimes);
+        PlaySound(audioSaws2);
+        GameEvent(displayStoryVillage28);
         villageImageActual.src = 'bitmaps/village29.png';
         villageStage = 100;
         asCount -= priceBuild28[0];
@@ -3017,17 +3727,26 @@ function Build() {
         residenceInStockCount[8] -= priceBuild28[3];
         residenceSpentCount[8] += priceBuild28[3];
 
-        residentsMax += 39;
+        residentsMax += arrayResidentCapacities[5];
+        lawsCount += 99;
     }
     else if (villageStage == 100 && asCount >= priceBuild100[0] && beadsCount >= priceBuild100[1] && scrollsCount >= priceBuild100[2] && ingotsBronzeCount >= priceBuild100[3] && boardsCount >= priceBuild100[4] && stoneCount >= priceBuild100[5] && crystalsCount >= priceBuild100[6] && residenceInStockCount[8] >= priceBuild100[7]) {
-        if (player.likesStory) { GameEvent(displayStoryVillage100); }
+        PlaySound(audioChimes);
+        PlaySound(audioChant);
+        //PlaySound(audioConstruction);
+        PlaySound(audioWoodChop);
+        PlaySound(audioSaws);
+        PlaySound(audioSaws2);
+        PlaySound(audioBricks);
+        setTimeout(() => { PlaySound(audioNewAge); }, 1200);
+        GameEvent(displayStoryVillage100);
         villageImageActual.src = 'bitmaps/village100.png';
         villageStage += 1;
         asCount -= priceBuild100[0];
         asSpent += priceBuild100[0];
         commercialLifetimeSpend += priceBuild100[0];
         beadsCount -= priceBuild100[1];
-        scrollsCount -= priceBuild100[2];
+        //scrollsCount -= priceBuild100[2];
         ingotsBronzeCount -= priceBuild100[3];
         mountainSpentCount[4] += priceBuild100[3];
         boardsCount -= priceBuild100[4];
@@ -3049,189 +3768,17 @@ function Build() {
         player.hasMonument = true;
         player.canChooseHeir = true;
         AnimateHeirButton();
-    }
-
-    else {
-        if (player.likesStory) { GameEvent(displayStoryPoorVillage); }
-    }
-
-    UpdateDisplay();
-}
-
-
-
-function TakeCruise() {
-    if (asCount >= priceCruise) {
-        if (player.likesStory) { GameEvent(displayStoryCruise); }
-        player.hasTakenCruise = true;
-        asCount -= priceCruise;
-        asSpent += priceCruise;
-        statecraftLifetimeSpend += priceCruise;
+        lawsCount += 2222;
     }
     else {
-        if (player.likesStory) { GameEvent(displayStoryPoorCruise); }
+        if (villageStage < 18) { PlaySound(audioWorkToDo); }
+        else { PlaySound(audioKingdomToRun); }
+        GameEvent(displayStoryPoorVillage);
     }
-    UpdateDisplay();
-}
-
-
-
-function SponsorNavy() {
-    if (asCount >= priceNavy) {
-        if (player.likesStory) { GameEvent(displayStoryNavy); }
-        asCount -= priceNavy;
-        asSpent += priceNavy;
-        statecraftLifetimeSpend += priceNavy;
-        player.hasNavy = true;
+    if (lastGrainCondition) {
+        PlaySound(audioNoWork);
+        GameEvent(displayStoryNotEnoughTown);
     }
-    else {
-        if (player.likesStory) { GameEvent(displayStoryPoorCruise); }
-    }
-    UpdateDisplay();
-}
-
-
-
-function EstablishTradeRoute() {
-    if (!player.canExport && asCount >= pricePort0 && player.hasOliveMill) {
-        if (player.likesStory) { GameEvent(displayStoryPort00); }
-        asCount -= pricePort0;
-        asSpent += pricePort0;
-        commercialLifetimeSpend += pricePort0;
-        player.canExport = true;
-        player.canExportOil = true;
-    }
-    else if (!player.canExport && !player.hasOliveMill) {
-        if (player.likesStory) { GameEvent(displayStoryPoorOil); }
-    }
-    else if (!player.canExport && asCount < pricePort0 && player.hasOliveMill) {
-        if (player.likesStory) { GameEvent(displayStoryPoorExport); }
-    }
-
-    else if (player.canExport && asCount >= pricePort1 && player.hasBrewery && !player.canExportBeer) {
-        if (player.likesStory) { GameEvent(displayStoryPort01); }
-        asCount -= pricePort1;
-        asSpent += pricePort1;
-        commercialLifetimeSpend += pricePort1;
-        player.canExportBeer = true;
-    }
-    else if (player.canExport && !player.hasBrewery && !player.canExportBeer) {
-        if (player.likesStory) { GameEvent(displayStoryPoorBeer); }
-    }
-    else if (player.canExport && asCount < pricePort1 && player.hasBrewery && !player.canExportBeer) {
-        if (player.likesStory) { GameEvent(displayStoryPoorExport); }
-    }
-
-    else if (player.canExport && asCount >= pricePort2 && player.hasWinery && !player.canExportWine) {
-        if (player.likesStory) { GameEvent(displayStoryPort02); }
-        asCount -= pricePort2;
-        asSpent += pricePort2;
-        commercialLifetimeSpend += pricePort2;
-        player.canExportWine = true;
-    }
-    else if (player.canExport && !player.hasWinery && !player.canExportWine) {
-        if (player.likesStory) { GameEvent(displayStoryPoorWine); }
-    }
-    else if (player.canExport && asCount < pricePort2 && player.hasWinery && !player.canExportWine) {
-        if (player.likesStory) { GameEvent(displayStoryPoorExport); }
-    }
-
-    else if (player.canExport && asCount >= pricePort3 && player.hasKitchen && !player.canExportSyrup) {
-        if (player.likesStory) { GameEvent(displayStoryPort03); }
-        asCount -= pricePort3;
-        asSpent += pricePort3;
-        commercialLifetimeSpend += pricePort3;
-        player.canExportSyrup = true;
-    }
-    else if (player.canExport && !player.hasKitchen && !player.canExportSyrup) {
-        if (player.likesStory) { GameEvent(displayStoryPoorSyrup); }
-    }
-    else if (player.canExport && asCount < pricePort3 && player.hasKitchen && !player.canExportSyrup) {
-        if (player.likesStory) { GameEvent(displayStoryPoorExport); }
-    }
-
-    else if (player.canExport && asCount >= pricePort4 && player.hasPress && !player.canExportJuice) {
-        if (player.likesStory) { GameEvent(displayStoryPort04); }
-        asCount -= pricePort4;
-        asSpent += pricePort4;
-        commercialLifetimeSpend += pricePort4;
-        player.canExportJuice = true;
-    }
-    else if (player.canExport && !player.hasPress && !player.canExportJuice) {
-        if (player.likesStory) { GameEvent(displayStoryPoorJuice); }
-    }
-    else if (player.canExport && asCount < pricePort4 && player.hasPress && !player.canExportJuice) {
-        if (player.likesStory) { GameEvent(displayStoryPoorExport); }
-    }
-
-    else if (player.canExport && asCount >= pricePort5 && player.hasGreenhouse && !player.canExportFigs) {
-        if (player.likesStory) { GameEvent(displayStoryPort05); }
-        asCount -= pricePort5;
-        asSpent += pricePort5;
-        commercialLifetimeSpend += pricePort5;
-        player.canExportFigs = true;
-        player.hasMerchantGuildWrit = true;
-    }
-    else if (player.canExport && !player.hasGreenhouse && !player.canExportFigs) {
-        if (player.likesStory) { GameEvent(displayStoryPoorFigs); }
-    }
-    else if (player.canExport && asCount < pricePort5 && player.hasGreenhouse && !player.canExportFigs) {
-        if (player.likesStory) { GameEvent(displayStoryPoorExport); }
-    }
-
-    else if (player.canExport && asCount >= pricePort6 && player.hasAtelier && !player.canExportTrinkets) {
-        if (player.likesStory) { GameEvent(displayStoryPort06); }
-        asCount -= pricePort6;
-        asSpent += pricePort6;
-        commercialLifetimeSpend += pricePort6;
-        player.canExportTrinkets = true;
-        player.seesExportButton = false;
-    }
-    else if (player.canExport && !player.hasAtelier && !player.canExportTrinkets) {
-        if (player.likesStory) { GameEvent(displayStoryPoorTrinkets); }
-    }
-    else if (player.canExport && asCount < pricePort6 && player.hasAtelier && !player.canExportTrinkets) {
-        if (player.likesStory) { GameEvent(displayStoryPoorExport); }
-    }
-
-    UpdateDisplay();
-}
-
-
-
-function ExportFish() {
-    player.hasExportedFish = true;
-    if (player.likesStory) { GameEvent(displayStoryExportFish); }
-    UpdateDisplay();
-}
-
-
-
-function EstablishShippingLanes() {
-    if (player.hasMerchantGuildWrit && player.hasBank && !player.canImportTin) {
-        if (player.likesStory) { GameEvent(displayStoryPort07); }
-        player.canImport = true;
-        player.canImportTin = true;
-        player.canHireBronzeworkers = true;
-        player.seesMountainButton = true;
-        player.seesImportButton = false;
-    }
-    else if (!player.hasMerchantGuildWrit && player.hasBank && !player.canImportTin) {
-        if (player.likesStory) { GameEvent(displayStoryPoorWrit); }
-    }
-    else if (player.hasMerchantGuildWrit && !player.hasBank && !player.canImportTin) {
-        if (player.likesStory) { GameEvent(displayStoryPoorBank); }
-    }
-    else if (!player.hasMerchantGuildWrit && !player.hasBank && !player.canImportTin) {
-        if (player.likesStory) { GameEvent(displayStoryPoorBankWrit); }
-    }
-
-    else if (player.canImportTin && !player.canImportSalt) {
-        if (player.likesStory) { GameEvent(displayStoryPort08); }
-        player.seesImportButton = false;
-        player.canImportSalt = true;
-    }
-
     UpdateDisplay();
 }
 
@@ -3240,79 +3787,85 @@ function EstablishShippingLanes() {
 function SellCommodities(type) {
     const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / commodityBulkCount);
 
-    if (type == 0 && bushelCount[0] > commodityBulkCount) {
+    if (type == 0 && bushelCount[0] > (commodityBulkCount * ((player.hasWon) ? 10 : 1))) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasSoldWheat) {
             player.hasSoldWheat = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstSellWheat); }
+            GameEvent(displayStoryFirstSellWheat);
         }
-
-        bushelCount[0] -= commodityBulkCount;
-        soldCount[0] += commodityBulkCount;
-        asCount += currentBushelPrice;
-        marketLifetimeRevenue += currentBushelPrice;
+        bushelCount[0] -= commodityBulkCount * ((player.hasWon) ? 10 : 1);
+        soldCount[0] += commodityBulkCount * ((player.hasWon) ? 10 : 1);
+        asCount += currentBushelPrice * ((player.hasWon) ? 10 : 1);
+        marketLifetimeRevenue += currentBushelPrice * ((player.hasWon) ? 10 : 1);
         UpdateDisplay();
     }
-    else if (type == 1 && bushelCount[1] > commodityBulkCount) {
+    else if (type == 1 && bushelCount[1] > (commodityBulkCount * ((player.hasWon) ? 10 : 1))) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasSoldBarley) {
             player.hasSoldBarley = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstSellBarley); }
+            GameEvent(displayStoryFirstSellBarley);
         }
-
-        bushelCount[1] -= commodityBulkCount;
-        soldCount[1] += commodityBulkCount;
-        const currentBarleySellPrice = Math.floor((currentBushelPrice - currentBarleyAdjustment) / 2);
+        bushelCount[1] -= commodityBulkCount * ((player.hasWon) ? 10 : 1);
+        soldCount[1] += commodityBulkCount * ((player.hasWon) ? 10 : 1);
+        const currentBarleySellPrice = Math.floor((currentBushelPrice - currentBarleyAdjustment) / 2) * ((player.hasWon) ? 10 : 1);
         asCount += currentBarleySellPrice;
         marketLifetimeRevenue += currentBarleySellPrice;
         UpdateDisplay();
     }
-    else if (type == 2 && logsCount >= commodityBulkCount) {
+    else if (type == 2 && logsCount >= (commodityBulkCount)) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasSoldLogs) {
             player.hasSoldLogs = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstSellLogs); }
+            GameEvent(displayStoryFirstSellLogs);
         }
-
         logsCount -= commodityBulkCount;
         forestSoldCount[0] += commodityBulkCount;
-        const currentLogBulkSellPrice = commodityBulkCount * valueInWheat1Log * currentDollarPriceOfOneWheat / 2;
+        const currentLogBulkSellPrice = commodityBulkCount * valueInWheat1Log * currentDollarPriceOfOneWheat / 2 * ((player.hasWon) ? 10 : 1);
         asCount += currentLogBulkSellPrice;
         marketLifetimeRevenue += currentLogBulkSellPrice;
         UpdateDisplay();
     }
-    else if (type == 3 && boardsCount >= commodityBulkCount) {
+    else if (type == 3 && boardsCount >= (commodityBulkCount)) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasSoldBoards) {
             player.hasSoldBoards = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstSellBoards); }
+            GameEvent(displayStoryFirstSellBoards);
         }
-
         boardsCount -= commodityBulkCount;
         forestSoldCount[1] += commodityBulkCount;
-        const currentBoardBulkSellPrice = commodityBulkCount * valueInWheat1Board * currentDollarPriceOfOneWheat / 2;
+        const currentBoardBulkSellPrice = commodityBulkCount * valueInWheat1Board * currentDollarPriceOfOneWheat / 2 * ((player.hasWon) ? 10 : 1);
         asCount += currentBoardBulkSellPrice;
         marketLifetimeRevenue += currentBoardBulkSellPrice;
         UpdateDisplay();
     }
-    else if (type == 4 && stoneCount >= commodityBulkCount) {
+    else if (type == 4 && stoneCount >= (commodityBulkCount)) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasSoldStone) {
             player.hasSoldStone = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstSellStone); }
+            GameEvent(displayStoryFirstSellStone);
         }
-
         stoneCount -= commodityBulkCount;
         mountainSoldCount[0] += commodityBulkCount;
-        const currentStoneBulkSellPrice = commodityBulkCount * valueInWheat1Stone * currentDollarPriceOfOneWheat / 2;
+        const currentStoneBulkSellPrice = commodityBulkCount * valueInWheat1Stone * currentDollarPriceOfOneWheat / 2 * ((player.hasWon) ? 10 : 1);
         asCount += currentStoneBulkSellPrice;
         marketLifetimeRevenue += currentStoneBulkSellPrice;
         UpdateDisplay();
     }
-    else if (type == 5 && bushelCount[7] > commodityBulkCount) {
+    else if (type == 5 && bushelCount[7] > (commodityBulkCount * ((player.hasWon) ? 10 : 1))) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasSoldFlax) {
             player.hasSoldFlax = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstSellFlax); }
+            GameEvent(displayStoryFirstSellFlax);
         }
-
-        bushelCount[7] -= commodityBulkCount;
-        soldCount[7] += commodityBulkCount;
-        const currentFlaxSellPrice = Math.floor((currentBushelPrice - currentBarleyAdjustment) / 2);
+        bushelCount[7] -= commodityBulkCount * ((player.hasWon) ? 10 : 1);
+        soldCount[7] += commodityBulkCount * ((player.hasWon) ? 10 : 1);
+        const currentFlaxSellPrice = Math.floor((currentBushelPrice - currentBarleyAdjustment) / 2) * ((player.hasWon) ? 10 : 1);
         asCount += currentFlaxSellPrice;
         marketLifetimeRevenue += currentFlaxSellPrice;
         UpdateDisplay();
@@ -3329,67 +3882,77 @@ function PurchaseCommodities(type) {
     const currentBoardBulkCost = commodityBulkCount * valueInWheat1Board * currentDollarPriceOfOneWheat;
     const currentStoneBulkCost = commodityBulkCount * valueInWheat1Stone * currentDollarPriceOfOneWheat;
 
-    if (type == 0 && asCount >= currentWheatBulkCost) {
+    if (type == 0 && asCount >= (currentWheatBulkCost * ((player.hasWon) ? 10 : 1))) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasBoughtWheat) {
             player.hasBoughtWheat = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstBuyWheat); }
+            GameEvent(displayStoryFirstBuyWheat);
         }
 
-        asCount -= currentWheatBulkCost;
-        asSpent += currentWheatBulkCost;
-        commoditiesLifetimeSpend += currentWheatBulkCost;
-        bushelCount[0] += commodityBulkCount;
-        purchasedCount[0] += commodityBulkCount;
+        asCount -= currentWheatBulkCost * ((player.hasWon) ? 10 : 1);
+        asSpent += currentWheatBulkCost * ((player.hasWon) ? 10 : 1);
+        commoditiesLifetimeSpend += currentWheatBulkCost * ((player.hasWon) ? 10 : 1);
+        bushelCount[0] += commodityBulkCount * ((player.hasWon) ? 10 : 1);
+        purchasedCount[0] += commodityBulkCount * ((player.hasWon) ? 10 : 1);
         UpdateDisplay();
     }
-    else if (type == 1 && asCount >= currentBarleyBulkCost) {
+    else if (type == 1 && asCount >= (currentBarleyBulkCost * ((player.hasWon) ? 10 : 1))) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasBoughtBarley) {
             player.hasBoughtBarley = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstBuyBarley); }
+            GameEvent(displayStoryFirstBuyBarley);
         }
 
-        asCount -= currentBarleyBulkCost;
-        asSpent += currentBarleyBulkCost;
-        commoditiesLifetimeSpend += currentBarleyBulkCost;
-        bushelCount[1] += commodityBulkCount;
-        purchasedCount[1] += commodityBulkCount;
+        asCount -= currentBarleyBulkCost * ((player.hasWon) ? 10 : 1);
+        asSpent += currentBarleyBulkCost * ((player.hasWon) ? 10 : 1);
+        commoditiesLifetimeSpend += currentBarleyBulkCost * ((player.hasWon) ? 10 : 1);
+        bushelCount[1] += commodityBulkCount * ((player.hasWon) ? 10 : 1);
+        purchasedCount[1] += commodityBulkCount * ((player.hasWon) ? 10 : 1);
         UpdateDisplay();
     }
-    else if (type == 2 && asCount >= currentLogBulkCost) {
+    else if (type == 2 && asCount >= (currentLogBulkCost * ((player.hasWon) ? 10 : 1))) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasBoughtLogs) {
             player.hasBoughtLogs = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstBuyLogs); }
+            GameEvent(displayStoryFirstBuyLogs);
         }
 
-        asCount -= currentLogBulkCost;
-        asSpent += currentLogBulkCost;
-        commoditiesLifetimeSpend += currentLogBulkCost;
+        asCount -= currentLogBulkCost * ((player.hasWon) ? 10 : 1);
+        asSpent += currentLogBulkCost * ((player.hasWon) ? 10 : 1);
+        commoditiesLifetimeSpend += currentLogBulkCost * ((player.hasWon) ? 10 : 1);
         logsCount += commodityBulkCount;
         forestPurchasedCount[0] += commodityBulkCount;
         UpdateDisplay();
     }
-    else if (type == 3 && asCount >= currentBoardBulkCost) {
+    else if (type == 3 && asCount >= (currentBoardBulkCost * ((player.hasWon) ? 10 : 1))) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasBoughtBoards) {
             player.hasBoughtBoards = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstBuyBoards); }
+            GameEvent(displayStoryFirstBuyBoards);
         }
 
-        asCount -= currentBoardBulkCost;
-        asSpent += currentBoardBulkCost;
-        commoditiesLifetimeSpend += currentBoardBulkCost;
+        asCount -= currentBoardBulkCost * ((player.hasWon) ? 10 : 1);
+        asSpent += currentBoardBulkCost * ((player.hasWon) ? 10 : 1);
+        commoditiesLifetimeSpend += currentBoardBulkCost * ((player.hasWon) ? 10 : 1);
         boardsCount += commodityBulkCount;
         forestPurchasedCount[1] += commodityBulkCount;
         UpdateDisplay();
     }
-    else if (type == 4 && asCount >= currentStoneBulkCost) {
+    else if (type == 4 && asCount >= (currentStoneBulkCost * ((player.hasWon) ? 10 : 1))) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
         if (!player.hasBoughtStone) {
             player.hasBoughtStone = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstBuyStone); }
+            GameEvent(displayStoryFirstBuyStone);
         }
 
-        asCount -= currentStoneBulkCost;
-        asSpent += currentStoneBulkCost;
-        commoditiesLifetimeSpend += currentStoneBulkCost;
+        asCount -= currentStoneBulkCost * ((player.hasWon) ? 10 : 1);
+        asSpent += currentStoneBulkCost * ((player.hasWon) ? 10 : 1);
+        commoditiesLifetimeSpend += currentStoneBulkCost * ((player.hasWon) ? 10 : 1);
         stoneCount += commodityBulkCount;
         mountainPurchasedCount[0] += commodityBulkCount;
         UpdateDisplay();
@@ -3400,9 +3963,12 @@ function PurchaseCommodities(type) {
 
 function SellLivestock() {
     if (horsesCount >= commodityHorseCount) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
+        PlaySound(audioHorse);
         if (!player.hasSoldPonies) {
             player.hasSoldPonies = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstSellPonies); }
+            GameEvent(displayStoryFirstSellPonies);
         }
         const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / commodityBulkCount);
         const currentHorseSellCost = (commodityHorseCount * commodityHorsePrice * currentDollarPriceOfOneWheat) / 2;
@@ -3420,9 +3986,12 @@ function PurchaseLivestock() {
     const currentDollarPriceOfOneWheat = Math.ceil(currentBushelPrice / commodityBulkCount);
     const currentHorseBuyCost = commodityHorseCount * commodityHorsePrice * currentDollarPriceOfOneWheat;
     if (asCount >= currentHorseBuyCost) {
+        PlaySound(audioChaChing);
+        //PlaySound(audioClack);
+        PlaySound(audioHorse);
         if (!player.hasBoughtPonies) {
             player.hasBoughtPonies = true;
-            if (player.likesStory) { GameEvent(displayStoryFirstBuyPonies); }
+            GameEvent(displayStoryFirstBuyPonies);
         }
         horsesCount += commodityHorseCount;
         horsesBought += commodityHorseCount;
@@ -3435,62 +4004,551 @@ function PurchaseLivestock() {
 
 
 
-function Win() {
-    //if (player.likesStory) { GameEvent(displayWinMessage); }
-    //window.open(winTarget, 'PRAEDIUM_requested_new_tab');
-
-    player.hasWon = true;
-    player.saṃsāra += null; // namasté, pendejos 🖕🧘‍♂️🖕
-    if (timeAtWin == null) { timeAtWin = new Date(); }
-    RecordProgress();
+function GoToTemple() {
+    KillAmbience();
+    PlaySound(audioClack);
+    PlaySound(audioChant);
+    if (!player.hasSeenTemple) {
+        player.hasSeenTemple = true;
+        GameEvent(displayStoryTempleFirstVisit);
+    }
     PauseTime();
-    PlayMusic(audioEnding);
-    divWidthClamp.style.display = 'none';
-
-    const divEndingBackdrop = document.createElement('div');
-    divEndingBackdrop.id = 'divEndingBackdrop';
-    let lastString = '<div id="divEndingFoil"><div id="divEndingSeal"><div id="divEndingSheet">';
-    lastString += '<div id="divFinalStory">' + displayLastStory + '</div>';
-    lastString += '<br><br><br>';
-    lastString += '<i>' + displayToBeContinued + '</i>';
-    lastString += '<br><br>';
-    lastString += '<img id="endingPlate" src="curves/PRÆDIVM2.svg">';
-    lastString += '<br><br>';
-    lastString += '<button onclick="WriteReportToDisk(true);">' + displayLabelDownload + '</button>';
-    lastString += '<br><br><br><br>';
-    lastString += '<b>' + displayTheEnd + '</b>';
-    lastString += '<br><br><br><br>';
-    lastString += displayThankYouForPlaying;
-    lastString += ' 🙏';
-    lastString += '</div></div></div>';
-    //lastString += '<canvas id="canvasFireworks"></canvas>';
-    divEndingBackdrop.innerHTML = lastString;
-    body.appendChild(divEndingBackdrop);
-    //canvasFireworks = document.getElementById('canvasFireworks');
-    //canvasFireworksContext = canvasFireworks.getContext('2d');
-    //canvasFireworks.width = window.innerWidth;
-    //canvasFireworks.height = window.innerHeight;
-    //AnimateFireworks();
+    divGameWindow.style.display = 'none';
+    divViewTownship.style.display = '';
+    divMinigameTemple.style.display = 'block';
+    divMinigameTemple.appendChild(divFooter);
+    player.isAt = 'Temple';
+    UpdateDisplay();
+    JumpToTopPlease();
 }
 
 
 
-function ChooseHeir() {
-    Translate(player.speaks, false); // this repopulates the bindings in the following string
-    if (player.likesStory) { GameEvent(displayStoryHeir); }
+function Pray() {
+    PlaySound(audioChant);
+    if (templeStage == 4) { PlaySound(audioChimes); }
+    GameEvent(displayStoryTemplePray);
+    prayersCount++;
+}
 
+
+
+function Offer() {
+    if (templeStage == 0 && logsCount >= priceTemple0) {
+        PlaySound(audioChaChing);
+        PlaySound(audioChant);
+        GameEvent(displayStoryTemple0);
+        logsCount -= priceTemple0;
+        forestSpentCount[0] += priceTemple0;
+        templeStage++;
+    }
+    else if (templeStage == 1 && shepherdsInventory[5] >= priceTemple1) {
+        PlaySound(audioChaChing);
+        PlaySound(audioChant);
+        GameEvent(displayStoryTemple1);
+        shepherdsInventory[5] -= priceTemple1;
+        templeSpentCount[0] += priceTemple1;
+        templeStage++;
+    }
+    else if (templeStage == 2 && minersInventory[3] >= priceTemple2 && minersInventory[4] >= priceTemple2 && ingotsBronzeCount >= priceTemple2) {
+        PlaySound(audioChaChing);
+        PlaySound(audioChant);
+        GameEvent(displayStoryTemple2);
+        minersInventory[3] -= priceTemple2;
+        templeSpentCount[1] += priceTemple2;
+        minersInventory[4] -= priceTemple2;
+        templeSpentCount[2] += priceTemple2;
+        ingotsBronzeCount -= priceTemple2;
+        mountainSpentCount[4] += priceTemple2;
+        templeStage++;
+    }
+    else if (templeStage == 3 && minersInventory[0] >= priceTemple3 && minersInventory[1] >= priceTemple3 && residenceInStockCount[8] >= priceTemple3) {
+        PlaySound(audioChaChing);
+        PlaySound(audioChimes)
+        PlaySound(audioChant);
+        GameEvent(displayStoryTemple3);
+        minersInventory[0] -= priceTemple3;
+        templeSpentCount[3] += priceTemple3;
+        minersInventory[1] -= priceTemple3;
+        templeSpentCount[4] += priceTemple3;
+        residenceInStockCount[8] -= priceTemple3;
+        residenceSpentCount[8] += priceTemple3;
+        templeStage++;
+    }
+    else {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorTemple);
+    }
+    UpdateDisplay();
+}
+
+
+
+function LeaveTemple() {
+    KillAmbience();
+    KillSound(audioWorkToDo);
+    PlaySound(audioClack);
+    FireTownshipExtendedAmbience();
+    if (gameSpeed == 'paused') { StartTime(); }
+    divGameWindow.style.display = '';
+    divViewTownship.style.display = 'block';
+    divMinigameTemple.style.display = '';
+    divWidthClamp.appendChild(divFooter);
+    player.isAt = 'Township';
+    UpdateDisplay();
+    JumpToTopPlease();
+    if (!player.hasLeftTemple) {
+        player.hasLeftTemple = true;
+        PlaySound(audioChant);
+        GameEvent(displayStoryTempleFirstLeave);
+    }
+}
+
+
+
+function ReleaseCats() {
+    let exterminatorBill = ratsCount;
+    if (exterminatorBill > ratMeterMaxValue) { exterminatorBill = ratMeterMaxValue; }
+    if (asCount >= exterminatorBill) {
+        PlaySound(audioClack);
+        PlaySound(audioCats);
+        if (!player.hasReleasedCats) {
+            player.hasReleasedCats = true;
+            GameEvent(displayStoryReleaseTheCats);
+        }
+        asCount -= exterminatorBill;
+        asSpent += exterminatorBill;
+        lifetimeSpentOnCats += exterminatorBill;
+        clowdersOfCatsReleased++;
+        ratsCount = 2;
+        UpdateDisplay();
+    }
+    else {
+        if (player.hasArmy) { PlaySound(audioKingdomToRun); }
+        else { PlaySound(audioWorkToDo); }
+        GameEvent(displayStoryPoorCruise);
+    }
+}
+
+
+
+function BenHur() {
+    KillAmbience();
+    PlaySound(audioClack);
+    PlaySound(ambienceChariots);
+    GameEvent(displayStoryStartRace);
+    PauseTime();
+    divGameWindow.style.display = 'none';
+    divViewTownship.style.display = '';
+    divMinigameStage.style.display = 'block';
+    divMinigameStage.appendChild(divFooter);
+    player.isAt = 'Stage';
+    stageDressing = 'Racetrack';
+    player.hasSeenRace = true;
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function TakeInAShow() {
+    KillAmbience();
+    PlaySound(audioClack);
+    PlaySound(ambienceOrchestra);
+    if (player.gender == 1 || player.gender == 3) { alert(displayStoryNoGirlsAllowed); }
+    if (player.likesStory) {
+        Translate(player.speaks, false); // this repopulates the bindings in the following string
+        GameEvent(displayStoryStartPlay);
+    }
+    PauseTime();
+    buttonNextScene.style.display = 'block';
+    buttonLeaveEarly.style.display = 'block';
+    buttonLeaveStage.style.display = 'none';
+    divGameWindow.style.display = 'none';
+    divViewTownship.style.display = '';
+    divMinigameStage.style.display = 'block';
+    divMinigameStage.appendChild(divFooter);
+    player.isAt = 'Stage';
+    stageDressing = 'Theater';
+    player.hasGoodTaste = true;
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function AdvanceScene() {
+    PlaySound(audioClack);
+    PlaySound(audioPaper);
+    stageStage++;
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function LeaveEarly() {
+    PlaySound(audioClack);
+    PlaySound(audioShush);
+    if (confirm(displayEndPlayEarlyConfirm)) {
+        buttonLeaveStage.style.display = '';
+        LeaveStage(true);
+    }
+}
+
+
+
+function LeaveStage(leftEarly = false) {
+    PlaySound(audioClack);
+    KillAmbience();
+    FireTownshipExtendedAmbience();
+    if (gameSpeed == 'paused') { StartTime(); }
+    buttonNextScene.style.display = '';
+    buttonLeaveEarly.style.display = '';
+    divGameWindow.style.display = '';
+    divViewTownship.style.display = 'block';
+    divMinigameStage.style.display = '';
+    divWidthClamp.appendChild(divFooter);
+    player.isAt = 'Township';
+    UpdateDisplay();
+    JumpToTopPlease();
+    if (stageDressing == 'Theater') {
+        if (leftEarly) { GameEvent(displayStoryEndPlayEarly); }
+        else { GameEvent(displayStoryEndPlay); }
+    }
+    stageDressing = 'Empty';
+}
+
+
+
+function GoToOracle() {
+    KillAmbience();
+    PlaySound(audioClack);
+    PlaySound(audioChimes);
+    if (!player.hasSeenOracle) {
+        player.hasSeenOracle = true;
+        GameEvent(displayStoryOracleFirstVisit);
+    }
+    PauseTime();
+    divGameWindow.style.display = 'none';
+    divViewTownship.style.display = '';
+    divMinigameOracle.style.display = 'block';
+    divMinigameOracle.appendChild(divFooter);
+    player.isAt = 'Oracle';
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function ConsultOracle() {
+    PlaySound(audioClack);
+    PlaySound(audioChimes);
+    PlaySound(audioSpell);
+    GameEvent(displayRandomWisdomsDisplay[revealedWisdom]);
+    revealedWisdom++;
+    if (revealedWisdom == displayRandomWisdomsDisplay.length) {
+        if (!player.hasAllWisdom) {
+            player.hasAllWisdom = true;
+            Achievement();
+        }
+        revealedWisdom = 0;
+    }
+}
+
+
+
+function LeaveOracle() {
+    KillAmbience();
+    PlaySound(audioClack);
+    FireTownshipExtendedAmbience();
+    if (gameSpeed == 'paused') { StartTime(); }
+    divGameWindow.style.display = '';
+    divViewTownship.style.display = 'block';
+    divMinigameOracle.style.display = '';
+    divWidthClamp.appendChild(divFooter);
+    player.isAt = 'Township';
+    UpdateDisplay();
+    JumpToTopPlease();
+}
+
+
+
+function PlayGod() {
+    if (relicCount >= pricePegasus) {
+        PlaySound(audioHorse);
+        PlaySound(audioSpell);
+        PlaySound(audioChimes);
+        PlaySound(ambienceVincent);
+        relicCount -= pricePegasus;
+        GameEvent(displayStoryPegasus);
+        player.hasPegasi = true;
+        residenceAmbience = ambienceVincent;
+        RecordProgress();
+        UpdateDisplay();
+    }
+    else {
+        PlaySound(audioWizards);
+        GameEvent(displayStoryPegasusNo);
+    }
+}
+
+
+
+// Port tab ----------------------------------------------------------------
+
+function TakeCruise() {
+    if (asCount >= priceCruise) {
+        PlaySound(audioPort);
+        PlaySound(ambienceSeagull);
+        PlaySound(audioDinner);
+        GameEvent(displayStoryCruise);
+        player.hasTakenCruise = true;
+        asCount -= priceCruise;
+        asSpent += priceCruise;
+        statecraftLifetimeSpend += priceCruise;
+    }
+    else {
+        if (!player.hasArmy) { PlaySound(audioWorkToDo); }
+        else { PlaySound(audioKingdomToRun); }
+        GameEvent(displayStoryPoorCruise);
+    }
+    UpdateDisplay();
+}
+
+
+
+function SponsorNavy() {
+    if (asCount >= priceNavy) {
+        PlaySound(audioPort);
+        PlaySound(ambienceSeagull);
+        PlaySound(audioSailing);
+        GameEvent(displayStoryNavy);
+        asCount -= priceNavy;
+        asSpent += priceNavy;
+        statecraftLifetimeSpend += priceNavy;
+        player.hasNavy = true;
+    }
+    else {
+        if (!player.hasArmy) { PlaySound(audioWorkToDo); }
+        else { PlaySound(audioKingdomToRun); }
+        GameEvent(displayStoryPoorCruise);
+    }
+    UpdateDisplay();
+}
+
+
+
+function SailWest() {
+    PlaySound(audioPort);
+    PlaySound(ambienceSeagull);
+    PlaySound(audioSailing);
+    PlaySound(audioSpell);
+    PlaySound(audioChimes);
+    GameEvent(displayStorySailWest);
+    player.hasWentToAman = true;
+    RecordProgress();
+    UpdateDisplay();
+    //window.open(sailWestTarget, 'PRAEDIUM_requested_new_tab');
+}
+
+
+
+function EstablishTradeRoute() {
+    if (!player.canExport && asCount >= pricePort0 && player.hasOliveMill) {
+        PlaySound(audioContract);
+        GameEvent(displayStoryPort00);
+        asCount -= pricePort0;
+        asSpent += pricePort0;
+        commercialLifetimeSpend += pricePort0;
+        player.canExport = true;
+        player.canExportOil = true;
+    }
+    else if (!player.canExport && !player.hasOliveMill) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorOil);
+    }
+    else if (!player.canExport && asCount < pricePort0 && player.hasOliveMill) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorExport);
+    }
+
+    else if (player.canExport && asCount >= pricePort1 && player.hasBrewery && !player.canExportBeer) {
+        PlaySound(audioContract);
+        GameEvent(displayStoryPort01);
+        asCount -= pricePort1;
+        asSpent += pricePort1;
+        commercialLifetimeSpend += pricePort1;
+        player.canExportBeer = true;
+    }
+    else if (player.canExport && !player.hasBrewery && !player.canExportBeer) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorBeer);
+    }
+    else if (player.canExport && asCount < pricePort1 && player.hasBrewery && !player.canExportBeer) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorExport);
+    }
+
+    else if (player.canExport && asCount >= pricePort2 && player.hasWinery && !player.canExportWine) {
+        PlaySound(audioContract);
+        GameEvent(displayStoryPort02);
+        asCount -= pricePort2;
+        asSpent += pricePort2;
+        commercialLifetimeSpend += pricePort2;
+        player.canExportWine = true;
+    }
+    else if (player.canExport && !player.hasWinery && !player.canExportWine) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorWine);
+    }
+    else if (player.canExport && asCount < pricePort2 && player.hasWinery && !player.canExportWine) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorExport);
+    }
+
+    else if (player.canExport && asCount >= pricePort3 && player.hasKitchen && !player.canExportSyrup) {
+        PlaySound(audioContract);
+        GameEvent(displayStoryPort03);
+        asCount -= pricePort3;
+        asSpent += pricePort3;
+        commercialLifetimeSpend += pricePort3;
+        player.canExportSyrup = true;
+    }
+    else if (player.canExport && !player.hasKitchen && !player.canExportSyrup) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorSyrup);
+    }
+    else if (player.canExport && asCount < pricePort3 && player.hasKitchen && !player.canExportSyrup) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorExport);
+    }
+
+    else if (player.canExport && asCount >= pricePort4 && player.hasPress && !player.canExportJuice) {
+        PlaySound(audioContract);
+        GameEvent(displayStoryPort04);
+        asCount -= pricePort4;
+        asSpent += pricePort4;
+        commercialLifetimeSpend += pricePort4;
+        player.canExportJuice = true;
+    }
+    else if (player.canExport && !player.hasPress && !player.canExportJuice) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorJuice);
+    }
+    else if (player.canExport && asCount < pricePort4 && player.hasPress && !player.canExportJuice) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorExport);
+    }
+
+    else if (player.canExport && asCount >= pricePort5 && player.hasGreenhouse && !player.canExportFigs) {
+        PlaySound(audioContract);
+        GameEvent(displayStoryPort05);
+        asCount -= pricePort5;
+        asSpent += pricePort5;
+        commercialLifetimeSpend += pricePort5;
+        player.canExportFigs = true;
+        player.hasMerchantGuildWrit = true;
+    }
+    else if (player.canExport && !player.hasGreenhouse && !player.canExportFigs) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorFigs);
+    }
+    else if (player.canExport && asCount < pricePort5 && player.hasGreenhouse && !player.canExportFigs) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorExport);
+    }
+
+    else if (player.canExport && asCount >= pricePort6 && player.hasAtelier && !player.canExportTrinkets) {
+        PlaySound(audioContract);
+        GameEvent(displayStoryPort06);
+        asCount -= pricePort6;
+        asSpent += pricePort6;
+        commercialLifetimeSpend += pricePort6;
+        player.canExportTrinkets = true;
+        player.seesExportButton = false;
+    }
+    else if (player.canExport && !player.hasAtelier && !player.canExportTrinkets) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorTrinkets);
+    }
+    else if (player.canExport && asCount < pricePort6 && player.hasAtelier && !player.canExportTrinkets) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorExport);
+    }
+
+    UpdateDisplay();
+}
+
+
+
+function ExportFish() {
+    PlaySound(audioContract);
+    player.hasExportedFish = true;
+    GameEvent(displayStoryExportFish);
+    UpdateDisplay();
+}
+
+
+
+function EstablishShippingLanes() {
+    if (player.hasMerchantGuildWrit && player.hasBank && !player.canImportTin) {
+        PlaySound(audioContract);
+        GameEvent(displayStoryPort07);
+        player.canImport = true;
+        player.canImportTin = true;
+        player.canHireBronzeworkers = true;
+        player.seesMountainButton = true;
+        player.seesImportButton = false;
+    }
+    else if (!player.hasMerchantGuildWrit && player.hasBank && !player.canImportTin) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorWrit);
+    }
+    else if (player.hasMerchantGuildWrit && !player.hasBank && !player.canImportTin) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorBank);
+    }
+    else if (!player.hasMerchantGuildWrit && !player.hasBank && !player.canImportTin) {
+        PlaySound(audioWorkToDo);
+        GameEvent(displayStoryPoorBankWrit);
+    }
+    else if (player.canImportTin && !player.canImportSalt) {
+        PlaySound(audioContract);
+        GameEvent(displayStoryPort08);
+        player.seesImportButton = false;
+        player.canImportSalt = true;
+    }
+    UpdateDisplay();
+}
+
+
+
+// Build-A-Heir Workshop® --------------------------------------------------
+
+function ChooseHeir() {
+    PlaySound(audioForeward);
+    setTimeout(() => {
+        PlaySound(audioHeirGloom);
+    }, 3210);
+    setTimeout(() => {
+        PlaySound(audioHeirSob);
+    }, 5678);
+    if (player.likesStory) {
+        Translate(player.speaks, false); // this repopulates the bindings in the following string
+        GameEvent(displayStoryHeir);
+    }
     heirDate[0] = week;
     heirDate[1] = year;
-
     player.canChooseHeir = false;
     player.isAt = 'Workshop';
-
     divViewResidence.style.display = '';
     divViewPraedium.style.display = 'none';
     divViewTownship.style.display = '';
     divViewPort.style.display = '';
     divViewHeirWorkshop.style.display = 'block';
-
+    divCalendar.style.display = 'none';
+    divCalendarGap.style.display = 'none';
     UpdateDisplay();
     JumpToTopPlease();
     clearTimeout(timeoutHeirButton);
@@ -3499,7 +4557,11 @@ function ChooseHeir() {
 
 
 function HeirBegin() {
-    PauseTime();
+    KillSound(audioHeirGloom);
+    KillSound(audioHeirSob);
+    PlaySound(audioClack);
+    PlaySound(audioStart);
+    PlaySound(audioHeirName);
     heirStage++;
     const defaultName = selectHeirNames.options[selectHeirNames.selectedIndex].text;
     player.names.push(defaultName);
@@ -3510,6 +4572,8 @@ function HeirBegin() {
 
 
 function HeirChangeName() {
+    PlaySound(audioClack);
+    PlaySound(audioHeirMyNameIs);
     const newChoice = selectHeirNames.options[selectHeirNames.selectedIndex].text;
     player.names[2] = newChoice;
     UpdateDisplay();
@@ -3518,6 +4582,10 @@ function HeirChangeName() {
 
 
 function HeirChooseName() {
+    KillSound(audioStart);
+    KillSound(audioHeirName);
+    PlaySound(audioClack);
+    PlaySound(audioHeirChoice);
     heirStage++;
     UpdateDisplay();
     JumpToTopPlease();
@@ -3526,6 +4594,7 @@ function HeirChooseName() {
 
 
 function HeirChangeGender(direction) {
+    PlaySound(audioClick);
     if (direction == 'previous') {
         player.gender--;
         if (player.gender == -1) { player.gender = 7; }
@@ -3534,6 +4603,7 @@ function HeirChangeGender(direction) {
         player.gender++;
         if (player.gender == 8) { player.gender = 0; }
     }
+    PlaySound(eval('audioHeirGender' + player.gender));
     heirFacesPageCurrent = 1;
     UpdateDisplay();
 }
@@ -3541,6 +4611,9 @@ function HeirChangeGender(direction) {
 
 
 function HeirChooseGender() {
+    KillSound(audioHeirChoice);
+    PlaySound(audioClack);
+    PlaySound(audioHeirBackground);
     heirStage++;
     RebuildFacesArray();
     Translate(player.speaks, false); // this repopulates the correct honorific binding in Spanish for the string used in the following method call
@@ -3551,7 +4624,11 @@ function HeirChooseGender() {
 
 
 
-function HeirChangeEthnicity() {
+function HeirChangeEthnicity(bark = false) {
+    if (bark) {
+        PlaySound(audioClack);
+        PlaySound(audioContract);
+    }
     let selectionsString = '';
     function AddChoiceToList(choice) {
         if (selectHeirEthnicities.selectedIndex == choice) { selectionsString += '<option value="' + displayNations[choice] + '" selected>' + displayNations[choice] + '</option>'; }
@@ -3566,6 +4643,9 @@ function HeirChangeEthnicity() {
 
 
 function HeirChooseEthnicity() {
+    KillSound(audioHeirBackground);
+    PlaySound(audioClack);
+    PlaySound(audioHeirMyLiege);
     heirStage++;
     HeirChangeTitle(); // populates the selections
     //UpdateDisplay(); // redundant because of above method call
@@ -3574,7 +4654,11 @@ function HeirChooseEthnicity() {
 
 
 
-function HeirChangeTitle() {
+function HeirChangeTitle(bark = false) {
+    if (bark) {
+        PlaySound(audioClack);
+        PlaySound(audioHeirFanfare);
+    }
     let selectionsString = '';
     function AddChoiceToList(choice) {
         if (selectHeirTitles.selectedIndex == choice) { selectionsString += '<option value="' + displayTitles[choice] + '" selected>' + displayTitles[choice] + '</option>'; }
@@ -3589,6 +4673,9 @@ function HeirChangeTitle() {
 
 
 function HeirChooseTitle() {
+    KillSound(audioHeirMyLiege);
+    PlaySound(audioClack);
+    PlaySound(audioHeirFitRightIn);
     heirStage++;
     UpdateDisplay();
     JumpToTopPlease();
@@ -3598,10 +4685,18 @@ function HeirChooseTitle() {
 
 function HeirChangeFaces(direction) {
     if (direction == 'next') {
-        if (heirFacesPageCurrent != heirFacesPageTotal) { heirFacesPageCurrent++; }
+        if (heirFacesPageCurrent != heirFacesPageTotal) {
+            heirFacesPageCurrent++;
+            PlaySound(audioClick);
+            PlaySound(audioPaper);
+        }
     }
     else if (direction == 'previous') {
-        if (heirFacesPageCurrent != 1) { heirFacesPageCurrent--; }
+        if (heirFacesPageCurrent != 1) {
+            heirFacesPageCurrent--;
+            PlaySound(audioClick);
+            PlaySound(audioPaper);
+        }
     }
     UpdateDisplay();
 }
@@ -3609,6 +4704,9 @@ function HeirChangeFaces(direction) {
 
 
 function HeirChooseFace(chosenChoice) {
+    KillSound(audioHeirFitRightIn);
+    PlaySound(audioClack);
+    PlaySound(audioHeirConfirm);
     heirFaceChoice = chosenChoice;
     heirStage++;
     UpdateDisplay();
@@ -3629,19 +4727,35 @@ function HeirConfirmAll(ask = true) {
         if (heirAttributes.birthday[0] == '31') { ordinal = 'st'; }
         if (player.speaks == 'Spanish') { ordinal = '.º'; }
         //Translate() is not necessary here for the following string; it already happened at time of gender selection
+        PlaySound(audioWompWomp);
         SystemMessage(displayNoSuchThing[0] + heirAttributes.birthday[0] + ordinal + displayNoSuchThing[1] + heirAttributes.birthday[1] + displayNoSuchThing[2]);
     }
     else if (heirAttributes.neuroses[5]) {
         //Translate() is not necessary here for the following string; it already happened at time of gender selection
+        PlaySound(audioSquish);
         SystemMessage(displayHeirAnthropophagy);
     }
     else {
         let doTheThing = false;
-
         if (!ask) { doTheThing = true; }
-        else { if (confirm(displayHeirConfirm)) { doTheThing = true; } }
+        else {
+            PlaySound(audioClack);
+            PlaySound(audioMilord);
+            if (confirm(displayHeirConfirm)) { doTheThing = true; }
+        }
 
         if (doTheThing) {
+            if (heirAttributes.psych == '28') {
+                PlaySound(audioSquish);
+                alert(displayHeirWow);
+            }
+            divCalendar.style.display = '';
+            divCalendarGap.style.display = '';
+            PlaySound(audioHuzzah);
+            PlaySound(audioStart);
+            PlaySound(ambienceSeagull);
+            PlaySound(ambienceCrickets);
+            PlaySound(audioPassTheTorch);
             player.hasBecomeHeir = true;
             function CalcBirthDOY() {
                 let dayCounter = 0;
@@ -3698,12 +4812,13 @@ function HeirConfirmAll(ask = true) {
             }
             heirAttributes.birthday[2] = CalcBirthDOY();
             heirAttributes.birthday[3] = Math.ceil(heirAttributes.birthday[2] / 7);
+            if (heirAttributes.birthday[3] == 53) { heirAttributes.birthday[3]-- }; // Dec 31 -> Week 53
             player.isAt = 'Map';
             divViewMap.style.display = 'block';
             divViewHeirWorkshop.style.display = '';
             UpdateDisplay();
             JumpToTopPlease();
-            if (player.likesStory) { GameEvent(displayHeirComplete); }
+            GameEvent(displayHeirComplete);
         }
     }
 }
@@ -3711,27 +4826,128 @@ function HeirConfirmAll(ask = true) {
 
 
 function HeirGoBack() {
+    KillSound(audioHeirChoice);
+    KillSound(audioHeirBackground);
+    KillSound(audioHeirMyLiege);
+    KillSound(audioHeirFitRightIn);
+    KillSound(audioHeirConfirm);
+    PlaySound(audioClack);
     heirStage--;
+    if (heirStage == 1) {
+        PlaySound(audioStart);
+        PlaySound(audioHeirName);
+    }
+    else if (heirStage == 2) { PlaySound(audioHeirChoice); }
+    else if (heirStage == 3) { PlaySound(audioHeirBackground); }
+    else if (heirStage == 4) { PlaySound(audioHeirMyLiege); }
+    else if (heirStage == 5) { PlaySound(audioHeirFitRightIn); }
     UpdateDisplay();
     JumpToTopPlease();
 }
 
 
 
+// Map & Neighbors tabs ----------------------------------------------------
+
+function MapChangeTarget(direction) {
+    PlaySound(audioClick);
+    if (player.hasWon) {
+        PlaySound(audioTravelAlt);
+        PlaySound(ambienceDowntown);
+    }
+    else {
+        PlaySound(audioTravel);
+        PlaySound(ambienceSeagull);
+        PlaySound(ambienceCrickets);
+    }
+    if (direction == 'next') {
+        if (mapTarget != mapProvinces.length - 1) { while (mapProvinces[mapTarget + 1][1] == false) { mapTarget++; } }
+        mapTarget++;
+        if (mapTarget == mapProvinces.length) { mapTarget = 0; }
+    }
+    else if (direction == 'previous') {
+        if (mapTarget != 0) { while (mapProvinces[mapTarget - 1][1] == false) { mapTarget--; } }
+        mapTarget--;
+        if (mapTarget == -1) { mapTarget = mapProvinces.length - 1; }
+    }
+    if (mapTarget == 3 && !player.hasTargettedMiners) {
+        player.hasTargettedMiners = true;
+        KillAmbience();
+        PlaySound(ambienceNationC);
+        GameEvent(displayStoryMinersFirstTarget);
+    }
+    else if (mapTarget == 1 && !player.hasTargettedShepherds) {
+        player.hasTargettedShepherds = true;
+        KillAmbience();
+        PlaySound(ambienceNationB);
+        GameEvent(displayStoryShepherdsFirstTarget);
+    }
+    else if (mapTarget == 2 && !player.hasTargettedFarmers) {
+        player.hasTargettedFarmers = true;
+        KillAmbience();
+        PlaySound(ambienceNationA);
+        GameEvent(displayStoryFarmersFirstTarget);
+    }
+    else if (mapTarget == 0 && !player.hasTargettedSelf) {
+        player.hasTargettedSelf = true;
+        KillAmbience();
+        PlaySound(ambienceNationD);
+        GameEvent(displayStoryHeroFirstTarget);
+    }
+    mapOutlineOpacity = 0;
+    UpdateDisplay();
+}
+
+
+
+function MapChangeDetails(format) {
+    PlaySound(audioKnob);
+    if (format == 'econ') {
+        PlaySound(audioHeirGender0);
+        PlaySound(audioHeirGender1);
+    }
+    else if (format == 'mil') {
+        PlaySound(audioHeirGender3);
+        PlaySound(audioHeirGender4);
+    }
+    else {
+        PlaySound(audioHeirGender6);
+        PlaySound(audioHeirGender7); // ⁶🤷⁷ six-sevennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn 6️⃣🫲🤪🫴7️⃣
+    }
+    mapDetailsCurrent = format;
+    UpdateDisplay();
+}
+
+
+
 function VisitProvince() {
+    KillSound(audioWorldTimer);
+    KillAmbience();
+    PlaySound(audioClack);
+    if (player.hasWon) { PlaySound(audioTravelAlt); }
+    else { PlaySound(audioTravel); }
     if (mapTarget == 0) {
-        if (!player.hasReturned) {
-            player.hasReturned = true;
-            if (player.likesStory) { GameEvent(displayStoryReturned); }
-        }
+        PlaySound(ambienceNationD);
+        FirePRÆDIVM_TM_ExtendedAmbience();
         divViewMap.style.display = '';
         divViewPraedium.style.display = '';
         player.isAt = 'Praedium';
         buttonReturnToMap.style.display = 'inline-block';
         UpdateDisplay();
         JumpToTopPlease();
+        if (!player.hasReturned) {
+            player.hasReturned = true;
+            GameEvent(displayStoryReturned);
+        }
     }
     else if (mapTarget == 1) {
+        PlaySound(ambienceNationB); // shepherds
+        PlaySound(ambienceCrickets);
+        if (player.hasHelpedShepherds) {
+            PlaySound(audioChaChing);
+            PlaySound(ambienceCracklingFire);
+        }
+        else { PlaySound(ambienceCampfire); }
         divViewMap.style.display = '';
         divViewShepherds.style.display = 'block';
         player.isAt = 'Shepherds';
@@ -3740,11 +4956,15 @@ function VisitProvince() {
         JumpToTopPlease();
         if (!player.hasSeenShepherds) {
             player.hasSeenShepherds = true;
-            if (player.likesStory) { GameEvent(displayStoryShepherdsFirstVisit); }
+            GameEvent(displayStoryShepherdsFirstVisit);
         }
     }
     else if (mapTarget == 2) {
+        PlaySound(ambienceNationA); // farmer Mo
         if (player.hasHelpedMiners && player.hasHelpedShepherds) {
+            PlaySound(ambienceCrickets);
+            PlaySound(ambienceCampfire);
+            PlaySound(audioFarm);
             divViewMap.style.display = '';
             divViewFarmers.style.display = 'block';
             player.isAt = 'Farmers';
@@ -3752,15 +4972,24 @@ function VisitProvince() {
             UpdateDisplay();
             JumpToTopPlease();
             if (!player.hasSeenFarmers) {
+                PlaySound(audioHerosWelcome);
                 player.hasSeenFarmers = true;
-                if (player.likesStory) { GameEvent(displayStoryFarmersFirstVisit); }
+                GameEvent(displayStoryFarmersFirstVisit);
             }
         }
         else {
-            if (player.likesStory) { GameEvent(displayStoryFarmersRejection); }
+            PlaySound(audioBadges);
+            GameEvent(displayStoryFarmersRejection);
         }
     }
     else if (mapTarget == 3) {
+        if (!player.hasWon) { PlaySound(ambienceNationC); } // miners
+        if (player.hasWon) { PlaySound(ambienceARacistsIdeaOfWhatTheDesertSoundsLike); }
+        else if (player.hasHelpedMiners) {
+            PlaySound(audioChaChing);
+            PlaySound(ambienceMarket);
+        }
+        else { PlaySound(ambienceDogs); }
         divViewMap.style.display = '';
         divViewMiners.style.display = 'block';
         player.isAt = 'Miners';
@@ -3769,7 +4998,7 @@ function VisitProvince() {
         JumpToTopPlease();
         if (!player.hasSeenMiners) {
             player.hasSeenMiners = true;
-            if (player.likesStory) { GameEvent(displayStoryMinersFirstVisit); }
+            GameEvent(displayStoryMinersFirstVisit);
         }
     }
 }
@@ -3777,6 +5006,20 @@ function VisitProvince() {
 
 
 function ReturnToMapView() {
+    StopMusic();
+    KillAmbience();
+    KillSound(audioPortTimer);
+    PlaySound(audioClack);
+    if (player.hasWon) {
+        PlaySound(audioTravelAlt);
+        PlaySound(ambienceDowntown);
+    }
+    else {
+        PlaySound(audioTravel);
+        PlaySound(ambienceSeagull);
+        PlaySound(ambienceCrickets);
+    }
+    PlaySound(audioWorldTimer);
     divViewMap.style.display = 'block';
     divViewPraedium.style.display = 'none';
     divViewResidence.style.display = '';
@@ -3793,55 +5036,34 @@ function ReturnToMapView() {
 
 
 
-function MapChangeTarget(direction) {
-    if (direction == 'next') {
-
-        if (mapTarget != mapProvinces.length - 1) {
-            while (mapProvinces[mapTarget + 1][1] == false) {
-                mapTarget++;
-            }
+function ShepherdsEvents() {
+    if (!player.hasMetShepherds) {
+        PlaySound(audioProletariat);
+        mapProvinces[1][2] = 1;
+        player.hasMetShepherds = true;
+        if (player.likesStory) {
+            Translate(player.speaks, false); // populates the following string correctly
+            GameEvent(displayStoryShepherdsMeeting);
         }
-
-        mapTarget++;
-        if (mapTarget == mapProvinces.length) { mapTarget = 0; }
     }
-    else if (direction == 'previous') {
-
-        if (mapTarget != 0) {
-            while (mapProvinces[mapTarget - 1][1] == false) {
-                mapTarget--;
-            }
-        }
-
-        mapTarget--;
-        if (mapTarget == -1) { mapTarget = mapProvinces.length - 1; }
+    else if (player.hasMetShepherds && !player.hasConsultedShepherds) {
+        PlaySound(audioToadyA);
+        player.hasConsultedShepherds = true;
+        GameEvent(displayStoryShepherdsToadies);
     }
-
-    if (mapTarget == 3 && !player.hasTargettedMiners) {
-        player.hasTargettedMiners = true;
-        if (player.likesStory) { GameEvent(displayStoryMinersFirstTarget); }
+    else if (player.hasMetShepherds && player.hasConsultedShepherds && !player.hasHelpedShepherds && militarySoldiers >= priceShepherds) {
+        PlaySound(audioGrumbleA);
+        PlaySound(audioForeward);
+        mapProvinces[1][2] = 3;
+        residentsCount -= priceShepherds;
+        player.hasHelpedShepherds = true;
+        Translate(player.speaks, false); // populates the map details header correctly
+        GameEvent(displayStoryShepherdsHelp);
     }
-    else if (mapTarget == 1 && !player.hasTargettedShepherds) {
-        player.hasTargettedShepherds = true;
-        if (player.likesStory) { GameEvent(displayStoryShepherdsFirstTarget); }
+    else {
+        PlaySound(audioApologeticDenial);
+        GameEvent(displayStoryPoorShepherds);
     }
-    else if (mapTarget == 2 && !player.hasTargettedFarmers) {
-        player.hasTargettedFarmers = true;
-        if (player.likesStory) { GameEvent(displayStoryFarmersFirstTarget); }
-    }
-    else if (mapTarget == 0 && !player.hasTargettedSelf) {
-        player.hasTargettedSelf = true;
-        if (player.likesStory) { GameEvent(displayStoryHeroFirstTarget); }
-    }
-
-    mapOutlineOpacity = 0;
-    UpdateDisplay();
-}
-
-
-
-function MapChangeDetails(format) {
-    mapDetailsCurrent = format;
     UpdateDisplay();
 }
 
@@ -3849,16 +5071,22 @@ function MapChangeDetails(format) {
 
 function MinersEvents() {
     if (!player.hasMetMiners) {
+        PlaySound(audioCapitalist);
         mapProvinces[3][2] = 1;
         player.hasMetMiners = true;
-        Translate(player.speaks, false); // populates the following string correctly
-        if (player.likesStory) { GameEvent(displayStoryMinersMeeting); }
+        if (player.likesStory) {
+            Translate(player.speaks, false); // populates the following string correctly
+            GameEvent(displayStoryMinersMeeting);
+        }
     }
     else if (player.hasMetMiners && !player.hasConsultedMiners) {
+        PlaySound(audioToadyB);
         player.hasConsultedMiners = true;
-        if (player.likesStory) { GameEvent(displayStoryMinersToadies); }
+        GameEvent(displayStoryMinersToadies);
     }
     else if (player.hasMetMiners && player.hasConsultedMiners && !player.hasHelpedMiners && player.hasBandages && asCount >= priceMiners[0] && stoneCount >= priceMiners[1] && militaryCavalryCurrent >= priceMiners[2]) {
+        PlaySound(audioGrumbleB);
+        PlaySound(audioForeward);
         mapProvinces[3][2] = 2;
         asCount -= priceMiners[0];
         asSpent += priceMiners[0];
@@ -3870,21 +5098,14 @@ function MinersEvents() {
 
         player.hasHelpedMiners = true;
         Translate(player.speaks, false); // populates the map details header correctly
-        if (player.likesStory) { GameEvent(displayStoryMinersHelp); }
+        GameEvent(displayStoryMinersHelp);
     }
     else {
-        if (!player.hasRations) {
-            if (player.likesStory) { GameEvent(displayStoryPoorMinersRations); }
-        }
-        else if (!player.hasBandages) {
-            if (player.likesStory) { GameEvent(displayStoryPoorMinersBandages); }
-        }
-        else if (militaryCavalryCurrent < priceMiners[2]) {
-            if (player.likesStory) { GameEvent(displayStoryPoorMinersSoldiers); }
-        }
-        else {
-            if (player.likesStory) { GameEvent(displayStoryPoorMinersPrice); }
-        }
+        PlaySound(audioApologeticDenial);
+        if (!player.hasRations) { GameEvent(displayStoryPoorMinersRations); }
+        else if (!player.hasBandages) { GameEvent(displayStoryPoorMinersBandages); }
+        else if (militaryCavalryCurrent < priceMiners[2]) { GameEvent(displayStoryPoorMinersSoldiers); }
+        else { GameEvent(displayStoryPoorMinersPrice); }
     }
     UpdateDisplay();
 }
@@ -3893,341 +5114,22 @@ function MinersEvents() {
 
 function FarmersEvents() {
     if (!player.hasPrepared) {
+        PlaySound(audioAtOnce);
         player.hasPrepared = true;
-        if (player.likesStory) { GameEvent(displayStoryFarmersPrepare); }
+        GameEvent(displayStoryFarmersPrepare);
+        UpdateDisplay();
     }
     else if (player.hasPrepared && !player.hasMetFarmers) {
-        // 🚨🚨🚨
-        //player.hasMetFarmers = true;
-        //alert('"sup sup" -King Alavi');
-        // 🚨🚨🚨
-
-        Win();
-    }
-    else {
-        alert('third thing');
-    }
-    UpdateDisplay();
-}
-
-
-
-function ShepherdsEvents() {
-    if (!player.hasMetShepherds) {
-        mapProvinces[1][2] = 1;
-        player.hasMetShepherds = true;
-        Translate(player.speaks, false); // populates the following string correctly
-        if (player.likesStory) { GameEvent(displayStoryShepherdsMeeting); }
-    }
-    else if (player.hasMetShepherds && !player.hasConsultedShepherds) {
-        player.hasConsultedShepherds = true;
-        if (player.likesStory) { GameEvent(displayStoryShepherdsToadies); }
-    }
-    else if (player.hasMetShepherds && player.hasConsultedShepherds && !player.hasHelpedShepherds && militarySoldiers >= priceShepherds) {
-        mapProvinces[1][2] = 3;
-        residentsCount -= priceShepherds;
-        player.hasHelpedShepherds = true;
-        Translate(player.speaks, false); // populates the map details header correctly
-        if (player.likesStory) { GameEvent(displayStoryShepherdsHelp); }
-    }
-    else {
-        if (player.likesStory) { GameEvent(displayStoryPoorShepherds); }
-    }
-    UpdateDisplay();
-}
-
-
-
-function SetOutOnSojourn() {
-    if (player.likesStory) { GameEvent(displayStoryHikeGo); }
-    PauseTime();
-    divGameWindow.style.display = 'none';
-    divViewResidence.style.display = '';
-    divMinigameHike.style.display = 'block';
-    divMinigameHike.appendChild(divFooter);
-    player.isAt = 'Hike';
-    UpdateDisplay();
-    JumpToTopPlease();
-}
-
-
-
-function LeaveHike() {
-    player.seesHikeButton = false;
-    player.hasHiked = true;
-    if (gameSpeed == 'paused') { StartTime(); }
-    divGameWindow.style.display = '';
-    divViewResidence.style.display = 'block';
-    divMinigameHike.style.display = '';
-    divWidthClamp.appendChild(divFooter);
-    player.isAt = 'Residence';
-    UpdateDisplay();
-    JumpToTopPlease();
-    if (player.likesStory) { GameEvent(displayStoryHikeLeave); }
-}
-
-
-
-function Relax() {
-    //alert('*******🚨🚨🚨YOU ARE VERY RELAXED NOW!!!!!🚨🚨🚨*******');
-    if (player.likesStory) {
-        GameEvent('<div id="divMeetings">' + (superMeditatorWizardPowersActivated ? displayStoryHikeEnough : displayStoryHikeRelax[relaxStage]) + '</div>');
-    }
-    relaxStage++;
-    if (relaxStage == displayStoryHikeRelax.length) {
-        relaxStage--;
-        meditateCount++;
-        if (meditateCount > meditateLimit) { superMeditatorWizardPowersActivated = true; }
-    }
-    UpdateDisplay();
-}
-
-
-
-function Info() {
-    SystemMessage(displayInfoFinal);
-}
-
-
-
-function Help() {
-    player.seesHint = !player.seesHint;
-    if (player.seesHint) { GameEvent(displayHintsOn, null, true, false); }
-    else { SystemMessage(displayHintsOff); }
-    UpdateDisplay();
-}
-
-
-
-function SummonModsWindow() {
-    player.seesModsWindow = true;
-    player.isGod = false; // so one can type in the text box without keypresses triggering debug functions, and you have to be God to even see this window, so it will be turned back on in DismissModsWindow();
-    UpdateDisplay();
-    textareaModCode.focus({ focusVisible: true });
-    divOverlayMods.scrollTo(0, 0);
-}
-
-
-
-function SubmitModCode() {
-    const grabbedModCode = textareaModCode.value;
-    RecordModCode(grabbedModCode);
-}
-
-
-
-function DismissModsWindow() {
-    player.seesModsWindow = false;
-    player.isGod = true;
-    UpdateDisplay();
-}
-
-
-
-function SummonOptions() {
-    player.seesOptions = true;
-    PauseTime();
-    UpdateDisplay();
-    buttonOptionsDismiss.focus({ focusVisible: false });
-    divOverlayOptions.scrollTo(0, 0);
-}
-
-
-
-function DismissOptions() {
-    player.seesOptions = false;
-    if (gameSpeed == 'paused' && player.isAt != 'Creek' && player.isAt != 'Wharf' && player.isAt != 'Arena' && player.isAt != 'Hike' && player.isAt != 'Workshop' && player.isAt != 'Temple' && player.isAt != 'Oracle' && player.isAt != 'Stage') { StartTime(); }
-    UpdateDisplay();
-}
-
-
-
-function ToggleAudio() {
-    player.likesMusic = !player.likesMusic;
-    player.likesSounds = player.likesMusic;
-
-    toggleMusic.checked = player.likesMusic;
-    toggleSounds.checked = player.likesSounds;
-
-    if (player.likesMusic) {
-        buttonForewardToggleAudio.innerHTML = '🔊';
-        labelToggleAudio.innerHTML = 'Audio is enabled&nbsp;';
-        PlayMusic(audioTheme, false);
-    }
-    else {
-        buttonForewardToggleAudio.innerHTML = '🔇';
-        labelToggleAudio.innerHTML = 'Audio is disabled';
-        StopMusic();
-    }
-}
-
-
-
-function ToggleMusic() {
-    if (toggleMusic.checked) {
-        player.likesMusic = true;
-        PlayMusic(audioTheme, false);
-    }
-    else {
-        player.likesMusic = false;
-        StopMusic();
-    }
-}
-
-
-
-function ToggleSound() {
-    if (toggleSounds.checked) {
-        player.likesSounds = true;
-        PlaySound(audioPeasant);
-    }
-    else {
-        player.likesSounds = false;
-        KillAllSounds();
-    }
-}
-
-
-
-function ToggleAnimation() {
-    if (toggleAnimation.checked) {
-        player.likesAnimations = true;
-        DisplayAnimatedImages();
-    }
-    else {
-        player.likesAnimations = false;
-        DisplayStaticImages();
-    }
-}
-
-
-
-function ToggleProfanity() {
-    if (toggleProfanity.checked) {
-        player.likesProfanity = true;
-        //play sfx: Bart Simpson saying 'damn'
-    }
-    else {
-        player.likesProfanity = false;
-        //play sfx: Church Lady saying 'isnt that special'
-    }
-}
-
-
-
-function Legal() {
-    SystemMessage(displayLegalFinal);
-    //window.open(legalTarget, 'PraediumRequestedWindow');
-}
-
-
-
-function SailWest() {
-    if (player.likesStory) { GameEvent(displayStorySailWest); }
-    player.hasWentToAman = true;
-    RecordProgress();
-    UpdateDisplay();
-    //window.open(sailWestTarget, 'PRAEDIUM_requested_new_tab');
-}
-
-
-
-function PlayGod() {
-    if (relicCount >= pricePegasus) {
-        relicCount -= pricePegasus;
-        if (player.likesStory) { GameEvent(displayStoryPegasus); }
-        player.hasPegasi = true;
-        RecordProgress();
+        player.hasMetFarmers = true;
+        Win(); // 👑 "sup sup" -King Alavi 👑
         UpdateDisplay();
     }
+    else if (!player.hasCrashed) { GetHyphy(); }
     else {
-        if (player.likesStory) { GameEvent(displayStoryPegasusNo); }
-    }
-}
-
-
-
-function ReleaseCats() {
-    let exterminatorBill = ratsCount;
-    if (exterminatorBill > ratMeterMaxValue) { exterminatorBill = ratMeterMaxValue; }
-    if (asCount >= exterminatorBill) {
-        if (!player.hasReleasedCats) {
-            player.hasReleasedCats = true;
-            if (player.likesStory) { GameEvent(displayStoryReleaseTheCats); }
-        }
-        asCount -= exterminatorBill;
-        asSpent += exterminatorBill;
-        lifetimeSpentOnCats += exterminatorBill;
-        clowdersOfCatsReleased++;
-        ratsCount = 2;
-        UpdateDisplay();
-    }
-    else {
-        if (player.likesStory) { GameEvent(displayStoryPoorCruise); }
-    }
-}
-
-
-
-function TrueEnding() {
-    if (superMeditatorWizardPowersActivated && prayersCount > 0) {
-        player.hasDoneEverything = true;
-        PlayMusic(audioMuppets, false);
-        if (player.hasNotRaisedDongers) {
-            player.hasNotRaisedDongers = false;
-            if (player.likesStory) { GameEvent(displayWinMessage); }
-            imgNirvana.src = 'bitmaps/godEnding.png';
-        }
-        else {
-            player.hasNotRaisedDongers = true;
-            if (player.likesStory) { GameEvent(displayMsgDongers); }
-            imgNirvana.src = 'bitmaps/nimoy.png';
-        }
-    }
-    else {
-        if (!player.hasSeenDog) {
-            player.hasSeenDog = true;
-            imgNirvana.src = 'bitmaps/dogEnding.png';
-            if (player.likesStory) { GameEvent(displayMsgDenial); }
-        }
-        else {
-            if (player.hasHiked && !superMeditatorWizardPowersActivated) {
-                imgNirvana.src = 'bitmaps/大コスモの王様.png';
-                if (player.likesStory) { GameEvent(displayMsgTooLate); }
-            }
-            else {
-                imgNirvana.src = 'bitmaps/kururinpa.png';
-                let msgHint = displayMsgNotYetPray;
-                if (!player.hasHiked) { msgHint = displayMsgNotYetHike; }
-                if (player.likesStory) { GameEvent(displayMsgNotYetA + msgHint + displayMsgNotYetB); }
-            }
-        }
-    }
-    UpdateDisplay();
-}
-
-
-
-function BuyTreasure() {
-    if (asCount >= priceWorkOfArt) {
-        if (!player.hasBoughtArt) {
-            player.hasBoughtArt = true;
-            if (player.likesStory) { GameEvent(displayStoryBuyArt); }
-        }
-        else {
-            if (player.likesStory) { GameEvent(displayStoryBuyArtAgain); }
-        }
-        asCount -= priceWorkOfArt;
-        asSpent += priceWorkOfArt;
-        statecraftLifetimeSpend += priceWorkOfArt;
-        treasuresCount++;
-        UpdateDisplay();
-    }
-    else {
-        if (player.likesStory) {
-            Translate(player.speaks, false); // populates the following string correctly
-            GameEvent(displayStoryPoorTreasure);
-        }
+        alert('Insert MiniDisc labeled ‘22 - SYSTEM MAINTENANCE’ into Drive 2 and Press Button to Continue.');
+        alert('Insert HD DVD labeled ‘36 - TOWNE, FOREST (COMBAT), & YE OLDE VILLAGERS’ into Drive 1 and Press Button to Continue.');
+        alert('Insert microSD card labeled ‘114 - CATACOMBS, TUNNEL & SYSTEM’ into Megadrive Epsilon and Press Button to Continue.');
+        alert('⚠️ ERROR: No Extended Media Found, unable to continue');
     }
 }
 

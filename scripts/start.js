@@ -1,19 +1,15 @@
 // ۞ START *****************************************************************************************
 // *************************************************************************************************
 
+SetMusicVolume(audioVolumes[0], false);
+SetSoundVolume(audioVolumes[1], false, false);
 window.onresize = UpdateDisplay;
-
 window.onbeforeunload = function () { JumpToTopPlease(); };
 window.onpagehide = function () { JumpToTopPlease(); };
-
 Translate('English', false);
-
 DetermineDevice(false);
-
 CheckForPreviousGame();
-
 RebuildFacesArray();
-
 UpdateFishDisplay();
 
 setTimeout(() => {
@@ -30,9 +26,9 @@ setTimeout(() => {
 // ╠══════════════╣
 // ║ by Davis Lab ║
 // ╟──────────────╢
-// ║  v1.24.02-B  ║
+// ║  v1.25.00-A  ║
 // ╟──────────────╢
-// ║  11/06/2025  ║
+// ║  01/14/2026  ║
 // ╚══════════════╝
 
 // “The humble semicolon is why spacing and line-ends do not matter

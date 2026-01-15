@@ -13,11 +13,12 @@ function CheckForPreviousGame() {
         if (version.substring(0, 7) == loadedReport.v.substring(0, 7)) { AskToResume(); }
         else {
             if (loadedReport.hero.speaks == 'English') {
-                alert('It appears that there is data saved on your device from a previous version of PRAEDIUM. It is not compatible with this newer version.');
+                alert('💾🚫 It appears that there is data saved on your device from a previous version of PRAEDIUM. It is not compatible with this newer version.');
             }
             else {
-                alert('Parece que hay datos guardados en su dispositivo de una versión anterior de PRAEDIUM. No es compatible con esta versión más reciente.');
+                alert('💾🚫 Parece que hay datos guardados en su dispositivo de una versión anterior de PRAEDIUM. No es compatible con esta versión más reciente.');
             }
+            loadedReport = null;
             localStorage.removeItem(save_key);
         }
     }
@@ -28,6 +29,7 @@ function CheckForPreviousGame() {
 function AskToResume() {
     SetWidth(loadedReport.system[0], false);
     player.speaks = loadedReport.hero.speaks;
+    player.likesSounds = loadedReport.hero.likesSounds;
     loadedIcon = 'Bushel';
     if (loadedReport.counts.staff[2] > 0) { loadedIcon = 'Fieldhand'; }
     if (loadedReport.hero.seesReport) { loadedIcon = 'Accountant'; }
@@ -71,6 +73,9 @@ function AskToResume() {
 
 
 function ContinuePreviousGame() {
+    PlaySound(audioClack);
+    if (!loadedReport.hero.seesVillage) { PlaySound(audioWorkToDo); }
+    else { PlaySound(audioApologeticDenial); }
     if (confirm(displayResumeConfirm)) {
         /////////////////////////////////////////////////////////////////////////////////////////
         if (loadedReport.hero.names.length > 1) { player.names.push(loadedReport.hero.names[1]); }
@@ -84,7 +89,8 @@ function ContinuePreviousGame() {
         //player.speaks = loadedReport.hero.speaks;
 
         player.likesMusic = loadedReport.hero.likesMusic;
-        player.likesSounds = loadedReport.hero.likesSounds;
+        //player.likesSounds = loadedReport.hero.likesSounds;
+        player.likesTickTock = loadedReport.hero.likesTickTock;
         player.likesAnimations = loadedReport.hero.likesAnimations;
         player.likesStory = loadedReport.hero.likesStory;
         player.likesRecords = loadedReport.hero.likesRecords;
@@ -205,6 +211,7 @@ function ContinuePreviousGame() {
         player.hasMonument = loadedReport.hero.hasMonument;
         player.hasSeenResidence = loadedReport.hero.hasSeenResidence;
         player.hasSeenVillage = loadedReport.hero.hasSeenVillage;
+        player.hasBeenBackToPraedium = loadedReport.hero.hasBeenBackToPraedium;
         player.hasSeenOracle = loadedReport.hero.hasSeenOracle;
         player.hasSeenTemple = loadedReport.hero.hasSeenTemple;
         player.hasSeenArena = loadedReport.hero.hasSeenArena;
@@ -259,6 +266,8 @@ function ContinuePreviousGame() {
         player.hasCelebratedAnniversary = loadedReport.hero.hasCelebratedAnniversary;
         player.hasSeenDog = loadedReport.hero.hasSeenDog;
         player.hasDoneEverything = loadedReport.hero.hasDoneEverything;
+        player.hasLeftTemple = loadedReport.hero.hasLeftTemple;
+        player.hasCrashed = loadedReport.hero.hasCrashed;
         /////////////////////////////////////////////////////////////////////////////////////////
         gameTurn = loadedReport.calendar[0];
         year = loadedReport.calendar[1];
@@ -271,7 +280,10 @@ function ContinuePreviousGame() {
         heirDate[1] = loadedReport.calendar[5][1];
         timeAtStart = loadedReport.timestamps[1];
         timeAtWin = loadedReport.timestamps[2];
+        /////////////////////////////////////////////////////////////////////////////////////////
         yearFormat = loadedReport.system[1];
+        SetMusicVolume(loadedReport.system[2][0], false);
+        SetSoundVolume(loadedReport.system[2][1], false, false);
         /////////////////////////////////////////////////////////////////////////////////////////
         heirFacesPageCurrent = loadedReport.heir[0];
         heirFaceChoice = loadedReport.heir[1];
@@ -302,6 +314,7 @@ function ContinuePreviousGame() {
         CloneArray(loadedReport.counts.farmSpent, spentCount);
         CloneArray(loadedReport.counts.farmPurchased, purchasedCount);
         CloneArray(loadedReport.counts.farmSold, soldCount);
+        CloneArray(loadedReport.counts.farmLoss, lifetimeLostToRats);
         yieldMin = loadedReport.counts.farmYields[0];
         yieldMax = loadedReport.counts.farmYields[1];
         olivesMin = loadedReport.counts.farmYields[2];
@@ -368,7 +381,7 @@ function ContinuePreviousGame() {
         metallurgistsHired = loadedReport.counts.staff[12];
         priority = loadedReport.counts.staffPriority;
         weeksOfHoliday = loadedReport.counts.staffHoliday[0];
-        manweeksLost = loadedReport.counts.staffHoliday[1];
+        manweeksShamefullyLost = loadedReport.counts.staffHoliday[1];
         CloneArray(loadedReport.counts.staffWheatPaid, paidOutWheat);
         CloneArray(loadedReport.counts.staffStarving, starving);
         loavesPaymentAmount = loadedReport.counts.staffSalary;
@@ -419,6 +432,7 @@ function ContinuePreviousGame() {
         tributeLifetimePaid = loadedReport.counts.villageSpend[4];
         statecraftLifetimeSpend = loadedReport.counts.villageSpend[5];
         lifetimeSpentOnCats = loadedReport.counts.villageSpend[6];
+        medicalLifetimeProfit = loadedReport.counts.villageSpend[7];
         horsesCount = loadedReport.counts.villageInventory[0];
         beadsCount = loadedReport.counts.villageInventory[1];
         trophiesCount = loadedReport.counts.villageInventory[2];
@@ -429,6 +443,7 @@ function ContinuePreviousGame() {
         relicCount = loadedReport.counts.villageInventory[7];
         messiahCount = loadedReport.counts.villageInventory[8];
         patronsCount = loadedReport.counts.villageInventory[9];
+        lawsCount = loadedReport.counts.villageInventory[10];
         horsesSpawn = loadedReport.counts.villageState[0];
         horsesStarving = loadedReport.counts.villageState[1];
         beadsSpawn = loadedReport.counts.villageState[2];
@@ -544,22 +559,52 @@ function ContinuePreviousGame() {
 
         if (farmStage > 17) { buttonBarterOlive.classList.add('noMargin'); }
 
-        if (villageStage > 24) { arenaBet = 1000000; }
+        if (villageStage > 24) { arenaBet = arenaHighBet; }
         /////////////////////////////////////////////////////////////////////////////////////////
         loadedReport = null;
         divOverlayResume.style.display = '';
         UpdateDisplay();
         if (player.likesMusic) { toggleMusic.checked = true; }
         if (player.likesSounds) { toggleSounds.checked = true; }
-        PlayMusic(audioTheme);
+        if (!player.likesTickTock) { toggleTickTock.checked = false; }
+        rangeVolumeMusic.value = audioVolumes[0];
+        rangeVolumeSounds.value = audioVolumes[1];
+        PlayMusic(audioLoad);
+        PlaySound(audioHuzzah);
+        FirePRÆDIVM_TM_ExtendedAmbience();
         //if (!player.likesProfanity) { toggleProfanity.checked = false; } * DEPRECATED *
         if (player.hasBecomeHeir) { buttonReturnToMap.style.display = 'inline-block'; }
         if (villageStage > 10) { buttonBuyStone.classList.add('BuyStoneMarginOverrideClass'); }
         if (hintLevel == 13) { buttonQ.style.display = 'none'; }
         if (meditateCount > meditateLimit) { superMeditatorWizardPowersActivated = true; }
         if (player.hasDoneEverything) { imgNirvana.src = 'bitmaps/nirvana.png'; }
+        if (residenceStage > 13) { residenceAmbience = ambienceBells; }
+        else if (residenceStage > 2) { residenceAmbience = ambienceCracklingFire; }
+        else if (residenceStage > 0) { residenceAmbience = ambienceCrickets; }
+        if (player.hasPegasi) { residenceAmbience = ambienceVincent; }
+        if (villageStage == -3) { townshipAmbience = ambienceCeremony; }
         Translate(player.speaks, false); // populates the map details header correctly
         SetYearFormat(yearFormat, false);
+        if (player.hasWon) {
+            currencySymbol = '£';
+            shepherdsProduction = [12000, 8000, 2000, 4000, 1000, 6000, 18000, 1600, 1600, 3200, 6400,];
+            minersProduction = [100, 500, 1000, 100, 500, 1000, 1500, 500, 2500, 5000, 5000,];
+            barterMaxBulkCount = 10000;
+            bushelMax[0] = 3000000000000;
+            bushelMax[1] = 3000000000000;
+            bushelMax[2] = 30000000;
+            bushelMax[3] = 30000000;
+            bushelMax[4] = 30000000;
+            bushelMax[5] = 30000000;
+            bushelMax[6] = 30000000;
+            bushelMax[7] = 3000000000000;
+            taxesValue = 8000;
+            tourismValue = 20000;
+            rentPrice = 400;
+            tributeAmount = 131313;
+            horsesIncAmount = 20;
+            militaryUnitCost = 1000;
+        }
         StartTime(); // ...and everything *should* just work 🤞😬
     }
 }
@@ -567,7 +612,11 @@ function ContinuePreviousGame() {
 
 
 function StartNewGame() {
+    PlaySound(audioClack);
+    PlaySound(audioMilord);
     if (confirm(displayRestartConfirm)) {
+        PlaySound(audioHuzzah);
+        if (player.likesSounds) { ToggleAudio(); }
         localStorage.removeItem(save_key);
         trueEnding = false;
         divOverlayResume.style.display = '';
@@ -589,6 +638,15 @@ function JumpToTopPlease() {
 function JumpToBottom() {
     divGameWindow.scrollTo(0, document.body.scrollHeight);
     window.scrollTo(0, document.body.scrollHeight);
+}
+
+
+
+function ScrollToBottomGently() {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth', // positively ought to be ‘behaviour’, if’n ye ask me, guv’na 🇬🇧🫖💂🏻‍♂️👑 >:( hup hup hup
+    });
 }
 
 
@@ -688,6 +746,7 @@ function CollateGameStateReport(loud = false) {
         farmSpent: spentCount,
         farmPurchased: purchasedCount,
         farmSold: soldCount,
+        farmLoss: lifetimeLostToRats,
         farmYields: [yieldMin, yieldMax, olivesMin, olivesMax, datesMin, datesMax, figsMin, figsMax, pomegranateMin, pomegranateMax, grapesMin, grapesMax],
         farmCounters: [olivesGrowthCounter,],
         farmDimensions: farmSize,
@@ -709,7 +768,7 @@ function CollateGameStateReport(loud = false) {
 
         staff: [handsAvailable, handsMax, handsHired, vigneronsHired, arboristsHired, horticulturalistsHired, loggersHired, sawyersHired, masonsHired, minersHired, gemcuttersHired, smeltersHired, metallurgistsHired,],
         staffPriority: priority,
-        staffHoliday: [weeksOfHoliday, manweeksLost,],
+        staffHoliday: [weeksOfHoliday, manweeksShamefullyLost,],
         staffWheatPaid: paidOutWheat,
         staffStarving: starving,
         staffSalary: loavesPaymentAmount,
@@ -728,8 +787,8 @@ function CollateGameStateReport(loud = false) {
         villageDemographics: [residentsCount, residentsMax, pilgrimsCount, pilgrimsMax, pilgrimsLifetimeCount, totalPatientsSeen, totalPatronsHosted,],
         villageFiat: [asCount, asSpent, rentPrice, taxesValue, interestRate, tourismValue, actualBushelPrice, currentBushelPrice, actualBarleyAdjustment, currentBarleyAdjustment, valueInWheat1Log, valueInWheat1Board, valueInWheat1Stone,],
         villageEarn: [rentLifetimeCollected, taxesLifetimeCollected, interestLifetimeCollected, tourismLifetimeProfit, pilgrimLifetimeIncome, marketLifetimeRevenue, lesArtsLifetimeCollected,],
-        villageSpend: [commercialLifetimeSpend, commoditiesLifetimeSpend, militaryLifetimeCost, medicalLifetimeCost, tributeLifetimePaid, statecraftLifetimeSpend, lifetimeSpentOnCats,],
-        villageInventory: [horsesCount, beadsCount, trophiesCount, scrollsCount, ratsCount, ghostsCount, patientsCount, relicCount, messiahCount, patronsCount,],
+        villageSpend: [commercialLifetimeSpend, commoditiesLifetimeSpend, militaryLifetimeCost, medicalLifetimeCost, tributeLifetimePaid, statecraftLifetimeSpend, lifetimeSpentOnCats, medicalLifetimeProfit,],
+        villageInventory: [horsesCount, beadsCount, trophiesCount, scrollsCount, ratsCount, ghostsCount, patientsCount, relicCount, messiahCount, patronsCount, lawsCount,],
         villageState: [horsesSpawn, horsesStarving, beadsSpawn, trophiesSpawn, scrollsSpawn, ratsSpawn,],
         villageCounters: [horseClock, tributeTimer,],
         villageDetritus: [horsesIncAmount, horsesEaten, trophyChance, ratsHighScore, patientCost, pilgrimPrayerValue, relicSpawnCount, horsesBought, horsesSold, messiahSpawnCount, clowdersOfCatsReleased,],
@@ -803,7 +862,7 @@ function CollateGameStateReport(loud = false) {
         stages: [farmStage, warehouseStage, residenceStage, villageStage, hintLevel, relaxStage, meditateCount, prayersCount, templeStage, revealedWisdom, stageStage,],
         relations: [mapProvinces[1][2], mapProvinces[2][2], mapProvinces[3][2],],
         timestamps: [timeAtSave, timeAtStart, timeAtWin,],
-        system: [resolutionScale, yearFormat,],
+        system: [resolutionScale, yearFormat, audioVolumes,],
         v: version,
     };
     if (loud) {
@@ -861,6 +920,7 @@ function StartTime(punchIt = false) {
 
 
 function SystemMessage(messageCorpus) {
+    PlaySound(audioClick);
     divSystemMessageCorpus.innerHTML = messageCorpus;
     player.seesSystemMessage = true;
     UpdateDisplay();
@@ -870,113 +930,118 @@ function SystemMessage(messageCorpus) {
 
 
 
-function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true, showDateline = true) {
-    if (stopThePresses) { PauseTime(); }
-    ///////////////////////////////////////////////////////////////////////////////////////////
-    eventFaçade = null; // !!!!!!!!!!!!! 🚨🚨🚨 blank out ALL event art 🚨🚨🚨 !!!!!!!!!!!!!
-    ///////////////////////////////////////////////////////////////////////////////////////////
+function GameEvent(eventCorpus, eventFaçade = null, stopThePresses = true, showDateline = true, honourPreference = true) {
+    if (player.likesStory || !honourPreference) {
+        PlaySound(audioClick);
+        if (stopThePresses) { PauseTime(); }
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        eventFaçade = null; // !!!!!!!!!!!!! 🚨🚨🚨 blank out ALL event art 🚨🚨🚨 !!!!!!!!!!!!!
+        ///////////////////////////////////////////////////////////////////////////////////////////
 
-    if (eventFaçade != null) {
-        divGameEventFaçade.innerHTML = '<img src="bitmaps/' + eventFaçade + '.gif">';
-        divGameEventFaçade.style.display = 'block';
-    }
-    else {
-        divGameEventFaçade.style.display = 'none';
-    }
-    let finalContent = '';
-    if (showDateline) {
-        let stringMonthPortion = displayMonthPortions[0];
-        if (week % 4 == 0) { stringMonthPortion = displayMonthPortions[1]; }
-        else if (week % 4 == 1) { stringMonthPortion = displayMonthPortions[2]; }
-        const monthSet = 2;
-        let stringMonthName = displayMonthNames[0][monthSet];
-        if (week > 48) { stringMonthName = displayMonthNames[12][monthSet]; }
-        else if (week > 44) { stringMonthName = displayMonthNames[11][monthSet]; }
-        else if (week > 40) { stringMonthName = displayMonthNames[10][monthSet]; }
-        else if (week > 36) { stringMonthName = displayMonthNames[9][monthSet]; }
-        else if (week > 32) { stringMonthName = displayMonthNames[8][monthSet]; }
-        else if (week > 28) { stringMonthName = displayMonthNames[7][monthSet]; }
-        else if (week > 24) { stringMonthName = displayMonthNames[6][monthSet]; }
-        else if (week > 20) { stringMonthName = displayMonthNames[5][monthSet]; }
-        else if (week > 16) { stringMonthName = displayMonthNames[4][monthSet]; }
-        else if (week > 12) { stringMonthName = displayMonthNames[3][monthSet]; }
-        else if (week > 8) { stringMonthName = displayMonthNames[2][monthSet]; }
-        else if (week > 4) { stringMonthName = displayMonthNames[1][monthSet]; }
-        const stringDatelineMonth = stringMonthPortion + stringMonthName;
-
-        let seasonalWeek = 1;
-        if (week < 14) { seasonalWeek = week; }
-        else if (week % 13 == 0) { seasonalWeek = 13; }
-        else { seasonalWeek = (week % 13); }
-        let ordinalAbbrev = 'th';
-        if (seasonalWeek == 1) { ordinalAbbrev = 'st'; }
-        else if (seasonalWeek == 2) { ordinalAbbrev = 'nd'; }
-        else if (seasonalWeek == 3) { ordinalAbbrev = 'rd'; }
-        if (player.speaks == 'Spanish') {
-            if (seasonalWeek == 1) { ordinalAbbrev = 'er'; }
-            else if (seasonalWeek == 2) { ordinalAbbrev = 'do'; }
-            else if (seasonalWeek == 3) { ordinalAbbrev = 'er'; }
-            else if (seasonalWeek == 4) { ordinalAbbrev = 'to'; }
-            else if (seasonalWeek == 5) { ordinalAbbrev = 'to'; }
-            else if (seasonalWeek == 6) { ordinalAbbrev = 'to'; }
-            else if (seasonalWeek == 7) { ordinalAbbrev = 'mo'; }
-            else if (seasonalWeek == 8) { ordinalAbbrev = 'vo'; }
-            else if (seasonalWeek == 9) { ordinalAbbrev = 'no'; }
-            else if (seasonalWeek == 10) { ordinalAbbrev = 'mo'; }
-            else if (seasonalWeek == 11) { ordinalAbbrev = 'mo'; }
-            else if (seasonalWeek == 12) { ordinalAbbrev = 'mo'; }
-            else if (seasonalWeek == 13) { ordinalAbbrev = 'er'; }
+        if (eventFaçade != null) {
+            divGameEventFaçade.innerHTML = '<img src="bitmaps/' + eventFaçade + '.gif">';
+            divGameEventFaçade.style.display = 'block';
         }
-        let currentSeason = 0;
-        if (week > 39) { currentSeason = 3; }
-        else if (week > 26) { currentSeason = 2; }
-        else if (week > 13) { currentSeason = 1; }
-        const stringDatelineSeason = seasonalWeek + ordinalAbbrev + displayWeekOf + displaySeasons[currentSeason];
+        else {
+            divGameEventFaçade.style.display = 'none';
+        }
+        let finalContent = '';
+        if (showDateline) {
+            let stringMonthPortion = displayMonthPortions[0];
+            if (week % 4 == 0) { stringMonthPortion = displayMonthPortions[1]; }
+            else if (week % 4 == 1) { stringMonthPortion = displayMonthPortions[2]; }
+            const monthSet = 2;
+            let stringMonthName = displayMonthNames[0][monthSet];
+            if (week > 48) { stringMonthName = displayMonthNames[12][monthSet]; }
+            else if (week > 44) { stringMonthName = displayMonthNames[11][monthSet]; }
+            else if (week > 40) { stringMonthName = displayMonthNames[10][monthSet]; }
+            else if (week > 36) { stringMonthName = displayMonthNames[9][monthSet]; }
+            else if (week > 32) { stringMonthName = displayMonthNames[8][monthSet]; }
+            else if (week > 28) { stringMonthName = displayMonthNames[7][monthSet]; }
+            else if (week > 24) { stringMonthName = displayMonthNames[6][monthSet]; }
+            else if (week > 20) { stringMonthName = displayMonthNames[5][monthSet]; }
+            else if (week > 16) { stringMonthName = displayMonthNames[4][monthSet]; }
+            else if (week > 12) { stringMonthName = displayMonthNames[3][monthSet]; }
+            else if (week > 8) { stringMonthName = displayMonthNames[2][monthSet]; }
+            else if (week > 4) { stringMonthName = displayMonthNames[1][monthSet]; }
+            const stringDatelineMonth = stringMonthPortion + stringMonthName;
 
-        let stringDatelineYear = '';
-        if (yearFormat == 0) {
-            let formattedYear = 0;
-            let currentEra = displayEras[0];
-            if (year < 201) { formattedYear = 201 - year; }
-            else {
-                formattedYear = year - 200;
-                currentEra = displayEras[1];
+            let seasonalWeek = 1;
+            if (week < 14) { seasonalWeek = week; }
+            else if (week % 13 == 0) { seasonalWeek = 13; }
+            else { seasonalWeek = (week % 13); }
+            let ordinalAbbrev = 'th';
+            if (seasonalWeek == 1) { ordinalAbbrev = 'st'; }
+            else if (seasonalWeek == 2) { ordinalAbbrev = 'nd'; }
+            else if (seasonalWeek == 3) { ordinalAbbrev = 'rd'; }
+            if (player.speaks == 'Spanish') {
+                if (seasonalWeek == 1) { ordinalAbbrev = 'er'; }
+                else if (seasonalWeek == 2) { ordinalAbbrev = 'do'; }
+                else if (seasonalWeek == 3) { ordinalAbbrev = 'er'; }
+                else if (seasonalWeek == 4) { ordinalAbbrev = 'to'; }
+                else if (seasonalWeek == 5) { ordinalAbbrev = 'to'; }
+                else if (seasonalWeek == 6) { ordinalAbbrev = 'to'; }
+                else if (seasonalWeek == 7) { ordinalAbbrev = 'mo'; }
+                else if (seasonalWeek == 8) { ordinalAbbrev = 'vo'; }
+                else if (seasonalWeek == 9) { ordinalAbbrev = 'no'; }
+                else if (seasonalWeek == 10) { ordinalAbbrev = 'mo'; }
+                else if (seasonalWeek == 11) { ordinalAbbrev = 'mo'; }
+                else if (seasonalWeek == 12) { ordinalAbbrev = 'mo'; }
+                else if (seasonalWeek == 13) { ordinalAbbrev = 'er'; }
             }
-            stringDatelineYear = formattedYear + '&nbsp;' + currentEra;
-        }
-        else if (yearFormat == 1) {
-            let formattedYear = yearAtStartRoman + (year - 1);
-            stringDatelineYear = displayYear + ' ' + RomanceNumber(formattedYear);
-        }
-        else if (yearFormat == 2) {
-            let formattedYear = yearAtStartHebrew + (year - 1);
-            stringDatelineYear = 'שָׁנָה' + ' ' + CircumciseNumber(formattedYear);
-        }
-        else if (yearFormat == 3) {
-            let formattedYear = yearAtStartHanDynasty + (year - 1);
-            stringDatelineYear = '<div id="chineseNumerals">年' + SteepNumberInGreenTea(formattedYear) + '</div>';
-        }
+            let currentSeason = 0;
+            if (week > 39) { currentSeason = 3; }
+            else if (week > 26) { currentSeason = 2; }
+            else if (week > 13) { currentSeason = 1; }
+            const stringDatelineSeason = seasonalWeek + ordinalAbbrev + displayWeekOf + displaySeasons[currentSeason];
 
-        finalContent += '<div id="divDateline"><div id="divDatelineMonth">' + stringDatelineMonth + '</div>' + stringDatelineSeason + '<div id="divDatelineYear">' + stringDatelineYear + '</div></div>';
+            let stringDatelineYear = '';
+            let yearToShow = year;
+            if (player.hasWon) { yearToShow += endingYearDelta; }
+            if (yearFormat == 0) {
+                let formattedYear = 0;
+                let currentEra = displayEras[0];
+                if (yearToShow < 201) { formattedYear = 201 - yearToShow; }
+                else {
+                    formattedYear = yearToShow - 200;
+                    currentEra = displayEras[1];
+                }
+                stringDatelineYear = formattedYear + '&nbsp;' + currentEra;
+            }
+            else if (yearFormat == 1) {
+                let formattedYear = yearAtStartRoman + (yearToShow - 1);
+                stringDatelineYear = displayYear + ' ' + RomanceNumber(formattedYear);
+            }
+            else if (yearFormat == 2) {
+                let formattedYear = yearAtStartHebrew + (yearToShow - 1);
+                stringDatelineYear = 'שָׁנָה' + ' ' + CircumciseNumber(formattedYear);
+            }
+            else if (yearFormat == 3) {
+                let formattedYear = yearAtStartHanDynasty + (yearToShow - 1);
+                stringDatelineYear = '<div id="chineseNumerals">年' + SteepNumberInGreenTea(formattedYear) + '</div>';
+            }
+
+            finalContent += '<div id="divDateline"><div id="divDatelineMonth">' + stringDatelineMonth + '</div>' + stringDatelineSeason + '<div id="divDatelineYear">' + stringDatelineYear + '</div></div>';
+        }
+        finalContent += eventCorpus;
+        divGameEventCorpus.innerHTML = finalContent;
+        player.seesGameEvent = true;
+        UpdateDisplay();
+        buttonGameEventDismiss.focus({ focusVisible: false });
+        divOverlayGameEvent.scrollTo(0, 0);
+        player.canDismissEvent = false;
+        buttonGameEventDismiss.innerHTML = '<span class="icon AnkhTile inlineIcon"></span>';
+        clearTimeout(timeoutGameEventDismiss);
+        let conditionalDelay = gameEventDismissDelay;
+        if (!player.likesDelay) { conditionalDelay = 10; }
+        timeoutGameEventDismiss = setTimeout(() => {
+            // 🚨🚨🚨
+            //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK;
+            buttonGameEventDismiss.innerHTML = displayOK;
+            // 🚨🚨🚨
+            player.canDismissEvent = true;
+        }, conditionalDelay);
     }
-    finalContent += eventCorpus;
-    divGameEventCorpus.innerHTML = finalContent;
-    player.seesGameEvent = true;
-    UpdateDisplay();
-    buttonGameEventDismiss.focus({ focusVisible: false });
-    divOverlayGameEvent.scrollTo(0, 0);
-    player.canDismissEvent = false;
-    buttonGameEventDismiss.innerHTML = '<span class="icon AnkhTile inlineIcon"></span>';
-    clearTimeout(timeoutGameEventDismiss);
-    let conditionalDelay = gameEventDismissDelay;
-    if (!player.likesDelay) { conditionalDelay = 10; }
-    timeoutGameEventDismiss = setTimeout(() => {
-        // 🚨🚨🚨
-        //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK;
-        buttonGameEventDismiss.innerHTML = displayOK;
-        // 🚨🚨🚨
-        player.canDismissEvent = true;
-    }, conditionalDelay);
 }
 
 
@@ -1045,6 +1110,8 @@ function FindWholeRandom(min, max) {
 
 
 function GetNewPlayerName() {
+    PlaySound(audioClack);
+    PlaySound(audioInquiry);
     let newName = prompt(displayNamePlayer).trim();
     player.names.push(newName);
 }
@@ -1367,6 +1434,1001 @@ function SetYearFormat(desiredFormat, bark = true) {
 
 
 
+function Braghettone() {
+    PlaySound(audioMeow);
+    const victoriasLeaf = document.getElementById('imgFigLeaf');
+    victoriasLeaf.remove();
+}
+
+
+
+// ۞ UTILITIES / FRACTIONS *************************************************************************
+// *************************************************************************************************
+
+// 🚨🚨🚨 ☢️ 🚨🚨🚨
+function GetHyphy() {
+    KillAllSounds();
+    StopMusic();
+    PauseTime();
+    divOverlayLoading.remove();
+    divFontPreloads.remove();
+    divWidthClamp.remove();
+    divOverlayGameEvent.remove();
+    divOverlayForeword.remove();
+    divOverlaySystemMessage.remove();
+    divOverlayMods.remove();
+    divOverlayOptions.remove();
+    divOverlayResume.remove();
+    divCheevo.remove();
+    stylesheetActive.href = '';
+    stylesheetLoading.href = '';
+    //divScriptsFlushableBinB.remove();
+    //divScriptsFlushableBinA.remove();
+    FireToadDenominators();
+}
+// 🚨🚨🚨 ☢️ 🚨🚨🚨
+
+/// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ QUACK //// \\\
+///  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \|/ ////  \\\
+///   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ v ////   \\\
+///    \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ////    \\\
+
+let fractionsCanvasBasket = null;
+let fractionsCanvas = null;
+let fractionsCanvasContext = null;
+const splashRevealSpeed = 6;
+const firstPauseDuration = 1982;
+const redrawPauseDuration = 222;
+const iconBlinkDuration = 666;
+const installerSplashRevealSpeed = 16;
+const secondPauseDuration = firstPauseDuration;
+const thirdPauseDuration = firstPauseDuration;
+let iconBlinkDriver = null;
+let blinkToggle = false;
+let iconContainer = null;
+let desktopContainer = null;
+let wizardWallpaper = null;
+let wizardStage = 0;
+let saveAfterCrash = true;
+
+function FireToadDenominators() {
+    html.style.margin = '0px';
+    html.style.border = '0px';
+    html.style.padding = '0px';
+    body.style.background = '#005574';
+    body.style.margin = '0px';
+    body.style.border = '0px';
+    body.style.padding = '0px';
+    const divCanvasBasket = document.createElement('div');
+    fractionsCanvasBasket = divCanvasBasket;
+    fractionsCanvasBasket.id = 'fractionsCanvasBasket';
+    fractionsCanvasBasket.style.position = 'relative';
+    fractionsCanvasBasket.style.width = '642px';
+    fractionsCanvasBasket.style.height = '482px';
+    fractionsCanvasBasket.style.margin = '0px auto';
+    const canvasBinbowsDesktop = document.createElement('canvas');
+    fractionsCanvas = canvasBinbowsDesktop;
+    fractionsCanvas.id = 'fractionsCanvas';
+    fractionsCanvas.style.border = '1px solid black';
+    fractionsCanvasContext = fractionsCanvas.getContext('2d');
+    fractionsCanvasBasket.appendChild(fractionsCanvas);
+    const divCanvasSpacer = document.createElement('div');
+    divCanvasSpacer.id = 'divCanvasSpacer';
+    divCanvasSpacer.style.height = '20px';
+    divCanvasSpacer.style.width = '20px';
+    body.appendChild(divCanvasSpacer);
+    body.appendChild(fractionsCanvasBasket);
+    const imageBinbowsSplash = new Image();
+    imageBinbowsSplash.src = 'bitmaps/System32/binbowsSplash.png';
+    imageBinbowsSplash.onload = function () { DrawSplash(); }
+
+    function DrawSplash() {
+        PlaySound(audioBoot);
+        fractionsCanvas.width = imageBinbowsSplash.width;
+        fractionsCanvas.height = imageBinbowsSplash.height;
+        fractionsCanvasContext.fillStyle = 'black';
+        fractionsCanvasContext.fillRect(0, 0, fractionsCanvas.width, fractionsCanvas.height);
+        function WipeUp(stepDuration, imageToReveal) {
+            let drawStep = 1;
+            function RenderSplashLines(lines) {
+                const sw = imageToReveal.width;
+                const sh = lines;
+                const sy = imageToReveal.height - sh;
+                const dw = sw;
+                const dh = sh;
+                const dy = sy;
+                fractionsCanvasContext.drawImage(imageToReveal, 0, sy, sw, sh, 0, dy, dw, dh);
+            }
+            function IterateStep() {
+                drawStep++;
+                RenderSplashLines(drawStep);
+                if (drawStep < imageToReveal.height) { setTimeout(() => { IterateStep(); }, stepDuration); }
+                else { setTimeout(() => { DrawDesktop(); }, firstPauseDuration); }
+            }
+            RenderSplashLines(drawStep);
+            setTimeout(() => { IterateStep(); }, stepDuration);
+        }
+        WipeUp(splashRevealSpeed, imageBinbowsSplash);
+    }
+
+    function DrawDesktop() {
+        PlaySound(audioTada);
+        body.style.backgroundImage = 'url("bitmaps/System32/BlissUXGA.jpg")';
+        body.style.backgroundRepeat = 'no-repeat';
+        body.style.backgroundPosition = 'center center';
+        body.style.backgroundSize = 'cover';
+        body.style.backgroundAttachment = 'fixed';
+        body.style.minHeight = '100vh';
+
+        fractionsCanvasContext.fillStyle = 'white';
+        fractionsCanvasContext.fillRect(0, 0, fractionsCanvas.width, fractionsCanvas.height);
+        const imageBinbowsDesktop = new Image();
+        imageBinbowsDesktop.src = 'bitmaps/System32/binbowsDesktop.png';
+        imageBinbowsDesktop.onload = function () {
+            setTimeout(() => {
+                desktopContainer = imageBinbowsDesktop;
+                fractionsCanvasContext.drawImage(desktopContainer, 0, 0);
+                const imageBinbowsIconInGreen = new Image();
+                imageBinbowsIconInGreen.src = 'bitmaps/System32/binbowsIcon.png';
+                imageBinbowsIconInGreen.onload = function () {
+                    iconContainer = imageBinbowsIconInGreen;
+                    const divTouchTarget = document.createElement('div');
+                    divTouchTarget.id = 'divTouchTarget';
+                    //divTouchTarget.innerHTML = 'HEY!';
+                    divTouchTarget.style.width = '128px';
+                    divTouchTarget.style.height = '128px';
+                    //divTouchTarget.style.background = 'pink';
+                    divTouchTarget.style.position = 'absolute';
+                    divTouchTarget.style.top = '171px';
+                    divTouchTarget.style.left = '257px';
+                    divTouchTarget.addEventListener('click', TriggerInstall, false);
+                    fractionsCanvasBasket.appendChild(divTouchTarget);
+                    FireIconAttract();
+                }
+            }, redrawPauseDuration);
+        }
+    }
+
+    function FireIconAttract() {
+        iconBlinkDriver = setTimeout(() => {
+            blinkToggle = !blinkToggle;
+            if (blinkToggle) { fractionsCanvasContext.drawImage(iconContainer, 280, 186); }
+            else { fractionsCanvasContext.drawImage(desktopContainer, 0, 0); }
+            FireIconAttract();
+        }, iconBlinkDuration);
+    }
+}
+
+function TriggerInstall() {
+    PlaySound(audioQuack);
+    PlayMusic(audioFrogWar);
+    clearTimeout(iconBlinkDriver);
+    iconBlinkDriver = null;
+    const divTouchTarget = document.getElementById('divTouchTarget');
+    divTouchTarget.remove();
+    const imageInstallerWindow = new Image();
+    imageInstallerWindow.src = 'bitmaps/System32/installerWindow.png';
+    imageInstallerWindow.onload = function () {
+        fractionsCanvasContext.drawImage(imageInstallerWindow, 0, 0);
+        DrawInstallerSplash();
+    };
+}
+
+function DrawInstallerSplash() {
+    const imageInstallerSplash = new Image();
+    imageInstallerSplash.src = 'bitmaps/System32/installerSplash.png';
+    imageInstallerSplash.onload = function () {
+        function WipeDown(stepDuration, imageToReveal) {
+            let drawStep = 1;
+            let offset = 38;
+            function RenderSplashLines(lines) {
+                const sw = imageToReveal.width;
+                const sh = lines;
+                const dw = sw;
+                const dh = sh;
+                fractionsCanvasContext.drawImage(imageToReveal, 0, 0, sw, sh, 0, 0 + offset, dw, dh);
+            }
+            function IterateStep() {
+                drawStep++;
+                RenderSplashLines(drawStep);
+                if (drawStep < imageToReveal.height) { setTimeout(() => { IterateStep(); }, stepDuration); }
+                else { setTimeout(() => { DrawInstallerLogo(imageInstallerSplash); }, secondPauseDuration); }
+            }
+            RenderSplashLines(drawStep);
+            setTimeout(() => { IterateStep(); }, stepDuration);
+        }
+        WipeDown(installerSplashRevealSpeed, imageInstallerSplash);
+    }
+}
+
+function DrawInstallerLogo(imageInstallerSplash) {
+    const imageInstallerLogo = new Image();
+    imageInstallerLogo.src = 'bitmaps/System32/installerLogo.png';
+    imageInstallerLogo.onload = function () {
+        function WipeDown(stepDuration, imageToReveal) {
+            let drawStep = 1;
+            let offsetX = 64;
+            let offsetY = 166;
+            function RenderSplashLines(lines) {
+                const sw = imageToReveal.width;
+                const sh = lines;
+                const dw = sw;
+                const dh = sh;
+                fractionsCanvasContext.drawImage(imageToReveal, 0, 0, sw, sh, 0 + offsetX, 0 + offsetY, dw, dh);
+            }
+            function IterateStep() {
+                drawStep++;
+                RenderSplashLines(drawStep);
+                if (drawStep < imageToReveal.height) { setTimeout(() => { IterateStep(); }, stepDuration); }
+                else { setTimeout(() => { DrawWizardWindow(imageInstallerSplash); }, thirdPauseDuration); }
+            }
+            RenderSplashLines(drawStep);
+            setTimeout(() => { IterateStep(); }, stepDuration);
+        }
+        WipeDown(installerSplashRevealSpeed, imageInstallerLogo);
+    }
+}
+
+function DrawWizardWindow(imageInstallerSplash) {
+    fractionsCanvasContext.drawImage(imageInstallerSplash, 0, 38);
+    setTimeout(() => {
+        const imageInstallerWizard = new Image();
+        imageInstallerWizard.src = 'bitmaps/System32/installerWizard.png';
+        imageInstallerWizard.onload = function () {
+            wizardWallpaper = imageInstallerWizard;
+            fractionsCanvasContext.drawImage(wizardWallpaper, 12, 60);
+            setTimeout(() => {
+                const imageInstallerWizard1 = new Image();
+                imageInstallerWizard1.src = 'bitmaps/System32/installerWizardPage1.png';
+                imageInstallerWizard1.onload = function () {
+                    wizardStage = 1;
+                    fractionsCanvasContext.drawImage(imageInstallerWizard1, 13, 61);
+                    setTimeout(() => { WizardPageTwo(); }, 3600);
+                }
+            }, 100);
+        }
+    }, 100);
+}
+
+function WizardPageTwo() {
+    fractionsCanvasContext.drawImage(wizardWallpaper, 12, 60);
+    setTimeout(() => {
+        const imageInstallerWizard2 = new Image();
+        imageInstallerWizard2.src = 'bitmaps/System32/installerWizardPage2.png';
+        imageInstallerWizard2.onload = function () {
+            wizardStage = 2;
+            fractionsCanvasContext.drawImage(imageInstallerWizard2, 13, 61);
+            setTimeout(() => {
+                const buttonFF_Learn = document.createElement('button');
+                buttonFF_Learn.id = 'buttonFF_Learn';
+                buttonFF_Learn.innerHTML = 'VIEW DEMONSTRATION OF INSTALLATION';
+                buttonFF_Learn.style.position = 'absolute';
+                buttonFF_Learn.style.bottom = '187px';
+                buttonFF_Learn.style.left = '169px';
+                fractionsCanvasBasket.appendChild(buttonFF_Learn);
+                buttonFF_Learn.addEventListener('click', WizardTriggerA, false);
+                //PlaySound(audioGunshot);
+            }, 100);
+        }
+    }, 100);
+}
+
+function WizardTriggerA() {
+    if (wizardStage == 2) {
+        const buttonFF_Learn = document.getElementById('buttonFF_Learn');
+        buttonFF_Learn.remove();
+    }
+    else if (wizardStage == 4) {
+        const buttonFF_Great = document.getElementById('buttonFF_Great');
+        buttonFF_Great.remove();
+    }
+    setTimeout(() => {
+        fractionsCanvasContext.drawImage(wizardWallpaper, 12, 60);
+        setTimeout(() => {
+            const imageInstallerWizard3 = new Image();
+            imageInstallerWizard3.src = 'bitmaps/System32/installerWizardPage3.png';
+            imageInstallerWizard3.onload = function () {
+                wizardStage = 3;
+                fractionsCanvasContext.drawImage(imageInstallerWizard3, 13, 61);
+                setTimeout(() => {
+                    const buttonFF_Understand = document.createElement('button');
+                    buttonFF_Understand.id = 'buttonFF_Understand';
+                    buttonFF_Understand.innerHTML = 'I UNDERSTAND';
+                    buttonFF_Understand.style.position = 'absolute';
+                    buttonFF_Understand.style.bottom = '111px';
+                    buttonFF_Understand.style.left = '107px';
+                    fractionsCanvasBasket.appendChild(buttonFF_Understand);
+                    buttonFF_Understand.addEventListener('click', WizardTriggerC, false);
+                    const buttonFF_Confound = document.createElement('button');
+                    buttonFF_Confound.id = 'buttonFF_Confound';
+                    buttonFF_Confound.innerHTML = 'I DO NOT UNDERSTAND, COULD YOU PLEASE REPEAT THAT?';
+                    buttonFF_Confound.style.position = 'absolute';
+                    buttonFF_Confound.style.bottom = '66px';
+                    buttonFF_Confound.style.left = '107px';
+                    fractionsCanvasBasket.appendChild(buttonFF_Confound);
+                    buttonFF_Confound.addEventListener('click', WizardTriggerB, false);
+                    //PlaySound(audioGunshot);
+                }, 100);
+            }
+        }, 100);
+    }, 100);
+}
+
+function WizardTriggerB() {
+    const buttonFF_Understand = document.getElementById('buttonFF_Understand');
+    buttonFF_Understand.remove();
+    const buttonFF_Confound = document.getElementById('buttonFF_Confound');
+    buttonFF_Confound.remove();
+    setTimeout(() => {
+        fractionsCanvasContext.drawImage(wizardWallpaper, 12, 60);
+        setTimeout(() => {
+            const imageInstallerWizard4 = new Image();
+            imageInstallerWizard4.src = 'bitmaps/System32/installerWizardPage4.png';
+            imageInstallerWizard4.onload = function () {
+                wizardStage = 4;
+                fractionsCanvasContext.drawImage(imageInstallerWizard4, 13, 61);
+                setTimeout(() => {
+                    const buttonFF_Great = document.createElement('button');
+                    buttonFF_Great.id = 'buttonFF_Great';
+                    buttonFF_Great.innerHTML = 'GREAT';
+                    buttonFF_Great.style.position = 'absolute';
+                    buttonFF_Great.style.bottom = '187px';
+                    buttonFF_Great.style.left = '169px';
+                    fractionsCanvasBasket.appendChild(buttonFF_Great);
+                    buttonFF_Great.addEventListener('click', WizardTriggerA, false);
+                    //PlaySound(audioGunshot);
+                }, 100);
+            }
+        }, 100);
+    }, 100);
+}
+
+function WizardTriggerC() {
+    const buttonFF_Understand = document.getElementById('buttonFF_Understand');
+    buttonFF_Understand.remove();
+    const buttonFF_Confound = document.getElementById('buttonFF_Confound');
+    buttonFF_Confound.remove();
+    setTimeout(() => {
+        fractionsCanvasContext.drawImage(wizardWallpaper, 12, 60);
+        setTimeout(() => {
+            const imageInstallerWizard5 = new Image();
+            imageInstallerWizard5.src = 'bitmaps/System32/installerWizardPage5.png';
+            imageInstallerWizard5.onload = function () {
+                wizardStage = 5;
+                fractionsCanvasContext.drawImage(imageInstallerWizard5, 13, 61);
+                setTimeout(() => {
+                    const inputFF_File = document.createElement('input');
+                    inputFF_File.type = 'file';
+                    inputFF_File.id = 'inputFF_File';
+                    inputFF_File.name = 'inputFF_File';
+                    inputFF_File.style.position = 'absolute';
+                    inputFF_File.style.bottom = '275px';
+                    inputFF_File.style.left = '188px';
+                    inputFF_File.style.background = 'white';
+                    fractionsCanvasBasket.appendChild(inputFF_File);
+                    inputFF_File.addEventListener('change', WizardTriggerD, false);
+                    //PlaySound(audioGunshot);
+                }, 100);
+            }
+        }, 100);
+    }, 100);
+}
+
+function WizardTriggerD() {
+    let scotsman = false;
+    const inputFF_File = document.getElementById('inputFF_File');
+    const arrayFilePath = inputFF_File.value.split('\\');
+    const fileName = arrayFilePath[arrayFilePath.length - 1];
+    if (fileName == 'fart.barf') { scotsman = true; }
+    inputFF_File.remove();
+    fractionsCanvasContext.drawImage(wizardWallpaper, 12, 60);
+    setTimeout(() => {
+        if (scotsman) {
+            const imageInstallerWizard7 = new Image();
+            imageInstallerWizard7.src = 'bitmaps/System32/installerWizardPage7.png';
+            imageInstallerWizard7.onload = function () {
+                wizardStage = 7;
+                PlaySound(audioTrumpet);
+                fractionsCanvasContext.drawImage(imageInstallerWizard7, 13, 61);
+                // ╔════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+                // ║                                                                                                        ║
+                // ║                                                                                                        ║
+                // ║                                                                                                        ║
+                // ║    To Whomsoever It May Possibly Concern:                                                              ║
+                // ║                                                                                                        ║
+                // ║    Okay so listen, I hope this isn’t too disappointing but I’m just gonna be fully honest with you:    ║
+                // ║    I feel like the only conceivable way for anyone to  possibly discover this last gag would be for    ║
+                // ║    them to have come looking here in the code, right?                                                  ║
+                // ║                                                                                                        ║
+                // ║    Like, ok, maybe,  ***maybe*** someone might get this  far into the game——which,  that isn’t even    ║
+                // ║    *remotely* a given, right?,  that any other living human being even plays this stupid game, much    ║
+                // ║    less finishes it,  and then reloads their completed save,  and then finds this whole hidden Frog    ║
+                // ║    Fractions Easter Egg section in  the first place, right?  All of that nonsense  is certainly not    ║
+                // ║    guaranteed to ever happen——and so then, if someone DID, for them to actually  say to themselves:    ║
+                // ║    “hmm, I wonder if there’s a secret extra joke, if one were to try opening some ‘correct’ file?”,    ║
+                // ║    like...  holy *moley*,  what a long-shot, right?  For anyone to even consider that?  And then if    ║
+                // ║    they somehow DID, well,  the most likely way for them to  find out what the ‘correct’  file name    ║
+                // ║    would be, would be for them to come looking here,  in the code, like you’ve just done, right?  I    ║
+                // ║    mean,  here we all are now,  correct?  (And, bully to you, by the way,  may I just say.   It  is    ║
+                // ║    practically unbelievable to me that you have found this message.  You’re so clever!  You must be    ║
+                // ║    super good at doing puzzles!)                                                                       ║
+                // ║                                                                                                        ║
+                // ║    So, again, I hope you’re not too disappointed, but it’s just that anything I could think of that    ║
+                // ║    might be a fun surprise, as an outcome for you trying to open some dummy file you’d need to make    ║
+                // ║    called ‘fart dot barf’ or whatever else I maybe  could think of that could hopefully be a little    ║
+                // ║    funnier,  *whatever* that surprise  might be...  you’d see  what it was  right here in the code,    ║
+                // ║    right now, alongside this comment, you know what I mean? So what would be the point of putting a    ║
+                // ║    bunch of effort into some silly super-hidden outcome, when the surprise would be spoiled for you    ║
+                // ║    whenever you got here just looking for the way to see that outcome? Am I making any sense?          ║
+                // ║                                                                                                        ║
+                // ║    So listen, champ†, I’m just  gonna leave this comment here for you.  I know it might be a little    ║
+                // ║    underwhelming,  but I mean:  ‘BE SURE TO DRINK YOUR OVALTINE’, you know what I mean?  What could    ║
+                // ║    have been here that wouldn’t have been underwhelming, you know? God bless, you rascal.              ║ (´˘ -˘ 人)
+                // ║                                                                                                        ║
+                // ║    If it’s any consolation,  you’re probably the only other human being  in all of recorded history    ║
+                // ║    who has ever or will ever read these words, so, you know. That’s something, I suppose!              ║
+                // ║                                                                                                        ║
+                // ║    (†that’s short for ‘champion’)                                                                      ║
+                // ║                                                                                                        ║
+                // ║                                                                                                        ║
+                // ║                                                                                                        ║
+                // ║                                                                     Yours,                             ║
+                // ║                                                                     Michael David Davis II             ║
+                // ║                                                                                                        ║
+                // ║                                                                                                        ║
+                // ║                                                                                                        ║
+                // ╚════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+            }
+        }
+        else {
+            const imageInstallerWizard6_3 = new Image();
+            imageInstallerWizard6_3.src = 'bitmaps/System32/installerWizardPage6-3.png';
+            imageInstallerWizard6_3.onload = function () {
+                const imageInstallerWizard6_2 = new Image();
+                imageInstallerWizard6_2.src = 'bitmaps/System32/installerWizardPage6-2.png';
+                imageInstallerWizard6_2.onload = function () {
+                    const imageInstallerWizard6 = new Image();
+                    imageInstallerWizard6.src = 'bitmaps/System32/installerWizardPage6.png';
+                    imageInstallerWizard6.onload = function () {
+                        const imageInstallerWizard6_4 = new Image();
+                        imageInstallerWizard6_4.src = 'bitmaps/System32/installerWizardPage6-4.png';
+                        imageInstallerWizard6_4.onload = function () {
+                            const imageInstallerWizard6_5 = new Image();
+                            imageInstallerWizard6_5.src = 'bitmaps/System32/installerWizardPage6-5.png';
+                            imageInstallerWizard6_5.onload = function () {
+                                const imageInstallerWizard6_6 = new Image();
+                                imageInstallerWizard6_6.src = 'bitmaps/System32/installerWizardPage6-6.png';
+                                imageInstallerWizard6_6.onload = function () {
+                                    wizardStage = 6;
+                                    ScriptedSequence(imageInstallerWizard6, imageInstallerWizard6_2, imageInstallerWizard6_3, imageInstallerWizard6_4, imageInstallerWizard6_5, imageInstallerWizard6_6);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            function ScriptedSequence(imageInstallerWizard6, imageInstallerWizard6_2, imageInstallerWizard6_3, imageInstallerWizard6_4, imageInstallerWizard6_5, imageInstallerWizard6_6) {
+                StopMusic();
+                let errWindowX = 50;
+                let errWindowY = 120;
+                function ThrowError(style = 0, xxx = errWindowX, yyy = errWindowY) {
+                    PlaySound(audioSosumi);
+                    let chosenArt = imageInstallerWizard6;
+                    if (style == 1) { chosenArt = imageInstallerWizard6_2; }
+                    else if (style == 2) { chosenArt = imageInstallerWizard6_3; }
+                    else if (style == 3) { chosenArt = imageInstallerWizard6_4; }
+                    else if (style == 4) { chosenArt = imageInstallerWizard6_5; }
+                    else if (style == 5) { chosenArt = imageInstallerWizard6_6; }
+                    fractionsCanvasContext.drawImage(chosenArt, xxx, yyy);
+                }
+                ThrowError(0, 126, 160);
+                setTimeout(() => { ThrowError(0, 100, 140); }, 3333);
+                setTimeout(() => { ThrowError(1, 150, 170); }, 7000);
+                setTimeout(() => { ThrowError(2, 100, 155); }, 8888);
+                setTimeout(() => { ThrowError(1, 110, 160); }, 10000);
+                setTimeout(() => { ThrowError(2, 115, 164); }, 10234);
+                setTimeout(() => { ThrowError(3, 115, 164); }, 10567);
+                setTimeout(() => { ThrowError(4, 115 - 20, 164 + 20); }, 11000);
+                setTimeout(() => { ThrowError(4, 115 + 20, 164 - 20); }, 11111);
+                setTimeout(() => { ThrowError(4, 115, 164); }, 11222);
+                setTimeout(() => { ThrowError(4, 115 + 10, 164 - 10); }, 11333);
+                setTimeout(() => {
+                    let errCount = 0;
+                    const maxErrCount = 512;
+                    function FranticError() {
+                        errCount++;
+                        errWindowX -= 2;
+                        errWindowY -= 2;
+                        if (errWindowX < 1) { errWindowX = 638; }
+                        if (errWindowY < 1) { errWindowY = 478; }
+                        ThrowError(5);
+                        if (errCount != maxErrCount) { setTimeout(FranticError, 0); }
+                        else { LoadDosFont(); }
+                    }
+                    FranticError();
+                }, 13333);
+            }
+        }
+    }, 100);
+}
+
+function LoadDosFont() {
+    const dosFont = new FontFace(
+        'DOS437',
+        'url("fonts/DOS437.ttf")',
+        {
+            style: 'normal',
+            weight: 'normal',
+            stretch: 'normal',
+        }
+    );
+    document.fonts.add(dosFont);
+    dosFont.load().then(() => {
+        console.log('Good load: ``DOS437.TTF``');
+        SetupFinalCrash();
+    }).catch((error) => {
+        console.error('Error loading ``DOS437.TTF``: ', error);
+        SetupFinalCrash();
+    });
+
+}
+
+function SetupFinalCrash() {
+    PlaySound(audioSosumi);
+    PlaySound(audioCrash);
+    Object.assign(body.style, {
+        background: '#000082',
+        color: 'white',
+        fontFamily: '"DOS437"',
+        fontSize: '16px',
+        padding: '32px 64px',
+        pointerEvents: 'none',
+        touchAction: 'none',
+        userSelect: 'none',
+        minHeight: '',
+    });
+    body.innerHTML = '';
+    FinalCrash();
+}
+
+function AppendToLog(lorem) {
+    body.insertAdjacentHTML("beforeend", lorem);
+    ScrollToBottomGently();
+}
+
+function FinalCrash() {
+    AppendToLog('Michaelsoft (R) Binbows TNG (TM) Version 3.11 [64 KiB LoMEM, 65536 KiB HiMEM]<br>');
+    AppendToLog('=============================================================================<br><br>');
+
+    setTimeout(() => { AppendToLog('******* STOP:&nbsp;'); }, 100);
+    setTimeout(() => { AppendToLog(' 0xC0000218'); }, 200);
+    setTimeout(() => { AppendToLog('&nbsp; (0x00000000,'); }, 250);
+    setTimeout(() => { AppendToLog('0x00000034,'); }, 300);
+    setTimeout(() => { AppendToLog('0xFCCBFFFF,'); }, 2400);
+    setTimeout(() => { AppendToLog('0x00000000)<br>'); }, 2500);
+    setTimeout(() => { AppendToLog('REGISTRY_FILE_FAILURE (0E : 016F : BFF9B3D4)<br><br>'); }, 2550);
+
+    setTimeout(() => { AppendToLog('pp3-0000'); }, 2650);
+    setTimeout(() => { AppendToLog(' irql:2'); }, 2700);
+    setTimeout(() => { AppendToLog(' SYSVER 0xf0000421<br><br>'); }, 2900);
+
+    setTimeout(() => { AppendToLog('eax=ffdff13c ebx=80088968 ecx=08000800'); }, 3000);
+    setTimeout(() => { AppendToLog(' edx=ff0a8f60 esi=80087010 edi=8008a048<br>'); }, 3000 + 50);
+    setTimeout(() => { AppendToLog('eip=801b9dc5 esp=ff0a8b8c ebp=e10076c8'); }, 3000 + 150);
+    setTimeout(() => { AppendToLog(' &nbsp;p6-0707 &nbsp; &nbsp; &nbsp; nv up ei ng nz na po nc<br>'); }, 3000 + 200);
+    setTimeout(() => { AppendToLog('cr0=80050039 cr2=e1052002 cr3=00030000'); }, 3000 + 300);
+    setTimeout(() => { AppendToLog(' cr4=00000000 irql:0 &nbsp; &nbsp; &nbsp; efl=ff0a8b84<br>'); }, 3000 + 350);
+    setTimeout(() => { AppendToLog('gdtr=80036000 &nbsp; gdtl=03ff idtr=80036400'); }, 3000 + 450);
+    setTimeout(() => { AppendToLog(' &nbsp; idtl=07ff &nbsp; &nbsp; &nbsp;tr=0028 &nbsp; &nbsp;ldtr=0000<br><br>'); }, 3000 + 500);
+
+    setTimeout(() => { AppendToLog('Dll Base DateStmp - Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Dll Base DateStmp - Name<br>'); }, 3550);
+    setTimeout(() => { AppendToLog('80100000 2fc653bc - ntoskrnl.exe'); }, 4200);
+    setTimeout(() => { AppendToLog(' &nbsp; &nbsp; &nbsp; &nbsp;80400000 2fb24f68 - hal.dll<br>'); }, 4200 + 69); // nice 🤘
+    setTimeout(() => { AppendToLog('80010000 2fc28575 - atapi.sys &nbsp; '); }, 4200 + 150);
+    setTimeout(() => { AppendToLog('&nbsp; &nbsp; &nbsp; &nbsp; 80013000 2faae8ca - SCSIPORT.SYS<br>'); }, 4200 + 160);
+    setTimeout(() => { AppendToLog('8001b000 2faae85d - BusLogic.sys'); }, 4200 + 170);
+    setTimeout(() => { AppendToLog('&nbsp; &nbsp; &nbsp; &nbsp; 80001000 2faae8c5 - Scsidisk.sys<br>'); }, 4200 + 180);
+    setTimeout(() => { AppendToLog('80f00000 2fc4f4b2 - Ntfs.sys &nbsp; &nbsp;'); }, 4200 + 190);
+    setTimeout(() => { AppendToLog('&nbsp; &nbsp; &nbsp; &nbsp; fcc00000 2faae8af - Floppy.SYS<br>'); }, 4200 + 220);
+    setTimeout(() => { AppendToLog('fcc10000 2fb16eef - Scsicdrm.SYS'); }, 4200 + 230);
+    setTimeout(() => { AppendToLog('&nbsp; &nbsp; &nbsp; &nbsp; fcc20000 2faae8a2 - Cdaudio.SYS<br>'); }, 4200 + 240);
+    setTimeout(() => { AppendToLog('fcc30000 2faae8ff - Fs_Rec.SYS &nbsp;'); }, 4200 + 250);
+    setTimeout(() => { AppendToLog('&nbsp; &nbsp; &nbsp; &nbsp; fcc40000 2faae8b7 - Null.SYS<br>'); }, 4200 + 300);
+    setTimeout(() => { AppendToLog('fcc50000 2faae8a1 - Beep.SYS &nbsp; &nbsp;'); }, 4200 + 310);
+    setTimeout(() => { AppendToLog('&nbsp; &nbsp; &nbsp; &nbsp; fcc60000 2faae8de - sndblst.SYS<br>'); }, 4200 + 320);
+    setTimeout(() => { AppendToLog('fcc70000 2faae8b2 - i8042prt.SYS'); }, 4200 + 333);
+    setTimeout(() => { AppendToLog('&nbsp; &nbsp; &nbsp; &nbsp; fcc80000 2faae8b5 - Mouclass.SYS<br>'); }, 4200 + 400);
+    setTimeout(() => { AppendToLog('fcc90000 2faae8b4 - Kbdclass.SYS'); }, 4200 + 410);
+    setTimeout(() => { AppendToLog('&nbsp; &nbsp; &nbsp; &nbsp; fccb0000 2faae88d - VIDEOPRT.SYS<br>'); }, 4200 + 420); // sweet 🤙
+    setTimeout(() => { AppendToLog('fcca0000 54a49c11 - vbemp.sys &nbsp; '); }, 4200 + 430);
+    setTimeout(() => { AppendToLog('&nbsp; &nbsp; &nbsp; &nbsp; fccc0000 2faae892 - vga.sys<br>'); }, 4200 + 444);
+    setTimeout(() => { AppendToLog('fccd0000 2faae8fd - Msfs.SYS &nbsp; &nbsp;'); }, 4200 + 500);
+    setTimeout(() => { AppendToLog('&nbsp; &nbsp; &nbsp; &nbsp; fcce0000 2faae8ec - Nofaps.SYS<br><br>'); }, 4200 + 555);
+    setTimeout(() => {
+        AppendToLog('Address &nbsp;dword dump &nbsp; Build [1057] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Name<br><div id="divDwords"></div>');
+        let divDwords = document.getElementById('divDwords');
+        divDwords.style.fontFamily = '"DOS437"';
+        divDwords.style.fontSize = '16px';
+        divDwords.style.color = 'white';
+        setTimeout(() => { DrawDwords(divDwords); }, 777);
+    }, 5000);
+}
+
+function DrawDwords(divDwords) {
+    let dwordsMaxRows = 22;
+    const arrayDwords = [];
+    const arrayApps = [
+        'ntoskrnl.exe',
+        'hal.dll',
+        'diaper.bin',
+        'systemd.so',
+        'finder.dylib',
+    ];
+    function LoremHex(prefix = '', length = 8) {
+        const hexChars = '0123456789abcdef';
+        let result = prefix;
+        while (result.length < length) {
+            const r = Math.floor(Math.random() * 16);
+            result += hexChars[r];
+        }
+        return result.slice(0, length);
+    }
+    function NewDword() {
+        let dwordApp = arrayApps[0];
+        if (FindWholeRandom(0, 4) == 0) { dwordApp = arrayApps[FindWholeRandom(0, arrayApps.length - 1)]; }
+        const generatedDword = LoremHex('fcca') + ' ' + LoremHex('801c') + ' ' + LoremHex('801f') + ' 00000000 ' + LoremHex('fcce') + ' 00000000 ' + LoremHex() + ' - ' + dwordApp;
+        arrayDwords.push(generatedDword);
+        if (arrayDwords.length > dwordsMaxRows) { arrayDwords.shift(); }
+        let dwordString = '';
+        for (let i = 0; i < arrayDwords.length; i++) {
+            dwordString += arrayDwords[i] + '<br>';
+        }
+        divDwords.innerHTML = dwordString;
+        ScrollToBottomGently();
+    }
+    const arrayDwordTimeline = [
+        500,
+        200,
+        300,
+        10,
+        10,
+        10,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        100,
+        200,
+        250,
+        100,
+        100,
+        200,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        50,
+        50,
+        40,
+        40,
+        30,
+        20,
+        20,
+        20,
+        40,
+        40,
+        40,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        33,
+        22, 22, 22, 22,
+        22, 22, 22, 22,
+        22, 22, 22, 22,
+        22, 22, 22, 22,
+        22, 22, 22, 22,
+        22, 22, 22, 333,
+        10, 10, 10, 10, 10, 10, 10,
+        10, 10, 10, 10, 10, 10, 10,
+        10, 10, 10, 10, 10, 10, 10,
+        10, 10, 10, 10, 10, 10, 10,
+        10, 10, 10, 10, 10, 10, 10,
+        10, 10, 10, 10, 10, 10, 10,
+        10, 10, 10, 10, 10, 10, 10,
+        10, 10, 10, 10, 10, 10, 10,
+        10, 10, 10, 10, 10, 10, 10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+    ];
+    function wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+    async function resolveDwordTimeline() {
+        for (const step of arrayDwordTimeline) {
+            await wait(step);
+            NewDword();
+        }
+        CrashDump();
+    }
+    resolveDwordTimeline();
+}
+
+function CrashDump(withExtremePrejudice = true) {
+    setTimeout(() => { AppendToLog('<br>Collecting data for crash dump ...<br>'); }, 200);
+    setTimeout(() => { AppendToLog('Initializing disk for crash dump ...<br>'); }, 250);
+    setTimeout(() => { AppendToLog('Beginning dump of physical memory.<br>'); }, 300);
+    setTimeout(() => {
+        AppendToLog('Dumping physical memory to disk:&nbsp;');
+        const gerpGorpA = document.createElement('span');
+        gerpGorpA.id = 'jesusManHowLongIsThisGoingToGoOnForBroReleaseThisGameReleaseMePleeaaasssseeeeee';
+        Object.assign(gerpGorpA.style, {
+            color: 'white',
+            fontFamily: '"DOS437"',
+            fontSize: '16px',
+        });
+        body.appendChild(gerpGorpA);
+        gerpGorpA.style.color = 'white';
+        animateCounter(gerpGorpA, 2000, () => {
+            KeepThisGoingIGuess();
+        });
+    }, 310);
+}
+
+function animateCounter(targetElement, duration, onComplete) {
+    const start = Date.now();
+    const end = start + duration;
+    function update() {
+        const now = Date.now();
+        const progress = Math.min((now - start) / duration, 1);
+        targetElement.textContent = Math.floor(progress * 69); // this number just never isnt funny huh 🙄
+        if (now < end) {
+            requestAnimationFrame(update);
+        } else if (onComplete) {
+            onComplete();
+        }
+    }
+    update();
+}
+
+function KeepThisGoingIGuess() {
+    AppendToLog('<br>ERROR; Stopcode √-1: unencounterable error encountered!<br>Physical memory dump critical failure!<br>'); // (You may need to contact your system admin or technical support group for further assistance.)
+    setTimeout(() => { AppendToLog('UNABLE TO RECOVER!<br><br>'); }, 300);
+    setTimeout(() => {
+        AppendToLog('FORMATTING MAIN DRIVE TO PREVENT HARDWARE CORRUPTION (IN PROGRESS):<br><div id="final_progress_container_final_i_mean_it"></div><br>');
+        const proggo_counter = document.getElementById('final_progress_container_final_i_mean_it');
+        Object.assign(proggo_counter.style, {
+            color: 'white',
+            fontFamily: '"DOS437"',
+            fontSize: '16px',
+        });
+        animateDOSProgressBar(proggo_counter);
+    }, 350);
+    setTimeout(() => { AppendToLog('(!!!WARNING!!! **ALL** DATA ON DEVICE IS UNRECOVERABLE AND WILL BE LOST,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DO **NOT** POWER DOWN)<br>'); }, 400);
+}
+
+function animateDOSProgressBar(target, options = {}) {
+    const config = {
+        duration: 3000,
+        barLength: 70,
+        onComplete: null,
+        emptyChar: "░",
+        filledChar: "▓",
+        showCursor: true,
+        prefix: "",
+        ...options
+    };
+    const element = typeof target === "string" ? document.querySelector(target) : target;
+    if (!element) {
+        console.error("Target element not found");
+        return;
+    }
+    const cursorFrames = ["|", "/", "─", "\\"];
+    let cursorIndex = 0;
+
+    // Animation state
+    let progress = 0;
+    let pausedProgress = null; // Holds progress value during stutter
+    let pauseEndTime = 0; // When the current pause should end
+    const startTime = Date.now();
+
+    function render() {
+        const filledCount = Math.floor((progress / 100) * config.barLength);
+        const emptyCount = config.barLength - filledCount;
+        const bar = config.filledChar.repeat(filledCount) + config.emptyChar.repeat(emptyCount);
+        const percentage = progress.toString().padStart(3, "0");
+        const cursor = config.showCursor ? cursorFrames[cursorIndex] + " " : "";
+        element.textContent = `${config.prefix}${bar} ${cursor}${percentage}%`;
+        cursorIndex = (cursorIndex + 1) % cursorFrames.length;
+    }
+
+    function animate() {
+        class EscapeHatch extends Error {
+            constructor() {
+                super("Intentional early exit — not a bug");
+            }
+        }
+        try {
+            const now = Date.now();
+            if (pausedProgress !== null) {
+                if (now < pauseEndTime) {
+                    // Still paused - keep showing the frozen progress
+                    progress = pausedProgress;
+                    render();
+                    requestAnimationFrame(animate);
+                    return;
+                } else {
+                    // Pause is over - resume normal animation
+                    pausedProgress = null;
+                }
+            }
+            const elapsed = now - startTime;
+            const newProgress = Math.min(100, (elapsed / config.duration) * 100);
+
+            // Update progress (round to whole numbers for that chunky DOS feel)
+            progress = Math.floor(newProgress);
+            //console.log(progress); ////////////////////////////////////////////////////////////////////////////////////////////
+            if (progress > 82) { throw new EscapeHatch(); }
+            render();
+
+            // Random stuttering - occasionally pause the progress
+            // More likely to stutter in the middle range (30-70%)
+            if (pausedProgress === null && progress >= 30 && progress <= 70 && Math.random() < 0.06) {
+                // Freeze at current progress
+                pausedProgress = progress;
+                const pauseDuration = Math.floor(Math.random() * 200) + 150;
+                pauseEndTime = now + pauseDuration;
+            }
+
+            // Continue animation or complete
+            if (progress < 100) { requestAnimationFrame(animate); }
+            else {
+                // Final render at 100%
+                progress = 100;
+                render();
+                // Call completion callback if provided
+                if (config.onComplete && typeof config.onComplete === "function") { config.onComplete(); }
+            }
+        } catch (e) {
+            if (e instanceof EscapeHatch) {
+                // All good. We meant to leave.
+                derpDerpDerp();
+                //return;
+            }
+            // Something else actually broke
+            console.log('sup sup');
+            //throw e;
+        }
+    }
+    animate();
+}
+
+//animateDOSProgressBar("#progress-container", {
+//    duration: 12000,
+//    barLength: 60,
+//    prefix: "FORMATTING... ",
+//    onComplete: () => { derpDerpDerp(); }
+//});
+
+function derpDerpDerp() {
+    AppendToLog('<br>******** EXCEPTION OCCURRED! ********<br>');
+    setTimeout(() => { AppendToLog('CANNOT WRITE TO BAD SECTOR!<br><br>FrameMemory:8049C3A0H<br>CONTEXT:80395E80H &nbsp;(DSI EXCEPTION)<br>SRR0: &nbsp; 80211BB8H &nbsp; SRR1:0000B032H<br>DSISR: &nbsp;40000000H &nbsp; DAR: 11111121H<br>--------------------------------- GPR<br>'); }, 300);
+    setTimeout(() => {
+        AppendToLog('<div id="killMePleaseJustDoIt"></div>');
+        const registerTub = document.getElementById('killMePleaseJustDoIt');
+        Object.assign(registerTub.style, {
+            color: 'white',
+            fontFamily: '"DOS437"',
+            fontSize: '16px',
+        });
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H';ScrollToBottomGently(); }, 50);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H<br>R01:804001F8H';ScrollToBottomGently(); }, 150);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H<br>R01:804001F8H<br>R02:803F31A0H';ScrollToBottomGently(); }, 250);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H<br>R01:804001F8H<br>R02:803F31A0H<br>R03:81579C88H';ScrollToBottomGently(); }, 350);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H<br>R01:804001F8H<br>R02:803F31A0H<br>R03:81579C88H<br>R04:803E0000H';ScrollToBottomGently(); }, 450);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H<br>R01:804001F8H<br>R02:803F31A0H<br>R03:81579C88H<br>R04:803E0000H<br>R05:43300000H';ScrollToBottomGently(); }, 550);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H<br>R01:804001F8H<br>R02:803F31A0H<br>R03:81579C88H<br>R04:803E0000H<br>R05:43300000H<br>R06:00000000H';ScrollToBottomGently(); }, 650);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H<br>R01:804001F8H<br>R02:803F31A0H<br>R03:81579C88H<br>R04:803E0000H<br>R05:43300000H<br>R06:00000000H<br>R07:8040018CH';ScrollToBottomGently(); }, 750);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H<br>R01:804001F8H<br>R02:803F31A0H<br>R03:81579C88H<br>R04:803E0000H<br>R05:43300000H<br>R06:00000000H<br>R07:8040018CH<br>R08:00000004H';ScrollToBottomGently(); }, 850);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H<br>R01:804001F8H<br>R02:803F31A0H<br>R03:81579C88H<br>R04:803E0000H<br>R05:43300000H<br>R06:00000000H<br>R07:8040018CH<br>R08:00000004H<br>R09:00000000H';ScrollToBottomGently(); }, 950);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H<br>R01:804001F8H<br>R02:803F31A0H<br>R03:81579C88H<br>R04:803E0000H<br>R05:43300000H<br>R06:00000000H<br>R07:8040018CH<br>R08:00000004H<br>R09:00000000H<br>R10:00000000H';ScrollToBottomGently(); }, 1000);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H R11:804002A8H<br>R01:804001F8H<br>R02:803F31A0H<br>R03:81579C88H<br>R04:803E0000H<br>R05:43300000H<br>R06:00000000H<br>R07:8040018CH<br>R08:00000004H<br>R09:00000000H<br>R10:00000000H'; }, 1500);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H R11:804002A8H<br>R01:804001F8H R12:11111111H<br>R02:803F31A0H<br>R03:81579C88H<br>R04:803E0000H<br>R05:43300000H<br>R06:00000000H<br>R07:8040018CH<br>R08:00000004H<br>R09:00000000H<br>R10:00000000H'; }, 1550);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H R11:804002A8H<br>R01:804001F8H R12:11111111H<br>R02:803F31A0H R13:803F15C0H<br>R03:81579C88H<br>R04:803E0000H<br>R05:43300000H<br>R06:00000000H<br>R07:8040018CH<br>R08:00000004H<br>R09:00000000H<br>R10:00000000H'; }, 1600);
+        setTimeout(() => { registerTub.innerHTML = 'R00:43300000H R11:804002A8H<br>R01:804001F8H R12:11111111H<br>R02:803F31A0H R13:803F15C0H<br>R03:81579C88H R14:00000000H<br>R04:803E0000H<br>R05:43300000H<br>R06:00000000H<br>R07:8040018CH<br>R08:00000004H<br>R09:00000000H<br>R10:00000000H'; }, 1650);
+        setTimeout(() => { AppendToLog('============================================================================================<br>STOP:  {Registry File Failure}<br>The registry cannot load the hive (file):\\SystemRoot\\System\\Config\\SOFTWARE or its log or alternate.<br>It is corrupt, absent, or not writable.<br><br><br>'); }, 1776); //🇺🇸
+        setTimeout(() => { AppendToLog('0x00000080 (NMI_HARDWARE_FAILURE)<br>Hardware Malfunction<br>Call your hardware vendor for support.<br>NMI: Parity Check / Memory Parity Error<br>The system has halted.<br>Power down device immediately to prevent damage to battery!<br><br><br>'); }, 1999); //☥
+    }, 350);
+}
+
+
+
+
+
+
+
+
+
+
+
+function PostCrash() {
+    player.hasCrashed = true;
+    if (saveAfterCrash) { RecordProgress(); }
+}
+
+///    //// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    \\\
+///   //// ^ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\   \\\
+///  //// /|\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  \\\
+/// //// QUACK \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\\
+
+
+
+// ۞ UTILITIES / CHEATS ****************************************************************************
+// *************************************************************************************************
+
 // ↑↑ ↓↓ ← → ← → Ⓑ Ⓐ
 const コナミコマンド = [
     'ArrowUp',
@@ -1448,18 +2510,26 @@ document.addEventListener('keydown', keyHandlerId, false);
 
 
 
-function PlaySound(audioSelection) {
-    if (player.likesSounds) { FireAudio(audioSelection, true); }
+// ۞ UTILITIES / AUDIO *****************************************************************************
+// *************************************************************************************************
+
+function SetMusicVolume(newValue, refreshDisplay = true) {
+    audioVolumes[0] = newValue;
+    if (refreshDisplay) { UpdateDisplay(); }
+    const volumeToPercent = (audioVolumes[0] / 100);
+    for (let i = 0; i < arraySongs.length; i++) { arraySongs[i].volume = volumeToPercent; }
 }
 
 
 
-function KillAllSounds() {
-    achievementSoundRare.pause();
-    audioTrophy.pause();
-    audioPeasant.pause();
-    audioChime.pause();
-    audioWhistle.pause();
+function SetSoundVolume(newValue, meow = false, refreshDisplay = true) {
+    audioVolumes[1] = newValue;
+    if (refreshDisplay) { UpdateDisplay(); }
+    const volumeToPercent = (audioVolumes[1] / 100);
+    for (let i = 0; i < arraySounds.length; i++) { arraySounds[i].volume = volumeToPercent; }
+    for (let i = 0; i < arrayAmbience.length; i++) { arrayAmbience[i].volume = volumeToPercent; }
+    for (let i = 0; i < arrayVoices.length; i++) { arrayVoices[i].volume = volumeToPercent; }
+    if (meow) { PlaySound(audioMeow); }
 }
 
 
@@ -1474,10 +2544,81 @@ function PlayMusic(audioSelection, fromTheTop = true) {
 
 
 function StopMusic() {
-    audioTheme.pause();
-    audioFish.pause();
-    audioEnding.pause();
-    audioMuppets.pause();
+    for (let i = 0; i < arraySongs.length; i++) { arraySongs[i].pause(); }
+}
+
+
+
+function PlaySound(audioSelection) {
+    if (player.likesSounds) { FireAudio(audioSelection, true); }
+}
+
+
+
+function KillSound(audioSelection) {
+    audioSelection.pause();
+}
+
+
+
+function KillAllSounds() {
+    for (let i = 0; i < arraySounds.length; i++) { arraySounds[i].pause(); }
+    KillAmbience();
+    KillVoices();
+}
+
+
+
+function KillAmbience() {
+    for (let i = 0; i < arrayAmbience.length; i++) { arrayAmbience[i].pause(); }
+}
+
+
+
+function KillVoices() {
+    for (let i = 0; i < arrayVoices.length; i++) { arrayVoices[i].pause(); }
+}
+
+
+
+function FirePRÆDIVM_TM_ExtendedAmbience() {
+    if (player.hasHiredGemcutters) { PlaySound(audioChimes); }
+    if (player.hasHiredBronzeworkers) { PlaySound(audioSmith); }
+    else if (player.canSmelt) { PlaySound(audioSmelt); }
+    else if (player.canMine) { PlaySound(audioMine); }
+    else if (player.seesMountain) { PlaySound(audioBricks); }
+    else if (player.canLog) {
+        PlaySound(audioWoodChop);
+        if (player.canSaw) { PlaySound(audioSaws); }
+    }
+    else if (player.seesForest) { PlaySound(audioBirds); }
+    else { PlaySound(audioFarm); }
+}
+
+
+
+function FireTownshipExtendedAmbience() {
+    if (villageStage < 14) PlaySound(townshipAmbience);
+    if (villageStage > -1 && villageStage < 23) { PlaySound(ambienceStream); }
+    if (villageStage > 0 && villageStage < 27) { PlaySound(audioSmith); }
+    if (villageStage > 1 && villageStage < 19) { PlaySound(audioSaws); }
+    if (villageStage > 10 && villageStage < 19) { PlaySound(audioHorse); }
+    if (villageStage > 13 && villageStage < 27) { PlaySound(audioChaChing); } // replaces crickets
+    if (villageStage > 18 && villageStage != 101) { PlaySound(ambienceMarket); } // replaces horse and saws
+    if (villageStage > 22 && villageStage < 27) { PlaySound(audioGavel); } // replaces stream
+    if (villageStage > 26) { PlaySound(ambienceMetropolis); } // replaces smith, gavel and cha-ching
+    if (villageStage == 101) {
+        //replaces market
+        PlaySound(audioChant);
+        PlaySound(audioChimes);
+    }
+}
+
+
+
+function ContextAwareClack(myGuy) {
+    if (myGuy.checked) { PlaySound(audioClick); }
+    else { PlaySound(audioClack); }
 }
 
 

@@ -2,17 +2,141 @@
 // *************************************************************************************************
 
 function GameTurn() {
-    //if (player.likesRecords) { snapshotLastTurn = snapshotThisTurn; } //vestigial, this was for a potential diff check
+    //if (player.likesRecords) { snapshotLastTurn = snapshotThisTurn; } // (⚠️ vestigial, this was for a potential turn-by-turn 'diff' check for an 'activity last turn' type report for the player)
 
+    // -- UPDATE CALENDARS -(BEGIN)---------------------------------------------------------------------------------
     gameTurn++;
-
     week++;
-    if (week == playerBirthWeek) { player.age++; }
     if (week == 53) {
         week = 1;
         year++;
     }
 
+    if (!player.hasBecomeHeir && week == playerBirthWeek) { player.age++; }
+    if (player.hasBecomeHeir && week == heirAttributes.birthday[3]) { heirAttributes.age[1]++; }
+
+    if (player.likesTickTock && (gameSpeed == 'standard' || gameSpeed == 'fast')) {
+        if (player.isAt == 'Residence' && player.hasBakery) { PlaySound(audioOven); }
+        if (player.isAt == 'Praedium' && player.canLog) { PlaySound(audioWoodChopSolo); }
+        if (player.isAt == 'Township' && residentsMax != 0) { PlaySound(audioCoinbag); }
+        if (player.isAt == 'Port' && gameSpeed == 'standard' && (player.canExport || player.hasExportedFish)) { PlaySound(audioPortTimer); }
+        if (player.isAt == 'Map' && gameSpeed == 'standard') { PlaySound(audioWorldTimer); }
+        if (week == 52 && !player.hasWon) { PlaySound(audioWorldChime); }
+        if (week == 1 && player.hasWon) { PlaySound(audioWorldAlarm); }
+        if (tickOrTock == 'tick') {
+            if (player.hasWon) { PlaySound(audioWorldBeep); }
+            else { PlaySound(audioWorldTick); }
+            tickOrTock = 'tock';
+        }
+        else {
+            if (player.hasWon) { PlaySound(audioWorldBeep); }
+            else { PlaySound(audioWorldTock); }
+            tickOrTock = 'tick';
+        }
+    }
+    // -- UPDATE CALENDARS -(END)-----------------------------------------------------------------------------------
+
+    // -- FLAVOUR TEXT EVENTS -(BEGIN)------------------------------------------------------------------------------
+    if (!player.hasWon) {
+        if (year == 13 && week == 12) {
+            // en.wikipedia.org/wiki/Treaty_of_Apamea (week unknown, chosen at random)
+            gameEventTrigger = true;
+            gameEventContainer = displayStorySeleucids;
+        }
+        if (year == 34 && week == 25) {
+            // en.wikipedia.org/wiki/Maccabean_Revolt (week unknown, chosen at random)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryMaccabees;
+        }
+        if (year == 55 && week == 20) {
+            // en.wikipedia.org/wiki/Battle_of_Corinth_(146_BC) (battle occurred in summertime)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryRomanConquestofGreece;
+        }
+        if (year == 79 && week == 30) {
+            // en.wikipedia.org/wiki/Roman%E2%80%93Gallic_wars (years long conflict, week chosen at random)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryGaul;
+        }
+        if (year == 110 && week == 45) {
+            // en.wikipedia.org/wiki/Social_War_(91%E2%80%9387_BC) ('The war started in late 91 BC', according to Wiki)
+            gameEventTrigger = true;
+            gameEventContainer = displayStorySocialWar;
+        }
+        if (year == 125 && week == 33) {
+            // (⚠️⚠️⚠️ for the life of me I can not find/remember the source where I originally found this information! 🤬 ⚠️⚠️⚠️)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryRomanBreadRiot;
+        }
+        if (year == 130 && week == 14) {
+            // en.wikipedia.org/wiki/Battle_of_the_Silarius_River (battle occurred in April)
+            gameEventTrigger = true;
+            gameEventContainer = displayStorySpartacus;
+        }
+        if (year == 138 && week == 24) {
+            // en.wikipedia.org/wiki/Siege_of_Jerusalem_(63_BC) (supposedly took place in June or July)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryJerusalem;
+        }
+        if (year == 151 && week == 37) {
+            // en.wikipedia.org/wiki/Gallic_Wars ('There is no precise end date to the war', according to Wiki; week chosen at random)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryRomanConquestofFrance;
+        }
+        if (year == 156 && week == 2) {
+            // en.wikipedia.org/wiki/Julian_calendar ('It took effect on 1 January 45 BC', according to Wiki)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryJulian;
+        }
+        if (year == 157 && week == 11) {
+            // en.wikipedia.org/wiki/Assassination_of_Julius_Caesar (Beware the Ides of March)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryIdesOfMarch;
+        }
+        if (year == 159 && week == 40) {
+            // en.wikipedia.org/wiki/Battle_of_Philippi (October 23rd)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryRevenge;
+        }
+        if (year == 171 && week == 30) {
+            // en.wikipedia.org/wiki/Death_of_Cleopatra (either August 10th or 12th)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryCleopatra;
+        }
+        if (year == 174 && week == 4) {
+            // en.wikipedia.org/wiki/Principate (January 27th)
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryRomanEmpire;
+        }
+        if (year == 450 && week == 5) {
+            gameEventTrigger = true;
+            gameEventContainer = displayStory450Years;
+        }
+        if (year == 970 && week == 2) {
+            gameEventTrigger = true;
+            gameEventContainer = displayStory900Years;
+        }
+        if (year == 970 && week == 6) {
+            gameEventTrigger = true;
+            gameEventContainer = displayStory901Years;
+        }
+        if (player.hasBecomeHeir && week == heirDate[0] && !player.hasCelebratedAnniversary) {
+            player.hasCelebratedAnniversary = true;
+            gameEventTrigger = true;
+            Translate(player.speaks, false); // not sure if this is necessary or not (we're probably covered from when gender is set, for example, but why risk it?)
+            gameEventContainer = displayStoryFirstAnniversary;
+        }
+        if (player.hasBecomeHeir && week == heirAttributes.birthday[3] && !player.hasCelebratedBirthday) {
+            PlaySound(audioBirthdayParty);
+            player.hasCelebratedBirthday = true;
+            gameEventTrigger = true;
+            Translate(player.speaks, false); // this repopulates the correct year for the string used in the following method call
+            gameEventContainer = displayStoryFirstBirthday;
+        }
+    }
+    // -- FLAVOUR TEXT EVENTS -(END)--------------------------------------------------------------------------------
+
+    // -- PERFORM TASKS FOR THIS TURN -(BEGIN)----------------------------------------------------------------------
     let cell = [-1, -1];
     for (let i = 0; i < farmSize[1]; i++) {
         cell[0]++;
@@ -33,15 +157,12 @@ function GameTurn() {
             }
         }
     }
-
     if (week == 41) { FruitOlives(); }
     if (week == 25 || week == 28 || week == 31) { FruitDates(); }
     if (week == 19) { FruitFigs(); }
     if (week == 44) { FruitPoms(); }
     if (week == 47) { FruitGrapes(); }
-
     if (handsHired > 0 || vigneronsHired > 0) { FieldhandWork(); }
-
     if (player.canLog) { FellTrees(); }
     if (player.canSaw) { SawLogs(); }
     if (player.seesMountain) {
@@ -49,7 +170,6 @@ function GameTurn() {
         if (player.canMine) { MineCopper(); }
         if (player.canSmelt) { SmeltCopper(); }
     }
-
     if (residentsCount < residentsMax) { Migration(); }
     if (residentsCount > 0) {
         ChargeRent();
@@ -63,7 +183,6 @@ function GameTurn() {
             }
         }
     }
-
     if (week % 4 == 0) {
         SetMarketPrice();
         if (beadsSpawn) { MakeBeads(); }
@@ -73,25 +192,19 @@ function GameTurn() {
         if (player.hasHelpedMiners) { VassalProduction('Miners'); }
         if (player.hasHelpedFarmers) { VassalProduction('Farmers'); }
     }
-
     if (player.hasHelpedShepherds) {
         const copSalary = priceShepherds * policeCost;
         PayWorkerGroup(copSalary, 11);
     }
-
     if (week % 2 == 0 && trophiesSpawn) {
         const tourismTotalIncome = tourismValue * trophiesCount;
         asCount += tourismTotalIncome;
         tourismLifetimeProfit += tourismTotalIncome;
     }
-
     if (horsesSpawn) { GrowHorses(); }
     if (horsesCount > 0) { FeedHorses(); }
-
     if (scrollsSpawn) { ScribeWisdom(); }
-
     if (ratsSpawn) { BreedRats(); }
-
     if (player.hasGoodTaste) {
         patronsCount = FindWholeRandom(patronsMin, patronsMax);
         totalPatronsHosted += patronsCount;
@@ -99,11 +212,11 @@ function GameTurn() {
         asCount += thisTurnRevenue;
         lesArtsLifetimeCollected += thisTurnRevenue;
     }
-
     if (player.hasCityWalls) {
         if (tributeTimer < tributeTimerLimit) {
             tributeTimer++;
             if (tributeTimer == tributeTimerLimit) {
+                PlaySound(audioChaChing);
                 gameEventTrigger = true;
                 gameEventContainer = displayStoryTribute;
                 player.hasBeenLevied = true;
@@ -116,35 +229,18 @@ function GameTurn() {
             tributeLifetimePaid += weeklyLevy;
         }
     }
-
     if (player.hasArmy) {
         militarySoldiers = Math.floor(residentsCount * militaryEnlistment);
         militaryCavalryMax = militarySoldiers;
         militaryCavalryCurrent = horsesCount;
         if (militaryCavalryCurrent > militaryCavalryMax) { militaryCavalryCurrent = militaryCavalryMax; }
         militaryInfantry = militarySoldiers - militaryCavalryCurrent;
-        ////////////////////////////////////
-        //alert(militaryUnitCost);
-        //////////////////////////////////
         const militarySalary = (militaryInfantry * militaryUnitCost) + (militaryCavalryCurrent * (militaryUnitCost * militaryUnitCostFactor));
         asCount -= militarySalary;
         asSpent += militarySalary;
         militaryLifetimeCost += militarySalary;
     }
-
-    if (farmStage == 1 && bushelCount[0] > 88 && !player.hasMildewed) {
-        player.hasMildewed = true;
-        bushelCount[0] = Math.floor((bushelCount[0] * 0.1));
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryFarmMildew;
-    }
-
-    if (villageStage > 13 && (week == 52 || week == 26)) {
-        const calculatedTaxValue = residentsCount * taxesValue;
-        asCount += calculatedTaxValue;
-        taxesLifetimeCollected += calculatedTaxValue;
-    }
-
+    if (villageStage > 13 && (week == 52 || week == 26)) { CollectTax(); }
     if (player.hasMonument) {
         pilgrimsMax = Math.floor(residentsCount / 2);
         pilgrimsCount = FindWholeRandom(0, pilgrimsMax);
@@ -154,9 +250,7 @@ function GameTurn() {
         pilgrimLifetimeIncome += thisWeeksTake;
         if (week == 1 && year % 10 == 0) { relicCount++; }
     }
-
     if (player.canExport || player.hasExportedFish) { Shipping(); }
-
     if (player.hasHiredBronzeworkers) {
         ForgeBronze();
         if (crystalTimer < crystalTimerLimit && player.hasAtelier) {
@@ -169,178 +263,52 @@ function GameTurn() {
             }
         }
     }
-
     if (player.hasHiredGemcutters) { CutCrystals(); }
-
     if (player.hasHospital) { TreatPatients(); }
-
+    if (player.hasCourthouse) { DraftLaws(); }
     if (player.hasBakery) { WorkshopProduction(); }
+    if (fishState.hasFishermen) { FisherboysWork(); }
+    // -- PERFORM TASKS FOR THIS TURN -(END)------------------------------------------------------------------------
 
-    if (fishState.hasFishermen) {
-        let outputThisWeek = 0;
-        if (!fishState.hasNets) {
-            outputThisWeek = fishermenBounty * filetsPerFish[0];
-            lifetimeFishermanCaught[0] += outputThisWeek;
-        }
-        else {
-            outputThisWeek = fishermenBounty * filetsPerFish[1];
-            lifetimeFishermanCaught[1] += outputThisWeek;
-        }
-        filetCount += outputThisWeek;
-        lifetimeFishermenEarnings += outputThisWeek;
-        filetCount -= fishermenHired * fishermenPay;
-        filetsSpent[7] += fishermenHired * fishermenPay;
-        filetCount -= fishcuttersHired * fishcuttersPay;
-        filetsSpent[8] += fishcuttersHired * fishcuttersPay;
-        if (lifetimeStockfishProduced > 0) {
-            filetCount -= tannersHired * tannersPay;
-            filetsSpent[9] += tannersHired * tannersPay;
-        }
-        if (filetCount > freshFiletCapacity) {
-            if (lifetimeStockfishProduced == 0) {
-                gameEventTrigger = true;
-                gameEventContainer = displayStoryCanShipFish;
-            }
-            filetsAgedOut = filetCount - freshFiletCapacity;
-            filetCount -= filetsAgedOut;
-            stockfishCount += filetsAgedOut;
-            lifetimeStockfishProduced += filetsAgedOut;
-        }
-    }
-
-    // -- FLAVOUR TEXT EVENTS --------------------------------------------------------------------------------------
-    if (year == 13 && week == 12) {
-        // en.wikipedia.org/wiki/Treaty_of_Apamea (week unknown, chosen at random)
+    // -- CRITICAL PATH EVENTS -(BEGIN)-----------------------------------------------------------------------------
+    if (farmStage == 1 && bushelCount[0] > 88 && !player.hasMildewed) {
+        player.hasMildewed = true;
+        bushelCount[0] = Math.floor((bushelCount[0] * 0.1));
         gameEventTrigger = true;
-        gameEventContainer = displayStorySeleucids;
+        gameEventContainer = displayStoryFarmMildew;
+        PlaySound(audioMessage);
     }
-    if (year == 34 && week == 25) {
-        // en.wikipedia.org/wiki/Maccabean_Revolt (week unknown, chosen at random)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryMaccabees;
-    }
-    if (year == 55 && week == 20) {
-        // en.wikipedia.org/wiki/Battle_of_Corinth_(146_BC) (battle occurred in summertime)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryRomanConquestofGreece;
-    }
-    if (year == 79 && week == 30) {
-        // en.wikipedia.org/wiki/Roman%E2%80%93Gallic_wars (years long conflict, week chosen at random)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryGaul;
-    }
-    if (year == 110 && week == 45) {
-        // en.wikipedia.org/wiki/Social_War_(91%E2%80%9387_BC) ('The war started in late 91 BC', according to Wiki)
-        gameEventTrigger = true;
-        gameEventContainer = displayStorySocialWar;
-    }
-    if (year == 125 && week == 33) {
-        // (⚠️⚠️⚠️ for the life of me I can not find/remember the source where I originally found this information! 🤬 ⚠️⚠️⚠️)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryRomanBreadRiot;
-    }
-    if (year == 130 && week == 14) {
-        // en.wikipedia.org/wiki/Battle_of_the_Silarius_River (battle occurred in April)
-        gameEventTrigger = true;
-        gameEventContainer = displayStorySpartacus;
-    }
-    if (year == 138 && week == 24) {
-        // en.wikipedia.org/wiki/Siege_of_Jerusalem_(63_BC) (supposedly took place in June or July)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryJerusalem;
-    }
-    if (year == 151 && week == 37) {
-        // en.wikipedia.org/wiki/Gallic_Wars ('There is no precise end date to the war', according to Wiki; week chosen at random)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryRomanConquestofFrance;
-    }
-    if (year == 156 && week == 2) {
-        // en.wikipedia.org/wiki/Julian_calendar ('It took effect on 1 January 45 BC', according to Wiki)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryJulian;
-    }
-    if (year == 157 && week == 11) {
-        // en.wikipedia.org/wiki/Assassination_of_Julius_Caesar (Beware the Ides of March)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryIdesOfMarch;
-    }
-    if (year == 159 && week == 40) {
-        // en.wikipedia.org/wiki/Battle_of_Philippi (October 23rd)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryRevenge;
-    }
-    if (year == 171 && week == 30) {
-        // en.wikipedia.org/wiki/Death_of_Cleopatra (either August 10th or 12th)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryCleopatra;
-    }
-    if (year == 174 && week == 4) {
-        // en.wikipedia.org/wiki/Principate (January 27th)
-        gameEventTrigger = true;
-        gameEventContainer = displayStoryRomanEmpire;
-    }
-
-    if (year == 450 && week == 5) {
-        gameEventTrigger = true;
-        gameEventContainer = displayStory450Years;
-    }
-    if (year == 970 && week == 2) {
-        gameEventTrigger = true;
-        gameEventContainer = displayStory900Years;
-    }
-    if (year == 970 && week == 6) {
-        gameEventTrigger = true;
-        gameEventContainer = displayStory901Years;
-    }
-
-    if (player.hasBecomeHeir && week == heirDate[0] && !player.hasCelebratedAnniversary) {
-        player.hasCelebratedAnniversary = true;
-        gameEventTrigger = true;
-        Translate(player.speaks, false); // not sure if this is necessary or not (we're probably covered from when gender is set, for example, but why risk it?)
-        gameEventContainer = displayStoryFirstAnniversary;
-    }
-
-    if (player.hasBecomeHeir && week == heirAttributes.birthday[3]) { heirAttributes.age[1]++; }
-    if (player.hasBecomeHeir && week == heirAttributes.birthday[3] && !player.hasCelebratedBirthday) {
-        player.hasCelebratedBirthday = true;
-        gameEventTrigger = true;
-        Translate(player.speaks, false); // this repopulates the correct year for the string used in the following method call
-        gameEventContainer = displayStoryFirstBirthday;
-    }
-
-    // -- CRITICAL PATH EVENTS -------------------------------------------------------------------------------------
     if (player.isAt == 'Map' && player.hasHelpedMiners && player.hasHelpedShepherds && !player.hasBeenSummoned) {
         player.hasBeenSummoned = true;
         gameEventTrigger = true;
         mapProvinces[2][2] = 1;
         gameEventContainer = displayStoryFarmersSummon;
+        PlaySound(audioMoSummon);
     }
     if (player.isAt == 'Farmers' && !player.hasBeenReceived) {
         player.hasBeenReceived = true;
         gameEventTrigger = true;
         gameEventContainer = displayStoryFarmersFirstImpression;
+        PlaySound(audioFarm);
     }
+    // -- CRITICAL PATH EVENTS -(END)-------------------------------------------------------------------------------
 
     // -- WRAP UP --------------------------------------------------------------------------------------------------
     if (player.likesRecords) {
-        //snapshotThisTurn = CollateGameStateReport();
-        //reportOutputToWriteToDiskForDataAnalysis = snapshotThisTurn - snapshotLastTurn;
+        //snapshotThisTurn = CollateGameStateReport();                                    // (⚠️ see above ↑ )
+        //reportOutputToWriteToDiskForDataAnalysis = snapshotThisTurn - snapshotLastTurn; // (⚠️ see above ↑ )
         WriteReportToDisk();
     }
-
     if (week == 1 && year > 1 && player.isAt != 'Workshop') {
         if (year == 2) { timeAtStart = new Date(); }
         RecordProgress();
     }
-
     UpdateDisplay();
-
     if (gameSpeed == 'standard' && player.likesAnimations) {
         globalAnimationFrame = 1;
         clearTimeout(timeoutCanvases);
         timeoutCanvases = setTimeout(AnimateCanvases, animationInterval);
     }
-
     if (gameEventTrigger) {
         gameEventTrigger = false;
         setTimeout(FireGameEvent, 50);
@@ -350,7 +318,8 @@ function GameTurn() {
 
 
 function FireGameEvent() {
-    if (player.likesStory) { GameEvent(gameEventContainer, null, true); }
+    PlaySound(audioTrumpet);
+    GameEvent(gameEventContainer);
 }
 
 
@@ -374,7 +343,6 @@ function FruitOlives() {
             if (year == (olivePlantDate[1] + 8)) {
                 gameEventTrigger = true;
                 gameEventContainer = displayStoryOlives;
-                //if (player.likesStory) { GameEvent(displayStoryOlives, 'buy_olives', false); }
                 player.canBarter = true;
             }
             for (let i = 0; i < arrayOlivar.length; i++) { arrayOlivar[i] = 1; }
@@ -605,10 +573,17 @@ function CutCrystals() {
 function TreatPatients() {
     patientsCount = FindWholeRandom(patientsMin, patientsMax);
     totalPatientsSeen += patientsCount;
-    const thisTurnCost = patientsCount * patientCost;
-    asCount -= thisTurnCost;
-    asSpent += thisTurnCost;
-    medicalLifetimeCost += thisTurnCost;
+    if (player.hasWon) {
+        const thisTurnIncome = patientsCount * patientPrice;
+        asCount += thisTurnIncome;
+        medicalLifetimeProfit += thisTurnIncome;
+    }
+    else {
+        const thisTurnCost = patientsCount * patientCost;
+        asCount -= thisTurnCost;
+        asSpent += thisTurnCost;
+        medicalLifetimeCost += thisTurnCost;
+    }
 }
 
 
@@ -617,6 +592,14 @@ function AccrueInterest() {
     const interestAmount = Math.floor(asCount * (interestRate / 12));
     asCount += interestAmount;
     interestLifetimeCollected += interestAmount;
+}
+
+
+
+function CollectTax() {
+    const calculatedTaxValue = residentsCount * taxesValue;
+    asCount += calculatedTaxValue;
+    taxesLifetimeCollected += calculatedTaxValue;
 }
 
 
@@ -646,6 +629,7 @@ function Shipping() {
             if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[0] += bounty;
+            if (bounty != 0) { FireShipmentAudio(); }
         }
     }
 
@@ -660,6 +644,7 @@ function Shipping() {
             if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[1] += bounty;
+            if (bounty != 0) { FireShipmentAudio(); }
         }
     }
 
@@ -674,6 +659,7 @@ function Shipping() {
             if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[2] += bounty;
+            if (bounty != 0) { FireShipmentAudio(); }
         }
     }
 
@@ -688,6 +674,7 @@ function Shipping() {
             if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[3] += bounty;
+            if (bounty != 0) { FireShipmentAudio(); }
         }
     }
 
@@ -702,6 +689,7 @@ function Shipping() {
             if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[4] += bounty;
+            if (bounty != 0) { FireShipmentAudio(); }
         }
     }
 
@@ -716,6 +704,7 @@ function Shipping() {
             if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[5] += bounty;
+            if (bounty != 0) { FireShipmentAudio(); }
         }
     }
 
@@ -729,6 +718,7 @@ function Shipping() {
             if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             shipmentProfits[6] += bounty;
+            if (bounty != 0) { FireShipmentAudio(); }
         }
     }
 
@@ -747,6 +737,7 @@ function Shipping() {
                 bounty = bounty - workshopShare;
             }
             ingotsTinCount += bounty;
+            if (bounty != 0) { FireShipmentAudio(); }
         }
     }
 
@@ -759,6 +750,7 @@ function Shipping() {
             let bounty = importAmount[1];
             residenceIngredientInStockCount[14][1] += bounty;
             residenceIngredientConsumedCount[14][1] += bounty;
+            if (bounty != 0) { FireShipmentAudio(); }
         }
     }
 
@@ -772,6 +764,13 @@ function Shipping() {
             if (player.hasNavy) { bounty += Math.ceil(bounty / 4); }
             asCount += bounty;
             lifetimeStockfishProfit += bounty;
+            if (bounty != 0) { FireShipmentAudio(); }
+        }
+    }
+    function FireShipmentAudio() {
+        if (player.isAt == 'Port' && player.likesTickTock && (gameSpeed == 'standard' || gameSpeed == 'fast')) {
+            PlaySound(audioChaChing);
+            PlaySound(audioHorn);
         }
     }
 }
@@ -799,6 +798,7 @@ function PayWorkerGroup(howManyToPay, whoToPay) {
 
 function FieldhandWork() {
     PayWorkerGroup(handsHired, 0);
+    let gruntGrunted = false;
     if (vigneronsHired > 0) { PayWorkerGroup(vigneronsHired, 6); }
     if (arboristsHired > 0) { PayWorkerGroup(arboristsHired, 7); }
     if (horticulturalistsHired > 0) { PayWorkerGroup(horticulturalistsHired, 8); }
@@ -809,7 +809,8 @@ function FieldhandWork() {
             taskComplete = PlotHarvest(true);
             if (!taskComplete) { taskComplete = PlotWater(true); }
             if (!taskComplete) { taskComplete = PlotPlant(true); }
-            if (!taskComplete) { PlotTill(true); }
+            if (!taskComplete) { taskComplete = PlotTill(true); }
+            if (taskComplete) { gruntGrunted = true; }
         }
     }
     else if (priority == 'Sow') {
@@ -818,13 +819,51 @@ function FieldhandWork() {
             taskComplete = PlotTill(true);
             if (!taskComplete) { taskComplete = PlotPlant(true); }
             if (!taskComplete) { taskComplete = PlotWater(true); }
-            if (!taskComplete) { PlotHarvest(true); }
+            if (!taskComplete) { taskComplete = PlotHarvest(true); }
+            if (taskComplete) { gruntGrunted = true; }
         }
     }
     else {
         //console.log('🍕 cowabunga, dude 🤙'); // truly, Turtle Power knows no limit 🥋🐢🗡️
         weeksOfHoliday++;
-        manweeksLost += laborForceTally;
+        manweeksShamefullyLost += laborForceTally;
+        if (player.isAt == 'Praedium' && player.likesTickTock && (gameSpeed == 'standard' || gameSpeed == 'fast')) { PlaySound(audioParty); }
+    }
+    if (gruntGrunted && player.isAt == 'Praedium' && player.likesTickTock && (gameSpeed == 'standard' || gameSpeed == 'fast')) { PlaySound(audioGrunt); }
+}
+
+
+
+function FisherboysWork() {
+    let outputThisWeek = 0;
+    if (!fishState.hasNets) {
+        outputThisWeek = fishermenBounty * filetsPerFish[0];
+        lifetimeFishermanCaught[0] += outputThisWeek;
+    }
+    else {
+        outputThisWeek = fishermenBounty * filetsPerFish[1];
+        lifetimeFishermanCaught[1] += outputThisWeek;
+    }
+    if (player.hasWon) { outputThisWeek = outputThisWeek * 100; }
+    filetCount += outputThisWeek;
+    lifetimeFishermenEarnings += outputThisWeek;
+    filetCount -= fishermenHired * fishermenPay;
+    filetsSpent[7] += fishermenHired * fishermenPay;
+    filetCount -= fishcuttersHired * fishcuttersPay;
+    filetsSpent[8] += fishcuttersHired * fishcuttersPay;
+    if (lifetimeStockfishProduced > 0) {
+        filetCount -= tannersHired * tannersPay;
+        filetsSpent[9] += tannersHired * tannersPay;
+    }
+    if (filetCount > freshFiletCapacity) {
+        if (lifetimeStockfishProduced == 0) {
+            gameEventTrigger = true;
+            gameEventContainer = displayStoryCanShipFish;
+        }
+        filetsAgedOut = filetCount - freshFiletCapacity;
+        filetCount -= filetsAgedOut;
+        stockfishCount += filetsAgedOut;
+        lifetimeStockfishProduced += filetsAgedOut;
     }
 }
 
@@ -916,6 +955,10 @@ function SmeltCopper() {
 
 function Migration() {
     if (FindWholeRandom(1, 3) != 3) {
+        if (player.isAt == 'Township' && player.likesTickTock && (gameSpeed == 'standard' || gameSpeed == 'fast')) {
+            if (player.hasWon) { PlaySound(audioHelloAlt); }
+            else { PlaySound(audioHello); }
+        }
         let newResidents = 1;
         if (FindWholeRandom(1, 10) == 1) {
             newResidents = 2;
@@ -980,6 +1023,16 @@ function FeedHorses() {
 
 function ScribeWisdom() {
     if (week == 1 || week == 14 || week == 27 || week == 40) { scrollsCount += scrollsIncAmount; }
+}
+
+
+
+function DraftLaws() {
+    let newLaws = 1;
+    if (FindWholeRandom(1, 3) == 3) { newLaws++; }
+    if (FindWholeRandom(1, 6) == 3) { newLaws += 5; }
+    if (FindWholeRandom(1, 9) == 3) { newLaws += 10; }
+    lawsCount += newLaws;
 }
 
 

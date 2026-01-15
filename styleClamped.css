@@ -772,6 +772,11 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     height: calc(38px * var(--pixel-scale));
 }
 
+#buttonFarmersEvents img {
+    width: calc(130px * var(--pixel-scale));
+    height: calc(135px * var(--pixel-scale));
+}
+
 
 
 /* // OVERLAYS ////////////////////////////////////////////////////////////////////////////////// */
@@ -924,12 +929,31 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
 }
 
 #divSystemMessageCorpus #divMusicCredits,
+#divSystemMessageCorpus #divFontsCredits,
 #divSystemMessageCorpus #divHechoEnFlorida {
     font-family: 'EB Garamond', serif;
     font-size: calc(18px * var(--pixel-scale));
     color: #040412;
     line-height: calc(26px * var(--pixel-scale));
     text-align: center;
+}
+
+#divMusicCreditsWrap,
+#divFontsCreditsWrap {
+    position: relative;
+    border: 1px solid black;
+    padding: calc(30px * var(--pixel-scale)) calc(5px * var(--pixel-scale)) calc(25px * var(--pixel-scale)) calc(5px * var(--pixel-scale));
+}
+
+#divMusicCreditsTitle,
+#divFontsCreditsTitle {
+    background: #d7ebfa;
+    position: absolute;
+    font-size: calc(21px * var(--pixel-scale));
+    padding: calc(10px * var(--pixel-scale));
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #divSystemMessageCorpus #divTextCredits {
@@ -979,24 +1003,35 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     font-family: 'EB Garamond', serif;
     font-weight: bold;
     color: #040412;
-    font-size: calc(35px * var(--pixel-scale));
     text-align: center;
-    line-height: calc(12px * var(--pixel-scale));
     margin: calc(14px * var(--pixel-scale)) auto calc(32px * var(--pixel-scale)) auto;
+}
+
+#divInfoTitle #spanInfoTitleLITERAL {
+    font-family: 'EB Garamond', serif;
+    font-weight: bold;
+    color: #040412;
+    font-size: calc(50px * var(--pixel-scale));
+}
+
+#divInfoTitle #divInfoSubtitle {
+    font-family: 'EB Garamond', serif;
+    font-weight: normal;
+    font-size: calc(27px * var(--pixel-scale));
+    line-height: calc(25px * var(--pixel-scale));
 }
 
 #spanInfoVersion {
     font-family: 'EB Garamond', serif;
     font-weight: bold;
     color: #040412;
-    font-size: calc(8px * var(--pixel-scale));
 }
 
 #spanInfoCC0 {
     font-family: 'EB Garamond', serif;
     font-weight: bold;
     color: #040412;
-    font-size: calc(7px * var(--pixel-scale));
+    font-size: calc(9px * var(--pixel-scale));
 }
 
 #divSystemMessageSource {
@@ -1292,9 +1327,45 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     font-style: italic;
 }
 
+#divGameEventCorpus .Eiffel65 {
+    font-family: 'EB Garamond', serif;
+    font-size: calc(18px * var(--pixel-scale));
+    color: #3c14dc;
+}
+
 #divGameEventCorpus #imgTentIcon {
     width: calc(44px * var(--pixel-scale));
     height: calc(54px * var(--pixel-scale));
+}
+
+#divGameEventCorpus #imgClipperIcon {
+    width: calc(48px * var(--pixel-scale));
+    height: calc(33px * var(--pixel-scale));
+}
+
+#divGameEventCorpus #imgWagonsIcon {
+    width: calc(110px * var(--pixel-scale));
+    height: calc(39px * var(--pixel-scale));
+}
+
+#divGameEventCorpus #imgRodIcon {
+    width: calc(34px * var(--pixel-scale));
+    height: calc(34px * var(--pixel-scale));
+}
+
+#divGameEventCorpus #imgLadsIcon {
+    width: calc(236px * var(--pixel-scale));
+    height: calc(158px * var(--pixel-scale));
+}
+
+#divGameEventCorpus #imgBedsideIcon {
+    width: calc(296px * var(--pixel-scale));
+    height: calc(158px * var(--pixel-scale));
+}
+
+#divGameEventCorpus #imgShoppesIcon {
+    width: calc(146px * var(--pixel-scale));
+    height: calc(98px * var(--pixel-scale));
 }
 
 #divGameEventCorpus #imgTributeTreasure {
@@ -1428,6 +1499,21 @@ body #divGameWindow #divViewTownship #divVillageButtons .BuyStoneMarginOverrideC
     width: calc(13px * var(--pixel-scale));
     height: calc(13px * var(--pixel-scale));
     /*outline: 2px solid #005ca1;*/
+}
+
+#divVolumeMusic,
+#divVolumeSounds {
+    color: #b6b600;
+}
+
+#divModalOptions div#divVolumeSounds {
+    margin-bottom: calc(10px * var(--pixel-scale));
+}
+
+#divModalOptions #labelVolumeMusic,
+#divModalOptions #labelVolumeSounds {
+    font-family: 'Typewriter', monospace;
+    font-size: calc(12px * var(--pixel-scale));
 }
 
 #divModalOptions #spanOptionLanguage,
@@ -3080,6 +3166,26 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     --j: 20;
 }
 
+.JötunnQ1 {
+    --i: 28;
+    --j: 20;
+}
+
+.JötunnQ2 {
+    --i: 29;
+    --j: 20;
+}
+
+.JötunnQ3 {
+    --i: 28;
+    --j: 21;
+}
+
+.JötunnQ4 {
+    --i: 29;
+    --j: 21;
+}
+
 .Avatar {
     --i: 26;
     --j: 20;
@@ -3545,6 +3651,11 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 .Scroll {
     --i: 4;
     --j: 15;
+}
+
+.OtherScroll {
+    --i: 26;
+    --j: 22;
 }
 
 .FarmerJoe {
@@ -4023,35 +4134,35 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 .HeirGenderIconMaleSm {
-    background-position: calc(1 * -32px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+    background-position: calc(3 * -32px * var(--pixel-scale)) calc(3 * -272px * var(--pixel-scale));
 }
 
 .HeirGenderIconFemaleSm {
-    background-position: calc(1 * -48px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+    background-position: calc(3 * -48px * var(--pixel-scale)) calc(3 * -272px * var(--pixel-scale));
 }
 
 .HeirGenderIconMaleTransSm {
-    background-position: calc(1 * -64px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+    background-position: calc(3 * -64px * var(--pixel-scale)) calc(3 * -272px * var(--pixel-scale));
 }
 
 .HeirGenderIconFemaleTransSm {
-    background-position: calc(1 * -80px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+    background-position: calc(3 * -80px * var(--pixel-scale)) calc(3 * -272px * var(--pixel-scale));
 }
 
 .HeirGenderIconIntersexSm {
-    background-position: calc(1 * -96px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+    background-position: calc(3 * -96px * var(--pixel-scale)) calc(3 * -272px * var(--pixel-scale));
 }
 
 .HeirGenderIconNobinarioSm {
-    background-position: calc(1 * -112px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+    background-position: calc(3 * -112px * var(--pixel-scale)) calc(3 * -272px * var(--pixel-scale));
 }
 
 .HeirGenderIconOmnigenderSm {
-    background-position: calc(1 * -128px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+    background-position: calc(3 * -128px * var(--pixel-scale)) calc(3 * -272px * var(--pixel-scale));
 }
 
 .HeirGenderIconAgenderSm {
-    background-position: calc(1 * -144px * var(--pixel-scale)) calc(1 * -272px * var(--pixel-scale));
+    background-position: calc(3 * -144px * var(--pixel-scale)) calc(3 * -272px * var(--pixel-scale));
 }
 
 #buttonHeirChooseGender {
@@ -4099,18 +4210,228 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 }
 
 #divViewHeirWorkshop #divHeirWorkshopSummary #divHeirSelectedGender {
-    width: calc(1 * 16px * var(--pixel-scale));
-    height: calc(1 * 16px * var(--pixel-scale));
-    margin: 0;
+    width: calc(3 * 16px * var(--pixel-scale));
+    height: calc(3 * 16px * var(--pixel-scale));
+    margin: calc(2px * var(--pixel-scale)) auto 0 auto;
     display: inline-block;
     /* ⚠️ TILEMAP HEIGHT ⚠️ */
-    background-size: calc(1 * 512px * var(--pixel-scale)) calc(1 * 416px * var(--pixel-scale));
+    background-size: calc(3 * 512px * var(--pixel-scale)) calc(3 * 416px * var(--pixel-scale));
 }
 
 #divViewHeirWorkshop #divHeirWorkshopSummary #divHeirMasthead,
 #divViewHeirWorkshop #divHeirWorkshopSummary #divHeirMasthead b,
 #divViewHeirWorkshop #divHeirWorkshopSummary #divHeirMasthead span {
     font-size: calc(21px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary input[type='color'] {
+    margin-top: calc(2px * var(--pixel-scale));
+    width: calc(40px * var(--pixel-scale));
+    height: calc(30px * var(--pixel-scale));
+    padding: 0;
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #canvasEyeDiagram {
+    width: calc(107px * 2 * var(--pixel-scale));
+    display: block;
+    margin: calc(5px * var(--pixel-scale)) auto 0 auto;
+    border: 0;
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #labelEyeColourA {
+    display: block;
+    width: fit-content;
+    margin: calc(5px * var(--pixel-scale)) auto 0 auto;
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #labelEyeColourA,
+#divViewHeirWorkshop #divHeirWorkshopSummary #labelEyeColourB,
+#divViewHeirWorkshop #divHeirWorkshopSummary #labelEyeColourC {
+    color: #aaa;
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary input#inputEyeColourA {
+    width: calc(60px * var(--pixel-scale));
+    height: calc(45px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div input.cosmetics {
+    margin: calc(3px * var(--pixel-scale)) auto 0 auto;
+    width: calc(120px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div input.cosmetics.lipstick {
+    display: block;
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div input.cosmetics.eyeshadow {
+    margin-top: calc(3px * var(--pixel-scale));
+    height: calc(90px * var(--pixel-scale));
+    width: calc(70px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div input.cosmetics.rouge {
+    width: calc(240px * var(--pixel-scale));
+    height: calc(90px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div input.cosmetics.nails {
+    width: calc(22px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour1,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour2,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour3,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour4,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour5,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour6,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour7,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour8,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour9,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour10,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour11,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour12,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour13,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour14,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour15,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour16,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour17,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour18,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour19,
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour20 {
+    position: absolute;
+}
+
+
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour1 {
+    top: calc(36px * var(--pixel-scale));
+    left: calc(-12px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour2 {
+    top: calc(-6px * var(--pixel-scale));
+    left: calc(10px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour3 {
+    top: calc(-34px * var(--pixel-scale));
+    left: calc(42px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour4 {
+    top: calc(-28px * var(--pixel-scale));
+    left: calc(82px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour5 {
+    top: calc(36px * var(--pixel-scale));
+    left: calc(122px * var(--pixel-scale));
+}
+
+
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour6 {
+    top: calc(36px * var(--pixel-scale));
+    left: calc(10px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour7 {
+    top: calc(-28px * var(--pixel-scale));
+    left: calc(51px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour8 {
+    top: calc(-34px * var(--pixel-scale));
+    left: calc(90px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour9 {
+    top: calc(-6px * var(--pixel-scale));
+    left: calc(123px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour10 {
+    top: calc(36px * var(--pixel-scale));
+    left: calc(145px * var(--pixel-scale));
+}
+
+
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour11 {
+    top: calc(8px * var(--pixel-scale));
+    left: calc(-28px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour12 {
+    top: calc(-12px * var(--pixel-scale));
+    left: calc(-3px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour13 {
+    top: calc(-26px * var(--pixel-scale));
+    left: calc(22px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour14 {
+    top: calc(-36px * var(--pixel-scale));
+    left: calc(47px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour15 {
+    top: calc(-38px * var(--pixel-scale));
+    left: calc(72px * var(--pixel-scale));
+}
+
+
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour16 {
+    top: calc(-38px * var(--pixel-scale));
+    left: calc(-10px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour17 {
+    top: calc(-36px * var(--pixel-scale));
+    left: calc(15px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour18 {
+    top: calc(-26px * var(--pixel-scale));
+    left: calc(40px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour19 {
+    top: calc(-12px * var(--pixel-scale));
+    left: calc(65px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary div #inputNailsColour20 {
+    top: calc(8px * var(--pixel-scale));
+    left: calc(90px * var(--pixel-scale));
+}
+
+
+
+#divViewHeirWorkshop #divHeirWorkshopSummary .handModel {
+    height: calc(23px * 6 * var(--pixel-scale));
+    width: calc(26px * 6 * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary .footModel {
+    height: calc(29px * 6 * var(--pixel-scale));
+    width: calc(14px * 6 * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary .handModelWrapper {
+    position: relative;
+    display: inline-block;
+    margin-top: calc(40px * var(--pixel-scale));
+    width: fit-content;
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #sinisterHand,
+#divViewHeirWorkshop #divHeirWorkshopSummary #sinisterFoot {
+    transform: scaleX(-1);
 }
 
 #divViewHeirWorkshop #divHeirWorkshopSummary #divHeirBoxOptions {
@@ -4131,6 +4452,13 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
     border: 1px solid black;
     padding: calc(10px * var(--pixel-scale));
     margin-top: calc(32px * var(--pixel-scale));
+}
+
+#divViewHeirWorkshop #divHeirWorkshopSummary #divHeirBoxQuestionnaire {
+    border: 1px solid black;
+    width: 80%;
+    padding: calc(10px * var(--pixel-scale));
+    margin: calc(32px * var(--pixel-scale)) auto 0 auto;
 }
 
 #divViewHeirWorkshop #divHeirWorkshopSummary label {
@@ -4352,6 +4680,9 @@ html body div#divMinigameFishing table#tableFishInventory tbody tr td.rightPadCo
 #buttonStar,
 #divOverlayResume,
 #divOverlayOptions,
+#divVolumeMusic,
+#divVolumeSounds,
+#divTickTockVisibilityContainer,
 #tableFarmInventory,
 #tableFarmStaff,
 #tableFarmReport,
@@ -5409,6 +5740,23 @@ body #divMinigameStage #divStageCorpus .stageHeadingShortLine {
     font-size: calc(26px * var(--pixel-scale));
     line-height: calc(12px * var(--pixel-scale));
     margin-bottom: calc(12px * var(--pixel-scale));
+}
+
+body #divMinigameStage #divStageCorpus #divFigLeafContainer {
+    position: relative;
+    width: calc(402px * var(--pixel-scale));
+    margin: 0 auto;
+}
+
+body #divMinigameStage #divStageCorpus #divFigLeafContainer #imgFigLeaf {
+    position: absolute;
+    display: block;
+    top: calc(342px * var(--pixel-scale));
+    left: calc(180px * var(--pixel-scale));
+    width: calc(50px * var(--pixel-scale));
+    height: calc(62px * var(--pixel-scale));
+    pointer-events: all;
+    touch-action: auto;
 }
 
 #divStageCorpus .stageHeadingShortLine #stageHeadingStructure {

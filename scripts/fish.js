@@ -1,7 +1,7 @@
 // ۞ FISHING ***************************************************************************************
 // *************************************************************************************************
 
-// --- UTILITIES/SYSTEM ----------------------------------------------------------------------------
+// --- UTILITIES -----------------------------------------------------------------------------------
 
 function FishTimerBehaviour() {
     fishTimeLeft -= fishTimerIntervalSeconds;
@@ -13,6 +13,7 @@ function FishTimerBehaviour() {
     if (fishTimeLeft > 0) {
         if (!fishAvailable) {
             if (FindWholeRandom(1, fishAvailableChanceUpperLimit) == 1) {
+                PlaySound(audioSplash);
                 fishAvailable = true;
                 const threeSidedDie = FindWholeRandom(1, 3);
                 let modifier = 0;
@@ -26,6 +27,8 @@ function FishTimerBehaviour() {
                 fishAvailableCountdown -= fishTimerIntervalSeconds;
             }
             else {
+                KillSound(audioSplash);
+                PlaySound(audioDash);
                 fishEscapeCountSession++;
                 fishEscapeCountLifetime++;
                 fishAvailable = false;
@@ -47,6 +50,7 @@ function FishTimerBehaviour() {
 
 function EndFishGame() {
     StopMusic();
+    KillAllSounds();
     PlaySound(audioWhistle);
 
     fishGameOver = true;
@@ -70,7 +74,7 @@ function EndFishGame() {
     lifetimeFishEarnings += fishRewardTotal;
     UpdateDisplay();
 
-    //populate final window====================
+    // populate final window ====================
     let finalString = displayCatchReportTitle;
     finalString += '<div id="divCatchReportDivider"></div>'
     finalString += displayCatchReportYouCaught + ':';
@@ -201,7 +205,7 @@ function EndFishGame() {
     }
     finalString += '</div>'
 
-    //pop up final window==================
+    // pop up final window ==================
     GameEvent(finalString, null, true, false);
 
     RecordProgress();
@@ -213,6 +217,9 @@ function EndFishGame() {
 
 function InitNewFishGame() {
     PlayMusic(audioFish);
+    PlaySound(audioWaterAmbient);
+    PlaySound(audioWhistle);
+    PlaySound(audioClack);
     player.hasFished = true;
     fishWarmup = false;
     fishGameOver = false;
@@ -242,15 +249,21 @@ function InitNewFishGame() {
         fishWarmup = false;
         fishTimerLoop = setTimeout(FishTimerBehaviour, fishTimerIntervalMilliseconds);
     }, 3800);
+    setTimeout(() => {
+        PlaySound(audioGunshot);
+    }, 3000);
     UpdateFishDisplay();
 }
 
 
 
 function FishButton() {
+    PlaySound(audioClick);
     if (!fishGameOver && !fishInNet && fishGameStarted) {
         if (!fishButtonStunned) {
             if (fishAvailable) {
+                KillSound(audioSplash);
+                PlaySound(audioYeah);
                 clearTimeout(fishTimerLoop);
                 fishAvailable = false;
                 fishInNet = true;
@@ -269,11 +282,15 @@ function FishButton() {
                 if (caughtFishLifetime[4] > 0) { hasCaughtTheBigOne = true; }
                 else if (caughtFishLifetime[5] > 0) { hasCaughtTheBigOne = true; }
                 if (totalityOfFish > 19 && !hasCaughtTheBigOne) { caughtFishType = 4; }
-                if (caughtFishType == 4) { ShowToast(); }
+                if (caughtFishType == 4) {
+                    ShowToast();
+                    PlaySound(audioKoolAidMan);
+                }
                 fishGreatCatch = false;
                 if (fishAvailableCountdownMax - fishAvailableCountdown < fishGreatCatchThresholdS) {
                     fishGreatCatch = true;
                     caughtFishType++;
+                    PlaySound(audioToasty);
                 }
                 fishAvailableCountdown = 0;
                 caughtFishSession[caughtFishType]++;
@@ -286,11 +303,15 @@ function FishButton() {
                 }, fishInNetDurationMS);
             }
             else {
+                PlaySound(audioSwish);
                 fishButtonStunned = true;
                 ShiverMeFishButton();
             }
         }
-        else { ShiverMeFishButton(); }
+        else {
+            PlaySound(audioSwish);
+            ShiverMeFishButton();
+        }
     }
     UpdateFishDisplay();
 }
@@ -300,10 +321,15 @@ function FishButton() {
 function WharfEvents() {
     if (!fishGameStarted && !fishWarmup) {
         if (totalCatches < priceWharf[0]) {
-            //alert('You must catch more fish for some arbitrary reason!');
+            PlaySound(audioWasteTime);
+            PlaySound(audioWompWomp);
+            GameEvent(displayStoryWharfYeahRight);
         }
         else {
             if (fishState.hasWharf) {
+                KillAmbience();
+                PlaySound(ambienceSeagull);
+                PlaySound(audioShopBell);
                 divMinigameFishing.style.display = '';
                 divViewWharf.style.display = 'block';
                 divViewWharf.appendChild(divFooter);
@@ -311,14 +337,17 @@ function WharfEvents() {
                 JumpToTopPlease();
                 if (!fishState.hasSeenWharf) {
                     fishState.hasSeenWharf = true;
-                    if (player.likesStory) { GameEvent(displayStoryWharfFirstVisit); }
+                    GameEvent(displayStoryWharfFirstVisit);
                 }
             }
             else {
                 if (bushelCount[0] == priceWharf[1]) {
-                    if (player.likesStory) { GameEvent(displayStoryNotEnoughFish); }
+                    PlaySound(audioNoWork);
+                    GameEvent(displayStoryNotEnoughFish);
                 }
                 else if (bushelCount[0] > priceWharf[1] && logsCount >= priceWharf[2] && boardsCount >= priceWharf[3] && stoneCount >= priceWharf[4]) {
+                    PlaySound(audioJasper);
+                    PlaySound(audioSaws2);
                     bushelCount[0] -= priceWharf[1];
                     spentCount[0] += priceWharf[1];
                     logsCount -= priceWharf[2];
@@ -327,12 +356,18 @@ function WharfEvents() {
                     forestSpentCount[1] += priceWharf[3];
                     stoneCount -= priceWharf[4];
                     mountainSpentCount[0] += priceWharf[4];
-                    if (player.likesStory) { GameEvent(displayStoryWharf); }
+                    GameEvent(displayStoryWharf);
                     fishState.hasWharf = true;
                 }
                 else {
-                    if (player.seesVillage) { if (player.likesStory) { GameEvent(displayStoryPoorVillage); } }
-                    else { if (player.likesStory) { GameEvent(displayStoryPoorFarm); } }
+                    if (player.seesVillage) {
+                        PlaySound(audioKingdomToRun);
+                        GameEvent(displayStoryPoorVillage);
+                    }
+                    else {
+                        PlaySound(audioWasteTime);
+                        GameEvent(displayStoryPoorFarm);
+                    }
                 }
             }
         }
@@ -343,45 +378,46 @@ function WharfEvents() {
 
 
 function PurchaseWharfItem(item) {
+    PlaySound(audioZeldaItem);
     if (item == 0 && player.hasBrewery) {
         fishState.hasPosca = true;
         stunnedFishButtonWiggleDurationS = '0.24s';
         stunnedFishButtonCountdownDurationMS = 300;
-        if (player.likesStory) { GameEvent('<span class="icon Grog inlineIcon quadrupleSize"></span><br><br>' + displayStoryWharfBuyPosca); }
+        GameEvent('<span class="icon Grog inlineIcon quadrupleSize"></span><br><br>' + displayStoryWharfBuyPosca);
     }
     if (item == 1 && (caughtFishLifetime[0] + caughtFishLifetime[1] >= 20)) {
         fishState.hasPrey = true;
         fishLargeChanceUpperLimit = 8;
-        if (player.likesStory) { GameEvent(displayStoryWharfBuyPrey); }
+        GameEvent(displayStoryWharfBuyPrey);
     }
     if (item == 2 && (caughtFishLifetime[2] + caughtFishLifetime[3] >= 10)) {
         fishState.hasChum = true;
         fishAvailableChanceUpperLimit = 8;
-        if (player.likesStory) { GameEvent('<span class="icon Chumbucket inlineIcon quadrupleSize"></span><br><br>' + displayStoryWharfBuyChum); }
+        GameEvent('<span class="icon Chumbucket inlineIcon quadrupleSize"></span><br><br>' + displayStoryWharfBuyChum);
     }
     if (item == 3 && villageStage > 0) {
         fishState.hasKnife = true;
         caughtFishBounty = [2, 4, 10, 20, 100, 200,];
-        if (player.likesStory) { GameEvent('<span class="icon BoningKnife inlineIcon sextupleSize"></span><br>' + displayStoryWharfBuyKnife); }
+        GameEvent('<span class="icon BoningKnife inlineIcon sextupleSize"></span><br>' + displayStoryWharfBuyKnife);
     }
     if (item == 4 && player.canSell) {
         fishState.hasBait = true;
         fishGreatCatchThresholdS = 0.4;
-        if (player.likesStory) { GameEvent(displayStoryWharfBuyBait); }
+        GameEvent(displayStoryWharfBuyBait);
     }
     if (item == 5 && beadsSpawn) {
         fishState.hasRod = true;
         fishAvailableCountdownMax = 1.0;
-        if (player.likesStory) { GameEvent(displayStoryWharfBuyRod); }
+        GameEvent(displayStoryWharfBuyRod);
     }
     if (item == 6 && villageStage > 20) {
         fishState.hasWWF = true;
         fishRareChanceUpperLimit = 80;
-        if (player.likesStory) { GameEvent(displayStoryWharfBuyWWF); }
+        GameEvent(displayStoryWharfBuyWWF);
     }
     if (item == 7 && player.hasCottage && fishState.hasFishermen) {
         fishState.hasNets = true;
-        if (player.likesStory) { GameEvent(displayStoryWharfBuyNets); }
+        GameEvent(displayStoryWharfBuyNets);
     }
     UpdateFishDisplay();
 }
@@ -389,8 +425,10 @@ function PurchaseWharfItem(item) {
 
 
 function HireFishboys() {
+    PlaySound(audioZeldaItem);
+    PlaySound(audioReadyToWork);
     if (residenceStage > 11) {
-        if (player.likesStory) { GameEvent(displayStoryWharfFishboys); }
+        GameEvent(displayStoryWharfFishboys);
         fishState.hasFishermen = true;
     }
     UpdateFishDisplay();
@@ -399,6 +437,7 @@ function HireFishboys() {
 
 
 function ChewFat() {
+    PlaySound(audioJasper);
     let gossipTopic = [
         'politics',
         'religion',
@@ -533,6 +572,10 @@ function ChewFat() {
 
 
 function LeaveTheStore() {
+    KillAmbience();
+    if (player.hasWon) { PlaySound(ambienceHarbor); }
+    else { PlaySound(ambienceStream); }
+    PlaySound(audioShopBell);
     divViewWharf.style.display = '';
     divMinigameFishing.style.display = 'block';
     divMinigameFishing.appendChild(divFooter);
@@ -667,6 +710,7 @@ function UpdateFishDisplay() {
     if (fishState.hasPrey) { canvasFishingHoleContext.drawImage(imageFish_BackdropStock, 0, 0); }
     if (fishState.hasWharf) { canvasFishingHoleContext.drawImage(imageFish_Wharf, 0, 0); }
     if (player.hasWon) { canvasFishingHoleContext.drawImage(imageFish_BackdropInca, 0, 0); }
+    if (player.hasWon && (!fishGameStarted && !fishWarmup)) { canvasFishingHoleContext.drawImage(imageFish_BackdropTTD, 0, 0); }
     if (cellHand != null) {
         canvasFishingHoleContext.drawImage(cellHand, 0, 0);
         if (fishState.hasBait && cellHand == imageFish_HandWarmup) { canvasFishingHoleContext.drawImage(imageFish_SuperwormChoice, 0, 0); }

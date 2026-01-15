@@ -4,7 +4,7 @@
 const displayGameTitle = 'PRAEDIUM';
 let displayGameEdition = '';
 
-const currencySymbol = '<s>𝐼</s>';
+let currencySymbol = '<s>𝐼</s>';
 
 const displayGender = ['', '', '', '', '', '', '', '',];
 let displayNations = ['',];
@@ -51,6 +51,8 @@ let displayMonthNames = [
 
 let heirReportDictionary = ['',];
 let displayDefiniteArticle = '';
+let displayUndocumented = '';
+let displayOpenRoad = '';
 let displayThouArt = '';
 let displayItIsI = '';
 let displayFirst = '';
@@ -59,6 +61,7 @@ let displayOK = '';
 let displayOptions = '';
 let displayMusic = '';
 let displaySounds = '';
+let displayTickTock = '';
 let displayAnimations = '';
 let displayProfanity = '';
 let displayLanguage = '';
@@ -103,7 +106,9 @@ let displayProduced = '';
 let displayProducedShort = '';
 let displayDispensed = '';
 let displayScore = '';
+let displayGross = '';
 let displayHomers = '';
+let displayMetricTons = '';
 let displayUnits = '';
 let displayUnit = '';
 let displayStarving = '';
@@ -189,6 +194,7 @@ let displayEntertainers = '';
 let displayBums = '';
 let displayPolice = '';
 let displaySoldiers = '';
+let displayNephilim = '';
 let displayDiamonds = '';
 let displayJacinth = '';
 let displayBismuth = '';
@@ -320,6 +326,7 @@ let displayStoryBuyArt = '';
 let displayStoryBuyArtAgain = '';
 let displayLabelTakeInAShow = '';
 let displayStoryStartPlay = '';
+let displayStoryNoGirlsAllowed = '';
 let displayStoryEndPlay = '';
 let displayStoryEndPlayEarly = '';
 let displayEndPlayEarlyConfirm = '';
@@ -329,6 +336,7 @@ let displayLabelLeaveTemple = '';
 let displayLabelPray = '';
 let displayLabelOffer = '';
 let displayStoryTempleFirstVisit = '';
+let displayStoryTempleFirstLeave = '';
 let displayStoryTemplePray = '';
 let displayStoryTemple0 = '';
 let displayStoryTemple1 = '';
@@ -409,6 +417,8 @@ let displayHeirConfirm = '';
 let displayHeirAnthropophagy = '';
 let displayNoSuchThing = ['',];
 let displayHeirComplete = '';
+let displayHeirGross = '';
+let displayHeirWow = '';
 
 let displayStoryRudeJerk = '';
 let displayStoryBrokenHoe = '';
@@ -603,6 +613,7 @@ let displayStoryResidence18 = '';
 let displayStoryResidence19 = '';
 let displayStoryParty = '';
 
+let displayStoryVillageReturnToPraedium = '';
 let displayStoryVillageFirstVisit = '';
 let displayStoryVillageNEG5 = '';
 let displayStoryVillageNEG4 = '';
@@ -712,6 +723,7 @@ let displayTourism = '';
 let displayTheArts = '';
 let displayWorship = '';
 let displayTribute = '';
+let displayCorpTax = '';
 let displayGaming = '';
 let displayMilitary = '';
 let displayMedical = '';
@@ -744,6 +756,7 @@ let displayChampionships = '';
 let displayWon = '';
 let displayChance = '';
 let displayScripture = '';
+let displayLaws = '';
 let displayRelic = '';
 let displayGhosts = '';
 let displayPatients = '';
@@ -812,7 +825,10 @@ let displayNextDelivery = '';
 
 let displayMapPrevTarget = '';
 let displayMapNextTarget = '';
+let displayMapPrevTargetAlt = '';
+let displayMapNextTargetAlt = '';
 let displayMapCurrTarget = '';
+let displayMapCurrTargetAlt = '';
 let displayMapDetails = '';
 let displayMapEcon = '';
 let displayMapMil = '';
@@ -880,6 +896,8 @@ let displayLabelShepherdsB = '';
 let displayLabelShepherdsC = '';
 let displayLabelFarmersA = '';
 let displayLabelFarmersB = '';
+let displayLabelFarmersC = '';
+let displayLabelFarmersD = '';
 
 let displayLastStory = '';
 let displayToBeContinued = '';
@@ -907,6 +925,7 @@ let displayInfoMadeFor = '';
 let displayInfoMadeWith = '';
 let displayInfoDedication = '';
 let displayInfoMusic = '';
+let displayInfoFonts = '';
 let displayInfoText = '';
 let displayInfoMadeInFlorida = '';
 let displayInfoThanks = '';
@@ -958,6 +977,7 @@ let displayStoryHikeGo = '';
 let displayStoryHikeLeave = '';
 let displayStoryHikeRelax = [];
 let displayStoryHikeEnough = '';
+let displayStoryHikeFine = '';
 
 let displayStoryFishFirstVisit = '';
 let displayFishFish = '';
@@ -981,6 +1001,7 @@ let displayLabelWharfUnlockA = '';
 let displayLabelWharfUnlockB = '';
 let displayLabelWharfUnlockBsing = '';
 let displayStoryWharf = '';
+let displayStoryWharfYeahRight = '';
 let displayStoryWharfFirstVisit = '';
 let displayCatchReportTitle = '';
 let displayCatchReportYouCaught = '';
@@ -1091,7 +1112,7 @@ function Translate(language, bark = true) {
         buttonSpanish.classList.remove('selectedOption');
         formatterCurrent = formatterEnglish;
 
-        displayGameEdition = 'GOLD EDITION';
+        displayGameEdition = 'DIAMOND EDITION';
 
         displayGender[0] = 'MALE';
         displayGender[1] = 'FEMALE';
@@ -1103,15 +1124,21 @@ function Translate(language, bark = true) {
         displayGender[7] = 'AGENDER';
 
         displayNations = [
+            'Akkad',
             'Ammon',
+            'Anaharath',
             'Anatolia',
             'Antioch',
             'Arabia',
             'Aram-Damascus',
+            'Ararat',
             'Assyria', //
             'Babylon', // (Weakness to Hero Unit: Cyrus, Starts Game w/: Lvl. 3 Walls)
+            'Bakhdi',
             'Bithynia',
+            'Byzantium',
             'Canaan', //
+            'Cappadocia',
             'Carthage', // (Unique Unit Formation: Horde)
             'Chaldea',
             'Corinth', // (+10 Armor Crafting) https://en.wikipedia.org/wiki/Corinthian_helmet
@@ -1124,18 +1151,26 @@ function Translate(language, bark = true) {
             'Eranshahr',
             'Etruria', // (+10 Gastronomy)
             'Galatia', // (Unique Unit: Druids)
+            'Galilee',
             'Gandhara',
+            'Gath',
+            'Gezer',
             'Greece', // (+10 Philosophy)
             'Hattusa', // (+10 Cuneiform)
             'Helvetia',
             'The Hindu Kush',
+            'Hippo',
             'Iberia', // (Unique Unit: Mountain Antelope)
             'India',
             'Israel', // (Unique Unit: Rabbi)
             'Judea', //
+            'Lebanon',
             'Libya', //
             'Macedon', //
+            'Mauretania',
             'Media',
+            'Megiddo',
+            'Midian', // (probably Saudi today)
             'Moab', //
             'Naamah',
             'Nod',
@@ -1152,6 +1187,7 @@ function Translate(language, bark = true) {
             'Samaria', // (Special Trait: Charitability)
             'Scythia', // (Unique Unit: Mounted Archer)
             'Serica',
+            'Shechem',
             'Shuah',
             'Sīnae',
             'Sinim',
@@ -1164,21 +1200,32 @@ function Translate(language, bark = true) {
             'Teman',
             'Thrace', //
             'Troy', // (Hero Unit: Hector)
+            'Tyre',
+            'Ugarit',
+            'Urartu',
             'Uttara-Kuru',
             'Uz', // (Hero Unit: Job)
             'Vulcan', // (+10 Logic, Hero Unit: Spock)
+            'Yoqne’am',
             'All over', // (Special Trait: Disease Resistance)
+            'I don’t know',
         ];
         displayEthnicities = [
+            'an Akkadian',
             'an Ammonite',
+            'an Issacharian',
             'an Anatolian',
             'an Antiochian',
             'an Arab',
             'an Aramean',
+            'an Ararat',
             'an Assyrian',
             'a Babylonian',
+            'a Bactrian',
             'a Bithynian',
+            'a Byzantine',
             'a Canaanite',
+            'a Cappadocian',
             'a Carthaginian',
             'a Chaldean',
             'a Corinthian',
@@ -1191,17 +1238,25 @@ function Translate(language, bark = true) {
             'a Sasanian',
             'an Etruscan',
             'a Celt',
+            'a Galilean',
             'a Gandhari',
+            'a Gittite',
+            'an Ephraimite',
             'a Greek',
             'a Hittite',
             'a Helvetian',
             'a Nuristani',
+            'a Vandal',
             'an Iberian',
-            'an Indian',
+            'an Indi',
             'an Israelite',
             'a Judean',
+            'a Lebanite',
             'a Libyan',
             'a Macedonian',
+            'a Berber',
+            'a Mede',
+            'a Manassite',
             'a Midianite',
             'a Moabite',
             'a Naamathite',
@@ -1219,6 +1274,7 @@ function Translate(language, bark = true) {
             'a Samaritan',
             'a Scythian',
             'a Sēresian',
+            'a Shechemite',
             'a Shuhite',
             'a Sinatian',
             'a Sinimite',
@@ -1231,10 +1287,15 @@ function Translate(language, bark = true) {
             'a Temanite',
             'a Thracian',
             'a Trojan',
+            'a Tyrian',
+            'a Ugarite',
+            'an Urartian',
             'an Uttarakuru',
             'an Uzite',
             'a Vulcanian',
+            'a Yoqneamite',
             'a Cosmopolitan',
+            'an ʿApiru',
         ];
 
         displayTitles = [
@@ -1255,16 +1316,6 @@ function Translate(language, bark = true) {
             'Imperial Potentate',
             'Imperator',
             'Imperious Leader',
-            'Grand Moff',
-            'Generalissimo',
-            'Vizier',
-            'Overseer',
-            'Superintendent',
-            'Super-Nintendo Chalmers',
-            'Director',
-            'Commissioner',
-            'Dean',
-            'Warden',
             'Shah',
             'Muad’Dib',
             'Sultan',
@@ -1280,6 +1331,7 @@ function Translate(language, bark = true) {
             'Chakravarti',
             'Caliph',
             'Calipha',
+            'Mansa',
             'King',
             'Queen',
             'Sheikh',
@@ -1305,6 +1357,23 @@ function Translate(language, bark = true) {
             'Itcanan',
             'Khan',
             'Khatun',
+            'Grand Moff',
+            'Generalissimo',
+            'Vizier',
+            'Overseer',
+            'Superintendent',
+            'Super-Nintendo Chalmers',
+            'Director',
+            'Commissioner',
+            'Kommissar',
+            'Administrator',
+            'Ombudsman',
+            'Representative',
+            'Senator',
+            'Congressman',
+            'Congresswoman',
+            'Dean',
+            'Warden',
             'Sheriff',
             'Castellan',
             'Constable',
@@ -1600,56 +1669,56 @@ function Translate(language, bark = true) {
             'Years Old',
             'Average',
             'Height',
-            'Short',
-            'Tall&nbsp;',
+            ['Short', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Tall&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Weight',
-            'Thin',
-            'Heavy',
+            ['Thin', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Heavy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Build',
-            'Bookish',
-            'Muscular',
+            ['Bookish', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Muscular&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Endurance',
-            'Frail',
-            'Tough',
+            ['Frail', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Tough&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Agility',
-            'Clumsy',
-            'Spry&nbsp;&nbsp;',
+            ['Clumsy', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Spry&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Dexterity',
-            'Uncoordinated',
-            'Nimble&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+            ['Uncoordinated', '&nbsp;&nbsp;',],
+            'Nimble&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Mental Acuity',
-            'Dim',
-            'Sharp',
+            ['Dim', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Sharp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Judgment',
-            'Naïve',
-            'Wise&nbsp;',
+            ['Naïve', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Wise&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Charisma',
-            'Awkward',
-            'Charming',
+            ['Awkward', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Charming&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Looks',
-            'Unprepossessing',
+            ['Unprepossessing', '',],
             'Fetching&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Temperament',
-            'Timid',
-            'Aggressive',
+            ['Timid', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Aggressive&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Disposition',
-            'Impatient',
-            'Disciplined',
+            ['Impatient', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Disciplined&nbsp;&nbsp;&nbsp;&nbsp;',
             'Adventurousness',
-            'Meek',
-            'Bold',
+            ['Meek', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Bold&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Drive',
-            'Lazy',
-            'Diligent',
+            ['Lazy', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Diligent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Aspirations',
-            'Practical',
-            'Ambitious',
+            ['Practical', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Ambitious&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Diet',
-            'Rich',
-            'Healthy',
+            ['Rich', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Healthy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Mêlée Combat Ability',
-            'Inept',
-            'Competent',
+            ['Inept', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Competent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Optional Characteristics',
             'Interesting Scar(s)',
             'Cat Person',
@@ -1695,8 +1764,56 @@ function Translate(language, bark = true) {
             'October',
             'November',
             'December',
+            'Standard Boilerplate Courtier’s Questionnaire',
+            '<i>Recall thine earliest memories, back to the times when thou wert but a child. Imagine thou art back in those times now.</i><br><br><br>#1. Whilst in towne the goode baker doth bestow a piping-hot sweetroll unto thee. Delighted, thou doth take it into the alley to enjoy, only to be intercepted by a gang of three other kids thine age. The leader demands the sweetroll, or else he and his friends will beat thee and take it.<br><br>Dost thou:',
+            'Drop the sweetroll and step on it, then get ready for the fight?',
+            'Give him the sweetroll now without argument, knowing that later this afternoon you will have all your friends with you and can come and take whatever he owes you?',
+            'Act like you’re going to give him the sweetroll, but at the last minute throw it up into the air, hoping they’ll pay attention to it long enough for you to get a shot in on the leader?',
+            'Lick the sweetroll, then ask the guy if he still wants it?',
+            'Offer to split the sweetroll four ways with all the boys, because, after all, isn’t sharing really what friendship is all about?',
+            'Hold the sweetroll behind your back and sincerely ask: “What sweetroll?”?',
+            'Brandish your pocket knife and ask these chumps just how badly do they really want your sweetroll?',
+            'Blow the whistle you wear around your neck and scream for a guard as loud as you can that someone is trying to steal your sweetroll?',
+            'Let these fellas know that if it’s delicious flaky sweetrolls they’re on the look-out for, why there’s a bakery just lousy with ’em, and it’s right around the corner from where you’re all standing?',
+            'Tell them that unfortunately the sweetroll is stale, and you were simply taking the sweetroll out to the garbage as a favour to the baker?',
+            'Announce that you have come here to chew sweetrolls and kick ass, and that you’re all out of sweetrolls?',
+            'Run away with the sweetroll just as fast as your little legs will take you?',
+            'Just let them have it and forget about it... besides, you don’t even like sweetrolls anyways?',
+            'Ask them why they don’t have any sweetrolls of their own, is it because all of their drug-addicted, alcoholic mothers are too tired from working as prostitutes to make them any?',
+            'Whisper a silent prayer, lifting up this problem and all of your problems to Father God, safe in the knowledge that at all times and in all ways your Creator loves and cares about you and will surely keep you safe from any harm?',
+            'Freeze up like a total coward, because frankly this whole situation is just entirely too much?',
+            'Stuff as much of the sweetroll as will fit into your mouth, desperately chewing and swallowing as much as you can before the other children have a chance to react?',
+            'Start raving and cussing like a lunatic whilst jumping around and flailing your arms in an attempt to convince the gang that you’re clearly insane (and who’s to say you’re not?) and not worth the trouble?',
+            'Explain to these boys that violence is simply never the answer, and remind them all of just how disappointed their fathers would surely be if they had any idea what they were all getting up to?',
+            'Quickly scan your environment for anything that could be used as a makeshift weapon——always remembering, of course, that the environment itself is sometimes the best weapon of all?',
+            'Thank your lucky stars that you always carry around an assortment of high-yield smoke bombs in your pockets for just such an occasion... who’s paranoid <i>now</i>, huh?',
+            'Genuinely just start crying?',
+            'Drop to your knees, blubbering: “Take it, please!, just take it!” whilst holding out the sweetroll in a trembling hand, all the while consciously and deliberately steadying your core, knowing that when the leader of the gang reaches out to take the sweetroll, you can grab his wrist, yank him off balance and beat his skinny ass to within an inch of his miserable life before these other two idiots even know what’s happened?',
+            'Carefully set the sweetroll down, take off your jacket, crack your knuckles, put up your dukes and challenge their leader to honourable single combat, winner-take-sweetroll?',
+            'Suggest joining forces and working as a team to rob the baker and the bakery?',
+            'Realize they’re only behaving this way because they were obviously never raised right, so you invite these filthy urchins back to your home for a warm bath and a hot meal?',
+            'Try to convince the bullies that if they leave you alone today, in a few weeks time you know how you can ALL have sweetrolls, the sweetest they’ve ever tasted... dozens of them, in fact! You have no idea what you’re talking about, of course, but if these clowns fall for it, it buys you some time to think of something clever later (or at the very least, to steer clear of these dopes for a while)?',
+            'Wears Lipstick?',
+            'Wears Eyeshadow?',
+            'Whip out a deck of cards and exclaim: “Who wants to see some magic!”?',
+            'A little blush?',
+            'Paints Their Nails?',
+            'Wears A Wig?',
+            'Wow, you’d never know! 🤯',
+            'Oral Care Routine',
+            ['Lax', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Dogmatic&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+            'Fall to the ground and throw up all over yourself and then splash around in the throw up and pee on yourself and poop on yourself, disgusting your would-be attackers to the point they would rather die than touch you?',
+            'Loudly clear your throat, the agreed-upon signal for your comrades to emerge from their hiding places... this has been a carefully planned ambush, all along——meticulously orchestrated by the entire town——meant to thwart these notorious local miscreants, once and for all, and now these vicious punks will finally get what’s coming to them?',
+            'Jump into a Megazord made out of Gundams that are piloted by Sailor Scouts and the G.I. Joes are there helping Batman... <i>ok, ok, pal, slow down</i>',
+            'Shockedly proclaim: “Look behind you! A three-headed monkey!” and then when they all turn to look, duck into a nearby sewer manhole, tip-toing away with your sweetroll tucked safely under your arm to the sounds of “Hey, where did he go?” and “He was just here!”?',
+            'Voice',
+            'Spit in this guy’s face, because you don’t know who he thinks he’s talking to but nobody talks to you like that?',
+            'And Toes?',
         ];
         displayDefiniteArticle = 'THE';
+        displayUndocumented = 'undocumented';
+        displayOpenRoad = 'the open road, baby';
         displayThouArt = 'THOU ART';
         displayItIsI = 'INDEED! IT IS I, ';
         displayFirst = 'FIRST';
@@ -1705,6 +1822,7 @@ function Translate(language, bark = true) {
         displayOptions = 'Options';
         displayMusic = 'Music?';
         displaySounds = 'Sounds?';
+        displayTickTock = 'Tick-Tock?';
         displayAnimations = 'Cosmetic Animations?';
         displayProfanity = 'Profanity?';
         displayLanguage = 'Language:';
@@ -1749,7 +1867,9 @@ function Translate(language, bark = true) {
         displayProducedShort = 'Prod.';
         displayDispensed = 'Dispensed';
         displayScore = 'Score';
+        displayGross = 'Gross';
         displayHomers = 'Homers';
+        displayMetricTons = 'Metric<br>Tons';
         displayUnits = 'Units';
         displayUnit = 'Unit';
         displayStarving = 'YOUR MEN ARE STARVING!!';
@@ -1835,6 +1955,7 @@ function Translate(language, bark = true) {
         displayBums = 'Liesure Class';
         displayPolice = 'Constabulary';
         displaySoldiers = 'Soldiers';
+        displayNephilim = 'Nephilim';
         displayDiamonds = 'Adamant';
         displayJacinth = 'Hyacinth';
         displayBismuth = 'Bismuth';
@@ -1980,6 +2101,7 @@ function Translate(language, bark = true) {
         displayStoryStartPlay += '<div id="productionMasthead"><img id="imgFleuron_HEAVY_NW_BUD" src="' + fleurons.HEAVY_NW_BUD + '"><i><b>WEALTH</b></i><img id="imgFleuron_HEAVY_SE_BUD" src="' + fleurons.HEAVY_SE_BUD + '"></div>the yet-still-popular<br><img id="imgFleuron_HEAVY_NW_VINE" src="' + fleurons.HEAVY_NW_VINE + '"> <b>Ancient Grecian Play</b> <img id="imgFleuron_HEAVY_SE_VINE" src="' + fleurons.HEAVY_SE_VINE + '"><br>which first debuted<br>nearly ' + FormatYearOnDemand(yearDelta, false, false) + ' Years Ago!<br>❦<br><br>';
         displayStoryStartPlay += '• • • ✾ • • •<br>--starring, in the title role--<br>the Celebrated + Award-Winning<br>Germani Thespian,<br>Known Far and Wide,<div id="starBilling"><img id="imgFleuron_NW_LEAF" src="' + fleurons.NW_LEAF + '"> <b>LEIF</b> <img id="imgFleuron_NE_turned_LEAF" src="' + fleurons.NE_turned_LEAF + '"></div><img id="imgFleuron_SW_turned_LEAF" src="' + fleurons.SW_turned_LEAF + '"> the Magnanimous! <img id="imgFleuron_SE_LEAF" src="' + fleurons.SE_LEAF + '"><br><br>--directed by--<br><b>David of Britannia</b><br><br>--costumes, props & set-design--<br><b>Master HAMZA</b><br>of the celebrated<br>𐫱 House of Ansari 𐫱<br>❦<br><br>';
         displayStoryStartPlay += '❁<br>(P.S. Attendance is on a first-come, first-served basis and is <b>not</b> guaranteed.)<br>❦<br><br>❁<br>(P.P.S. Of course, because <i>Wealth</i> is a comedy, <b>Gentlemen Only</b> may be admitted into the audience!)<br>❦<br><br>❂ – ❂ – ❂ – ❂ – ❂ – ❂ – ❂</div><br>Affixed to the scroll with a tiny bit of pitch was a much smaller piece of papyrus, upon which had been written, in a deliberate hand: <i>The bearer of this ticket is entitled to *Full* Senior V.I.P. Status</i>, and below this was a wax emblem embossed with a very official-looking signet seal.<br><br><div class="centerMePlease">——— ⦿ ———</div><br>The weather this evening is perfect for a show: there’s a mild, cooling breeze and the makings of a clear, starry night sky. Your private guard presses through the unwashed throng of lollygaggers milling about the entrance of the theatre, past swirling crowds of delinquent children trying to steal glances inside and boisterous ticket scalpers shouting “Two here, I have two!” and makeshift food stalls with overly-friendly merchants offering free samples of every meat on a stick imaginable.<br><br>Once inside, you are obligated to make the customary greetings and salutations to all those of (or very near) your station, but eventually, finally, you and your evening companions are led to the ritziest private viewing box in the house, and make yourselves comfortable as the pre-show orations are just coming to an end.</div>';
+        displayStoryNoGirlsAllowed = 'well I say I never harrumph this is highly irregular I must say harrumph harrumph 😤';
         displayStoryEndPlay = 'Boy... that was <i>raunchy</i>. You’d heard that Greek comedies were practically nothing but penis and flatulence jokes and were chock full of foul-mouthed obscenities, crass vulgarity and low-class swearing, but Holy Smokes, son... that was <i>ribald</i>.<br><br>Well, it was certainly an event you won’t soon forget. The theater is fun!';
         displayStoryEndPlayEarly = 'Well, that is just about enough of *that*, thank you very much. Different strokes for different folks, Buster... the theater just ain’t for me!';
         displayEndPlayEarlyConfirm = 'But, sirrah! Art thou *quite* certain thou doth wisheth to leave, before the play hath concluded, milord!? (These were *expensive* seats, y’know! 😮‍💨)';
@@ -1991,6 +2113,7 @@ function Translate(language, bark = true) {
         let priestlyAddress = 'Lord Mayor';
         if (player.hasBecomeHeir) { priestlyAddress = displayTitles[player.title] + ' ' + player.names[2]; }
         displayStoryTempleFirstVisit = '“Why, ' + priestlyAddress + ', what a pleasant surprise! It is always wonderful to see you. Please, come in, come in,” coos the head priest';
+        displayStoryTempleFirstLeave = 'You know, I just don’t know if visiting that place does any good or not...';
         displayStoryTemplePray = 'Finding an empty pew, you make yourself comfortable on the hassock, bow your head and clasp your hands together. Taking in a deep breath, you silently murmur a personal prayer.';
         displayStoryTemple0 = 'The Atash Behram is eternally hungry, my child. This will be put to good use';
         displayStoryTemple1 = '“With what shall I come before the Lord, and bow myself down before God Most High? Shall I approach Him with burnt-offerings, with yearling calves? Will the Lord be pleased with thousands of rams, or ten thousand rivers of oil? Shall I offer my first-born for my transgressions; the fruit of my body for the sin of my soul?”<br>You, man, have been told what is good and what the Lord requires of you: only to do justice, and to love mercy, and to walk humbly with your God.<br><br>Micah 6:6-8';
@@ -2079,6 +2202,8 @@ function Translate(language, bark = true) {
         if (player.gender == 1 || player.gender == 3) { displayNoSuchThing[2] = '. Nice try, sweetheart<br><br>Pick a date that actually exists, plz (ΘεΘ;)'; }
         if (player.gender == 4 || player.gender == 5 || player.gender == 6 || player.gender == 7) { displayNoSuchThing[2] = '. Nice try, cutie pie<br><br>Pick a date that actually exists, plz (ΘεΘ;)'; }
         displayHeirComplete = 'WELL, IT’S ALL ON<br>*YOUR* SHOULDERS NOW,<br> CHUM (づ￣ ³￣)づ';
+        displayHeirGross = 'Damn dude that is a BONKERS choice\nI mean it’s a free country I guess but damn dude for real';
+        displayHeirWow = 'You’re seriously sticking with the throw-up thing?\n\nOkayyy... (yikes 😬)';
 
         displayStoryRudeJerk = 'A corpulent rival farmer riding atop a clearly-exhausted donkey wanders past the edge of your plot, trotting along the property line.<br><br>He looks you up and down, then bellows: “Why, hello there, neighbor! Nice patch ’a land you got there... not! You might as well face it: you’ll never make it in <i>this</i> world, ya runt! You should probably just give up now!” Then he kicks a cruel heel deep into the belly of his mount, causing the poor thing to empty its bowels. “There’s some fresh manure for ya! You’re gonna need it! Ahh, haw haw haw,” he guffaws, and leads the donkey off, back from whence he came.<br><br>Boy, what a jerk!';
         displayStoryBrokenHoe = 'AWW, NUTS! THE SHAFT OF YOUR HOE JUST BROKE; THAT’S SUCH A SHAME, YOU’D HAD THAT THING FOR AGES. AH, WELL. YOU SPEND THE REST OF THE AFTERNOON IN THE FOREST LOOKING FOR A REPLACEMENT';
@@ -2394,7 +2519,7 @@ function Translate(language, bark = true) {
         displayStoryHands34 = 'I’LL STAND BY ALL THIS DRINKING<br>IF IT HELPS ME THROUGH THESE DAYS<br>—INTERPOL' + theseBoys[0] + theseBoys[38] + theseBoys[1];
         displayStoryHands35 = theseBoys[0] + theseBoys[39] + theseBoys[1] + '<br><br>CONGRATULATIONS. YOU EMPLOY ALL YOU KNOW';
 
-        displayStoryFound = '“I HAVE SONS, I HAVE WEALTH,” WITH SUCH THOUGHTS THE FOOL IS TORMENTED. BUT IF ONE’S SELF IS NOT EVEN ONE’S OWN, HOW THEN ARE SONS? HOW THEN IS WEALTH?<br><br>DHAMMAPADA 5.62';
+        displayStoryFound = '“I HAVE SONS, I HAVE WEALTH,” WITH SUCH THOUGHTS THE FOOL IS TORMENTED. BUT IF ONE’S SELF IS NOT EVEN ONE’S OWN, HOW THEN ARE SONS? HOW THEN IS WEALTH?<br><br>DHAMMAPADA 5.62<br><br><img id="imgWagonsIcon" src="' + imageWagons.src + '"><br>(Sovereignty Over Locality Asserted)';
         displayStoryFoundCopper = 'A PAIR OF HIKERS IN YOUR MOUNTAINS HAVE DISCOVERED NUGGETS OF WHAT APPEARS TO BE ORICHALCUM!';
         displayStoryMineScout = 'YOUR SCOUTS FOUND A RICH VEIN IN YOUR NORTHERN FOOTHILLS';
         const mineBoys = [
@@ -2444,7 +2569,7 @@ function Translate(language, bark = true) {
             'Daniel', // en.wikipedia.org/wiki/Daniel_Swarovski
         ];
         const crystalRoster = crystalBoys[0] + crystalBoys[2] + crystalBoys[1] + crystalBoys[3] + crystalBoys[1] + crystalBoys[4] + crystalBoys[5] + crystalBoys[1] + crystalBoys[6] + newHire[4];
-        displayStoryCrystal = '<span class="icon NewGem inlineIcon quintupleSize"></span><br><br>LAPIDARISTS IN OUR ATELIER WILL TRANSFORM THESE INTO SOMETHING TRULY WONDERFUL' + crystalRoster;
+        displayStoryCrystal = '<span class="icon NewGem inlineIcon quintupleSize"></span><br><br>LIGHT-FINGERED LAPIDARISTS AND WHITESMITHS IN OUR ATELIER WILL TRANSFORM THESE INTO SOMETHING TRULY WONDERFUL' + crystalRoster;
         displayStoryTribute = '<img id="imgTributeTreasure" src="' + imageTributeTreasure.src + '"><br><br>THE LOCAL WARLORD KING HAS CAUGHT WIND OF YOUR SUCCESS AT LAST. QUOTH HIS EMISSARY: “OF COURSE, TARIFFS MUST BE LEVIED”';
         displayStorySeleucids = 'MY FRIEND, HAVE YOU HEARD THE NEWS? THOSE OLIVE-MUNCHING ROMANS HAVE JUST DEFEATED THE SELEUCIDS! ANTIOCHUS III HAS SIGNED THE TREATY OF APAMEA! WE ARE NOW ALL UNDER ROMAN OCCUPATION. MAY THE GODS PROTECT US';
         displayStoryMaccabees = 'THEY SAY THE MACCABEES ARE REVOLTING, BUT I DON’T THINK THEY’RE SO BAD';
@@ -2480,7 +2605,7 @@ function Translate(language, bark = true) {
         displayStory900Years = 'All right, all right, Buster Brown, enough is enough. Even Methuselah was only given ' + FormatYearOnDemand(969, false, false) + ' years.<br><br><span class="icon Murray inlineIcon quadrupleSize"></span><br><br>GAME OVER MAN, GAME OVER';
         displayStory901Years = 'I’m just kidding, it’s not Game Over. You take as much time as you need, sport.';
 
-        displayStoryResidenceFirstVisit = 'THERE’S NO PLACE LIKE HOME: YOUR CAMPSITE, ANONYMOUS AMONG THE HUNDREDS OF OTHERS JUST LIKE IT ALL NESTLED HERE, IN THIS NARROW, ARID VALLEY, WHERE YOU RENT THIS PATCH OF DIRT FOR AN EXTORTIONATE RATE';
+        displayStoryResidenceFirstVisit = 'THERE’S NO PLACE LIKE HOME: YOUR CAMPSITE, ANONYMOUS AMONG THE HUNDREDS OF OTHERS JUST LIKE IT ALL NESTLED HERE, IN THIS NARROW, ARID VALLEY, WHERE YOU RENT THIS PATCH OF DIRT FOR AN EXTORTIONATE RATE<br><br><img id="imgRodIcon" src="' + imageRod.src + '"><br>(Activity Unlocked: Fishing)';
         displayStoryResidence00 = 'LIVING ON MY OWN LAND WILL CERTAINLY MAKE IT EASY TO GET TO WORK IN THE MORNING';
         displayStoryResidence01 = 'FINALLY SOME SPACE TO STRETCH OUT MY LEGS';
         displayStoryResidence02 = 'MORE THAN ENOUGH ACREAGE IN THIS PRAIRIE FOR A MODEST HOMESTEAD, I RECKON';
@@ -2503,6 +2628,7 @@ function Translate(language, bark = true) {
         displayStoryResidence19 = 'WHEN OUR BOYS COME BACK FROM THE FRONT WE’RE GONNA NEED TO BE ABLE TO PATCH ’EM UP';
         displayStoryParty = '<div id="divMeetings">Most of the important guests have now arrived.<br><br>In your Great Hall, a mixed group are gathered in front of the grand fireplace. An open blaze crackles there, casting flickers of orange light onto jewels and laces and costly fabrics.<br><br>You recognize in the group an armor manufacturer down from Carthage, an alchemy equipment importer, an ice-shipper whose summer mansion overlooks Lake Asphaltites, a representative of the Sanhedrin Treasury (lean and remote, that one), a dealer in mineral mining equipment, a thin and hard-faced woman whose escort service for foreign dignitaries reputedly operates as cover for various smuggling, spying, and blackmail operations.<br><br>Boy, anyone who is *anyone* is here! How splendid!<br><br>A slender, wan footman appears suddenly in an ornately gilded doorway, clears his throat and announces with a curtsy: “Ladies and gentlemen, my Lord... Dinner is served.”<br><br><div class="centerMePlease">——— ⦿ ———</div><br>Each new course and cocktail is received with progressively greater delight by your many guests.<br><br>Cakes baked with dates and sweetened with honey, whole roast oxen, a peppery lentil stew served alongside brass platters stacked high with piping-hot fresh bread, broiled duck, sautéed goose, fried pigeon, exotic foreign fish, pongi rice in sauce dolsa, barbecued ‘Lamprey a la Augustus’, and all washed down with endless goblets of chilled Caladani wine and imported juices... the meal seems endless.<br><br>“What is this dish?”, the armorer asks one of your ladling girls. “It’s delicious.”<br><br>“Tongues of wild flamingo in a mushroom-yeast sauce, milord,” she replies. “A very old recipe.”<br><br>“I must have that recipe,” the man says.<br><br>She nods. “I’ll see that you get it.”<br><br><div class="centerMePlease">——— ⦿ ———</div><br>During the post-dinner show, as scores of flamboyantly-painted trapeze artists catapult through the air over an undulating, writhing formation of beautiful dancing girls trailing variegated ribbons, a portly and impeccably garbed nobleman presses through the thronged crowd to your side; it’s the local Finance Minister, and he seems quite obviously drunk.<br><br>With a toddler’s grip he pulls you aside by the sleeve and whispers his wine-soaked breath into your ear:<br><br>“By All The Known Gods, what a <span class="tiltMePlease">wonderful</span> event! Come see me next week, my dear, send someone round yon the morrow to make the appointment with my girl, she manages my calendar; and let us see what can be done about these pesky imperial tariffs and levies, eh?”<br><br><div class="centerMePlease">(Export Profits Increased 25%)</div></div>';
 
+        displayStoryVillageReturnToPraedium = 'ANOTHER DAY, ANOTHER DRACHMA, AM I RIGHT?';
         displayStoryVillageFirstVisit = 'FROM NOW ON, WE’RE GONNA BE DOING THINGS *MY* WAY AROUND HERE';
         displayStoryVillageNEG5 = 'AN INVESTIGATION OF THIS LAND HAS FOUND NO STAGNANT POOLS OR SWAMPS. A FLAT BUT SLOPING PLAIN TO ENSURE GOOD DRAINAGE, HIGH ENOUGH TO AVOID FUTURE FLOODS. UPON THOROUGH INSPECTION, LIVERS FROM THE LOCAL WILDLIFE APPEAR TO BE HEALTHY';
         displayStoryVillageNEG4 = 'THE CLERIC HAS DECLARED THAT THE GODS HAVE BEEN PLEASED (THEY HAD BETTER BE, WE’RE PAYING THIS GUY AN ARM AN A LEG)';
@@ -2512,13 +2638,13 @@ function Translate(language, bark = true) {
         displayStoryVillage0 = 'HE WILL NEED LUMBER FOR THE FORGE';
         displayStoryVillage1 = 'NOW WE CAN BUILD';
         displayStoryVillage2 = 'WE’VE GOT TO HAVE SOME LAW AND ORDER';
-        displayStoryVillage3 = 'PEOPLE NEED HOMES';
-        displayStoryVillage4 = 'MO’ APARTMENTS MEANS MO’ TENANTS, MO’ TENANTS MEANS MO’ RENT';
-        displayStoryVillage5 = 'THE SPICES OF THE MARKET ARE FRAGRANT INDEED';
-        displayStoryVillage6 = 'THE BUILDERS ASSURE THERE IS NO DANGER';
-        displayStoryVillage7 = 'CITIZENS FLOW IN FROM THE COUNTRYSIDE NOW, SEEKING OPPORTUNITY<br><br>(+' + loggersHired + ' Loggers <span class="icon Logger inlineIcon"></span> Hired)';
+        displayStoryVillage3 = 'PEOPLE NEED HOMES<br><br>(<span class="icon Citizen inlineIcon"></span> Population Cap +' + arrayResidentCapacities[0] + ')';
+        displayStoryVillage4 = 'MO’ APARTMENTS MEANS MO’ TENANTS, MO’ TENANTS MEANS MO’ RENT<br><br>(<span class="icon Citizen inlineIcon"></span> Population Cap +' + arrayResidentCapacities[0] + ')';
+        displayStoryVillage5 = 'THE SPICES OF THE MARKET ARE FRAGRANT INDEED<br><br><img id="imgClipperIcon" src="' + imageClipper.src + '"><br>(Journey To Port Now Available)';
+        displayStoryVillage6 = 'THE BUILDERS ASSURE THERE IS NO DANGER<br><br>(<span class="icon Citizen inlineIcon"></span> Population Cap +' + arrayResidentCapacities[0] + ')';
+        displayStoryVillage7 = 'CITIZENS FLOW IN FROM THE COUNTRYSIDE NOW, SEEKING OPPORTUNITY<br><br>(<span class="icon Citizen inlineIcon"></span> Population Cap +' + arrayResidentCapacities[1] + ',<br>+' + loggersHired + ' Loggers <span class="icon Logger inlineIcon"></span> Hired)';
         displayStoryVillage8 = '“TEACH A MAN TO FISH AND YOU FEED HIM FOR A LIFETIME”<br>—MAIMONIDES<br><br>(Per Harvest Yield Maximum +33%)';
-        displayStoryVillage9 = 'LIVE IN A GOOD PLACE<br><br>TAO TE CHING 8:5<br><br>(+' + masonsHired + ' Quarry Workers <span class="icon Mason inlineIcon"></span> Hired)';
+        displayStoryVillage9 = 'LIVE IN A GOOD PLACE<br><br>TAO TE CHING 8:5<br><br>(<span class="icon Citizen inlineIcon"></span> Population Cap +' + arrayResidentCapacities[1] + ',<br>+' + masonsHired + ' Quarry Workers <span class="icon Mason inlineIcon"></span> Hired)';
         displayStoryVillage10 = 'HORSES DRIVE PROGRESS';
         displayStoryVillage11 = 'THE TRUE SERVANTS OF GOD ARE THOSE WHO WALK UPON THE EARTH EASILY, AND WHEN THE IGNORANT ADDRESS THEM HARSHLY, THEY REPLY WITH WORDS OF PEACE<br><br>AL-FURQAN 63';
         displayStoryVillage12 = '“THEY DESIRE JUST TWO THINGS, BREAD AND CIRCUSES”<br>—JUVENAL';
@@ -2527,18 +2653,18 @@ function Translate(language, bark = true) {
         displayStoryVillage15 = 'CLEANLINESS IS GODLINESS';
         displayStoryVillage16 = 'THEY HATE HIM WHO REPROVES IN THE GATE, AND THEY ABHOR HIM WHO SPEAKS THE TRUTH<br><br>AMOS 5:10';
         displayStoryVillage17 = '<div id="MrSecretary">Q: Could I follow up, Mr. Secretary, on what you just said, please? In regard to Iraqi weapons of mass destruction, is there any evidence to indicate that Iraq has attempted to, or is willing to, supply terrorists with weapons of mass destruction? Because there are reports that there is *no* evidence of a direct link between Baghdad and these terrorist organizations.<br><br>Rumsfeld: Reports that say that something *hasn’t* happened are always interesting to me, because, as we know, there are ‘known knowns’: there are things we know we know. We also know there are ‘known unknowns’, that is to say we know there are some things we do not know. But there are also ‘unknown unknowns’: the ones we don’t know we don’t know. And if one looks throughout the history of our country and other free countries, it is the latter category that tend to be the difficult ones. And so people who have the omniscience that they can say with high certainty that something has not happened or is not being tried, have capabilities that are... heh, they can do things I can’t do.<br><br>Q: Excuse me, but is *this* an unknown unknown? Because you said ‘several unknowns’, and I’m just wondering if this is an unknown unknown.<br><br>Rumsfeld: I’m not going to say which it is.<br><br><i>DoD News Broadcast, Pentagon Briefing Room, February 12, ' + FormatYearOnDemand(2002) + ' - 11:30 AM<br>Presenter: United States Secretary of Defense Donald H. Rumsfeld<br>(Also participating: Gen. Richard B. Myers, Chairman of the Joint Chiefs of Staff)</i></div>';
-        displayStoryVillage18 = '“MY LIFE HAS BEEN SPENT IN URBAN AND SUBURBAN SPRAWL WHERE THE NATURAL WORLD IS LARGELY OBSCURED BY THE ASPHALT, STEEL, AND CONCRETE THAT WEIGH DOWN THE AMERICAN LANDSCAPE. NATURE SEEMS MOSTLY ABSENT FROM THIS WORLD ... IN FACT, NATURE IS THERE, BUT IT HAS BEEN SO THOROUGHLY CONTROLLED AND MASTERED THAT, IN A SENSE, IT CEASES TO EXIST. MEMBERS OF THE METROPOLIS TAKE THE DOMINATION OF NATURE FOR GRANTED. INDEED, THE CONQUEST OF NATURE IS SO CENTRAL TO AMERICAN CULTURE TODAY THAT WE HARDLY GIVE THE IDEA A SECOND THOUGHT”<br>—THEODORE STEINBERG';
+        displayStoryVillage18 = '“MY LIFE HAS BEEN SPENT IN URBAN AND SUBURBAN SPRAWL WHERE THE NATURAL WORLD IS LARGELY OBSCURED BY THE ASPHALT, STEEL, AND CONCRETE THAT WEIGH DOWN THE AMERICAN LANDSCAPE. NATURE SEEMS MOSTLY ABSENT FROM THIS WORLD ... IN FACT, NATURE IS THERE, BUT IT HAS BEEN SO THOROUGHLY CONTROLLED AND MASTERED THAT, IN A SENSE, IT CEASES TO EXIST. MEMBERS OF THE METROPOLIS TAKE THE DOMINATION OF NATURE FOR GRANTED. INDEED, THE CONQUEST OF NATURE IS SO CENTRAL TO AMERICAN CULTURE TODAY THAT WE HARDLY GIVE THE IDEA A SECOND THOUGHT”<br>—THEODORE STEINBERG<br><br>(<span class="icon Citizen inlineIcon"></span> Population Cap +' + arrayResidentCapacities[2] + ')';
         displayStoryVillage19 = '“BUT IT’S THE MOST BEAUTIFUL THING THERE IS, DYING. IT’S NOT AT ALL HOW THEY PAINT IT, LIKE SOMETHING CONFUSING AND TERRIFYING. IT SEEMS TO ME THEY PAINT IT THAT WAY BECAUSE ‘RESTING IN PEACE’ SOUNDS TOO TEMPTING”<br>—MATEO GARCÍA ELIZONDO';
         displayStoryVillage20 = '“PLATO SAID GOD GEOMETRIZES CONTINUALLY”<br>—PLUTARCH<br><br>“GOD ARITHMETIZES”<br>—CARL FRIEDRICH GAUSS<br><br>“GOD DOES NOT PLAY DICE”<br>—ALBERT EINSTEIN<br><br>(Workshop Competencies Improved)';
-        displayStoryVillage21 = 'THE LORD WAS BY THEN NEARLY FINISHED OFF BECAUSE OF THE PAIN IN HIS TEETH. THEREFORE IT WAS WITH GREAT EFFORT THAT HE SPOKE AGAIN:<br>“I BEG OF YOU, TAKE PITY ON ME. WHAT MEDICINES WOULD YOU MAKE? WITH WHAT MEDICINES WOULD YOU CURE?” ASKED THE LORD.<br>“WE WOULD MERELY REMOVE WORMS FROM TEETH, CURE EYE AILMENTS, AND SET BONES, THOU LORD,” THEY REPLIED<br><br>POPOL VUH, THE DEFEAT OF SEVEN MACAW';
+        displayStoryVillage21 = 'THE LORD WAS BY THEN NEARLY FINISHED OFF BECAUSE OF THE PAIN IN HIS TEETH. THEREFORE IT WAS WITH GREAT EFFORT THAT HE SPOKE AGAIN:<br>“I BEG OF YOU, TAKE PITY ON ME. WHAT MEDICINES WOULD YOU MAKE? WITH WHAT MEDICINES WOULD YOU CURE?” ASKED THE LORD.<br>“WE WOULD MERELY REMOVE WORMS FROM TEETH, CURE EYE AILMENTS, AND SET BONES, THOU LORD,” THEY REPLIED<br><br>POPOL VUH, THE DEFEAT OF SEVEN MACAW<br><br>(With Proper Facilities & Supplies, Bandages Can Now Be Manufactured)';
         displayStoryVillage22 = '5. IF A JUDGE TRY A CASE, REACH A DECISION, AND PRESENT HIS JUDGMENT IN WRITING; IF LATER ERROR SHALL APPEAR IN HIS DECISION, AND IT BE THROUGH HIS OWN FAULT, THEN HE SHALL PAY TWELVE TIMES THE FINE SET BY HIM IN THE CASE, AND HE SHALL BE PUBLICLY REMOVED FROM THE BENCH, AND NEVER AGAIN SHALL HE SIT THERE TO RENDER JUDGEMENT<br><br>THE CODE OF HAMMURABI';
         displayStoryVillage23 = '<div id="shootingScript"><div class="action">EXT. CORNER OF ALLEN & 5<sup>TH</sup> ST. – DAY</div>WYATT<div class="dialogue">You know I was thinkin’, what this town could really use is a racetrack.</div>BEHAN<div class="dialogue">Really? That’s not a bad idea. Send a signal we’re growin’ up.</div>DOC<div class="dialogue">Way ahead of yourselves, aren’t you, boys? This is just another mining camp.</div>BEHAN<div class="dialogue">Have you seen how everyone dresses? Awful tony for a mining camp. No sir, the die is cast: we are growin’; be as big as San Francisco in a few years, and just as sophisticated.</div><div class="action">As if on cue, a bullet WHIZZES past Behan’s head. Everyone ducks. More GUNFIRE as a man holding a bloody hand to his throat reels out the door of the nearby Crystal Palace, his gun firing wildly like a sputtering engine before he pitches face first onto the sidewalk, dead.<br><br>Immediately two more men appear: a staggering DRUNK with a bullet hole in his shoulder; and TURKEY CREEK JACK JOHNSON, a leathery plainsman with his gun at the ready. A crowd forms as the drunk raises his pistol, bellowing.</div>DRUNK<div class="dialogue">You son of a bitch!</div>DOC<div class="dialogue">(turns to Behan)<br>Very cosmopolitan.</div></div>TOMBSTONE (HOLLYWOOD PICTURES, ' + FormatYearOnDemand(1993) + ')';
         displayStoryVillage24 = '“NO ONE IN THIS WORLD, SO FAR AS I KNOW—AND I HAVE SEARCHED THE RECORDS FOR YEARS, AND EMPLOYED AGENTS TO HELP ME—HAS EVER LOST MONEY BY UNDERESTIMATING THE INTELLIGENCE OF THE GREAT MASSES OF PLAIN PEOPLE”<br>—H.L. MENCKEN';
         displayStoryVillage25 = 'A CIRCUS FOR SPORT, A COLOSSEUM FOR THE BLOODLUST, AND NOW A WORLD-CLASS THEATER FOR THE LATEST DRAMAS. TRULY THIS SHOULD PUT US ON THE MAP';
-        displayStoryVillage26 = '“BUILDING SUSTAINABLE CITIES — AND A SUSTAINABLE FUTURE — WILL NEED OPEN DIALOGUE AMONG ALL BRANCHES OF NATIONAL, REGIONAL AND LOCAL GOVERNMENT. AND IT WILL NEED THE ENGAGEMENT OF ALL STAKEHOLDERS — INCLUDING THE PRIVATE SECTOR AND CIVIL SOCIETY, AND ESPECIALLY THE POOR AND MARGINALIZED”<br>—BAN KI-MOON';
-        displayStoryVillage27 = 'SALVATION IS NOT BROUGHT ABOUT BY FORMULAS OF WORSHIP, OR BY EXORCISM, OR BY CALLING ON ORACLES<br><br>OFUDESAKI 3:45';
-        displayStoryVillage28 = 'THEY TELL ME GOD WRITES PATTERNS IN THE FIRMAMENT. WELL I MEAN TO FIND OUT';
-        displayStoryVillage100 = 'THE BRONZE PLAQUE ON THE PINK MARBLE BASE READS:<br><br>≈ THE 8 VIRTUES ≈<br><br>♠<br>• HONESTY •<br>TELL THE TRUTH<br><br>♠<br>• HONOR •<br>DO WHAT IS RIGHT<br><br>♠<br>• VALOR •<br>STAND AGAINST INJUSTICE<br><br>♠<br>• SACRIFICE •<br>SHARE YOUR BLESSINGS<br><br>♠<br>• COMPASSION •<br>BE KIND TO THE WEAK<br><br>♠<br>• JUSTICE •<br>BE FAIR TO ALL<br><br>♠<br>• SPIRITUALITY •<br>LISTEN TO THE LIGHT<br><br>♠<br>• HUMILITY •<br>RESIST PRIDE<br><br>♣';
+        displayStoryVillage26 = '“BUILDING SUSTAINABLE CITIES — AND A SUSTAINABLE FUTURE — WILL NEED OPEN DIALOGUE AMONG ALL BRANCHES OF NATIONAL, REGIONAL AND LOCAL GOVERNMENT. AND IT WILL NEED THE ENGAGEMENT OF ALL STAKEHOLDERS — INCLUDING THE PRIVATE SECTOR AND CIVIL SOCIETY, AND ESPECIALLY THE POOR AND MARGINALIZED”<br>—BAN KI-MOON<br><br>(<span class="icon Citizen inlineIcon"></span> Population Cap +' + arrayResidentCapacities[3] + ')';
+        displayStoryVillage27 = 'SALVATION IS NOT BROUGHT ABOUT BY FORMULAS OF WORSHIP, OR BY EXORCISM, OR BY CALLING ON ORACLES<br><br>OFUDESAKI 3:45<br><br>(<span class="icon Citizen inlineIcon"></span> Population Cap +' + arrayResidentCapacities[4] + ',<br>Thanks To Recently-Ratified<br>Relaxed Zoning Restrictions)';
+        displayStoryVillage28 = 'THEY TELL ME GOD WRITES PATTERNS IN THE FIRMAMENT. WELL I MEAN TO FIND OUT<br><br>(Due To Outright City Hall Corruption, Bureaucratic Grifters Managed To Find Dubiously-Legal Loopholes To Allow:<br><span class="icon Citizen inlineIcon"></span> Population Cap +' + arrayResidentCapacities[5] + ')';
+        displayStoryVillage100 = '<br><img id="imgLadsIcon" src="' + imageLads.src + '"><br><br>THE BRONZE PLAQUE ON THE PINK MARBLE BASE READS:<br><br>≈ THE 8 VIRTUES ≈<br><br>♠<br>• HONESTY •<br>TELL THE TRUTH<br><br>♠<br>• HONOR •<br>DO WHAT IS RIGHT<br><br>♠<br>• VALOR •<br>STAND AGAINST INJUSTICE<br><br>♠<br>• SACRIFICE •<br>SHARE YOUR BLESSINGS<br><br>♠<br>• COMPASSION •<br>BE KIND TO THE WEAK<br><br>♠<br>• JUSTICE •<br>BE FAIR TO ALL<br><br>♠<br>• SPIRITUALITY •<br>LISTEN TO THE LIGHT<br><br>♠<br>• HUMILITY •<br>RESIST PRIDE<br><br>♣';
 
         displayStoryPortFirstVisit = 'YOU FIRST ARRIVED ON THESE FOREIGN SHORES THROUGH THESE VERY DOCKS; JUST A CHILD THEN, A STRANGER IN A STRANGE LAND. OF COURSE, YOUR CIRCUMSTANCES HAVE IMPROVED SIGNIFICANTLY SINCE THOSE DAYS. TODAY YOU HAVE BEEN GREETED HERE AS A POTENTIAL CLIENT OF GREAT IMPORTANCE, AND USHERED DIRECTLY INTO THE FOREMAN’S WELL-APPOINTED OFFICE. HIS ASSISTANT OFFERS YOU AN ORNATELY FILIGREED PEWTER TRAY FULL OF CANDIED DATES';
         displayStoryPort00 = 'THE ATHENIANS HAVE A PRESSING NEED FOR SACRED OIL, AND ARE WILLING TO PAY HANDSOMELY';
@@ -2555,7 +2681,7 @@ function Translate(language, bark = true) {
         if (player.names.length > 1) {
             let nameToShow = player.names[1].toUpperCase();
             if (nameToShow == '') { nameToShow = 'NOMENESCIO'; } // en.wikipedia.org/wiki/Nomen_nescio
-            displayStoryHeir = 'THE ROYAL PHYSICIAN HAS BEEN BROUGHT TO YOUR CHAMBER UNDER HEAVY GUARD.<br><br>YOU ARE INFORMED THAT SENATOR ' + nameToShow + ', THE BELOVED MAGISTRATE OF THE ' + nameState.toUpperCase() + ' REGION, PASSED PEACEFULLY IN THEIR SLEEP THIS MORNING AT THE AGE OF ' + FormatYearOnDemand(player.age, false, false) + '.<br><br>THEIR LAST OFFICIAL ACT WAS TO NAME *THEE* AS SUCCESSOR!';
+            displayStoryHeir = 'THE ROYAL PHYSICIAN HAS BEEN BROUGHT TO YOUR CHAMBER UNDER HEAVY GUARD.<br><br>YOU ARE INFORMED THAT SENATOR ' + nameToShow + ', THE BELOVED MAGISTRATE OF THE ' + nameState.toUpperCase() + ' REGION, HAS JUST NOW PASSED PEACEFULLY IN THEIR SLEEP AT THE VENERABLE AGE OF ' + FormatYearOnDemand(player.age, false, false) + '.<br><br>THEIR LAST OFFICIAL ACT WAS TO NAME *THEE* AS SUCCESSOR!<br><br><img id="imgBedsideIcon" src="' + imageBedside.src + '">';
         }
 
         displayStorySailWest = 'NOW, TO SET SAIL FOR THE UNDYING LANDS; TO THAT GREAT UNDISCOVERED COUNTRY DO I GO';
@@ -2617,6 +2743,7 @@ function Translate(language, bark = true) {
         displayTheArts = 'The Arts';
         displayWorship = 'Worship';
         displayTribute = 'Tribute';
+        displayCorpTax = 'Corporate Income Taxes';
         displayGaming = 'Gaming';
         displayMilitary = 'Military';
         displayMedical = 'Medical';
@@ -2649,6 +2776,7 @@ function Translate(language, bark = true) {
         displayWon = 'WON';
         displayChance = 'chance';
         displayScripture = 'Scripture';
+        displayLaws = 'Laws';
         displayRelic = 'Artifacts';
         displayGhosts = 'Ghosts';
         displayPatients = 'Patients';
@@ -2712,13 +2840,16 @@ function Translate(language, bark = true) {
         displayVoyage = 'Voyage';
         displayShipped = 'Shipped';
         displayImported = 'Imported';
-        displayProfit = 'Profit:';
-        displayCost = 'Cost:';
+        displayProfit = 'ITD Profit:';
+        displayCost = 'ITD Cost:';
         displayNextDelivery = 'Next Delivery In:';
 
         displayMapPrevTarget = '← PREV. PROVINCE';
         displayMapNextTarget = 'NEXT PROVINCE →';
+        displayMapPrevTargetAlt = '← PREV. GOVERNORATE';
+        displayMapNextTargetAlt = 'NEXT GOVERNORATE →';
         displayMapCurrTarget = 'SELECTED PROVINCE:';
+        displayMapCurrTargetAlt = 'SELECTED GOVERNORATE:';
         displayMapDetails = 'DETAILS VIEW';
         displayMapEcon = 'ECONOMIC';
         displayMapMil = 'MILITARY';
@@ -2765,7 +2896,7 @@ function Translate(language, bark = true) {
         displayStoryFarmersFirstVisit = 'Thy retinue is met at the border and escorted to the capital with all the pomp and circumstance traditionally reserved for a prince’s return home from abroad. Thou art humbled and honoured in equal measure.';
         displayStoryFarmersFirstImpression = '<div id="divMeetings">Thou art given the run of a sizable complex of cottages adjacent a dense patch of farmland just outside the royal tower, the entire area safely ensconced within the castle grounds’ enormous main bailey. In the far distance is a breathtaking view of the ' + mapProvinces[3][0] + ' mountains.<br><br>Thou art told this farm produces foodstuffs served exclusively at the royal table, and to helpest thyself to anything you see.<br><br>Thine accommodations art modest but exceedingly comfortable: the soaps perfumed with exotic flowers and spices; the linens are plainly embroidered but the finest money can buy. There are more than enough cottages to accommodate thine entire entourage.<br><br>Thy host hast clearly gone to great lengths—and spared no expense—to ensure thy comfort during thy visit to his fair lands.</div>';
         let moOrigin = '“Whilst but a child he came to these lands from Persia, a nation far to the East.';
-        if (player.ethnicity == 41) { moOrigin = '“He is of your fine countrymen: a Persian.'; }
+        if (player.ethnicity == 55) { moOrigin = '“He is of your fine countrymen: a Persian.'; }
         displayStoryFarmersPrepare = '<div id="divMeetings">Thou dost summon thy royal retinue to a meeting to interrogate thine advisors regarding what they make of the situation so far. One of thine eldest diplomats speaks up first:<br><br>“' + displayTitles[player.title] + ', even amongst our most-learned scholars little is certain about this enigmatic ‘Lord of the West’: Alavi al-Habib, Mighty Padishah of ' + mapProvinces[2][0] + '.<br><br>' + moOrigin + '<br><br>“He is said to possess the wisdom of Solomon, the patience of Job, and the courage of Samson.<br><br>“He is said to be known to his people by seven names:<br><br><div id="AlaviNames">علوی فرد<br>Alavi the Individual,<br><br>علوی ولخرجی<br>Alavi the Extravagant,<br><br>علوی کوشا<br>Alavi the Diligent,<br><br>علوی آراسته<br>Alavi the Well-Bedecked,<br><br>علوی که تسلیم نمی شود<br>Alavi Who Does Not Yield,<br><br>علوی، برادر در میان برادران<br>Alavi, Brother Among Brothers,<br><br>علوی محبوب خدا<br>Alavi, Beloved of God.</div><br>“He is said to be addressed by his wives by a different set of seven names, but, *ahem*... forgive me, it would not be polite to repeat them aloud here, amongst mixed company.”<br><br>A young nobleman’s son begins to chant at a sing-song pace: <span id="AlaviSong">“Alawi Shamshir, Alawi Risheh, Alawi Keh Cpehmeh Zanan Ra Khshnod Mi <span style="white-space: nowrap;">Kand—*!*”</span></span> before his mother snatches him from the room by the ear, swatting his rear end and cursing. The rest of the women in the room blush and giggle, hiding their faces behind hand-fans.<br><br>Thy diplomat smooths his robes, and continues: “He is said to be as handsome as his hair is black, and his hair is said to be as black as the night is dark.<br><br>“He would make a formidable opponent, and an invaluable ally. I am excited to learn what this man has to say.”</div>';
         displayStoryFarmersRejection = '<div id="divToadies">Thine imperial caravan is met by a company of well-equipped and humourless guards at the territorial border. The po-faced captain bows curtly, then recites in a heavily-accented regional vernacular: “No offense is intended, effendi; but we do not allow travel across our borders nor o’er our lands.”<br><br>Thou art further informed that they mean no disrespect but that their leaders have no interest in foreign diplomacy and are not interested in any meeting.<br><br>Thick bundles of adamantine muscle tense and flex underneath the flesh of their sword arms. Their gleaming and well-oiled weapons are obviously finest Thorbardin steel. Thou art outnumbered; they are heavily armed, with the means to enforce what they claim. Thou decidest to return from whence ye came. The better part of valour *is* discretion, after all.</div>';
         displayStoryFarmersSummon = 'Thy porter requests thine attention to inform thee of this message that has just arrived amongst the most recent mail shipment from the western hinterlands:<div id="nasirMessage">Tales of thy deeds in the East have not escaped the ears of my people, nor mine own. I shall accept thee at my supper table at thine convenience, shouldst thou be amenable to an invitation such as this.<br><br>پادیشاه علوی الحبیب —<br>Padishah Alavi al-Habib,<br>Lord of ' + mapProvinces[2][0] + '</div>';
@@ -2777,7 +2908,7 @@ function Translate(language, bark = true) {
         displayStoryMinersToadies = '<div id="divToadies">“Rich and easy targets, the miners of ' + mapProvinces[3][0] + ' are a proud and patrician people. In exchange for our protection, and the maintenance of their existing mineral rights (tithing an exorbitant amount in taxes, of course), they will kiss the ring. Where is the harm? We can always change our minds later.”</div>';
         displayStoryMinersHelp = 'You permanently station fifty garrisons of your finest soldiers along the farthest borders of this region, establishing regular guard posts along the frontier. Soon this land infamous for lawlessness becomes celebrated for its law and order.';
         displayStoryShepherdsFirstTarget = '<br><img id="EmblemShepherds" class="imgNationalEmblem" src="' + nationalEmblems.shepherds + '"><br><br>OUR NEIGHBORS TO THE SOUTH: THE SHEPHERDS OF ' + mapProvinces[1][0].toUpperCase() + '. A SIMPLE PEOPLE, NOT WEALTHY, BUT HARD-WORKING AND LOYAL';
-        displayStoryShepherdsFirstVisit = 'It is brought to your attention a representative for this area’s patrimonial shepherding families would like to meet with you. You travel to their lands to witness them for yourself, and to decide if you will answer their request.';
+        displayStoryShepherdsFirstVisit = 'It is brought to your attention that a representative for this area’s patrimonial shepherding families would like to meet with you. You travel to their lands to witness them for yourself, and to decide if you will answer their request.';
         if (player.names.length == 3) {
             displayStoryShepherdsMeeting = '<div id="divMeetings">“Why, greetings, O ' + displayTitles[player.title] + ' of the North. Do you mind if I call you ' + player.names[2] + '? We don’t usually find much call to put on airs or stand on ceremony around here, that may be obvious. I s’pose my ‘official title’ might be ‘Governor’, but... well, most of my flock simply refer to me as Father Çoban.<br><br>“Let me be frank: I have been empowered to speak on behalf of all of the families in this region. Thy predecessor always dealt with us fairly. We hope that relationship may now continue with thee.<br><br>“Here in this valley so near the River Jordan we have all that we need, but... maybe not all that we wish. Our revenues are modest, and thus our profits are meager. To put it bluntly, Friend ' + player.names[2] + ': we are limited only by operating capital.<br><br>“The prosperity of ' + nameVillage + ' is legend. If she were willing to invest in our wool enterprises, we would understand, of course, that a certain level of independence would be required to be sacrificed to whosoever keeps the lamp oil flowing, so to speak.<br><br>“To put it most simply: in exchange for an assurance of fair dealings and the promise of regular shipments of your fabled gems, which we might put to use towards growing our wool industry to our mutual benefit, we will bend the knee, O ' + displayTitles[player.title] + '.”</div>';
         }
@@ -2794,6 +2925,8 @@ function Translate(language, bark = true) {
         displayLabelShepherdsC = 'VASSALIZE THE TERRITORY';
         displayLabelFarmersA = 'PREPARE FOR THINE AUDIENCE WITH THE PADISHAH';
         displayLabelFarmersB = 'ATTEND THE FEAST';
+        displayLabelFarmersC = 'FIGHT THE WAR';
+        displayLabelFarmersD = 'TEMPORARILY UNAVAILABLE DUE TO ROUTINE MAINTENANCE';
 
         displayLastStory = 'As you prepare to attend the banquet, you see out the window a cadre of soldiers surrounding a terrified-looking young servant approaching your complex of apartments in a hurry. Some of your guard meet them on the road. After a few words are exchanged, one of your men rushes back.<br><br>As you finish dressing, one of your attendants bursts into the room.<br><br>“Your Majesty, a messenger from the royal guard has just arrived, with word from our hosts! Their scouts have just detected a great army approaching from the south! They are soon to be under attack!”<br><br>The messenger is brought before you, the poor boy visibly shaking. He drops to his hands and knees and announces: “O Mighty ' + displayTitles[player.title] + ' of the East, I am tremendously repentant to have to bring this news to all of you, our honoured guests, but... We have been betrayed! Attacked by our enemies! Foreign armies approach the capital! They will be here in a matter of days!”<br><br>Your people look to you for your response. What is to be done? How shall we respond? Do we flee, or pledge our support in this coming battle? Shall we send for our troops?<br><br>You have a big decision to make.';
         displayToBeContinued = 'To be continued in...';
@@ -2817,29 +2950,52 @@ function Translate(language, bark = true) {
         displayResolutionQuote = '<div id="divSystemMessageScripture">“Never plan to fail, never fail to plan”</div><div id="divSystemMessageSource">—60 Second Assassin</div>';
 
         displayInfoMadeFor = 'For D., D., S., Carlos, and Gustavo. I love y’all so much.';
+
         displayInfoMadeWith = 'Made with ';
         displayInfoMadeWith += ScribeList(appsList);
         displayInfoMadeWith += '.';
+
         displayInfoDedication = 'Dedicated to ';
         displayInfoDedication += ScribeList(dedicationList);
         displayInfoDedication += ', and in loving memory of Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez and Philip J Reed, VSc. I really, really wish y’all were here.'; // ۩
-        displayInfoMusic = '<div id="divMusicCredits">“Moraff’s Aria”<br>Composed by Steve Moraff<br>&copy; ' + FormatYearOnDemand(1989, false) + ' MoraffWare<br><br>';
+
+        displayInfoMusic = '<div id="divMusicCreditsWrap"><div id="divMusicCreditsTitle">𝕸𝖚𝖘𝖎𝖈𝖆</div><div id="divMusicCredits">';
+        displayInfoMusic += '“Moraff’s Aria”<br>Composed by Steve Moraff<br>&copy; ' + FormatYearOnDemand(1989, false) + ' MoraffWare<br><br>';
+        displayInfoMusic += '“Love Theme from <i>HeroQuest</i>”<br>Composed by Barry Leitch<br>&copy; ' + FormatYearOnDemand(1991, false) + ' Gremlin Graphics Software Ltd.<br><br>';
         displayInfoMusic += '“Slider”<br>Composed by Koji Kondo<br>&copy; ' + FormatYearOnDemand(1996, false) + ' Nintendo Co., Ltd.<br><br>';
-        displayInfoMusic += '“The Temporal Corps Goes Rolling Along”<br>Composed by Arfing Dog, Glen R. Dahlgren & Michael Lindner<br>&copy; ' + FormatYearOnDemand(1991, false) + ' Legend Entertainment<br><br>';
-        displayInfoMusic += '“Finale: The Magic Store”<br>Performed by The Muppets (Jim Henson, Frank Oz, Jerry Nelson, Richard Hunt, Dave Goelz, Steve Whitmire & Kathryn Mullen)<br>Composed by Paul Williams & Kenneth Ascher<br>&copysr; ' + FormatYearOnDemand(1979, false) + ' Henson Associates, Inc.</div>';
+        displayInfoMusic += '“The Temporal Corps Goes<br>Rolling Along”<br>Composed by Arfing Dog,<br>Glen R. Dahlgren<br>and Michael Lindner<br>&copy; ' + FormatYearOnDemand(1991, false) + ' Legend Entertainment<br><br>';
+        displayInfoMusic += '“Finale: The Magic Store”<br>Performed by The Muppets (Jim Henson, Frank Oz, Jerry Nelson, Richard Hunt, Dave Goelz, Steve Whitmire & Kathryn Mullen)<br>Composed by Paul Williams<br>and Kenneth Ascher<br>&copysr; ' + FormatYearOnDemand(1979, false) + ' Henson Associates, Inc.<br><br>';
+        displayInfoMusic += '“<i>Invisible War</i> Title Theme”<br>Composed by Alexander Brandon<br>and Todd Simmons<br>&copy; ' + FormatYearOnDemand(2003, false) + ' Eidos Interactive';
+        displayInfoMusic += '</div></div>';
+
+        displayInfoFonts = '<div id="divFontsCreditsWrap"><div id="divFontsCreditsTitle">𝕿𝖞𝖕𝖔𝖌𝖗𝖆𝖕𝖍𝖎𝖆</div><div id="divFontsCredits">';
+        displayInfoFonts += '‘<i>Egenolff–Berner Garamond</i>’<br>Designed by Georg Mayr-Duffner<br>and Octavio Pardo<br>ø ' + FormatYearOnDemand(2011, false) + ' Google LLC<br><br>';
+        displayInfoFonts += '‘<i>OSRS Plain 11</i>’<br>Drafted by Hunter W.B.<br>&copy; ' + FormatYearOnDemand(1999, false) + ' Jagex Ltd.<br><br>';
+        displayInfoFonts += '‘<i>Courier</i>’<br>Designed by Howard “Bud” Kettler<br>ø ' + FormatYearOnDemand(1956, false) + ' IBM<br><br>';
+        displayInfoFonts += '‘<i>Alegreya Sans SC</i>’<br>Designed by Juan Pablo del Peral<br>&copy; ' + FormatYearOnDemand(2013, false) + ' Huerta Tipográfica<br><br>';
+        displayInfoFonts += '‘<i>Libertinus Serif</i>’<br>Designed by Philipp H. Poll,<br>Khaled Hosny<br>and Caleb Maclennan<br>&copy; ' + FormatYearOnDemand(2012, false) + ' The Libertinus Project<br><br>';
+        displayInfoFonts += '‘<i>Pixel</i>’<br>&copy; ' + FormatYearOnDemand(2022, false) + ' krolesz94<br><br>';
+        displayInfoFonts += '‘<i>Vipnagorgialla</i>’<br>Designed by Raymond Larabie<br>&copy; ' + FormatYearOnDemand(2024, false) + ' Typodermic Fonts Inc.<br><br>';
+        displayInfoFonts += '‘<i>Nokia Cellphone FC Sm.</i>’<br>Drafted by Zeh Fernando<br>&copy; ' + FormatYearOnDemand(1998, false) + ' Nokia Oyj<br><br>';
+        displayInfoFonts += '‘<i>Perfect DOS VGA 437</i>’<br>Designed by David J. Bradley,<br>Lew Eggebrecht<br>and Andy Saenz<br>Drafted by Zeh Fernando<br>ø ' + FormatYearOnDemand(1981, false) + ' IBM';
+        displayInfoFonts += '</div></div>';
+
         displayInfoText = 'Portions of <i>Dune</i> &copy; ' + FormatYearOnDemand(1965, false) + ' by Frank Herbert. Segments of text from <i>Ultima IV</i> &copy; ' + FormatYearOnDemand(1985, false) + ' by Lord British and <i>Ultima V</i> &copy; ' + FormatYearOnDemand(1988, false) + ' by Lord British. Segments of text from <i>Quest for Glory</i> by Lori Ann Cole &copy; ' + FormatYearOnDemand(1989, false) + ' Sierra On-Line, Inc. All copyright material used without permission.<br><br>';
         displayInfoText += '“The Dust and the Laurel” by ChatGPT and <i>Trireme Cruise at Sunset</i> by Microsoft Copilot hereby released into the public domain.';
+
         displayInfoMadeInFlorida = '<div id="divHechoEnFlorida">Made in Florida 🍊</div>';
+
         displayInfoThanks = 'Special thanks to ';
         displayInfoThanks += ScribeList(gratitudeList);
-        displayInfoThanks += '.<br><br>Very special thanks to my parents for a lifetime of support.<br><br>';
-        displayInfoThanks += displayInfoMusic + '<br>';
+        displayInfoThanks += '.<br><br>Very special thanks to my parents for a lifetime of support.<br><br><br>';
+        displayInfoThanks += displayInfoMusic + '<br><br>' + displayInfoFonts + '<br>';
         displayInfoThanks += '<div id="divTextCredits">' + displayInfoText + '</div><br>';
         displayInfoThanks += 'Seagulls appear courtesy of the Panther-One Wild Mediterranean Gull Aviary & Grill and OpenGameArt.org. ';
         displayInfoThanks += 'Seagull training by “Wild Bill” Stealey and the Northwest Florida Panhandle Seagull Wranglers Association of America: Mediterranean Chapter.<br><br>';
         displayInfoThanks += 'Argos, Bailey, Boxcar Willie and Spike appear courtesy of The Ken & Roberta Williams Virtual Canine Rescue Center of Oakhurst, California.<br><br>';
         displayInfoThanks += 'Noodle the Cobra provided by Herpy Derper’s Reptile & Lizardarium of Winter Park, Florida.<br><br>';
         displayInfoThanks += 'The sheep are just sheep. They don’t get any names.';
+
         displayInfoScripture = '<div id="divSystemMessageScripture">“If you hear the Way one morning and die that night, you die content.”</div><div id="divSystemMessageSource">Analects 4:8</div>';
 
         displayBoilerplate = 'THIS SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND.';
@@ -2876,7 +3032,7 @@ function Translate(language, bark = true) {
         displayGenieAttempt = 'DAMN YOU’RE JUST A GLUTTON FOR PUNISHMENT, HUH';
         displayGenieCancel = 'lol jk jk';
 
-        displayHintsOn = 'From now on, the next thing you need to do will be highlighted in this way:<br><br><button class="hinted" onclick="alert(`Great job! 🏅`);">PRESS ME!</button><br><br>But feel free to try anything!<br>There are no wrong choices.';
+        displayHintsOn = 'From now on, the next thing you need to do will be highlighted in this way:<br><br><button class="hinted" onclick="PlaySound(audioKoolAidMan); alert(`Great job! 🏅`);">PRESS ME!</button><br><br>But feel free to try anything!<br>There are no wrong choices.';
         displayHintsOff = 'Hints have now been disabled.';
         displayHintsEnd = '⚠️ This is the end of the automatic hints. From now on you’ll have to decide what to do on your own. Good luck!';
 
@@ -2893,6 +3049,7 @@ function Translate(language, bark = true) {
             'Adjusting your weight, you stretch out your legs, re-cross them, make yourself again comfortable, place your palms in your lap and close your eyes, searching inward for tranquility.<br><br>You take a deep breath in through your nose, filling your lungs to capacity with cool, salubrious mountain air, then clear your mind of all thought as you gently exhale out of your mouth.',
         ];
         displayStoryHikeEnough = 'Ahh... I think that’s probably enough zen for one day.';
+        displayStoryHikeFine = 'All right, all right... have it your way: you meditate some more, okay? You meditate for <i>hours</i>.';
 
         displayStoryFishFirstVisit = 'AH, THE SIMPLE PLEASURE OF A DAY SPENT AT THE CREEK... ONE OF THE LAST THINGS YOUR FATHER TAUGHT YOU BEFORE HIS UNTIMELY DEMISE<br><br>(Employees Who Receive Fish With Their Pay Work Twice As Hard)';
         displayFishFish = 'FISH';
@@ -2915,7 +3072,8 @@ function Translate(language, bark = true) {
         displayLabelWharfUnlockA = 'unlocks: after';
         displayLabelWharfUnlockB = 'more catches';
         displayLabelWharfUnlockBsing = 'more catch';
-        displayStoryWharf = 'THESE BUILDERS WANT TO REVIEW THE PLANS FOR DRIVING THE PYLONS... WELL THE COSTS SURE KEEP PILING ON, LET ME TELL YOU' + newHire[0] + 'Wharfinger' + newHire[1] + 'Dockmaster Tabernarius' + theseBoys[1];
+        displayStoryWharf = 'THESE BUILDERS WANT TO REVIEW THE PLANS FOR DRIVING THE PYLONS... WELL THE COSTS SURE KEEP PILING ON, LET ME TELL YOU<br><br><img id="imgShoppesIcon" src="' + imageShoppes.src + '"><br>(Boardwalk Shops Now Open)' + newHire[0] + 'Wharfinger' + newHire[1] + 'Dockmaster Tabernarius' + theseBoys[1];
+        displayStoryWharfYeahRight = 'Now you liss’n here, feller, an’ you jus’ liss’n up real good, cowboy... ’roun’ here, we gotta sayin’: “If’n y’ain’ caught up all the required fish, yer dreams’ve a pier do not have a wish,” you hear me? Now go on, now. G’on; git. Beat it.';
         displayStoryWharfFirstVisit = 'WOW, THIS PLACE STINKS';
         displayCatchReportTitle = 'Levantine Fish & Wildlife Conservation Commission — Post-Catch Report';
         displayCatchReportYouCaught = 'You caught';
@@ -3026,7 +3184,7 @@ function Translate(language, bark = true) {
         buttonSpanish.classList.add('selectedOption');
         formatterCurrent = formatterSpanish;
 
-        displayGameEdition = 'EDICIÓN DE ORO';
+        displayGameEdition = 'EDICIÓN DIAMANTE';
 
         displayGender[0] = 'HOMBRE';
         displayGender[1] = 'MUJER';
@@ -3038,15 +3196,21 @@ function Translate(language, bark = true) {
         displayGender[7] = 'AGÉNERO';
 
         displayNations = [
+            'Acad',
             'Amón',
+            'Anaharath',
             'Anatolia',
             'Antioquía',
             'Arabia',
             'Aram-Damasco',
+            'Ararat',
             'Asiria',
             'Babilonia',
+            'Bakhdi',
             'Bitinia',
+            'Bizancio',
             'Canaán',
+            'Capadocia',
             'Cartago',
             'Caldea',
             'Corinto',
@@ -3059,18 +3223,26 @@ function Translate(language, bark = true) {
             'Eranshahr',
             'Etruria',
             'Galacia',
+            'Galilea',
             'Gandhara',
+            'Gat',
+            'Gezer',
             'Grecia',
             'Hattusa',
             'Helvecia',
             'El Hindu Kush',
+            'Hippo',
             'Iberia',
             'India',
             'Israel',
             'Judea',
+            'Líbano',
             'Libia',
             'Macedonia',
+            'Mauritania',
             'Media',
+            'Megido',
+            'Madián',
             'Moab',
             'Naamah',
             'Nod',
@@ -3087,6 +3259,7 @@ function Translate(language, bark = true) {
             'Samaria',
             'Escitia',
             'Serica',
+            'Siquem',
             'Shuah',
             'Sinae',
             'Sinim',
@@ -3099,21 +3272,32 @@ function Translate(language, bark = true) {
             'Temán',
             'Tracia',
             'Troya',
+            'Tiro',
+            'Ugarit',
+            'Urartu',
             'Uttara-Kuru',
             'Uz',
             'Vulcano',
+            'Yokneam',
             'Todas partes',
+            'No lo sé',
         ];
         displayEthnicities = [
+            'un acadio',
             'un amonita',
+            'un issacarita',
             'un anatoliano',
             'un antioqueño',
             'un árabe',
             'un arameo',
+            'un ararat',
             'un asirio',
             'un babilónico',
+            'un bactriano',
             'un bitinio',
+            'un bizantino',
             'un cananeo',
+            'un capadocio',
             'un cartaginés',
             'un caldeo',
             'un corintio',
@@ -3126,17 +3310,25 @@ function Translate(language, bark = true) {
             'un sasánida',
             'un etrusco',
             'un celta',
+            'un galileo',
             'un gandhari',
+            'un guitita',
+            'un efraimita',
             'un griego',
             'un hitita',
             'un helvético',
             'un nuristaní',
+            'un vándalo',
             'un ibérico',
             'un indio',
             'un israelita',
             'un judío',
+            'un libanés',
             'un libio',
             'un macedonio',
+            'un bereber',
+            'un medo',
+            'un manasita',
             'un madianita',
             'un moabita',
             'un naamatita',
@@ -3154,6 +3346,7 @@ function Translate(language, bark = true) {
             'un samaritano',
             'un escita',
             'un seresio',
+            'un siquemita',
             'un suhita',
             'un sinato',
             'un sinimita',
@@ -3166,22 +3359,33 @@ function Translate(language, bark = true) {
             'un temanita',
             'un tracio',
             'un troyano',
+            'un tirio',
+            'un ugarita',
+            'un urartiano',
             'un uttarakuru',
             'un uzita',
             'un vulcaniano',
+            'un yokneamita',
             'un cosmopolitán',
+            'un habiru',
         ];
         if (player.gender == 1 || player.gender == 3) {
             displayEthnicities = [
+                'una acadia',
                 'una amonita',
+                'una issacarita',
                 'una anatoliana',
                 'una antioqueña',
                 'una árabe',
                 'una aramea',
+                'una ararati',
                 'una asiria',
                 'una babilónica',
+                'una bactriana',
                 'una bitinia',
+                'una bizantina',
                 'una cananea',
+                'una capadocia',
                 'una cartaginesa',
                 'una caldeo',
                 'una corintia',
@@ -3194,17 +3398,25 @@ function Translate(language, bark = true) {
                 'una sasánida',
                 'una etrusca',
                 'una celta',
+                'una galilea',
                 'una gandhari',
+                'una guitita',
+                'una efraimita',
                 'una griega',
                 'una hitita',
                 'una helvética',
                 'una nuristaní',
+                'una vándala',
                 'una ibérica',
                 'una india',
                 'una israelita',
                 'una judía',
+                'una libanesa',
                 'una libia',
                 'una macedonio',
+                'una bereber',
+                'una meda',
+                'una manasita',
                 'una madianita',
                 'una moabita',
                 'una naamatita',
@@ -3222,6 +3434,7 @@ function Translate(language, bark = true) {
                 'una samaritana',
                 'una escita',
                 'una seresia',
+                'una siquemita',
                 'una suhita',
                 'una sinata',
                 'una sinimita',
@@ -3234,10 +3447,15 @@ function Translate(language, bark = true) {
                 'una temanita',
                 'una tracia',
                 'una troyana',
+                'una tiria',
+                'una ugarita',
+                'una urartiana',
                 'una uttarakuru',
                 'una uzita',
                 'una vulcaniana',
+                'una yokneamita',
                 'una cosmopolitaña',
+                'una habiru',
             ];
         }
 
@@ -3259,16 +3477,6 @@ function Translate(language, bark = true) {
             'Potentado Imperial',
             'Imperator',
             'Líder Imperioso',
-            'Gran Moff',
-            'Generalísimo',
-            'Visir',
-            'Supervisor',
-            'Superintendente',
-            'Super-Nintendo Chalmers',
-            'Director',
-            'Comisario',
-            'Decano',
-            'Guardián',
             'Sha',
             'Muad’Dib',
             'Sultán',
@@ -3284,6 +3492,7 @@ function Translate(language, bark = true) {
             'Chakravarti',
             'Califa',
             'Señora Califa',
+            'Mansa',
             'Rey',
             'Reina',
             'Jeque',
@@ -3309,6 +3518,23 @@ function Translate(language, bark = true) {
             'Itcanan',
             'Kan',
             'Katun',
+            'Gran Moff',
+            'Generalísimo',
+            'Visir',
+            'Supervisor',
+            'Superintendente',
+            'Super-Nintendo Chalmers',
+            'Director',
+            'Comisionado',
+            'Comisario',
+            'Administrador',
+            'Defensor del Pueblo',
+            'Representante',
+            'Senador',
+            'Congresista',
+            'Señora Congresista',
+            'Decano',
+            'Guardián',
             'Sheriff',
             'Castellano',
             'Condestable',
@@ -3502,56 +3728,56 @@ function Translate(language, bark = true) {
             'Años',
             'Promedio',
             'Altura',
-            'Bajo',
-            'Alto',
+            ['Bajo', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Alto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Peso',
-            'Delgado',
-            'Rechoncho',
+            ['Delgado', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Rechoncho&nbsp;&nbsp;&nbsp;&nbsp;',
             'Complexión',
-            'Intelectual',
-            'Musculoso&nbsp;&nbsp;',
+            ['Intelectual', '&nbsp;&nbsp;',],
+            'Musculoso&nbsp;&nbsp;&nbsp;&nbsp;',
             'Resistencia',
-            'Frágil',
-            'Tenaz&nbsp;',
+            ['Frágil', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Tenaz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Agilidad',
-            'Torpe',
-            'Ágil&nbsp;',
+            ['Torpe', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Ágil&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Destreza',
-            'Descoordinado',
+            ['Descoordinado', '',],
             'Listo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Agudeza Mental',
-            'Tonto',
-            'Perspicaz',
+            ['Tonto', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Perspicaz&nbsp;&nbsp;&nbsp;&nbsp;',
             'Juicio',
-            'Ingenuo',
-            'Sabia&nbsp;&nbsp;',
+            ['Ingenuo', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Sabia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Carisma',
-            'Extraño',
-            'Encantadora',
+            ['Extraño', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Encantadora&nbsp;&nbsp;',
             'Aspecto',
-            'Acaradeperro',
-            'Incitante&nbsp;&nbsp;&nbsp;',
+            ['Acaradeperro', '&nbsp;',],
+            'Incitante&nbsp;&nbsp;&nbsp;&nbsp;',
             'Temperamento',
-            'Tímida',
-            'Agresivo',
+            ['Tímida', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Agresivo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
             'Disposición',
-            'Impaciente',
-            'Disciplinado',
+            ['Impaciente', '&nbsp;&nbsp;&nbsp;',],
+            'Disciplinado&nbsp;',
             'Sentido de Aventurero',
-            'Mansa',
-            'Intrépido',
+            ['Mansa', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Intrépido&nbsp;&nbsp;&nbsp;&nbsp;',
             'Empuje',
-            'Perezoso',
-            'Diligente',
+            ['Perezoso', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Diligente&nbsp;&nbsp;&nbsp;&nbsp;',
             'Aspiraciones',
-            'Práctico',
-            'Ambiciosa',
+            ['Práctico', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Ambiciosa&nbsp;&nbsp;&nbsp;&nbsp;',
             'Dieta',
-            'Rico',
-            'Saludable',
+            ['Rico', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Saludable&nbsp;&nbsp;&nbsp;&nbsp;',
             'Habilidad de Combate Cuerpo-a-Cuerpo',
-            'Inepta',
-            'Competente',
+            ['Inepta', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Competente&nbsp;&nbsp;&nbsp;',
             'Características Opcionales',
             'Cicatriz(es) Interesante(s)',
             'Gato Persona',
@@ -3597,9 +3823,60 @@ function Translate(language, bark = true) {
             'Octubre',
             'Noviembre',
             'Diciembre',
+            'Cuestionario Estándar para Cortesanos',
+            '<i>Recuerda tus primeros recuerdos, de cuando eras solo un niño. Imagina que ahora estás de vuelta en aquellos tiempos.</i><br><br><br>#1. Una día, el buen panadero te da un bollodulce recién horneado. Encantado, te lo llevas al callejón para disfrutarlo, solo para ser interceptado por una pandilla de otros tres niños de tu edad. El líder exige el bollodulce, o de lo contrario él y sus amigos te golpearán y te lo quitarán.<br><br>¿Deberías:',
+            'Suelta el bollodulce y písalo, y luego prepárate para la pelea?',
+            'Dale el bollodulce ahora sin discutir, sabiendo que más tarde esta tarde tendrás a todos tus amigos contigo y podrás venir a cobrar lo que te deba?',
+            'Haz como que vas a darle el bollodulce, pero en el último momento lánzalo al aire, esperando que la distracción te permita darle un puñetazo por sorpresa al líder?',
+            'Lame el bollodulce y luego pregúntale al chico si todavía lo quiere?',
+            'Propónganse repartir la bollodulce entre todos los chicos, porque, al fin y al cabo, ¿no se trata de eso la amistad?',
+            'Sostén el bollodulce detrás de tu espalda y pregunta sinceramente: «¿Qué bollodulce?»?',
+            'Saca tu navaja y pregúntales a estos tontos cuántas ganas tienen realmente de tu bollodulce?',
+            'Haz sonar el silbato que llevas colgado al cuello y grita con todas tus fuerzas que alguien está intentando robarte el bollodulce?',
+            'Díganles a estos chicos que si lo que buscan son unos bollodulces deliciosos y hojaldrados, hay una pastelería solo repleta de ellos, y está justo a la vuelta de la esquina?',
+            'Diles que, por desgracia, la bollodulce está rancia y que simplemente la estabas llevando a la basura como un favor al panadero?',
+            'Anuncia que has venido a masticar bollodulces y patear trasero, y estas toda fuera de bollodulces?',
+            'Escapa corriendo con la bollodulce tan rápido como te lo permitan tus pequeñas piernas?',
+            'Solo déjalos que se lo queden y olvídalo... además, a ti ni siquiera te gustan los bollodulces?',
+            'Pregúntales por qué no tienen bollodulces propios, ¿será porque sus madres, drogadictas y alcohólicas, están demasiado cansadas de trabajar como prostitutas como para preparárselos?',
+            'Susurra una oración silenciosa, elevando este problema y todos tus problemas a Dios Padre, con la seguridad de que tu Creador te ama y se preocupa por ti en todo momento y de todas las maneras, y que sin duda te protegerá de todo mal?',
+            'Paralizas como un completo cobarde, porque, francamente, toda esta situación es demasiado?',
+            'Mete en tu boca todo el bollodulce que quepa, masticando y tragando con desesperación lo más que puedas antes de que los demás niños tengan oportunidad de reaccionar?',
+            'Empieza a desvariar y a maldecir como un lunático mientras saltas y agitas los brazos intentando convencer a la pandilla de que estás completamente loco (¿y quién puede decir que no lo estás?) y que no vale la pena el lío?',
+            'Explícales a estos chicos que la violencia simplemente nunca es la respuesta, y recuérdales lo decepcionados que estarían sus padres si supieran lo que están haciendo?',
+            'Escanea rápidamente tu entorno en busca de cualquier cosa que pueda usarse como arma improvisada——recordando siempre, por supuesto, que el entorno mismo a veces es la mejor arma de todas?',
+            'Das gracias a sus estrellas afortunadas de que siempre llevas encima un surtido de bombas de humo de alto rendimiento en tus bolsillos para precisamente una ocasión como esta... ¿Quién está paranoico <i>ahora</i>, eh?',
+            'Verdaderamente solamente empiezas a llorar?',
+            'Caes de rodillas, sollozando: «¡Tómalo, por favor!, ¡solo tómalo!», mientras le ofreces el bollodulce con mano temblorosa, todo el tiempo estabilizas conscientemente y deliberadamente tu centro, sabiendo que cuando el líder de la pandilla intente tomarlo, podrás agarrarle la muñeca, desequilibrarlo y darle una paliza que casi lo mata antes de que los otros dos idiotas se den cuenta de lo que ha pasado?',
+            'Dejas con cuidado la bollodulce, te quitas la chaqueta, te crujes los nudillos, levantas los puños y desafías a su líder a un combate singular honorable; ganador-llevar-bollodulce?',
+            'Sugieres unir fuerzas y trabajar en equipo para robar al panadero y la panadería?',
+            'Das cuenta de que se comportan así porque obviamente nunca fueron bien educados, así que invitas a estos mocosos sucios a tu casa para darles un baño caliente y una comida deliciosa?',
+            'Intentas convencer a los abusones de que si te dejan en paz hoy, dentro de unas semanas podréis comer todos bollodulces, los más dulces que jamás hayan probado... ¡docenas, de hecho! Claro que no tienes ni idea de lo que estás diciendo, pero si estos payasos se lo creen, te dará tiempo para pensar en algo ingenioso más tarde (o al menos, para mantenerte alejado de estos tontos por un tiempo)?',
+            '¿Usa Pintalabios?',
+            '¿Usa Sombra de Ojos?',
+            'Sacas una baraja de cartas y exclamas: «¡Quién quiere ver algo de magia!»?',
+            '¿Un poco de rubor?',
+            '¿Pinta Las Uñas?',
+            '¿Lleva Una Peluca?',
+            '¡Guau, nunca lo hubieras imaginado! 🤯',
+            'Rutina de Higiene Dental',
+            ['Flojo', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',],
+            'Dogmático&nbsp;&nbsp;&nbsp;&nbsp;',
+            'Caes al suelo y vomitas por todas partes y chapoteas en tu vómito y te orinas y te defecas encima, asqueando a tus potenciales atacantes hasta el punto de que preferirían morir antes que tocarte?',
+            'Aclaras la garganta con fuerza, la señal convenida para que tus camaradas salgan de sus escondites... esto ha sido una emboscada cuidadosamente planeada, meticulosamente orquestada por todo el pueblo, destinada a frustrar los planes de estos notorios delincuentes locales de una vez por todas, y ahora estos criminales viciosos recibirán su merecido?',
+            'Subes a un Megazord formado por Gundams pilotados por Sailor Scouts y los G.I. Joes están ahí ayudando a Batman... <i>ok ok, amigo, tranquilo</i>',
+            'Exclamas con sorpresa: «¡Miren detrás de ustedes! ¡Un mono de cabezas tres!» y luego cuando todos se giran para mirar, metes en una pozo de registro de alcantarillado cercana, alejándote de puntillas con tu bollodulce a salvo bajo el brazo al son de «¿Oye, adónde fue?» y «¡Estaba justo aquí!»?',
+            'Voz',
+            'Escupes en la cara a este tipo, porque no sabes con quién se cree que está hablando pero nadie te habla así?',
+            '¿Y Dedos del Pie?',
         ];
         displayDefiniteArticle = 'EL';
-        if (player.gender == 1 || player.gender == 3) { displayDefiniteArticle = 'LA'; }
+        displayUndocumented = 'indocumentado';
+        if (player.gender == 1 || player.gender == 3) {
+            displayDefiniteArticle = 'LA';
+            displayUndocumented = 'indocumentada';
+        }
+        displayOpenRoad = 'la carretera abierta, nena';
         displayThouArt = 'TÚ ERES';
         displayItIsI = '¡VERDADERAMENTE! SOY YO, ';
         displayFirst = 'PRIMERO';
@@ -3609,6 +3886,7 @@ function Translate(language, bark = true) {
         displayOptions = 'Opciones';
         displayMusic = '¿Música?';
         displaySounds = '¿Sonidos?';
+        displayTickTock = '¿Tic-Tac?';
         displayAnimations = '¿Animaciones cosméticas?';
         displayProfanity = '¿Blasfemia?';
         displayLanguage = 'Idioma:';
@@ -3653,7 +3931,9 @@ function Translate(language, bark = true) {
         displayProducedShort = 'Prod.';
         displayDispensed = 'Dispensados';
         displayScore = 'Veintenas';
+        displayGross = 'Gruesa';
         displayHomers = 'Homeres';
+        displayMetricTons = 'Toneladas<br>Métricas';
         displayUnits = 'Unidades';
         displayUnit = 'Unidad';
         displayStarving = '¡¡TUS HOMBRES SE<br>MUEREN DE HAMBRE!!';
@@ -3739,6 +4019,7 @@ function Translate(language, bark = true) {
         displayBums = 'Clase Ociosa';
         displayPolice = 'Policías';
         displaySoldiers = 'Soldados';
+        displayNephilim = 'Nefilim';
         displayDiamonds = 'Adamanto';//'Diamantes';
         displayJacinth = 'Jacinto';
         displayBismuth = 'Bismuto';
@@ -3884,6 +4165,7 @@ function Translate(language, bark = true) {
         displayStoryStartPlay += '<div id="productionMasthead"><img id="imgFleuron_HEAVY_NW_BUD" src="' + fleurons.HEAVY_NW_BUD + '"><i><b>RIQUEZA</b></i><img id="imgFleuron_HEAVY_SE_BUD" src="' + fleurons.HEAVY_SE_BUD + '"></div>la todavía-popular<br><img id="imgFleuron_HEAVY_NW_VINE" src="' + fleurons.HEAVY_NW_VINE + '"> <b>Obra de Antigua Grecia</b> <img id="imgFleuron_HEAVY_SE_VINE" src="' + fleurons.HEAVY_SE_VINE + '"><br>que se estrenó por primera vez<br>hace casi ' + FormatYearOnDemand(yearDelta, false, false) + ' Años!<br>❦<br><br>';
         displayStoryStartPlay += '• • • ✾ • • •<br>--protagonizando,<br>en el papel principal--<br>el Célebre + Galardonado<br>Actor del Teatro de Germania,<br>Conocido en Todo el Mundo,<div id="starBilling"><img id="imgFleuron_NW_LEAF" src="' + fleurons.NW_LEAF + '"> <b>LEIF</b> <img id="imgFleuron_NE_turned_LEAF" src="' + fleurons.NE_turned_LEAF + '"></div><img id="imgFleuron_SW_turned_LEAF" src="' + fleurons.SW_turned_LEAF + '"> ¡el Magnánimo! <img id="imgFleuron_SE_LEAF" src="' + fleurons.SE_LEAF + '"><br><br>--dirigida por--<br><b>Dabíd de Britania</b><br><br>--vestuario, utilería, escenografía--<br><b>Maestro HAMZA</b><br>de la célebre<br>𐫱 Casa de Ansari 𐫱<br>❦<br><br>';
         displayStoryStartPlay += '❁<br>(P.D. La asistencia se realiza por orden de llegada y <b>no</b> está garantizada.)<br>❦<br><br>❁<br>(P.P.D. Por supuesto, dado que <i>Riqueza</i> es una comedia, ¡<b>Solo</b> Se Permitirá la entrada a <b>Caballeros</b> en la audiencia!)<br>❦<br><br>❂ – ❂ – ❂ – ❂ – ❂ – ❂ – ❂</div><br>Fijado al pergamino con un poco de brea había un trozo de papiro mucho más pequeño, sobre el cual se había escrito, con letra deliberada: <i>El portador de este boleto tiene derecho al Estatus VIP Senior *Completo*</i>, y debajo de esto había un emblema de cera grabado con un sello sellado de aspecto muy oficial.<br><br><div class="centerMePlease">——— ⦿ ———</div><br>El clima esta noche es perfecto para un espectáculo: hay una brisa suave y refrescante y todo el potencial para un cielo nocturno claro y estrellado. Su guardia privada se abre paso entre la multitud sucia de holgazanes que se arremolinan en la entrada del teatro, pasando por enjambres de niños delincuentes que intentan robar miradas adentro y revendedores de entradas ruidosos que gritan «¡Dos aquí, tengo dos!» y puestos de comida improvisados con comerciantes excesivamente amigables que ofrecen muestras gratis de toda la carne en un palito imaginable.<br><br>Una vez dentro, estás obligado a hacer los saludos y salutaciones habituales a todos aquellos de (o muy cercanos a) tu posición, pero eventualmente, finalmente, sú y sus compañeros de la noche son conducidos al palco privado más elegante del lugar, y se ponen cómodos ya que los discursos previos al espectáculo están llegando a su fin.</div>';
+        displayStoryNoGirlsAllowed = '¡Vaya, vaya! ¡Jamás lo hubiera imaginado! ¡Hum! ¡Esto es sumamente irregular, debo decir! 😤';
         displayStoryEndPlay = 'Vaya... eso fue <i>lascivo</i>. Habías oído que las comedias griegas no eran más que chistes sobre penes y flatulencias, y que estaban llenas de obscenidades malhablado, vulgaridad grosero y palabrotas de clase-baja, pero ¡Madre mía!, hermano... eso fue <i>obsceno</i>.<br><br>Bueno, sin duda fue un evento inolvidable. ¡El teatro es divertido!';
         displayStoryEndPlayEarly = 'Bueno, ya es *suficiente*, muchas gracias. Cada persona tiene sus gustos, muchacho... ¡el teatro no es para mí!';
         displayEndPlayEarlyConfirm = '¡Pero, señor de señores! ¡¿Está usted completamente seguro de que desea irse antes de que termine la obra, milord!? (¡Esos asientos eran *caros*, ya sabes! 😮‍💨)';
@@ -3895,6 +4177,7 @@ function Translate(language, bark = true) {
         let priestlyAddress = 'Señor Alcalde';
         if (player.hasBecomeHeir) { priestlyAddress = displayTitles[player.title] + ' ' + player.names[2]; }
         displayStoryTempleFirstVisit = '«¡Vaya, ' + priestlyAddress + ', qué grata sorpresa! Siempre es un placer verlo. Por favor, pase, pase», arrulla el sumo sacerdote';
+        displayStoryTempleFirstLeave = '¿Sabes?, solo no sé si visitar ese lugar sirve de algo o no...';
         displayStoryTemplePray = 'Al encontrar un banco vacío, te ponte cómodo en el reclinatorio, inclinas la cabeza y juntas las manos. Respiras hondo y murmuras en silencio una oración personal.';
         displayStoryTemple0 = 'El Atash Behram tiene hambre eterna, hijo mío. Esto se aprovechará al máximo';
         displayStoryTemple1 = '«¿Con qué me presentaré ante el Señor, y me inclinaré ante el Dios Altísimo? ¿Me acercaré a Él con holocaustos, con becerros de un año? ¿Se agradará el Señor de millares de carneros, o diez mil arroyos de aceite? ¿Ofreceré a mi primogénito por mis transgresiones; al fruto de mi cuerpo por el pecado de mi alma?»<br>A ti, humano, se te ha dicho lo que es bueno y lo que el Señor exige de ti: solamente hacer justicia, y amar misericordia, y humillarte ante tu Dios.<br><br>Miqueas 6:6-8';
@@ -3988,6 +4271,8 @@ function Translate(language, bark = true) {
         displayHeirComplete = 'BUENO, TODO ESTÁ SOBRE<br>*TUS* HOMBROS AHORA,<br>COMPAÑERO (づ￣ ³￣)づ';
         if (player.gender == 1 || player.gender == 3) { displayHeirComplete = 'BUENA, TODO ESTÁ SOBRE<br>*TUS* HOMBROS AHORA,<br>COMPAÑERA (づ￣ ³￣)づ'; }
         if (player.gender == 4 || player.gender == 5 || player.gender == 6 || player.gender == 7) { displayHeirComplete = 'BUENO, TODO ESTÁ SOBRE<br>*TUS* HOMBROS AHORA,<br>COMPINCHE (づ￣ ³￣)づ'; }
+        displayHeirGross = 'Joder tío esa es una elección DEMENTE\nO sea es un país libre supongo pero joder muchacho verdadero';
+        displayHeirWow = '¿En serio mantienes tu decisión acerca de el evento del vómito?\n\nValeeee... (jolín 😬)';
 
         displayStoryRudeJerk = 'Un granjero rival corpulento, montado en un burro visiblemente exhausto, deambula por el borde de tu parcela, trotando a lo largo del límite de la propiedad.<br><br>Te mira de arriba abajo y luego grita: «¡Buenas días, vecino! Bonito parche de tierra el que tienes ahí... ¡es broma! Mejor asúmelo: ¡nunca lo lograrás en <i>este</i> mundo, ti redrojo! ¡Deberías rendirte ya!» Luego le da una cruel patada en el vientre a su montura, lo que hace que la pobre criatura vacíe sus intestinos. «¡Aquí tienes estiércol fresco para ti! ¡Lo vas a necesitar! Ah, ja ja ja», se ríe a carcajadas, y lleva al burro por donde vino.<br><br>¡Dios mío, qué pendejo!';
         displayStoryBrokenHoe = '¡AY, QUÉ LOCURA! SE TE ROMPIÓ EL MANGO DE LA AZADA; QUÉ LÁSTIMA, HACÍA SIGLOS QUE LA TENÍAS. AH, BUENO. TE PASAS EL RESTO DE LA TARDE EN EL BOSQUE BUSCANDO UN REPUESTO';
@@ -4303,7 +4588,7 @@ function Translate(language, bark = true) {
         displayStoryHands34 = 'TOLERARÉ TODA ESTA BEBIDA<br>SI ME AYUDA A PASAR LOS DÍAS<br>—INTERPOL' + estosChicos[0] + estosChicos[38] + estosChicos[1];
         displayStoryHands35 = estosChicos[0] + estosChicos[39] + estosChicos[1] + '<br><br>FELICIDADES. USTED EMPLEA A TODOS LOS QUE CONOCE';
 
-        displayStoryFound = '«TENGO HIJOS, TENGO RIQUEZA,» CON TALES PENSAMIENTOS EL TONTO SE TORMENTA. PERO SI NO ERES EL DUEÑO DE TU PROPIO SER, ¿CÓMO PUEDES DECIR QUE LOS HIJOS TE PERTENECEN? ¿O RIQUEZA?<br><br>DHAMMAPADA 5.62';
+        displayStoryFound = '«TENGO HIJOS, TENGO RIQUEZA,» CON TALES PENSAMIENTOS EL TONTO SE TORMENTA. PERO SI NO ERES EL DUEÑO DE TU PROPIO SER, ¿CÓMO PUEDES DECIR QUE LOS HIJOS TE PERTENECEN? ¿O RIQUEZA?<br><br>DHAMMAPADA 5.62<br><br><img id="imgWagonsIcon" src="' + imageWagons.src + '"><br>(Soberanía Sobre Localidad Reivindicado)';
         displayStoryFoundCopper = '¡UNA PAREJA DE SENDERISTAS EN TU MONTAÑAS HAN DESCUBIERTO PEPITAS DE LO QUE PARECE SER ORICALCO!';
         displayStoryMineScout = 'TUS EXPLORADORES ENCONTRARON UN VETA RICO EN TUS COLINAS DEL NORTE';
         const mineBoys = [
@@ -4353,7 +4638,7 @@ function Translate(language, bark = true) {
             'Daniel',
         ];
         const crystalRoster = crystalBoys[0] + crystalBoys[2] + crystalBoys[1] + crystalBoys[3] + crystalBoys[1] + crystalBoys[4] + crystalBoys[5] + crystalBoys[1] + crystalBoys[6] + newHire[4];
-        displayStoryCrystal = '<span class="icon NewGem inlineIcon quintupleSize"></span><br><br>LOS LAPIDARISTAS DE NUESTRO TALLER TRANSFORMARÁN ESTOS EN ALGO VERDADERAMENTE MARAVILLOSO' + crystalRoster;
+        displayStoryCrystal = '<span class="icon NewGem inlineIcon quintupleSize"></span><br><br>LAPIDARISTAS Y HOJALATEROS DE DEDOS LIGEROS DE NUESTRO TALLER TRANSFORMARÁN ESTOS EN ALGO VERDADERAMENTE MARAVILLOSO' + crystalRoster;
         displayStoryTribute = '<img id="imgTributeTreasure" src="' + imageTributeTreasure.src + '"><br><br>EL JEFE MILITAR REY LOCAL FINALMENTE HA OÍDO HABLAR DE TI. SU EMISARIO TE DICE: «POR SUPUESTO, SE DEBEN IMPONER ARANCELES»';
         displayStorySeleucids = 'AMIGO, ¿HAS OÍDO LAS NOTICIAS? ¡ESOS ROMANOS COMEDORES DE ACEITUNAS ACABARON DE DERROTAR A LOS SELÉUCIDAS! ¡ANTÍOCO III HA FIRMADO EL TRATADO DE APAMEA! AHORA TODOS ESTAMOS BAJO OCUPACIÓN ROMANA. QUE LOS DIOSES NOS PROTEJAN';
         displayStoryMaccabees = 'DICEN QUE LOS MACABEOS SE REBELAN. ANTÍOCO IV LOS HA EMPUJADO DEMASIADO LEJOS';
@@ -4389,7 +4674,7 @@ function Translate(language, bark = true) {
         displayStory900Years = 'Está bien, está bien, Panchito Bandido, ya es suficiente. Incluso a Matusalén sólo le fueron dados ' + FormatYearOnDemand(969, false, false) + ' años.<br><br><span class="icon Murray inlineIcon quadrupleSize"></span><br><br>JUEGO TERMINADO HOMBRE, JUEGO TERMINADO';
         displayStory901Years = 'Estoy bromeando, no es Juego Terminado. Tómate todo el tiempo que necesites, amigo.';
 
-        displayStoryResidenceFirstVisit = 'NO HAY LUGAR COMO EL HOGAR: TU CAMPAMENTO, ANÓNIMO ENTRE LOS CIENTOS DE OTROS EXACTAMENTE COMO ÉL QUE SE ENCUENTRAN AQUÍ, EN ESTE VALLE ANGOSTO Y ÁRIDO, DONDE ALQUILAS ESTE TROZO DE TIERRA POR UN PRECIO EXORBITANTE';
+        displayStoryResidenceFirstVisit = 'NO HAY LUGAR COMO EL HOGAR: TU CAMPAMENTO, ANÓNIMO ENTRE LOS CIENTOS DE OTROS EXACTAMENTE COMO ÉL QUE SE ENCUENTRAN AQUÍ, EN ESTE VALLE ANGOSTO Y ÁRIDO, DONDE ALQUILAS ESTE TROZO DE TIERRA POR UN PRECIO EXORBITANTE<br><br><img id="imgRodIcon" src="' + imageRod.src + '"><br>(Actividad Desbloqueado: Pescando)';
         displayStoryResidence00 = 'VIVIR EN MI PROPIA TIERRA SEGURO ME HARÁ MÁS FÁCIL LLEGAR AL TRABAJO POR LA MAÑANA';
         displayStoryResidence01 = 'POR FIN UN POCO DE ESPACIO PARA ESTIRAR MIS PIERNAS';
         displayStoryResidence02 = 'SUPERFICIE MÁS QUE SUFICIENTE EN ESTE PRADERA PARA UNA FINCA MODESTA, CREO QUE';
@@ -4412,6 +4697,7 @@ function Translate(language, bark = true) {
         displayStoryResidence19 = 'CUANDO NUESTROS CHICOS REGRESAN DEL FRENTE TENDREMOS QUE PODER PARCHARLOS';
         displayStoryParty = '<div id="divMeetings">La mayoría de los invitados importantes ya han llegado.<br><br>En su Gran Salón, un grupo diverso se reúne frente a la gran chimenea. Una llama viva crepita allí, proyectando destellos de luz naranja sobre joyas, encajes y telas costosas.<br><br>Reconoces en el grupo a un fabricante de armaduras llegado de Cartago, a un importador de equipos de alquimia, a un transportista de hielo cuya mansión de verano tiene vistas al lago Asphaltites, a un representante de la Tesorería del Sanedrín (delgado y remoto, ese), a un comerciante de equipos para la extracción de minerales, a una mujer delgada y de rostro duro cuyo servicio de acompañantes para dignatarios extranjeros supuestamente funciona como tapadera para varias operaciones de contrabando, espionaje y chantaje.<br><br>¡Vaya, aquí están todos los que son *realmente* importantes! ¡Qué espléndido!<br><br>Un lacayo delgado y pálido aparece de repente en una puerta ricamente decorada con oro, se aclara la garganta y anuncia con una reverencia: «Damas y caballeros, mi Señor... La cena está servida».<br><br><div class="centerMePlease">——— ⦿ ———</div><br>Cada nuevo plato y cóctel es recibido con creciente deleite por sus numerosos invitados.<br><br>Pasteles horneados con dátiles y endulzados con miel, bueyes enteros asados, un guiso de lentejas picantes servido junto a bandejas de bronce repletas de pan fresco recién hecho, pato asado, ganso salteado, paloma frita, pescado extranjero exótico, arroz pongi en salsa dolsa, ‘Lamprea a la Augusto’ a la parrilla, y todo regado con interminables copas de vino Caladani frío y jugos importados... la comida parece interminable.<br><br>«¿Qué plato es este?», le pregunta el armero a una de sus sirvientas. «Está delicioso».<br><br>«Lenguas de flamenco silvestre en salsa de champiñones y levadura, milord», responde ella. «Una receta muy antigua».<br><br>«Necesito esa receta», dice el hombre.<br><br>Ella asiente. «Me encargaré de que la consiga».<br><br><div class="centerMePlease">——— ⦿ ———</div><br>Durante el espectáculo posterior a la cena, mientras decenas de trapecistas extravagantemente pintados se catapultan por el aire sobre una formación ondulante y retorcida de hermosas bailarinas que arrastran cintas abigarradas, un noble corpulento e impecablemente vestido se abre paso entre la multitud hasta su lado; es el Ministro de Finanzas local, y parece bastante obviamente borracho.<br><br>Con el agarre de un niño pequeño, te toma a un lado por la manga y te susurra su aliento empapado en vino al oído:<br><br>«¡Por Todos Los Dioses Conocidos, qué acontecimiento tan <span class="tiltMePlease">maravilloso</span>! Ven a verme la semana que viene, querida, envía a alguien mañana para concertar una cita con mi chica, ella me lleva la agenda; y veamos qué podemos hacer con estos molestos aranceles y gravámenes imperiales, ¿de acuerdo?»<br><br><div class="centerMePlease">(Ganancias de Exportación<br>Aumentaron 25%)</div></div>';
 
+        displayStoryVillageReturnToPraedium = 'OTRO DÍA, OTRA DRACMA, ¿VERDAD?';
         displayStoryVillageFirstVisit = 'A PARTIR DE AHORA, VAMOS A HACER LAS COSAS A *MI* MANERA';
         displayStoryVillageNEG5 = 'UNA INVESTIGACIÓN DE ESTE TERRENO NO HA ENCONTRADO PISCINAS ESTANCADAS NI PANTANOS. UNA LLANURA PLANA PERO CON PENDIENTE PARA ASEGURAR UN BUEN DRENAJE, LO SUFICIENTEMENTE ALTA PARA EVITAR FUTURAS INUNDACIONES. TRAS UNA INSPECCIÓN EXHAUSTIVA, LOS HÍGADOS DE LA FAUNA LOCAL PARECEN ESTAR SALUDABLES';
         displayStoryVillageNEG4 = 'EL CLÉRIGO HA DECLARADO QUE LOS DIOSES ESTÁN COMPLACIDOS (SERÁ MEJOR QUE ASÍ SEA, LE ESTAMOS PAGANDO A ESTE TIPO UN BRAZO Y UNA PIERNA)';
@@ -4421,13 +4707,13 @@ function Translate(language, bark = true) {
         displayStoryVillage0 = 'NECESITARÁ MADERA PARA LA FRAGUA';
         displayStoryVillage1 = 'AHORA PODEMOS CONSTRUIR';
         displayStoryVillage2 = 'DEBEMOS TENER ALGO DE LEY Y ORDEN';
-        displayStoryVillage3 = 'LA GENTE NECESITA HOGARES';
-        displayStoryVillage4 = 'MÁS APARTAMENTOS SIGNIFICA MÁS INQUILINOS, MÁS INQUILINOS SIGNIFICA MÁS RENTA';
-        displayStoryVillage5 = 'LAS ESPECIAS DEL MERCADO SON VERDADERAMENTE FRAGANTES';
-        displayStoryVillage6 = 'LOS CONSTRUCTORES ASEGURAN QUE NO HAY PELIGRO';
-        displayStoryVillage7 = 'LOS CIUDADANOS LLEGAN DEL CAMPO AHORA EN BUSCA DE OPORTUNIDADES<br><br>(+' + loggersHired + ' Leñadores <span class="icon Logger inlineIcon"></span> Contratados)';
+        displayStoryVillage3 = 'LA GENTE NECESITA HOGARES<br><br>(<span class="icon Citizen inlineIcon"></span> Límite Población +' + arrayResidentCapacities[0] + ')';
+        displayStoryVillage4 = 'MÁS APARTAMENTOS SIGNIFICA MÁS INQUILINOS, MÁS INQUILINOS SIGNIFICA MÁS RENTA<br><br>(<span class="icon Citizen inlineIcon"></span> Límite Población +' + arrayResidentCapacities[0] + ')';
+        displayStoryVillage5 = 'LAS ESPECIAS DEL MERCADO SON VERDADERAMENTE FRAGANTES<br><br><img id="imgClipperIcon" src="' + imageClipper.src + '"><br>(Viaje A Puerto Ya Disponible)';
+        displayStoryVillage6 = 'LOS CONSTRUCTORES ASEGURAN QUE NO HAY PELIGRO<br><br>(<span class="icon Citizen inlineIcon"></span> Límite Población +' + arrayResidentCapacities[0] + ')';
+        displayStoryVillage7 = 'LOS CIUDADANOS LLEGAN DEL CAMPO AHORA EN BUSCA DE OPORTUNIDADES<br><br>(<span class="icon Citizen inlineIcon"></span> Límite Población +' + arrayResidentCapacities[1] + ',<br>+' + loggersHired + ' Leñadores <span class="icon Logger inlineIcon"></span> Contratados)';
         displayStoryVillage8 = '«ENSEÑA A UN HOMBRE A PESCAR Y LO ALIMENTARÁS TODA LA VIDA»<br>—MAIMÓNIDES<br><br>(Rendimiento Máximo Por Cosecha +33%)';
-        displayStoryVillage9 = 'VIVIR EN UN BUEN LUGAR<br><br>DÀO DÉ JĪNG 8:5<br><br>(+' + masonsHired + ' Trabajadores de Cantera <span class="icon Mason inlineIcon"></span> Contratados)';
+        displayStoryVillage9 = 'VIVIR EN UN BUEN LUGAR<br><br>DÀO DÉ JĪNG 8:5<br><br>(<span class="icon Citizen inlineIcon"></span> Límite Población +' + arrayResidentCapacities[1] + ',<br>+' + masonsHired + ' Trabajadores de Cantera <span class="icon Mason inlineIcon"></span> Contratados)';
         displayStoryVillage10 = 'LOS CABALLOS IMPULSAN EL PROGRESO';
         displayStoryVillage11 = 'LOS VERDADEROS SIERVOS DE DIOS SON LOS QUE VIAJAN POR LA TIERRA CON GRACIA, Y CUANDO LOS IGNORANTES SE DIRIGEN A LES GROSERAMENTE, RESPONDEN CON PALABRAS DE PAZ<br><br>’AL-FURQĀN 63';
         displayStoryVillage12 = '«SÓLO DESEAN DOS COSAS, PAN Y CIRCOS»<br>—JUVENAL';
@@ -4436,18 +4722,18 @@ function Translate(language, bark = true) {
         displayStoryVillage15 = 'LA LIMPIEZA ES DIVINO';
         displayStoryVillage16 = 'ODIAN AL QUE SERMONA EN LA PUERTA, Y ABORRECEN AL QUE HABLA LA VERDAD<br><br>AMÓS 5:10';
         displayStoryVillage17 = '<div id="MrSecretary">P: ¿Podría continuar, Señor Secretario, con lo que acaba de decir, por favor? Con respecto a las armas de destrucción masiva iraquíes, ¿hay alguna evidencia que indique que Irak ha intentado o está dispuesto a suministrar armas de destrucción masiva a terroristas? Porque hay informes de que *no* hay evidencia de un vínculo directo entre Bagdad y estas organizaciones terroristas.<br><br>Rumsfeld: Los informes que dicen que algo *no* ha sucedido siempre me resultan interesantes porque, como sabemos, hay cosas que ‘se saben’: hay cosas que sabemos que sabemos. También sabemos que hay ‘incógnitas conocidas’, es decir, sabemos que hay algunas cosas que no sabemos. Pero, también hay muchas ‘incógnitas desconocidas’: aquellas que no sabemos que no conocemos. Y si uno mira a lo largo de la historia de nuestro país y de otros países libres, son los de esta última categoría los que tienden a ser los difíciles. Y entonces las personas que tienen la omnisciencia de poder decir con gran certeza que algo no ha sucedido o no se está intentando, tienen capacidades que son... jeje, ellos pueden hacer cosas que yo no puedo hacer.<br><br>P: Disculpe, pero ¿es *esto* un desconocido desconocido? Porque usted dijo ‘varios desconocidos’ y me pregunto si esto es un desconocido desconocido.<br><br>Rumsfeld: No voy a decir cuál es.<br><br><i>DoD Transmisión de Noticias, Sala de Reuniones del Pentágono, Febrero 12, ' + FormatYearOnDemand(2002) + ' - 11:30 AM<br>Presentador: Secretario de Defensa de los Estados Unidos Donald H. Rumsfeld<br>(También participan: Gral. Richard B. Myers, Presidente del Estado Mayor Conjunto)</i></div>';
-        displayStoryVillage18 = '«MI VIDA HA TRANSCURRIDO EN ZONAS URBANA Y SUBURBANAS DONDE EL MUNDO NATURAL ESTÁ EN GRAN MEDIO OBSCURRIDO POR EL ASFALTO, EL ACERO Y EL HORMIGÓN QUE PESAN EL PAISAJE AMERICANO. LA NATURALEZA PARECE ESTAR MAYORMENTE AUSENTE EN ESTE MUNDO ... DE HECHO, LA NATURALEZA ESTÁ ALLÍ, PERO HA SIDO TAN CONTROLADA Y DOMINADA QUE, EN CIERTO SENTIDO, DEJA DE EXISTIR. LOS MIEMBROS DE LA METRÓPOLIS DEN POR SENTADO EL DOMINIO DE LA NATURALEZA. DE HECHO, LA CONQUISTA DE LA NATURALEZA ES TAN CENTRAL PARA LA CULTURA AMERICANA HOY EN DÍA QUE DIFICILMENTE PENSAMOS EN LA IDEA»<br>—THEODORE STEINBERG';
+        displayStoryVillage18 = '«MI VIDA HA TRANSCURRIDO EN ZONAS URBANA Y SUBURBANAS DONDE EL MUNDO NATURAL ESTÁ EN GRAN MEDIO OBSCURRIDO POR EL ASFALTO, EL ACERO Y EL HORMIGÓN QUE PESAN EL PAISAJE AMERICANO. LA NATURALEZA PARECE ESTAR MAYORMENTE AUSENTE EN ESTE MUNDO ... DE HECHO, LA NATURALEZA ESTÁ ALLÍ, PERO HA SIDO TAN CONTROLADA Y DOMINADA QUE, EN CIERTO SENTIDO, DEJA DE EXISTIR. LOS MIEMBROS DE LA METRÓPOLIS DEN POR SENTADO EL DOMINIO DE LA NATURALEZA. DE HECHO, LA CONQUISTA DE LA NATURALEZA ES TAN CENTRAL PARA LA CULTURA AMERICANA HOY EN DÍA QUE DIFICILMENTE PENSAMOS EN LA IDEA»<br>—THEODORE STEINBERG<br><br>(<span class="icon Citizen inlineIcon"></span> Límite Población +' + arrayResidentCapacities[2] + ')';
         displayStoryVillage19 = '«PERO ES DE LO MÁS BONITO QUE HAY, MORIRSE. NO ES PARA NADA COMO LO PINTAN, COMO ALGO CONFUSO Y ATERRADOR. A MI SE ME HACE QUE A UNO SE LO PINTAN ASI PORQUE ‘DESCANSAR EN PAZ’ SUENA DEMASIADO TENTADOR»<br>—MATEO GARCÍA ELIZONDO';
         displayStoryVillage20 = '«PLATÓN DIJO QUE DIOS GEOMETRIZA CONTINUAMENTE»<br>—PLUTARCO<br><br>«DIOS ARITMETIZA»<br>—CARL FRIEDRICH GAUSS<br><br>«DIOS NO JUEGA A LOS DADOS»<br>—ALBERT EINSTEIN<br><br>(Competencias del Taller Mejoraron)';
-        displayStoryVillage21 = 'EL SEÑOR YA ESTABA CASI ACABADO POR EL DOLOR EN SUS DIENTES. POR TANTO, FUE CON GRAN ESFUERZO QUE HABLÓ OTRA VEZ:<br>«TE LO SUPLICO, TEN PIEDAD DE MÍ. ¿QUÉ MEDICAMENTOS HABRÍAS PREPARADO? ¿CON QUÉ MEDICAMENTOS CURARÍAS?» PREGUNTÓ EL SEÑOR.<br>«NOSOTROS SIMPLEMENTE ELIMINARÍAMOS GUSANOS DE LOS DIENTES, CURARÍAMOS DOLENCIAS OCULARES, Y PONER HUESOS, TÚ SEÑOR,» RESPONDIERON<br><br>POPOL VUH, LA DERROTA DE SIETE GUACAMAYO';
+        displayStoryVillage21 = 'EL SEÑOR YA ESTABA CASI ACABADO POR EL DOLOR EN SUS DIENTES. POR TANTO, FUE CON GRAN ESFUERZO QUE HABLÓ OTRA VEZ:<br>«TE LO SUPLICO, TEN PIEDAD DE MÍ. ¿QUÉ MEDICAMENTOS HABRÍAS PREPARADO? ¿CON QUÉ MEDICAMENTOS CURARÍAS?» PREGUNTÓ EL SEÑOR.<br>«NOSOTROS SIMPLEMENTE ELIMINARÍAMOS GUSANOS DE LOS DIENTES, CURARÍAMOS DOLENCIAS OCULARES, Y PONER HUESOS, TÚ SEÑOR,» RESPONDIERON<br><br>POPOL VUH, LA DERROTA DE SIETE GUACAMAYO<br><br>(Con Las Instalaciones y Los Suministros Adecuados, Ya Se Pueden Fabricar Vendajes)';
         displayStoryVillage22 = '5. SI UN JUEZ JUZGA UN CASO, LLEGA A UNA DECISIÓN Y PRESENTA SU SENTENCIA POR ESCRITO; SI LUEGO APARECE ERROR EN SU DECISIÓN, Y ES POR SU PROPIA CULPA, ENTONCES PAGARÁ DOCE VECES LA MULTA QUE HAYA FIJADO EN EL CASO, Y SERÁ REMOVIDO PÚBLICAMENTE DEL TRIBUNAL, Y NUNCA MÁS SE SENTARÁ ALLÍ PARA DICTAR SENTENCIA<br><br>EL CÓDIGO DE HAMMURABI';
         displayStoryVillage23 = '<div id="shootingScript"><div class="action">EXT. ESQUINA DE ALLEN Y CALLE 5 – DÍA</div>WYATT<div class="dialogue">Sabes, estaba pensando que lo que realmente le vendría bien a esta ciudad es una pista de carreras.</div>BEHAN<div class="dialogue">¿En serio? No es una mala idea. Envía un mensaje de que estamos creciendo.</div>DOC<div class="dialogue">Se están adelantando mucho, ¿no, muchachos? Este es solo otro campamento minero.</div>BEHAN<div class="dialogue">¿Has visto cómo se visten todos? Bastante elegante para un campamento minero. No señor, la suerte está echada: estamos creciendo; tan grandes como San Francisco en unos años, e igual de sofisticados.</div><div class="action">Como si fuera una señal, una bala pasa ZUMBANDO cerca de la cabeza de Behan. Todos se agachan. MÁS DISPAROS mientras un hombre con una mano ensangrentada en la garganta sale tambaleándose por la puerta del cercano Crystal Palace, su arma disparando salvajemente como un motor en llamas antes de caer de cara a la acera, muerto.<br><br>Inmediatamente aparecen dos hombres más: un BORRACHO tambaleante con un agujero de bala en el hombro; y TURKEY CREEK JACK JOHNSON, un curtido hombre de las llanuras con su arma lista. Se forma una multitud mientras el borracho levanta su pistola y grita.</div>BORRACHO<div class="dialogue">¡Hijo de puta!</div>DOC<div class="dialogue">(se vuelve hacia Behan)<br>Muy cosmopolita.</div></div>TOMBSTONE (HOLLYWOOD PICTURES, ' + FormatYearOnDemand(1993) + ')';
         displayStoryVillage24 = '«NADIE EN ESTE MUNDO, HASTA DONDE YO SÉ (Y HE BUSCADO EN LOS REGISTROS DURANTE AÑOS Y HE CONTRATADO AGENTES PARA QUE ME AYUDARAN) HA PERDIDO DINERO POR SUBESTIMAR LA INTELIGENCIA DE LAS GRANDES MASAS DE GENTE SENCILLA»<br>—H.L. MENCKEN';
         displayStoryVillage25 = 'UN CIRCO PARA EL DEPORTE, UN COLISEO PARA LA SED DE SANGRE, Y AHORA UN TEATRO DE CLASE MUNDIAL PARA LOS ÚLTIMOS DRAMAS. SEGURAMENTE ESTO DEBERÍA PONERNOS EN EL MAPA';
-        displayStoryVillage26 = '«PARA CONSTRUIR CIUDADES SOSTENIBLES — Y UN FUTURO SOSTENIBLE — SE NECESITARÁ UN DIÁLOGO ABIERTO ENTRE TODAS LAS PODERES DEL GOBIERNO NACIONAL, REGIONAL Y LOCAL. Y SE REQUERIRÁ LA PARTICIPACIÓN DE TODOS LOS INTERESADOS — INCLUIDOS EL SECTOR PRIVADO Y LA SOCIEDAD CIVIL, Y ESPECIALMENTE LOS POBRES Y MARGINADOS»<br>—BAN KI-MOON';
-        displayStoryVillage27 = 'SALVACIÓN NO SE OBTIENE CON FÓRMULAS DE ADORACIÓN, NI CON EXORCISMOS, NI CON INVOCACIONES A ORÁCULOS<br><br>OFUDESAKI 3:45';
-        displayStoryVillage28 = 'ME DICEN QUE DIOS ESCRIBE PATRONES EN EL FIRMAMENTO. BUENO, QUIERO DESCUBRIRLO';
-        displayStoryVillage100 = 'LA PLACA DE BRONCE SOBRE LA BASE DE MÁRMOL ROSA DICE:<br><br>≈ LAS 8 VIRTUDES ≈<br><br>♠<br>• HONESTIDAD •<br>DECIR LA VERDAD<br><br>♠<br>• HONOR •<br>HACER LO CORRECTO<br><br>♠<br>• VALOR •<br>MANTENERSE CONTRA LA INJUSTICIA<br><br>♠<br>• SACRIFICIO •<br>COMPARTE TUS BENDICIONES<br><br>♠<br>• COMPASIÓN •<br>SER AMABLE CON LOS DÉBILES<br><br>♠<br>• JUSTICIA •<br>SER JUSTO CON TODOS<br><br>♠<br>• ESPIRITUALIDAD •<br>ESCUCHA LA LUZ<br><br>♠<br>• HUMILDAD •<br>RESISTIR ORGULLO<br><br>♣';
+        displayStoryVillage26 = '«PARA CONSTRUIR CIUDADES SOSTENIBLES — Y UN FUTURO SOSTENIBLE — SE NECESITARÁ UN DIÁLOGO ABIERTO ENTRE TODAS LAS PODERES DEL GOBIERNO NACIONAL, REGIONAL Y LOCAL. Y SE REQUERIRÁ LA PARTICIPACIÓN DE TODOS LOS INTERESADOS — INCLUIDOS EL SECTOR PRIVADO Y LA SOCIEDAD CIVIL, Y ESPECIALMENTE LOS POBRES Y MARGINADOS»<br>—BAN KI-MOON<br><br>(<span class="icon Citizen inlineIcon"></span> Límite Población +' + arrayResidentCapacities[3] + ')';
+        displayStoryVillage27 = 'SALVACIÓN NO SE OBTIENE CON FÓRMULAS DE ADORACIÓN, NI CON EXORCISMOS, NI CON INVOCACIONES A ORÁCULOS<br><br>OFUDESAKI 3:45<br><br>(<span class="icon Citizen inlineIcon"></span> Límite Población +' + arrayResidentCapacities[4] + ',<br>Gracias A Restricciones<br>de Zonificación Relajadas<br>Ratificadas Recientemente)';
+        displayStoryVillage28 = 'ME DICEN QUE DIOS ESCRIBE PATRONES EN EL FIRMAMENTO. BUENO, QUIERO DESCUBRIRLO<br><br>(Debido a Corrupción Ayuntamiento Flagrante, Burócratas Torcidos Lograron Encontrar Resquicios Legales Dudosos<br>Para Permitir:<br><span class="icon Citizen inlineIcon"></span> Límite Población +' + arrayResidentCapacities[5] + ')';
+        displayStoryVillage100 = '<br><img id="imgLadsIcon" src="' + imageLads.src + '"><br><br>LA PLACA DE BRONCE SOBRE LA BASE DE MÁRMOL ROSA DICE:<br><br>≈ LAS 8 VIRTUDES ≈<br><br>♠<br>• HONESTIDAD •<br>DECIR LA VERDAD<br><br>♠<br>• HONOR •<br>HACER LO CORRECTO<br><br>♠<br>• VALOR •<br>MANTENERSE CONTRA LA INJUSTICIA<br><br>♠<br>• SACRIFICIO •<br>COMPARTE TUS BENDICIONES<br><br>♠<br>• COMPASIÓN •<br>SER AMABLE CON LOS DÉBILES<br><br>♠<br>• JUSTICIA •<br>SER JUSTO CON TODOS<br><br>♠<br>• ESPIRITUALIDAD •<br>ESCUCHA LA LUZ<br><br>♠<br>• HUMILDAD •<br>RESISTIR ORGULLO<br><br>♣';
 
         displayStoryPortFirstVisit = 'USTED LLEGÓ A ESTE PAÍS POR ESTOS MISMOS MUELLES; ENTONCES SOLO ERA UN NIÑO, UN EXTRAÑO EN UNA TIERRA EXTRAÑA. POR SUPUESTO, SUS CIRCUNSTANCIAS HAN MEJORADO SIGNIFICATIVAMENTE DESDE AQUELLOS DÍAS. HOY LO HAN RECIBIDO AQUÍ COMO UN CLIENTE POTENCIAL DE GRAN IMPORTANCIA Y LO HAN CONDUCIDO DIRECTAMENTE A LA BIEN EQUIPADA OFICINA DEL CAPATAZ. SU ASISTENTE LE OFRECE UNA BANDEJA DE PELTRE CON FILIGRANAS ADORNADAS LLENA DE DÁTILES CONFITADOS';
         displayStoryPort00 = 'LOS ATENIENSES TIENEN UNA NECESIDAD URGENTE DE ACEITE SAGRADO Y ESTÁN DISPUESTOS A PAGAR GENIALMENTE';
@@ -4464,7 +4750,7 @@ function Translate(language, bark = true) {
         if (player.names.length > 1) {
             let nameToShow = player.names[1].toUpperCase();
             if (nameToShow == '') { nameToShow = 'NOMENESCIO'; }
-            displayStoryHeir = 'EL MÉDICO REAL HA SIDO TRAÍDO A VUESTRA CÁMARA BAJO FUERTE GUARDIA.<br><br>TE DICEN QUE EL SENADOR ' + nameToShow + ', EL AMADO MAGISTRADO DE LA REGIÓN DE ' + nameState.toUpperCase() + ', FALLECIÓ PACÍFICAMENTE MIENTRAS SUEÑA ESTA MAÑANA A LA EDAD DE ' + FormatYearOnDemand(player.age, false, false) + ' AÑOS.<br><br>¡SU ÚLTIMO ACTO OFICIAL FUE NOMBRARTE *TU* COMO SUCESOR!';
+            displayStoryHeir = 'EL MÉDICO REAL HA SIDO TRAÍDO A VUESTRA CÁMARA BAJO FUERTE GUARDIA.<br><br>TE DICEN QUE EL SENADOR ' + nameToShow + ', EL AMADO MAGISTRADO DE LA REGIÓN DE ' + nameState.toUpperCase() + ', ACABA DE FALLECER PACÍFICAMENTE MIENTRAS DORMÍA A LA VENERABLE EDAD DE ' + FormatYearOnDemand(player.age, false, false) + ' AÑOS.<br><br>¡SU ÚLTIMO ACTO OFICIAL FUE NOMBRARTE *TU* COMO SUCESOR!<br><br><img id="imgBedsideIcon" src="' + imageBedside.src + '">';
         }
 
         displayStorySailWest = 'AHORA, A ZARPAR HACIA LAS TIERRAS IMPERECEDERAS; A ESE GRAN PAÍS NO DESCUBRIDO VOY';
@@ -4525,6 +4811,7 @@ function Translate(language, bark = true) {
         displayTheArts = 'Las Artes';
         displayWorship = 'Adoración';
         displayTribute = 'Homenaje';
+        displayCorpTax = 'Impuestos Sobre Sociedades';
         displayGaming = 'Juego de Azar';
         displayMilitary = 'Militar';
         displayMedical = 'Médica';
@@ -4557,6 +4844,7 @@ function Translate(language, bark = true) {
         displayWon = 'GANADOS';
         displayChance = 'oportunidad';
         displayScripture = 'Escritura';
+        displayLaws = 'Leyes';
         displayRelic = 'Artefactos';
         displayGhosts = 'Fantasmas';
         displayPatients = 'Pacientes';
@@ -4620,13 +4908,16 @@ function Translate(language, bark = true) {
         displayVoyage = 'Viaje';
         displayShipped = 'Enviado';
         displayImported = 'Importado';
-        displayProfit = 'Lucro:';
-        displayCost = 'Costó:';
+        displayProfit = 'Lucro ITD:';
+        displayCost = 'Costo ITD:';
         displayNextDelivery = 'Próxima Entrega En:';
 
         displayMapPrevTarget = '← ANTERIOR PROVINCIA';
         displayMapNextTarget = 'SIGUIENTE PROVINCIA →';
+        displayMapPrevTargetAlt = '← ANTERIOR GOBERNACIÓN';
+        displayMapNextTargetAlt = 'SIGUIENTE GOBERNACIÓN →';
         displayMapCurrTarget = 'PROVINCIA SELECCIONADA:';
+        displayMapCurrTargetAlt = 'GOBERNACIÓN SELECCIONADA:';
         displayMapDetails = 'VISTA DE DETALLES';
         displayMapEcon = 'ECONÓMICA';
         displayMapMil = 'MILITAR';
@@ -4681,7 +4972,7 @@ function Translate(language, bark = true) {
         displayStoryFarmersFirstVisit = 'Su séquito es recibido en la frontera y escoltado hasta la capital con toda la pompa y circunstancia tradicionalmente reservadas para el regreso de un príncipe a casa desde el extranjero. Te sientes humilde y ' + displayHonrado + ' en igual medida.';
         displayStoryFarmersFirstImpression = '<div id="divMeetings">Se le otorga el control sobre un complejo considerable de cabañas adyacentes a una densa franja de tierras de cultivo justo afuera de la torre real, toda el área se encuentra segura dentro del enorme patio principal de los terrenos del castillo. A lo lejos hay una vista impresionante de las montañas de ' + mapProvinces[3][0] + '.<br><br>Te dicen que esta granja produce alimentos que se sirven exclusivamente en la mesa real y que puedes servirte todo lo que veas.<br><br>Sus alojamientos son modestos pero sumamente cómodos: los jabones están perfumados con flores exóticas y especias; las sábanas están bordadas de forma sencilla, pero el mejor material que se puede comprar con dinero. Hay cabañas más que suficientes para acomodar a todo su séquito.<br><br>Es evidente que su anfitrión ha hecho todo lo posible (y no ha escatimado en gastos) para garantizar su comodidad durante su visita a sus bellas tierras.</div>';
         let moOrigin = '»Siendo apenas un niño llegó a estas tierras procedente de Persia, una nación muy lejana al Oriente.';
-        if (player.ethnicity == 41) { moOrigin = '»Es uno de tus buenos compatriotas: un persa.'; }
+        if (player.ethnicity == 55) { moOrigin = '»Es uno de tus buenos compatriotas: un persa.'; }
         displayStoryFarmersPrepare = '<div id="divMeetings">Convocas a tu séquito real a una reunión para interrogar a tus asesores sobre su opinión de la situación hasta el momento. Uno de sus mayores diplomáticos habla primero:<br><br>«' + displayTitles[player.title] + ', incluso para nuestros eruditos más eruditos, hay poco seguro acerca de este enigmático “Señor de Occidente”: Alavi al-Habeeb, Poderoso Padishá de ' + mapProvinces[2][0] + '.<br><br>' + moOrigin + '<br><br>»Se dice que posee la sabiduría de Salomón, la paciencia de Job y el coraje de Sansón.<br><br>»Se dice que su pueblo lo conoce por siete nombres:<br><br><div id="AlaviNames">علوی فرد<br>Alavi el Individual,<br><br>علوی ولخرجی<br>Alavi el Extravagante,<br><br>علوی کوشا<br>Alavi el Diligente,<br><br>علوی آراسته<br>Alavi el Bien-Engalanado,<br><br>علوی که تسلیم نمی شود<br>Alavi Que No Se Rinde,<br><br>علوی، برادر در میان برادران<br>Alavi, Hermano Entre Hermanos,<br><br>علوی محبوب خدا<br>Alavi, Amado de Dios.</div><br>»Se dice que sus esposas se dirigen a él por un conjunto diferente de siete nombres, pero, *ejem*... perdóneme, no sería de buena educación repetirlas aquí en voz alta, entre tanta gente.»<br><br>El hijo pequeño de un noble comienza a cantar a un ritmo cantarín: <span id="AlaviSong">«Alawi Shamshir, Alawi Risheh, Alawi Keh Cpehmeh Zanan Ra Khshnod Mi Kand—*!*»</span> antes de que su madre lo saque de la habitación por la oreja, dándole una palmada en el trasero y maldiciendo. El resto de mujeres en la sala se sonrojan y ríen, escondiendo sus rostros detrás de abanicos.<br><br>Su diplomático se alisa la túnica y continúa: «Se dice que es tan guapo como negro es su cabello, y se dice que su cabello es tan negro como oscura es la noche.<br><br>»Sería un oponente formidable, y un aliado invaluable. Estoy entusiasmado por saber lo que este hombre tiene que decir.»</div>';
         displayStoryFarmersRejection = '<div id="divToadies">Su caravana imperial se encuentra con una compañía de guardias bien equipados y sin sentido del humor en la frontera territorial. El capitán, de rostro serio, hace una breve reverencia y luego recita en un dialecto regional con un fuerte acento: «No es mi intención ofender a nadie, effendi; pero no permitimos viajes a través de nuestras fronteras ni sobre nuestras tierras.»<br><br>Se le informa además que no tienen intención de faltarle el respeto, pero que sus líderes no tienen ningún interés en la diplomacia extranjera y no están interesados ​​en ninguna reunión.<br><br>Gruesos haces de músculo adamantino se tensan y flexionan debajo de la piel de sus brazos que sostienen las espadas. Sus armas brillantes y bien engrasadas son obviamente del mejor acero Thorbardin. Ustedes están en inferioridad numérica; ellos están fuertemente armados y tienen los medios para hacer cumplir lo que afirman. Decides regresar al lugar de donde viniste. La mejor parte del valor *es* la discreción, después de todo.</div>';
         displayStoryFarmersSummon = 'Su portero solicita su atención para informarle de este mensaje que acaba de llegar entre el envío de correo más reciente desde el interior del oeste:<div id="nasirMessage">Los relatos de tus hazañas en Oriente no han escapado a los oídos de mi pueblo, ni a los míos propios. Te aceptaré en mi mesa cuando te resulte conveniente, si estás dispuesto a aceptar una invitación como ésta.<br><br>پادیشاه علوی الحبیب —<br>Padishá Alavi al-Habeeb,<br>Señor de ' + mapProvinces[2][0] + '</div>';
@@ -4725,6 +5016,8 @@ function Translate(language, bark = true) {
         displayLabelShepherdsC = 'VASALIZAR EL TERRITORIO';
         displayLabelFarmersA = 'PREPARAR PARA SU AUDIENCIA CON EL PADISHÁ';
         displayLabelFarmersB = 'ASISTIR LA FIESTA';
+        displayLabelFarmersC = 'LUCHAR LA LUCHA';
+        displayLabelFarmersD = 'TEMPORALMENTE NO DISPONIBLE DEBIDO A MANTENIMIENTO RUTINARIA';
 
         displayLastStory = 'Mientras te preparas para asistir al banquete, ves por la ventana un grupo de soldados rodeando a un joven sirviente que parece estar aterrado y que se acerca rápidamente a tu complejo de apartamentos. Algunos de tus guardias se les acercan. Tras intercambiar unas palabras, uno de sus ellos regresa corriendo.<br><br>Después de que termines de vestirse, uno de sus asistentes irrumpe en la habitación.<br><br>«Su Majestad, ¡acaba de llegar un mensajero de la guardia real con noticias de nuestros anfitriones! ¡Sus exploradores han detectado un gran ejército que se acerca desde el sur! ¡Pronto serán atacados!»<br><br>El mensajero es presentado ante usted; el pobre muchacho temblaba visiblemente. Se arrodilló y exclamó: «¡Oh, Gran ' + displayTitles[player.title] + ' del Este! Siento un profundo pesar al tener que darles esta noticia a ustedes, nuestros distinguidos invitados, pero… ¡Hemos sido traicionados! ¡Atacados por nuestros enemigos! ¡Ejércitos extranjeros se acercan a la capital! ¡Llegarán en cuestión de días!»<br><br>Su pueblo espera su respuesta. ¿Qué debemos hacer? ¿Cómo debemos reaccionar? ¿Debemos huir o brindar nuestro apoyo en la próxima batalla? ¿Debemos llamar a nuestras tropas?<br><br>Tienes una decisión muy importante que tomar.';
         displayToBeContinued = 'Continuará en...';
@@ -4748,29 +5041,52 @@ function Translate(language, bark = true) {
         displayResolutionQuote = '<div id="divSystemMessageScripture">«Nunca planees fracasar, nunca falles de planificar»</div><div id="divSystemMessageSource">—60 Second Assassin</div>';
 
         displayInfoMadeFor = 'Para D., D., S., Carlos, y Gustavo. Los amo a todos mucho.';
+
         displayInfoMadeWith = 'Hecho con ';
         displayInfoMadeWith += ScribeList(appsList);
         displayInfoMadeWith += '.';
+
         displayInfoDedication = 'Dedicado a ';
         displayInfoDedication += ScribeList(dedicationList);
         displayInfoDedication += ', y en memoria amorosa de Travontee’ Flemming, Francisco Furlan, La’Voris McKeever, Tio “Calush” Méndez y Philip J Reed, VSc. Realmente, realmente desearía que estuvieran aquí.'; // ۩
-        displayInfoMusic = '<div id="divMusicCredits">“Aria de Moraff”<br>Compuesta por Steve Moraff<br>&copy; ' + FormatYearOnDemand(1989, false) + ' MoraffWare<br><br>';
+
+        displayInfoMusic = '<div id="divMusicCreditsWrap"><div id="divMusicCreditsTitle">𝕸𝖚𝖘𝖎𝖈𝖆</div><div id="divMusicCredits">';
+        displayInfoMusic += '“Aria de Moraff”<br>Compuesta por Steve Moraff<br>&copy; ' + FormatYearOnDemand(1989, false) + ' MoraffWare<br><br>';
+        displayInfoMusic += '“Tema Amor desde <i>HeroQuest</i>”<br>Compuesta por Barry Leitch<br>&copy; ' + FormatYearOnDemand(1991, false) + ' Gremlin Graphics Software Ltd.<br><br>';
         displayInfoMusic += '“Deslizador”<br>Compuesta por Koji Kondo<br>&copy; ' + FormatYearOnDemand(1996, false) + ' Nintendo Co., Ltd.<br><br>';
-        displayInfoMusic += '“El Cuerpo Temporal Va Sigue Adelante”<br>Compuesta por Arfing Dog, Glen R. Dahlgren y Michael Lindner<br>&copy; ' + FormatYearOnDemand(1991, false) + ' Legend Entertainment<br><br>';
-        displayInfoMusic += '“Final: La Tienda Mágica”<br>Interpretado por Los Muppets (Jim Henson, Frank Oz, Jerry Nelson, Richard Hunt, Dave Goelz, Steve Whitmire y Kathryn Mullen)<br>Compuesta por Paul Williams y Kenneth Ascher<br>&copysr; ' + FormatYearOnDemand(1979, false) + ' Henson Associates, Inc.</div>';
+        displayInfoMusic += '“El Cuerpo Temporal Va<br>Sigue Adelante”<br>Compuesta por Arfing Dog,<br>Glen R. Dahlgren<br>y Michael Lindner<br>&copy; ' + FormatYearOnDemand(1991, false) + ' Legend Entertainment<br><br>';
+        displayInfoMusic += '“Final: La Tienda Mágica”<br>Interpretado por Los Muppets (Jim Henson, Frank Oz, Jerry Nelson, Richard Hunt, Dave Goelz, Steve Whitmire y Kathryn Mullen)<br>Compuesta por Paul Williams<br>y Kenneth Ascher<br>&copysr; ' + FormatYearOnDemand(1979, false) + ' Henson Associates, Inc.<br><br>';
+        displayInfoMusic += '“Tema Título de <i>Invisible War</i>”<br>Compuesta por Alexander Brandon<br>y Todd Simmons<br>&copy; ' + FormatYearOnDemand(2003, false) + ' Eidos Interactive';
+        displayInfoMusic += '</div></div>';
+
+        displayInfoFonts = '<div id="divFontsCreditsWrap"><div id="divFontsCreditsTitle">𝕿𝖞𝖕𝖔𝖌𝖗𝖆𝖕𝖍𝖎𝖆</div><div id="divFontsCredits">';
+        displayInfoFonts += '‘<i>Egenolff–Berner Garamond</i>’<br>Diseñado por Georg Mayr-Duffner<br>y Octavio Pardo<br>ø ' + FormatYearOnDemand(2011, false) + ' Google LLC<br><br>';
+        displayInfoFonts += '‘<i>OSRS Plain 11</i>’<br>Redactó por Hunter W.B.<br>&copy; ' + FormatYearOnDemand(1999, false) + ' Jagex Ltd.<br><br>';
+        displayInfoFonts += '‘<i>Courier</i>’<br>Diseñado por Howard “Bud” Kettler<br>ø ' + FormatYearOnDemand(1956, false) + ' IBM<br><br>';
+        displayInfoFonts += '‘<i>Alegreya Sans SC</i>’<br>Diseñado por Juan Pablo del Peral<br>&copy; ' + FormatYearOnDemand(2013, false) + ' Huerta Tipográfica<br><br>';
+        displayInfoFonts += '‘<i>Libertinus Serif</i>’<br>Diseñado por Philipp H. Poll,<br>Khaled Hosny<br>y Caleb Maclennan<br>&copy; ' + FormatYearOnDemand(2012, false) + ' El Proyecto Libertino<br><br>';
+        displayInfoFonts += '‘<i>Pixel</i>’<br>&copy; ' + FormatYearOnDemand(2022, false) + ' krolesz94<br><br>';
+        displayInfoFonts += '‘<i>Vipnagorgialla</i>’<br>Diseñado por Raymond Larabie<br>&copy; ' + FormatYearOnDemand(2024, false) + ' Typodermic Fonts Inc.<br><br>';
+        displayInfoFonts += '‘<i>Nokia Cellphone FC Sm.</i>’<br>Redactó por Zeh Fernando<br>&copy; ' + FormatYearOnDemand(1998, false) + ' Nokia Oyj<br><br>';
+        displayInfoFonts += '‘<i>Perfect DOS VGA 437</i>’<br>Diseñado por David J. Bradley,<br>Lew Eggebrecht<br>y Andy Saenz<br>Redactó por Zeh Fernando<br>ø ' + FormatYearOnDemand(1981, false) + ' IBM';
+        displayInfoFonts += '</div></div>';
+
         displayInfoText = 'Porciones de <i>Dune</i> &copy; ' + FormatYearOnDemand(1965, false) + ' por Frank Herbert. Segmentos de texto de <i>Ultima IV</i> &copy; ' + FormatYearOnDemand(1985, false) + ' por Lord British y <i>Ultima V</i> &copy; ' + FormatYearOnDemand(1988, false) + ' por Lord British. Segmentos de texto de <i>Quest for Glory</i> de Lori Ann Cole &copy; ' + FormatYearOnDemand(1989, false) + ' Sierra On-Line, Inc. Todo material con derechos de autor utilizado sin permiso.<br><br>';
         displayInfoText += '“El Polvo y el Laurel” de ChatGPT y <i>Crucero en Trirreme al Atardecer</i> de Microsoft Copilot por la presente liberado al dominio público.';
+
         displayInfoMadeInFlorida = '<div id="divHechoEnFlorida">Hecho en Florida 🍊</div>';
+
         displayInfoThanks = 'Agradecimientos especiales a ';
         displayInfoThanks += ScribeList(gratitudeList);
-        displayInfoThanks += '.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br>';
-        displayInfoThanks += displayInfoMusic + '<br>';
+        displayInfoThanks += '.<br><br>Un agradecimiento muy especial a mis padres por toda una vida de apoyo.<br><br><br>';
+        displayInfoThanks += displayInfoMusic + '<br><br>' + displayInfoFonts + '<br>';
         displayInfoThanks += '<div id="divTextCredits">' + displayInfoText + '</div><br>';
         displayInfoThanks += 'Gaviotas aparecen por cortesía del Panther-One Gaviotas Mediterráneas Salvajes Aviario & Parrilla y OpenGameArt.org. ';
         displayInfoThanks += 'Entrenamiento de gaviotas por “Loco Bill” Stealey y la Asociación de Domadores de Gaviotas del Noroeste de Florida Panhandle de Estados Unidos: Capítulo de Mediterráneo.<br><br>';
         displayInfoThanks += 'Argos, Bailey, Boxcar Willie y Spike aparecen cortesía de El Ken y Roberta Williams Centro Virtual de Rescate Canino de Oakhurst, California.<br><br>';
         displayInfoThanks += 'Fideo la Cobra proporcionada por Herpy Derper’s Reptil y Lagartorio de Winter Park, Florida.<br><br>';
         displayInfoThanks += 'Las ovejas son simplemente ovejas. No tienen nombre nada.';
+
         displayInfoScripture = '<div id="divSystemMessageScripture">«Si escuchas el Camino una mañana y mueres esa noche, mueres contento.»</div><div id="divSystemMessageSource">Analectas 4:8</div>';
 
         displayBoilerplate = 'ESTE SOFTWARE SE PROPORCIONA *TAL CUAL*, SIN GARANTÍA DE NINGÚN TIPO.';
@@ -4807,7 +5123,7 @@ function Translate(language, bark = true) {
         displayGenieAttempt = 'MALDITA SEA, ERES SOLO UN GLOTÓN DEL CASTIGO, ¿EH?';
         displayGenieCancel = 'No, no, solo bromeando :D';
 
-        displayHintsOn = 'A partir de ahora, lo siguiente que debes hacer se resaltará de esta manera:<br><br><button class="hinted" onclick="alert(`¡Excelente trabajo! 🏅`);">¡PULSA AQUÍ!</button><br><br>¡Pero siéntete libre de probar cualquier cosa! No hay decisiones incorrectas.';
+        displayHintsOn = 'A partir de ahora, lo siguiente que debes hacer se resaltará de esta manera:<br><br><button class="hinted" onclick="PlaySound(audioKoolAidMan); alert(`¡Excelente trabajo! 🏅`);">¡PULSA AQUÍ!</button><br><br>¡Pero siéntete libre de probar cualquier cosa! No hay decisiones incorrectas.';
         displayHintsOff = 'Las sugerencias ahora están desactivadas.';
         displayHintsEnd = '⚠️ Se acabaron las pistas automáticas. A partir de ahora, tendrás que decidir qué hacer por tu cuenta. ¡Buena suerte!';
 
@@ -4824,6 +5140,7 @@ function Translate(language, bark = true) {
             'Ajustando tu peso, estiras las piernas, las vuelves a cruzar, te pones nuevamente cómodo, colocas las palmas de las manos en el regazo y cierras los ojos, buscando en tu interior la tranquilidad.<br><br>Tu respira profundamente por la nariz, llenando tus pulmones con el aire fresco y saludable de la montaña, luego despejas tu mente de todo pensamiento mientras exhalas suavemente por la boca.',
         ];
         displayStoryHikeEnough = 'Ahhh... Creo que probablemente sea suficiente zen por un día.';
+        displayStoryHikeFine = 'De acuerdo, de acuerdo... como quieras: tu medita un poco más, ¿vale? Tu medita durante <i>horas</i>.';
 
         displayStoryFishFirstVisit = 'A, EL SIMPLE PLACER DE PASAR UN DÍA EN EL ARROYO... UNA DE LAS ÚLTIMAS COSAS QUE TE ENSEÑÓ TU PADRE ANTES DE SU PREMATURA MUERTE<br><br>(Empleados Que Reciben Pescado Con Su Salario Trabajan El Doble De Duro)';
         displayFishFish = 'FISH';
@@ -4846,7 +5163,8 @@ function Translate(language, bark = true) {
         displayLabelWharfUnlockA = 'desbloquea: después';
         displayLabelWharfUnlockB = 'capturas más';
         displayLabelWharfUnlockBsing = 'captura más';
-        displayStoryWharf = 'ESTOS CONSTRUCTORES QUIEREN REVISAR LOS PLANOS PARA EL CLAVAR DE LOS PILONES... BUENO LOS COSTOS SEGURO QUE SIGUEN DE APILAR, DÉJAME DECÍRTELO' + newHire[0] + 'Wharfinger' + newHire[1] + 'Jefe-de-Muelle Tabernarius' + estosChicos[1];
+        displayStoryWharf = 'ESTOS CONSTRUCTORES QUIEREN REVISAR LOS PLANOS PARA EL CLAVAR DE LOS PILONES... BUENO LOS COSTOS SEGURO QUE SIGUEN DE APILAR, DÉJAME DECÍRTELO<br><br><img id="imgShoppesIcon" src="' + imageShoppes.src + '"><br>(Tiendas del Paseo Marítimo Ya Abiertas)' + newHire[0] + 'Wharfinger' + newHire[1] + 'Jefe-de-Muelle Tabernarius' + estosChicos[1];
+        displayStoryWharfYeahRight = 'Ahora tu escucha aquí, tipo, y tu solo escuchan muy bueno, vaquero... por aquí, tenemos un dicho: «Si no has pescado los peces necesarios, tus sueños de un muelle no tienen un deseo», ¿me oyes? Vamos ahora, vamos. Pónese, lo digo. Lárgate de aquí.';
         displayStoryWharfFirstVisit = 'GUAU, ESTE LUGAR APESTA';
         displayCatchReportTitle = 'Comisión de Conservación de Pesca y Vida Silvestre del Levante — Informe Posterior a la Captura';
         displayCatchReportYouCaught = 'Has cogido';
@@ -4919,11 +5237,13 @@ function Translate(language, bark = true) {
     divPsxSubtitle.innerHTML = displayTrophyEarned;
 
     const divider = '<div class="divider">♦♦♦ ♦ ♦♦♦</div>';
-    let publicationYear = 2025;
+    let publicationYear = 2026;
     if (yearFormat == 1) { publicationYear = RomanceNumber(publicationYear + yearAtStartRoman - yearAtStartProlepticGregorian); }
     else if (yearFormat == 2) { publicationYear = CircumciseNumber(publicationYear + yearAtStartHebrew - yearAtStartProlepticGregorian); }
     else if (yearFormat == 3) { publicationYear = SteepNumberInGreenTea(publicationYear + yearAtStartHanDynasty - yearAtStartProlepticGregorian); }
-    displayInfoFinal = '<div id="divInfoTitle">' + displayGameTitle + '<br><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) ' + publicationYear + ' Davis Laboratory</span></div>';
+    let subtitle = '~𝕬~<br>𝕿𝖆𝖑𝖊 𝖔𝖋 𝕿𝖍𝖊 𝕲𝖊𝖔𝖗𝖌𝖊';
+    if (player.speaks == 'Spanish') { subtitle = '~𝖀𝖓𝖆~<br>𝕳𝖎𝖘𝖙𝖔𝖗𝖎𝖆 𝖉𝖊 𝕰𝖑 𝕵𝖔𝖗𝖌𝖊'; }
+    displayInfoFinal = '<div id="divInfoTitle"><span id="spanInfoTitleLITERAL">' + displayGameTitle + '</span><div id="divInfoSubtitle">' + subtitle + '</div><span id="spanInfoVersion">v' + version + ' (<span id="spanInfoCC0">CCØ</span>) ' + publicationYear + ' Davis Laboratory</span></div>';
     displayInfoFinal += displayInfoMadeFor + '<br><br>' + displayInfoMadeWith + '<br><br>' + displayInfoDedication + '<br><br>' + displayInfoThanks + '<br><br>' + displayInfoMadeInFlorida;
     displayInfoFinal += divider + displayInfoScripture;
     displayLegalFinal = displayBoilerplate + divider + displayLegalQuote;
@@ -5030,6 +5350,7 @@ const gratitudeList = [
     'Andrew Mark Henry', // youtube.com/@ReligionForBreakfast
     'Marty Hirsch', // en.wikipedia.org/wiki/MChess_Pro
     'Milton “Hozq” Hjort', // hozq3d.gumroad.com/l/LVA4
+    'ħ𐓫chelaġa', // youtube.com/@hochelaga
     'Filip Holm', // patreon.com/letstalkreligion
     'Home of the Underdogs', // homeoftheunderdogs.net
     'Bashir Hood',
@@ -5065,6 +5386,7 @@ const gratitudeList = [
     'Brian Moran',
     'Flathead Mike Niles',
     'Photon Storm', // arcade.photonstorm.com
+    'Pixabay', // pixabay.com
     [
         '*',
         'the Public Broadcasting Service',
@@ -5074,7 +5396,7 @@ const gratitudeList = [
     'Garrett Ryan', // toldinstone.com
     'Jim Shepperd',
     'Dr. Justin Sledge', // justinsledge.com/esoterica
-    'Todd Spigener',
+    'Todd “Nonius” Spigener',
     'The Spriters Resource', // spriters-resource.com
     'Stack Overflow', // stackoverflow.com
     'Grant Sutherland',

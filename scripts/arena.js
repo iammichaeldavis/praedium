@@ -4,9 +4,13 @@
 // --- PLAYER ACTIONS ------------------------------------------------------------------------------
 
 function GoToArena() {
+    KillAmbience();
+    PlaySound(audioClack);
+    if (arenaBet != arenaHighBet) { PlaySound(audioHorse); }
+    else { PlaySound(ambienceCrowd); }
     if (!player.hasSeenArena) {
         player.hasSeenArena = true;
-        if (player.likesStory) { GameEvent(displayStoryArenaFirstVisit); }
+        GameEvent(displayStoryArenaFirstVisit);
     }
 
     PauseTime();
@@ -21,6 +25,9 @@ function GoToArena() {
 }
 
 function LeaveArena() {
+    PlaySound(audioClack);
+    KillAmbience();
+    FireTownshipExtendedAmbience();
     if (gameSpeed == 'paused') { StartTime(); }
     divGameWindow.style.display = '';
     divViewTownship.style.display = 'block';
@@ -39,20 +46,17 @@ function PlaceBet(side) {
         arenaTotalBet += arenaBet;
         const payout = arenaBet + ((arenaBet / 10) * 9);
 
-        //console.log('--------- NEW BET ---------');
         const winner = FindWholeRandom(0, 1);
-        //console.log('Bet: ' + ((side == 0) ? '🟦 Blue' : '🟥 Red') );
-        //console.log('Win: ' + ((winner == 0) ? '🟦 Blue' : '🟥 Red') );
         if (winner == side) {
-            //console.log('Good choice!');
             asCount += payout;
             arenaTotalWin += payout;
             arenaWins[side]++;
+            PlaySound(audioChaChing);
         }
         else {
-            //console.log('YOU LOSE GOOD DAY SIR I SAID GOOD DAY');
             arenaTotalLoss += arenaBet;
             arenaLosses[side]++;
+            PlaySound(audioWompWomp);
         }
 
         let taleOfTheTape = displayTOTT1 + ' <span class="icon PlainMessage inlineIcon"></span>:';

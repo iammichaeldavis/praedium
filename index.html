@@ -13,7 +13,7 @@
         gtag('config', 'G-1V9KKXZ12Y');
     </script>
 
-    <title>PRAEDIUM - EDICIÓN DE ORO</title>
+    <title>PRAEDIUM - EDICIÓN DIAMANTE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
@@ -21,9 +21,9 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://iammichaeldavis.github.io/praedium/bitmaps/share.png">
     <meta name="twitter:image:alt" content="Screenshot of a player’s farm taken early in the game">
-    <meta property="og:title" content="PRAEDIUM - EDICIÓN DE ORO">
-    <meta property="og:site_name" content="PRAEDIUM - EDICIÓN DE ORO">
-    <meta name="apple-mobile-web-app-title" content="PRAEDIUM - EDICIÓN DE ORO">
+    <meta property="og:title" content="PRAEDIUM - EDICIÓN DIAMANTE">
+    <meta property="og:site_name" content="PRAEDIUM - EDICIÓN DIAMANTE">
+    <meta name="apple-mobile-web-app-title" content="PRAEDIUM - EDICIÓN DIAMANTE">
     <meta name="description" content="PRAEDIUM is a Levantine farming simulation set in 200 BC">
     <meta property="og:description" content="PRAEDIUM is a Levantine farming simulation set in 200 BC">
     <meta name="twitter:card" content="summary_large_image">
@@ -41,8 +41,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap">
-    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.24.02.0001">
-    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.24.02.0001">
+    <link rel="stylesheet" id="stylesheetLoading" href="loading.css?v=1.25.00.0000">
+    <link rel="stylesheet" id="stylesheetActive" href="style.css?v=1.25.00.0000">
     <script>history.scrollRestoration = 'manual';</script>
 </head>
 
@@ -89,12 +89,12 @@
         </div>
         <div id="divCalendarGap"></div>
         <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-        <!--
+        <!--[⚠️VESTIGIAL⚠️]
         <div id="divEmpireRibbon" style="background-color: brown;">
             how much golds???!!!
         </div>
         <div id="divRibbonGap"></div>
-        -->
+        [⚠️VESTIGIAL⚠️]-->
         <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
         <div id="divGameWindow">
             <img id="imgNirvana" src="bitmaps/red_gate.png" style="display: none;">
@@ -159,7 +159,7 @@
 
                 <div id="divHeirWorkshopName">
                     <div id="divHeirWorkshopNameHeadline"></div>
-                    <select name="heirNames" id="selectHeirNames" onchange="HeirChangeName();">
+                    <select name="heirNames" id="selectHeirNames" onchange="HeirChangeName();" onclick="PlaySound(audioClick);">
                         <option value="Adonis" selected>Adonis</option> <!-- Sophie Brussaux and Drake -->
                         <option value="Aire">Aire</option> <!-- Kylie Jenner and Travis Scott -->
                         <option value="Apollo">Apollo</option> <!-- Gwen Stefani and Gavin Rossdale -->
@@ -185,6 +185,7 @@
                         <option value="Gravity">Gravity</option> <!-- Stormi Bree and Lucky Blue Smith -->
                         <option value="Huckleberry">Huckleberry</option> <!-- Shara and Bear Grylls -->
                         <option value="Ian">Ian</option> <!-- Peggy and William George Dury -->
+                        <option value="Imani">Imani</option> <!-- ??? and D'Angelo -->
                         <option value="Jaden">Jaden</option> <!-- Jada Pinkett and Will Smith -->
                         <option value="Jenna">Jenna</option> <!-- Laura and George W. Bush -->
                         <option value="Kal-El">Kal-El</option> <!-- Alice Kim and Nicolas Cage -->
@@ -198,7 +199,7 @@
                         <option value="Maude">Maude</option> <!-- Leslie Mann and Judd Apatow -->
                         <option value="Marmaduke">Marmaduke</option> <!-- Shara and Bear Grylls -->
                         <option value="Moon Unit">Moon Unit</option> <!-- Gail and Frank Zappa -->
-                        <option value="Moroccan">Moroccan</option> <!-- Mariah Carey and Nick Cannon -->
+                        <option value="Moroccan">Moroccan</option> <!-- Mariah Carey and Nick Cannon --> <!-- (alt.: 'Morocco', ??? and D'Angelo) -->
                         <option value="Moses">Moses</option> <!-- Gwyneth Paltrow and Chris Martin -->
                         <option value="North">North</option> <!-- Kim Kardashian and Kanye West -->
                         <option value="Olin">Olin</option> <!-- Blake Lively and Ryan Reynolds -->
@@ -223,6 +224,7 @@
                         <option value="Summer Rain">Summer Rain</option> <!--  Christina Aguilera and Matthew Rutler -->
                         <option value="Sunday">Sunday</option> <!-- Kelly Tisdale and Mike Myers -->
                         <option value="Suri">Suri</option> <!-- Katie Holmes and Tom Cruise -->
+                        <option value="Swayvo">Swayvo</option> <!-- Angie B. Stone and D'Angelo -->
                         <option value="Techno Mechanicus">Techno Mechanicus</option> <!-- Grimes and Elon Musk -->
                         <option value="Trey">Trey</option> <!-- Sheree Zampino and Will Smith -->
                         <option value="Ulysses">Ulysses</option> <!-- Elizabeth and William Peoples -->
@@ -245,13 +247,13 @@
 
                 <div id="divHeirWorkshopEthnicity">
                     <div id="divHeirWorkshopEthnicityHeadline"></div>
-                    <select name="heirEthnicities" id="selectHeirEthnicities" onchange="HeirChangeEthnicity();"></select>
+                    <select name="heirEthnicities" id="selectHeirEthnicities" onchange="HeirChangeEthnicity(true);" onclick="PlaySound(audioClick);"></select>
                     <button id="buttonHeirChooseEthnicity"></button>
                 </div>
 
                 <div id="divHeirWorkshopTitle">
                     <div id="divHeirWorkshopTitleHeadline"></div>
-                    <select name="heirTitles" id="selectHeirTitles" onchange="HeirChangeTitle();"></select>
+                    <select name="heirTitles" id="selectHeirTitles" onchange="HeirChangeTitle(true);" onclick="PlaySound(audioClick);"></select>
                     <button id="buttonHeirChooseTitle"></button>
                 </div>
 
@@ -436,11 +438,11 @@
                     </div>
                     <div id="divBarterButtons">
                         <button id="buttonBarterAll" onclick="BarterAll();"></button>
-                        <button id="buttonBarterOlive"></button>
-                        <button id="buttonBarterDate"></button>
-                        <button id="buttonBarterFig"></button>
-                        <button id="buttonBarterPom"></button>
-                        <button id="buttonBarterGrape"></button>
+                        <button id="buttonBarterOlive" onclick="BarterFruit(2);"></button>
+                        <button id="buttonBarterDate" onclick="BarterFruit(3);"></button>
+                        <button id="buttonBarterFig" onclick="BarterFruit(4);"></button>
+                        <button id="buttonBarterPom" onclick="BarterFruit(5);"></button>
+                        <button id="buttonBarterGrape" onclick="BarterFruit(6);"></button>
                     </div>
                 </div>
             </div>
@@ -460,18 +462,18 @@
                     <button id="buttonVisitOracle" onclick="GoToOracle();"></button>
                     <button id="buttonBuild" onclick="Build();"></button>
                     <button id="buttonPlayGod" onclick="PlayGod();"></button>
-                    <button id="buttonSellWheat"></button>
-                    <button id="buttonSellBarley"></button>
-                    <button id="buttonSellFlax"></button>
-                    <button id="buttonSellLogs"></button>
-                    <button id="buttonSellBoards"></button>
-                    <button id="buttonSellStone"></button>
+                    <button id="buttonSellWheat" onclick="SellCommodities(0);"></button>
+                    <button id="buttonSellBarley" onclick="SellCommodities(1);"></button>
+                    <button id="buttonSellFlax" onclick="SellCommodities(5);"></button>
+                    <button id="buttonSellLogs" onclick="SellCommodities(2);"></button>
+                    <button id="buttonSellBoards" onclick="SellCommodities(3);"></button>
+                    <button id="buttonSellStone" onclick="SellCommodities(4);"></button>
                     <button id="buttonSellHorses" onclick="SellLivestock();"></button>
-                    <button id="buttonBuyWheat"></button>
-                    <button id="buttonBuyBarley"></button>
-                    <button id="buttonBuyLogs"></button>
-                    <button id="buttonBuyBoards"></button>
-                    <button id="buttonBuyStone"></button>
+                    <button id="buttonBuyWheat" onclick="PurchaseCommodities(0);"></button>
+                    <button id="buttonBuyBarley" onclick="PurchaseCommodities(1);"></button>
+                    <button id="buttonBuyLogs" onclick="PurchaseCommodities(2);"></button>
+                    <button id="buttonBuyBoards" onclick="PurchaseCommodities(3);"></button>
+                    <button id="buttonBuyStone" onclick="PurchaseCommodities(4);"></button>
                     <button id="buttonBuyHorses" onclick="PurchaseLivestock();"></button>
                 </div>
             </div>
@@ -675,11 +677,25 @@
         <div id="divModalOptions">
             <div>
                 <label for="toggleMusic" id="labelToggleMusic"></label>
-                <input type="checkbox" id="toggleMusic" name="toggleMusic" onclick="ToggleMusic()">
+                <input type="checkbox" id="toggleMusic" name="toggleMusic" onclick="ToggleMusic();">
+                <div id="divVolumeMusic">
+                    Vol. <input type="range" id="rangeVolumeMusic" name="rangeVolumeMusic" min="10" value="40" max="99" style="width: 60%;"
+                        oninput="SetMusicVolume(this.value);">
+                    <label id="labelVolumeMusic" for="rangeVolumeMusic"></label>
+                </div>
             </div>
             <div>
                 <label for="toggleSounds" id="labelToggleSounds"></label>
-                <input type="checkbox" id="toggleSounds" name="toggleSounds" onclick="ToggleSound()">
+                <input type="checkbox" id="toggleSounds" name="toggleSounds" onclick="ToggleSound();">
+                <div id="divVolumeSounds">
+                    Vol. <input type="range" id="rangeVolumeSounds" name="rangeVolumeSounds" min="10" value="80" max="99" style="width: 60%;"
+                        oninput="SetSoundVolume(this.value, true);">
+                    <label id="labelVolumeSounds" for="rangeVolumeSounds"></label>
+                </div>
+                <div id="divTickTockVisibilityContainer">
+                    <label for="toggleTickTock" id="labelToggleTickTock"></label>
+                    <input type="checkbox" id="toggleTickTock" name="toggleTickTock" onclick="ToggleTickTock();" checked>
+                </div>
             </div>
             <div>
                 <label for="toggleAnimation" id="labelToggleAnimation"></label>
@@ -749,18 +765,26 @@
         </div>
     </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
-    <script src="scripts/image_data.js"></script>
-    <script src="scripts/init.js"></script>
-    <script src="scripts/utilities.js"></script>
-    <script src="scripts/translate.js"></script>
-    <script src="scripts/ui.js"></script>
-    <script src="scripts/player_actions.js"></script>
-    <script src="scripts/game_turn.js"></script>
-    <script src="scripts/fish.js"></script>
-    <script src="scripts/arena.js"></script>
-    <!-- <script src="scripts/harp.js"></script> -->
-    <script src="scripts/start.js"></script>
-    <script src="scripts/mods.js"></script>
+    <div id="divScriptsBinsBasket" style="display: none;">
+        <div id="divScriptsFlushableBinA" style="display: none;">
+            <script src="scripts/resources.js"></script>
+            <script src="scripts/init.js"></script>
+        </div>
+        <div id="divScriptsFlushableBinC" style="display: none;">
+            <script src="scripts/utilities.js"></script>
+        </div>
+        <div id="divScriptsFlushableBinB" style="display: none;">
+            <script src="scripts/translate.js"></script>
+            <script src="scripts/ui.js"></script>
+            <script src="scripts/player_actions.js"></script>
+            <script src="scripts/game_turn.js"></script>
+            <script src="scripts/fish.js"></script>
+            <script src="scripts/arena.js"></script>
+            <!-- <script src="scripts/harp.js"></script> -->
+            <script src="scripts/start.js"></script>
+            <script src="scripts/mods.js"></script>
+        </div>
+    </div>
     <!-- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- -->
 </body>
 

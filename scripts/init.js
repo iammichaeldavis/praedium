@@ -1,7 +1,7 @@
 // ۞ INIT ******************************************************************************************
 // *************************************************************************************************
 
-const version = '1.24.02-B';
+const version = '1.25.00-A';
 
 const arrayFarmPlots = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -49,8 +49,9 @@ const player = {
 
     speaks: null,
 
-    likesMusic: false, // 🚨🚨🚨
+    likesMusic: false,
     likesSounds: false,
+    likesTickTock: true,
     likesAnimations: true,
     likesStory: true,
     likesRecords: false,
@@ -172,6 +173,7 @@ const player = {
     hasMonument: false,
     hasSeenResidence: false,
     hasSeenVillage: false,
+    hasBeenBackToPraedium: false,
     hasSeenOracle: false,
     hasSeenTemple: false,
     hasSeenArena: false,
@@ -226,9 +228,12 @@ const player = {
     hasCelebratedAnniversary: false,
     hasSeenDog: false,
     hasDoneEverything: false,
+    hasLeftTemple: false,
+    hasCrashed: false,
 };
 
 const stylesheetActive = document.getElementById('stylesheetActive');
+const html = document.getElementsByTagName('html')[0];
 const body = document.getElementsByTagName('body')[0];
 const divWidthClamp = document.getElementById('divWidthClamp');
 const divGameWindow = document.getElementById('divGameWindow');
@@ -270,8 +275,17 @@ const buttonModsDismiss = document.getElementById('buttonModsDismiss');
 const divOverlayOptions = document.getElementById('divOverlayOptions');
 const toggleMusic = document.getElementById('toggleMusic');
 const labelToggleMusic = document.getElementById('labelToggleMusic');
+const divVolumeMusic = document.getElementById('divVolumeMusic');
+const rangeVolumeMusic = document.getElementById('rangeVolumeMusic');
+const labelVolumeMusic = document.getElementById('labelVolumeMusic');
 const toggleSounds = document.getElementById('toggleSounds');
 const labelToggleSounds = document.getElementById('labelToggleSounds');
+const divTickTockVisibilityContainer = document.getElementById('divTickTockVisibilityContainer');
+const toggleTickTock = document.getElementById('toggleTickTock');
+const labelToggleTickTock = document.getElementById('labelToggleTickTock');
+const divVolumeSounds = document.getElementById('divVolumeSounds');
+const rangeVolumeSounds = document.getElementById('rangeVolumeSounds');
+const labelVolumeSounds = document.getElementById('labelVolumeSounds');
 const toggleAnimation = document.getElementById('toggleAnimation');
 const labelToggleAnimation = document.getElementById('labelToggleAnimation');
 const toggleProfanity = document.getElementById('toggleProfanity');
@@ -292,6 +306,7 @@ const buttonYearHebrew = document.getElementById('buttonYearHebrew');
 const buttonYearHan = document.getElementById('buttonYearHan');
 
 const divCalendar = document.getElementById('divCalendar');
+const divCalendarGap = document.getElementById('divCalendarGap');
 const divYear = document.getElementById('divYear');
 const divRuneSeason = document.getElementById('divRuneSeason');
 const divStonesSeason = document.getElementById('divStonesSeason');
@@ -625,6 +640,8 @@ let canvasFireworksContext = null;
 let resolutionScale = 0;
 let yearFormat = 0;
 
+let safetyEngaged = true;
+
 const formatterEnglish = new Intl.NumberFormat('en-US');
 const formatterSpanish = new Intl.NumberFormat('es');
 const formatterSpanishInventory = new Intl.NumberFormat('de-DE');
@@ -647,6 +664,7 @@ let week = 1;
 let timeAtStart = null;
 let timeAtWin = null;
 let trueEnding = false;
+const endingYearDelta = 2050;
 
 // 0. Wheat 🌾, 1. Barley 🌾, 2. Olive 🫒, 3. Date 🫐, 4. Fig 🍅, 5. Pomegranate 🍎, 6. Grape 🍇, 7. Flax 🌾
 const bushelCount = [10, 0, 0, 0, 0, 0, 0, 0,];
@@ -658,8 +676,9 @@ const harvestedCount = [0, 0, 0, 0, 0, 0, 0, 0,];
 const spentCount = [0, 0, 0, 0, 0, 0, 0, 0,];
 const purchasedCount = [0, 0, 0, 0, 0, 0, 0, 0,];
 const soldCount = [0, 0, 0, 0, 0, 0, 0, 0,];
-const barterMaxBulkCount = 1000;
+let barterMaxBulkCount = 1000;
 const barterExchangeRate = [1, 1, 10, 14, 18, 24, 32,];
+const lifetimeLostToRats = [0, 0, 0, 0, 0, 0, 0, 0,];
 
 let plantCost = 1;
 let yieldMin = 4;
@@ -694,7 +713,7 @@ const newFarmHandsCount = 28;
 const flaxFarmHandsCount = 16;
 let priority = 'Reap';
 let weeksOfHoliday = 0;
-let manweeksLost = 0;
+let manweeksShamefullyLost = 0;
 let handsHired = 0;
 let vigneronsHired = 0;
 let arboristsHired = 0;
@@ -781,6 +800,7 @@ let villageStage = -5;
 
 let residentsCount = 0;
 let residentsMax = 0;
+const arrayResidentCapacities = [14, 42, 168, 333, 111, 39,];
 
 let asCount = 0;
 let asSpent = 0;
@@ -831,6 +851,8 @@ let scrollsSpawn = false;
 const scrollsIncAmount = 1;
 let scrollsCount = 0;
 
+let lawsCount = 282; // en.wikipedia.org/wiki/Code_of_Hammurabi ⚖️👨‍⚖️
+
 let ratsSpawn = false;
 let ratsOutbreak = false;
 let ratsCount = 1;
@@ -859,8 +881,10 @@ let patientsMin = 0;
 let patientsMax = 200;
 let patientsCount = 0;
 let patientCost = 10;
+const patientPrice = 100;
 let totalPatientsSeen = 0;
 let medicalLifetimeCost = 0;
+let medicalLifetimeProfit = 0;
 
 let pilgrimsCount = 0;
 let pilgrimsMax = 0;
@@ -1019,22 +1043,12 @@ const priceShepherds = 50;
 
 const pricePegasus = 3;
 
-const tributeAmount = 616; // 😈 NRO QSR
+let tributeAmount = 616; // 😈 NRO QSR
 let tributeLifetimePaid = 0;
 let tributeTimer = 0;
 const tributeTimerLimit = 100;
 
 let revealedWisdom = 0;
-
-const achievementSoundRare = new Audio('waveforms/XboxOneRareAchievement.mp3');
-const audioTrophy = new Audio('waveforms/ps4_trophy.mp3');
-const audioTheme = new Audio('waveforms/moraffsAria.mp3');
-const audioEnding = new Audio('waveforms/tquestAnthem.mp3');
-const audioPeasant = new Audio('waveforms/warcraft.mp3');
-const audioFish = new Audio('waveforms/SM64_Slider.mp3');
-const audioWhistle = new Audio('waveforms/whistle.mp3');
-const audioChime = new Audio('waveforms/SMK_ChristmasTreeChime.mp3');
-const audioMuppets = new Audio('waveforms/muppets.mp3');
 
 const heirDate = [0, 0,];
 let heirStage = 0;
@@ -1048,15 +1062,66 @@ let heirFacesPageTotal = 13;
 let heirFaceChoice = 0;
 
 let heirAttributes = {
-    age: [33, 33,],
-    birthday: ['1', 'January', 1, 1,],
+    voice: '5',
+    eyes: [
+        '#1b6f20',
+        '#3b56a0',
+        '#f9a124',
+    ],
+    lips: [
+        false,
+        '#e0103d',
+        '#e0103d',
+    ],
+    shadow: [
+        false,
+        '#aa0867',
+        '#aa0867',
+    ],
+    cheeks: [
+        false,
+        '#ad4841',
+    ],
+    nails: [
+        false,
+        '#e60505',
+        '#ff780a',
+        '#ffae00',
+        '#ebe700',
+        '#47d115',
+
+        '#00ebb4',
+        '#038cfc',
+        '#2b32fd',
+        '#5f14eb',
+        '#8913d8',
+
+        false,
+        '#e60505',
+        '#ff780a',
+        '#ffae00',
+        '#ebe700',
+        '#47d115',
+
+        '#00ebb4',
+        '#038cfc',
+        '#2b32fd',
+        '#5f14eb',
+        '#8913d8',
+    ],
+    WIG: false,
+    birthday: [
+        '1',
+        'January',
+        1,
+        1,
+    ],
+    age: [
+        33,
+        33,
+    ],
     height: '1',
     weight: '1',
-    eyes: [
-        '#1a9424',
-        '#1448f0',
-        '#ffba24',
-    ],
     STR: '1',
     END: '1',
     AGI: '1',
@@ -1072,6 +1137,7 @@ let heirAttributes = {
     ASP: '1',
     DIE: '1',
     COM: '1',
+    ORL: '1',
     options: [
         false,
         false,
@@ -1105,18 +1171,19 @@ let heirAttributes = {
         false,
         false,
     ],
+    psych: '0',
 };
 
 // 0. Wool 🧶, 1. Milk 🥛, 2. Yoghurt 🍦, 3. Butter 🧈, 4. Cheese 🧀, 5. Mutton 🥩, 6. Offal 🍖, 7. Hide 🏈, 8. Bone 🦴, 9. Blood 🩸, 10. Manure 💩
 const shepherdsInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const shepherdsProduction = [120, 80, 20, 40, 10, 60, 180, 16, 16, 32, 64,];
+let shepherdsProduction = [120, 80, 20, 40, 10, 60, 180, 16, 16, 32, 64,];
 const shepherdsCount = 240;
 const shepherdsCost = 1;
 const policeCost = 2;
 
 // 0. Diamonds 💎, 1. Jacinth 💎, 2. Bismuth 💎, 3. Gold 🧱, 4. Silver 🧱, 5. Iron 🧱, 6. White Copper 🧱, 7. False Silver 🧱, 8. Lead 🧱, 9. Kobold Ore 🪨, 10. Magnes Rock 🪨
 const minersInventory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
-const minersProduction = [1, 5, 10, 1, 5, 10, 15, 5, 25, 50, 50,];
+let minersProduction = [1, 5, 10, 1, 5, 10, 15, 5, 25, 50, 50,];
 const minersCost = [200, 100, 250000,];
 const minersCount = 3600;
 
@@ -1134,6 +1201,9 @@ let snapshotThisTurn = null;
 
 let loadedReport = null;
 let loadedIcon = null;
+
+const audioVolumes = [40, 80,];
+let tickOrTock = 'tick';
 
 let debugCounter = 0;
 let godMenuCounter = 0;
@@ -1175,6 +1245,8 @@ let shepherdsAnimationFrameA = 0;
 let shepherdsAnimationFrameB = 0;
 let shepherdsAnimationFrameC = 0;
 let shepherdsAnimationFrameD = 0;
+let shepherdsAnimationFrameE = 0;
+let shepherdsAnimationFrameF = 0;
 let shepherdsAnimationToggle = false;
 let farmersAnimationFrame = 0;
 let farmersGullAnimationFrame = 290;
@@ -1287,7 +1359,6 @@ const shippedFishPricePerUnit = 100;
 let lifetimeStockfishShipped = 0;
 let lifetimeStockfishProfit = 0;
 
-
 let splashTimer = null;
 const splashFPS = 10;
 let splashFrame = 0;
@@ -1313,6 +1384,7 @@ let templeSpentCount = [0, 0, 0, 0, 0,]; // 0. Mutton, 1. Gold, 2. Silver, 3. Di
 let treasuresCount = 0;
 
 let arenaBet = 100000;
+const arenaHighBet = 1000000;
 let arenaTotalBet = 0;
 let arenaTotalWin = 0;
 let arenaTotalLoss = 0;

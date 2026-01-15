@@ -271,6 +271,7 @@ function UpdateDisplay() {
 
 function UpdateCalendar() {
     let formattedYear = year;
+    if (player.hasWon) { formattedYear += endingYearDelta; }
     if (yearFormat == 1) { formattedYear = RomanceNumber(formattedYear); }
     else if (yearFormat == 2) { formattedYear = CircumciseNumber(formattedYear); }
     else if (yearFormat == 3) { formattedYear = SteepNumberInGreenTea(formattedYear); }
@@ -458,7 +459,6 @@ function UpdateCalendar() {
 
 
 function UpdateText() {
-    // FOREWORD ----------------------------
     if (player.seesForeword) {
         divForewordCorpus.innerHTML = displayForewordA + '<div id="divForewordScripture">' + displayForewordScripture + '<div id="divForewordSource">' + displayForewordSource + '</div></div>' + displayForewordB;
         buttonForewordDismiss.innerHTML = displayForewordLabel;
@@ -480,6 +480,7 @@ function UpdateText() {
         let countWheat = formatterCurrent.format(bushelCount[0]);
         let fruitGap = '&nbsp;&nbsp;';
         if (warehouseStage > 2) { fruitGap += '&nbsp;'; }
+        if (player.hasWon) { fruitGap += '&nbsp;&nbsp;&nbsp;&nbsp;'; }
         if (player.seesWarehouse) { countWheat += '<span class="warehouseTotal">/' + formatterCurrent.format(bushelMax[0]) + '</span>'; }
         let tableString = '<tr><td>' + displayWheat + '&nbsp;<span class="icon Wheat inlineIcon"></span>:</td><td class="rightPadColumn">' + countWheat + '</td></tr>';
         if (farmStage > 16) {
@@ -678,19 +679,19 @@ function UpdateText() {
                 tableString += '<br>' + displayGood;
                 tableString += '</td>';
                 tableString += '<td>';
-                tableString += displayScore + '<br>' + displayProduced;
+                tableString += ((player.hasWon) ? displayGross : displayScore) + '<br>' + displayProduced;
                 tableString += '</td>';
                 if (player.canSell) {
                     tableString += '<td>';
-                    tableString += displayScore + '<br>' + displayPurchased;
+                    tableString += ((player.hasWon) ? displayGross : displayScore) + '<br>' + displayPurchased;
                     tableString += '</td>';
                 }
                 tableString += '<td>';
-                tableString += displayScore + '<br>' + displaySpent;
+                tableString += ((player.hasWon) ? displayGross : displayScore) + '<br>' + displaySpent;
                 tableString += '</td>';
                 if (player.canSell) {
                     tableString += '<td>';
-                    tableString += displayScore + '<br>' + displaySold;
+                    tableString += ((player.hasWon) ? displayGross : displayScore) + '<br>' + displaySold;
                     tableString += '</td>';
                 }
                 tableString += '</tr>';
@@ -855,22 +856,23 @@ function UpdateText() {
             if (player.seesReport) {
                 tableString = '<tr>';
                 tableString += '<td>';
+                if (player.hasWon) { tableString += '<br>'; }
                 tableString += '<br>' + displayGood;
                 tableString += '</td>';
                 tableString += '<td>';
-                tableString += displayHomers + '<br>' + displayProduced;
+                tableString += ((player.hasWon) ? displayMetricTons : displayHomers) + '<br>' + displayProduced;
                 tableString += '</td>';
                 if (player.canSell) {
                     tableString += '<td>';
-                    tableString += displayHomers + '<br>' + displayPurchased;
+                    tableString += ((player.hasWon) ? displayMetricTons : displayHomers) + '<br>' + displayPurchased;
                     tableString += '</td>';
                 }
                 tableString += '<td>';
-                tableString += displayHomers + '<br>' + displaySpent;
+                tableString += ((player.hasWon) ? displayMetricTons : displayHomers) + '<br>' + displaySpent;
                 tableString += '</td>';
                 if (player.canSell) {
                     tableString += '<td>';
-                    tableString += displayHomers + '<br>' + displaySold;
+                    tableString += ((player.hasWon) ? displayMetricTons : displayHomers) + '<br>' + displaySold;
                     tableString += '</td>';
                 }
                 tableString += '</tr>';
@@ -1072,18 +1074,18 @@ function UpdateText() {
             const barterInventoryPom = (bushelCount[5] < barterMaxBulkCount) ? bushelCount[5] : barterMaxBulkCount;
             const barterInventoryGrape = (bushelCount[6] < barterMaxBulkCount) ? bushelCount[6] : barterMaxBulkCount;
 
-            const barterValueOlive = barterInventoryOlive * barterExchangeRate[2];
-            const barterValueDate = barterInventoryDate * barterExchangeRate[3];
-            const barterValueFig = barterInventoryFig * barterExchangeRate[4];
-            const barterValuePom = barterInventoryPom * barterExchangeRate[5];
-            const barterValueGrape = barterInventoryGrape * barterExchangeRate[6];
+            const barterValueOlive = barterInventoryOlive * barterExchangeRate[2] * ((player.hasWon) ? 10 : 1);
+            const barterValueDate = barterInventoryDate * barterExchangeRate[3] * ((player.hasWon) ? 10 : 1);
+            const barterValueFig = barterInventoryFig * barterExchangeRate[4] * ((player.hasWon) ? 10 : 1);
+            const barterValuePom = barterInventoryPom * barterExchangeRate[5] * ((player.hasWon) ? 10 : 1);
+            const barterValueGrape = barterInventoryGrape * barterExchangeRate[6] * ((player.hasWon) ? 10 : 1);
 
             buttonBarterAll.innerHTML = displayBarterAll + ' <span class="icon Accountant inlineIcon"></span>';
-            buttonBarterOlive.innerHTML = barterInventoryOlive + '<span class="icon Olive inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueOlive) + '<span class="icon Wheat inlineIcon"></span>';
-            buttonBarterDate.innerHTML = barterInventoryDate + '<span class="icon Date inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueDate) + '<span class="icon Wheat inlineIcon"></span>';
-            buttonBarterFig.innerHTML = barterInventoryFig + '<span class="icon Fig inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueFig) + '<span class="icon Wheat inlineIcon"></span>';
-            buttonBarterPom.innerHTML = barterInventoryPom + '<span class="icon Pom inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValuePom) + '<span class="icon Wheat inlineIcon"></span>';
-            buttonBarterGrape.innerHTML = barterInventoryGrape + '<span class="icon Grape inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueGrape) + '<span class="icon Wheat inlineIcon"></span>';
+            buttonBarterOlive.innerHTML = formatterCurrent.format(barterInventoryOlive) + '<span class="icon Olive inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueOlive) + '<span class="icon Wheat inlineIcon"></span>';
+            buttonBarterDate.innerHTML = formatterCurrent.format(barterInventoryDate) + '<span class="icon Date inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueDate) + '<span class="icon Wheat inlineIcon"></span>';
+            buttonBarterFig.innerHTML = formatterCurrent.format(barterInventoryFig) + '<span class="icon Fig inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueFig) + '<span class="icon Wheat inlineIcon"></span>';
+            buttonBarterPom.innerHTML = formatterCurrent.format(barterInventoryPom) + '<span class="icon Pom inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValuePom) + '<span class="icon Wheat inlineIcon"></span>';
+            buttonBarterGrape.innerHTML = formatterCurrent.format(barterInventoryGrape) + '<span class="icon Grape inlineIcon"></span> <span class="icon Sell inlineIcon"></span> ' + formatterCurrent.format(barterValueGrape) + '<span class="icon Wheat inlineIcon"></span>';
         }
     }
 
@@ -1197,6 +1199,12 @@ function UpdateText() {
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(interestLifetimeCollected) + '</td>';
                 tableString += '</tr>';
             }
+            if (player.hasWon) {
+                tableString += '<tr>';
+                tableString += '<td>' + displayMedical + ' <span class="icon Patient inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(medicalLifetimeProfit) + '</td>';
+                tableString += '</tr>';
+            }
             if (villageStage > 12) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayTourism + ' <span class="icon Chuckles inlineIcon"></span>:' + '</td>';
@@ -1248,7 +1256,7 @@ function UpdateText() {
             }
             if (player.hasBeenLevied) {
                 tableString += '<tr>';
-                tableString += '<td>' + displayTribute + ' <span class="icon LordBritish inlineIcon"></span>:' + '</td>';
+                tableString += '<td>' + ((player.hasWon) ? displayCorpTax : displayTribute) + ' <span class="icon LordBritish inlineIcon"></span>:' + '</td>';
                 tableString += '<td class="rightPadColumn">' + currencySymbol + formatterCurrent.format(tributeLifetimePaid) + '</td>';
                 tableString += '</tr>';
             }
@@ -1282,8 +1290,8 @@ function UpdateText() {
             tableString += '<tbody>';
             if (player.hasBeenLevied) {
                 tableString += '<tr>';
-                tableString += '<td>' + displayTribute + ' <span class="icon LordBritish inlineIcon"></span>:' + '</td>';
-                tableString += '<td class="noPadColumn">' + '-' + currencySymbol + tributeAmount + '/' + '<span class="icon CityWalls inlineIcon"></span>' + '</td>';
+                tableString += '<td>' + ((player.hasWon) ? displayCorpTax : displayTribute) + ' <span class="icon LordBritish inlineIcon"></span>:' + '</td>';
+                tableString += '<td class="noPadColumn">' + '-' + currencySymbol + formatterCurrent.format(tributeAmount) + '/' + '<span class="icon CityWalls inlineIcon"></span>' + '</td>';
                 tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayDay + '</span>' + '</td>';
                 tableString += '</tr>';
             }
@@ -1295,7 +1303,7 @@ function UpdateText() {
             if (trophiesSpawn) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayTourism + ' <span class="icon Chuckles inlineIcon"></span>:' + '</td>';
-                tableString += '<td class="noPadColumn">' + '+' + currencySymbol + tourismValue + '/' + '<span class="icon Trophy inlineIcon"></span>' + '</td>';
+                tableString += '<td class="noPadColumn">' + '+' + currencySymbol + formatterCurrent.format(tourismValue) + '/' + '<span class="icon Trophy inlineIcon"></span>' + '</td>';
                 tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displayFortnight + '</span>' + '</td>';
                 tableString += '</tr>';
             }
@@ -1316,7 +1324,7 @@ function UpdateText() {
             if (villageStage > 13) {
                 tableString += '<tr>';
                 tableString += '<td>' + displayTaxes + ' <span class="icon Chest inlineIcon"></span>:' + '</td>';
-                tableString += '<td class="noPadColumn">' + '+' + currencySymbol + taxesValue + '/' + '<span class="icon Key inlineIcon"></span>' + '</td>';
+                tableString += '<td class="noPadColumn">' + '+' + currencySymbol + formatterCurrent.format(taxesValue) + '/' + '<span class="icon Key inlineIcon"></span>' + '</td>';
                 tableString += '<td class="rightPadColumn" style="text-align: left;">' + '<span class="warehouseTotal">/' + displaySemester + '</span>' + '</td>';
                 tableString += '</tr>';
             }
@@ -1393,6 +1401,13 @@ function UpdateText() {
                     tableString += '<td></td>';
                     tableString += '</tr>';
                 }
+                if (player.hasCourthouse) {
+                    tableString += '<tr>';
+                    tableString += '<td>' + displayLaws + ' <span class="icon OtherScroll inlineIcon"></span>:' + '</td>';
+                    tableString += '<td class="noPadColumn">' + formatterCurrent.format(lawsCount) + '</td>';
+                    tableString += '<td></td>';
+                    tableString += '</tr>';
+                }
                 if (player.hasMonument) {
                     tableString += '<tr>';
                     tableString += '<td>' + displayRelic + ' <span class="icon Relic inlineIcon"></span>:' + '</td>';
@@ -1412,7 +1427,7 @@ function UpdateText() {
                     tableString += '<td>' + displayPatients + ' <span class="icon Patient inlineIcon"></span>:' + '</td>';
                     tableString += '<td class="noPadColumn">' + formatterCurrent.format(patientsCount) + '</td>';
                     let cellContent = '';
-                    if (patientsCount != 0) { cellContent = '(-' + currencySymbol + formatterCurrent.format(patientsCount * patientCost) + ')'; }
+                    if (patientsCount != 0) { cellContent = '(' + ((player.hasWon) ? '+' : '-') + currencySymbol + formatterCurrent.format(patientsCount * ((player.hasWon) ? patientPrice : patientCost)) + ')'; }
                     tableString += '<td>' + cellContent + '</td>';
                     tableString += '</tr>';
                 }
@@ -1613,87 +1628,87 @@ function UpdateText() {
             let tempCommodityIcon = 'WheatDisable';
             let tempSellIcon = 'SellDisable';
             buttonBuyWheat.classList.add('disabled');
-            if (asCount >= buyWheatCost) {
+            if (asCount >= buyWheatCost * ((player.hasWon) ? 10 : 1)) {
                 tempCommodityIcon = 'Wheat';
                 tempSellIcon = 'Sell';
                 buttonBuyWheat.classList.remove('disabled');
             }
-            buttonBuyWheat.innerHTML = currencySymbol + formatterCurrent.format(buyWheatCost) + '&nbsp;' + '<span class="icon ' + tempSellIcon + ' inlineIcon"></span>' + '&nbsp;' + formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
+            buttonBuyWheat.innerHTML = currencySymbol + formatterCurrent.format(buyWheatCost * ((player.hasWon) ? 10 : 1)) + '&nbsp;' + '<span class="icon ' + tempSellIcon + ' inlineIcon"></span>' + '&nbsp;' + formatterCurrent.format(commodityBulkCount * ((player.hasWon) ? 10 : 1)) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
 
             tempCommodityIcon = 'WheatDisable';
             tempSellIcon = 'SellDisable';
             buttonSellWheat.classList.add('disabled');
-            if (bushelCount[0] > commodityBulkCount) {
+            if (bushelCount[0] > commodityBulkCount * ((player.hasWon) ? 10 : 1)) {
                 tempCommodityIcon = 'Wheat';
                 tempSellIcon = 'Sell';
                 buttonSellWheat.classList.remove('disabled');
             }
-            buttonSellWheat.innerHTML = formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(currentBushelPrice);
+            buttonSellWheat.innerHTML = formatterCurrent.format(commodityBulkCount * ((player.hasWon) ? 10 : 1)) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(currentBushelPrice * ((player.hasWon) ? 10 : 1));
 
             tempCommodityIcon = 'BarleyDisable';
             tempSellIcon = 'SellDisable';
             buttonBuyBarley.classList.add('disabled');
             let adjustedPrice = (currentBushelPrice - currentBarleyAdjustment);
-            if (asCount >= adjustedPrice) {
+            if (asCount >= adjustedPrice * ((player.hasWon) ? 10 : 1)) {
                 tempCommodityIcon = 'Barley';
                 tempSellIcon = 'Sell';
                 buttonBuyBarley.classList.remove('disabled');
             }
-            buttonBuyBarley.innerHTML = currencySymbol + formatterCurrent.format(adjustedPrice) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
+            buttonBuyBarley.innerHTML = currencySymbol + formatterCurrent.format(adjustedPrice * ((player.hasWon) ? 10 : 1)) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterCurrent.format(commodityBulkCount * ((player.hasWon) ? 10 : 1)) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
 
             tempCommodityIcon = 'BarleyDisable';
             tempSellIcon = 'SellDisable';
             buttonSellBarley.classList.add('disabled');
-            if (bushelCount[1] > commodityBulkCount) {
+            if (bushelCount[1] > commodityBulkCount * ((player.hasWon) ? 10 : 1)) {
                 tempCommodityIcon = 'Barley';
                 tempSellIcon = 'Sell';
                 buttonSellBarley.classList.remove('disabled');
             }
             adjustedPrice = Math.floor((currentBushelPrice - currentBarleyAdjustment) / 2);
-            buttonSellBarley.innerHTML = formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(adjustedPrice);
+            buttonSellBarley.innerHTML = formatterCurrent.format(commodityBulkCount * ((player.hasWon) ? 10 : 1)) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(adjustedPrice * ((player.hasWon) ? 10 : 1));
 
             tempCommodityIcon = 'FlaxDisable';
             tempSellIcon = 'SellDisable';
             buttonSellFlax.classList.add('disabled');
-            if (bushelCount[7] > commodityBulkCount) {
+            if (bushelCount[7] > commodityBulkCount * ((player.hasWon) ? 10 : 1)) {
                 tempCommodityIcon = 'Flax';
                 tempSellIcon = 'Sell';
                 buttonSellFlax.classList.remove('disabled');
             }
-            buttonSellFlax.innerHTML = formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(adjustedPrice);
+            buttonSellFlax.innerHTML = formatterCurrent.format(commodityBulkCount * ((player.hasWon) ? 10 : 1)) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(adjustedPrice * ((player.hasWon) ? 10 : 1));
 
             const currentLogBulkCost = commodityBulkCount * valueInWheat1Log * currentDollarPriceOfOneWheat;
             tempCommodityIcon = 'LogsDisable';
             tempSellIcon = 'SellDisable';
             buttonBuyLogs.classList.add('disabled');
-            if (asCount >= currentLogBulkCost) {
+            if (asCount >= currentLogBulkCost * ((player.hasWon) ? 10 : 1)) {
                 tempCommodityIcon = 'Log';
                 tempSellIcon = 'Sell';
                 buttonBuyLogs.classList.remove('disabled');
             }
-            buttonBuyLogs.innerHTML = currencySymbol + formatterCurrent.format(currentLogBulkCost) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
+            buttonBuyLogs.innerHTML = currencySymbol + formatterCurrent.format(currentLogBulkCost * ((player.hasWon) ? 10 : 1)) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
 
             tempCommodityIcon = 'LogsDisable';
             tempSellIcon = 'SellDisable';
             buttonSellLogs.classList.add('disabled');
-            if (logsCount > commodityBulkCount) {
+            if (logsCount >= commodityBulkCount) {
                 tempCommodityIcon = 'Log';
                 tempSellIcon = 'Sell';
                 buttonSellLogs.classList.remove('disabled');
             }
             adjustedPrice = Math.floor(currentLogBulkCost / 2);
-            buttonSellLogs.innerHTML = formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(adjustedPrice);
+            buttonSellLogs.innerHTML = formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(adjustedPrice * ((player.hasWon) ? 10 : 1));
 
             const currentBoardBulkCost = commodityBulkCount * valueInWheat1Board * currentDollarPriceOfOneWheat;
             tempCommodityIcon = 'BoardsDisable';
             tempSellIcon = 'SellDisable';
             buttonBuyBoards.classList.add('disabled');
-            if (asCount >= currentBoardBulkCost) {
+            if (asCount >= currentBoardBulkCost * ((player.hasWon) ? 10 : 1)) {
                 tempCommodityIcon = 'Board';
                 tempSellIcon = 'Sell';
                 buttonBuyBoards.classList.remove('disabled');
             }
-            buttonBuyBoards.innerHTML = currencySymbol + formatterCurrent.format(currentBoardBulkCost) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
+            buttonBuyBoards.innerHTML = currencySymbol + formatterCurrent.format(currentBoardBulkCost * ((player.hasWon) ? 10 : 1)) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
 
             tempCommodityIcon = 'BoardsDisable';
             tempSellIcon = 'SellDisable';
@@ -1704,18 +1719,18 @@ function UpdateText() {
                 buttonSellBoards.classList.remove('disabled');
             }
             adjustedPrice = Math.floor(currentBoardBulkCost / 2);
-            buttonSellBoards.innerHTML = formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(adjustedPrice);
+            buttonSellBoards.innerHTML = formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(adjustedPrice * ((player.hasWon) ? 10 : 1));
 
             const currentStoneBulkCost = commodityBulkCount * valueInWheat1Stone * currentDollarPriceOfOneWheat;
             tempCommodityIcon = 'StoneDisable';
             tempSellIcon = 'SellDisable';
             buttonBuyStone.classList.add('disabled');
-            if (asCount >= currentStoneBulkCost) {
+            if (asCount >= currentStoneBulkCost * ((player.hasWon) ? 10 : 1)) {
                 tempCommodityIcon = 'Stone';
                 tempSellIcon = 'Sell';
                 buttonBuyStone.classList.remove('disabled');
             }
-            buttonBuyStone.innerHTML = currencySymbol + formatterCurrent.format(currentStoneBulkCost) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
+            buttonBuyStone.innerHTML = currencySymbol + formatterCurrent.format(currentStoneBulkCost * ((player.hasWon) ? 10 : 1)) + ' <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span>';
 
             tempCommodityIcon = 'StoneDisable';
             tempSellIcon = 'SellDisable';
@@ -1726,7 +1741,7 @@ function UpdateText() {
                 buttonSellStone.classList.remove('disabled');
             }
             adjustedPrice = Math.floor(currentStoneBulkCost / 2);
-            buttonSellStone.innerHTML = formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(adjustedPrice);
+            buttonSellStone.innerHTML = formatterCurrent.format(commodityBulkCount) + '<span class="icon ' + tempCommodityIcon + ' inlineIcon"></span> <span class="icon ' + tempSellIcon + ' inlineIcon"></span> ' + currencySymbol + formatterCurrent.format(adjustedPrice * ((player.hasWon) ? 10 : 1));
 
             const currentHorseBulkCost = commodityHorseCount * commodityHorsePrice * currentDollarPriceOfOneWheat;
             tempCommodityIcon = 'HorseyDisable';
@@ -3958,7 +3973,7 @@ function UpdateText() {
                 contentPlay += '<br>';
             }
             else if (stageStage == 11) {
-                const aVscImin = '<img class="imgPlayMiniature imgPlayMiniature12" src="bitmaps/stage/play12.png">';
+                const aVscImin = '<div id="divFigLeafContainer"><img class="imgPlayMiniature imgPlayMiniature12" src="bitmaps/stage/play12.png"><img id="imgFigLeaf" src="' + imageFigLeaf.src + '" onclick="Braghettone();"></div><div class="redrum" style="text-align: center;"><i>(Folium fici tange ut removeas)</i></div>';
                 contentPlay += '<div class="stageHeadingShortLine">' + aVscI[0] + aVscI[1] + aVscI[2] + '</div>';
                 contentPlay += aVscI[3];
                 contentPlay += '<br>';
@@ -4315,15 +4330,31 @@ function UpdateText() {
         spanHeirFacesPagination.innerHTML = displayHeirPage + ' ' + heirFacesPageCurrent + ' ' + displayHeirOf + ' ' + heirFacesPageTotal;
 
         if (heirStage == 6) {
+            // THOU ART:
             let summaryString = '<div style="user-select: none;">' + displayThouArt + ':';
 
+            // PORTRAIT
             summaryString += '<br>';
             summaryString += '<br>';
-
             summaryString += '<div id="divHeirSelectedPortrait" style="background-position: -' + (arrayFacesDisplaySet[heirFaceChoice][1] * pixelScale * 3) + 'px -' + (arrayFacesDisplaySet[heirFaceChoice][0] * pixelScale * 3) + 'px;"></div>';
-
             summaryString += '<br>';
 
+            // TITLE NAME (the) ETHNICITY
+            const ethnicitySansArticle = displayEthnicities[player.ethnicity].toUpperCase().split(" ")[1];
+            summaryString += '<div id="divHeirMasthead" style="width: 88%; margin-left: auto; margin-right: auto;">';
+            summaryString += '<span style="white-space: nowrap;">' + displayTitles[player.title].toUpperCase() + '</span> ';
+            summaryString += '<span style="white-space: nowrap;"><b>' + player.names[2].toUpperCase() + '</b></span> ';
+            summaryString += '<span style="white-space: nowrap;">' + displayDefiniteArticle + ' ' + ethnicitySansArticle.toUpperCase() + '</span>';
+            summaryString += '</div>';
+
+            // HOMETOWN
+            summaryString += '<br><br>';
+            let placeOfOrigin = ((player.ethnicity == (displayNations.length - 1)) ? displayUndocumented : displayNations[player.ethnicity]);
+            if (player.ethnicity == (displayNations.length - 2)) { placeOfOrigin = displayOpenRoad; }
+            summaryString += '<i><b>' + heirReportDictionary[0] + ':</b></i><br>' + placeOfOrigin;
+
+            // GENDER EXPRESSION
+            summaryString += '<br><br><br>';
             let genderIcon = '';
             if (player.gender == 0) { genderIcon = '<div id="divHeirSelectedGender" class="HeirGenderIconMaleSm"></div>'; }
             else if (player.gender == 1) { genderIcon = '<div id="divHeirSelectedGender" class="HeirGenderIconFemaleSm"></div>'; }
@@ -4333,30 +4364,110 @@ function UpdateText() {
             else if (player.gender == 5) { genderIcon = '<div id="divHeirSelectedGender" class="HeirGenderIconNobinarioSm"></div>'; }
             else if (player.gender == 6) { genderIcon = '<div id="divHeirSelectedGender" class="HeirGenderIconOmnigenderSm"></div>'; }
             else if (player.gender == 7) { genderIcon = '<div id="divHeirSelectedGender" class="HeirGenderIconAgenderSm"></div>'; }
-            const ethnicitySansArticle = displayEthnicities[player.ethnicity].toUpperCase().split(" ")[1];
-            summaryString += '<div id="divHeirMasthead">';
-            summaryString += '<span style="white-space: nowrap;">' + displayTitles[player.title].toUpperCase() + '</span> ';
-            summaryString += '<span style="white-space: nowrap;"><b>' + player.names[2].toUpperCase() + '</b></span> ';
-            summaryString += '<span style="white-space: nowrap;">' + displayDefiniteArticle + ' ' + ethnicitySansArticle.toUpperCase() + '</span>';
-            summaryString += '</div>';
-
-            summaryString += '<br><br>';
-            summaryString += '<i><b>' + heirReportDictionary[0] + ':</b></i><br>' + displayNations[player.ethnicity];
-
-            summaryString += '<br><br>';
             summaryString += '<i><b>' + heirReportDictionary[1] + ':</b></i><br>' + genderIcon;
 
-            summaryString += '<br><br>';
-            summaryString += '<i><b>' + heirReportDictionary[2] + ':</b></i><br>';
-            summaryString += '<label for="inputEyeColourA">' + heirReportDictionary[3] + '</label><br>';
-            summaryString += '<input type="color" id="inputEyeColourA" name="inputEyeColourA" value="' + heirAttributes.eyes[0] + '" onchange="heirAttributes.eyes[0] = this.value;"><br>';
-            summaryString += '<label for="inputEyeColourB">' + heirReportDictionary[4] + ' </label><input type="color" id="inputEyeColourB" name="inputEyeColourB" value="' + heirAttributes.eyes[1] + '" onchange="heirAttributes.eyes[1] = this.value;"> ';
-            summaryString += '<input type="color" id="inputEyeColourC" name="inputEyeColourC" value="' + heirAttributes.eyes[2] + '" onchange="heirAttributes.eyes[2] = this.value;"><label for="inputEyeColourC"> ' + heirReportDictionary[5] + '</label>';
+            // VOICE
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[148] + ':</b></i><br>';
+            summaryString += 'MASC <input type="range" id="inputHeirVoice" name="inputHeirVoice" min="0" value="' + heirAttributes.voice + '" max="10" style="width: 60%;" onpointerdown="PlaySound(audioClack); PlaySound(arrayVoices[heirAttributes.voice]);" onpointerup="PlaySound(audioClick);" oninput="KillVoices(); heirAttributes.voice = this.value; PlaySound(arrayVoices[heirAttributes.voice]);"> FEM';
 
+            // EYE COLOUR
+            summaryString += '<br><br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[2] + ':</b></i><br>';
+            summaryString += '<div id="divDiagramContainer"></div>';
+            summaryString += '<label for="inputEyeColourA" id="labelEyeColourA">' + heirReportDictionary[3] + '</label>';
+            summaryString += '<input type="color" id="inputEyeColourA" name="inputEyeColourA" value="' + heirAttributes.eyes[0] + '" onchange="heirAttributes.eyes[0] = this.value; PlaySound(audioClick); RedrawEye();" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);"><br>';
+            summaryString += '<label for="inputEyeColourB" id="labelEyeColourB">' + heirReportDictionary[4] + ' </label><input type="color" id="inputEyeColourB" name="inputEyeColourB" value="' + heirAttributes.eyes[1] + '" onchange="heirAttributes.eyes[1] = this.value; PlaySound(audioClick); RedrawEye();" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);"> ';
+            summaryString += '<input type="color" id="inputEyeColourC" name="inputEyeColourC" value="' + heirAttributes.eyes[2] + '" onchange="heirAttributes.eyes[2] = this.value; PlaySound(audioClick); RedrawEye();" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);"><label for="inputEyeColourC" id="labelEyeColourC"> ' + heirReportDictionary[5] + '</label>';
+
+            // LIPSTICK
+            summaryString += '<br><br><br>';
+            summaryString += '<label for="inputLipstick"><i><b>' + heirReportDictionary[134] + '</b></i></label>' + '&nbsp;';
+            summaryString += '<input type="checkbox" id="inputLipstick" name="inputLipstick" ' + (heirAttributes.lips[0] ? 'checked' : '') + ' onchange="heirAttributes.lips[0] = this.checked; ContextAwareClack(this); UpdateDisplay();"><br>';
+            if (heirAttributes.lips[0]) {
+                summaryString += '<input type="color" id="inputLipColourTop" name="inputLipColourTop" value="' + heirAttributes.lips[1] + '" onchange="heirAttributes.lips[1] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics lipstick">';
+                summaryString += '<input type="color" id="inputLipColourBtm" name="inputLipColourBtm" value="' + heirAttributes.lips[2] + '" onchange="heirAttributes.lips[2] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics lipstick">';
+            }
+
+            // EYESHADOW
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputEyeshadow"><i><b>' + heirReportDictionary[135] + '</b></i></label>' + '&nbsp;';
+            summaryString += '<input type="checkbox" id="inputEyeshadow" name="inputEyeshadow" ' + (heirAttributes.shadow[0] ? 'checked' : '') + ' onchange="heirAttributes.shadow[0] = this.checked; ContextAwareClack(this); UpdateDisplay();"><br>';
+            if (heirAttributes.shadow[0]) {
+                summaryString += '<input type="color" id="inputEyeshadowColourL" name="inputEyeshadowColourL" value="' + heirAttributes.shadow[1] + '" onchange="heirAttributes.shadow[1] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics eyeshadow"> ';
+                summaryString += '<input type="color" id="inputEyeshadowColourR" name="inputEyeshadowColourR" value="' + heirAttributes.shadow[2] + '" onchange="heirAttributes.shadow[2] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics eyeshadow">';
+
+                // ROUGE
+                summaryString += '<br><br><br>';
+                summaryString += '<label for="inputBlush"><i><b>' + heirReportDictionary[137] + '</b></i></label>' + '&nbsp;';
+                summaryString += '<input type="checkbox" id="inputBlush" name="inputBlush" ' + (heirAttributes.cheeks[0] ? 'checked' : '') + ' onchange="heirAttributes.cheeks[0] = this.checked; ContextAwareClack(this); UpdateDisplay();"><br>';
+                if (heirAttributes.cheeks[0]) {
+                    summaryString += '<input type="color" id="inputBlushColour" name="inputBlushColour" value="' + heirAttributes.cheeks[1] + '" onchange="heirAttributes.cheeks[1] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics rouge"><br>';
+                }
+            }
+
+            // NAIL POLISH
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputNails"><i><b>' + heirReportDictionary[138] + '</b></i></label>' + '&nbsp;';
+            summaryString += '<input type="checkbox" id="inputNails" name="inputNails" ' + (heirAttributes.nails[0] ? 'checked' : '') + ' onchange="heirAttributes.nails[0] = this.checked; ContextAwareClack(this); UpdateDisplay();"><br>';
+            if (heirAttributes.nails[0]) {
+                summaryString += '<div class="handModelWrapper">';
+                summaryString += '<img src="' + imageHandForNailsR.src + '" class="handModel">';
+                summaryString += '<input type="color" id="inputNailsColour1" name="inputNailsColour1" value="' + heirAttributes.nails[1] + '" onchange="heirAttributes.nails[1] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                summaryString += '<input type="color" id="inputNailsColour2" name="inputNailsColour2" value="' + heirAttributes.nails[2] + '" onchange="heirAttributes.nails[2] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                summaryString += '<input type="color" id="inputNailsColour3" name="inputNailsColour3" value="' + heirAttributes.nails[3] + '" onchange="heirAttributes.nails[3] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                summaryString += '<input type="color" id="inputNailsColour4" name="inputNailsColour4" value="' + heirAttributes.nails[4] + '" onchange="heirAttributes.nails[4] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                summaryString += '<input type="color" id="inputNailsColour5" name="inputNailsColour5" value="' + heirAttributes.nails[5] + '" onchange="heirAttributes.nails[5] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                summaryString += '</div> &nbsp; &nbsp; ';
+
+                summaryString += '<div class="handModelWrapper">';
+                summaryString += '<img id="sinisterHand" src="' + imageHandForNailsL.src + '" class="handModel">';
+                summaryString += '<input type="color" id="inputNailsColour6" name="inputNailsColour6" value="' + heirAttributes.nails[6] + '" onchange="heirAttributes.nails[6] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                summaryString += '<input type="color" id="inputNailsColour7" name="inputNailsColour7" value="' + heirAttributes.nails[7] + '" onchange="heirAttributes.nails[7] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                summaryString += '<input type="color" id="inputNailsColour8" name="inputNailsColour8" value="' + heirAttributes.nails[8] + '" onchange="heirAttributes.nails[8] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                summaryString += '<input type="color" id="inputNailsColour9" name="inputNailsColour9" value="' + heirAttributes.nails[9] + '" onchange="heirAttributes.nails[9] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                summaryString += '<input type="color" id="inputNailsColour10" name="inputNailsColour10" value="' + heirAttributes.nails[10] + '" onchange="heirAttributes.nails[10] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                summaryString += '</div>';
+
+                // TOES
+                summaryString += '<br><br><br>';
+                summaryString += '<label for="inputToes"><i><b>' + heirReportDictionary[150] + '</b></i></label>' + '&nbsp;';
+                summaryString += '<input type="checkbox" id="inputToes" name="inputToes" ' + (heirAttributes.nails[11] ? 'checked' : '') + ' onchange="heirAttributes.nails[11] = this.checked; ContextAwareClack(this); UpdateDisplay();"><br>';
+                if (heirAttributes.nails[11]) {
+                    summaryString += '<div class="handModelWrapper">';
+                    summaryString += '<img src="' + imageFootForNailsR.src + '" class="footModel">';
+                    summaryString += '<input type="color" id="inputNailsColour11" name="inputNailsColour11" value="' + heirAttributes.nails[12] + '" onchange="heirAttributes.nails[12] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                    summaryString += '<input type="color" id="inputNailsColour12" name="inputNailsColour12" value="' + heirAttributes.nails[13] + '" onchange="heirAttributes.nails[13] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                    summaryString += '<input type="color" id="inputNailsColour13" name="inputNailsColour13" value="' + heirAttributes.nails[14] + '" onchange="heirAttributes.nails[14] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                    summaryString += '<input type="color" id="inputNailsColour14" name="inputNailsColour14" value="' + heirAttributes.nails[15] + '" onchange="heirAttributes.nails[15] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                    summaryString += '<input type="color" id="inputNailsColour15" name="inputNailsColour15" value="' + heirAttributes.nails[16] + '" onchange="heirAttributes.nails[16] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                    summaryString += '</div> &nbsp; &nbsp; &nbsp; ';
+
+                    summaryString += '<div class="handModelWrapper">';
+                    summaryString += '<img id="sinisterFoot" src="' + imageFootForNailsL.src + '" class="footModel">';
+                    summaryString += '<input type="color" id="inputNailsColour16" name="inputNailsColour16" value="' + heirAttributes.nails[17] + '" onchange="heirAttributes.nails[17] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                    summaryString += '<input type="color" id="inputNailsColour17" name="inputNailsColour17" value="' + heirAttributes.nails[18] + '" onchange="heirAttributes.nails[18] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                    summaryString += '<input type="color" id="inputNailsColour18" name="inputNailsColour18" value="' + heirAttributes.nails[19] + '" onchange="heirAttributes.nails[19] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                    summaryString += '<input type="color" id="inputNailsColour19" name="inputNailsColour19" value="' + heirAttributes.nails[20] + '" onchange="heirAttributes.nails[20] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                    summaryString += '<input type="color" id="inputNailsColour20" name="inputNailsColour20" value="' + heirAttributes.nails[21] + '" onchange="heirAttributes.nails[21] = this.value; PlaySound(audioClick);" oninput="PlaySound(audioHeirCrystal);" onclick="PlaySound(audioClack);" class="cosmetics nails">';
+                    summaryString += '</div>';
+                    summaryString += '<br>';
+                }
+            }
+
+            // WIG
+            summaryString += '<br><br>';
+            summaryString += '<label for="inputWig"><i><b>' + heirReportDictionary[139] + '</b></i></label>' + '&nbsp;';
+            summaryString += '<input type="checkbox" id="inputWig" name="inputWig" ' + (heirAttributes.WIG ? 'checked' : '') + ' onchange="heirAttributes.WIG = this.checked; ContextAwareClack(this); UpdateDisplay();"><br>';
+            if (heirAttributes.WIG) {
+                summaryString += heirReportDictionary[140] + '<br>';
+            }
+
+            // BIRTHDAY
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[90] + ':</b></i><br>';
             summaryString += '<label for="selectHeirBirthDay">' + heirReportDictionary[91] + ':</label> ';
-            summaryString += '<select name="selectHeirBirthDay" id="selectHeirBirthDay" style="border: 1px solid black;" onchange="heirAttributes.birthday[0] = this.value;">';
+            summaryString += '<select name="selectHeirBirthDay" id="selectHeirBirthDay" style="border: 1px solid black;" onchange="heirAttributes.birthday[0] = this.value; PlaySound(audioClack); PlaySound(audioKazoo);" onclick="PlaySound(audioClick);">';
             summaryString += '<option value="1" ' + ((heirAttributes.birthday[0] == '1') ? 'selected' : '') + '>1</option>';
             summaryString += '<option value="2" ' + ((heirAttributes.birthday[0] == '2') ? 'selected' : '') + '>2</option>';
             summaryString += '<option value="3" ' + ((heirAttributes.birthday[0] == '3') ? 'selected' : '') + '>3</option>';
@@ -4391,7 +4502,7 @@ function UpdateText() {
             summaryString += '</select>';
             summaryString += ' &nbsp; ';
             summaryString += '<label for="selectHeirBirthMonth">' + heirReportDictionary[92] + ':</label> ';
-            summaryString += '<select name="selectHeirBirthMonth" id="selectHeirBirthMonth" style="border: 1px solid black;" onchange="heirAttributes.birthday[1] = this.value;">';
+            summaryString += '<select name="selectHeirBirthMonth" id="selectHeirBirthMonth" style="border: 1px solid black;" onchange="heirAttributes.birthday[1] = this.value; PlaySound(audioClack); PlaySound(audioKazoo);" onclick="PlaySound(audioClick);">';
             summaryString += '<option value="January" ' + ((heirAttributes.birthday[1] == 'January') ? 'selected' : '') + '>' + heirReportDictionary[93] + '</option>';
             summaryString += '<option value="February" ' + ((heirAttributes.birthday[1] == 'February') ? 'selected' : '') + '>' + heirReportDictionary[94] + '</option>';
             summaryString += '<option value="March" ' + ((heirAttributes.birthday[1] == 'March') ? 'selected' : '') + '>' + heirReportDictionary[95] + '</option>';
@@ -4406,6 +4517,7 @@ function UpdateText() {
             summaryString += '<option value="December" ' + ((heirAttributes.birthday[1] == 'December') ? 'selected' : '') + '>' + heirReportDictionary[104] + '</option>';
             summaryString += '</select>';
 
+            // AGE
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[6] + ':</b></i><br><label for="inputHeirRange">';
             let ageOutput = heirAttributes.age[0];
@@ -4413,189 +4525,286 @@ function UpdateText() {
             else if (yearFormat == 2) { ageOutput = CircumciseNumber(ageOutput); }
             else if (yearFormat == 3) { ageOutput = SteepNumberInGreenTea(ageOutput); }
             summaryString += '<span id="spanAgeDisplay">' + ageOutput + '</span> ' + heirReportDictionary[7];
-            summaryString += '</label><br>- <input type="range" id="inputHeirRange" name="inputHeirRange" min="' + heirAgeMin + '" value="' + heirAttributes.age[0] + '" max="' + heirAgeMax + '" style="width: 60%;"> +';
+            summaryString += '</label><br>- <input type="range" id="inputHeirRange" name="inputHeirRange" min="' + heirAgeMin + '" value="' + heirAttributes.age[0] + '" max="' + heirAgeMax + '" style="width: 60%;" onpointerdown="PlaySound(audioClack);" onpointerup="PlaySound(audioClick);"> +';
 
-            summaryString += '<br><br><br>';
+            // HGT
+            summaryString += '<br><br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[9] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroHeightShort" name="inputHeroHeight" value="0" ' + ((heirAttributes.height == '0') ? 'checked' : '') + ' onclick="heirAttributes.height = this.value;"> <label for="inputHeroHeightShort">' + heirReportDictionary[10] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroHeightAverage" name="inputHeroHeight" value="1" ' + ((heirAttributes.height == '1') ? 'checked' : '') + ' onclick="heirAttributes.height = this.value;"> <label for="inputHeroHeightAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroHeightTall" name="inputHeroHeight" value="2" ' + ((heirAttributes.height == '2') ? 'checked' : '') + ' onclick="heirAttributes.height = this.value;"> <label for="inputHeroHeightTall">' + heirReportDictionary[11] + '</label>';
+            summaryString += heirReportDictionary[10][1] + '<input type="radio" id="inputHeroHeightShort" name="inputHeroHeight" value="0" ' + ((heirAttributes.height == '0') ? 'checked' : '') + ' onclick="heirAttributes.height = this.value; PlaySound(audioClack);"> <label for="inputHeroHeightShort">' + heirReportDictionary[10][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroHeightAverage" name="inputHeroHeight" value="1" ' + ((heirAttributes.height == '1') ? 'checked' : '') + ' onclick="heirAttributes.height = this.value; PlaySound(audioClack);"> <label for="inputHeroHeightAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroHeightTall" name="inputHeroHeight" value="2" ' + ((heirAttributes.height == '2') ? 'checked' : '') + ' onclick="heirAttributes.height = this.value; PlaySound(audioClack);"> <label for="inputHeroHeightTall">' + heirReportDictionary[11] + '</label>';
 
+            // WGT
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[12] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroWeightThin" name="inputHeroWeight" value="0" ' + ((heirAttributes.weight == '0') ? 'checked' : '') + ' onclick="heirAttributes.weight = this.value;"> <label for="inputHeroWeightThin">' + heirReportDictionary[13] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroWeightAverage" name="inputHeroWeight" value="1" ' + ((heirAttributes.weight == '1') ? 'checked' : '') + ' onclick="heirAttributes.weight = this.value;"> <label for="inputHeroWeightAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroWeightHeavy" name="inputHeroWeight" value="2" ' + ((heirAttributes.weight == '2') ? 'checked' : '') + ' onclick="heirAttributes.weight = this.value;"> <label for="inputHeroWeightHeavy">' + heirReportDictionary[14] + '</label>';
+            summaryString += heirReportDictionary[13][1] + '<input type="radio" id="inputHeroWeightThin" name="inputHeroWeight" value="0" ' + ((heirAttributes.weight == '0') ? 'checked' : '') + ' onclick="heirAttributes.weight = this.value; PlaySound(audioClack);"> <label for="inputHeroWeightThin">' + heirReportDictionary[13][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroWeightAverage" name="inputHeroWeight" value="1" ' + ((heirAttributes.weight == '1') ? 'checked' : '') + ' onclick="heirAttributes.weight = this.value; PlaySound(audioClack);"> <label for="inputHeroWeightAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroWeightHeavy" name="inputHeroWeight" value="2" ' + ((heirAttributes.weight == '2') ? 'checked' : '') + ' onclick="heirAttributes.weight = this.value; PlaySound(audioClack);"> <label for="inputHeroWeightHeavy">' + heirReportDictionary[14] + '</label>';
 
+            // STR
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[15] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroBuildBookish" name="inputHeroBuild" value="0" ' + ((heirAttributes.STR == '0') ? 'checked' : '') + ' onclick="heirAttributes.STR = this.value;"> <label for="inputHeroBuildBookish">' + heirReportDictionary[16] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroBuildAverage" name="inputHeroBuild" value="1" ' + ((heirAttributes.STR == '1') ? 'checked' : '') + ' onclick="heirAttributes.STR = this.value;"> <label for="inputHeroBuildAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroBuildMuscular" name="inputHeroBuild" value="2" ' + ((heirAttributes.STR == '2') ? 'checked' : '') + ' onclick="heirAttributes.STR = this.value;"> <label for="inputHeroBuildMuscular">' + heirReportDictionary[17] + '</label>';
+            summaryString += heirReportDictionary[16][1] + '<input type="radio" id="inputHeroBuildBookish" name="inputHeroBuild" value="0" ' + ((heirAttributes.STR == '0') ? 'checked' : '') + ' onclick="heirAttributes.STR = this.value; PlaySound(audioClack);"> <label for="inputHeroBuildBookish">' + heirReportDictionary[16][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroBuildAverage" name="inputHeroBuild" value="1" ' + ((heirAttributes.STR == '1') ? 'checked' : '') + ' onclick="heirAttributes.STR = this.value; PlaySound(audioClack);"> <label for="inputHeroBuildAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroBuildMuscular" name="inputHeroBuild" value="2" ' + ((heirAttributes.STR == '2') ? 'checked' : '') + ' onclick="heirAttributes.STR = this.value; PlaySound(audioClack);"> <label for="inputHeroBuildMuscular">' + heirReportDictionary[17] + '</label>';
 
+            // END
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[18] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroEnduranceFrail" name="inputHeroEndurance" value="0" ' + ((heirAttributes.END == '0') ? 'checked' : '') + ' onclick="heirAttributes.END = this.value;"> <label for="inputHeroEnduranceFrail">' + heirReportDictionary[19] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroEnduranceAverage" name="inputHeroEndurance" value="1" ' + ((heirAttributes.END == '1') ? 'checked' : '') + ' onclick="heirAttributes.END = this.value;"> <label for="inputHeroEnduranceAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroEnduranceTough" name="inputHeroEndurance" value="2" ' + ((heirAttributes.END == '2') ? 'checked' : '') + ' onclick="heirAttributes.END = this.value;"> <label for="inputHeroEnduranceTough">' + heirReportDictionary[20] + '</label>';
+            summaryString += heirReportDictionary[19][1] + '<input type="radio" id="inputHeroEnduranceFrail" name="inputHeroEndurance" value="0" ' + ((heirAttributes.END == '0') ? 'checked' : '') + ' onclick="heirAttributes.END = this.value; PlaySound(audioClack);"> <label for="inputHeroEnduranceFrail">' + heirReportDictionary[19][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroEnduranceAverage" name="inputHeroEndurance" value="1" ' + ((heirAttributes.END == '1') ? 'checked' : '') + ' onclick="heirAttributes.END = this.value; PlaySound(audioClack);"> <label for="inputHeroEnduranceAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroEnduranceTough" name="inputHeroEndurance" value="2" ' + ((heirAttributes.END == '2') ? 'checked' : '') + ' onclick="heirAttributes.END = this.value; PlaySound(audioClack);"> <label for="inputHeroEnduranceTough">' + heirReportDictionary[20] + '</label>';
 
+            // AGI
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[21] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroAgilityClumsy" name="inputHeroAgility" value="0" ' + ((heirAttributes.AGI == '0') ? 'checked' : '') + ' onclick="heirAttributes.AGI = this.value;"> <label for="inputHeroAgilityClumsy">' + heirReportDictionary[22] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroAgilityAverage" name="inputHeroAgility" value="1" ' + ((heirAttributes.AGI == '1') ? 'checked' : '') + ' onclick="heirAttributes.AGI = this.value;"> <label for="inputHeroAgilityAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroAgilitySpry" name="inputHeroAgility" value="2" ' + ((heirAttributes.AGI == '2') ? 'checked' : '') + ' onclick="heirAttributes.AGI = this.value;"> <label for="inputHeroAgilitySpry">' + heirReportDictionary[23] + '</label>';
+            summaryString += heirReportDictionary[22][1] + '<input type="radio" id="inputHeroAgilityClumsy" name="inputHeroAgility" value="0" ' + ((heirAttributes.AGI == '0') ? 'checked' : '') + ' onclick="heirAttributes.AGI = this.value; PlaySound(audioClack);"> <label for="inputHeroAgilityClumsy">' + heirReportDictionary[22][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAgilityAverage" name="inputHeroAgility" value="1" ' + ((heirAttributes.AGI == '1') ? 'checked' : '') + ' onclick="heirAttributes.AGI = this.value; PlaySound(audioClack);"> <label for="inputHeroAgilityAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAgilitySpry" name="inputHeroAgility" value="2" ' + ((heirAttributes.AGI == '2') ? 'checked' : '') + ' onclick="heirAttributes.AGI = this.value; PlaySound(audioClack);"> <label for="inputHeroAgilitySpry">' + heirReportDictionary[23] + '</label>';
 
+            // DEX
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[24] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroDexterityUncoordinated" name="inputHeroDexterity" value="0" ' + ((heirAttributes.DEX == '0') ? 'checked' : '') + ' onclick="heirAttributes.DEX = this.value;"> <label for="inputHeroDexterityUncoordinated">' + heirReportDictionary[25] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroDexterityAverage" name="inputHeroDexterity" value="1" ' + ((heirAttributes.DEX == '1') ? 'checked' : '') + ' onclick="heirAttributes.DEX = this.value;"> <label for="inputHeroDexterityAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroDexterityNimble" name="inputHeroDexterity" value="2" ' + ((heirAttributes.DEX == '2') ? 'checked' : '') + ' onclick="heirAttributes.DEX = this.value;"> <label for="inputHeroDexterityNimble">' + heirReportDictionary[26] + '</label>';
+            summaryString += heirReportDictionary[25][1] + '<input type="radio" id="inputHeroDexterityUncoordinated" name="inputHeroDexterity" value="0" ' + ((heirAttributes.DEX == '0') ? 'checked' : '') + ' onclick="heirAttributes.DEX = this.value; PlaySound(audioClack);"> <label for="inputHeroDexterityUncoordinated">' + heirReportDictionary[25][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDexterityAverage" name="inputHeroDexterity" value="1" ' + ((heirAttributes.DEX == '1') ? 'checked' : '') + ' onclick="heirAttributes.DEX = this.value; PlaySound(audioClack);"> <label for="inputHeroDexterityAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDexterityNimble" name="inputHeroDexterity" value="2" ' + ((heirAttributes.DEX == '2') ? 'checked' : '') + ' onclick="heirAttributes.DEX = this.value; PlaySound(audioClack);"> <label for="inputHeroDexterityNimble">' + heirReportDictionary[26] + '</label>';
 
+            // INT
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[27] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroMentalDim" name="inputHeroMental" value="0"' + ((heirAttributes.INT == '0') ? 'checked' : '') + ' onclick="heirAttributes.INT = this.value;"> <label for="inputHeroMentalDim">' + heirReportDictionary[28] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroMentalAverage" name="inputHeroMental" value="1" ' + ((heirAttributes.INT == '1') ? 'checked' : '') + ' onclick="heirAttributes.INT = this.value;"> <label for="inputHeroMentalAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroMentalSharp" name="inputHeroMental" value="2" ' + ((heirAttributes.INT == '2') ? 'checked' : '') + ' onclick="heirAttributes.INT = this.value;"> <label for="inputHeroMentalSharp">' + heirReportDictionary[29] + '</label>';
+            summaryString += heirReportDictionary[28][1] + '<input type="radio" id="inputHeroMentalDim" name="inputHeroMental" value="0"' + ((heirAttributes.INT == '0') ? 'checked' : '') + ' onclick="heirAttributes.INT = this.value; PlaySound(audioClack);"> <label for="inputHeroMentalDim">' + heirReportDictionary[28][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroMentalAverage" name="inputHeroMental" value="1" ' + ((heirAttributes.INT == '1') ? 'checked' : '') + ' onclick="heirAttributes.INT = this.value; PlaySound(audioClack);"> <label for="inputHeroMentalAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroMentalSharp" name="inputHeroMental" value="2" ' + ((heirAttributes.INT == '2') ? 'checked' : '') + ' onclick="heirAttributes.INT = this.value; PlaySound(audioClack);"> <label for="inputHeroMentalSharp">' + heirReportDictionary[29] + '</label>';
 
+            // WIS
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[30] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroJudgmentNaïve" name="inputHeroJudgment" value="0"' + ((heirAttributes.WIS == '0') ? 'checked' : '') + ' onclick="heirAttributes.WIS = this.value;"> <label for="inputHeroJudgmentNaïve">' + heirReportDictionary[31] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroJudgmentAverage" name="inputHeroJudgment" value="1" ' + ((heirAttributes.WIS == '1') ? 'checked' : '') + ' onclick="heirAttributes.WIS = this.value;"> <label for="inputHeroJudgmentAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroJudgmentWise" name="inputHeroJudgment" value="2" ' + ((heirAttributes.WIS == '2') ? 'checked' : '') + ' onclick="heirAttributes.WIS = this.value;"> <label for="inputHeroJudgmentWise">' + heirReportDictionary[32] + '</label>';
+            summaryString += heirReportDictionary[31][1] + '<input type="radio" id="inputHeroJudgmentNaïve" name="inputHeroJudgment" value="0"' + ((heirAttributes.WIS == '0') ? 'checked' : '') + ' onclick="heirAttributes.WIS = this.value; PlaySound(audioClack);"> <label for="inputHeroJudgmentNaïve">' + heirReportDictionary[31][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroJudgmentAverage" name="inputHeroJudgment" value="1" ' + ((heirAttributes.WIS == '1') ? 'checked' : '') + ' onclick="heirAttributes.WIS = this.value; PlaySound(audioClack);"> <label for="inputHeroJudgmentAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroJudgmentWise" name="inputHeroJudgment" value="2" ' + ((heirAttributes.WIS == '2') ? 'checked' : '') + ' onclick="heirAttributes.WIS = this.value; PlaySound(audioClack);"> <label for="inputHeroJudgmentWise">' + heirReportDictionary[32] + '</label>';
 
+            // CHA
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[33] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroCharismaAwkward" name="inputHeroCharisma" value="0"' + ((heirAttributes.CHA == '0') ? 'checked' : '') + ' onclick="heirAttributes.CHA = this.value;"> <label for="inputHeroCharismaAwkward">' + heirReportDictionary[34] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroCharismaAverage" name="inputHeroCharisma" value="1" ' + ((heirAttributes.CHA == '1') ? 'checked' : '') + ' onclick="heirAttributes.CHA = this.value;"> <label for="inputHeroCharismaAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroCharismaCharming" name="inputHeroCharisma" value="2" ' + ((heirAttributes.CHA == '2') ? 'checked' : '') + ' onclick="heirAttributes.CHA = this.value;"> <label for="inputHeroCharismaCharming">' + heirReportDictionary[35] + '</label>';
+            summaryString += heirReportDictionary[34][1] + '<input type="radio" id="inputHeroCharismaAwkward" name="inputHeroCharisma" value="0"' + ((heirAttributes.CHA == '0') ? 'checked' : '') + ' onclick="heirAttributes.CHA = this.value; PlaySound(audioClack);"> <label for="inputHeroCharismaAwkward">' + heirReportDictionary[34][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroCharismaAverage" name="inputHeroCharisma" value="1" ' + ((heirAttributes.CHA == '1') ? 'checked' : '') + ' onclick="heirAttributes.CHA = this.value; PlaySound(audioClack);"> <label for="inputHeroCharismaAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroCharismaCharming" name="inputHeroCharisma" value="2" ' + ((heirAttributes.CHA == '2') ? 'checked' : '') + ' onclick="heirAttributes.CHA = this.value; PlaySound(audioClack);"> <label for="inputHeroCharismaCharming">' + heirReportDictionary[35] + '</label>';
 
+            // ATT
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[36] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroLooksUnprepossessing" name="inputHeroLooks" value="0"' + ((heirAttributes.ATT == '0') ? 'checked' : '') + ' onclick="heirAttributes.ATT = this.value;"> <label for="inputHeroLooksUnprepossessing">' + heirReportDictionary[37] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroLooksAverage" name="inputHeroLooks" value="1" ' + ((heirAttributes.ATT == '1') ? 'checked' : '') + ' onclick="heirAttributes.ATT = this.value;"> <label for="inputHeroLooksAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroLooksFetching" name="inputHeroLooks" value="2" ' + ((heirAttributes.ATT == '2') ? 'checked' : '') + ' onclick="heirAttributes.ATT = this.value;"> <label for="inputHeroLooksFetching">' + heirReportDictionary[38] + '</label>';
+            summaryString += heirReportDictionary[37][1] + '<input type="radio" id="inputHeroLooksUnprepossessing" name="inputHeroLooks" value="0"' + ((heirAttributes.ATT == '0') ? 'checked' : '') + ' onclick="heirAttributes.ATT = this.value; PlaySound(audioClack);"> <label for="inputHeroLooksUnprepossessing">' + heirReportDictionary[37][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroLooksAverage" name="inputHeroLooks" value="1" ' + ((heirAttributes.ATT == '1') ? 'checked' : '') + ' onclick="heirAttributes.ATT = this.value; PlaySound(audioClack);"> <label for="inputHeroLooksAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroLooksFetching" name="inputHeroLooks" value="2" ' + ((heirAttributes.ATT == '2') ? 'checked' : '') + ' onclick="heirAttributes.ATT = this.value; PlaySound(audioClack);"> <label for="inputHeroLooksFetching">' + heirReportDictionary[38] + '</label>';
 
+            // TMP
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[39] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroTemperamentTimid" name="inputHeroTemperament" value="0"' + ((heirAttributes.TMP == '0') ? 'checked' : '') + ' onclick="heirAttributes.TMP = this.value;"> <label for="inputHeroTemperamentTimid">' + heirReportDictionary[40] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroTemperamentAverage" name="inputHeroTemperament" value="1" ' + ((heirAttributes.TMP == '1') ? 'checked' : '') + ' onclick="heirAttributes.TMP = this.value;"> <label for="inputHeroTemperamentAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroTemperamentAggressive" name="inputHeroTemperament" value="2" ' + ((heirAttributes.TMP == '2') ? 'checked' : '') + ' onclick="heirAttributes.TMP = this.value;"> <label for="inputHeroTemperamentAggressive">' + heirReportDictionary[41] + '</label>';
+            summaryString += heirReportDictionary[40][1] + '<input type="radio" id="inputHeroTemperamentTimid" name="inputHeroTemperament" value="0"' + ((heirAttributes.TMP == '0') ? 'checked' : '') + ' onclick="heirAttributes.TMP = this.value; PlaySound(audioClack);"> <label for="inputHeroTemperamentTimid">' + heirReportDictionary[40][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroTemperamentAverage" name="inputHeroTemperament" value="1" ' + ((heirAttributes.TMP == '1') ? 'checked' : '') + ' onclick="heirAttributes.TMP = this.value; PlaySound(audioClack);"> <label for="inputHeroTemperamentAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroTemperamentAggressive" name="inputHeroTemperament" value="2" ' + ((heirAttributes.TMP == '2') ? 'checked' : '') + ' onclick="heirAttributes.TMP = this.value; PlaySound(audioClack);"> <label for="inputHeroTemperamentAggressive">' + heirReportDictionary[41] + '</label>';
 
+            // DSP
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[42] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroDispositionImpatient" name="inputHeroDisposition" value="0"' + ((heirAttributes.DSP == '0') ? 'checked' : '') + ' onclick="heirAttributes.DSP = this.value;"> <label for="inputHeroDispositionImpatient">' + heirReportDictionary[43] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroDispositionAverage" name="inputHeroDisposition" value="1" ' + ((heirAttributes.DSP == '1') ? 'checked' : '') + ' onclick="heirAttributes.DSP = this.value;"> <label for="inputHeroDispositionAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroDispositionDisciplined" name="inputHeroDisposition" value="2" ' + ((heirAttributes.DSP == '2') ? 'checked' : '') + ' onclick="heirAttributes.DSP = this.value;"> <label for="inputHeroDispositionDisciplined">' + heirReportDictionary[44] + '</label>';
+            summaryString += heirReportDictionary[43][1] + '<input type="radio" id="inputHeroDispositionImpatient" name="inputHeroDisposition" value="0"' + ((heirAttributes.DSP == '0') ? 'checked' : '') + ' onclick="heirAttributes.DSP = this.value; PlaySound(audioClack);"> <label for="inputHeroDispositionImpatient">' + heirReportDictionary[43][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDispositionAverage" name="inputHeroDisposition" value="1" ' + ((heirAttributes.DSP == '1') ? 'checked' : '') + ' onclick="heirAttributes.DSP = this.value; PlaySound(audioClack);"> <label for="inputHeroDispositionAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDispositionDisciplined" name="inputHeroDisposition" value="2" ' + ((heirAttributes.DSP == '2') ? 'checked' : '') + ' onclick="heirAttributes.DSP = this.value; PlaySound(audioClack);"> <label for="inputHeroDispositionDisciplined">' + heirReportDictionary[44] + '</label>';
 
+            // ADV
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[45] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroAdventurousnessMeek" name="inputHeroAdventurousness" value="0"' + ((heirAttributes.ADV == '0') ? 'checked' : '') + ' onclick="heirAttributes.ADV = this.value;"> <label for="inputHeroAdventurousnessMeek">' + heirReportDictionary[46] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroAdventurousnessAverage" name="inputHeroAdventurousness" value="1" ' + ((heirAttributes.ADV == '1') ? 'checked' : '') + ' onclick="heirAttributes.ADV = this.value;"> <label for="inputHeroAdventurousnessAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroAdventurousnessBold" name="inputHeroAdventurousness" value="2" ' + ((heirAttributes.ADV == '2') ? 'checked' : '') + ' onclick="heirAttributes.ADV = this.value;"> <label for="inputHeroAdventurousnessBold">' + heirReportDictionary[47] + '</label>';
+            summaryString += heirReportDictionary[46][1] + '<input type="radio" id="inputHeroAdventurousnessMeek" name="inputHeroAdventurousness" value="0"' + ((heirAttributes.ADV == '0') ? 'checked' : '') + ' onclick="heirAttributes.ADV = this.value; PlaySound(audioClack);"> <label for="inputHeroAdventurousnessMeek">' + heirReportDictionary[46][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAdventurousnessAverage" name="inputHeroAdventurousness" value="1" ' + ((heirAttributes.ADV == '1') ? 'checked' : '') + ' onclick="heirAttributes.ADV = this.value; PlaySound(audioClack);"> <label for="inputHeroAdventurousnessAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAdventurousnessBold" name="inputHeroAdventurousness" value="2" ' + ((heirAttributes.ADV == '2') ? 'checked' : '') + ' onclick="heirAttributes.ADV = this.value; PlaySound(audioClack);"> <label for="inputHeroAdventurousnessBold">' + heirReportDictionary[47] + '</label>';
 
+            // DRV
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[48] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroDriveLazy" name="inputHeroDrive" value="0"' + ((heirAttributes.DRV == '0') ? 'checked' : '') + ' onclick="heirAttributes.DRV = this.value;"> <label for="inputHeroDriveLazy">' + heirReportDictionary[49] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroDriveAverage" name="inputHeroDrive" value="1" ' + ((heirAttributes.DRV == '1') ? 'checked' : '') + ' onclick="heirAttributes.DRV = this.value;"> <label for="inputHeroDriveAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroDriveDiligent" name="inputHeroDrive" value="2" ' + ((heirAttributes.DRV == '2') ? 'checked' : '') + ' onclick="heirAttributes.DRV = this.value;"> <label for="inputHeroDriveDiligent">' + heirReportDictionary[50] + '</label>';
+            summaryString += heirReportDictionary[49][1] + '<input type="radio" id="inputHeroDriveLazy" name="inputHeroDrive" value="0"' + ((heirAttributes.DRV == '0') ? 'checked' : '') + ' onclick="heirAttributes.DRV = this.value; PlaySound(audioClack);"> <label for="inputHeroDriveLazy">' + heirReportDictionary[49][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDriveAverage" name="inputHeroDrive" value="1" ' + ((heirAttributes.DRV == '1') ? 'checked' : '') + ' onclick="heirAttributes.DRV = this.value; PlaySound(audioClack);"> <label for="inputHeroDriveAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDriveDiligent" name="inputHeroDrive" value="2" ' + ((heirAttributes.DRV == '2') ? 'checked' : '') + ' onclick="heirAttributes.DRV = this.value; PlaySound(audioClack);"> <label for="inputHeroDriveDiligent">' + heirReportDictionary[50] + '</label>';
 
+            // AMB
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[51] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroAspirationsPractical" name="inputHeroAspirations" value="0"' + ((heirAttributes.ASP == '0') ? 'checked' : '') + ' onclick="heirAttributes.ASP = this.value;"> <label for="inputHeroAspirationsPractical">' + heirReportDictionary[52] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroAspirationsAverage" name="inputHeroAspirations" value="1" ' + ((heirAttributes.ASP == '1') ? 'checked' : '') + ' onclick="heirAttributes.ASP = this.value;"> <label for="inputHeroAspirationsAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroAspirationsAmbitious" name="inputHeroAspirations" value="2" ' + ((heirAttributes.ASP == '2') ? 'checked' : '') + ' onclick="heirAttributes.ASP = this.value;"> <label for="inputHeroAspirationsAmbitious">' + heirReportDictionary[53] + '</label>';
+            summaryString += heirReportDictionary[52][1] + '<input type="radio" id="inputHeroAspirationsPractical" name="inputHeroAspirations" value="0"' + ((heirAttributes.ASP == '0') ? 'checked' : '') + ' onclick="heirAttributes.ASP = this.value; PlaySound(audioClack);"> <label for="inputHeroAspirationsPractical">' + heirReportDictionary[52][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAspirationsAverage" name="inputHeroAspirations" value="1" ' + ((heirAttributes.ASP == '1') ? 'checked' : '') + ' onclick="heirAttributes.ASP = this.value; PlaySound(audioClack);"> <label for="inputHeroAspirationsAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroAspirationsAmbitious" name="inputHeroAspirations" value="2" ' + ((heirAttributes.ASP == '2') ? 'checked' : '') + ' onclick="heirAttributes.ASP = this.value; PlaySound(audioClack);"> <label for="inputHeroAspirationsAmbitious">' + heirReportDictionary[53] + '</label>';
 
+            // DIE
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[54] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroDietRich" name="inputHeroDiet" value="0"' + ((heirAttributes.DIE == '0') ? 'checked' : '') + ' onclick="heirAttributes.DIE = this.value;"> <label for="inputHeroDietRich">' + heirReportDictionary[55] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroDietAverage" name="inputHeroDiet" value="1" ' + ((heirAttributes.DIE == '1') ? 'checked' : '') + ' onclick="heirAttributes.DIE = this.value;"> <label for="inputHeroDietAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroDietHealthy" name="inputHeroDiet" value="2" ' + ((heirAttributes.DIE == '2') ? 'checked' : '') + ' onclick="heirAttributes.DIE = this.value;"> <label for="inputHeroDietHealthy">' + heirReportDictionary[56] + '</label>';
+            summaryString += heirReportDictionary[55][1] + '<input type="radio" id="inputHeroDietRich" name="inputHeroDiet" value="0"' + ((heirAttributes.DIE == '0') ? 'checked' : '') + ' onclick="heirAttributes.DIE = this.value; PlaySound(audioClack);"> <label for="inputHeroDietRich">' + heirReportDictionary[55][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDietAverage" name="inputHeroDiet" value="1" ' + ((heirAttributes.DIE == '1') ? 'checked' : '') + ' onclick="heirAttributes.DIE = this.value; PlaySound(audioClack);"> <label for="inputHeroDietAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroDietHealthy" name="inputHeroDiet" value="2" ' + ((heirAttributes.DIE == '2') ? 'checked' : '') + ' onclick="heirAttributes.DIE = this.value; PlaySound(audioClack);"> <label for="inputHeroDietHealthy">' + heirReportDictionary[56] + '</label>';
 
+            // COM
             summaryString += '<br><br><br>';
             summaryString += '<i><b>' + heirReportDictionary[57] + ':</b></i><br>';
-            summaryString += '<input type="radio" id="inputHeroMêléeInept" name="inputHeroMêlée" value="0" ' + ((heirAttributes.COM == '0') ? 'checked' : '') + ' onclick="heirAttributes.COM = this.value;"> <label for="inputHeroMêléeInept">' + heirReportDictionary[58] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroMêléeAverage" name="inputHeroMêlée" value="1" ' + ((heirAttributes.COM == '1') ? 'checked' : '') + ' onclick="heirAttributes.COM = this.value;"> <label for="inputHeroMêléeAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
-            summaryString += '<input type="radio" id="inputHeroMêléeCompetent" name="inputHeroMêlée" value="2" ' + ((heirAttributes.COM == '2') ? 'checked' : '') + ' onclick="heirAttributes.COM = this.value;"> <label for="inputHeroMêléeCompetent">' + heirReportDictionary[59] + '</label>';
+            summaryString += heirReportDictionary[58][1] + '<input type="radio" id="inputHeroMêléeInept" name="inputHeroMêlée" value="0" ' + ((heirAttributes.COM == '0') ? 'checked' : '') + ' onclick="heirAttributes.COM = this.value; PlaySound(audioClack);"> <label for="inputHeroMêléeInept">' + heirReportDictionary[58][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroMêléeAverage" name="inputHeroMêlée" value="1" ' + ((heirAttributes.COM == '1') ? 'checked' : '') + ' onclick="heirAttributes.COM = this.value; PlaySound(audioClack);"> <label for="inputHeroMêléeAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroMêléeCompetent" name="inputHeroMêlée" value="2" ' + ((heirAttributes.COM == '2') ? 'checked' : '') + ' onclick="heirAttributes.COM = this.value; PlaySound(audioClack);"> <label for="inputHeroMêléeCompetent">' + heirReportDictionary[59] + '</label>';
 
+            // ORL
+            summaryString += '<br><br><br>';
+            summaryString += '<i><b>' + heirReportDictionary[141] + ':</b></i><br>';
+            summaryString += heirReportDictionary[142][1] + '<input type="radio" id="inputHeroOralCareLax" name="inputHeroOralCare" value="0" ' + ((heirAttributes.ORL == '0') ? 'checked' : '') + ' onclick="heirAttributes.ORL = this.value; PlaySound(audioClack);"> <label for="inputHeroOralCareLax">' + heirReportDictionary[142][0] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroOralCareAverage" name="inputHeroOralCare" value="1" ' + ((heirAttributes.ORL == '1') ? 'checked' : '') + ' onclick="heirAttributes.ORL = this.value; PlaySound(audioClack);"> <label for="inputHeroOralCareAverage">' + heirReportDictionary[8] + '</label> &nbsp; ';
+            summaryString += '<input type="radio" id="inputHeroOralCareStrict" name="inputHeroOralCare" value="2" ' + ((heirAttributes.ORL == '2') ? 'checked' : '') + ' onclick="heirAttributes.ORL = this.value; PlaySound(audioClack);"> <label for="inputHeroOralCareStrict">' + heirReportDictionary[143] + '</label>';
+
+            // Options
             summaryString += '<br><br>';
             summaryString += '<br><br>';
-
             summaryString += '<div id="divHeirBoxOptions">';
             summaryString += '<i><b>' + heirReportDictionary[60] + ':</b></i>';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputScars">' + heirReportDictionary[61] + '</label> <input type="checkbox" id="inputScars" name="inputScars" ' + (heirAttributes.options[0] ? 'checked' : '') + ' onchange="heirAttributes.options[0] = this.checked;">';
+            summaryString += '<label for="inputScars">' + heirReportDictionary[61] + '</label> <input type="checkbox" id="inputScars" name="inputScars" ' + (heirAttributes.options[0] ? 'checked' : '') + ' onchange="heirAttributes.options[0] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputLikesCats">' + heirReportDictionary[62] + '</label> <input type="checkbox" id="inputLikesCats" name="inputLikesCats" ' + (heirAttributes.options[1] ? 'checked' : '') + ' onchange="heirAttributes.options[1] = this.checked;">';
+            summaryString += '<label for="inputLikesCats">' + heirReportDictionary[62] + '</label> <input type="checkbox" id="inputLikesCats" name="inputLikesCats" ' + (heirAttributes.options[1] ? 'checked' : '') + ' onchange="heirAttributes.options[1] = this.checked; ContextAwareClack(this);">';
             summaryString += ' &nbsp; &nbsp; ';
-            summaryString += '<label for="inputLikesDogs">' + heirReportDictionary[63] + '</label> <input type="checkbox" id="inputLikesDogs" name="inputLikesDogs" ' + (heirAttributes.options[2] ? 'checked' : '') + ' onchange="heirAttributes.options[2] = this.checked;">';
+            summaryString += '<label for="inputLikesDogs">' + heirReportDictionary[63] + '</label> <input type="checkbox" id="inputLikesDogs" name="inputLikesDogs" ' + (heirAttributes.options[2] ? 'checked' : '') + ' onchange="heirAttributes.options[2] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputTroublemaker">' + heirReportDictionary[64] + '</label> <input type="checkbox" id="inputTroublemaker" name="inputTroublemaker" ' + (heirAttributes.options[3] ? 'checked' : '') + ' onchange="heirAttributes.options[3] = this.checked;">';
+            summaryString += '<label for="inputTroublemaker">' + heirReportDictionary[64] + '</label> <input type="checkbox" id="inputTroublemaker" name="inputTroublemaker" ' + (heirAttributes.options[3] ? 'checked' : '') + ' onchange="heirAttributes.options[3] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputInquisitive">' + heirReportDictionary[65] + '</label> <input type="checkbox" id="inputInquisitive" name="inputInquisitive" ' + (heirAttributes.options[4] ? 'checked' : '') + ' onchange="heirAttributes.options[4] = this.checked;">';
+            summaryString += '<label for="inputInquisitive">' + heirReportDictionary[65] + '</label> <input type="checkbox" id="inputInquisitive" name="inputInquisitive" ' + (heirAttributes.options[4] ? 'checked' : '') + ' onchange="heirAttributes.options[4] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputArrogant">' + heirReportDictionary[66] + '</label> <input type="checkbox" id="inputArrogant" name="inputArrogant" ' + (heirAttributes.options[5] ? 'checked' : '') + ' onchange="heirAttributes.options[5] = this.checked;">';
+            summaryString += '<label for="inputArrogant">' + heirReportDictionary[66] + '</label> <input type="checkbox" id="inputArrogant" name="inputArrogant" ' + (heirAttributes.options[5] ? 'checked' : '') + ' onchange="heirAttributes.options[5] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputAccidentProne">' + heirReportDictionary[67] + '</label> <input type="checkbox" id="inputAccidentProne" name="inputAccidentProne" ' + (heirAttributes.options[6] ? 'checked' : '') + ' onchange="heirAttributes.options[6] = this.checked;">';
+            summaryString += '<label for="inputAccidentProne">' + heirReportDictionary[67] + '</label> <input type="checkbox" id="inputAccidentProne" name="inputAccidentProne" ' + (heirAttributes.options[6] ? 'checked' : '') + ' onchange="heirAttributes.options[6] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputRomantic">' + heirReportDictionary[68] + '</label> <input type="checkbox" id="inputRomantic" name="inputRomantic" ' + (heirAttributes.options[7] ? 'checked' : '') + ' onchange="heirAttributes.options[7] = this.checked;">';
+            summaryString += '<label for="inputRomantic">' + heirReportDictionary[68] + '</label> <input type="checkbox" id="inputRomantic" name="inputRomantic" ' + (heirAttributes.options[7] ? 'checked' : '') + ' onchange="heirAttributes.options[7] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputTooSmart">' + heirReportDictionary[69] + '</label> <input type="checkbox" id="inputTooSmart" name="inputTooSmart" ' + (heirAttributes.options[8] ? 'checked' : '') + ' onchange="heirAttributes.options[8] = this.checked;">';
+            summaryString += '<label for="inputTooSmart">' + heirReportDictionary[69] + '</label> <input type="checkbox" id="inputTooSmart" name="inputTooSmart" ' + (heirAttributes.options[8] ? 'checked' : '') + ' onchange="heirAttributes.options[8] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputLikesGuys">' + heirReportDictionary[70] + '</label> <input type="checkbox" id="inputLikesGuys" name="inputLikesGuys" ' + (heirAttributes.options[9] ? 'checked' : '') + ' onchange="heirAttributes.options[9] = this.checked;">';
+            summaryString += '<label for="inputLikesGuys">' + heirReportDictionary[70] + '</label> <input type="checkbox" id="inputLikesGuys" name="inputLikesGuys" ' + (heirAttributes.options[9] ? 'checked' : '') + ' onchange="heirAttributes.options[9] = this.checked; ContextAwareClack(this);">';
             summaryString += ' &nbsp; &nbsp; ';
-            summaryString += '<label for="inputLikesGals">' + heirReportDictionary[71] + '</label> <input type="checkbox" id="inputLikesGals" name="inputLikesGals" ' + (heirAttributes.options[10] ? 'checked' : '') + ' onchange="heirAttributes.options[10] = this.checked;">';
+            summaryString += '<label for="inputLikesGals">' + heirReportDictionary[71] + '</label> <input type="checkbox" id="inputLikesGals" name="inputLikesGals" ' + (heirAttributes.options[10] ? 'checked' : '') + ' onchange="heirAttributes.options[10] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputLotToLearn">' + heirReportDictionary[72] + '</label> <input type="checkbox" id="inputLotToLearn" name="inputLotToLearn" ' + (heirAttributes.options[11] ? 'checked' : '') + ' onchange="heirAttributes.options[11] = this.checked;">';
+            summaryString += '<label for="inputLotToLearn">' + heirReportDictionary[72] + '</label> <input type="checkbox" id="inputLotToLearn" name="inputLotToLearn" ' + (heirAttributes.options[11] ? 'checked' : '') + ' onchange="heirAttributes.options[11] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputLate">' + heirReportDictionary[73] + '</label> <input type="checkbox" id="inputLate" name="inputLate" ' + (heirAttributes.options[12] ? 'checked' : '') + ' onchange="heirAttributes.options[12] = this.checked;">';
+            summaryString += '<label for="inputLate">' + heirReportDictionary[73] + '</label> <input type="checkbox" id="inputLate" name="inputLate" ' + (heirAttributes.options[12] ? 'checked' : '') + ' onchange="heirAttributes.options[12] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputVain">' + heirReportDictionary[74] + '</label> <input type="checkbox" id="inputVain" name="inputVain" ' + (heirAttributes.options[13] ? 'checked' : '') + ' onchange="heirAttributes.options[13] = this.checked;">';
+            summaryString += '<label for="inputVain">' + heirReportDictionary[74] + '</label> <input type="checkbox" id="inputVain" name="inputVain" ' + (heirAttributes.options[13] ? 'checked' : '') + ' onchange="heirAttributes.options[13] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputIdealist">' + heirReportDictionary[75] + '</label> <input type="checkbox" id="inputIdealist" name="inputIdealist" ' + (heirAttributes.options[14] ? 'checked' : '') + ' onchange="heirAttributes.options[14] = this.checked;">';
+            summaryString += '<label for="inputIdealist">' + heirReportDictionary[75] + '</label> <input type="checkbox" id="inputIdealist" name="inputIdealist" ' + (heirAttributes.options[14] ? 'checked' : '') + ' onchange="heirAttributes.options[14] = this.checked; ContextAwareClack(this);">';
             summaryString += '</div>';
 
+            // Fears
             summaryString += '<div style="display: flex; justify-content: center;">';
-
             summaryString += '<div id="divHeirBoxFears">';
             summaryString += '<i><b>' + heirReportDictionary[76] + ':</b></i>';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputPhobiasWater">' + heirReportDictionary[77] + '</label> <input type="checkbox" id="inputPhobiasWater" name="inputPhobiasWater" ' + (heirAttributes.phobias[0] ? 'checked' : '') + ' onchange="heirAttributes.phobias[0] = this.checked;">';
+            summaryString += '<label for="inputPhobiasWater">' + heirReportDictionary[77] + '</label> <input type="checkbox" id="inputPhobiasWater" name="inputPhobiasWater" ' + (heirAttributes.phobias[0] ? 'checked' : '') + ' onchange="heirAttributes.phobias[0] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputPhobiasSnakes">' + heirReportDictionary[78] + '</label> <input type="checkbox" id="inputPhobiasSnakes" name="inputPhobiasSnakes" ' + (heirAttributes.phobias[1] ? 'checked' : '') + ' onchange="heirAttributes.phobias[1] = this.checked;">';
+            summaryString += '<label for="inputPhobiasSnakes">' + heirReportDictionary[78] + '</label> <input type="checkbox" id="inputPhobiasSnakes" name="inputPhobiasSnakes" ' + (heirAttributes.phobias[1] ? 'checked' : '') + ' onchange="heirAttributes.phobias[1] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputPhobiasHeights">' + heirReportDictionary[79] + '</label> <input type="checkbox" id="inputPhobiasHeights" name="inputPhobiasHeights" ' + (heirAttributes.phobias[2] ? 'checked' : '') + ' onchange="heirAttributes.phobias[2] = this.checked;">';
+            summaryString += '<label for="inputPhobiasHeights">' + heirReportDictionary[79] + '</label> <input type="checkbox" id="inputPhobiasHeights" name="inputPhobiasHeights" ' + (heirAttributes.phobias[2] ? 'checked' : '') + ' onchange="heirAttributes.phobias[2] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputPhobiasDark">' + heirReportDictionary[80] + '</label> <input type="checkbox" id="inputPhobiasDark" name="inputPhobiasDark" ' + (heirAttributes.phobias[3] ? 'checked' : '') + ' onchange="heirAttributes.phobias[3] = this.checked;">';
+            summaryString += '<label for="inputPhobiasDark">' + heirReportDictionary[80] + '</label> <input type="checkbox" id="inputPhobiasDark" name="inputPhobiasDark" ' + (heirAttributes.phobias[3] ? 'checked' : '') + ' onchange="heirAttributes.phobias[3] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputPhobiasElbowGrease">' + heirReportDictionary[81] + '</label> <input type="checkbox" id="inputPhobiasElbowGrease" name="inputPhobiasElbowGrease" ' + (heirAttributes.phobias[4] ? 'checked' : '') + ' onchange="heirAttributes.phobias[4] = this.checked;">';
+            summaryString += '<label for="inputPhobiasElbowGrease">' + heirReportDictionary[81] + '</label> <input type="checkbox" id="inputPhobiasElbowGrease" name="inputPhobiasElbowGrease" ' + (heirAttributes.phobias[4] ? 'checked' : '') + ' onchange="heirAttributes.phobias[4] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputPhobiasVampires">' + heirReportDictionary[82] + '</label> <input type="checkbox" id="inputPhobiasVampires" name="inputPhobiasVampires" ' + (heirAttributes.phobias[5] ? 'checked' : '') + ' onchange="heirAttributes.phobias[5] = this.checked;">';
+            summaryString += '<label for="inputPhobiasVampires">' + heirReportDictionary[82] + '</label> <input type="checkbox" id="inputPhobiasVampires" name="inputPhobiasVampires" ' + (heirAttributes.phobias[5] ? 'checked' : '') + ' onchange="heirAttributes.phobias[5] = this.checked; ContextAwareClack(this);">';
             summaryString += '</div>';
 
+            // Peccadilloes
             summaryString += '<div id="divHeirBoxPeccadilloes">';
             summaryString += '<i><b>' + heirReportDictionary[83] + ':</b></i>';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputNeurosesADHD">' + heirReportDictionary[84] + '</label> <input type="checkbox" id="inputNeurosesADHD" name="inputNeurosesADHD" ' + (heirAttributes.neuroses[4] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[4] = this.checked;">';
+            summaryString += '<label for="inputNeurosesADHD">' + heirReportDictionary[84] + '</label> <input type="checkbox" id="inputNeurosesADHD" name="inputNeurosesADHD" ' + (heirAttributes.neuroses[4] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[4] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputNeurosesBipolar">' + heirReportDictionary[85] + '</label> <input type="checkbox" id="inputNeurosesBipolar" name="inputNeurosesBipolar" ' + (heirAttributes.neuroses[2] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[2] = this.checked;">';
+            summaryString += '<label for="inputNeurosesBipolar">' + heirReportDictionary[85] + '</label> <input type="checkbox" id="inputNeurosesBipolar" name="inputNeurosesBipolar" ' + (heirAttributes.neuroses[2] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[2] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputNeurosesSchizophrenic">' + heirReportDictionary[86] + '</label> <input type="checkbox" id="inputNeurosesSchizophrenic" name="inputNeurosesSchizophrenic" ' + (heirAttributes.neuroses[0] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[0] = this.checked;">';
+            summaryString += '<label for="inputNeurosesSchizophrenic">' + heirReportDictionary[86] + '</label> <input type="checkbox" id="inputNeurosesSchizophrenic" name="inputNeurosesSchizophrenic" ' + (heirAttributes.neuroses[0] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[0] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputNeurosesOCD">' + heirReportDictionary[87] + '</label> <input type="checkbox" id="inputNeurosesOCD" name="inputNeurosesOCD" ' + (heirAttributes.neuroses[1] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[1] = this.checked;">';
+            summaryString += '<label for="inputNeurosesOCD">' + heirReportDictionary[87] + '</label> <input type="checkbox" id="inputNeurosesOCD" name="inputNeurosesOCD" ' + (heirAttributes.neuroses[1] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[1] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputNeurosesOnychophagia">' + heirReportDictionary[88] + '</label> <input type="checkbox" id="inputNeurosesOnychophagia" name="inputNeurosesOnychophagia" ' + (heirAttributes.neuroses[3] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[3] = this.checked;">';
+            summaryString += '<label for="inputNeurosesOnychophagia">' + heirReportDictionary[88] + '</label> <input type="checkbox" id="inputNeurosesOnychophagia" name="inputNeurosesOnychophagia" ' + (heirAttributes.neuroses[3] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[3] = this.checked; ContextAwareClack(this);">';
             summaryString += '<br><br>';
-            summaryString += '<label for="inputNeurosesMisunderstood">' + heirReportDictionary[89] + '</label> <input type="checkbox" id="inputNeurosesMisunderstood" name="inputNeurosesMisunderstood" ' + (heirAttributes.neuroses[5] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[5] = this.checked;">';
+            summaryString += '<label for="inputNeurosesMisunderstood">' + heirReportDictionary[89] + '</label> <input type="checkbox" id="inputNeurosesMisunderstood" name="inputNeurosesMisunderstood" ' + (heirAttributes.neuroses[5] ? 'checked' : '') + ' onchange="heirAttributes.neuroses[5] = this.checked; ContextAwareClack(this);">';
+            summaryString += '</div>';
             summaryString += '</div>';
 
-            summaryString += '</div>';
-
+            // Question
+            summaryString += '<div id="divHeirBoxQuestionnaire">';
+            summaryString += '<i><b>' + heirReportDictionary[105] + ':</b></i>';
+            summaryString += '<br><br><div style="text-align:justify;">';
+            summaryString += heirReportDictionary[106];
             summaryString += '<br><br><br>';
+            summaryString += '<div style="width: 80%; margin: 0 auto;">';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalA" name="inputHeroPsychEval" value="0" ' + ((heirAttributes.psych == '0') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalA">' + heirReportDictionary[107] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalB" name="inputHeroPsychEval" value="1" ' + ((heirAttributes.psych == '1') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalB">' + heirReportDictionary[108] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalC" name="inputHeroPsychEval" value="2" ' + ((heirAttributes.psych == '2') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalC">' + heirReportDictionary[109] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalD" name="inputHeroPsychEval" value="3" ' + ((heirAttributes.psych == '3') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalD">' + heirReportDictionary[110] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalE" name="inputHeroPsychEval" value="4" ' + ((heirAttributes.psych == '4') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalE">' + heirReportDictionary[111] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalF" name="inputHeroPsychEval" value="5" ' + ((heirAttributes.psych == '5') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalF">' + heirReportDictionary[112] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalG" name="inputHeroPsychEval" value="6" ' + ((heirAttributes.psych == '6') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalG">' + heirReportDictionary[113] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalH" name="inputHeroPsychEval" value="7" ' + ((heirAttributes.psych == '7') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalH">' + heirReportDictionary[114] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalI" name="inputHeroPsychEval" value="8" ' + ((heirAttributes.psych == '8') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalI">' + heirReportDictionary[115] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalJ" name="inputHeroPsychEval" value="9" ' + ((heirAttributes.psych == '9') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalJ">' + heirReportDictionary[116] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalK" name="inputHeroPsychEval" value="10" ' + ((heirAttributes.psych == '10') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalK">' + heirReportDictionary[117] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalL" name="inputHeroPsychEval" value="11" ' + ((heirAttributes.psych == '11') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalL">' + heirReportDictionary[118] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalM" name="inputHeroPsychEval" value="12" ' + ((heirAttributes.psych == '12') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalM">' + heirReportDictionary[119] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalN" name="inputHeroPsychEval" value="13" ' + ((heirAttributes.psych == '13') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalN">' + heirReportDictionary[120] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalO" name="inputHeroPsychEval" value="14" ' + ((heirAttributes.psych == '14') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalO">' + heirReportDictionary[121] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalP" name="inputHeroPsychEval" value="15" ' + ((heirAttributes.psych == '15') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalP">' + heirReportDictionary[122] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalQ" name="inputHeroPsychEval" value="16" ' + ((heirAttributes.psych == '16') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalQ">' + heirReportDictionary[123] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalR" name="inputHeroPsychEval" value="17" ' + ((heirAttributes.psych == '17') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalR">' + heirReportDictionary[124] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalS" name="inputHeroPsychEval" value="18" ' + ((heirAttributes.psych == '18') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalS">' + heirReportDictionary[125] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalT" name="inputHeroPsychEval" value="19" ' + ((heirAttributes.psych == '19') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalT">' + heirReportDictionary[126] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalU" name="inputHeroPsychEval" value="20" ' + ((heirAttributes.psych == '20') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalU">' + heirReportDictionary[127] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalV" name="inputHeroPsychEval" value="21" ' + ((heirAttributes.psych == '21') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalV">' + heirReportDictionary[128] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalW" name="inputHeroPsychEval" value="22" ' + ((heirAttributes.psych == '22') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalW">' + heirReportDictionary[129] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalX" name="inputHeroPsychEval" value="23" ' + ((heirAttributes.psych == '23') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalX">' + heirReportDictionary[130] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalY" name="inputHeroPsychEval" value="24" ' + ((heirAttributes.psych == '24') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalY">' + heirReportDictionary[131] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalZ" name="inputHeroPsychEval" value="25" ' + ((heirAttributes.psych == '25') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalZ">' + heirReportDictionary[132] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalAA" name="inputHeroPsychEval" value="26" ' + ((heirAttributes.psych == '26') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalAA">' + heirReportDictionary[133] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalAB" name="inputHeroPsychEval" value="27" ' + ((heirAttributes.psych == '27') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalAB">' + heirReportDictionary[136] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalAC" name="inputHeroPsychEval" value="28" ' + ((heirAttributes.psych == '28') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack); PlaySound(audioSquish); alert(displayHeirGross);"> <label for="inputHeroPsychEvalAC">' + heirReportDictionary[144] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalAD" name="inputHeroPsychEval" value="29" ' + ((heirAttributes.psych == '29') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalAD">' + heirReportDictionary[145] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalAE" name="inputHeroPsychEval" value="30" ' + ((heirAttributes.psych == '30') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalAE">' + heirReportDictionary[146] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalAF" name="inputHeroPsychEval" value="31" ' + ((heirAttributes.psych == '31') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalAF">' + heirReportDictionary[147] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '<input type="radio" id="inputHeroPsychEvalAG" name="inputHeroPsychEval" value="32" ' + ((heirAttributes.psych == '32') ? 'checked' : '') + ' onclick="heirAttributes.psych = this.value; PlaySound(audioClack);"> <label for="inputHeroPsychEvalAG">' + heirReportDictionary[149] + '</label>';
+            summaryString += '<br><br><br>';
+            summaryString += '</div></div></div>';
 
+            // Wrap-up
+            summaryString += '<br><br><br>';
             summaryString += displayHeirSummaryCorrect;
-
             summaryString += '<br><br>';
-
             summaryString += '<button id="buttonHeirConfirmAll" onclick="HeirConfirmAll();" style="max-width: 80%;">';
             summaryString += displayItIsI + '<span style="white-space: nowrap;">' + displayTitles[player.title].toUpperCase() + ' ' + player.names[2].toUpperCase() + '</span> <span style="white-space: nowrap;">' + displayDefiniteArticle + ' ' + displayFirst + '</span>';
             summaryString += '</button>';
@@ -4603,16 +4812,17 @@ function UpdateText() {
 
             divHeirWorkshopSummary.innerHTML = summaryString;
             ListenToAge();
+            InitEyeDiagram();
         }
 
         buttonHeirGoBack.innerHTML = displayLabelReturnToPrevDecision;
     }
 
     else if (player.isAt == 'Map') {
-        buttonMapTargetPrev.innerHTML = displayMapPrevTarget;
-        buttonMapTargetNext.innerHTML = displayMapNextTarget;
+        buttonMapTargetPrev.innerHTML = (player.hasWon) ? displayMapPrevTargetAlt : displayMapPrevTarget;
+        buttonMapTargetNext.innerHTML = (player.hasWon) ? displayMapNextTargetAlt : displayMapNextTarget;
         const currentProvinceName = mapProvinces[mapTarget][0].toUpperCase();
-        divMapTarget.innerHTML = displayMapCurrTarget + '<br><b>' + currentProvinceName + '</b>';
+        divMapTarget.innerHTML = ((player.hasWon) ? displayMapCurrTargetAlt : displayMapCurrTarget) + '<br><b>' + currentProvinceName + '</b>';
         spanDetailsLabel.innerHTML = displayMapDetails;
         buttonMapEcon.innerHTML = displayMapEcon;
         buttonMapMil.innerHTML = displayMapMil;
@@ -5882,6 +6092,21 @@ function UpdateText() {
             stringyStringerson += '</td>';
             stringyStringerson += '</tr>';
 
+            if (player.hasWon) {
+                stringyStringerson += '<tr>';
+                stringyStringerson += '<td style="line-height: 0;">';
+                stringyStringerson += displayNephilim + ' <span class="icon JötunnQ1 inlineIcon"></span><span class="icon JötunnQ2 inlineIcon"></span>&nbsp;<br>';
+                stringyStringerson += '<span class="icon JötunnQ3 inlineIcon"></span><span class="icon JötunnQ4 inlineIcon"></span>:';
+                stringyStringerson += '</td>';
+                stringyStringerson += '<td class="noPadColumn">';
+                stringyStringerson += '???';
+                stringyStringerson += '</td>';
+                stringyStringerson += '<td>';
+                stringyStringerson += '';
+                stringyStringerson += '</td>';
+                stringyStringerson += '</tr>';
+            }
+
             stringyStringerson += '</tbody>';
             stringyStringerson += '</table>';
 
@@ -5928,6 +6153,19 @@ function UpdateText() {
             labelString += '<span class="icon DrumB inlineIcon"></span>';
             labelString += '<span class="icon HulaRight inlineIcon"></span>';
             buttonFarmersEvents.innerHTML = labelString;
+        }
+        if (player.hasMetFarmers) {
+            let labelString = '';
+            labelString += displayLabelFarmersC;
+            labelString += '<br>';
+            labelString += '<span class="icon Sword inlineIcon"></span>';
+            labelString += '<span class="icon Sword inlineIcon"></span>';
+            labelString += '<span class="icon Sword inlineIcon"></span>';
+            buttonFarmersEvents.innerHTML = labelString;
+        }
+        if (player.hasCrashed) {
+            buttonFarmersEvents.innerHTML = '<img src="' + imageCautionSign.src + '"><br>' + '[' + displayLabelFarmersD + ']';
+            buttonFarmersEvents.classList.add('disabled');
         }
     }
 
@@ -6113,7 +6351,10 @@ function UpdateText() {
     //buttonGameEventDismiss.innerHTML = player.hasWon ? displayEndButton : displayOK; // 🚨 this is now done in gameEvent utility function to facilitate delay
     buttonOptionsDismiss.innerHTML = displayOK;
     labelToggleMusic.innerHTML = displayMusic;
+    labelVolumeMusic.innerHTML = audioVolumes[0];
     labelToggleSounds.innerHTML = displaySounds;
+    labelVolumeSounds.innerHTML = audioVolumes[1];
+    labelToggleTickTock.innerHTML = displayTickTock;
     labelToggleAnimation.innerHTML = displayAnimations;
     labelToggleProfanity.innerHTML = displayProfanity;
     spanOptionLanguage.innerHTML = displayLanguage;
@@ -6163,6 +6404,15 @@ function UpdateHeirAgeDisplay(inputWithListener, targetElement) {
     else if (yearFormat == 2) { ageOutput = CircumciseNumber(ageOutput); }
     else if (yearFormat == 3) { ageOutput = SteepNumberInGreenTea(ageOutput); }
     targetElement.innerHTML = ageOutput;
+
+    if (heirAttributes.age[0] < heirAgeMin + 9) { PlaySound(audioHeirGender0); }
+    else if (heirAttributes.age[0] < heirAgeMin + (9 * 2)) { PlaySound(audioHeirGender1); }
+    else if (heirAttributes.age[0] < heirAgeMin + (9 * 3)) { PlaySound(audioHeirGender2); }
+    else if (heirAttributes.age[0] < heirAgeMin + (9 * 4)) { PlaySound(audioHeirGender3); }
+    else if (heirAttributes.age[0] < heirAgeMin + (9 * 5)) { PlaySound(audioHeirGender4); }
+    else if (heirAttributes.age[0] < heirAgeMin + (9 * 6) + 1) { PlaySound(audioHeirGender5); }
+    else if (heirAttributes.age[0] < heirAgeMin + (9 * 7) + 2) { PlaySound(audioHeirGender6); }
+    else { PlaySound(audioHeirGender7); }
 }
 
 
@@ -6171,6 +6421,228 @@ function ListenToAge() {
     const grabbedInput = document.getElementById('inputHeirRange');
     const grabbedSpan = document.getElementById('spanAgeDisplay');
     grabbedInput.addEventListener('input', function () { UpdateHeirAgeDisplay(grabbedInput, grabbedSpan); });
+}
+
+
+
+function InitEyeDiagram() {
+    const divDiagramContainer = document.getElementById('divDiagramContainer');
+    const canvasEyeDiagram = document.createElement('canvas');
+    canvasEyeDiagram.id = 'canvasEyeDiagram';
+    canvasEyeDiagram.width = 107;
+    canvasEyeDiagram.height = 47;
+    divDiagramContainer.appendChild(canvasEyeDiagram);
+    RedrawEye();
+}
+
+
+
+function RedrawEye() {
+    const canvasEyeDiagram = document.getElementById('canvasEyeDiagram');
+    const canvasEyeDiagramContext = canvasEyeDiagram.getContext('2d');
+    canvasEyeDiagramContext.clearRect(0, 0, canvasEyeDiagram.width, canvasEyeDiagram.height);
+    canvasEyeDiagramContext.drawImage(imageEye_4_Sclera, 0, 0);
+    PaintIris(canvasEyeDiagramContext);
+}
+
+
+
+function PaintIris(ctx) {
+    let imageContainer0 = new Image();
+    let imageContainer1 = new Image();
+    let imageContainer2 = new Image();
+    let imageContainer3 = new Image();
+    let imageContainer4 = new Image();
+    let imageContainer5 = new Image();
+    let imageContainer6 = new Image();
+    let imageContainer7 = new Image();
+    let imageContainer8 = new Image();
+    let imageContainer9 = new Image();
+    let imageContainer10 = new Image();
+    let imageContainer11 = new Image();
+    imageContainer0 = FillEyeImage(imageEye_3_PLAYER_SET, heirAttributes.eyes[0], 'fill');
+    imageContainer0.onload = function () {
+        imageContainer1 = FillEyeImage(imageEye_3_SATplus, heirAttributes.eyes[0], 'desaturate');
+        imageContainer1.onload = function () {
+            imageContainer2 = FillEyeImage(imageEye_3_VALmin, heirAttributes.eyes[0], 'dim');
+            imageContainer2.onload = function () {
+                imageContainer3 = FillEyeImage(imageEye_3_VALminmin, heirAttributes.eyes[0], 'dimPlaid');
+                imageContainer3.onload = function () {
+                    imageContainer4 = FillEyeImage(imageEye_2_PLAYER_SET, heirAttributes.eyes[1], 'fill');
+                    imageContainer4.onload = function () {
+                        imageContainer5 = FillEyeImage(imageEye_2_SATplus, heirAttributes.eyes[1], 'desaturate');
+                        imageContainer5.onload = function () {
+                            imageContainer6 = FillEyeImage(imageEye_2_VALmin, heirAttributes.eyes[1], 'dim');
+                            imageContainer6.onload = function () {
+                                imageContainer7 = FillEyeImage(imageEye_2_VALminmin, heirAttributes.eyes[1], 'dimPlaid');
+                                imageContainer7.onload = function () {
+                                    imageContainer8 = FillEyeImage(imageEye_1_PLAYER_SET, heirAttributes.eyes[2], 'fill');
+                                    imageContainer8.onload = function () {
+                                        imageContainer9 = FillEyeImage(imageEye_1_SATplus, heirAttributes.eyes[2], 'desaturate');
+                                        imageContainer9.onload = function () {
+                                            imageContainer10 = FillEyeImage(imageEye_1_VALmin, heirAttributes.eyes[2], 'dim');
+                                            imageContainer10.onload = function () {
+                                                imageContainer11 = FillEyeImage(imageEye_1_VALminmin, heirAttributes.eyes[2], 'dimPlaid');
+                                                imageContainer11.onload = function () {
+                                                    ctx.drawImage(imageContainer0, 0, 0);
+                                                    ctx.drawImage(imageContainer1, 0, 0);
+                                                    ctx.drawImage(imageContainer2, 0, 0);
+                                                    ctx.drawImage(imageContainer3, 0, 0);
+                                                    ctx.drawImage(imageContainer4, 0, 0);
+                                                    ctx.drawImage(imageContainer5, 0, 0);
+                                                    ctx.drawImage(imageContainer6, 0, 0);
+                                                    ctx.drawImage(imageContainer7, 0, 0);
+                                                    ctx.drawImage(imageContainer8, 0, 0);
+                                                    ctx.drawImage(imageContainer9, 0, 0);
+                                                    ctx.drawImage(imageContainer10, 0, 0);
+                                                    ctx.drawImage(imageContainer11, 0, 0);
+                                                    ctx.drawImage(imageEye_0_Shine, 0, 0);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+function FillEyeImage(alphaMap, newColor, operation) {
+    const desaturateDeltas = [30, -25];
+    const dimDelta = 20;
+    const canvasTemp = document.createElement('canvas');
+    const canvasTempContext = canvasTemp.getContext('2d');
+    canvasTemp.width = alphaMap.width;
+    canvasTemp.height = alphaMap.height;
+    canvasTempContext.drawImage(alphaMap, 0, 0);
+    const imageData = canvasTempContext.getImageData(0, 0, canvasTemp.width, canvasTemp.height);
+    const pixels = imageData.data; // Uint8ClampedArray
+    let targetColor = {
+        r: Number(`0x${(newColor[1] + newColor[2])}`),
+        g: Number(`0x${(newColor[3] + newColor[4])}`),
+        b: Number(`0x${(newColor[5] + newColor[6])}`),
+    };
+    function rgbToHsv(r, g, b) {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+        let max = Math.max(r, g, b);
+        let min = Math.min(r, g, b);
+        let h, s, v = max;
+        let diff = max - min;
+        s = max === 0 ? 0 : diff / max;
+        if (max === min) {
+            h = 0; // achromatic
+        }
+        else {
+            switch (max) {
+                case r:
+                    h = (g - b) / diff + (g < b ? 6 : 0);
+                    break;
+                case g:
+                    h = (b - r) / diff + 2;
+                    break;
+                case b:
+                    h = (r - g) / diff + 4;
+                    break;
+            }
+            h /= 6;
+        }
+        h = Math.round(h * 360);
+        s = Math.round(s * 100);
+        v = Math.round(v * 100);
+        return { h, s, v };
+    }
+    function hsvToRgb(h, s, v) {
+        // Ensure h, s, v are within valid ranges (h: 0-360, s, v: 0-1)
+        h = h % 360; // Wrap hue around if it exceeds 360
+        s = Math.max(0, Math.min(1, s));
+        v = Math.max(0, Math.min(1, v));
+        let r, g, b;
+        const i = Math.floor(h / 60);
+        const f = (h / 60) - i;
+        const p = v * (1 - s);
+        const q = v * (1 - f * s);
+        const t = v * (1 - (1 - f) * s);
+        switch (i % 6) {
+            case 0:
+                r = v;
+                g = t;
+                b = p;
+                break;
+            case 1:
+                r = q;
+                g = v;
+                b = p;
+                break;
+            case 2:
+                r = p;
+                g = v;
+                b = t;
+                break;
+            case 3:
+                r = p;
+                g = q;
+                b = v;
+                break;
+            case 4:
+                r = t;
+                g = p;
+                b = v;
+                break;
+            case 5:
+                r = v;
+                g = p;
+                b = q;
+                break;
+        }
+        // Convert RGB values from 0-1 to 0-255 and round to nearest integer
+        r = Math.round(r * 255);
+        g = Math.round(g * 255);
+        b = Math.round(b * 255);
+        return { r, g, b };
+    }
+    function attenuate(val, amt) {
+        val = val - amt;
+        if (val < 0) { val = 0; }
+        if (val > 100) { val = 100; }
+        return val;
+    }
+    if (operation == 'desaturate') {
+        const newHsv = rgbToHsv(targetColor.r, targetColor.g, targetColor.b);
+        const desatHsv = [newHsv.h, attenuate(newHsv.s, desaturateDeltas[0]), attenuate(newHsv.v, desaturateDeltas[1]),];
+        targetColor = hsvToRgb(desatHsv[0], (desatHsv[1] / 100), (desatHsv[2] / 100));
+    }
+    else if (operation == 'dim') {
+        const newHsv = rgbToHsv(targetColor.r, targetColor.g, targetColor.b);
+        const dimHsv = [newHsv.h, newHsv.s, attenuate(newHsv.v, dimDelta),];
+        targetColor = hsvToRgb(dimHsv[0], (dimHsv[1] / 100), (dimHsv[2] / 100));
+    }
+    else if (operation == 'dimPlaid') {
+        const newHsv = rgbToHsv(targetColor.r, targetColor.g, targetColor.b);
+        const dimHsv = [newHsv.h, newHsv.s, attenuate(newHsv.v, dimDelta * 2),];
+        targetColor = hsvToRgb(dimHsv[0], (dimHsv[1] / 100), (dimHsv[2] / 100));
+    }
+    for (let i = 0; i < pixels.length; i += 4) {
+        const alpha = pixels[i + 3];
+        if (alpha > 0) {
+            pixels[i] = targetColor.r;
+            pixels[i + 1] = targetColor.g;
+            pixels[i + 2] = targetColor.b;
+        }
+    }
+    canvasTempContext.putImageData(imageData, 0, 0);
+    const imageDataURL = canvasTemp.toDataURL('image/png');
+    const imgFinal = new Image();
+    imgFinal.src = imageDataURL;
+    //divDiagramContainer.appendChild(imgFinal);
+    return imgFinal;
 }
 
 
@@ -6341,6 +6813,9 @@ function UpdateVisibilities() {
     divOverlaySystemMessage.style.display = player.seesSystemMessage ? 'block' : '';
     divOverlayGameEvent.style.display = player.seesGameEvent ? 'block' : '';
     divOverlayOptions.style.display = player.seesOptions ? 'block' : '';
+    divVolumeMusic.style.display = player.likesMusic ? 'block' : '';
+    divVolumeSounds.style.display = player.likesSounds ? 'block' : '';
+    divTickTockVisibilityContainer.style.display = player.likesSounds ? 'block' : '';
     divOverlayMods.style.display = player.seesModsWindow ? 'block' : '';
     buttonStar.style.display = player.isGod ? 'inline-block' : '';
     buttonRecords.style.display = player.isGod ? 'inline-block' : '';
@@ -6591,7 +7066,10 @@ function UpdateHint() {
 
         if (hintLevel == 12) {
             hintedElementFound.classList.remove('hinted');
-            if (player.seesHint) { alert(displayHintsEnd); }
+            if (player.seesHint) {
+                PlaySound(audioTutorialChime);
+                alert(displayHintsEnd);
+            }
             player.seesHint = false;
             buttonQ.style.display = 'none';
             hintLevel++;
@@ -10832,7 +11310,7 @@ function RedrawMap() {
 
     canvasMapContext.globalAlpha = 1.0;
     canvasMapContext.drawImage(mapImage, 0, 0, 208, 173, 0, 0, 208, 173);
-    canvasMapContext.drawImage(mapIconsImage, 0, 0, 208, 173, 0, 0, 208, 173);
+    if (!player.hasWon) { canvasMapContext.drawImage(mapIconsImage, 0, 0, 208, 173, 0, 0, 208, 173); }
     if (player.hasWon) { canvasMapContext.drawImage(mapImageWin, 0, 0); }
 
     let whoGetsDrawed = mapPlayerImage;
@@ -10859,7 +11337,9 @@ function RedrawShepherds() {
     canvasShepherdsContext.drawImage(neighborsSheepTailImage, 0, 0, 21, 26, 316, 178, 21, 26);
     if (player.hasWon) {
         canvasShepherdsContext.drawImage(neighborsSheepDragonImage, 0, 0, 384, 224, 0, 0, 384, 224);
+        canvasShepherdsContext.drawImage(neighborsToasterImage, 282, 22);
         canvasShepherdsContext.drawImage(neighborsLemmingImage, 0, 0);
+        canvasShepherdsContext.drawImage(neighborsLemmingAnimationImage, 151, 136);
     }
 }
 
@@ -11519,6 +11999,7 @@ function RedrawCanvases() {
             else {
                 portAnimationToggle = true;
                 portAnimationFrame++;
+                if (portAnimationFrame == 10 && !player.hasWon) { PlaySound(ambienceGullsong); }
             }
             if (portAnimationFrame < arrayPortGull.length) {
                 portGullImage.src = arrayPortGull[portAnimationFrame];
@@ -11712,23 +12193,35 @@ function RedrawCanvases() {
                 1,
                 1,
             ];
+            const arrayToasterFrames = [
+                0, 1, 2, 3, 2, 1,
+            ];
+            const arrayLemmingFrames = [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+            ];
 
             shepherdsAnimationToggle = !shepherdsAnimationToggle;
+            shepherdsAnimationFrameF++;
             if (shepherdsAnimationToggle) {
                 shepherdsAnimationFrameA++;
                 shepherdsAnimationFrameB++;
                 shepherdsAnimationFrameC++;
                 shepherdsAnimationFrameD++;
+                shepherdsAnimationFrameE++;
             }
             if (shepherdsAnimationFrameA == arraySheepFacingFrames.length) { shepherdsAnimationFrameA = 0; }
             if (shepherdsAnimationFrameB == arraySheepHeadFrames.length) { shepherdsAnimationFrameB = 0; }
             if (shepherdsAnimationFrameC == arraySheepTailFrames.length) { shepherdsAnimationFrameC = 0; }
             if (shepherdsAnimationFrameD == arraySheepDragonFrames.length) { shepherdsAnimationFrameD = 0; }
+            if (shepherdsAnimationFrameE == arrayToasterFrames.length) { shepherdsAnimationFrameE = 0; }
+            if (shepherdsAnimationFrameF == arrayLemmingFrames.length) { shepherdsAnimationFrameF = 0; }
 
             neighborsSheepFacingImage.src = arraySheepFacingCamera[arraySheepFacingFrames[shepherdsAnimationFrameA]];
             neighborsSheepHeadImage.src = arraySheepHead[arraySheepHeadFrames[shepherdsAnimationFrameB]];
             neighborsSheepTailImage.src = arraySheepTail[arraySheepTailFrames[shepherdsAnimationFrameC]];
             neighborsSheepDragonImage.src = arraySheepDragon[arraySheepDragonFrames[shepherdsAnimationFrameD]];
+            neighborsToasterImage.src = arrayFlyingToaster[arrayToasterFrames[shepherdsAnimationFrameE]];
+            neighborsLemmingAnimationImage.src = arrayLemmingDollFrames[arrayLemmingFrames[shepherdsAnimationFrameF]];
         }
         else if (player.isAt == 'Farmers') {
             const arrayDucksFrames = [
@@ -12095,6 +12588,20 @@ function RedrawCanvases() {
                 'laughB',
                 'laughC',
                 'laughB',
+                'laughC',
+                'laughB',
+                'laughC',
+
+                'laughC',
+                'laughB',
+                'laughB',
+                'laughA',
+                'laughA',
+                'laughB',
+                'laughC',
+                'laughB',
+                'laughC',
+                'laughB',
                 'laughA',
                 'laughA',
                 'laughA',
@@ -12112,11 +12619,18 @@ function RedrawCanvases() {
                 'laughC',
                 'laughB',
                 'laughC',
+                'laughC',
+                'laughB',
+                'laughB',
+                'laughB',
                 'laughB',
                 'laughA',
                 'laughA',
                 'laughA',
                 'laughA',
+                'laughA',
+                'laughA',
+                'faceNodDown',
                 'faceNodDown',
                 'faceNodDown',
 
@@ -12191,6 +12705,7 @@ function RedrawCanvases() {
                 minersAnimationFrameH++;
                 minersAnimationFrameI++;
                 minersAnimationFrameJ++;
+                if (minersAnimationFrameJ == 40 && player.hasWon) { PlaySound(ambienceTimCurry); }
                 minersAnimationFrameK++;
             }
             if (minersAnimationFrameA == arrayDaggoWillyFrames.length) { minersAnimationFrameA = 0; }
